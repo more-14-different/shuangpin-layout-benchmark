@@ -11,6 +11,7 @@ NF3 发布 314 个单首键候选，并恢复 1 个键道原作比较基线。�
 - `S005` 从 PR1 快照恢复，保留 ch/zh 条件首键及完整冻结 benchmark；`S005-NF` 继续作为项目单首键派生版。二者同表比较，原作基线不参与 NF 前沿授标。
 - “双拼布局：无尽的前沿”补入廿六双拼，并记录其 21×26 原版及 AEUIO/AVUIO 改版的种子作用。
 - 页面保留布局、群聊立项、种子、模型四条时间线，以及五类键域探索地图。
+- 发布摘要改为直白版本说明；筛选区采用莫兰迪蓝，测评环境采用莫兰迪灰，选型说明合并为紧凑信息块。
 - README、五张截图、snapshot 与审校材料全部由最终 HTML 重建。
 
 ## Release assets
@@ -18,10 +19,10 @@ NF3 发布 314 个单首键候选，并恢复 1 个键道原作比较基线。�
 | 文件 | 用途 |
 |---|---|
 | `a7_CKT_NF3_closure.html` | 离线交互式 Benchmark |
-| `NF3_neighbourhood_repro.zip` | 搜索证书、代码、缓存轨迹与复放入口 |
+| `NF3_neighbourhood_repro.zip` | 搜索代码、缓存轨迹、闭合记录与复放入口 |
 | `NF3_results.json` | 38 个 NF3 端点及父子差值 |
 | `NF3_neighbourhood_audit.json` | 五类键域汇总、协议与验证记录 |
-| `NF3_memory_bounds.json` | 49 份固定分组记忆下界证书 |
+| `NF3_memory_bounds.json` | 49 份固定分组的记忆下界记录 |
 | `NF3_publication_bundle.zip` | README、截图、snapshot、来源与审校材料 |
 | `SHA256SUMS.txt` | 发布文件校验和 |
 
