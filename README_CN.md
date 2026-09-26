@@ -2,7 +2,7 @@
 
 **314 个普通声母单首键候选，另列 1 个键道原作基线；五类键域，一套可复查的码表、测评合同与闭合记录。**
 
-[简体中文](#简体中文) · [English](#english) · [繁體中文](#繁體中文) · [下载 Release](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest)
+[简体中文](#简体中文) · [English](#english) · [繁體中文](#繁體中文) · [下载 Release](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest)
 
 ![NF3 研究脉络与探索地图](assets/nf3-research-map.png)
 
@@ -78,7 +78,7 @@ NF3 固定父种实际记忆项 M、逻辑声韵分组、重码桶、五辅键�
 
 ### 如何阅读和复现
 
-1. 从 [Releases](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest) 下载 `a7_CKT_NF3_closure.html`，用现代浏览器离线打开。
+1. 从 [Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest) 下载 `a7_CKT_NF3_closure.html`，用现代浏览器离线打开。
 2. “选型总览”查看少量代表；“对比评测”查看筛选后的完整表；“方案详情”查看键盘图与逐音节码表。
 3. “方法与词典 → 阅读指南”查看四条时间线、探索地图、NF3 闭合记录和逐方案父子差值。
 4. 下载 `NF3_neighbourhood_repro.zip`，按包内 `README.md` 复放搜索过程、独立复算与浏览器检查。
@@ -119,7 +119,7 @@ The historical lineage includes Flypy, Ziranma, Shengbi, KeyTao, Shoudao, and Li
 
 ### Use
 
-1. Download `a7_CKT_NF3_closure.html` from [Releases](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest) and open it locally.
+1. Download `a7_CKT_NF3_closure.html` from [Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest) and open it locally.
 2. Use Selection for shortlists, Benchmark for full filtered tables, and Scheme for keyboards and exact syllable codes.
 3. Open Methods → Reading guide for the project, chat-origin, seed, metric, and explored-region records.
 4. Use `NF3_neighbourhood_repro.zip` for executable replay and independent verification.
@@ -154,7 +154,7 @@ NF3 保存 71,507,052 次鄰域動作檢查及 71,226 次完整條件評分。�
 
 ### 使用與復現
 
-1. 從 [Releases](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest) 下載 `a7_CKT_NF3_closure.html` 並離線開啟。
+1. 從 [Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest) 下載 `a7_CKT_NF3_closure.html` 並離線開啟。
 2. 「選型總覽」提供少量代表；「對比評測」提供完整篩選表；「方案詳情」提供鍵盤圖及逐音節碼表。
 3. 「方法與詞典 → 閱讀指南」提供四條時間線、探索地圖、NF3 證書與父子差值。
 4. `NF3_neighbourhood_repro.zip` 提供可執行復放與獨立核驗。
