@@ -1,0 +1,78 @@
+{
+  "release": "NF3-PB1",
+  "reviewDate": "2026-09-26",
+  "source": "a7_CKT_NF3_closure.html",
+  "sourceBytes": 22649092,
+  "sourceSha256": "6c36e3dc5fd1b5e1ddf61a0965ec37cd8b739ae7aa892dee9a334c2b597247b1",
+  "payloadSha256": "959485dd5eb85d56950da89493cef83930950b4e0d41eecabb624ace5277c1dd",
+  "engineSha256": {
+    "Engine7": "8fdf2e43e905ec98fe93b7244dc291d396ea278c137baba63b4e363eec36c470",
+    "CKTEngine": "f2c1fc0ffc95393123b45095c75ce67df199ecf3fc39c1db0393f6b60045a002",
+    "DecisionMarks": "81200ab6028d4403254848e74c1f57c6236ff09a9bcb3c27798d49da792c264a"
+  },
+  "counts": {
+    "publicationRecords": 315,
+    "nfCandidates": 314,
+    "comparisonBaselines": 1,
+    "commonSyllables": 399,
+    "encodedSyllables": 421,
+    "characters": 8105,
+    "wordsUnion": 92233
+  },
+  "lineage": {
+    "PR1": 258,
+    "NF1": 237,
+    "NF2": 276,
+    "NF3": 314
+  },
+  "comparisonBaseline": {
+    "id": "S005",
+    "name": "冰雪键道双拼（原作基线）",
+    "role": "PR1 frozen original-code comparison; excluded from NF frontier awards",
+    "conditionalInitials": {"ch":["W","J"],"zh":["F","Q"]},
+    "memoryM": 40,
+    "unique399": 372,
+    "cktS2Ms": 82.02880703174584,
+    "completionCktMs": 90.14886257066757,
+    "a7eV5": 11.377006858478637,
+    "a7eV4": 10.732886598501992,
+    "luHistorical": 78.8975546900072
+  },
+  "nf1": {
+    "retainedFromPR1": 221,
+    "retiredConditionalInitialEntries": 37,
+    "newEntries": 16,
+    "proposals": 2208000
+  },
+  "nf2": {
+    "parents": 42,
+    "stratifiedRuns": 252,
+    "newEntries": 39
+  },
+  "nf3": {
+    "parents": 49,
+    "newEntries": 38,
+    "moveChecks": 71507052,
+    "fullConditionalEvaluations": 71226,
+    "domains": [
+      {"domain":"21x21","parents":11,"improved":9,"retained":7,"bestCKTGainPercent":12.38414984020099,"bestV5GainPercent":8.362751318909952},
+      {"domain":"23x23","parents":9,"improved":9,"retained":9,"bestCKTGainPercent":3.8698334415673896,"bestV5GainPercent":1.8047325592464079},
+      {"domain":"21x26","parents":12,"improved":11,"retained":10,"bestCKTGainPercent":15.78538974931795,"bestV5GainPercent":7.868723732947112},
+      {"domain":"25x30","parents":9,"improved":6,"retained":5,"bestCKTGainPercent":1.7077303395097827,"bestV5GainPercent":1.1390328323866645},
+      {"domain":"26x26","parents":8,"improved":7,"retained":7,"bestCKTGainPercent":2.595192037630438,"bestV5GainPercent":1.2778484468723699}
+    ]
+  },
+  "example": {
+    "id": "NF3-21X21-M40-44",
+    "domain": "21x21",
+    "auxiliarySet": "AVUIO",
+    "orderedMapping": "IVUAO",
+    "memoryM": 40,
+    "unique399": 378,
+    "cktS2Ms": 71.70510997762358,
+    "completionCktMs": 81.71926262693782,
+    "a7eV5": 10.59621791187078,
+    "a7eV4": 10.885437363597163,
+    "luV1r": 78.43470760461204
+  }
+}

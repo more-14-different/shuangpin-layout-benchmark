@@ -1,0 +1,45 @@
+{
+  "reviewVersion": "NF3-PB1",
+  "reviewDate": "2026-09-26",
+  "html": {
+    "file": "a7_CKT_NF3_closure.html",
+    "bytes": 22649092,
+    "sha256": "6c36e3dc5fd1b5e1ddf61a0965ec37cd8b739ae7aa892dee9a334c2b597247b1",
+    "publicationRecords": 315,
+    "nfCandidates": 314,
+    "comparisonBaselines": 1,
+    "lineage": {"PR1":258,"NF1":237,"NF2":276,"NF3":314},
+    "scripts": {
+      "payload": "959485dd5eb85d56950da89493cef83930950b4e0d41eecabb624ace5277c1dd",
+      "Engine7": "8fdf2e43e905ec98fe93b7244dc291d396ea278c137baba63b4e363eec36c470",
+      "CKTEngine": "f2c1fc0ffc95393123b45095c75ce67df199ecf3fc39c1db0393f6b60045a002",
+      "DecisionMarks": "81200ab6028d4403254848e74c1f57c6236ff09a9bcb3c27798d49da792c264a",
+      "interface": "4ae36bbbae57dc6d8e306fb874884cf1d61622668649bbba429014a0d4662a58"
+    }
+  },
+  "checks": [
+    {"name":"four executable script blocks pass node --check","pass":true},
+    {"name":"315 publication records: 314 NF candidates plus S005 original baseline","pass":true},
+    {"name":"all 314 active candidates have one first key per ordinary initial","pass":true},
+    {"name":"S005 contains all five frozen score models, 20 CKT tracks and fair-completion metrics","pass":true},
+    {"name":"old 276 entries and score objects preserved by NF3 build","pass":true},
+    {"name":"38 NF3 entries complete in full and lite build audit","pass":true},
+    {"name":"49 NF3 endpoints closed under the declared seven neighbourhoods","pass":true},
+    {"name":"local Edge loads final full HTML from file URL","pass":true},
+    {"name":"selection, benchmark, scheme, methods and S005 comparison screenshots regenerated","pass":true},
+    {"name":"PR1 lineage, S005 baseline role and Lishi26 timeline reviewed","pass":true}
+  ],
+  "screenshots": [
+    {"file":"assets/nf3-21x21-av-selection.png","bytes":336955,"sha256":"7df243f1fb93e52bfff59046feee512463650aceb28b7c4af78c3c78a60da1fc"},
+    {"file":"assets/nf3-21x21-av-benchmark.png","bytes":280555,"sha256":"c94ad8cc73bbc0b3da27992913b9c53dc1289e32fe80a6c4aab493fb61e33491"},
+    {"file":"assets/nf3-21x21-m40-44-keyboard.png","bytes":271087,"sha256":"7da71f7d31c2b5ff230f1e67565516b272ef9d8f3d294118d030ba750d81b096"},
+    {"file":"assets/nf3-research-map.png","bytes":284659,"sha256":"c214f09f9cd07054ca2a639bdca2ebf714d0baf55ced367ff764c01c46a086f1"},
+    {"file":"assets/s005-original-vs-nf.png","bytes":80599,"sha256":"c45570c64a92ce4378c35838d066e82457b46050069a76242adda573070cc9f5"}
+  ],
+  "releaseArtifacts": [
+    {"file":"NF3_results.json","bytes":186601,"sha256":"21273dc7e32d9c675b9957e258c375ec57e7728ff5fb4f09395fafcfa102667e"},
+    {"file":"NF3_neighbourhood_audit.json","bytes":384375,"sha256":"40d3d5442916550cb0d78651799ba270d47537e3930c10af56b4a7a6b6769ea3"},
+    {"file":"NF3_memory_bounds.json","bytes":1200006,"sha256":"1685cf42d472238497d70ec788a3699b36e6579a610b089554774243770da0e2"},
+    {"file":"NF3_neighbourhood_repro.zip","bytes":14081887,"sha256":"4edd9b47d993263fae6b9e75871687fdb5f015c3ae1e14095c6b536cb393c121"}
+  ]
+}
