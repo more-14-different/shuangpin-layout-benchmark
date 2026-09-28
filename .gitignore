@@ -1,6 +1,17 @@
-# Local research archive and pre-publication captures
+# Local research archive
 old_publication/
-nf3-audit-*.png
+
+# Raster images stay local and are not published to GitHub or Gitee. SVG remains trackable.
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.ico
+*.avif
+*.tif
+*.tiff
 
 # Built publication artifacts: upload these as GitHub Release assets
 a7_CKT_NF3_closure.html

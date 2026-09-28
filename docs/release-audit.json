@@ -3,8 +3,8 @@
   "reviewDate": "2026-09-28",
   "html": {
     "file": "a7_CKT_NF3_closure.html",
-    "bytes": 22690682,
-    "sha256": "2138bbc684fa466c0ac2c4cbbf876439b0c234aa4fa0bc678d68fe4d98d8c203",
+    "bytes": 22711138,
+    "sha256": "4ca1861f73df2de5f6eec2cf53b33e3ebbcf55684f571702a0755357e5f99535",
     "publicationRecords": 315,
     "nfCandidates": 314,
     "comparisonBaselines": 1,
@@ -14,7 +14,7 @@
       "Engine7": "8fdf2e43e905ec98fe93b7244dc291d396ea278c137baba63b4e363eec36c470",
       "CKTEngine": "f2c1fc0ffc95393123b45095c75ce67df199ecf3fc39c1db0393f6b60045a002",
       "DecisionMarks": "81200ab6028d4403254848e74c1f57c6236ff09a9bcb3c27798d49da792c264a",
-      "interface": "7d2e4b0229a988d8294d4d2674d57a3d577303c7a43214e24ab7662e141a148a"
+      "interface": "7ade7baf7c0ab268ab2d27e5f21760f166a4b38f954ac6aa404bc8e82822480c"
     }
   },
   "checks": [
@@ -26,17 +26,13 @@
     {"name":"38 NF3 entries complete in full and lite build audit","pass":true},
     {"name":"49 NF3 endpoints closed under the declared seven neighbourhoods","pass":true},
     {"name":"local Edge loads final full HTML from file URL","pass":true},
-    {"name":"selection, benchmark, scheme, methods and S005 comparison screenshots regenerated","pass":true},
+    {"name":"raster images excluded from GitHub, Gitee and publication bundle; SVG remains allowed","pass":true},
     {"name":"PR1 lineage, S005 baseline role and Lishi26 timeline reviewed","pass":true},
     {"name":"scheme detail merges keyboard, heat, matrix and compact list under one shared filter","pass":true},
-    {"name":"315 schemes rendered in semantic and heat modes at maximum type sizes: zero text overlaps or frame escapes","pass":true}
-  ],
-  "screenshots": [
-    {"file":"assets/nf3-21x21-av-selection.png","bytes":326327,"sha256":"81a740ab3c93fa74c760b041d003c42a9ac0e2e24780e8c2960b502e03f61768"},
-    {"file":"assets/nf3-21x21-av-benchmark.png","bytes":279743,"sha256":"4c0b2ceda2e5dcff16c42cd18068c06b5ba178e62f476bf42c74bb0fb997c7ef"},
-    {"file":"assets/nf3-21x21-m40-44-keyboard.png","bytes":270031,"sha256":"d55c2b81e3a0d77f06af44219dbb3adbc99280e745c795a0f017af1c83edc330"},
-    {"file":"assets/nf3-research-map.png","bytes":284396,"sha256":"2316263546220256e681beebfcba35bb1e1fe358b217a54232a62c9e87f726a1"},
-    {"file":"assets/s005-original-vs-nf.png","bytes":80604,"sha256":"ba037f9ffe9e7b1c728dd3b4e2db31b63ed014868b8e1069c0bcaec6070574c4"}
+    {"name":"315 schemes rendered in semantic and heat modes at maximum type sizes: zero text overlaps or frame escapes","pass":true},
+    {"name":"top-level tabs expose only page-effective filter and context controls","pass":true},
+    {"name":"selection preference labels and legend action are center-aligned without internal divider rules","pass":true},
+    {"name":"reading guide separates the exploration map, scope notes and NF3 report with tested vertical spacing","pass":true}
   ],
   "releaseArtifacts": [
     {"file":"NF3_results.json","bytes":186601,"sha256":"21273dc7e32d9c675b9957e258c375ec57e7728ff5fb4f09395fafcfa102667e"},

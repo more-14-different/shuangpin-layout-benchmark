@@ -4,8 +4,6 @@
 
 [简体中文](#简体中文) · [English](#english) · [繁體中文](#繁體中文) · [下载 Release](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest)
 
-![NF3 研究脉络与探索地图](assets/nf3-research-map.png)
-
 <a id="简体中文"></a>
 ## 简体中文
 
@@ -59,11 +57,7 @@ NF3 固定父种实际记忆项 M、逻辑声韵分组、重码桶、五辅键�
 
 `NF3-21X21-M40-44` 是 21×21、AVUIO、M=40 的非支配候选之一：裸二键唯一 378/399，CKT-S2 71.705 ms/项，补全 CKT 81.719 ms/项，A7E-v5 10.5962，A7E-v4 10.8854，LU-v1r 78.43。
 
-![NF3-21X21-M40-44 键盘图](assets/nf3-21x21-m40-44-keyboard.png)
-
 同键域还保留偏向综合分、裸码速度、唯一性或记忆量的其他端点。先按使用结构筛选，再同时看 M、补全 CKT、v5/v4 和规则审计。
-
-![21×21 AVUIO 低记忆选型](assets/nf3-21x21-av-selection.png)
 
 ### 键道原作与单首键重建
 
@@ -73,8 +67,6 @@ NF3 固定父种实际记忆项 M、逻辑声韵分组、重码桶、五辅键�
 |---|---|---:|---:|---:|---:|---:|---:|---:|
 | S005 | 原作基线；ch/zh 条件首键 | 40 | 372/399 | 82.0288 | 90.1489 | 11.3770 | 10.7329 | 78.90 |
 | S005-NF | 项目派生；普通声母单首键 | 38 | 357/399 | 82.2352 | 108.3288 | 11.4985 | 10.8097 | 82.29 |
-
-![S005 原作基线与 S005-NF 单首键重建](assets/s005-original-vs-nf.png)
 
 ### 如何阅读和复现
 
@@ -91,7 +83,7 @@ AI 负责高维候选生成、筛选、复算和一致性检查；人类提出�
 
 ### 版本与权利
 
-本仓库发布自有说明、截图与审校材料；大型 HTML、复现包和结果 JSON 作为 Release assets 分发。外部模型、配置、词库及方案名称遵循各自来源与许可，详见[来源索引](docs/sources.md)。
+本仓库发布自有说明与审校材料；大型 HTML、复现包和结果 JSON 作为 Release assets 分发。位图仅供本地审校，不上传至 GitHub 或 Gitee；SVG 仍可按需发布。外部模型、配置、词库及方案名称遵循各自来源与许可，详见[来源索引](docs/sources.md)。
 
 ---
 
@@ -114,8 +106,6 @@ NF3 records 71,507,052 neighbourhood move checks and 71,226 full conditional eva
 The open frontier includes longer second-key cycles, changes involving five or more groups, auxiliary-set/order redesign, logical repartitioning, new conditional grammars, and CKT models for other user populations.
 
 The historical lineage includes Flypy, Ziranma, Shengbi, KeyTao, Shoudao, and Lishi26 (廿六双拼). `S005` keeps its original conditional ch/zh first-key branches and frozen scores; it is displayed beside `S005-NF` but excluded from the NF single-onset frontier awards.
-
-![NF3 21×21 AVUIO selection](assets/nf3-21x21-av-selection.png)
 
 ### Use
 
@@ -149,8 +139,6 @@ NF3 保存 71,507,052 次鄰域動作檢查及 71,226 次完整條件評分。�
 開放方向包括更長的韻鍵循環、五組以上聯動、五輔集合或順序重選、邏輯聲韻重新分組、新條件編碼語法，以及面向其他使用者群體的 CKT 模型。
 
 傳統來源種子包括小鶴、自然碼、聲筆、鍵道、首道與廿六雙拼。`S005` 保留原作 ch/zh 條件首鍵及凍結成績，與 `S005-NF` 並列展示，但不參與 NF 單首鍵前沿授標。
-
-![NF3-21X21-M40-44 鍵盤圖](assets/nf3-21x21-m40-44-keyboard.png)
 
 ### 使用與復現
 

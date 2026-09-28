@@ -30,7 +30,7 @@ AI 用于候选生成、筛选、复算及一致性检查；人类负责问题�
 
 - 5 个脚本块解析完成；4 个可执行脚本均通过 `node --check`。
 - 完整 HTML 通过本地 Microsoft Edge 文件 URL 加载，315 项发布记录与 NF3 页面状态可见。
-- 选型、对比、`NF3-21X21-M40-44` 键盘图、研究脉络及 S005/S005-NF 对比均从最终 HTML 重新截图。
+- 页面结构与交互从最终 HTML 在本地浏览器复核；位图只留在本地，不进入 GitHub、Gitee 或发布包。
 - payload、Engine7、CKTEngine 与 DecisionMarks 哈希记录于 `snapshot.json`；本次发布文案与界面脚本另行形成新文件哈希。
 
 ## Release 清单
