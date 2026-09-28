@@ -9,7 +9,7 @@
 
 ### 项目回答什么
 
-本项目把双拼布局放在同一码表、语料、成本模型和编码合同中比较，并公开每轮搜索的种子、约束与结果。它起于一个具体问题：**普通声母的第一键能否固定，而无需根据韵母回看决定？**
+本项目把双拼布局放在同一码表、语料、成本模型和编码合同中比较，并公开每轮搜索的种子、约束与结果。它起源于：21 键键道，其双拼部分如果不加飞键，高性能和低记忆量的平衡能推到什么极限？
 
 NF3 当前给出：
 
@@ -33,7 +33,7 @@ NF3 当前给出：
 | NF2 | 276 | 从 42 个分档父种搜索首键载体组换位与三循环，加入 39 项，并统一复算 LU-v1r |
 | NF3 | 314 | 从 49 个父种联合变异声键与韵键，加入 38 项，完成七类有限邻域闭合 |
 
-这条路线的主题是 **“双拼布局：无尽的前沿”**。小鹤、自然码、声笔、键道、首道与廿六双拼构成传统来源种子；廿六双拼的原版及 AEUIO/AVUIO 改版也带来 21×26 键域。每轮端点既是成果，也是下一轮的种子。页面同时记录“唯有源头活水来”的群聊立项时间线、各代种子的启发来源和变异方向。
+这条路线的主题是 **“双拼布局：无尽的前沿”**。小鹤、自然码、声笔、键道、首道、廿六双拼与李氏三拼构成传统来源种子；廿六双拼的原版及 AEUIO/AVUIO 改版带来 21×26 键域。25×30 键域则源自李氏三拼 15×15×15 的三段容量结构：重排为 25×30×5 后，容量上界由 3,375 放宽至 3,750。每轮端点既是成果，也是下一轮的种子。页面同时记录“唯有源头活水来”的群聊立项时间线、各代种子的启发来源和变异方向。
 
 ### 已探索区域与开放方向
 
@@ -92,7 +92,7 @@ AI 负责高维候选生成、筛选、复算和一致性检查；人类提出�
 
 ### Scope
 
-This project compares double-pinyin layouts under shared code tables, corpora, cost models, and encoding contracts. NF3 contains **314 layouts in which each of the 21 ordinary initials has one fixed first key**, across five keyboard domains, plus the restored `S005` original KeyTao/Snow baseline for like-for-like comparison.
+This project compares double-pinyin layouts under shared code tables, corpora, cost models, and encoding contracts. It began with a question: for the double-pinyin component of a 21-key KeyTao layout without alternative fly-key paths, how far can the balance between high performance and low memorization be pushed? NF3 contains **314 layouts in which each of the 21 ordinary initials has one fixed first key**, across five keyboard domains, plus the restored `S005` original KeyTao/Snow baseline for like-for-like comparison.
 
 | Stage | Active layouts | Result |
 |---|---:|---|
@@ -105,7 +105,7 @@ NF3 records 71,507,052 neighbourhood move checks and 71,226 full conditional eva
 
 The open frontier includes longer second-key cycles, changes involving five or more groups, auxiliary-set/order redesign, logical repartitioning, new conditional grammars, and CKT models for other user populations.
 
-The historical lineage includes Flypy, Ziranma, Shengbi, KeyTao, Shoudao, and Lishi26 (廿六双拼). `S005` keeps its original conditional ch/zh first-key branches and frozen scores; it is displayed beside `S005-NF` but excluded from the NF single-onset frontier awards.
+The historical lineage includes Flypy, Ziranma, Shengbi, KeyTao, Shoudao, Lishi26 (廿六双拼), and Lishi Triple Pinyin (李氏三拼). Lishi26 and its AEUIO/AVUIO variants contributed the 21×26 domain. The 25×30 domain comes from rearranging Lishi Triple Pinyin's 15×15×15 three-stage capacity as 25×30×5, expanding the upper bound from 3,375 to 3,750. `S005` keeps its original conditional ch/zh first-key branches and frozen scores; it is displayed beside `S005-NF` but excluded from the NF single-onset frontier awards.
 
 ### Use
 
@@ -125,7 +125,7 @@ AI performs large-scale generation, screening, recomputation, and consistency ch
 
 ### 範圍
 
-本專案在共同碼表、語料、成本模型與編碼合約下比較雙拼佈局。NF3 收錄 **314 個普通聲母單首鍵候選**，涵蓋 21×21、23×23、21×26、25×30、26×26 五類鍵域，另列 `S005` 鍵道原作基線作同口徑比較。
+本專案在共同碼表、語料、成本模型與編碼合約下比較雙拼佈局。它起源於一個問題：21 鍵鍵道的雙拼部分若不加飛鍵，高效能與低記憶量的平衡能推到什麼極限？NF3 收錄 **314 個普通聲母單首鍵候選**，涵蓋 21×21、23×23、21×26、25×30、26×26 五類鍵域，另列 `S005` 鍵道原作基線作同口徑比較。
 
 | 階段 | 活動方案 | 成果 |
 |---|---:|---|
@@ -138,7 +138,7 @@ NF3 保存 71,507,052 次鄰域動作檢查及 71,226 次完整條件評分。�
 
 開放方向包括更長的韻鍵循環、五組以上聯動、五輔集合或順序重選、邏輯聲韻重新分組、新條件編碼語法，以及面向其他使用者群體的 CKT 模型。
 
-傳統來源種子包括小鶴、自然碼、聲筆、鍵道、首道與廿六雙拼。`S005` 保留原作 ch/zh 條件首鍵及凍結成績，與 `S005-NF` 並列展示，但不參與 NF 單首鍵前沿授標。
+傳統來源種子包括小鶴、自然碼、聲筆、鍵道、首道、廿六雙拼與李氏三拼。廿六雙拼原版及 AEUIO/AVUIO 改版帶來 21×26 鍵域；25×30 鍵域則源自李氏三拼 15×15×15 的三段容量結構，重排為 25×30×5 後，容量上界由 3,375 放寬至 3,750。`S005` 保留原作 ch/zh 條件首鍵及凍結成績，與 `S005-NF` 並列展示，但不參與 NF 單首鍵前沿授標。
 
 ### 使用與復現
 

@@ -27,6 +27,7 @@ page.on('pageerror', error => pageErrors.push(String(error)));
 try {
   await page.goto(url, { waitUntil: 'load', timeout: 120_000 });
   await page.waitForFunction(() => window.App7?.ready, null, { timeout: 120_000 });
+  assert.equal(await page.evaluate(() => window.App7.current().id), 'NF3-21X21-M40-44');
 
   assert.equal(await page.locator('#nf6SelectionFilters').isVisible(), true);
   assert.equal(await page.locator('#uxFilters').isVisible(), false);
@@ -34,6 +35,7 @@ try {
   assert.equal(await page.locator('#uxMarking').isVisible(), false);
   assert.equal(await page.locator('.nf6-preference-card').isVisible(), true);
   assert.equal(await page.locator('#s005Comparison').count(), 0);
+  assert.equal(await page.getByText('FINAL SELECTION / FROZEN DATA', { exact: true }).count(), 0);
   const semanticColors = await page.evaluate(() => {
     const color = selector => getComputedStyle(document.querySelector(selector)).backgroundColor;
     return {
@@ -87,6 +89,41 @@ try {
   await page.locator('#run').click();
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
 
+  const viewButtonLefts = await page.locator('.nf5-view-group').evaluateAll(groups => groups.map(group =>
+    [...group.querySelectorAll('button')].map(button => button.getBoundingClientRect().left)
+  ));
+  for (const [first, second] of viewButtonLefts) {
+    assert.ok(Math.abs(first - second) < 1, `view buttons should be left-aligned: ${first}, ${second}`);
+  }
+
+  const soundMatrixSample = await page.locator('.nf5-matrix-cell .nf5-cell-sample').filter({ hasText: /〔/ }).first().innerText();
+  assert.match(soundMatrixSample, /[\u3400-\u9fff]/, 'sound matrix samples should retain corresponding characters');
+  await page.locator('[data-nf5-data="list"]').click();
+  assert.deepEqual(
+    (await page.locator('.nf5-list-table th').allTextContents()).map(text => text.replace('↕', '').trim()),
+    ['音节', '对应字', '声韵码', '权重值', '筛选内占比', '重码 / 例外'],
+  );
+  const soundCells = await page.locator('.nf5-list-table tbody tr').first().locator('td').allTextContents();
+  assert.match(soundCells[1], /[\u3400-\u9fff]/);
+  assert.match(soundCells[3], /^\d[\d,]*$/);
+  assert.match(soundCells[4], /^\d+\.\d{3}%$/);
+  const rowColors = await page.locator('.nf5-list-table tbody tr').evaluateAll(rows =>
+    rows.slice(0, 10).map(row => getComputedStyle(row.cells[0]).backgroundColor)
+  );
+  assert.ok(new Set(rowColors).size > 2, 'detail rows should use weight-dependent heat colors');
+
+  await page.locator('#dataset').selectOption('chars');
+  await page.locator('#run').click();
+  const charCells = await page.locator('.nf5-list-table tbody tr').first().locator('td').allTextContents();
+  assert.ok(charCells[1].trim().length > 0, 'single-character details should include a syllable');
+  assert.match(charCells[4], /^\d+\.\d{3}%$/);
+
+  await page.locator('#dataset').selectOption('words');
+  await page.locator('#run').click();
+  const wordCells = await page.locator('.nf5-list-table tbody tr').first().locator('td').allTextContents();
+  assert.match(wordCells[1], /^\S+ \S+$/, 'two-character details should include both syllables');
+  assert.match(wordCells[4], /^\d+\.\d{3}%$/);
+
   await page.locator('#tabs [data-action="nav:methods"]').click();
   await page.waitForFunction(() => window.App7.UX.method === 'guide');
   const guideSpacing = await page.evaluate(() => {
@@ -106,6 +143,7 @@ try {
   assert.equal(guideSpacing.noteCount, 2);
   await page.locator('#uxSubnav [data-action="sub:visualLegend"]').click();
   await page.waitForFunction(() => window.App7.UX.method === 'visualLegend');
+  assert.equal(await page.getByText('VISUAL SEMANTICS / DV1', { exact: true }).count(), 0);
   for (const id of ['uxFilters', 'uxEnvironment', 'uxMarking', 'nf6MatrixControls']) {
     assert.equal(await page.locator(`#${id}`).isVisible(), false, `${id} should be hidden in legend`);
   }

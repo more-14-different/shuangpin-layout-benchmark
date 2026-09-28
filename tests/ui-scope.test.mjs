@@ -8,6 +8,10 @@ const artifactAvailable = existsSync(artifact);
 const html = artifactAvailable ? readFileSync(artifact, 'utf8') : '';
 const artifactTest = artifactAvailable ? test : test.skip;
 
+artifactTest('NF3-21X21-M40-44 is the default scheme', () => {
+  assert.equal((html.match(/CURRENT=D\.entries\.some\(e=>e\.id==='NF3-21X21-M40-44'\)\?'NF3-21X21-M40-44':D\.entries\[0\]\.id/g) ?? []).length, 2);
+});
+
 artifactTest('top-level pages declare their own control zones', () => {
   assert.match(html, /const NF6_PAGE_CONTROLS\s*=\s*\{/);
   assert.match(html, /benchmark:\s*\['uxFilters','uxEnvironment','uxMarking'\]/);
