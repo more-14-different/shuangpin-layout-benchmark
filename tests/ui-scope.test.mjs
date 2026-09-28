@@ -69,3 +69,20 @@ artifactTest('selection preference card has the approved aligned and dynamic lay
   assert.match(html, /\.nf6-preference-card>\.dv-ribbon[^}]*border-top:0/);
   assert.match(html, /\.nf6-preference-card>\.dv-ribbon[^}]*border-bottom:0/);
 });
+
+artifactTest('benchmark removes only explicitly low-information result columns', () => {
+  assert.match(html, /function uxCompactColumns\(headers,rows,raws=\[\]\)/);
+  assert.match(html, /keyGuardMs:\{hideWhen:'allZero'\}/);
+  assert.match(html, /lengthGuardMs:\{hideWhen:'allZero'\}/);
+  assert.match(html, /extrapolatedCodeShare:\{hideWhen:'allZero'\}/);
+  assert.match(html, /longCodeShare:\{hideWhen:'allZero'\}/);
+  assert.match(html, /centerMs:\{hideWhen:'duplicate',compareTo:'eq'\}/);
+  assert.match(html, /perChar:\{hideWhen:'duplicate',compareTo:'eq'\}/);
+  assert.match(html, /n:\{hideWhen:'uniform'\}/);
+  assert.match(html, /meanKeys:\{hideWhen:'uniform'\}/);
+  assert.match(html, /uxTable\(compact\.headers,compact\.rows,ids,'benchmark',compact\.raws\)/);
+  assert.match(html, /label:'宿主键域',help:'domain',column:'domain',hideWhen:'uniform'/);
+  assert.match(html, /label:'五辅键方向',help:'aux',column:'aux',hideWhen:'uniform'/);
+  assert.match(html, /uxTable\(compact\.headers,compact\.rows,es\.map\(e=>e\.id\),'fair',compact\.raws\)/);
+  assert.match(html, /已收起无比较信息的列/);
+});

@@ -61,6 +61,7 @@ try {
   });
   assert.deepEqual(ribbonBorders, ['0px', '0px']);
 
+  await page.locator('#nf6SelectionHost').selectOption('21x26');
   await page.locator('#nf6SelectionMemory').fill('32');
   await page.waitForTimeout(250);
   assert.match(await page.locator('#nf6SelectionCount').innerText(), /\d+ \/ 315 个候选/);
@@ -73,6 +74,19 @@ try {
   for (const id of ['uxFilters', 'uxEnvironment', 'uxMarking']) {
     assert.equal(await page.locator(`#${id}`).isVisible(), true, `${id} should be visible in benchmark`);
   }
+  await page.waitForSelector('table[data-ux-table="benchmark"]');
+  const benchmarkHeaders = (await page.locator('table[data-ux-table="benchmark"] th').allTextContents())
+    .map(text => text.replace(/[↕↑↓]/g, '').trim());
+  for (const redundant of ['每输出字 ms', '样本数 N', '平均键数', '中央 ms/项', '外推键保护 ms', '长码压力 ms', '含外推键占比', '超四码占比']) {
+    assert.equal(benchmarkHeaders.includes(redundant), false, `${redundant} should be compacted in the uniform sound benchmark`);
+  }
+  assert.match(await page.locator('.ux-compact-columns').innerText(), /当前结果全为 0/);
+  await page.locator('[data-action="fair"]').click();
+  await page.waitForSelector('table[data-ux-table="fair"]');
+  const fairHeaders = (await page.locator('table[data-ux-table="fair"] th').allTextContents())
+    .map(text => text.replace(/[↕↑↓]/g, '').trim());
+  assert.equal(fairHeaders.includes('宿主键域'), false, 'the filtered common host domain should be summarized instead of repeated');
+  assert.match(await page.locator('.ux-compact-columns').innerText(), /宿主键域（各方案均为 21×26）/);
 
   await page.locator('#tabs [data-action="nav:scheme"]').click();
   await page.waitForFunction(() => window.App7.UX.view === 'scheme');
