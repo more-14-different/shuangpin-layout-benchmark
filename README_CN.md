@@ -1,152 +1,46 @@
-# Astra 主导的：双拼布局 Benchmark + 多轮优化 · NF3 阶段
+# 交互式可复现の双拼方案选型探索
 
-**314 个普通声母单首键候选，另列 1 个键道原作基线；五类键域，一套可复查的码表、测评合同与闭合记录。**
+当前离线页为 `a7_CKT_R11_integrated.html`：在共同 399 音节、统一语料和冻结模型下，汇集 **492 个完整方案**，可筛选比较、查看键图与逐音节码表，并回看各轮探索结果。旧版 `a7_CKT_NF3_closure.html` 已归档。
 
-[简体中文](#简体中文) · [English](#english) · [繁體中文](#繁體中文) · [下载 Release](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest)
+指标速读：`M` 为记忆项，`D`/`V` 为普通声母/基础韵母原键偏移数，均越低越易记；`U` 为 399 音节中的不同二键码数，越高越好；A7E-v5/v4、v6-CW150 与 CKT 均越低越好。所有结果都是既定合同下的模型值，不代表全局最优或真人实验结论。
 
-<a id="简体中文"></a>
-## 简体中文
+## 探索阶段
 
-### 项目回答什么
+PR1–NF3 建立了历史方案、五类键域和单首键前沿；R11 页面保留其结果，并以 NF4 为后续演进起点。
 
-本项目把双拼布局放在同一码表、语料、成本模型和编码合同中比较，并公开每轮搜索的种子、约束与结果。它起源于：21 键键道，其双拼部分如果不加飞键，高性能和低记忆量的平衡能推到什么极限？
+| 阶段 | 相对上一阶段的进步与已探明范围 | 新增 / 累计 | 代表方案 |
+|---|---|---:|---|
+| NF4 | 引入可逐项核对的 M-R1 记忆账；扩展 21×26 严格无飞键与规则零声母分支 | +34 / 350 | `SNF4-M37-AE-12` |
+| R2 | 升级为 M-R2 映射＋路由账本，单列 D，并修正 S005；搜索低记忆、低声母偏移前沿 | +18 / 368 | `R2-21X21-M38-01` |
+| R3 | 加入语料加权非首选硬约束，分开统计 D/V，并穷举五辅顺序 | +16 / 384 | `R3-21X21-M43-06` |
+| R4 | 将全 20 合同右小指负担纳入约束，探明 21×21 的 D≤1 / D≤2 取舍 | +17 / 401 | `R4-21X21-M41-07` |
+| R5 | 把含形辅主行率、角色键频与空格敏感性纳入复核，推进低偏移 21×26 前沿 | +11 / 412 | `R5-21X26-M39-09` |
+| R6 | 固定五辅映射，围绕 D=1 与含辅主行率做 21×26 有界搜索 | +19 / 431 | `R6-21X26-M42-16` |
+| R7 | 转向固定 AVUIO 的 21×21 补全约束邻域，分别核验系综、主行与记忆 | +14 / 445 | `R7-21X21-M40-01` |
+| R8 | 补全例外键口径并加入 v6 情景指标；闭合固定五辅的 21×21 / 21×26 局部邻域 | +10 / 455 | `R8-21X21-M40-01` |
+| R9 | 新增完整 moving-hand 文稿评测与 34 键扩展；21×26 放宽 D/HF 寻找低记忆取舍 | +21 / 476 | `R9-21X26-M37-05` |
+| R10 | 修正跨键域比较资格，将日常纯汉字 MX34 纳入目标；限定 21×26、D≤5、V≤1、399 无重无飞、固定五辅 | +8 / 484 | `R10-21X26-M39-08` |
+| R11 | 在 R10 约束内加入复合操作、定向韵键与有限两层搜索；同时整合文稿热图、检索和说明卡片 | +8 / 492 | `R11-21X26-M39-05` |
 
-NF3 当前给出：
+## 代表方案性能
 
-| 项目 | 冻结结果 |
-|---|---:|
-| NF 单首键候选 | 314 |
-| 原作比较基线 | 1（S005 · 冰雪键道双拼） |
-| 普通声母规则 | 21 个普通声母各固定一个首键 |
-| 键域 | 21×21、23×23、21×26、25×30、26×26 |
-| common 音节 | 399；完整码表另含扩展音节，共 421 项 |
-| 语料 | 8,105 单字；92,233 二字词并集 |
-| NF3 父种 / 发布端点 | 49 / 38 |
-| NF3 邻域动作检查 / 完整条件评分 | 71,507,052 / 71,226 |
-
-### 从 PR1 到 NF3
-
-| 阶段 | 活动项 | 做了什么 |
-|---|---:|---|
-| PR1 历史快照 | 258 | 汇集传统方案、结构投影与低记忆搜索端点 |
-| NF1 | 237 | 保留 221 项，移出 37 项条件首键方案，加入 16 项单首键重建 |
-| NF2 | 276 | 从 42 个分档父种搜索首键载体组换位与三循环，加入 39 项，并统一复算 LU-v1r |
-| NF3 | 314 | 从 49 个父种联合变异声键与韵键，加入 38 项，完成七类有限邻域闭合 |
-
-这条路线的主题是 **“双拼布局：无尽的前沿”**。小鹤、自然码、声笔、键道、首道、廿六双拼与李氏三拼构成传统来源种子；廿六双拼的原版及 AEUIO/AVUIO 改版带来 21×26 键域。25×30 键域则源自李氏三拼 15×15×15 的三段容量结构：重排为 25×30×5 后，容量上界由 3,375 放宽至 3,750。每轮端点既是成果，也是下一轮的种子。页面同时记录“唯有源头活水来”的群聊立项时间线、各代种子的启发来源和变异方向。
-
-### 已探索区域与开放方向
-
-NF3 固定父种实际记忆项 M、逻辑声韵分组、重码桶、五辅键集合与顺序，检查：
-
-1. 第一码、第二码各自的两交换与三循环；
-2. 声韵各换一对的原子联动；
-3. 围绕 zh/ch/sh 或零声母载体的第一码四循环与双交换。
-
-| 键域 | 父种 | 有改善 | 发布端点 | 最佳 CKT 降幅 | 最佳 v5 降幅 |
+| 方案 | 键域 | M/D/V | U | A7E-v5 / v4 / v6 | 补全 CKT ms |
 |---|---:|---:|---:|---:|---:|
-| 21×21 | 11 | 9 | 7 | 12.38% | 8.36% |
-| 23×23 | 9 | 9 | 9 | 3.87% | 1.80% |
-| 21×26 | 12 | 11 | 10 | 15.79% | 7.87% |
-| 25×30 | 9 | 6 | 5 | 1.71% | 1.14% |
-| 26×26 | 8 | 7 | 7 | 2.60% | 1.28% |
+| `SNF4-M37-AE-12` | 21×26 | 37/4/0 | 399 | 9.9692 / 10.6046 / 9.0590 | 67.855 |
+| `R2-21X21-M38-01` | 21×21 | 38/0/5 | 373 | 10.7153 / 10.7618 / 9.6446 | 86.832 |
+| `R3-21X21-M43-06` | 21×21 | 43/0/5 | 373 | 10.6631 / 10.6797 / 9.5851 | 95.221 |
+| `R4-21X21-M41-07` | 21×21 | 41/0/5 | 373 | 10.3236 / 10.7454 / 9.4286 | 88.827 |
+| `R5-21X26-M39-09` | 21×26 | 39/3/2 | 399 | 10.0252 / 10.6172 / 9.0640 | 68.716 |
+| `R6-21X26-M42-16` | 21×26 | 42/1/5 | 399 | 10.3905 / 10.6906 / 9.4175 | 70.856 |
+| `R7-21X21-M40-01` | 21×21 | 40/0/5 | 373 | 10.3619 / 10.7235 / 9.4840 | 87.031 |
+| `R8-21X21-M40-01` | 21×21 | 40/0/5 | 373 | 10.4131 / 10.7489 / 9.4988 | 82.038 |
+| `R9-21X26-M37-05` | 21×26 | 37/4/0 | 399 | 9.9382 / 10.5892 / 9.0343 | 67.490 |
+| `R10-21X26-M39-08` | 21×26 | 39/5/0 | 399 | 9.9167 / 10.5691 / 9.0195 | 67.324 |
+| `R11-21X26-M39-05` | 21×26 | 39/5/0 | 399 | 9.9158 / 10.5724 / 9.0241 | 67.215 |
 
-开放方向包括第二码四循环及更长循环、五组以上联动、五辅集合或顺序重选、逻辑声韵重新分组、新的条件编码语法，以及面向其他用户群体的 CKT 模型。
+## 实战采用
 
-### 21×21 / AVUIO 示例
+- `R8-21X21-M40-01` 已投入生产/实战，被 [rime-snow-pinyin 的“无飞键道神韵”](https://github.com/ChenZhu-Xie/rime-snow-pinyin/tree/main#%E6%97%A0%E9%A3%9E%E9%94%AE%E9%81%93%E7%A5%9E%E9%9F%B5-%E5%8F%8C%E6%8B%BC%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88) 用作双拼编码方案。
+- `R10-21X26-M39-08` 也即将被 [rime-snow-pinyin](https://github.com/ChenZhu-Xie/rime-snow-pinyin) 采用。
 
-`NF3-21X21-M40-44` 是 21×21、AVUIO、M=40 的非支配候选之一：裸二键唯一 378/399，CKT-S2 71.705 ms/项，补全 CKT 81.719 ms/项，A7E-v5 10.5962，A7E-v4 10.8854，LU-v1r 78.43。
-
-同键域还保留偏向综合分、裸码速度、唯一性或记忆量的其他端点。先按使用结构筛选，再同时看 M、补全 CKT、v5/v4 和规则审计。
-
-### 键道原作与单首键重建
-
-`S005` 从 PR1 冻结快照恢复为原作比较基线，保留 ch/zh 条件首键、完整主码和当时的同口径成绩；`S005-NF` 是本项目在相同语料、模型与合同下制作的普通声母单首键派生版。原作基线参与表格对比，不进入 NF 候选前沿授标。
-
-| 方案 | 角色 | M | 裸二键唯一 | CKT-S2 ms | 补全 CKT ms | A7E-v5 | A7E-v4 | LU |
-|---|---|---:|---:|---:|---:|---:|---:|---:|
-| S005 | 原作基线；ch/zh 条件首键 | 40 | 372/399 | 82.0288 | 90.1489 | 11.3770 | 10.7329 | 78.90 |
-| S005-NF | 项目派生；普通声母单首键 | 38 | 357/399 | 82.2352 | 108.3288 | 11.4985 | 10.8097 | 82.29 |
-
-### 如何阅读和复现
-
-1. 从 [Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest) 下载 `a7_CKT_NF3_closure.html`，用现代浏览器离线打开。
-2. “选型总览”查看少量代表；“对比评测”查看筛选后的完整表；“方案详情”查看键盘图与逐音节码表。
-3. “方法与词典 → 阅读指南”查看四条时间线、探索地图、NF3 闭合记录和逐方案父子差值。
-4. 下载 `NF3_neighbourhood_repro.zip`，按包内 `README.md` 复放搜索过程、独立复算与浏览器检查。
-
-发布证据：[冻结摘要](docs/snapshot.json) · [NF3 审校](docs/review.md) · [来源索引](docs/sources.md) · [机器审计](docs/release-audit.json)
-
-### 人与 AI
-
-AI 负责高维候选生成、筛选、复算和一致性检查；人类提出问题、定义公平口径与约束、核查来源、解释边界，并承担发布与维护责任。方案署名应如实记录协作与维护关系。公开环境和闭合记录，使后来者可以携带其他 AI 复核、换目标并继续向前。
-
-### 版本与权利
-
-本仓库发布自有说明与审校材料；大型 HTML、复现包和结果 JSON 作为 Release assets 分发。位图仅供本地审校，不上传至 GitHub 或 Gitee；SVG 仍可按需发布。外部模型、配置、词库及方案名称遵循各自来源与许可，详见[来源索引](docs/sources.md)。
-
----
-
-<a id="english"></a>
-## English
-
-### Scope
-
-This project compares double-pinyin layouts under shared code tables, corpora, cost models, and encoding contracts. It began with a question: for the double-pinyin component of a 21-key KeyTao layout without alternative fly-key paths, how far can the balance between high performance and low memorization be pushed? NF3 contains **314 layouts in which each of the 21 ordinary initials has one fixed first key**, across five keyboard domains, plus the restored `S005` original KeyTao/Snow baseline for like-for-like comparison.
-
-| Stage | Active layouts | Result |
-|---|---:|---|
-| PR1 historical snapshot | 258 | Imported and generated seeds |
-| NF1 | 237 | Kept 221, retired 37 conditional-first-key entries, added 16 reconstructions |
-| NF2 | 276 | Searched 42 stratified seeds and added 39 carrier-swap endpoints |
-| NF3 | 314 | Searched 49 parents jointly on both code positions and added 38 certified endpoints |
-
-NF3 records 71,507,052 neighbourhood move checks and 71,226 full conditional evaluations. Its certificates cover first/second-key transpositions and 3-cycles, atomic paired transpositions, and selected first-key 4-cycles/double transpositions around zh/ch/sh or zero-onset carriers.
-
-The open frontier includes longer second-key cycles, changes involving five or more groups, auxiliary-set/order redesign, logical repartitioning, new conditional grammars, and CKT models for other user populations.
-
-The historical lineage includes Flypy, Ziranma, Shengbi, KeyTao, Shoudao, Lishi26 (廿六双拼), and Lishi Triple Pinyin (李氏三拼). Lishi26 and its AEUIO/AVUIO variants contributed the 21×26 domain. The 25×30 domain comes from rearranging Lishi Triple Pinyin's 15×15×15 three-stage capacity as 25×30×5, expanding the upper bound from 3,375 to 3,750. `S005` keeps its original conditional ch/zh first-key branches and frozen scores; it is displayed beside `S005-NF` but excluded from the NF single-onset frontier awards.
-
-### Use
-
-1. Download `a7_CKT_NF3_closure.html` from [Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest) and open it locally.
-2. Use Selection for shortlists, Benchmark for full filtered tables, and Scheme for keyboards and exact syllable codes.
-3. Open Methods → Reading guide for the project, chat-origin, seed, metric, and explored-region records.
-4. Use `NF3_neighbourhood_repro.zip` for executable replay and independent verification.
-
-Evidence: [snapshot](docs/snapshot.json) · [review](docs/review.md) · [sources](docs/sources.md) · [release audit](docs/release-audit.json)
-
-AI performs large-scale generation, screening, recomputation, and consistency checks. Humans formulate the problem, set fair metrics and constraints, verify sources, interpret the evidence, and own publication and maintenance responsibility. Reproducible artifacts let future researchers continue with other models and objectives.
-
----
-
-<a id="繁體中文"></a>
-## 繁體中文
-
-### 範圍
-
-本專案在共同碼表、語料、成本模型與編碼合約下比較雙拼佈局。它起源於一個問題：21 鍵鍵道的雙拼部分若不加飛鍵，高效能與低記憶量的平衡能推到什麼極限？NF3 收錄 **314 個普通聲母單首鍵候選**，涵蓋 21×21、23×23、21×26、25×30、26×26 五類鍵域，另列 `S005` 鍵道原作基線作同口徑比較。
-
-| 階段 | 活動方案 | 成果 |
-|---|---:|---|
-| PR1 歷史快照 | 258 | 匯集來源方案與搜尋端點 |
-| NF1 | 237 | 保留 221 項，移出 37 項條件首鍵方案，加入 16 項重建 |
-| NF2 | 276 | 搜尋 42 個分檔父種，加入 39 項聲鍵載體變異端點 |
-| NF3 | 314 | 搜尋 49 個父種的聲韻聯動鄰域，加入 38 項端點 |
-
-NF3 保存 71,507,052 次鄰域動作檢查及 71,226 次完整條件評分。已覆蓋聲鍵／韻鍵兩交換與三循環、聲韻各換一對的原子聯動，以及圍繞 zh/ch/sh 或零聲母載體的聲鍵四循環與雙交換。
-
-開放方向包括更長的韻鍵循環、五組以上聯動、五輔集合或順序重選、邏輯聲韻重新分組、新條件編碼語法，以及面向其他使用者群體的 CKT 模型。
-
-傳統來源種子包括小鶴、自然碼、聲筆、鍵道、首道、廿六雙拼與李氏三拼。廿六雙拼原版及 AEUIO/AVUIO 改版帶來 21×26 鍵域；25×30 鍵域則源自李氏三拼 15×15×15 的三段容量結構，重排為 25×30×5 後，容量上界由 3,375 放寬至 3,750。`S005` 保留原作 ch/zh 條件首鍵及凍結成績，與 `S005-NF` 並列展示，但不參與 NF 單首鍵前沿授標。
-
-### 使用與復現
-
-1. 從 [Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest) 下載 `a7_CKT_NF3_closure.html` 並離線開啟。
-2. 「選型總覽」提供少量代表；「對比評測」提供完整篩選表；「方案詳情」提供鍵盤圖及逐音節碼表。
-3. 「方法與詞典 → 閱讀指南」提供四條時間線、探索地圖、NF3 證書與父子差值。
-4. `NF3_neighbourhood_repro.zip` 提供可執行復放與獨立核驗。
-
-證據：[凍結摘要](docs/snapshot.json) · [NF3 審校](docs/review.md) · [來源索引](docs/sources.md) · [機器審計](docs/release-audit.json)
-
-AI 承擔高維候選生成、篩選、複算與一致性檢查；人類提出問題、定義公平口徑與約束、核查來源、解釋證據，並承擔發佈與維護責任。公開環境與證書，讓後來者能攜帶其他 AI 繼續推進。
+下载：[GitHub Releases](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest) · [Gitee Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest)
