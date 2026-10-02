@@ -1,0 +1,28 @@
+{
+  "release": "R11",
+  "reviewDate": "2026-10-02",
+  "artifact": {
+    "file": "a7_CKT_R11.html",
+    "bytes": 42551645,
+    "sha256": "8912a84d4f9b045fc561009a3352c937acc34915e9a7a4023a061aeb9ae5aa54",
+    "publicationRecords": 467,
+    "commonSyllables": 399
+  },
+  "selectionAudit": {
+    "sourceRecords": 492,
+    "removedRecords": 25,
+    "addedRecords": 0,
+    "representativesRequired": 11,
+    "representativesPresent": 11,
+    "structuredReferencesToRemovedRecords": 0,
+    "payloadExteriorByteIdentical": true
+  },
+  "checks": [
+    {"name": "payload decodes as gzip JSON", "pass": true},
+    {"name": "467 distinct scheme records are present", "pass": true},
+    {"name": "all 11 stage representatives are present", "pass": true},
+    {"name": "removed schemes have no remaining structured references", "pass": true},
+    {"name": "HTML outside the payload is byte-identical to the integrated source", "pass": true},
+    {"name": "local Edge loads the offline HTML and passes the browser interaction suite", "pass": true}
+  ]
+}

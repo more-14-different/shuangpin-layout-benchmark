@@ -1,6 +1,6 @@
-# 交互式可复现の双拼方案选型探索
+# 交互式可复现 の 双拼方案选型探索
 
-当前离线页为 `a7_CKT_R11_integrated.html`：在共同 399 音节、统一语料和冻结模型下，汇集 **492 个完整方案**，可筛选比较、查看键图与逐音节码表，并回看各轮探索结果。旧版 `a7_CKT_NF3_closure.html` 已归档。
+当前离线页为 `a7_CKT_R11.html`：在共同 399 音节、统一语料和冻结模型下，汇集 **467 个完整方案**，可筛选比较、查看键图与逐音节码表，并回看各轮探索结果。
 
 指标速读：`M` 为记忆项，`D`/`V` 为普通声母/基础韵母原键偏移数，均越低越易记；`U` 为 399 音节中的不同二键码数，越高越好；A7E-v5/v4、v6-CW150 与 CKT 均越低越好。所有结果都是既定合同下的模型值，不代表全局最优或真人实验结论。
 
@@ -40,7 +40,7 @@ PR1–NF3 建立了历史方案、五类键域和单首键前沿；R11 页面保
 
 ## 实战采用
 
-- `R8-21X21-M40-01` 已投入生产/实战，被 [rime-snow-pinyin 的“无飞键道神韵”](https://github.com/ChenZhu-Xie/rime-snow-pinyin/tree/main#%E6%97%A0%E9%A3%9E%E9%94%AE%E9%81%93%E7%A5%9E%E9%9F%B5-%E5%8F%8C%E6%8B%BC%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88) 用作双拼编码方案。
+- `R8-21X21-M40-01` 已投入生产/实战，被 [rime-snow-pinyin 的“无飞键道・神韵”](https://github.com/ChenZhu-Xie/rime-snow-pinyin/tree/main#%E6%97%A0%E9%A3%9E%E9%94%AE%E9%81%93%E7%A5%9E%E9%9F%B5-%E5%8F%8C%E6%8B%BC%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88) 用作双拼编码方案。
 - `R10-21X26-M39-08` 也即将被 [rime-snow-pinyin](https://github.com/ChenZhu-Xie/rime-snow-pinyin) 采用。
 
 下载：[GitHub Releases](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest) · [Gitee Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases/latest)

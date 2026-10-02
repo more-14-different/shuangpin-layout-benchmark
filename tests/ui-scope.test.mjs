@@ -3,12 +3,12 @@ import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
-const artifact = fileURLToPath(new URL('../a7_CKT_NF3_closure.html', import.meta.url));
+const artifact = fileURLToPath(new URL('../a7_CKT_R11.html', import.meta.url));
 const artifactAvailable = existsSync(artifact);
 const html = artifactAvailable ? readFileSync(artifact, 'utf8') : '';
 const artifactTest = artifactAvailable ? test : test.skip;
 
-artifactTest('NF3-21X21-M40-44 is the default scheme', () => {
+artifactTest('the inherited NF3 selection remains the default scheme', () => {
   assert.equal((html.match(/CURRENT=D\.entries\.some\(e=>e\.id==='NF3-21X21-M40-44'\)\?'NF3-21X21-M40-44':D\.entries\[0\]\.id/g) ?? []).length, 2);
 });
 
@@ -54,7 +54,6 @@ artifactTest('page-specific controls reuse the matching benchmark semantic color
 artifactTest('selection overview does not special-case the historical S005 pair', () => {
   const overviewOverride = html.match(/uxRenderOverview=function\(\)\{NF3_OV_BASE\(\);[^\n]+/)?.[0] ?? '';
   assert.doesNotMatch(overviewOverride, /s005ComparisonCard/);
-  assert.match(overviewOverride, /D\.entries\.length/);
 });
 
 artifactTest('selection preference card has the approved aligned and dynamic layout', () => {

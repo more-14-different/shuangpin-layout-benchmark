@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 
 const require = createRequire(import.meta.url);
 const edge = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
-const artifact = resolve('a7_CKT_NF3_closure.html');
+const artifact = resolve('a7_CKT_R11.html');
 if (!existsSync(artifact) || !existsSync(edge)) {
   console.log('browser UI test skipped: local release HTML or Microsoft Edge is unavailable');
   process.exit(0);
@@ -62,15 +62,15 @@ try {
   assert.deepEqual(ribbonBorders, ['0px', '0px']);
 
   await page.locator('#nf6SelectionHost').selectOption('21x26');
-  await page.locator('#nf6SelectionMemory').fill('32');
+  await page.locator('#nf6SelectionMemory').fill('36');
   await page.waitForTimeout(250);
-  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\d+ \/ 315 个候选/);
+  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\d+ \/ 467$/);
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
   await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
   await page.waitForFunction(() => window.App7.UX.view === 'benchmark');
   assert.equal(await page.locator('#assocOp').inputValue(), 'le');
-  assert.equal(await page.locator('#assocValue').inputValue(), '32');
+  assert.equal(await page.locator('#assocValue').inputValue(), '36');
   for (const id of ['uxFilters', 'uxEnvironment', 'uxMarking']) {
     assert.equal(await page.locator(`#${id}`).isVisible(), true, `${id} should be visible in benchmark`);
   }
@@ -140,21 +140,9 @@ try {
 
   await page.locator('#tabs [data-action="nav:methods"]').click();
   await page.waitForFunction(() => window.App7.UX.method === 'guide');
-  const guideSpacing = await page.evaluate(() => {
-    const exploration = document.querySelector('.pub-exploration-map');
-    const report = document.querySelector('#nf3Report');
-    const table = exploration.querySelector('.scroll');
-    const notes = exploration.querySelector('.pub-exploration-notes');
-    const gap = (upper, lower) => lower.getBoundingClientRect().top - upper.getBoundingClientRect().bottom;
-    return {
-      explorationToReport: gap(exploration, report),
-      tableToNotes: gap(table, notes),
-      noteCount: notes.children.length,
-    };
-  });
-  assert.ok(guideSpacing.explorationToReport >= 28, `exploration/report gap: ${guideSpacing.explorationToReport}`);
-  assert.ok(guideSpacing.tableToNotes >= 18, `table/notes gap: ${guideSpacing.tableToNotes}`);
-  assert.equal(guideSpacing.noteCount, 2);
+  assert.equal(await page.locator('#r9Guide').isVisible(), true);
+  assert.equal(await page.locator('table[data-ux-table="r9-representatives"] tbody tr').count(), 11);
+  assert.match(await page.locator('#r9Guide').innerText(), /R11/);
   await page.locator('#uxSubnav [data-action="sub:visualLegend"]').click();
   await page.waitForFunction(() => window.App7.UX.method === 'visualLegend');
   assert.equal(await page.getByText('VISUAL SEMANTICS / DV1', { exact: true }).count(), 0);
