@@ -40,8 +40,7 @@ PR1–NF3 建立了历史方案、五类键域和单首键前沿；R11 页面保
 
 ## 实战采用
 
-- `R8-21X21-M40-01` 已投入生产/实战，被 [rime-snow-pinyin](https://github.com/ChenZhu-Xie/rime-snow-pinyin) 的“无[飞键](https://pingshunhuangalex.gitbook.io/rime-xkjd/advance-in-xkjd/alt-code)道・神韵”用作双拼编码方案。
-- `R10-21X26-M39-08` 也即将被 [rime-snow-pinyin](https://github.com/ChenZhu-Xie/rime-snow-pinyin) 采用。
+- `R9-21X21-M40-02` 已投入生产/实战，被 [rime-snow-pinyin](https://github.com/ChenZhu-Xie/rime-snow-pinyin) 的“无[飞键](https://pingshunhuangalex.gitbook.io/rime-xkjd/advance-in-xkjd/alt-code)道・神韵”用作双拼编码方案。
 
 下载：[GitHub Releases](https://github.com/more-14-different/shuangpin-layout-benchmark/releases/latest) · [Gitee Releases](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/releases)
 
