@@ -64,7 +64,7 @@ try {
   await page.locator('#nf6SelectionHost').selectOption('21x26');
   await page.locator('#nf6SelectionMemory').fill('36');
   await page.waitForTimeout(250);
-  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\d+ \/ 467$/);
+  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\d+ \/ 524$/);
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
   await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
@@ -80,7 +80,24 @@ try {
   for (const redundant of ['每输出字 ms', '样本数 N', '平均键数', '中央 ms/项', '外推键保护 ms', '长码压力 ms', '含外推键占比', '超四码占比']) {
     assert.equal(benchmarkHeaders.includes(redundant), false, `${redundant} should be compacted in the uniform sound benchmark`);
   }
+  for (const collisionHeader of ['五档跨族受影响均值', '五档首选损失均值', 'Top10k 受影响', 'Top10k 首选损失', 'Top10k 最大桶']) {
+    assert.equal(benchmarkHeaders.includes(collisionHeader), true, `${collisionHeader} should be present in the benchmark`);
+  }
   assert.match(await page.locator('.ux-compact-columns').innerText(), /当前结果全为 0/);
+  await page.locator('[data-action="collision"]').click();
+  await page.waitForSelector('table[data-ux-table="four-code-collision"]');
+  assert.equal(await page.locator('#uxSubnav [data-r9-bench="collision"]').getAttribute('class'), 'active');
+  const collisionHeaders = (await page.locator('table[data-ux-table="four-code-collision"] th').allTextContents())
+    .map(text => text.replace(/[↕↑↓]/g, '').trim());
+  assert.deepEqual(collisionHeaders, ['方案', '宿主键域', '零声母 scope', '词频截点', '跨族受影响', '高频首选损失', '跨族碰撞桶', '全部碰撞桶', '最大桶']);
+  const collisionRows = await page.locator('table[data-ux-table="four-code-collision"] tbody tr').count();
+  assert.equal(collisionRows, 5, 'the active 21x26/M36 filter should retain one comparable scheme at five cuts');
+  await page.locator('#uxSubnav [data-r9-bench="table"]').click();
+  await page.waitForSelector('table[data-ux-table="benchmark"]');
+  await page.locator('#uxSubnav [data-r9-bench="collision"]').click();
+  await page.waitForSelector('table[data-ux-table="four-code-collision"]');
+  await page.locator('[data-action="collision-back"]').click();
+  await page.waitForSelector('table[data-ux-table="benchmark"]');
   await page.locator('[data-action="fair"]').click();
   await page.waitForSelector('table[data-ux-table="fair"]');
   const fairHeaders = (await page.locator('table[data-ux-table="fair"] th').allTextContents())
@@ -102,6 +119,23 @@ try {
   assert.match(await page.locator('#view h2').first().innerText(), /S005/);
   await page.locator('#run').click();
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
+
+  const shenyunZeroOnsetSvg = await page.evaluate(() => {
+    const entry = window.App7.data.entries.find(row => row.id === 'SNOW-SHENYUN-21X28-TONE');
+    return window.App7.keyboardSVG(entry);
+  });
+  assert.match(shenyunZeroOnsetSvg, /Ø A\/E\/O/);
+  assert.match(shenyunZeroOnsetSvg, /Ø W/);
+  assert.match(shenyunZeroOnsetSvg, /Ø Y\/YU/);
+  assert.doesNotMatch(shenyunZeroOnsetSvg, /Ø Ø/);
+
+  const constrainedSeeds = await page.evaluate(() => ({
+    removed: window.App7.data.entries.filter(row => row.id.startsWith('S21X26-')).length,
+    retained: ['R10-21X26-M38-07', 'R10-21X26-M37-04']
+      .every(id => window.App7.data.entries.some(row => row.id === id)),
+  }));
+  assert.equal(constrainedSeeds.removed, 40);
+  assert.equal(constrainedSeeds.retained, true);
 
   const viewButtonLefts = await page.locator('.nf5-view-group').evaluateAll(groups => groups.map(group =>
     [...group.querySelectorAll('button')].map(button => button.getBoundingClientRect().left)
