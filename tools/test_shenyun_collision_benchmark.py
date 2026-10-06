@@ -186,27 +186,16 @@ class CatalogueCollisionEngineTests(unittest.TestCase):
         "S21X26-CONT5-F06-M40-PURE-Y-CANYON-01",
     }
 
-    def test_selects_all_21x28_and_retained_21x26_controls(self) -> None:
+    def test_selects_all_21x28_and_all_21x26_layouts(self) -> None:
         selected = select_collision_entries(self.payload["entries"])
-        self.assertEqual(len(selected), 60)
+        self.assertEqual(len(selected), 259)
         selected_21x26 = {
             row["id"] for row in selected if row["capacity"] == [21, 26]
         }
+        self.assertEqual(len(selected_21x26), 242)
         self.assertEqual(
             selected_21x26,
-            COLLISION_21X26_EXTREMES
-            | self.CONTINUATION_21X26_IDS
-            | self.CONTINUATION_2_21X26_IDS
-            | self.CONTINUATION_3_21X26_IDS
-            | self.CONTINUATION_4_21X26_IDS
-            | self.CONTINUATION_5_21X26_IDS
-            | {
-                "S21X26-M40-PURE-Y-PERFORMANCE-04",
-                "S21X26-M38-PURE-Y-PERFORMANCE-01",
-                "S21X26-M39-PURE-Y-PERFORMANCE-10",
-                "S21X26-M37-PURE-Y-CANYON-09",
-                "S21X26-M39-PURE-Y-CANYON-01",
-            },
+            {row["id"] for row in self.payload["entries"] if row["capacity"] == [21, 26]},
         )
         self.assertTrue(all(row["capacity"] == [21, 28] for row in selected if row["id"] not in selected_21x26))
         self.assertIn("SNOW-SHENYUN-21X28-TONE", {row["id"] for row in selected})
@@ -225,14 +214,16 @@ class CatalogueCollisionEngineTests(unittest.TestCase):
             self.payload["entries"], SPLIT_Y_YU_SCOPE, capacities=capacities
         )
         self.assertTrue(COLLISION_21X26_EXTREMES <= {entry["id"] for entry in pure})
-        self.assertEqual(
-            {entry["id"] for entry in split},
+        split_ids = {entry["id"] for entry in split}
+        self.assertEqual(len(pure), 219)
+        self.assertEqual(len(split), 23)
+        self.assertTrue(
             {
                 "NF4I-AE-Z-YU-M38-21",
                 "NF4I-AE-Z-YU-M40-24",
                 "NF4I-AV-Z-YU-M40-29",
                 "NF4I-AV-AEO-YU-M40-30",
-            },
+            } <= split_ids,
         )
 
     def test_r10_baseline_matches_frozen_common399_head_and_filtered_tail(self) -> None:
@@ -391,7 +382,7 @@ class IntegratedAtlasTests(unittest.TestCase):
         cls.by_id = {row["id"]: row for row in cls.payload["entries"]}
 
     def test_catalogue_contains_historical_and_reviewed_research_entries(self) -> None:
-        self.assertEqual(len(self.payload["entries"]), 524)
+        self.assertEqual(len(self.payload["entries"]), 551)
         self.assertTrue(self.EXPECTED_NEW_IDS <= self.by_id.keys())
         self.assertTrue(self.REMOVED_21X26_RESEARCH_IDS.isdisjoint(self.by_id))
         self.assertTrue(self.CONSTRAINED_21X26_IDS <= self.by_id.keys())
@@ -402,6 +393,24 @@ class IntegratedAtlasTests(unittest.TestCase):
         self.assertTrue(self.CONTINUATION_5_21X26_IDS <= self.by_id.keys())
         self.assertTrue({"R10-21X26-M38-07", "R10-21X26-M37-04"} <= self.by_id.keys())
         self.assertNotIn("R21X28-in-ui-an", self.by_id)
+
+    def test_every_21x21_layout_has_all_eight_b_path_rates(self) -> None:
+        rows = [entry for entry in self.payload["entries"] if entry["capacity"] == [21, 21]]
+        keys = {"j1", "j2", "s1", "s2", "wj1", "wj2", "ws1", "ws2"}
+        self.assertEqual(len(rows), 97)
+        self.assertEqual(len([entry for entry in rows if entry["id"].startswith("BPW-")]), 19)
+        self.assertEqual(self.payload["bPathBenchmark"]["schemeCount"], 97)
+        for entry in rows:
+            self.assertEqual(set(entry["bPathMetrics"]), keys, entry["id"])
+            for value in entry["bPathMetrics"].values():
+                self.assertGreaterEqual(value, 0)
+                self.assertLessEqual(value, 1)
+        for key in keys:
+            self.assertAlmostEqual(
+                self.by_id["S005"]["bPathMetrics"][key],
+                self.payload["bPathBenchmark"]["referenceS005"][key],
+                places=12,
+            )
 
     def test_all_21x28_roles_use_canonical_zero_onset_labels(self) -> None:
         zero_labels = {"ØA", "ØE", "ØO", "ØW", "ØY", "ØYU"}
@@ -414,9 +423,9 @@ class IntegratedAtlasTests(unittest.TestCase):
             self.assertTrue(parser_labels.isdisjoint(flattened), entry["id"])
             self.assertEqual(entry["zeroOnsetScope"], PURE_Y_SCOPE)
 
-    def test_all_60_retained_entries_have_collisions(self) -> None:
+    def test_all_259_comparable_entries_have_collisions(self) -> None:
         selected = select_collision_entries(self.payload["entries"])
-        self.assertEqual(len(selected), 60)
+        self.assertEqual(len(selected), 259)
         self.assertEqual(
             {entry["id"] for entry in selected},
             {
@@ -428,9 +437,9 @@ class IntegratedAtlasTests(unittest.TestCase):
             collision = entry.get("fourCodeCollision")
             self.assertIsNotNone(collision, entry["id"])
             self.assertEqual(set(collision["cuts"]), {str(cut) for cut in CUTS})
-        self.assertEqual(self.payload["fourCodeCollisionBenchmark"]["schemeCount"], 60)
+        self.assertEqual(self.payload["fourCodeCollisionBenchmark"]["schemeCount"], 259)
         self.assertEqual(self.payload["fourCodeCollisionBenchmark"]["families"], ["AUAU", "AAAU", "AAAA"])
-        self.assertEqual(self.payload["fourCodeCollisionBenchmark"]["activeOnsetScope"], PURE_Y_SCOPE)
+        self.assertEqual(self.payload["fourCodeCollisionBenchmark"]["activeOnsetScope"], "mixed-reviewed-cohort")
         self.assertEqual(
             self.payload["fourCodeCollisionBenchmark"]["availableOnsetScopes"],
             [PURE_Y_SCOPE, SPLIT_Y_YU_SCOPE],
@@ -439,7 +448,7 @@ class IntegratedAtlasTests(unittest.TestCase):
     def test_collision_audit_records_preservation_and_full_coverage(self) -> None:
         audit = json.loads(COLLISION_AUDIT.read_text(encoding="utf-8"))
         self.assertEqual(audit["catalogueCount"], 524)
-        self.assertEqual(audit["collisionSchemeCount"], 60)
+        self.assertEqual(audit["collisionSchemeCount"], 259)
         self.assertEqual(audit["preservedExistingEntries"], 484)
         self.assertEqual(audit["mutatedExistingFields"], [])
         self.assertEqual(

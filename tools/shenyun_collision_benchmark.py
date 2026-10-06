@@ -23,59 +23,6 @@ COLLISION_21X26_EXTREMES = {
     "R11-21X26-M37-02",
     "R11-21X26-M38-03",
 }
-SHENYUN_21X26_RESEARCH = {
-    "S21X26-PURE-Y-PERFORMANCE-01",
-    "S21X26-SPLIT-Y-YU-PERFORMANCE-01",
-    "S21X26-PURE-Y-COLLISION-01",
-    "S21X26-PURE-Y-COLLISION-02",
-    "S21X26-SPLIT-Y-YU-COLLISION-01",
-    "S21X26-PURE-Y-PERFORMANCE-05",
-    "S21X26-SPLIT-Y-YU-PERFORMANCE-09",
-    "S21X26-PURE-Y-CANYON-12",
-    "S21X26-PURE-Y-CANYON-01",
-    "S21X26-SPLIT-Y-YU-CANYON-01",
-    "S21X26-M40-PURE-Y-PERFORMANCE-04",
-    "S21X26-M38-PURE-Y-PERFORMANCE-01",
-    "S21X26-M39-PURE-Y-PERFORMANCE-10",
-    "S21X26-M37-PURE-Y-CANYON-09",
-    "S21X26-M39-PURE-Y-CANYON-01",
-    "S21X26-CONT-F01-M40-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT-F01-M40-PURE-Y-PERFORMANCE-04",
-    "S21X26-CONT-F02-M38-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT-F02-M38-PURE-Y-CANYON-07",
-    "S21X26-CONT-F04-M37-PURE-Y-CANYON-01",
-    "S21X26-CONT-F03-M39-PURE-Y-CANYON-02",
-    "S21X26-CONT2-F01-M40-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT2-F01-M40-PURE-Y-PERFORMANCE-03",
-    "S21X26-CONT2-F04-M38-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT2-F04-M38-PURE-Y-PERFORMANCE-05",
-    "S21X26-CONT2-F05-M37-PURE-Y-CANYON-01",
-    "S21X26-CONT2-F04-M38-PURE-Y-CANYON-01",
-    "S21X26-CONT2-F06-M39-PURE-Y-CANYON-01",
-    "S21X26-CONT2-F02-M40-PURE-Y-CANYON-01",
-    "S21X26-CONT3-F02-M40-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT3-F03-M38-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT3-F07-M39-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT3-F06-M38-PURE-Y-CANYON-01",
-    "S21X26-CONT3-F07-M39-PURE-Y-CANYON-01",
-    "S21X26-CONT3-F08-M40-PURE-Y-CANYON-01",
-    "S21X26-CONT3-F08-M40-PURE-Y-CANYON-02",
-    "S21X26-CONT3-F08-M40-PURE-Y-CANYON-03",
-    "S21X26-CONT4-F01-M40-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT4-F01-M40-PURE-Y-PERFORMANCE-10",
-    "S21X26-CONT4-F01-M40-PURE-Y-PERFORMANCE-11",
-    "S21X26-CONT4-F06-M40-PURE-Y-PERFORMANCE-12",
-    "S21X26-CONT4-F05-M39-PURE-Y-CANYON-01",
-    "S21X26-CONT4-F06-M40-PURE-Y-CANYON-01",
-    "S21X26-CONT4-F06-M40-PURE-Y-CANYON-02",
-    "S21X26-CONT4-F06-M40-PURE-Y-CANYON-08",
-    "S21X26-CONT5-F03-M40-PURE-Y-PERFORMANCE-01",
-    "S21X26-CONT5-F08-M40-PURE-Y-PERFORMANCE-11",
-    "S21X26-CONT5-F04-M40-PURE-Y-CANYON-05",
-    "S21X26-CONT5-F07-M40-PURE-Y-CANYON-01",
-    "S21X26-CONT5-F06-M40-PURE-Y-CANYON-01",
-}
-COLLISION_21X26_IDS = COLLISION_21X26_EXTREMES | SHENYUN_21X26_RESEARCH
 FAMILY_STAGE = {2: "AUAU", 3: "AAAU", 4: "AAAA"}
 FAMILY_NAME = {2: "double", 3: "triple", 4: "quadruple"}
 
@@ -85,13 +32,21 @@ def normalize_pinyin(value: str) -> str:
 
 
 def zero_onset_scope(entry: dict) -> str | None:
-    """Classify an explicit onset map without guessing from legacy code lists."""
+    """Classify ØY handling from explicit metadata or its frozen legacy audit.
+
+    Older catalogue rows predate the explicit ``YU`` pseudo-initial.  Their
+    memory audit nevertheless records whether the special YU branch exists,
+    so use that declaration rather than guessing from the generated codes.
+    """
     initial_map = entry.get("initialMap") or {}
     y_key = initial_map.get("Y")
     yu_key = initial_map.get("YU")
-    if y_key is None or yu_key is None:
-        return None
-    return PURE_Y_SCOPE if y_key == yu_key else SPLIT_Y_YU_SCOPE
+    if y_key is not None and yu_key is not None:
+        return PURE_Y_SCOPE if y_key == yu_key else SPLIT_Y_YU_SCOPE
+    simple_yu_split = (entry.get("memoryAuditR2") or {}).get("simpleYuSplit")
+    if isinstance(simple_yu_split, bool):
+        return SPLIT_Y_YU_SCOPE if simple_yu_split else PURE_Y_SCOPE
+    return None
 
 
 def select_onset_scope_entries(
@@ -113,16 +68,16 @@ def select_onset_scope_entries(
 
 
 def select_collision_entries(entries: Iterable[dict]) -> list[dict]:
-    """Select the declared 21x28 and reviewed 21x26 collision cohorts.
+    """Select every comparable 21x26 row and the declared 21x28 cohort.
 
-    The 21x28 cohort uses pure Y.  The reviewed 21x26 cohort deliberately
-    includes both pure-Y and split-Y/YU layouts, with the scope recorded on
-    every row rather than silently coercing one model into the other.
+    The 21x28 cohort uses pure Y.  All 21x26 layouts are measured, including
+    both pure-Y and split-Y/YU rows, with their scope recorded rather than
+    silently coercing one model into the other.
     """
     candidates = [
         entry for entry in entries
         if tuple(entry.get("capacity", ())) == (21, 28)
-        or entry.get("id") in COLLISION_21X26_IDS
+        or tuple(entry.get("capacity", ())) == (21, 26)
     ]
     return [
         entry for entry in candidates

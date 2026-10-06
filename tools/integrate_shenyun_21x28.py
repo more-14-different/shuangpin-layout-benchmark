@@ -317,6 +317,13 @@ def integrate_collision_ui(html: str) -> str:
     """Add the comparable 21x26/21x28 four-code summaries and drill-down once."""
     marker = "SHENYUN_COLLISION_UI_V2"
     if marker in html:
+        new_count = "${es.length} 个筛选后有数据方案 · ${rows.length} 行"
+        for old_count in (
+            "${es.length} 个方案（全部 21×28 + 三个 21×26 极端）· ${rows.length} 行",
+            "${es.length} 个 21×26 / 21×28 方案 · ${rows.length} 行",
+        ):
+            if old_count in html:
+                html = html.replace(old_count, new_count, 1)
         return html
     legacy_marker = "SHENYUN_COLLISION_UI_V1"
     if legacy_marker in html:
@@ -366,7 +373,7 @@ function renderFourCodeCollision(){
   rows.push([uxId(e.id),domain,scope,Number(cut).toLocaleString(),pct(m.crossAffectedRate),pct(m.crossFirstChoiceLossRate),m.crossBuckets,m.collisionBuckets,m.maxBucket]);
   ids.push(e.id);raws.push([e.id,domain,scope,Number(cut),m.crossAffectedRate,m.crossFirstChoiceLossRate,m.crossBuckets,m.collisionBuckets,m.maxBucket]);
  }
- $('#view').innerHTML=`<div class="panel compact"><div class="heading"><h2>四码跨编码族碰撞明细</h2><span>${es.length} 个方案（全部 21×28 + 三个 21×26 极端）· ${rows.length} 行</span></div>
+ $('#view').innerHTML=`<div class="panel compact"><div class="heading"><h2>四码跨编码族碰撞明细</h2><span>${es.length} 个筛选后有数据方案 · ${rows.length} 行</span></div>
  <p>同一真实词表中平权比较二字词 AUAU、三字词 AAAU、四字词 AAAA；每个截点按词频确定同码桶首选。缺失读音不记作零碰撞。</p>
  <p class="hint">语料截点：Top 500 / 1k / 2k / 5k / 10k。跨族受影响和首选损失按词频加权；最大桶按候选词数计。</p>
  <div class="ux-table-tools">${uxButton('返回综合表','collision-back','benchmark')} ${uxButton('导出本表 CSV','export-visible','export')}</div></div>
@@ -478,16 +485,19 @@ def onset_roles(initial_map: dict[str, str]) -> dict[str, list[str]]:
     })
 
 
-def normalize_21x28_onset_metadata(data: dict) -> list[str]:
+def normalize_onset_metadata(data: dict) -> list[str]:
     changed = []
     for entry in data["entries"]:
-        if entry.get("capacity") != [21, 28]:
+        if entry.get("capacity") not in ([21, 26], [21, 28]):
             continue
-        roles = onset_roles(entry["initialMap"])
         scope = zero_onset_scope(entry)
-        if entry.get("roles") != roles or entry.get("zeroOnsetScope") != scope:
+        roles = onset_roles(entry["initialMap"]) if entry.get("capacity") == [21, 28] else entry.get("roles")
+        if entry.get("zeroOnsetScope") != scope or (
+            entry.get("capacity") == [21, 28] and entry.get("roles") != roles
+        ):
             changed.append(entry["id"])
-        entry["roles"] = roles
+        if entry.get("capacity") == [21, 28]:
+            entry["roles"] = roles
         entry["zeroOnsetScope"] = scope
     return changed
 
@@ -955,7 +965,7 @@ def attach_four_code_collisions(data: dict, source: dict) -> dict[str, dict]:
         "schemeCount": len(results),
         "activeOnsetScope": scopes[0] if len(scopes) == 1 else "mixed-reviewed-cohort",
         "availableOnsetScopes": list(ONSET_SCOPES),
-        "cohort": "all declared pure-Y 21x28 layouts plus the retained R11 21x26 controls",
+        "cohort": "all catalogue 21x26 layouts plus all declared pure-Y 21x28 layouts",
         "ranking": "global Snow dictionary frequency order; unsupported readings retain rank but do not enter buckets",
         "winner": "highest frozen word weight; stable word/family tie break; polyphonic word wins if any code wins",
         "inputs": {
@@ -989,7 +999,7 @@ def main() -> None:
     assert len(current["entries"]) + len(pending_ids) == 524, (
         len(current["entries"]), pending_ids
     )
-    normalized_onset_ids = set(normalize_21x28_onset_metadata(current))
+    normalized_onset_ids = set(normalize_onset_metadata(current))
     before_snapshot = preservation_snapshot(current, existing_ids)
     with tempfile.TemporaryDirectory(prefix="shenyun-r11-", ignore_cleanup_errors=True) as temp_name:
         temp = Path(temp_name)
@@ -1030,7 +1040,7 @@ def main() -> None:
             updated = integrate(current, source, entries, exact, replay)
         else:
             updated = current
-        normalized_onset_ids.update(normalize_21x28_onset_metadata(updated))
+        normalized_onset_ids.update(normalize_onset_metadata(updated))
         updated_by_id = {entry["id"]: entry for entry in updated["entries"]}
         benchmark_ids = [*LEGACY_SHENYUN_IDS, *INTEGRATED_IDS]
         benchmark_entries = [updated_by_id[scheme_id] for scheme_id in benchmark_ids]

@@ -28,6 +28,15 @@ try {
   await page.goto(url, { waitUntil: 'load', timeout: 120_000 });
   await page.waitForFunction(() => window.App7?.ready, null, { timeout: 120_000 });
   assert.equal(await page.evaluate(() => window.App7.current().id), 'NF3-21X21-M40-44');
+  const bPathCoverage = await page.evaluate(() => {
+    const layouts = window.App7.data.entries.filter(entry => entry.capacity.join('x') === '21x21');
+    return {
+      count: layouts.length,
+      complete: layouts.every(entry => Object.values(entry.bPathMetrics ?? {}).length === 8),
+      selected: window.App7.data.entries.filter(entry => entry.id.startsWith('BPW-')).length,
+    };
+  });
+  assert.deepEqual(bPathCoverage, { count: 97, complete: true, selected: 19 });
 
   assert.equal(await page.locator('#nf6SelectionFilters').isVisible(), true);
   assert.equal(await page.locator('#uxFilters').isVisible(), false);
@@ -64,7 +73,10 @@ try {
   await page.locator('#nf6SelectionHost').selectOption('21x26');
   await page.locator('#nf6SelectionMemory').fill('36');
   await page.waitForTimeout(250);
-  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\d+ \/ 524$/);
+  assert.equal(
+    await page.locator('#nf6SelectionCount').innerText(),
+    `43 / ${await page.evaluate(() => window.App7.data.entries.length)}`,
+  );
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
   await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
@@ -83,6 +95,10 @@ try {
   for (const collisionHeader of ['五档跨族受影响均值', '五档首选损失均值', 'Top10k 受影响', 'Top10k 首选损失', 'Top10k 最大桶']) {
     assert.equal(benchmarkHeaders.includes(collisionHeader), true, `${collisionHeader} should be present in the benchmark`);
   }
+  for (const bPathHeader of ['键道·字+B1', '键道·字+B1+B2', '三拼·字+B1', '三拼·字+B1+B2',
+    '键道·词+B1', '键道·词+B1+B2', '三拼·词+B1', '三拼·词+B1+B2']) {
+    assert.equal(benchmarkHeaders.includes(bPathHeader), true, `${bPathHeader} should be present in the benchmark`);
+  }
   assert.match(await page.locator('.ux-compact-columns').innerText(), /当前结果全为 0/);
   await page.locator('[data-action="collision"]').click();
   await page.waitForSelector('table[data-ux-table="four-code-collision"]');
@@ -91,7 +107,7 @@ try {
     .map(text => text.replace(/[↕↑↓]/g, '').trim());
   assert.deepEqual(collisionHeaders, ['方案', '宿主键域', '零声母 scope', '词频截点', '跨族受影响', '高频首选损失', '跨族碰撞桶', '全部碰撞桶', '最大桶']);
   const collisionRows = await page.locator('table[data-ux-table="four-code-collision"] tbody tr').count();
-  assert.equal(collisionRows, 5, 'the active 21x26/M36 filter should retain one comparable scheme at five cuts');
+  assert.equal(collisionRows, 215, 'the active 21x26/M<=36 filter should retain all 43 schemes at five cuts');
   await page.locator('#uxSubnav [data-r9-bench="table"]').click();
   await page.waitForSelector('table[data-ux-table="benchmark"]');
   await page.locator('#uxSubnav [data-r9-bench="collision"]').click();
@@ -119,6 +135,25 @@ try {
   assert.match(await page.locator('#view h2').first().innerText(), /S005/);
   await page.locator('#run').click();
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
+
+  const lowMissIds = [
+    'LOWM-21X21-234186882e', 'LOWM-21X21-e51b9fed23',
+    'LOWM-21X21-f8b4a909fa', 'LOWM-21X21-7da832eb6d',
+    'EXPERIMENT-21X21-11cf6472a4', 'EXPERIMENT-21X21-a56df02245',
+    'EXPERIMENT-21X21-e11ce783d7', 'EXPERIMENT-21X21-110d170fca',
+  ];
+  assert.equal(await page.evaluate(ids => ids.every(id => {
+    const data = window.App7.data;
+    return data.entries.some(entry => entry.id === id && entry.tone === 'IVUAO')
+      && data.ckt.tracks[id]?.S2 && data.ensembleV6.values[id]
+      && data.macroxue.values[id];
+  }), lowMissIds), true);
+  await page.locator('#nf6SchemeQuery').fill('M41/D1');
+  await page.locator('#nf6SchemeList').selectOption(lowMissIds[0]);
+  await page.waitForFunction(() => window.App7.current().id === 'LOWM-21X21-234186882e');
+  assert.match(await page.locator('#view h2').first().innerText(), /LOWM-21X21-234186882e/);
+  await page.locator('#nf6SchemeQuery').fill('S005');
+  await page.locator('#nf6SchemeList').selectOption('S005');
 
   const shenyunZeroOnsetSvg = await page.evaluate(() => {
     const entry = window.App7.data.entries.find(row => row.id === 'SNOW-SHENYUN-21X28-TONE');
