@@ -566,7 +566,7 @@ def make_entry(source: dict, split, scheme: dict) -> dict:
         "zeroOnsetScope": zero_onset_scope({"initialMap": initial_map}),
         "rhymes": inverse(final_map),
         "reservedKeys": "AEIOU",
-        "auxiliaryClass": auxiliary,
+        "auxiliaryClass": "AEUIO",
         "defaultAuxOrder": auxiliary in {"AEUIO", "IEUAO"},
         "auxiliaryMappingMatchesReservation": True,
         "topgongReserve": "AEIOU",
