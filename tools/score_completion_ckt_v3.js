@@ -2,7 +2,10 @@
 /* Universal Completion CKT v3 Calculator for All Schemes.
  * Supports arbitrary capacities (21x21, 21x26, 21x28, 23x23, 26x26, 25x30, etc.)
  * and arbitrary native 5-key auxiliary mappings (IVUAO, OEWAY, IEUAO, UOEIA, AEUIO, etc.).
- * Cleans 25 一简字 from character frequency and evaluates 5 word lengths (1, 2, 3, 4, >4).
+ * 4-track closed-loop evaluation: character (1), word2 (2), word3 (3), word4 (4).
+ * Omits words of length >= 5 (equivalent initial-only output across schemes, no collisions).
+ * 2-char words and 4-char words compete directly in 4-key code space.
+ * Weights: [1, 3, 1, 1] matching 5000-char optimal segmentation tests.
  */
 'use strict';
 
@@ -181,7 +184,7 @@ function extractMultiwords(dictFile, pinyinMap, shape) {
     return { idx, tone: t };
   }
 
-  const w3 = [], w4 = [], w5 = [];
+  const w3 = [], w4 = [];
   for (const line of fs.readFileSync(dictFile, 'utf8').split(/\r?\n/)) {
     if (!line.includes('\t') || line.startsWith('#')) continue;
     const [word, reading, weightText] = line.split('\t');
@@ -198,17 +201,14 @@ function extractMultiwords(dictFile, pinyinMap, shape) {
     const item = { text: word, py: parsed.map(p => p.idx), tones: parsed.map(p => p.tone), weight };
     if (chars.length === 3) w3.push(item);
     else if (chars.length === 4) w4.push(item);
-    else if (chars.length >= 5) w5.push(item);
   }
 
   w3.sort((a, b) => b.weight - a.weight);
   w4.sort((a, b) => b.weight - a.weight);
-  w5.sort((a, b) => b.weight - a.weight);
 
   return {
     w3: w3.slice(0, 15000),
-    w4: w4.slice(0, 15000),
-    w5: w5.slice(0, 3000),
+    w4: w4.slice(0, 15000)
   };
 }
 
@@ -248,7 +248,7 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     });
   }
 
-  // 2. Words2 (带权二字词, 覆盖 13w 词库中的二字词)
+  // 2. Words2 (带权二字词, 4 码全拼 + 辅码)
   const w2_kt = [];
   const w2_sp = [];
   for (const [text, py1, py2, tone1, tone2, weight, lexicon, common] of data.words) {
@@ -280,7 +280,7 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     });
   }
 
-  // 3. Words3 (前三字声母 + 辅码)
+  // 3. Words3 (前三字声母简拼 + 辅码)
   const w3_kt = [];
   const w3_sp = [];
   for (const item of multiwords.w3) {
@@ -313,7 +313,7 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     });
   }
 
-  // 4. Words4 (前四字声母 + 辅码)
+  // 4. Words4 (前四字声母简拼 + 辅码，与二字词在 4 码编码空间直接交叉碰撞竞争)
   const w4_kt = [];
   const w4_sp = [];
   for (const item of multiwords.w4) {
@@ -346,33 +346,18 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     });
   }
 
-  // 5. Words5plus (声母全大写直出无辅码)
-  const w5_both = [];
-  for (const item of multiwords.w5) {
-    const { text, py, weight } = item;
-    const sylCodes = py.map(p => codes[p]);
-    if (sylCodes.some(x => !x)) continue;
-    const base = sylCodes.map(c => c[0].toUpperCase()).join('');
-    w5_both.push({
-      text, weight,
-      codes: [ [base], [base], [base] ]
-    });
-  }
-
   return {
     keytao: {
       character: chars_kt,
       word2: w2_kt,
       word3: w3_kt,
       word4: w4_kt,
-      word5plus: w5_both,
     },
     sanpin: {
       character: chars_sp,
       word2: w2_sp,
       word3: w3_sp,
       word4: w4_sp,
-      word5plus: w5_both,
     }
   };
 }
@@ -404,9 +389,9 @@ async function run() {
   if (!dictFile) throw Error('snow_pinyin.base.dict.yaml not found');
   const pinyinMap = new Map(data.pinyin.map((p, i) => [p, i]));
   const multiwords = extractMultiwords(dictFile, pinyinMap, data.shapes.snowshape);
-  console.log(`    Extracted cohorts: W3=${multiwords.w3.length}, W4=${multiwords.w4.length}, W5+=${multiwords.w5.length}`);
+  console.log(`    Extracted cohorts: W3=${multiwords.w3.length}, W4=${multiwords.w4.length}`);
 
-  console.log(`[3/5] Scoring all ${data.entries.length} schemes across all 10 tracks...`);
+  console.log(`[3/5] Scoring all ${data.entries.length} schemes across 8 tracks (4 cohorts x 2 modes)...`);
   const cache = new Map();
   const schemesObj = {};
   const limit = args.limit ? Number(args.limit) : data.entries.length;
@@ -418,7 +403,7 @@ async function run() {
     const rows = makeRowsForScheme(entry, data, stroke, multiwords);
     const modes = { keytao: {}, sanpin: {} };
     for (const mode of ['keytao', 'sanpin']) {
-      for (const kind of ['character', 'word2', 'word3', 'word4', 'word5plus']) {
+      for (const kind of ['character', 'word2', 'word3', 'word4']) {
         modes[mode][kind] = scoreCohort(rows[mode][kind], cache);
       }
     }
@@ -436,21 +421,19 @@ async function run() {
 
   const completionBV3 = {
     version: 'B-completion-CKT-v3-universal',
-    source: 'universal-10-track-evaluator',
+    source: 'universal-8-track-evaluator',
     policy: {
       tracks: [
         'kc1: keytao character (excluding 25 一简)',
         'kw2: keytao 2-char words',
         'kw3: keytao 3-char words',
         'kw4: keytao 4-char words',
-        'kw5: keytao 5+-char words',
         'sc1: sanpin character (excluding 25 一简)',
         'sw2: sanpin 2-char words',
         'sw3: sanpin 3-char words',
-        'sw4: sanpin 4-char words',
-        'sw5: sanpin 5+-char words'
+        'sw4: sanpin 4-char words'
       ],
-      weights: { character: 2, word2: 6, word3: 2, word4: 2, word5plus: 1 },
+      weights: { character: 1, word2: 3, word3: 1, word4: 1 },
       normalization: 'Divided by S005 at identical tau, alpha1, alpha2; fourth-power weighted mean.'
     },
     schemes: schemesObj
@@ -466,38 +449,38 @@ async function run() {
     console.log('[4/5] Embedding completionBV3 and v3 UI columns into HTML...');
     data.completionBV3 = completionBV3;
 
-    // Inject JS logic and Glossary in HTML if not already present
     let html = page.html;
 
-    // 1. Add UG.bCompositeV3 if not present
-    if (!html.includes('bCompositeV3:')) {
+    // 1. Update/Inject UG.bCompositeV3
+    const v3GlossaryCode = `UG.bCompositeV3={title:'综合补全 CKT v3 · 四阶词长闭环 · 原生五键',brief:'单字/二字/三字/四字闭环覆盖；四字词与二字词共享4码空间互相碰撞竞争；剔除53%一简干扰；完全原生支持任意五辅键与键域口径。S005恒为10。',detail:'1. 单字：从通用规范字频中剔除 25 个固顶一简字（占 53% 字频），纯粹评估需全拼+辅码消歧的次高频与生僻字补全；声母移位 D>0 的指法转移成本已 100% 被双拼基础码 CKT 精确反映；\\n2. 二字词：选用带权 13w 词（lexicon & 1）而非 6w 词，以全量带权词频真实反映词组重码，杜绝小词表截断产生的虚假无重码；忽略二简词以保全基准公平；\\n3. 三字词：提取高频实词 15,000 条，3 码声母简拼直出，支持两码辅码消歧；\\n4. 四字词：提取经典成语与高频实词 15,000 条，4 码声母简拼直出，支持两码辅码消歧；四字词与二字词在 4 码编码空间直接交叉碰撞，二者此消彼长体现在码长与选重上；\\n5. 超长词（L ≥ 5）：全方案均为声母直出无碰撞，且无需额外辅码，故予以忽略，避免 Shift 换挡计费失真；\\n6. 辅键与键域：直接采用方案原生 tone 五键映射与任意 capacity（包括 21×21、21×26、21×28、23×23、26×26 等），彻底消除固定 IVUAO 假设；\\n7. 权重匹配 5000 字实测最优切分词次比：单字 1、二字 3、三字 1、四字 1（即 16.7% : 50.0% : 16.7% : 16.7%）。',formula:'T_m,k = CKT + τ·p_res + α₁·(1−首选率) + α₂·次辅率\\nC_v3 = 10 · [Σ w_k (T_m,k / T_m,k(S005))⁴ / Σ w_k]^(1/4)\\nw = [1, 3, 1, 1]',direction:'同参数下越低越好',related:['bCompositeV2','bComposite0','selectioncost'],sources:['cktV2','completionBV3'],controls:['uxTau','uxFirstAuxPenalty','uxSecondAuxPenalty']};\n`;
+
+    if (html.includes('UG.bCompositeV3=')) {
+      html = html.replace(/UG\.bCompositeV3=\{[\s\S]*?\};\n/, v3GlossaryCode);
+    } else {
       const v2GlossaryAnchor = "UG.bCompositeV2={";
-      const v3GlossaryCode = `UG.bCompositeV3={title:'综合补全 CKT v3 · 全词长闭环 · 原生五键',brief:'五阶词长闭环覆盖，融入 5000 字实测切分比例；剔除 53% 一简字干扰；完全原生支持任意五辅键与键域口径。S005 恒为 10。',detail:'1. 单字：从通用规范字频中剔除 25 个固顶一简字（占 53% 字频），纯粹评估需全拼+辅码消歧的次高频与生僻字补全；\\n2. 二字词：选用带权 13w 词（lexicon & 1）而非 6w 词，以全量带权词频真实反映词组重码，杜绝小词表截断产生的虚假无重码；忽略二简词以保全基准公平；\\n3. 三字/四字词：前三/四字声母简拼直出，分别准入高频实词 15,000 条与经典成语/复合词 15,000 条（设置词频门槛，排除生造词与爬虫噪声），支持追加两码辅码换取消歧；\\n4. 超长词（L ≥ 5）：准入高频专有名词 3,000 条，前 4 声母小写、第 5 码及后续大写直出无辅码，计入 Shift 击键与长码压力；\\n5. 辅键与键域：直接采用方案原生 tone 五键映射与任意 capacity（包括 21×21、21×26、21×28、23×23、26×26 等），彻底消除固定 IVUAO 假设；\\n6. 权重按 5000 字实测最优切分词次分配：单字 2、二字 6、三字 2、四字 2、长词 1（即 15.4% : 46.2% : 15.4% : 15.4% : 7.7%）。',formula:'T_m,k = CKT + τ·p_res + α₁·(1−首选率) + α₂·次辅率\\nC_v3 = 10 · [Σ w_k (T_m,k / T_m,k(S005))⁴ / Σ w_k]^(1/4)\\nw = [2, 6, 2, 2, 1]',direction:'同参数下越低越好',related:['bCompositeV2','bComposite0','selectioncost'],sources:['cktV2','completionBV3'],controls:['uxTau','uxFirstAuxPenalty','uxSecondAuxPenalty']};\n`;
       html = html.replace(v2GlossaryAnchor, v3GlossaryCode + v2GlossaryAnchor);
     }
 
-    // 2. Add methods dictionary entry and documentation in cktReport
-    if (!html.includes("'bCompositeV3'")) {
+    // 2. Update methods dictionary entry
+    const v3Vers = "[uxTerm('bCompositeV3','综合补全 CKT v3（四阶词长闭环）'),Object.keys(D.completionBV3?.schemes||{}).length,'B-completion-CKT-v3-universal','S005固定锚点·原生五键·去一简·四阶实测加权'],";
+    if (html.includes("'bCompositeV3'")) {
+      html = html.replace(/\[uxTerm\('bCompositeV3'[\s\S]*?\],/, v3Vers);
+    } else {
       const versAnchor = "[uxTerm('bComposite0','综合补全CKT（字:词=1:2）')";
-      const v3Vers = "[uxTerm('bCompositeV3','综合补全 CKT v3（全词长闭环）'),Object.keys(D.completionBV3?.schemes||{}).length,'B-completion-CKT-v3-universal','S005固定锚点·原生五键·去一简·五词长实测加权'],";
       html = html.replace(versAnchor, v3Vers + versAnchor);
     }
 
-    // 3. Add JS functions and UI tracks
-    if (!html.includes('function bCompletionScoreV3')) {
-      const v2FuncAnchor = "function bCompletionScoreV2(m,tau,firstAux,secondAux,reference){";
-      const v3Funcs = `function bCompletionV3Row(e){return D.completionBV3?.schemes?.[e.id]?.modes||null}
+    // 3. Update/Inject JS functions and UI tracks
+    const v3Funcs = `function bCompletionV3Row(e){return D.completionBV3?.schemes?.[e.id]?.modes||null}
 const B_COMPLETION_TRACKS_V3=[
-  ['kc1','键道·单字(去一简)','keytao','character',2,2],
-  ['kw2','键道·二字词','keytao','word2',6,4],
-  ['kw3','键道·三字词','keytao','word3',2,3],
-  ['kw4','键道·四字词','keytao','word4',2,4],
-  ['kw5','键道·超长词','keytao','word5plus',1,5],
-  ['sc1','三拼·单字(去一简)','sanpin','character',2,2],
-  ['sw2','三拼·二字词','sanpin','word2',6,4],
-  ['sw3','三拼·三字词','sanpin','word3',2,3],
-  ['sw4','三拼·四字词','sanpin','word4',2,4],
-  ['sw5','三拼·超长词','sanpin','word5plus',1,5]
+  ['kc1','键道·单字(去一简)','keytao','character',1,2],
+  ['kw2','键道·二字词','keytao','word2',3,4],
+  ['kw3','键道·三字词','keytao','word3',1,3],
+  ['kw4','键道·四字词','keytao','word4',1,4],
+  ['sc1','三拼·单字(去一简)','sanpin','character',1,2],
+  ['sw2','三拼·二字词','sanpin','word2',3,4],
+  ['sw3','三拼·三字词','sanpin','word3',1,3],
+  ['sw4','三拼·四字词','sanpin','word4',1,4]
 ];
 function bCompletionScoreV3(m,tau,firstAux,secondAux,reference){
   if(!m||!reference)return null;
@@ -505,8 +488,8 @@ function bCompletionScoreV3(m,tau,firstAux,secondAux,reference){
   for(const [, ,mode,kind,weight,base] of B_COMPLETION_TRACKS_V3){
     const r=m[mode]?.[kind],b=reference[mode]?.[kind];
     if(!r||!b)return null;
-    const f=kind==='word5plus'?0:1-(r.stageWeight?.[0]??1),bf=kind==='word5plus'?0:1-(b.stageWeight?.[0]??1);
-    const f2=kind==='word5plus'?0:Math.max(0,r.meanKeys-base-f),bf2=kind==='word5plus'?0:Math.max(0,b.meanKeys-base-bf);
+    const f=1-(r.stageWeight?.[0]??1),bf=1-(b.stageWeight?.[0]??1);
+    const f2=Math.max(0,r.meanKeys-base-f),bf2=Math.max(0,b.meanKeys-base-bf);
     const a=r.completionUpperMs+tau*r.p2+firstAux*f+secondAux*f2;
     const c=b.completionUpperMs+tau*b.p2+firstAux*bf+secondAux*bf2;
     if(!(a>0&&c>0))return null;
@@ -515,13 +498,20 @@ function bCompletionScoreV3(m,tau,firstAux,secondAux,reference){
   }
   return 10*(sum/total)**.25;
 }\n`;
+
+    if (html.includes('function bCompletionScoreV3')) {
+      html = html.replace(/function bCompletionV3Row\(e\)[\s\S]*?return 10\*\(sum\/total\)\*\*\.25;\s*\}\n/, v3Funcs);
+    } else {
+      const v2FuncAnchor = "function bCompletionScoreV2(m,tau,firstAux,secondAux,reference){";
       html = html.replace(v2FuncAnchor, v3Funcs + v2FuncAnchor);
     }
 
-    // 4. Add UI header column and row calculations
-    if (!html.includes("help:'bCompositeV3'")) {
+    // 4. Update/Inject UI header column and row calculations
+    if (html.includes("help:'bCompositeV3'")) {
+      html = html.replace(/\{label:'综合补全 CKT v3[^']*',help:'bCompositeV3'\},/, "{label:'综合补全 CKT v3 · 四阶词长 · 原生五键 · ×10',help:'bCompositeV3'},");
+    } else {
       const v2Header = "{label:'综合补全 CKT v2 · 固定 IVUAO · 字:词=1:2 · ×10',help:'bCompositeV2'},";
-      const v3Header = "{label:'综合补全 CKT v2 · 固定 IVUAO · 字:词=1:2 · ×10',help:'bCompositeV2'},{label:'综合补全 CKT v3 · 全词长 · 原生五键 · ×10',help:'bCompositeV3'},";
+      const v3Header = "{label:'综合补全 CKT v2 · 固定 IVUAO · 字:词=1:2 · ×10',help:'bCompositeV2'},{label:'综合补全 CKT v3 · 四阶词长 · 原生五键 · ×10',help:'bCompositeV3'},";
       html = html.replace(v2Header, v3Header);
 
       const v2RowAnchor = "v2M=bCompletionV2Row(e),v2Score=bCompletionScoreV2(v2M,tau,bCompletionFirstAuxPenalty(),bCompletionSecondAuxPenalty(),bCompletionV2Row({id:'S005'})),scoreTau=bCompletionScore(m,tau);";
@@ -537,25 +527,28 @@ function bCompletionScoreV3(m,tau,firstAux,secondAux,reference){
       html = html.replace(v2NumAnchor, v3Num);
     }
 
-    // 5. Add CKT v3 section in cktReport panel if not present
-    if (!html.includes('<h3>综合补全 CKT v3：全词长闭环评估与词典收录准则</h3>')) {
-      const reportAnchor = '<p class="warning">公开仓库会继续更新，本页使用的是嵌入快照；';
-      const v3SectionHtml = `<h3>综合补全 CKT v3：全词长闭环评估与词典收录准则</h3>
+    // 5. Update/Inject CKT v3 section in cktReport panel
+    const v3SectionHtml = `<h3>综合补全 CKT v3：四阶词长闭环评估与词典收录准则</h3>
 <div class="two">
   <div class="card">
-    <h4>① 词典准入与去噪原则</h4>
-    <p><b>二字词</b>：采用全量带权 13w 词库（涵盖全部常用实词并真实反映高频重码碰撞），避免 6w 较小词表截断次高频词造成的虚假无重码率；忽略二简词以保障跨方案公平性。</p>
-    <p><b>三字词与四字词</b>：三字词取高频实词 15,000 条，四字词取经典成语与高频复合词 15,000 条，超长词 (≥5) 取高频专有名词 3,000 条。<b>严格设定频次阈值过滤噪声</b>，杜绝爬虫碎片与生造词拉低基准信噪比。</p>
+    <h4>① 词典准入与 4 码空间交叉碰撞</h4>
+    <p><b>二字词与四字词同台竞争</b>：二字词（4 码全拼）与四字词（4 码简拼）共享 4 码编码空间，发生真实的同码竞争。两者的此消彼长完全体现在各自的平均码长（是否需追加辅码）与选重耗时上。二字词采用全量带权 13w 词库；四字词准入高频成语与复合实词 15,000 条；三字词准入高频实词 15,000 条。</p>
+    <p><b>忽略四字词以上（L ≥ 5）</b>：五字及以上专有名词在各方案中均为纯声母简码直出，不存在跨阶编码碰撞与辅码消歧，全方案等价；忽略超长词可免除 Shift 换挡计费的模型外推争议，精简算力。</p>
   </div>
   <div class="card">
-    <h4>② 去一简与五阶词长权重</h4>
-    <p><b>单字剔除 25 个固顶一简</b>：25 个一简字在实际语料中独占单字总频次的 53.00%，且在各方案中均单键直接上屏无需消歧；剔除后纯粹考核剩余 47% 汉字的全拼+辅码消歧能力。</p>
-    <p><b>实测五阶词长加权 [2, 6, 2, 2, 1]</b>：基于 5000 字通用长文最优切分词次比（单字 15.4%、二字 46.2%、三字 15.4%、四字 15.4%、长词 7.7%），总权重 13，彻底形成全词长闭环。</p>
+    <h4>② 一简字处理与四阶词长权重</h4>
+    <p><b>单字剔除 25 个固顶一简</b>：25 个一简字在实际语料中独占单字总频次的 53.00%，且在各方案中均单键直接上屏无需消歧；剔除后纯粹考核剩余 47% 汉字的全拼+辅码消歧能力。声母移位 D&gt;0 带来的物理击键优劣，已 100% 被双拼基础码 CKT 转移耗时精确刻画，无需且不应变成方案-specific 剔除集合（避免测试集污染）。</p>
+    <p><b>实测四阶词长加权 [1, 3, 1, 1]</b>：基于 5000 字通用长文最优切分词次比（单字 16.7%、二字 50.0%、三字 16.7%、四字 16.7%），总权重 6，形成高精度的四阶闭环。</p>
     <p><b>原生五辅键与任意键域</b>：彻底解除固定 IVUAO 假设，直接根据每个方案原生的 tone 五键与实际 capacity 测算，S005 恒为 10 基准锚点。</p>
   </div>
 </div>
-` + reportAnchor;
-      html = html.replace(reportAnchor, v3SectionHtml);
+`;
+
+    if (html.includes('<h3>综合补全 CKT v3：')) {
+      html = html.replace(/<h3>综合补全 CKT v3：[\s\S]*?<\/div>\s*<\/div>\s*/, v3SectionHtml);
+    } else {
+      const reportAnchor = '<p class="warning">公开仓库会继续更新，本页使用的是嵌入快照；';
+      html = html.replace(reportAnchor, v3SectionHtml + reportAnchor);
     }
 
     // 6. Re-compress payload
