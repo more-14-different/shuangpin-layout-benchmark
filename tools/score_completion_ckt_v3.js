@@ -216,7 +216,7 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
   const codes = entry.codeList;
   const toneKeys = entry.tone;
   const shape = data.shapes.snowshape;
-  const keytaoWordFirstCharFirst = Array.isArray(entry.capacity) && entry.capacity[0] === 21 && entry.capacity[1] === 21;
+  const is21x21 = Array.isArray(entry.capacity) && entry.capacity[0] === 21 && entry.capacity[1] === 21;
 
   // 1. Chars (cleaned, without 25 一简字)
   const chars_kt = [];
@@ -258,8 +258,8 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     const [ch1, ch2] = [...text];
     const x1 = physicalShape(shape[ch1], toneKeys), x2 = physicalShape(shape[ch2], toneKeys);
     const t1 = toneKeys[tone1 - 1], t2 = toneKeys[tone2 - 1];
-    const b1 = keytaoWordFirstCharFirst ? x1 : x2;
-    const b2 = keytaoWordFirstCharFirst ? x2 : x1;
+    const b1 = is21x21 ? x1 : x2;
+    const b2 = is21x21 ? x2 : x1;
 
     w2_kt.push({
       text, weight,
@@ -291,8 +291,8 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     const chars = [...text];
     const x0 = physicalShape(shape[chars[0]], toneKeys);
     const x1 = physicalShape(shape[chars[1]], toneKeys);
-    const t_last = toneKeys[tones[2] - 1];
-    const t_first = toneKeys[tones[0] - 1];
+    const t_aux1 = is21x21 ? toneKeys[tones[2] - 1] : toneKeys[tones[0] - 1];
+    const t_aux2 = is21x21 ? toneKeys[tones[0] - 1] : toneKeys[tones[1] - 1];
 
     w3_kt.push({
       text, weight,
@@ -307,8 +307,8 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
       text, weight,
       codes: [
         [base],
-        t_last ? [base + t_last] : [base],
-        t_last && t_first ? [base + t_last + t_first] : (t_last ? [base + t_last] : [base])
+        t_aux1 ? [base + t_aux1] : [base],
+        t_aux1 && t_aux2 ? [base + t_aux1 + t_aux2] : (t_aux1 ? [base + t_aux1] : [base])
       ]
     });
   }
@@ -324,8 +324,8 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
     const chars = [...text];
     const x0 = physicalShape(shape[chars[0]], toneKeys);
     const x1 = physicalShape(shape[chars[1]], toneKeys);
-    const t_last = toneKeys[tones[3] - 1];
-    const t_first = toneKeys[tones[0] - 1];
+    const t_aux1 = is21x21 ? toneKeys[tones[3] - 1] : toneKeys[tones[0] - 1];
+    const t_aux2 = is21x21 ? toneKeys[tones[0] - 1] : toneKeys[tones[1] - 1];
 
     w4_kt.push({
       text, weight,
@@ -340,8 +340,8 @@ function makeRowsForScheme(entry, data, stroke, multiwords) {
       text, weight,
       codes: [
         [base],
-        t_last ? [base + t_last] : [base],
-        t_last && t_first ? [base + t_last + t_first] : (t_last ? [base + t_last] : [base])
+        t_aux1 ? [base + t_aux1] : [base],
+        t_aux1 && t_aux2 ? [base + t_aux1 + t_aux2] : (t_aux1 ? [base + t_aux1] : [base])
       ]
     });
   }
@@ -452,10 +452,10 @@ async function run() {
     let html = page.html;
 
     // 1. Update/Inject UG.bCompositeV3
-    const v3GlossaryCode = `UG.bCompositeV3={title:'综合补全 CKT v3 · 四阶词长闭环 · 原生五键',brief:'单字/二字/三字/四字闭环覆盖；四字词与二字词共享4码空间互相碰撞竞争；剔除53%一简干扰；完全原生支持任意五辅键与键域口径。S005恒为10。',detail:'1. 单字：从通用规范字频中剔除 25 个固顶一简字（占 53% 字频），纯粹评估需全拼+辅码消歧的次高频与生僻字补全；声母移位 D>0 的指法转移成本已 100% 被双拼基础码 CKT 精确反映；\\n2. 二字词：选用带权 13w 词（lexicon & 1）而非 6w 词，以全量带权词频真实反映词组重码，杜绝小词表截断产生的虚假无重码；忽略二简词以保全基准公平；\\n3. 三字词：提取高频实词 15,000 条，3 码声母简拼直出，支持两码辅码消歧；\\n4. 四字词：提取经典成语与高频实词 15,000 条，4 码声母简拼直出，支持两码辅码消歧；四字词与二字词在 4 码编码空间直接交叉碰撞，二者此消彼长体现在码长与选重上；\\n5. 超长词（L ≥ 5）：全方案均为声母直出无碰撞，且无需额外辅码，故予以忽略，避免 Shift 换挡计费失真；\\n6. 辅键与键域：直接采用方案原生 tone 五键映射与任意 capacity（包括 21×21、21×26、21×28、23×23、26×26 等），彻底消除固定 IVUAO 假设；\\n7. 权重匹配 5000 字实测最优切分词次比：单字 1、二字 3、三字 1、四字 1（即 16.7% : 50.0% : 16.7% : 16.7%）。',formula:'T_m,k = CKT + τ·p_res + α₁·(1−首选率) + α₂·次辅率\\nC_v3 = 10 · [Σ w_k (T_m,k / T_m,k(S005))⁴ / Σ w_k]^(1/4)\\nw = [1, 3, 1, 1]',direction:'同参数下越低越好',related:['bCompositeV2','bComposite0','selectioncost'],sources:['cktV2','completionBV3'],controls:['uxTau','uxFirstAuxPenalty','uxSecondAuxPenalty']};\n`;
+    const v3GlossaryCode = `UG.bCompositeV3={title:'综合补全 CKT v3 · 四阶词长闭环 · 原生五键',brief:'四阶词长闭环（单/二/三/四字，权重1:3:1:1）；二四字词同台竞争；剔除53%一简；口径自适应辅码规则（非21×21对齐飞花/神韵：二字B₂B₁、三四字B₁B₂）；原生五辅键；S005恒为10。',detail:'1. 单字：从通用规范字频中剔除 25 个固顶一简字（占 53% 字频），纯粹评估需全拼+辅码消歧的次高频与生僻字补全；声母移位 D>0 的指法转移成本已 100% 被双拼基础码 CKT 精确反映；\\n2. 二字词：选用带权 13w 词（lexicon & 1）而非 6w 词，以全量带权词频真实反映词组重码，杜绝小词表截断产生的虚假无重码；忽略声声二简词以保全基准公平；\\n3. 三字词：提取高频实词 15,000 条，3 码声母简拼直出，支持两码辅码消歧；\\n4. 四字词：提取经典成语与高频实词 15,000 条，4 码声母简拼直出，支持两码辅码消歧；四字词与二字词在 4 码编码空间直接交叉碰撞，二者此消彼长体现在码长与选重上；\\n5. 超长词（L ≥ 5）：全方案均为声母直出无碰撞，且无需额外辅码，故予以忽略，避免 Shift 换挡计费失真；\\n6. 口径自适应辅码规则与顺序：彻底消除固定 21×21 假设。21×21 口径键道二字词取首字形先（B₁B₂），三拼取次字调先（B₂B₁），三四字词取形 B₁B₂、调末首（T末T₁）；非 21×21 口径（21×26、21×28、26×26 等）全面严谨对齐飞花/神韵四码顶规范，二字词统一取次字辅码先（B₂B₁），三字词与四字词统一取首二字辅码先（形 B₁B₂、调 T₁T₂），形调规则对称统一；\\n7. 原生五辅键与四阶实测加权：直接采用方案原生 tone 五键映射与任意 capacity；权重匹配 5000 字实测最优切分词次比：单字 1、二字 3、三字 1、四字 1（即 16.7% : 50.0% : 16.7% : 16.7%），S005 恒为 10 基准锚点。',formula:'T_m,k = CKT + τ·p₂ + α₁·(1−首选率) + α₂·次辅率\\nC_v3 = 10 · [Σ_{m,k} w_k (T_m,k / T_m,k(S005))⁴ / Σ_{m,k} w_k]^(1/4)\\nw = [1, 3, 1, 1]\\n辅码顺序：21×21 二字[形B₁B₂, 调B₂B₁] 三四字[形B₁B₂, 调T末T₁]；非21×21 二字[形B₂B₁, 调B₂B₁] 三四字[形B₁B₂, 调T₁T₂]',direction:'同参数下越低越好',related:['bCompositeV2','bComposite0','selectioncost'],sources:['cktV2','completionBV3'],controls:['uxTau','uxFirstAuxPenalty','uxSecondAuxPenalty']};\n`;
 
     if (html.includes('UG.bCompositeV3=')) {
-      html = html.replace(/UG\.bCompositeV3=\{[\s\S]*?\};\n/, v3GlossaryCode);
+      html = html.replace(/UG\.bCompositeV3=\{[\s\S]*?\};\r?\n/, v3GlossaryCode);
     } else {
       const v2GlossaryAnchor = "UG.bCompositeV2={";
       html = html.replace(v2GlossaryAnchor, v3GlossaryCode + v2GlossaryAnchor);
@@ -539,7 +539,16 @@ function bCompletionScoreV3(m,tau,firstAux,secondAux,reference){
     <h4>② 一简字处理与四阶词长权重</h4>
     <p><b>单字剔除 25 个固顶一简</b>：25 个一简字在实际语料中独占单字总频次的 53.00%，且在各方案中均单键直接上屏无需消歧；剔除后纯粹考核剩余 47% 汉字的全拼+辅码消歧能力。声母移位 D&gt;0 带来的物理击键优劣，已 100% 被双拼基础码 CKT 转移耗时精确刻画，无需且不应变成方案-specific 剔除集合（避免测试集污染）。</p>
     <p><b>实测四阶词长加权 [1, 3, 1, 1]</b>：基于 5000 字通用长文最优切分词次比（单字 16.7%、二字 50.0%、三字 16.7%、四字 16.7%），总权重 6，形成高精度的四阶闭环。</p>
-    <p><b>原生五辅键与任意键域</b>：彻底解除固定 IVUAO 假设，直接根据每个方案原生的 tone 五键与实际 capacity 测算，S005 恒为 10 基准锚点。</p>
+  </div>
+  <div class="card">
+    <h4>③ 口径自适应辅码规则与字位顺序</h4>
+    <p><b>21×21 口径（键道/三拼传统规范）</b>：二字词键道形码取首字先（B₁B₂）、三拼调码取次字先（B₂B₁）；三字词与四字词形码取首二字（B₁B₂）、调码取末字+首字（三字词 T₃T₁、四字词 T₄T₁）。</p>
+    <p><b>非 21×21 口径（飞花/神韵·形/调对称规范）</b>：全面贯彻飞花/神韵标准。二字词统一取次字辅码先（B₂B₁）；三字词与四字词统一取首二字辅码先（形码 B₁B₂、调码 T₁T₂）。形码与调码规则完全对称一致，极大降低认知记忆负荷。</p>
+  </div>
+  <div class="card">
+    <h4>④ 原生五辅键与 S005 固定锚点闭环</h4>
+    <p><b>彻底解除固定 IVUAO 假设</b>：直接提取各方案原生的 tone 五键物理键位与实际 capacity（21×21、21×26、21×28、23×23、26×26 等），原生评估指法成本与碰撞。</p>
+    <p><b>S005 恒定 10.00000 基准锚点</b>：无论 τ、α₁、α₂ 如何调节，基准方案 S005 在同参数下四阶 8 轨道归一后恒为 10.00000，所有口径方案的分数均基于此高灵敏度对比，越低越好。</p>
   </div>
 </div>
 `;
