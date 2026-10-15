@@ -30,6 +30,25 @@ impl PackedCode {
         })
     }
 
+    pub fn from_bits_len(bits: u64, len: u8) -> Result<Self, String> {
+        if !(1..=Self::MAX_LEN as u8).contains(&len) {
+            return Err(format!(
+                "code length must be 1..={}, got {len}",
+                Self::MAX_LEN
+            ));
+        }
+        if bits >> (usize::from(len) * 6) != 0 {
+            return Err("packed code has bits outside its declared length".to_owned());
+        }
+        for position in 0..len {
+            let value = (bits >> (usize::from(position) * 6)) & 0x3f;
+            if !(1..=34).contains(&value) {
+                return Err(format!("invalid packed key value {value}"));
+            }
+        }
+        Ok(Self { bits, len })
+    }
+
     pub fn len(self) -> usize {
         usize::from(self.len)
     }
@@ -122,5 +141,15 @@ mod tests {
             assert_eq!(alphabet.unpack(packed), raw);
         }
         assert!(alphabet.pack("ABCD").unwrap() < alphabet.pack("ABCE").unwrap());
+    }
+
+    #[test]
+    fn raw_packed_codes_are_validated() {
+        let alphabet = KeyAlphabet::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./").unwrap();
+        let code = alphabet.pack("A/BCDE").unwrap();
+        assert_eq!(PackedCode::from_bits_len(code.bits(), 6).unwrap(), code);
+        assert!(PackedCode::from_bits_len(0, 1).is_err());
+        assert!(PackedCode::from_bits_len(35, 1).is_err());
+        assert!(PackedCode::from_bits_len(1 << 6, 1).is_err());
     }
 }
