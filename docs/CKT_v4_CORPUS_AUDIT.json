@@ -1,0 +1,280 @@
+{
+  "version": "ckt-v4-corpus-audit-v1",
+  "generatedAt": "2026-10-15T13:41:50.120Z",
+  "policy": {
+    "rankingSource": "snow_pinyin.base.dict.yaml only",
+    "reason": "base has graded weights; ext/tencent currently use constant weight 100 and therefore cannot be treated as comparable frequencies",
+    "characterCohort": "all 8,095 common payload characters for membership/coverage; the frequency-weighted headline uses the 6,263 rows with positive observed weight, and a separate uniform robustness track covers all 8,095; fixed one-key characters are reported separately",
+    "word2Cohort": "all eligible base two-character entries",
+    "word3And4Core": "base entries selected by a declared cumulative within-length frequency-mass threshold",
+    "robustnessCohort": "ext/tencent are coverage or adversarial robustness sets only, never mixed into the weighted headline score"
+  },
+  "payload": {
+    "html": "a7_CKT_R11.html",
+    "sha256": "371fc3d8ee9f4ff4dc9885a548cdf4de4606fa34fe9990d367e9ffd65e7fe645",
+    "entries": 840,
+    "commonPinyinSyllables": 399,
+    "commonCharacters": 8095,
+    "positiveWeightCharacters": 6263,
+    "zeroWeightCharacters": 1832,
+    "commonCharacterWeight": 73045527
+  },
+  "sources": {
+    "base": {
+      "file": "snow_pinyin.base.dict.yaml",
+      "sha256": "800e4dd62301b7402354efffed7948d4d191da42e9af65519f8bee5de6613c2f",
+      "rawRows": 534907,
+      "eligibleRows": 532217,
+      "malformedRows": 653,
+      "unsupportedShapeRows": 2037,
+      "distinctPositiveWeights": 30115,
+      "constantWeight": null,
+      "lengths": {
+        "word1": {
+          "count": 0,
+          "totalWeight": 0,
+          "minimumWeight": null,
+          "maximumWeight": null,
+          "thresholds": {}
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "minimumWeight": 1,
+          "maximumWeight": 13204281,
+          "thresholds": {
+            "0.95": {
+              "count": 47596,
+              "minimumWeight": 7955
+            },
+            "0.99": {
+              "count": 79589,
+              "minimumWeight": 2222
+            },
+            "0.995": {
+              "count": 89886,
+              "minimumWeight": 1305
+            },
+            "0.999": {
+              "count": 104900,
+              "minimumWeight": 555
+            }
+          }
+        },
+        "word3": {
+          "count": 153578,
+          "totalWeight": 1112607214,
+          "minimumWeight": 1,
+          "maximumWeight": 19260817,
+          "thresholds": {
+            "0.95": {
+              "count": 43897,
+              "minimumWeight": 2810
+            },
+            "0.99": {
+              "count": 72923,
+              "minimumWeight": 705
+            },
+            "0.995": {
+              "count": 84152,
+              "minimumWeight": 334
+            },
+            "0.999": {
+              "count": 109552,
+              "minimumWeight": 101
+            }
+          }
+        },
+        "word4": {
+          "count": 168560,
+          "totalWeight": 836730071,
+          "minimumWeight": 1,
+          "maximumWeight": 1873713,
+          "thresholds": {
+            "0.95": {
+              "count": 50305,
+              "minimumWeight": 2220
+            },
+            "0.99": {
+              "count": 77674,
+              "minimumWeight": 545
+            },
+            "0.995": {
+              "count": 88518,
+              "minimumWeight": 250
+            },
+            "0.999": {
+              "count": 110511,
+              "minimumWeight": 87
+            }
+          }
+        }
+      }
+    },
+    "ext": {
+      "file": "snow_pinyin.ext.dict.yaml",
+      "sha256": "4d290c83dfabb0690e839788202b00fc77899d0b9c6108961a129d5bf341ce0e",
+      "rawRows": 331769,
+      "eligibleRows": 331269,
+      "malformedRows": 295,
+      "unsupportedShapeRows": 205,
+      "distinctPositiveWeights": 1,
+      "constantWeight": 100,
+      "lengths": {
+        "word1": {
+          "count": 0,
+          "totalWeight": 0,
+          "minimumWeight": null,
+          "maximumWeight": null,
+          "thresholds": {}
+        },
+        "word2": {
+          "count": 1,
+          "totalWeight": 100,
+          "minimumWeight": 100,
+          "maximumWeight": 100,
+          "thresholds": {
+            "0.95": {
+              "count": 1,
+              "minimumWeight": 100
+            },
+            "0.99": {
+              "count": 1,
+              "minimumWeight": 100
+            },
+            "0.995": {
+              "count": 1,
+              "minimumWeight": 100
+            },
+            "0.999": {
+              "count": 1,
+              "minimumWeight": 100
+            }
+          }
+        },
+        "word3": {
+          "count": 73026,
+          "totalWeight": 7302600,
+          "minimumWeight": 100,
+          "maximumWeight": 100,
+          "thresholds": {
+            "0.95": {
+              "count": 69375,
+              "minimumWeight": 100
+            },
+            "0.99": {
+              "count": 72296,
+              "minimumWeight": 100
+            },
+            "0.995": {
+              "count": 72661,
+              "minimumWeight": 100
+            },
+            "0.999": {
+              "count": 72953,
+              "minimumWeight": 100
+            }
+          }
+        },
+        "word4": {
+          "count": 152255,
+          "totalWeight": 15225500,
+          "minimumWeight": 100,
+          "maximumWeight": 100,
+          "thresholds": {
+            "0.95": {
+              "count": 144643,
+              "minimumWeight": 100
+            },
+            "0.99": {
+              "count": 150733,
+              "minimumWeight": 100
+            },
+            "0.995": {
+              "count": 151494,
+              "minimumWeight": 100
+            },
+            "0.999": {
+              "count": 152103,
+              "minimumWeight": 100
+            }
+          }
+        }
+      }
+    },
+    "tencent": {
+      "file": "snow_pinyin.tencent.dict.yaml",
+      "sha256": "1bd4624b72b373248c2d59f2b4e18b1bcf963e1204e068a26fe3873cf07c2c0b",
+      "rawRows": 995452,
+      "eligibleRows": 995322,
+      "malformedRows": 16,
+      "unsupportedShapeRows": 114,
+      "distinctPositiveWeights": 1,
+      "constantWeight": 100,
+      "lengths": {
+        "word1": {
+          "count": 0,
+          "totalWeight": 0,
+          "minimumWeight": null,
+          "maximumWeight": null,
+          "thresholds": {}
+        },
+        "word2": {
+          "count": 0,
+          "totalWeight": 0,
+          "minimumWeight": null,
+          "maximumWeight": null,
+          "thresholds": {}
+        },
+        "word3": {
+          "count": 223068,
+          "totalWeight": 22306800,
+          "minimumWeight": 100,
+          "maximumWeight": 100,
+          "thresholds": {
+            "0.95": {
+              "count": 211915,
+              "minimumWeight": 100
+            },
+            "0.99": {
+              "count": 220838,
+              "minimumWeight": 100
+            },
+            "0.995": {
+              "count": 221953,
+              "minimumWeight": 100
+            },
+            "0.999": {
+              "count": 222845,
+              "minimumWeight": 100
+            }
+          }
+        },
+        "word4": {
+          "count": 485092,
+          "totalWeight": 48509200,
+          "minimumWeight": 100,
+          "maximumWeight": 100,
+          "thresholds": {
+            "0.95": {
+              "count": 460838,
+              "minimumWeight": 100
+            },
+            "0.99": {
+              "count": 480242,
+              "minimumWeight": 100
+            },
+            "0.995": {
+              "count": 482667,
+              "minimumWeight": 100
+            },
+            "0.999": {
+              "count": 484607,
+              "minimumWeight": 100
+            }
+          }
+        }
+      }
+    }
+  }
+}
