@@ -1,0 +1,179 @@
+{
+  "version": "completion-ckt-v4-joint-pool-1",
+  "schemeCoverage": {
+    "expected": 840,
+    "actual": 840,
+    "complete": true
+  },
+  "contracts": {
+    "four-code-top": 539,
+    "traditional-21x21": 301
+  },
+  "corpus": {
+    "snowBaseMass": 0.99,
+    "word3": 72923,
+    "word4": 77674,
+    "word2": 132814,
+    "charactersPositiveBeforeFixedOneKey": 6263
+  },
+  "upstream": {
+    "commit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+    "artifactVersion": 6,
+    "sourceSha256": "c32ddfcedac1df106e3db25c441fe5f50b8e1d75ca1d9fba3e2aaca5d21da2e7"
+  },
+  "anchorChecks": {
+    "historical300_300_600": 10,
+    "motorOnly0_0_0": 10,
+    "noFirst0_300_600": 10,
+    "noSecond300_0_600": 10,
+    "noSelection300_300_0": 10
+  },
+  "sliderSensitivityAgainstHistorical": {
+    "motorOnly0_0_0": {
+      "medianAbsoluteScoreChange": 0.28644472826053935,
+      "p95AbsoluteScoreChange": 0.4303812391660724,
+      "maximumAbsoluteScoreChange": 0.6225730831009617,
+      "maximumChangeScheme": "R4-21X21-M40-06",
+      "maximumSignedScoreChange": -0.6225730831009617,
+      "schemesWithChangedOrdinalRank": 839,
+      "schemesCrossingS005Anchor": 49,
+      "top20Overlap": 11,
+      "spearmanOrdinal": 0.7495506857091836
+    },
+    "noFirst0_300_600": {
+      "medianAbsoluteScoreChange": 0.07109576931087425,
+      "p95AbsoluteScoreChange": 0.1423948340959793,
+      "maximumAbsoluteScoreChange": 0.21955065379457928,
+      "maximumChangeScheme": "R4-21X21-M40-06",
+      "maximumSignedScoreChange": -0.21955065379457928,
+      "schemesWithChangedOrdinalRank": 828,
+      "schemesCrossingS005Anchor": 10,
+      "top20Overlap": 15,
+      "spearmanOrdinal": 0.9818512052474969
+    },
+    "noSecond300_0_600": {
+      "medianAbsoluteScoreChange": 0.03559279906597013,
+      "p95AbsoluteScoreChange": 0.058409852494031966,
+      "maximumAbsoluteScoreChange": 0.16176729645246546,
+      "maximumChangeScheme": "R4-21X21-M40-06",
+      "maximumSignedScoreChange": -0.16176729645246546,
+      "schemesWithChangedOrdinalRank": 793,
+      "schemesCrossingS005Anchor": 10,
+      "top20Overlap": 18,
+      "spearmanOrdinal": 0.9986879030643265
+    },
+    "noSelection300_300_0": {
+      "medianAbsoluteScoreChange": 0.0273678108098796,
+      "p95AbsoluteScoreChange": 0.03769029443043692,
+      "maximumAbsoluteScoreChange": 0.1300913594742159,
+      "maximumChangeScheme": "R4-21X21-M40-06",
+      "maximumSignedScoreChange": -0.1300913594742159,
+      "schemesWithChangedOrdinalRank": 735,
+      "schemesCrossingS005Anchor": 9,
+      "top20Overlap": 19,
+      "spearmanOrdinal": 0.9995962093402707
+    }
+  },
+  "scoreExtremesAtHistorical": [
+    {
+      "rank": 1,
+      "id": "CKT-LM-TG9-25X30-AEUIO-SAN-M53-B53-1",
+      "score": 8.833478997193101
+    },
+    {
+      "rank": 2,
+      "id": "CKT-LM-TG6-26X26-AEUIO-M50-B50-1",
+      "score": 8.862674919066352
+    },
+    {
+      "rank": 3,
+      "id": "NF3-26X26-M39-37",
+      "score": 8.872365013427686
+    },
+    {
+      "rank": 4,
+      "id": "MX9-09",
+      "score": 8.873674652248258
+    },
+    {
+      "rank": 5,
+      "id": "TG6-25X30-ANY5-M50",
+      "score": 8.874724136724726
+    },
+    {
+      "rank": 6,
+      "id": "TG9-25X30-AEUIO-SAN-M53",
+      "score": 8.889020098287956
+    },
+    {
+      "rank": 7,
+      "id": "NF2-26X26-ANY5-M41-21",
+      "score": 8.900648176998132
+    },
+    {
+      "rank": 8,
+      "id": "TG6-25X30-AEUIO-M54",
+      "score": 8.901208979846391
+    },
+    {
+      "rank": 9,
+      "id": "TG6-25X30-ANY5-M55",
+      "score": 8.903318300004159
+    },
+    {
+      "rank": 10,
+      "id": "TG6-25X30-AVUIO-M55",
+      "score": 8.903887534723967
+    },
+    {
+      "rank": 11,
+      "id": "TG9-25X30-AVUIO-JIAN-M55",
+      "score": 8.907804076738998
+    },
+    {
+      "rank": 12,
+      "id": "NF3-25X30-M33-11",
+      "score": 8.912298890825273
+    },
+    {
+      "rank": 13,
+      "id": "TG6-26X26-ANY5-M50",
+      "score": 8.913075325855912
+    },
+    {
+      "rank": 14,
+      "id": "TG9-26X26-AEUIO-SAN-M62",
+      "score": 8.919416078902179
+    },
+    {
+      "rank": 15,
+      "id": "TG6-25X30-AEUIO-M51",
+      "score": 8.920182718288888
+    },
+    {
+      "rank": 16,
+      "id": "TG25x30-AE-P54",
+      "score": 8.924819404834386
+    },
+    {
+      "rank": 17,
+      "id": "NF2-25X30-ANY5-M33-11",
+      "score": 8.926793057224177
+    },
+    {
+      "rank": 18,
+      "id": "TG9-26X26-ANY5-SAN-M62",
+      "score": 8.926919301661782
+    },
+    {
+      "rank": 19,
+      "id": "TG9-26X26-ANY5-JIAN-M62",
+      "score": 8.926919301661782
+    },
+    {
+      "rank": 20,
+      "id": "TG6-26X26-AEUIO-M50",
+      "score": 8.92952247729676
+    }
+  ]
+}

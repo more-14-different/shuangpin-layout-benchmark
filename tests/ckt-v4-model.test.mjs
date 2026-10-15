@@ -12,6 +12,7 @@ const {
   upstreamMotor,
   projectedMotor,
 } = require('../tools/ckt_v4_model.js');
+const {installFrontend, score: scoreV4} = require('../tools/integrate_completion_ckt_v4.js');
 
 const motorCost = code => ({upperMs: [...code].length * 100});
 
@@ -138,4 +139,33 @@ test('all declared extension keys remain usable in any code position', () => {
     assert.equal(value.projected, true);
     assert.equal(value.exact, false);
   }
+});
+
+test('HTML integration installs the v4 column once and remains idempotent', () => {
+  const old = `UG.bCompositeV2={};
+function bCompletionScoreV2(x){}
+const headers=[{label:'综合补全 CKT v3 · 四阶词长 · 原生五键 · ×10',help:'bCompositeV3'},];
+const row=(foo)),scoreTau=bCompletionScore(m,tau);
+const base=[v2Score,v3Score,scoreTau];
+const cells=[num(v2Score,5),num(v3Score,5),num(scoreTau,5),];`;
+  const installed = installFrontend(old);
+  assert.match(installed, /UG\.bCompositeV4=/);
+  assert.match(installed, /function bCompletionScoreV4/);
+  assert.match(installed, /help:'bCompositeV4'/);
+  assert.match(installed, /v4Score=bCompletionScoreV4/);
+  assert.equal(installFrontend(installed), installed);
+});
+
+test('realtime v4 formula keeps S005 at ten for every slider setting', () => {
+  const modes = {keytao: {}, sanpin: {}};
+  for (const mode of Object.keys(modes)) {
+    for (const kind of ['character', 'word2', 'word3', 'word4']) {
+      modes[mode][kind] = {motorUpperMs: 100, firstAuxRate: 0.2, secondAuxRate: 0.1, selectionRate: 0.05};
+    }
+  }
+  for (const parameters of [
+    {firstAuxMs: 300, secondAuxMs: 300, selectionDecisionMs: 600},
+    {firstAuxMs: 0, secondAuxMs: 0, selectionDecisionMs: 0},
+    {firstAuxMs: 1000, secondAuxMs: 1000, selectionDecisionMs: 2000},
+  ]) assert.equal(scoreV4(modes, modes, parameters), 10);
 });

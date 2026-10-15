@@ -36,7 +36,7 @@ try {
       selected: window.App7.data.entries.filter(entry => entry.id.startsWith('BPW-')).length,
     };
   });
-  assert.deepEqual(bPathCoverage, { count: 97, complete: true, selected: 19 });
+  assert.deepEqual(bPathCoverage, { count: 301, complete: true, selected: 19 });
 
   assert.equal(await page.locator('#nf6SelectionFilters').isVisible(), true);
   assert.equal(await page.locator('#uxFilters').isVisible(), false);
@@ -75,7 +75,7 @@ try {
   await page.waitForTimeout(250);
   assert.equal(
     await page.locator('#nf6SelectionCount').innerText(),
-    `43 / ${await page.evaluate(() => window.App7.data.entries.length)}`,
+    `60 / ${await page.evaluate(() => window.App7.data.entries.length)}`,
   );
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
@@ -107,7 +107,7 @@ try {
     .map(text => text.replace(/[↕↑↓]/g, '').trim());
   assert.deepEqual(collisionHeaders, ['方案', '宿主键域', '零声母 scope', '词频截点', '跨族受影响', '高频首选损失', '跨族碰撞桶', '全部碰撞桶', '最大桶']);
   const collisionRows = await page.locator('table[data-ux-table="four-code-collision"] tbody tr').count();
-  assert.equal(collisionRows, 215, 'the active 21x26/M<=36 filter should retain all 43 schemes at five cuts');
+  assert.equal(collisionRows, 300, 'the active 21x26/M<=36 filter should retain all 60 schemes at five cuts');
   await page.locator('#uxSubnav [data-r9-bench="table"]').click();
   await page.waitForSelector('table[data-ux-table="benchmark"]');
   await page.locator('#uxSubnav [data-r9-bench="collision"]').click();
@@ -119,6 +119,30 @@ try {
   const fairHeaders = (await page.locator('table[data-ux-table="fair"] th').allTextContents())
     .map(text => text.replace(/[↕↑↓]/g, '').trim());
   assert.equal(fairHeaders.includes('宿主键域'), false, 'the filtered common host domain should be summarized instead of repeated');
+  const v4Header = '综合补全 CKT v4 · 联合池 · 上游串击 · ×10';
+  assert.equal(fairHeaders.includes(v4Header), true, 'CKT v4 should be displayed in the disambiguation table');
+  assert.deepEqual(await page.evaluate(() => ({
+    count: Object.keys(window.App7.data.completionBV4?.schemes ?? {}).length,
+    s005: window.bCompletionScoreV4(
+      window.App7.data.completionBV4.schemes.S005.modes, 600, 300, 300,
+      window.App7.data.completionBV4.schemes.S005.modes,
+    ),
+  })), {count: 840, s005: 10});
+  const v4Column = fairHeaders.indexOf(v4Header);
+  const v4Before = await page.locator('table[data-ux-table="fair"] tbody tr').evaluateAll((rows, column) =>
+    Object.fromEntries(rows.map(row => [row.cells[0].innerText, row.cells[column].innerText])), v4Column);
+  await page.locator('#uxFirstAuxPenalty').evaluate(element => {
+    element.value = '0';
+    element.dispatchEvent(new Event('change', {bubbles: true}));
+  });
+  const v4After = await page.locator('table[data-ux-table="fair"] tbody tr').evaluateAll((rows, column) =>
+    Object.fromEntries(rows.map(row => [row.cells[0].innerText, row.cells[column].innerText])), v4Column);
+  assert.equal(Object.keys(v4Before).some(id => v4Before[id] !== v4After[id]), true,
+    'changing the cognitive slider should recompute visible CKT v4 values');
+  await page.locator('#uxFirstAuxPenalty').evaluate(element => {
+    element.value = '300';
+    element.dispatchEvent(new Event('change', {bubbles: true}));
+  });
   assert.match(await page.locator('.ux-compact-columns').innerText(), /宿主键域（各方案均为 21×26）/);
 
   await page.locator('#tabs [data-action="nav:scheme"]').click();

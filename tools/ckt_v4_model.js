@@ -146,9 +146,11 @@ function compareRows(a, b) {
   const aw = Number(a.weight) || 0;
   const bw = Number(b.weight) || 0;
   if (aw !== bw) return bw - aw;
-  const text = String(a.text).localeCompare(String(b.text), 'zh-Hans-CN');
-  if (text) return text;
-  return String(a.id).localeCompare(String(b.id));
+  // Equal corpus weights carry no evidence for a locale-dependent candidate
+  // order.  Keep the adapter's stable IDs as the deterministic final tie-break.
+  const ai = String(a.id);
+  const bi = String(b.id);
+  return ai < bi ? -1 : ai > bi ? 1 : 0;
 }
 
 function validateRows(rows) {
@@ -188,7 +190,10 @@ function rankBuckets(active, order) {
       buckets.get(key).push(state.row);
     }
   }
-  for (const bucket of buckets.values()) bucket.sort(compareRows);
+  for (const [key, rows] of buckets) {
+    rows.sort(compareRows);
+    buckets.set(key, new Map(rows.map((row, index) => [row.id, index + 1])));
+  }
   return buckets;
 }
 
@@ -196,8 +201,8 @@ function bestRank(row, stage, buckets) {
   let best = Infinity;
   let bestCodes = [];
   for (const code of stage.codes) {
-    const bucket = buckets.get(`${stage.pool}\u0000${code}`) || [];
-    const rank = bucket.findIndex(candidate => candidate.id === row.id) + 1;
+    const bucket = buckets.get(`${stage.pool}\u0000${code}`);
+    const rank = bucket?.get(row.id) || 0;
     if (!rank) continue;
     if (rank < best) {
       best = rank;
@@ -217,16 +222,19 @@ function bestRank(row, stage, buckets) {
 function resolveCompetition(rows, options = {}) {
   validateRows(rows);
   const motorCost = options.motorCost || (code => ({upperMs: [...code].length}));
-  const active = rows.map(row => ({row, stageIndex: 0}));
+  let active = rows.map(row => ({row, stageIndex: 0}));
   const outcomes = new Map();
   const orders = [...new Set(rows.flatMap(row => row.stages.map(stage => stage.order)))].sort((a, b) => a - b);
 
   for (const order of orders) {
     const buckets = rankBuckets(active, order);
-    for (let i = active.length - 1; i >= 0; i--) {
-      const state = active[i];
+    const nextActive = [];
+    for (const state of active) {
       const stage = state.row.stages[state.stageIndex];
-      if (!stage || stage.order !== order) continue;
+      if (!stage || stage.order !== order) {
+        nextActive.push(state);
+        continue;
+      }
       const ranked = bestRank(state.row, stage, buckets);
       const terminal = state.stageIndex === state.row.stages.length - 1;
       if (ranked.rank === 1 || terminal) {
@@ -256,11 +264,12 @@ function resolveCompetition(rows, options = {}) {
           motorUpperMs: chosenMotor.upperMs,
           motor: chosenMotor,
         });
-        active.splice(i, 1);
       } else {
         state.stageIndex += 1;
+        nextActive.push(state);
       }
     }
+    active = nextActive;
   }
   if (active.length) throw new Error(`unresolved rows: ${active.map(x => x.row.id).join(', ')}`);
   return rows.map(row => outcomes.get(row.id));

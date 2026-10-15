@@ -265,35 +265,47 @@ function main() {
     scanPerCandidateMs: Number(args.scan || 0),
   };
   const data = loadPayload(html);
-  const entries = args.all ? data.entries : ids.map(id => data.entries.find(entry => entry.id === id));
+  let entries = args.all ? data.entries : ids.map(id => data.entries.find(entry => entry.id === id));
   if (entries.some(entry => !entry)) throw new Error(`unknown scheme id in ${ids.join(',')}`);
+  if (args.offset !== undefined || args.limit !== undefined) {
+    const offset = Math.max(0, Number(args.offset || 0));
+    const limit = args.limit === undefined ? entries.length : Math.max(0, Number(args.limit));
+    entries = entries.slice(offset, offset + limit);
+  }
   const strokes = strokeOptions(path.join(snow, 'rime-stroke', 'stroke.dict.yaml'));
   const words = multiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), data, mass);
   const snapshot = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
   const keyDomain = auditPhysicalKeyDomain(data.entries, snapshot.keys, data.ckt.calibration.extension_maps,
     data.base.map(value => value[0]));
   const nativeMotor = upstreamMotor(snapshot, {continuationGuardMs: Number(args.guard || 0)});
-  const motor = projectedMotor(nativeMotor, snapshot.keys, data.ckt.calibration.extension_maps);
+  const compact = Boolean(args.compact);
   const schemes = {};
   for (const entry of entries) {
+    // The projected code cache is deliberately scoped to one scheme. Keeping
+    // it across hundreds of distinct layouts retains millions of dead strings.
+    const motor = projectedMotor(nativeMotor, snapshot.keys, data.ckt.calibration.extension_maps);
     const modes = {};
-    const motorOnlyModes = {};
+    const motorOnlyModes = compact ? null : {};
     const crossLength = {};
     for (const mode of ['keytao', 'sanpin']) {
       const rows = buildRows(entry, data, strokes, words, mode);
       const outcomes = resolveCompetition(rows, {motorCost: motor});
       modes[mode] = summarizeOutcomes(outcomes, parameters);
-      motorOnlyModes[mode] = summarizeOutcomes(outcomes, {
-        firstAuxMs: 0, secondAuxMs: 0, selectionDecisionMs: 0,
-        scanPerCandidateMs: 0, selectionActionMs: 0, pageActionMs: 0,
-      });
+      if (!compact) {
+        motorOnlyModes[mode] = summarizeOutcomes(outcomes, {
+          firstAuxMs: 0, secondAuxMs: 0, selectionDecisionMs: 0,
+          scanPerCandidateMs: 0, selectionActionMs: 0, pageActionMs: 0,
+        });
+      }
       crossLength[mode] = args['no-cross-audit'] ? null : crossLengthAudit(rows, outcomes, motor);
     }
-    schemes[entry.id] = {name: entry.name, capacity: entry.capacity, contract: classifyContract(entry.capacity),
-      modes, scenarios: {historicalCognitivePrior: modes, motorOnly: motorOnlyModes}, crossLength};
+    schemes[entry.id] = compact
+      ? {capacity: entry.capacity, contract: classifyContract(entry.capacity), modes}
+      : {name: entry.name, capacity: entry.capacity, contract: classifyContract(entry.capacity),
+        modes, scenarios: {historicalCognitivePrior: modes, motorOnly: motorOnlyModes}, crossLength};
     process.stderr.write(`scored ${entry.id} (${entry.capacity.join('x')})\n`);
   }
-  const reference = schemes.S005;
+  const reference = compact ? null : schemes.S005;
   if (reference) {
     for (const scheme of Object.values(schemes)) {
       scheme.score = compositeScore(scheme.modes, reference.modes);
@@ -316,7 +328,7 @@ function main() {
   };
   const json = JSON.stringify(output, null, 2);
   if (args.output) fs.writeFileSync(path.resolve(args.output), `${json}\n`, 'utf8');
-  console.log(json);
+  if (!args.quiet) console.log(json);
 }
 
 main();

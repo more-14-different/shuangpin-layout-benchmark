@@ -1,6 +1,6 @@
 # CKT v4：跨口径补全、联合候选池与认知成本规范（原型 1）
 
-状态：**可运行、未替换 v3 的验证原型**。本规范把已经由代码和测试确认的部分，与尚待人体实验标定的假设分开。现阶段不得把 v4 原型分数描述成最终人体实测值。
+状态：**已作为情景列进入主 HTML，与 v3 并列但不替换 v3**。本规范把已经由代码和测试确认的部分，与尚待人体实验标定的假设分开。现阶段不得把 v4 情景分描述成最终人体实测值。
 
 ## 1. v4 为什么不能只是替换一张上游当量表
 
@@ -49,7 +49,7 @@ P_4 = \text{word2} \cup \operatorname{residual}_{AAA}(\text{word3}) \cup \text{w
 
 ## 3. 单项成本
 
-对字词项 `i`，令 `s*(i)` 为它首次成为首选的阶段；若所有阶段都不是首选，则取终止阶段并保留真实候选序号 `r_i`。在各阶段中，先按冰雪词频降序、再按稳定字典序定序。
+对字词项 `i`，令 `s*(i)` 为它首次成为首选的阶段；若所有阶段都不是首选，则取终止阶段并保留真实候选序号 `r_i`。在各阶段中先按冰雪词频降序；完全同频时使用语料适配器生成的稳定 ID 兜底，保证所有方案确定性一致。该兜底不是对真实输入法同频候选顺序的实测声明。
 
 ### 3.1 物理层
 
@@ -162,6 +162,13 @@ node --test tests/ckt-v4-model.test.mjs
 
 # 4. 代表方案正式 99% 频率质量验证；可用 --ids 增减方案
 node tools/score_completion_ckt_v4.js --snow "D:\path\to\rime-snow-pinyin" --mass 0.99 --ids "S005,L600,SNOW-SHENYUN-21X28-SHAPE,H37" --output docs/CKT_v4_PROTOTYPE_RESULTS.json
+
+# 5. 全量生成采用小批次串行：推荐每个子进程只算 5 项后退出，以时间换空间
+#    --compact 只保留 HTML 实时重算所需统计量；下一批把 offset 增加 5
+node tools/score_completion_ckt_v4.js --all --offset 0 --limit 5 --mass 0.99 --no-cross-audit --compact --quiet --output part-000.json
+
+# 6. 合并分片、核验 840/840 覆盖、保存全方案紧凑结果、写入 HTML payload，并产出滑杆敏感性审计
+node tools/integrate_completion_ckt_v4.js --parts "D:\path\to\parts" --results docs/CKT_v4_ALL_SCHEMES_RESULTS.json --audit docs/CKT_v4_ALL_SCHEMES_VALIDATION.json
 ```
 
 评分器启动时会审计全部 840 个页面方案的物理键域和 Common399 完整性；遇到未声明键或 Common399 缺码立即失败，不会静默折叠。
