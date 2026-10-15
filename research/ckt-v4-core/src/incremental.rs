@@ -1,0 +1,204 @@
+use crate::compact::PackedCode;
+use crate::model::{Outcome, Pool, Row, resolve};
+use std::collections::{HashMap, HashSet};
+use std::sync::Arc;
+
+type StageKey = (Pool, PackedCode);
+type MotorCost = dyn Fn(PackedCode) -> Option<f64> + Send + Sync;
+
+#[derive(Clone, Debug)]
+pub struct UpdateReceipt {
+    old_rows: Vec<(usize, Row)>,
+    pub affected_rows: usize,
+}
+
+pub struct IncrementalResolver {
+    rows: Vec<Row>,
+    outcomes: Vec<Outcome>,
+    members: HashMap<StageKey, HashSet<usize>>,
+    motor_cost: Arc<MotorCost>,
+}
+
+impl IncrementalResolver {
+    pub fn new<F>(rows: Vec<Row>, motor_cost: F) -> Result<Self, String>
+    where
+        F: Fn(PackedCode) -> Option<f64> + Send + Sync + 'static,
+    {
+        let motor_cost: Arc<MotorCost> = Arc::new(motor_cost);
+        let outcomes = resolve(&rows, |code| motor_cost(code))?;
+        let members = Self::build_members(&rows);
+        Ok(Self {
+            rows,
+            outcomes,
+            members,
+            motor_cost,
+        })
+    }
+
+    pub fn rows(&self) -> &[Row] {
+        &self.rows
+    }
+
+    pub fn outcomes(&self) -> &[Outcome] {
+        &self.outcomes
+    }
+
+    fn build_members(rows: &[Row]) -> HashMap<StageKey, HashSet<usize>> {
+        let mut members: HashMap<StageKey, HashSet<usize>> = HashMap::new();
+        for (index, row) in rows.iter().enumerate() {
+            for stage in &row.stages {
+                for &code in &stage.codes {
+                    members.entry((stage.pool, code)).or_default().insert(index);
+                }
+            }
+        }
+        members
+    }
+
+    fn component(&self, seeds: impl IntoIterator<Item = usize>) -> HashSet<usize> {
+        let mut found = HashSet::new();
+        let mut pending = Vec::new();
+        for seed in seeds {
+            if found.insert(seed) {
+                pending.push(seed);
+            }
+        }
+        while let Some(index) = pending.pop() {
+            for stage in &self.rows[index].stages {
+                for &code in &stage.codes {
+                    if let Some(neighbors) = self.members.get(&(stage.pool, code)) {
+                        for &neighbor in neighbors {
+                            if found.insert(neighbor) {
+                                pending.push(neighbor);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        found
+    }
+
+    fn remove_memberships(&mut self, index: usize, row: &Row) {
+        for stage in &row.stages {
+            for &code in &stage.codes {
+                let key = (stage.pool, code);
+                if let Some(members) = self.members.get_mut(&key) {
+                    members.remove(&index);
+                    if members.is_empty() {
+                        self.members.remove(&key);
+                    }
+                }
+            }
+        }
+    }
+
+    fn add_memberships(&mut self, index: usize, row: &Row) {
+        for stage in &row.stages {
+            for &code in &stage.codes {
+                self.members
+                    .entry((stage.pool, code))
+                    .or_default()
+                    .insert(index);
+            }
+        }
+    }
+
+    /// Apply row replacements and exactly recompute the transitive collision
+    /// component touched by their old or new stage codes.
+    pub fn apply_updates(&mut self, updates: Vec<(usize, Row)>) -> Result<UpdateReceipt, String> {
+        if updates.is_empty() {
+            return Ok(UpdateReceipt {
+                old_rows: Vec::new(),
+                affected_rows: 0,
+            });
+        }
+        let mut seen = HashSet::new();
+        for (index, _) in &updates {
+            if *index >= self.rows.len() || !seen.insert(*index) {
+                return Err(format!("invalid or duplicate row update index {index}"));
+            }
+        }
+        for (position, (index, replacement)) in updates.iter().enumerate() {
+            if self
+                .rows
+                .iter()
+                .enumerate()
+                .any(|(other, row)| !seen.contains(&other) && row.id == replacement.id)
+                || updates[..position]
+                    .iter()
+                    .any(|(_, prior)| prior.id == replacement.id)
+            {
+                return Err(format!(
+                    "replacement row id is not unique: {}",
+                    replacement.id
+                ));
+            }
+            for stage in &replacement.stages {
+                for &code in &stage.codes {
+                    if (self.motor_cost)(code).is_none() {
+                        return Err(format!("replacement row {index} has an unsupported code"));
+                    }
+                }
+            }
+        }
+        let replacement_rows: Vec<_> = updates.iter().map(|(_, row)| row.clone()).collect();
+        resolve(&replacement_rows, |code| (self.motor_cost)(code))?;
+        let seeds: Vec<_> = updates.iter().map(|(index, _)| *index).collect();
+        let old_component = self.component(seeds.iter().copied());
+        let old_rows: Vec<_> = updates
+            .iter()
+            .map(|(index, _)| (*index, self.rows[*index].clone()))
+            .collect();
+
+        for (index, replacement) in updates {
+            let old = self.rows[index].clone();
+            self.remove_memberships(index, &old);
+            self.rows[index] = replacement;
+            let new = self.rows[index].clone();
+            self.add_memberships(index, &new);
+        }
+
+        let mut affected = old_component;
+        affected.extend(self.component(seeds));
+        // Closing the union makes the proof robust if a batch replacement joins
+        // two components through a row that was in the old component only.
+        loop {
+            let closed = self.component(affected.iter().copied());
+            if closed.len() == affected.len() {
+                break;
+            }
+            affected.extend(closed);
+        }
+
+        let mut indices: Vec<_> = affected.into_iter().collect();
+        indices.sort_unstable();
+        let subset: Vec<_> = indices
+            .iter()
+            .map(|&index| self.rows[index].clone())
+            .collect();
+        let resolved = resolve(&subset, |code| (self.motor_cost)(code))?;
+        for (mut outcome, &global_index) in resolved.into_iter().zip(&indices) {
+            outcome.row_index = global_index;
+            self.outcomes[global_index] = outcome;
+        }
+        Ok(UpdateReceipt {
+            old_rows,
+            affected_rows: indices.len(),
+        })
+    }
+
+    pub fn rollback(&mut self, receipt: UpdateReceipt) -> Result<usize, String> {
+        let rollback = self.apply_updates(receipt.old_rows)?;
+        Ok(rollback.affected_rows)
+    }
+
+    pub fn verify_against_full_recompute(&self) -> Result<(), String> {
+        let full = resolve(&self.rows, |code| (self.motor_cost)(code))?;
+        if full == self.outcomes {
+            Ok(())
+        } else {
+            Err("incremental outcomes differ from full recomputation".to_owned())
+        }
+    }
+}

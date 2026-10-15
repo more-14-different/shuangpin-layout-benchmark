@@ -331,4 +331,14 @@ function main() {
   if (!args.quiet) console.log(json);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  loadPayload,
+  strokeOptions,
+  multiwords,
+  auditPhysicalKeyDomain,
+  crossLengthAudit,
+  buildRows,
+  main,
+};

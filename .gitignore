@@ -22,3 +22,11 @@ a7_CKT_R11_integrated.html
 a7_CKT_R11_integrated_materials/
 a7_CKT_R11.html
 release/*.zip
+
+# Rust CKT v4 research kernel: keep reproducible sources/lockfile, ignore builds.
+/research/ckt-v4-core/target/
+**/*.rs.bk
+
+# Large replay/corpus/checkpoint artifacts are restored locally and never committed.
+/research/.cache/
+/research/checkpoints/
