@@ -1,13 +1,14 @@
 use ckt_v4_core::{
-    CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, IncrementalResolver, IncrementalSummary,
-    InputMode, KeyAlphabet, LayoutDiagnostics, NATIVE_ANNEAL_CHECKPOINT_VERSION,
-    NATIVE_PROPOSAL_POLICY, NativeCorpus, ProjectedMotor, Projection, ProposalContext,
-    ProposalError, ProposalKind, ProposalStats, RegularLayout, RoleTables, SchemeFixture,
-    SchemeState, SearchRng, Summary, composite_score, propose, resolve, summarize,
+    CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, FrontierLogProvenance, FrontierLogWriter,
+    FrontierMetrics, FrontierPoint, IncrementalResolver, IncrementalSummary, InputMode,
+    KeyAlphabet, LayoutDiagnostics, NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY,
+    NativeCorpus, ProjectedMotor, Projection, ProposalContext, ProposalError, ProposalKind,
+    ProposalStats, RegularLayout, RoleTables, SchemeFixture, SchemeState, SearchRng, Summary,
+    canonical_layout_bytes, composite_score, propose, resolve, summarize,
     validate_checkpoint_contract, validate_proposal,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::collections::{BTreeMap, HashMap};
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -69,6 +70,8 @@ struct Args {
     verify_every: usize,
     duty_ms: u64,
     proposal_kind: Option<ProposalKind>,
+    frontier_log: Option<PathBuf>,
+    record_mode: RecordMode,
     guards: LayoutGuards,
     resume: bool,
 }
@@ -79,6 +82,17 @@ struct LayoutGuards {
     max_memory: Option<usize>,
     max_displaced_initials: Option<usize>,
     max_displaced_vowels: Option<usize>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum RecordMode {
+    Accepted,
+    Leaders,
+}
+
+#[derive(Default)]
+struct DiagnosticLeaders {
+    by_metric: [Option<FrontierPoint>; 4],
 }
 
 fn main() -> Result<(), String> {
@@ -173,6 +187,25 @@ fn main() -> Result<(), String> {
         checkpoint.best_score = current_score;
         checkpoint.best_layout = checkpoint.current_layout.clone();
     }
+    let mut frontier_writer = args
+        .frontier_log
+        .as_ref()
+        .map(|path| FrontierLogWriter::open(path, frontier_provenance(&corpus, &fixture, &args)))
+        .transpose()?;
+    let mut diagnostic_leaders = DiagnosticLeaders::default();
+    if !args.resume
+        && let Some(writer) = frontier_writer.as_mut()
+    {
+        let initial_point = frontier_point(
+            checkpoint.iteration,
+            current_score,
+            &checkpoint.current_layout,
+            &fixture,
+            &alphabet,
+        )?;
+        diagnostic_leaders.consider(&initial_point);
+        writer.append(&initial_point)?;
+    }
     let mut rng = SearchRng::new(checkpoint.rng_state);
     let started = Instant::now();
 
@@ -241,6 +274,19 @@ fn main() -> Result<(), String> {
             composite_score(&mode_summaries(&modes), &reference)?
         };
         checkpoint.evaluated += 1;
+        let frontier_point = frontier_point(
+            iteration + 1,
+            proposed_score,
+            &proposal,
+            &fixture,
+            &alphabet,
+        )?;
+        if args.record_mode == RecordMode::Leaders
+            && diagnostic_leaders.consider(&frontier_point)
+            && let Some(writer) = frontier_writer.as_mut()
+        {
+            writer.append(&frontier_point)?;
+        }
         let progress = iteration as f64 / args.steps.max(1) as f64;
         let temperature = args.temperature * (1.0 - progress).powi(2) + 1e-9;
         let accept = proposed_score <= current_score
@@ -257,6 +303,11 @@ fn main() -> Result<(), String> {
             current_score = proposed_score;
             checkpoint.accepted += 1;
             checkpoint.proposal_stats[proposal_kind.index()].accepted += 1;
+            if args.record_mode == RecordMode::Accepted
+                && let Some(writer) = frontier_writer.as_mut()
+            {
+                writer.append(&frontier_point)?;
+            }
             if proposed_score < checkpoint.best_score {
                 checkpoint.best_score = proposed_score;
                 checkpoint.best_layout = checkpoint.current_layout.clone();
@@ -475,6 +526,83 @@ fn verify_modes(modes: &mut [ModeState], parameters: CognitiveParameters) -> Res
     Ok(())
 }
 
+impl DiagnosticLeaders {
+    fn consider(&mut self, point: &FrontierPoint) -> bool {
+        let mut changed = false;
+        let values = [
+            point.metrics.ckt_v4,
+            point.metrics.memory as f64,
+            point.metrics.displaced_initials as f64,
+            point.metrics.displaced_vowels as f64,
+        ];
+        let canonical = canonical_layout_bytes(&point.layout);
+        for (index, value) in values.into_iter().enumerate() {
+            let replace = self.by_metric[index].as_ref().is_none_or(|current| {
+                let current_values = [
+                    current.metrics.ckt_v4,
+                    current.metrics.memory as f64,
+                    current.metrics.displaced_initials as f64,
+                    current.metrics.displaced_vowels as f64,
+                ];
+                value < current_values[index]
+                    || (value == current_values[index]
+                        && canonical < canonical_layout_bytes(&current.layout))
+            });
+            if replace {
+                self.by_metric[index] = Some(point.clone());
+                changed = true;
+            }
+        }
+        changed
+    }
+}
+
+fn frontier_point(
+    iteration: usize,
+    ckt_v4: f64,
+    layout: &RegularLayout,
+    fixture: &SchemeFixture,
+    alphabet: &KeyAlphabet,
+) -> Result<FrontierPoint, String> {
+    let diagnostics = layout.diagnostics(alphabet, &fixture.heads, &fixture.finals)?;
+    Ok(FrontierPoint {
+        metrics: FrontierMetrics {
+            ckt_v4,
+            memory: diagnostics.memory,
+            displaced_initials: diagnostics.displaced_initials,
+            displaced_vowels: diagnostics.displaced_vowels,
+        },
+        layout: layout.clone(),
+        iteration,
+    })
+}
+
+fn frontier_provenance(
+    corpus: &NativeCorpus,
+    fixture: &SchemeFixture,
+    args: &Args,
+) -> FrontierLogProvenance {
+    let hashes: BTreeMap<_, _> = corpus.header().source_hashes.iter().collect();
+    let hash_signature = hashes
+        .into_iter()
+        .map(|(name, value)| format!("{name}={value}"))
+        .collect::<Vec<_>>()
+        .join(";");
+    FrontierLogProvenance {
+        corpus_hash: format!("mass={:.17};{hash_signature}", corpus.header().mass),
+        scheme_hash: fixture
+            .source_hashes
+            .get("html")
+            .cloned()
+            .unwrap_or_default(),
+        scheme_id: args.scheme_id.clone(),
+        max_memory: args.guards.max_memory,
+        max_displaced_initials: args.guards.max_displaced_initials,
+        max_displaced_vowels: args.guards.max_displaced_vowels,
+        proposal_policy: NATIVE_PROPOSAL_POLICY.to_owned(),
+    }
+}
+
 fn load_motor(
     corpus: &NativeCorpus,
     alphabet: &KeyAlphabet,
@@ -564,6 +692,8 @@ fn parse_args() -> Result<Args, String> {
         verify_every: 50,
         duty_ms: 5,
         proposal_kind: None,
+        frontier_log: None,
+        record_mode: RecordMode::Accepted,
         guards: LayoutGuards::default(),
         resume: false,
     };
@@ -588,6 +718,18 @@ fn parse_args() -> Result<Args, String> {
                 result.proposal_kind = Some(ProposalKind::parse(
                     &values.next().ok_or("--proposal needs a value")?,
                 )?)
+            }
+            "--frontier-log" => {
+                result.frontier_log = Some(PathBuf::from(
+                    values.next().ok_or("--frontier-log needs a value")?,
+                ))
+            }
+            "--record" => {
+                result.record_mode = match values.next().ok_or("--record needs a value")?.as_str() {
+                    "accepted" => RecordMode::Accepted,
+                    "leaders" => RecordMode::Leaders,
+                    value => return Err(format!("unknown frontier record mode {value:?}")),
+                }
             }
             "--max-memory" => {
                 result.guards.max_memory = Some(parse_value(values.next(), "--max-memory")?)
