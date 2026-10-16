@@ -16,6 +16,8 @@ The migration boundary is API-based:
   hybrid incremental/full annealer and resumable checkpoint contract;
 - `../docs/CKT_v4_SEARCH_NEIGHBORHOOD.md` specifies the phase-5 expanded
   neighborhood, optional M/D/V guards and topology capability boundary;
+- `notes/2026-10-16-ckt-v4-phase6-regular-frontier-design.md` specifies the
+  phase-6 regular-topology capability audit, compound moves and Pareto boundary;
 - `.cache/` holds restored replay packages and large cross-language fixtures;
 - `checkpoints/` holds resumable annealing state.
 
