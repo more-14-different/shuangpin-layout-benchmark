@@ -7,6 +7,7 @@ pub mod frontier_log;
 pub mod incremental;
 pub mod model;
 pub mod motor;
+pub mod moving_hand;
 pub mod native;
 pub mod search;
 
@@ -27,6 +28,10 @@ pub use model::{
     TrackSummary, composite_score, resolve, stage_pools, summarize,
 };
 pub use motor::{MotorValue, ProjectedMotor, Projection, RoleTables, RoleTablesInput};
+pub use moving_hand::{
+    CorpusVariant, KeyGeometry, MovingHandCorpus, MovingHandModel, MovingHandSummary,
+    MovingHandToken, RowStagger,
+};
 pub use native::{
     DependencyIndex, GeneratedRows, InputMode, LayoutDiagnostics, NativeCorpus, NativeCorpusCounts,
     NativeCorpusHeader, RegularLayout, SchemeFixture, SchemeInput, SchemeState,

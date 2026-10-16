@@ -251,7 +251,14 @@ def build_fixture(replay_path: Path, html_path: Path) -> dict[str, Any]:
     corpus_fixture: dict[str, Any] = {}
     for name in ("daily", "default"):
         tokens = [
-            {field: token[field] for field in ("char", "pinyin", "key") if field in token}
+            {
+                **{field: token[field] for field in ("char", "pinyin", "key") if field in token},
+                **(
+                    {"pinyinIndex": pinyin_index[token["pinyin"]]}
+                    if "pinyin" in token
+                    else {}
+                ),
+            }
             for token in corpora[name]["tokens"]
         ]
         corpus_fixture[name] = {
@@ -303,6 +310,7 @@ def build_fixture(replay_path: Path, html_path: Path) -> dict[str, Any]:
         },
         "movingHand": {
             "keys": mx["keys"],
+            "layoutKeyAlphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./",
             "geometry": geometry,
             "fingerSpeeds": [0.6, 0.9, 0.9, 1.0, 1.0, 1.0, 1.0, 0.9, 0.9, 0.6],
             "rowStagger": {"firstLowerRow": 0.25, "perAdditionalRow": 0.5},

@@ -1,4 +1,5 @@
 use crate::RegularLayout;
+use crate::moving_hand::{MovingHandModel, MovingHandSummary};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::path::Path;
@@ -26,7 +27,7 @@ pub struct ErgonomicFixture {
     pub source_hashes: HashMap<String, String>,
     pub token_order: Vec<String>,
     pub load_model: TokenLoadModel,
-    pub moving_hand: serde_json::Value,
+    pub moving_hand: MovingHandModel,
     pub expected: HashMap<String, ExpectedErgonomics>,
 }
 
@@ -35,7 +36,7 @@ pub struct ErgonomicFixture {
 pub struct ExpectedErgonomics {
     pub layout: Vec<String>,
     pub loads: LoadDiagnostics,
-    pub moving_hand: HashMap<String, serde_json::Value>,
+    pub moving_hand: HashMap<String, MovingHandSummary>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -89,6 +90,7 @@ impl ErgonomicFixture {
             ));
         }
         fixture.load_model.validate(&fixture.token_order)?;
+        fixture.moving_hand.validate()?;
         if fixture
             .source_hashes
             .values()

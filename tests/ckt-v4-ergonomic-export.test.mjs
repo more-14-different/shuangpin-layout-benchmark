@@ -50,12 +50,17 @@ test('ergonomic exporter freezes a deterministic, complete R11 contract', () => 
       assert.ok(corpus.tokens.length > 0);
       assert.ok(corpus.tokens.some(token => token.key));
       assert.ok(corpus.tokens.some(token => token.pinyin));
+      assert.ok(corpus.tokens
+        .filter(token => token.pinyin)
+        .every(token => Number.isInteger(token.pinyinIndex)));
       assert.deepEqual(Object.keys(corpus.variants).sort(), [
         'hanzi-only', 'native-punctuation',
       ]);
     }
     assert.deepEqual(Object.keys(fixture.movingHand.geometry).sort(),
       [...fixture.movingHand.keys].sort());
+    assert.equal(fixture.movingHand.layoutKeyAlphabet,
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./");
 
     for (const hash of Object.values(fixture.sourceHashes)) {
       assert.match(hash, /^[0-9a-f]{64}$/);
