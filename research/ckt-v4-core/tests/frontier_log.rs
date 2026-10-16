@@ -1,6 +1,6 @@
 use ckt_v4_core::{
-    FrontierLogProvenance, FrontierLogWriter, FrontierMetrics, FrontierPoint, RegularLayout,
-    read_frontier_log,
+    ExactFrontier, FrontierLogProvenance, FrontierLogWriter, FrontierMetrics, FrontierPoint,
+    RegularLayout, read_frontier_log,
 };
 use std::fs::{self, OpenOptions};
 use std::io::Write;
@@ -95,5 +95,31 @@ fn one_truncated_tail_is_ignored_but_complete_corruption_fails() {
 
     fs::write(&path, "not-json\n").unwrap();
     assert!(read_frontier_log(&path).is_err());
+    fs::remove_file(path).unwrap();
+}
+
+#[test]
+fn writer_memory_does_not_retain_history_while_the_log_grows() {
+    let path = temp_path("memory");
+    let mut writer = FrontierLogWriter::open(&path, provenance("memory")).unwrap();
+    let mut leaders = ExactFrontier::new();
+    const RECORDS: usize = 2_048;
+    for iteration in 0..RECORDS {
+        let mut candidate = point(iteration);
+        candidate.metrics.memory = 40 + iteration % 17;
+        candidate.metrics.displaced_initials = iteration % 7;
+        candidate.metrics.displaced_vowels = iteration % 5;
+        writer.append(&candidate).unwrap();
+        leaders.insert(candidate).unwrap();
+        assert_eq!(writer.retained_history_len(), 0);
+    }
+    drop(writer);
+    let bytes = fs::metadata(&path).unwrap().len();
+    println!(
+        "frontier-memory-smoke records={RECORDS} retainedHistory=0 exactLeaders={} bytes={bytes}",
+        leaders.members().len()
+    );
+    assert!(RECORDS > leaders.members().len());
+    assert!(bytes > 0);
     fs::remove_file(path).unwrap();
 }

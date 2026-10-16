@@ -70,3 +70,6 @@ ckt-v4-anneal-proposal scheme="S005-NF" proposal="final-token-move" checkpoint="
 ckt-v4-frontier-smoke scheme="SNF4-M36-AE-07" checkpoint="research/checkpoints/ckt-v4-frontier-smoke.json" log="research/checkpoints/ckt-v4-frontier-smoke.jsonl" output="research/checkpoints/ckt-v4-frontier-smoke-output.json":
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin anneal-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json "{{scheme}}" --steps 1 --proposal head-pair-regroup --checkpoint "{{checkpoint}}" --checkpoint-every 0 --verify-every 1 --duty-ms 0 --frontier-log "{{log}}" --record leaders
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin merge-frontier -- "{{log}}" "{{output}}"
+
+ckt-v4-frontier-memory-smoke:
+    cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml --test frontier_log writer_memory_does_not_retain_history_while_the_log_grows -- --exact --nocapture

@@ -94,6 +94,10 @@ impl FrontierLogWriter {
             },
         )
     }
+
+    pub const fn retained_history_len(&self) -> usize {
+        0
+    }
 }
 
 pub fn read_frontier_log(path: impl AsRef<Path>) -> Result<LogRecovery, String> {
