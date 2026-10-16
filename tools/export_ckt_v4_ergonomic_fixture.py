@@ -294,6 +294,7 @@ def build_fixture(replay_path: Path, html_path: Path) -> dict[str, Any]:
         "tokenOrder": token_order,
         "loadModel": {
             "keys": meta["keys"],
+            "layoutKeyAlphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./",
             "tracks": tracks,
             "masses": masses,
             "rightPinkyKeys": RIGHT_PINKY_KEYS,

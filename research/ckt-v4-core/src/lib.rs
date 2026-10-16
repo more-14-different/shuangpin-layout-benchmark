@@ -1,6 +1,7 @@
 pub mod binary;
 pub mod capability;
 pub mod compact;
+pub mod ergonomics;
 pub mod frontier;
 pub mod frontier_log;
 pub mod incremental;
@@ -15,6 +16,9 @@ pub use capability::{
     audit_scheme,
 };
 pub use compact::{KeyAlphabet, PackedCode};
+pub use ergonomics::{
+    ErgonomicFixture, ExpectedErgonomics, LoadDiagnostics, TokenLoadModel, TrackRoles,
+};
 pub use frontier::{ExactFrontier, FrontierMetrics, FrontierPoint, canonical_layout_bytes};
 pub use frontier_log::{FrontierLogProvenance, FrontierLogWriter, LogRecovery, read_frontier_log};
 pub use incremental::{IncrementalResolver, OutcomeChange, UpdateReceipt};
