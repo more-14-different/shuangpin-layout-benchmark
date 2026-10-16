@@ -73,3 +73,6 @@ ckt-v4-frontier-smoke scheme="SNF4-M36-AE-07" checkpoint="research/checkpoints/c
 
 ckt-v4-frontier-memory-smoke:
     cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml --test frontier_log writer_memory_does_not_retain_history_while_the_log_grows -- --exact --nocapture
+
+ckt-v4-ergonomic-fixture:
+    python tools/export_ckt_v4_ergonomic_fixture.py --output research/.cache/ckt-v4-ergonomics.json
