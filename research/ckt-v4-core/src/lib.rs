@@ -1,6 +1,7 @@
 pub mod binary;
 pub mod capability;
 pub mod compact;
+pub mod frontier;
 pub mod incremental;
 pub mod model;
 pub mod motor;
@@ -13,6 +14,7 @@ pub use capability::{
     audit_scheme,
 };
 pub use compact::{KeyAlphabet, PackedCode};
+pub use frontier::{ExactFrontier, FrontierMetrics, FrontierPoint, canonical_layout_bytes};
 pub use incremental::{IncrementalResolver, OutcomeChange, UpdateReceipt};
 pub use model::{
     CognitiveParameters, Contract, IncrementalSummary, Kind, Outcome, Pool, Row, Stage, Summary,
