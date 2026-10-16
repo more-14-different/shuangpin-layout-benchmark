@@ -32,7 +32,7 @@ ckt-v4-binary-verify:
 ckt-v4-binary-incremental-smoke:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin verify-binary -- research/.cache/ckt-v4-real-reference.bin tools/ckt_v4_upstream_role_tables.json --incremental-smoke
 
-ckt-v4-native-corpus ids="S005,L600,S005-NF,SNF4-M36-AE-07":
+ckt-v4-native-corpus ids="S005,L600,S005-NF,SNF4-M36-AE-07,N095,SNOW-SHENYUN-21X28-SHAPE,H37":
     node tools/export_ckt_v4_native_corpus.js --ids "{{ids}}" --output research/.cache/ckt-v4-native-corpus.bin --schemes research/.cache/ckt-v4-schemes.json
 
 ckt-v4-native-verify:
@@ -49,3 +49,9 @@ ckt-v4-anneal scheme="S005-NF" steps="100" checkpoint="research/checkpoints/ckt-
 
 ckt-v4-anneal-resume scheme="S005-NF" steps="100" checkpoint="research/checkpoints/ckt-v4-anneal.json":
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin anneal-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json "{{scheme}}" --steps "{{steps}}" --checkpoint "{{checkpoint}}" --checkpoint-every 10 --verify-every 50 --duty-ms 5 --resume
+
+ckt-v4-anneal-guarded scheme="SNF4-M36-AE-07" steps="100" max_memory="36" max_d="3" max_v="0" checkpoint="research/checkpoints/ckt-v4-guarded.json":
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin anneal-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json "{{scheme}}" --steps "{{steps}}" --max-memory "{{max_memory}}" --max-d "{{max_d}}" --max-v "{{max_v}}" --checkpoint "{{checkpoint}}" --checkpoint-every 10 --verify-every 50 --duty-ms 5
+
+ckt-v4-anneal-proposal scheme="S005-NF" proposal="final-token-move" checkpoint="research/checkpoints/ckt-v4-proposal-audit.json":
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin anneal-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json "{{scheme}}" --steps 1 --proposal "{{proposal}}" --checkpoint "{{checkpoint}}" --checkpoint-every 0 --verify-every 1 --duty-ms 0

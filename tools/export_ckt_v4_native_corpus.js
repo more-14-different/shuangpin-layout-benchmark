@@ -118,7 +118,7 @@ function main() {
   const snowBaseFile = path.join(snow, 'snow_pinyin.base.dict.yaml');
   const output = path.resolve(args.output || path.join(repo, 'research', '.cache', 'ckt-v4-native-corpus.bin'));
   const schemesOutput = path.resolve(args.schemes || path.join(repo, 'research', '.cache', 'ckt-v4-schemes.json'));
-  const ids = String(args.ids || 'S005,L600,S005-NF,SNF4-M36-AE-07').split(',').filter(Boolean);
+  const ids = String(args.ids || 'S005,L600,S005-NF,SNF4-M36-AE-07,N095,SNOW-SHENYUN-21X28-SHAPE,H37').split(',').filter(Boolean);
   const mass = Number(args.mass || 0.99);
   if (!(mass > 0 && mass <= 1)) throw new Error('--mass must be in (0,1]');
 

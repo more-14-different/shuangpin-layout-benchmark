@@ -117,6 +117,14 @@ pub struct RegularLayout {
     pub tone: [u8; 5],
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LayoutDiagnostics {
+    pub memory: usize,
+    pub displaced_initials: usize,
+    pub displaced_vowels: usize,
+}
+
 #[derive(Clone, Debug)]
 pub struct DependencyIndex {
     pub by_pinyin: Vec<Vec<usize>>,
@@ -290,6 +298,12 @@ impl RegularLayout {
         if tone_set.len() != 5 || !head_set.is_disjoint(&tone_set) {
             return Err(format!("{} has invalid auxiliary/head overlap", self.id));
         }
+        if self.capacity == [21, 21] && !final_set.is_disjoint(&tone_set) {
+            return Err(format!(
+                "{} has invalid traditional 21x21 auxiliary/final overlap",
+                self.id
+            ));
+        }
         // Under the no-fly convention, only 21x21 and 23x23 cannot make all
         // Common399 syllables unique.  Those two dimensions deliberately let
         // the downstream candidate model price syllable merges; every other
@@ -332,6 +346,34 @@ impl RegularLayout {
         Ok(())
     }
 
+    pub fn replace_tone_key(&mut self, slot: usize, key: u8) -> Result<(), String> {
+        if slot >= 5 || key >= 34 || self.tone.contains(&key) {
+            return Err("tone replacement needs a new key in the 34-key domain".to_owned());
+        }
+        self.tone[slot] = key;
+        Ok(())
+    }
+
+    pub fn assign_head_tokens(&mut self, indices: &[usize], key: u8) -> Result<(), String> {
+        assign_tokens(&mut self.head_keys, indices, key, "head")
+    }
+
+    pub fn swap_head_token_groups(
+        &mut self,
+        left: &[usize],
+        right: &[usize],
+    ) -> Result<(), String> {
+        swap_token_groups(&mut self.head_keys, left, right, "head")
+    }
+
+    pub fn assign_final_token(&mut self, index: usize, key: u8) -> Result<(), String> {
+        assign_tokens(&mut self.final_keys, &[index], key, "final")
+    }
+
+    pub fn swap_final_tokens(&mut self, left: usize, right: usize) -> Result<(), String> {
+        swap_token_groups(&mut self.final_keys, &[left], &[right], "final")
+    }
+
     pub fn distinct_head_keys(&self) -> Vec<u8> {
         self.head_keys
             .iter()
@@ -348,6 +390,71 @@ impl RegularLayout {
             .collect::<BTreeSet<_>>()
             .into_iter()
             .collect()
+    }
+
+    pub fn diagnostics(
+        &self,
+        alphabet: &KeyAlphabet,
+        heads: &[String],
+        finals: &[String],
+    ) -> Result<LayoutDiagnostics, String> {
+        if heads.len() != 27
+            || finals.len() != 35
+            || self.head_keys.len() != 27
+            || self.final_keys.len() != 35
+        {
+            return Err("layout diagnostics require the historical 27+35 topology".to_owned());
+        }
+        let preferred = |token: &str| -> Option<u8> {
+            let mut chars = token.chars();
+            let first = chars.next()?;
+            chars
+                .next()
+                .is_none()
+                .then(|| first.to_ascii_uppercase())
+                .and_then(|key| alphabet.index_of(key))
+        };
+        let differs = |actual: u8, token: &str| preferred(token) != Some(actual);
+
+        let displaced_initials = (0..21)
+            .filter(|&index| heads[index].chars().count() == 1)
+            .filter(|&index| differs(self.head_keys[index], &heads[index]))
+            .count();
+        let displaced_vowels = ["a", "e", "i", "o", "u"]
+            .into_iter()
+            .map(|name| {
+                finals
+                    .iter()
+                    .position(|final_name| final_name == name)
+                    .ok_or_else(|| format!("missing vowel final {name}"))
+            })
+            .collect::<Result<Vec<_>, _>>()?
+            .into_iter()
+            .filter(|&index| differs(self.final_keys[index], &finals[index]))
+            .count();
+
+        let mut memory = (0..21)
+            .filter(|&index| differs(self.head_keys[index], &heads[index]))
+            .count();
+        memory += self.head_keys[21..24]
+            .iter()
+            .copied()
+            .collect::<BTreeSet<_>>()
+            .len();
+        memory += usize::from(differs(self.head_keys[24], &heads[24]));
+        memory += usize::from(differs(self.head_keys[25], &heads[25]));
+        if self.head_keys[26] != self.head_keys[25] {
+            memory += usize::from(self.head_keys[26] != preferred(&heads[25]).unwrap_or(u8::MAX));
+            memory += 1;
+        }
+        memory += (0..35)
+            .filter(|&index| differs(self.final_keys[index], &finals[index]))
+            .count();
+        Ok(LayoutDiagnostics {
+            memory,
+            displaced_initials,
+            displaced_vowels,
+        })
     }
 
     fn to_scheme_state(
@@ -946,6 +1053,51 @@ fn swap_key_labels(values: &mut [u8], left: u8, right: u8) -> Result<(), String>
     }
 }
 
+fn assign_tokens(values: &mut [u8], indices: &[usize], key: u8, label: &str) -> Result<(), String> {
+    if key >= 34 || indices.is_empty() || indices.iter().any(|&index| index >= values.len()) {
+        return Err(format!("invalid {label} token assignment"));
+    }
+    if indices.iter().all(|&index| values[index] == key) {
+        return Err(format!("{label} token assignment is a no-op"));
+    }
+    for &index in indices {
+        values[index] = key;
+    }
+    Ok(())
+}
+
+fn swap_token_groups(
+    values: &mut [u8],
+    left: &[usize],
+    right: &[usize],
+    label: &str,
+) -> Result<(), String> {
+    if left.is_empty()
+        || right.is_empty()
+        || left.iter().chain(right).any(|&index| index >= values.len())
+        || left.iter().any(|index| right.contains(index))
+    {
+        return Err(format!("invalid {label} token-group swap"));
+    }
+    let left_key = values[left[0]];
+    let right_key = values[right[0]];
+    if left.iter().any(|&index| values[index] != left_key)
+        || right.iter().any(|&index| values[index] != right_key)
+        || left_key == right_key
+    {
+        return Err(format!(
+            "{label} token groups need two uniform distinct keys"
+        ));
+    }
+    for &index in left {
+        values[index] = right_key;
+    }
+    for &index in right {
+        values[index] = left_key;
+    }
+    Ok(())
+}
+
 fn make_stages(
     alphabet: &KeyAlphabet,
     contract: Contract,
@@ -1082,6 +1234,7 @@ fn read_string_u16<R: Read>(reader: &mut R) -> Result<String, String> {
 #[cfg(test)]
 mod tests {
     use super::RegularLayout;
+    use crate::KeyAlphabet;
 
     fn colliding_layout(capacity: [u8; 2]) -> (RegularLayout, Vec<[u8; 2]>, Vec<u16>) {
         let head_capacity = usize::from(capacity[0]);
@@ -1110,5 +1263,78 @@ mod tests {
             let (layout, topology, common) = colliding_layout(capacity);
             assert!(layout.validate(&topology, &common).is_err());
         }
+    }
+
+    #[test]
+    fn phase5_mutations_cover_groups_tokens_and_all_34_keys() {
+        let (mut layout, _, _) = colliding_layout([21, 21]);
+        layout.assign_head_tokens(&[0], 1).unwrap();
+        assert_eq!(layout.head_keys[0], 1);
+        layout.swap_head_token_groups(&[0], &[2]).unwrap();
+        assert_eq!((layout.head_keys[0], layout.head_keys[2]), (2, 1));
+        layout.assign_final_token(0, 1).unwrap();
+        assert_eq!(layout.final_keys[0], 1);
+        layout.swap_final_tokens(0, 2).unwrap();
+        assert_eq!((layout.final_keys[0], layout.final_keys[2]), (2, 1));
+        layout.replace_tone_key(0, 28).unwrap();
+        assert_eq!(layout.tone[0], 28);
+
+        layout.swap_head_keys(2, 33).unwrap();
+        layout.swap_final_keys(2, 32).unwrap();
+        assert!(layout.head_keys.contains(&33));
+        assert!(layout.final_keys.contains(&32));
+    }
+
+    #[test]
+    fn traditional_21x21_keeps_auxiliary_keys_out_of_both_domains() {
+        let (mut layout, topology, common) = colliding_layout([21, 21]);
+        layout.tone[0] = 0;
+        assert!(layout.validate(&topology, &common).is_err());
+
+        let (mut larger, topology, common) = colliding_layout([21, 26]);
+        larger.tone[0] = 21;
+        assert!(larger.validate(&topology, &common[..1]).is_ok());
+    }
+
+    #[test]
+    fn historical_m_d_v_diagnostics_keep_the_old_baseline() {
+        let alphabet = KeyAlphabet::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./").unwrap();
+        let heads: Vec<_> = [
+            "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh", "ch", "sh",
+            "r", "z", "c", "s", "A", "E", "O", "W", "Y", "YU",
+        ]
+        .into_iter()
+        .map(str::to_owned)
+        .collect();
+        let finals: Vec<_> = [
+            "a", "ai", "an", "ang", "ao", "e", "ei", "en", "eng", "er", "i", "ia", "ian", "iang",
+            "iao", "ie", "in", "ing", "iong", "iu", "o", "ong", "ou", "u", "ua", "uai", "uan",
+            "uang", "ui", "un", "uo", "v", "van", "ve", "vn",
+        ]
+        .into_iter()
+        .map(str::to_owned)
+        .collect();
+        let preferred = |name: &str| {
+            let mut chars = name.chars();
+            let first = chars.next().unwrap();
+            if chars.next().is_none() {
+                alphabet.index_of(first.to_ascii_uppercase()).unwrap()
+            } else {
+                0
+            }
+        };
+        let mut head_keys: Vec<_> = heads.iter().map(|name| preferred(name)).collect();
+        head_keys[26] = head_keys[25];
+        let layout = RegularLayout {
+            id: "diagnostics".to_owned(),
+            capacity: [21, 26],
+            head_keys,
+            final_keys: finals.iter().map(|name| preferred(name)).collect(),
+            tone: [26, 27, 28, 29, 30],
+        };
+        let diagnostics = layout.diagnostics(&alphabet, &heads, &finals).unwrap();
+        assert_eq!(diagnostics.memory, 35);
+        assert_eq!(diagnostics.displaced_initials, 0);
+        assert_eq!(diagnostics.displaced_vowels, 0);
     }
 }

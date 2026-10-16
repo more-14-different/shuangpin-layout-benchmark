@@ -134,19 +134,15 @@ impl IncrementalResolver {
                 return Err(format!("invalid or duplicate row update index {index}"));
             }
         }
-        for (position, (index, replacement)) in updates.iter().enumerate() {
-            if self
-                .rows
-                .iter()
-                .enumerate()
-                .any(|(other, row)| !seen.contains(&other) && row.id == replacement.id)
-                || updates[..position]
-                    .iter()
-                    .any(|(_, prior)| prior.id == replacement.id)
-            {
+        for (index, replacement) in &updates {
+            // This resolver is a fixed-topology update engine: a replacement
+            // may change stages and weights, but it must still describe the
+            // same stable row.  Comparing with the indexed row is both stricter
+            // and O(update count), unlike rescanning the full corpus per row.
+            if self.rows[*index].id != replacement.id {
                 return Err(format!(
-                    "replacement row id is not unique: {}",
-                    replacement.id
+                    "replacement row id differs at index {index}: {:?} != {:?}",
+                    replacement.id, self.rows[*index].id
                 ));
             }
             for stage in &replacement.stages {

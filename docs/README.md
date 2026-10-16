@@ -10,5 +10,6 @@
 - `CKT_v4_BINARY_FORMAT.md`：阶段 2 的分块紧凑真实夹具、来源哈希、稳定枚举和复现方法。
 - `CKT_v4_NATIVE_CORPUS.md`：阶段 3 的共享语料、独立方案状态、Rust 原生行生成和倒排增量更新。
 - `CKT_v4_ANNEALING.md`：阶段 4 的 67 维规则状态、分尺寸 Common399 约束、约束感知提案、增量/全量混合退火和检查点。
+- `CKT_v4_SEARCH_NEIGHBORHOOD.md`：阶段 5 的十类扩展提案、34 键空闲键引入、M/D/V 护栏、性能修复及各尺寸能力矩阵。
 
 可重复生成的截图、浏览器输出和完整研究环境不进入 Git；R11 完整复现材料保留在本地忽略目录 `a7_CKT_R11_integrated_materials/`。

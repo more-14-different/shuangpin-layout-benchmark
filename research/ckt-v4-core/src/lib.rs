@@ -14,6 +14,6 @@ pub use model::{
 };
 pub use motor::{MotorValue, ProjectedMotor, Projection, RoleTables, RoleTablesInput};
 pub use native::{
-    DependencyIndex, GeneratedRows, InputMode, NativeCorpus, NativeCorpusCounts,
+    DependencyIndex, GeneratedRows, InputMode, LayoutDiagnostics, NativeCorpus, NativeCorpusCounts,
     NativeCorpusHeader, RegularLayout, SchemeFixture, SchemeInput, SchemeState,
 };

@@ -14,6 +14,8 @@ The migration boundary is API-based:
   fixed-topology scheme update boundary;
 - `../docs/CKT_v4_ANNEALING.md` specifies the phase-4 constrained state,
   hybrid incremental/full annealer and resumable checkpoint contract;
+- `../docs/CKT_v4_SEARCH_NEIGHBORHOOD.md` specifies the phase-5 expanded
+  neighborhood, optional M/D/V guards and topology capability boundary;
 - `.cache/` holds restored replay packages and large cross-language fixtures;
 - `checkpoints/` holds resumable annealing state.
 

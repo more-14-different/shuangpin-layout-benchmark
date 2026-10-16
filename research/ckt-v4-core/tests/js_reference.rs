@@ -215,3 +215,15 @@ fn incremental_component_update_and_rollback_equal_full_recomputation() {
     incremental.verify_against_full_recompute().unwrap();
     assert_eq!(incremental.rows(), original);
 }
+
+#[test]
+fn incremental_updates_reject_row_identity_changes() {
+    let fixture = fixture();
+    let alphabet = KeyAlphabet::new(&fixture.key_alphabet).unwrap();
+    let rows = rows(&fixture.cases[0], &alphabet);
+    let mut incremental =
+        IncrementalResolver::new(rows, |code| Some(code.len() as f64 * 100.0)).unwrap();
+    let mut replacement = incremental.rows()[0].clone();
+    replacement.id.push_str("-different");
+    assert!(incremental.apply_updates(vec![(0, replacement)]).is_err());
+}
