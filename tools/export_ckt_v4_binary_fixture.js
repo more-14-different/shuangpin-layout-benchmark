@@ -171,7 +171,7 @@ function main() {
   const strokes = strokeOptions(strokeFile);
   const words = multiwords(snowBaseFile, data, mass);
   const snapshot = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
-  const motor = projectedMotor(upstreamMotor(snapshot), snapshot.keys, data.ckt.calibration.extension_maps);
+  const nativeMotor = upstreamMotor(snapshot);
   const header = {
     version: 'ckt-v4-row-binary-1',
     source: 'tools/export_ckt_v4_binary_fixture.js',
@@ -198,6 +198,9 @@ function main() {
     writer.u32(headerBytes.length);
     writer.bytes(headerBytes);
     for (const entry of entries) {
+      // Codes are layout-specific. Releasing this cache after each scheme keeps
+      // large all-scheme exports bounded instead of retaining dead code strings.
+      const motor = projectedMotor(nativeMotor, snapshot.keys, data.ckt.calibration.extension_maps);
       const contract = classifyContract(entry.capacity);
       for (const mode of ['keytao', 'sanpin']) {
         const rows = buildRows(entry, data, strokes, words, mode);
@@ -222,4 +225,10 @@ function main() {
   process.stderr.write(`wrote ${output} (${writer.bytesWritten} bytes)\n`);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  BinaryWriter,
+  hashFile,
+  parseArgs,
+};

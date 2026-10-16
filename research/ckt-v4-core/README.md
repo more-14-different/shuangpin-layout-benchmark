@@ -15,6 +15,8 @@ reference fixtures.
   `tools/ckt_v4_model.js`.
 - read phase-2 real fixtures one scheme/mode at a time from a compact binary
   format, retaining explicit keyboard contract and source provenance.
+- generate the same rows natively from a phase-3 shared corpus plus a small
+  scheme state, with inverted pinyin/auxiliary dependencies for exact updates.
 
 The incremental resolver is correctness-first. It finds the transitive component
 of rows sharing any old or new stage bucket and recomputes only that component.
@@ -30,6 +32,9 @@ From the repository root:
 just ckt-v4-rust-verify
 just ckt-v4-binary-fixture "S005,L600"
 just ckt-v4-binary-verify
+just ckt-v4-native-corpus "S005,L600"
+just ckt-v4-native-verify
+just ckt-v4-native-incremental-smoke
 cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml
 ```
 

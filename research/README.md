@@ -10,6 +10,8 @@ The migration boundary is API-based:
 - `ckt-v4-core/` owns compact competition, motor-cost and incremental-update code;
 - `../tools/` owns corpus/HTML adapters and JS reference exporters;
 - `../docs/CKT_v4_BINARY_FORMAT.md` specifies the phase-2 streamed row fixture;
+- `../docs/CKT_v4_NATIVE_CORPUS.md` specifies the phase-3 shared corpus and
+  fixed-topology scheme update boundary;
 - `.cache/` holds restored replay packages and large cross-language fixtures;
 - `checkpoints/` holds resumable annealing state.
 

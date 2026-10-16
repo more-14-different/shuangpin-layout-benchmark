@@ -334,6 +334,9 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
+  FIXED_ONE_KEY,
+  SHAPE_FROM,
+  STROKE_SLOT,
   loadPayload,
   strokeOptions,
   multiwords,
