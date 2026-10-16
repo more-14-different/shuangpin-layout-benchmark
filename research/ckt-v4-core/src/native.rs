@@ -157,7 +157,10 @@ impl SchemeFixture {
     pub fn open(path: impl AsRef<Path>) -> Result<Self, String> {
         let text = std::fs::read_to_string(path).map_err(|error| error.to_string())?;
         let fixture: Self = serde_json::from_str(&text).map_err(|error| error.to_string())?;
-        if fixture.version != "ckt-v4-scheme-state-1" {
+        if !matches!(
+            fixture.version.as_str(),
+            "ckt-v4-scheme-state-1" | "ckt-v4-scheme-state-2"
+        ) {
             return Err(format!(
                 "unsupported scheme fixture version {}",
                 fixture.version
@@ -538,6 +541,10 @@ impl SchemeState {
             codes,
             tone,
         })
+    }
+
+    pub fn code_at(&self, index: usize) -> Option<[u8; 2]> {
+        self.codes.get(index).copied().flatten()
     }
 
     pub fn swap_pinyin_codes(&mut self, left: usize, right: usize) -> Result<(), String> {
