@@ -18,9 +18,13 @@ pub use capability::{
 };
 pub use compact::{KeyAlphabet, PackedCode};
 pub use ergonomics::{
-    ErgonomicFixture, ExpectedErgonomics, LoadDiagnostics, TokenLoadModel, TrackRoles,
+    ErgonomicFixture, ErgonomicGuards, ExpectedErgonomics, LoadDiagnostics, TokenLoadModel,
+    TrackRoles,
 };
-pub use frontier::{ExactFrontier, FrontierMetrics, FrontierPoint, canonical_layout_bytes};
+pub use frontier::{
+    ErgonomicFrontierMetrics, ErgonomicMetricSchema, ExactFrontier, FrontierMetrics, FrontierPoint,
+    MetricDefinition, MetricDirection, MetricVerification, canonical_layout_bytes,
+};
 pub use frontier_log::{FrontierLogProvenance, FrontierLogWriter, LogRecovery, read_frontier_log};
 pub use incremental::{IncrementalResolver, OutcomeChange, UpdateReceipt};
 pub use model::{

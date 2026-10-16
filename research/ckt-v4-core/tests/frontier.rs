@@ -19,6 +19,7 @@ fn point(id: &str, marker: u8, values: (f64, usize, usize, usize)) -> FrontierPo
             memory: values.1,
             displaced_initials: values.2,
             displaced_vowels: values.3,
+            ergonomics: None,
         },
         layout: layout(id, marker),
         iteration: usize::from(marker),

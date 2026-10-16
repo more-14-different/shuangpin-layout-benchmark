@@ -70,6 +70,74 @@ pub struct LoadDiagnostics {
     pub y_max: f64,
 }
 
+#[derive(Clone, Copy, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ErgonomicGuards {
+    pub max_rp_s2: Option<f64>,
+    pub max_rp: Option<f64>,
+    pub max_w: Option<f64>,
+    pub max_y: Option<f64>,
+    pub min_mx_score: Option<f64>,
+}
+
+impl ErgonomicGuards {
+    pub const fn is_empty(self) -> bool {
+        self.max_rp_s2.is_none()
+            && self.max_rp.is_none()
+            && self.max_w.is_none()
+            && self.max_y.is_none()
+            && self.min_mx_score.is_none()
+    }
+
+    pub fn validate(
+        self,
+        verification: crate::MetricVerification,
+        metrics: &crate::ErgonomicFrontierMetrics,
+    ) -> Result<(), String> {
+        if verification != crate::MetricVerification::Exact {
+            return Ok(());
+        }
+        let loads = metrics.loads;
+        if self.max_rp_s2.is_some_and(|limit| loads.rp_s2 > limit) {
+            return Err(format!(
+                "right-pinky S2 load {} exceeds guard {}",
+                loads.rp_s2,
+                self.max_rp_s2.unwrap_or_default()
+            ));
+        }
+        if self.max_rp.is_some_and(|limit| loads.rp_max > limit) {
+            return Err(format!(
+                "right-pinky peak load {} exceeds guard {}",
+                loads.rp_max,
+                self.max_rp.unwrap_or_default()
+            ));
+        }
+        if self.max_w.is_some_and(|limit| loads.w_max > limit) {
+            return Err(format!(
+                "W peak load {} exceeds guard {}",
+                loads.w_max,
+                self.max_w.unwrap_or_default()
+            ));
+        }
+        if self.max_y.is_some_and(|limit| loads.y_max > limit) {
+            return Err(format!(
+                "Y peak load {} exceeds guard {}",
+                loads.y_max,
+                self.max_y.unwrap_or_default()
+            ));
+        }
+        if let Some(limit) = self.min_mx_score {
+            let score = metrics
+                .mx_score
+                .ok_or("moving-hand score guard requires an evaluated corpus")?;
+            if score < limit {
+                return Err(format!("moving-hand score {score} is below guard {limit}"));
+            }
+        }
+        Ok(())
+    }
+}
+
 impl ErgonomicFixture {
     pub fn open(path: impl AsRef<Path>) -> Result<Self, String> {
         let text = std::fs::read_to_string(path).map_err(|error| error.to_string())?;

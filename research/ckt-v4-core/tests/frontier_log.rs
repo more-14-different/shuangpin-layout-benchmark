@@ -27,6 +27,8 @@ fn provenance(scheme: &str) -> FrontierLogProvenance {
         max_displaced_initials: None,
         max_displaced_vowels: Some(1),
         proposal_policy: "regular-compound-v1".to_owned(),
+        ergonomic_schema: Default::default(),
+        ergonomic_contract: None,
     }
 }
 
@@ -37,6 +39,7 @@ fn point(iteration: usize) -> FrontierPoint {
             memory: 40 + iteration,
             displaced_initials: 3,
             displaced_vowels: 1,
+            ergonomics: None,
         },
         layout: RegularLayout {
             id: "seed".to_owned(),

@@ -24,7 +24,7 @@ fn main() -> Result<(), String> {
         return Err("usage: merge-frontier LOG OUTPUT".to_owned());
     }
     let recovered = read_frontier_log(&log)?;
-    let mut frontier = ExactFrontier::new();
+    let mut frontier = ExactFrontier::with_schema(recovered.provenance.ergonomic_schema);
     for point in &recovered.points {
         frontier.insert(point.clone())?;
     }

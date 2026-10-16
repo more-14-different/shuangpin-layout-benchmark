@@ -1,12 +1,12 @@
-use crate::FrontierPoint;
+use crate::frontier::validate_ergonomic_metrics;
+use crate::{ErgonomicMetricSchema, FrontierPoint, MetricDefinition};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 use std::fs::{File, OpenOptions};
 use std::io::{BufRead, BufReader, BufWriter, Write};
 use std::path::Path;
 
-const LOG_VERSION: &str = "ckt-v4-frontier-log-1";
-const METRIC_SCHEMA: [&str; 4] = ["cktV4", "memory", "displacedInitials", "displacedVowels"];
+const LOG_VERSION: &str = "ckt-v4-frontier-log-2";
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -18,6 +18,8 @@ pub struct FrontierLogProvenance {
     pub max_displaced_initials: Option<usize>,
     pub max_displaced_vowels: Option<usize>,
     pub proposal_policy: String,
+    pub ergonomic_schema: ErgonomicMetricSchema,
+    pub ergonomic_contract: Option<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -26,7 +28,7 @@ struct LogHeader {
     version: String,
     kind: String,
     provenance: FrontierLogProvenance,
-    metric_schema: [String; 4],
+    metric_schema: Vec<MetricDefinition>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -39,6 +41,7 @@ struct LogRecord {
 #[derive(Debug)]
 pub struct FrontierLogWriter {
     writer: BufWriter<File>,
+    schema: ErgonomicMetricSchema,
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -53,6 +56,7 @@ pub struct LogRecovery {
 impl FrontierLogWriter {
     pub fn open(path: impl AsRef<Path>, provenance: FrontierLogProvenance) -> Result<Self, String> {
         let path = path.as_ref();
+        let schema = provenance.ergonomic_schema;
         if let Some(parent) = path.parent() {
             std::fs::create_dir_all(parent).map_err(|error| error.to_string())?;
         }
@@ -79,11 +83,13 @@ impl FrontierLogWriter {
         if !exists {
             write_line(&mut writer, &header(provenance))?;
         }
-        Ok(Self { writer })
+        Ok(Self { writer, schema })
     }
 
     pub fn append(&mut self, point: &FrontierPoint) -> Result<(), String> {
-        if !point.metrics.ckt_v4.is_finite() {
+        if !point.metrics.ckt_v4.is_finite()
+            || validate_ergonomic_metrics(point.metrics, self.schema).is_err()
+        {
             return Err("frontier log refuses non-finite metrics".to_owned());
         }
         write_line(
@@ -135,7 +141,11 @@ pub fn read_frontier_log(path: impl AsRef<Path>) -> Result<LogRecovery, String> 
         }
         let record: LogRecord = serde_json::from_slice(trim_newline(&buffer))
             .map_err(|error| format!("corrupt completed frontier record: {error}"))?;
-        if record.kind != "point" || !record.point.metrics.ckt_v4.is_finite() {
+        if record.kind != "point"
+            || !record.point.metrics.ckt_v4.is_finite()
+            || validate_ergonomic_metrics(record.point.metrics, header.provenance.ergonomic_schema)
+                .is_err()
+        {
             return Err("invalid completed frontier record".to_owned());
         }
         input_records += 1;
@@ -190,7 +200,11 @@ fn inspect_existing(path: &Path) -> Result<Inspection, String> {
         }
         let record: LogRecord = serde_json::from_slice(trim_newline(&buffer))
             .map_err(|error| format!("corrupt completed frontier record: {error}"))?;
-        if record.kind != "point" || !record.point.metrics.ckt_v4.is_finite() {
+        if record.kind != "point"
+            || !record.point.metrics.ckt_v4.is_finite()
+            || validate_ergonomic_metrics(record.point.metrics, header.provenance.ergonomic_schema)
+                .is_err()
+        {
             return Err("invalid completed frontier record".to_owned());
         }
         offset += count as u64;
@@ -202,18 +216,19 @@ fn inspect_existing(path: &Path) -> Result<Inspection, String> {
 }
 
 fn header(provenance: FrontierLogProvenance) -> LogHeader {
+    let metric_schema = provenance.ergonomic_schema.declarations();
     LogHeader {
         version: LOG_VERSION.to_owned(),
         kind: "header".to_owned(),
         provenance,
-        metric_schema: METRIC_SCHEMA.map(str::to_owned),
+        metric_schema,
     }
 }
 
 fn validate_header(header: &LogHeader) -> Result<(), String> {
     if header.version != LOG_VERSION
         || header.kind != "header"
-        || header.metric_schema != METRIC_SCHEMA.map(str::to_owned)
+        || header.metric_schema != header.provenance.ergonomic_schema.declarations()
     {
         return Err("unsupported frontier log header".to_owned());
     }

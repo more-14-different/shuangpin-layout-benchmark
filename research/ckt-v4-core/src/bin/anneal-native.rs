@@ -1,11 +1,12 @@
 use ckt_v4_core::{
-    CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, FrontierLogProvenance, FrontierLogWriter,
+    CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, ErgonomicFixture, ErgonomicFrontierMetrics,
+    ErgonomicGuards, ErgonomicMetricSchema, FrontierLogProvenance, FrontierLogWriter,
     FrontierMetrics, FrontierPoint, IncrementalResolver, IncrementalSummary, InputMode,
-    KeyAlphabet, LayoutDiagnostics, NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY,
-    NativeCorpus, ProjectedMotor, Projection, ProposalContext, ProposalError, ProposalKind,
-    ProposalStats, RegularLayout, RoleTables, SchemeFixture, SchemeState, SearchRng, Summary,
-    canonical_layout_bytes, composite_score, propose, resolve, summarize,
-    validate_checkpoint_contract, validate_proposal,
+    KeyAlphabet, LayoutDiagnostics, MetricVerification, MovingHandCorpus,
+    NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY, NativeCorpus, ProjectedMotor,
+    Projection, ProposalContext, ProposalError, ProposalKind, ProposalStats, RegularLayout,
+    RoleTables, SchemeFixture, SchemeState, SearchRng, Summary, canonical_layout_bytes,
+    composite_score, propose, resolve, summarize, validate_checkpoint_contract, validate_proposal,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, HashMap};
@@ -26,6 +27,21 @@ struct ModeState {
     summary: IncrementalSummary,
 }
 
+struct ErgonomicRuntime {
+    fixture: ErgonomicFixture,
+    corpus: MovingHandCorpus,
+    verification: MetricVerification,
+    contract: String,
+}
+
+struct GuardContext<'a> {
+    schemes: &'a SchemeFixture,
+    alphabet: &'a KeyAlphabet,
+    layout: LayoutGuards,
+    ergonomic: Option<&'a ErgonomicRuntime>,
+    ergonomic_guards: ErgonomicGuards,
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct Checkpoint {
@@ -39,6 +55,8 @@ struct Checkpoint {
     proposal_order: [ProposalKind; PROPOSAL_KIND_COUNT],
     only_proposal: Option<ProposalKind>,
     guards: LayoutGuards,
+    ergonomic_guards: ErgonomicGuards,
+    ergonomic_contract: Option<String>,
     rng_state: u64,
     current_score: f64,
     best_score: f64,
@@ -73,6 +91,10 @@ struct Args {
     frontier_log: Option<PathBuf>,
     record_mode: RecordMode,
     guards: LayoutGuards,
+    ergonomic_fixture: Option<PathBuf>,
+    ergonomic_guards: ErgonomicGuards,
+    mx_corpus: String,
+    mx_variant: String,
     resume: bool,
 }
 
@@ -90,9 +112,9 @@ enum RecordMode {
     Leaders,
 }
 
-#[derive(Default)]
 struct DiagnosticLeaders {
-    by_metric: [Option<FrontierPoint>; 4],
+    schema: ErgonomicMetricSchema,
+    by_metric: Vec<Option<FrontierPoint>>,
 }
 
 fn main() -> Result<(), String> {
@@ -105,6 +127,8 @@ fn main() -> Result<(), String> {
         return Err("scheme/native-corpus provenance differs".to_owned());
     }
     let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
+    let ergonomic = load_ergonomic_runtime(&args, &fixture)?;
+    let ergonomic_contract = ergonomic.as_ref().map(|runtime| runtime.contract.clone());
     let motor = load_motor(&corpus, &alphabet, &args.snapshot)?;
     let parameters = CognitiveParameters::default();
 
@@ -136,6 +160,8 @@ fn main() -> Result<(), String> {
             || value.temperature.to_bits() != args.temperature.to_bits()
             || value.only_proposal != args.proposal_kind
             || value.guards != args.guards
+            || value.ergonomic_guards != args.ergonomic_guards
+            || value.ergonomic_contract != ergonomic_contract
         {
             return Err(
                 "checkpoint does not match scheme, reference, schedule, proposal, or guards"
@@ -155,6 +181,8 @@ fn main() -> Result<(), String> {
             proposal_order: ProposalKind::ALL,
             only_proposal: args.proposal_kind,
             guards: args.guards,
+            ergonomic_guards: args.ergonomic_guards,
+            ergonomic_contract: ergonomic_contract.clone(),
             rng_state: args.seed,
             current_score: f64::NAN,
             best_score: f64::INFINITY,
@@ -174,6 +202,18 @@ fn main() -> Result<(), String> {
     };
     validate_layout(&checkpoint.current_layout, &fixture, &alphabet, args.guards)?;
     validate_layout(&checkpoint.best_layout, &fixture, &alphabet, args.guards)?;
+    validate_ergonomic_guards(
+        &checkpoint.current_layout,
+        &fixture,
+        ergonomic.as_ref(),
+        args.ergonomic_guards,
+    )?;
+    validate_ergonomic_guards(
+        &checkpoint.best_layout,
+        &fixture,
+        ergonomic.as_ref(),
+        args.ergonomic_guards,
+    )?;
     let mut current_state = fixture.scheme_state(&checkpoint.current_layout)?;
     let mut modes = build_modes(&corpus, &current_state, &motor, parameters)?;
     let mut current_score = composite_score(&mode_summaries(&modes), &reference)?;
@@ -190,9 +230,15 @@ fn main() -> Result<(), String> {
     let mut frontier_writer = args
         .frontier_log
         .as_ref()
-        .map(|path| FrontierLogWriter::open(path, frontier_provenance(&corpus, &fixture, &args)))
+        .map(|path| {
+            FrontierLogWriter::open(
+                path,
+                frontier_provenance(&corpus, &fixture, &args, ergonomic.as_ref()),
+            )
+        })
         .transpose()?;
-    let mut diagnostic_leaders = DiagnosticLeaders::default();
+    let schema = ergonomic_schema(ergonomic.as_ref());
+    let mut diagnostic_leaders = DiagnosticLeaders::new(schema);
     if !args.resume
         && let Some(writer) = frontier_writer.as_mut()
     {
@@ -202,6 +248,7 @@ fn main() -> Result<(), String> {
             &checkpoint.current_layout,
             &fixture,
             &alphabet,
+            ergonomic.as_ref(),
         )?;
         diagnostic_leaders.consider(&initial_point);
         writer.append(&initial_point)?;
@@ -219,9 +266,13 @@ fn main() -> Result<(), String> {
         let (proposal_result, invalid_attempts) = propose_guarded(
             &checkpoint.current_layout,
             &proposal_context,
-            &fixture,
-            &alphabet,
-            args.guards,
+            &GuardContext {
+                schemes: &fixture,
+                alphabet: &alphabet,
+                layout: args.guards,
+                ergonomic: ergonomic.as_ref(),
+                ergonomic_guards: args.ergonomic_guards,
+            },
             &mut checkpoint.proposal_stats,
             &mut rng,
         )?;
@@ -280,6 +331,7 @@ fn main() -> Result<(), String> {
             &proposal,
             &fixture,
             &alphabet,
+            ergonomic.as_ref(),
         )?;
         if args.record_mode == RecordMode::Leaders
             && diagnostic_leaders.consider(&frontier_point)
@@ -379,9 +431,7 @@ fn main() -> Result<(), String> {
 fn propose_guarded(
     current: &RegularLayout,
     context: &ProposalContext<'_>,
-    fixture: &SchemeFixture,
-    alphabet: &KeyAlphabet,
-    guards: LayoutGuards,
+    guard_context: &GuardContext<'_>,
     stats: &mut [ProposalStats; PROPOSAL_KIND_COUNT],
     rng: &mut SearchRng,
 ) -> Result<((RegularLayout, ProposalKind), usize), String> {
@@ -414,7 +464,21 @@ fn propose_guarded(
             }
             Err(error) => return Err(error.to_string()),
         }
-        if validate_guards(&candidate, fixture, alphabet, guards).is_ok() {
+        if validate_guards(
+            &candidate,
+            guard_context.schemes,
+            guard_context.alphabet,
+            guard_context.layout,
+        )
+        .is_ok()
+            && validate_ergonomic_guards(
+                &candidate,
+                guard_context.schemes,
+                guard_context.ergonomic,
+                guard_context.ergonomic_guards,
+            )
+            .is_ok()
+        {
             return Ok(((candidate, kind), rejected));
         }
         stats[kind.index()].guard_rejected += 1;
@@ -458,6 +522,68 @@ fn validate_guards(
         ));
     }
     Ok(diagnostics)
+}
+
+fn validate_ergonomic_guards(
+    layout: &RegularLayout,
+    schemes: &SchemeFixture,
+    runtime: Option<&ErgonomicRuntime>,
+    guards: ErgonomicGuards,
+) -> Result<(), String> {
+    if guards.is_empty() {
+        return Ok(());
+    }
+    let runtime = runtime.ok_or("ergonomic guards require --ergonomic-fixture")?;
+    if runtime.verification != MetricVerification::Exact {
+        return Err("provisional ergonomic metrics cannot be used as guards".to_owned());
+    }
+    let state = schemes.scheme_state(layout)?;
+    let loads = runtime.fixture.load_model.diagnose(layout)?;
+    let mx_score = if guards.min_mx_score.is_some() {
+        Some(
+            runtime
+                .fixture
+                .moving_hand
+                .evaluate(&state, &runtime.corpus)?
+                .score,
+        )
+    } else {
+        None
+    };
+    guards.validate(
+        runtime.verification,
+        &ErgonomicFrontierMetrics { loads, mx_score },
+    )
+}
+
+fn ergonomic_metrics(
+    layout: &RegularLayout,
+    schemes: &SchemeFixture,
+    runtime: Option<&ErgonomicRuntime>,
+) -> Result<Option<ErgonomicFrontierMetrics>, String> {
+    let Some(runtime) = runtime else {
+        return Ok(None);
+    };
+    let state = schemes.scheme_state(layout)?;
+    Ok(Some(ErgonomicFrontierMetrics {
+        loads: runtime.fixture.load_model.diagnose(layout)?,
+        mx_score: Some(
+            runtime
+                .fixture
+                .moving_hand
+                .evaluate(&state, &runtime.corpus)?
+                .score,
+        ),
+    }))
+}
+
+fn ergonomic_schema(runtime: Option<&ErgonomicRuntime>) -> ErgonomicMetricSchema {
+    runtime.map_or_else(ErgonomicMetricSchema::default, |runtime| {
+        ErgonomicMetricSchema {
+            loads: Some(runtime.verification),
+            moving_hand: Some(runtime.verification),
+        }
+    })
 }
 
 fn build_modes(
@@ -527,23 +653,25 @@ fn verify_modes(modes: &mut [ModeState], parameters: CognitiveParameters) -> Res
 }
 
 impl DiagnosticLeaders {
+    fn new(schema: ErgonomicMetricSchema) -> Self {
+        let count = schema
+            .declarations()
+            .into_iter()
+            .filter(|definition| definition.verification == MetricVerification::Exact)
+            .count();
+        Self {
+            schema,
+            by_metric: vec![None; count],
+        }
+    }
+
     fn consider(&mut self, point: &FrontierPoint) -> bool {
         let mut changed = false;
-        let values = [
-            point.metrics.ckt_v4,
-            point.metrics.memory as f64,
-            point.metrics.displaced_initials as f64,
-            point.metrics.displaced_vowels as f64,
-        ];
+        let values = leader_values(point, self.schema);
         let canonical = canonical_layout_bytes(&point.layout);
         for (index, value) in values.into_iter().enumerate() {
             let replace = self.by_metric[index].as_ref().is_none_or(|current| {
-                let current_values = [
-                    current.metrics.ckt_v4,
-                    current.metrics.memory as f64,
-                    current.metrics.displaced_initials as f64,
-                    current.metrics.displaced_vowels as f64,
-                ];
+                let current_values = leader_values(current, self.schema);
                 value < current_values[index]
                     || (value == current_values[index]
                         && canonical < canonical_layout_bytes(&current.layout))
@@ -557,12 +685,36 @@ impl DiagnosticLeaders {
     }
 }
 
+fn leader_values(point: &FrontierPoint, schema: ErgonomicMetricSchema) -> Vec<f64> {
+    let metrics = point.metrics;
+    let mut values = vec![
+        metrics.ckt_v4,
+        metrics.memory as f64,
+        metrics.displaced_initials as f64,
+        metrics.displaced_vowels as f64,
+    ];
+    if schema.loads == Some(MetricVerification::Exact) {
+        let loads = metrics.ergonomics.expect("exact load metrics").loads;
+        values.extend([loads.rp_max, loads.w_max, loads.y_max]);
+    }
+    if schema.moving_hand == Some(MetricVerification::Exact) {
+        values.push(
+            -metrics
+                .ergonomics
+                .and_then(|metrics| metrics.mx_score)
+                .expect("exact moving-hand metric"),
+        );
+    }
+    values
+}
+
 fn frontier_point(
     iteration: usize,
     ckt_v4: f64,
     layout: &RegularLayout,
     fixture: &SchemeFixture,
     alphabet: &KeyAlphabet,
+    ergonomic: Option<&ErgonomicRuntime>,
 ) -> Result<FrontierPoint, String> {
     let diagnostics = layout.diagnostics(alphabet, &fixture.heads, &fixture.finals)?;
     Ok(FrontierPoint {
@@ -571,6 +723,7 @@ fn frontier_point(
             memory: diagnostics.memory,
             displaced_initials: diagnostics.displaced_initials,
             displaced_vowels: diagnostics.displaced_vowels,
+            ergonomics: ergonomic_metrics(layout, fixture, ergonomic)?,
         },
         layout: layout.clone(),
         iteration,
@@ -581,6 +734,7 @@ fn frontier_provenance(
     corpus: &NativeCorpus,
     fixture: &SchemeFixture,
     args: &Args,
+    ergonomic: Option<&ErgonomicRuntime>,
 ) -> FrontierLogProvenance {
     let hashes: BTreeMap<_, _> = corpus.header().source_hashes.iter().collect();
     let hash_signature = hashes
@@ -600,7 +754,53 @@ fn frontier_provenance(
         max_displaced_initials: args.guards.max_displaced_initials,
         max_displaced_vowels: args.guards.max_displaced_vowels,
         proposal_policy: NATIVE_PROPOSAL_POLICY.to_owned(),
+        ergonomic_schema: ergonomic_schema(ergonomic),
+        ergonomic_contract: ergonomic
+            .map(|runtime| format!("{};guards={:?}", runtime.contract, args.ergonomic_guards)),
     }
+}
+
+fn load_ergonomic_runtime(
+    args: &Args,
+    schemes: &SchemeFixture,
+) -> Result<Option<ErgonomicRuntime>, String> {
+    let Some(path) = &args.ergonomic_fixture else {
+        if !args.ergonomic_guards.is_empty() {
+            return Err("ergonomic guards require --ergonomic-fixture".to_owned());
+        }
+        return Ok(None);
+    };
+    let fixture = ErgonomicFixture::open(path)?;
+    if fixture.source_hashes.get("html") != schemes.source_hashes.get("html") {
+        return Err("ergonomic/scheme HTML provenance differs".to_owned());
+    }
+    let verification = match fixture.verification_status.as_str() {
+        "exact" => MetricVerification::Exact,
+        "provisional" => MetricVerification::Provisional,
+        value => return Err(format!("unknown ergonomic verification status {value:?}")),
+    };
+    if verification != MetricVerification::Exact && !args.ergonomic_guards.is_empty() {
+        return Err("provisional ergonomic metrics cannot be used as guards".to_owned());
+    }
+    let corpus = fixture
+        .moving_hand
+        .corpus(&args.mx_corpus, &args.mx_variant)?;
+    let hashes: BTreeMap<_, _> = fixture.source_hashes.iter().collect();
+    let hash_signature = hashes
+        .into_iter()
+        .map(|(name, value)| format!("{name}={value}"))
+        .collect::<Vec<_>>()
+        .join(";");
+    let contract = format!(
+        "verification={};mx={}|{};{}",
+        fixture.verification_status, args.mx_corpus, args.mx_variant, hash_signature
+    );
+    Ok(Some(ErgonomicRuntime {
+        fixture,
+        corpus,
+        verification,
+        contract,
+    }))
 }
 
 fn load_motor(
@@ -695,6 +895,10 @@ fn parse_args() -> Result<Args, String> {
         frontier_log: None,
         record_mode: RecordMode::Accepted,
         guards: LayoutGuards::default(),
+        ergonomic_fixture: None,
+        ergonomic_guards: ErgonomicGuards::default(),
+        mx_corpus: "daily".to_owned(),
+        mx_variant: "native-punctuation".to_owned(),
         resume: false,
     };
     while let Some(flag) = values.next() {
@@ -740,12 +944,51 @@ fn parse_args() -> Result<Args, String> {
             "--max-v" => {
                 result.guards.max_displaced_vowels = Some(parse_value(values.next(), "--max-v")?)
             }
+            "--ergonomic-fixture" => {
+                result.ergonomic_fixture = Some(PathBuf::from(
+                    values.next().ok_or("--ergonomic-fixture needs a value")?,
+                ))
+            }
+            "--max-rp-s2" => {
+                result.ergonomic_guards.max_rp_s2 = Some(parse_value(values.next(), "--max-rp-s2")?)
+            }
+            "--max-rp" => {
+                result.ergonomic_guards.max_rp = Some(parse_value(values.next(), "--max-rp")?)
+            }
+            "--max-w" => {
+                result.ergonomic_guards.max_w = Some(parse_value(values.next(), "--max-w")?)
+            }
+            "--max-y" => {
+                result.ergonomic_guards.max_y = Some(parse_value(values.next(), "--max-y")?)
+            }
+            "--min-mx-score" => {
+                result.ergonomic_guards.min_mx_score =
+                    Some(parse_value(values.next(), "--min-mx-score")?)
+            }
+            "--mx-corpus" => result.mx_corpus = values.next().ok_or("--mx-corpus needs a value")?,
+            "--mx-variant" => {
+                result.mx_variant = values.next().ok_or("--mx-variant needs a value")?
+            }
             "--resume" => result.resume = true,
             _ => return Err(format!("unknown option {flag}")),
         }
     }
     if result.steps == 0 || !result.temperature.is_finite() || result.temperature <= 0.0 {
         return Err("steps and temperature must be positive".to_owned());
+    }
+    let ergonomic_limits = [
+        result.ergonomic_guards.max_rp_s2,
+        result.ergonomic_guards.max_rp,
+        result.ergonomic_guards.max_w,
+        result.ergonomic_guards.max_y,
+        result.ergonomic_guards.min_mx_score,
+    ];
+    if ergonomic_limits
+        .into_iter()
+        .flatten()
+        .any(|value| !value.is_finite() || value < 0.0)
+    {
+        return Err("ergonomic guard values must be finite and non-negative".to_owned());
     }
     Ok(result)
 }
