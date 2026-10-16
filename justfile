@@ -35,6 +35,9 @@ ckt-v4-binary-incremental-smoke:
 ckt-v4-native-corpus ids="S005,L600,S005-NF,SNF4-M36-AE-07,N095,SNOW-SHENYUN-21X28-SHAPE,H37":
     node tools/export_ckt_v4_native_corpus.js --ids "{{ids}}" --output research/.cache/ckt-v4-native-corpus.bin --schemes research/.cache/ckt-v4-schemes.json
 
+ckt-v4-all-scheme-fixture:
+    node tools/export_ckt_v4_scheme_fixture.js --ids all --output research/.cache/ckt-v4-all-schemes.json
+
 ckt-v4-native-verify:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin verify-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json research/.cache/ckt-v4-real-reference.bin tools/ckt_v4_upstream_role_tables.json
 

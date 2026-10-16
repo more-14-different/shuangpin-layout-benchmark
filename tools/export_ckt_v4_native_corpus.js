@@ -16,42 +16,15 @@ const {
   strokeOptions,
   multiwords,
 } = require('./score_completion_ckt_v4.js');
+const {
+  ALPHABET,
+  buildSchemeFixture,
+  selectSchemeEntries,
+} = require('./ckt_v4_scheme_fixture.js');
 
 const MAGIC = Buffer.from('CKTV4COR', 'ascii');
 const FORMAT_VERSION = 1;
 const FILE_END = 0xc4c0ca5e;
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./";
-const HEADS = ['b','p','m','f','d','t','n','l','g','k','h','j','q','x','zh','ch','sh','r','z','c','s','A','E','O','W','Y','YU'];
-const FINALS = ['a','ai','an','ang','ao','e','ei','en','eng','er','i','ia','ian','iang','iao','ie','in','ing','iong','iu','o','ong','ou','u','ua','uai','uan','uang','ui','un','uo','v','van','ve','vn'];
-const CONSONANTS = HEADS.slice(0, 21).sort((a, b) => b.length - a.length);
-const YU = new Set(['yu', 'yuan', 'yue', 'yun']);
-
-function splitPinyin(py) {
-  let head;
-  let final;
-  if ('aeo'.includes(py[0])) {
-    head = py[0].toUpperCase();
-    final = py;
-  } else if (py.startsWith('y')) {
-    head = YU.has(py) ? 'YU' : 'Y';
-    final = py.slice(1);
-  } else if (py.startsWith('w')) {
-    head = 'W';
-    final = py.slice(1);
-  } else {
-    head = CONSONANTS.find(value => py.startsWith(value));
-    if (!head) return [0xff, 0xff];
-    final = py.slice(head.length);
-  }
-  if (['j', 'q', 'x', 'Y', 'YU'].includes(head) && final.startsWith('u')) final = `v${final.slice(1)}`;
-  const headIndex = HEADS.indexOf(head);
-  const finalIndex = FINALS.indexOf(final);
-  // A few non-Common399 syllables (for example hng) are outside the historical
-  // 27+35 optimizer state and never enter the frozen CKT corpus.
-  if (headIndex < 0 || finalIndex < 0) return [0xff, 0xff];
-  return [headIndex, finalIndex];
-}
-
 function shapeSlot(abstract, offset = 0) {
   const key = [...(abstract || '')][offset];
   const slot = SHAPE_FROM.indexOf(key);
@@ -109,6 +82,14 @@ function writeWord(writer, item) {
   writer.u8(item.shape2);
 }
 
+function buildNativeSchemeFixture(data, entries, htmlHash) {
+  const fixture = buildSchemeFixture(data, entries, htmlHash);
+  fixture.version = 'ckt-v4-scheme-state-1';
+  delete fixture.source;
+  delete fixture.counts;
+  return fixture;
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const repo = path.resolve(__dirname, '..');
@@ -126,8 +107,7 @@ function main() {
   const strokes = strokeOptions(strokeFile);
   const words = multiwords(snowBaseFile, data, mass);
   const templates = buildTemplates(data, strokes, words);
-  const entries = ids.map(id => data.entries.find(entry => entry.id === id));
-  if (entries.some(entry => !entry)) throw new Error(`unknown scheme id in ${ids.join(',')}`);
+  const entries = selectSchemeEntries(data, ids);
   const sourceHashes = {
     html: hashFile(html),
     snowBase: hashFile(snowBaseFile),
@@ -179,21 +159,7 @@ function main() {
     writer.close();
   }
 
-  const schemeFixture = {
-    version: 'ckt-v4-scheme-state-1',
-    keyAlphabet: ALPHABET,
-    sourceHashes: {html: sourceHashes.html},
-    heads: HEADS,
-    finals: FINALS,
-    pinyinMap: data.pinyin.map(splitPinyin),
-    commonPinyin: data.base.map(row => row[0]),
-    schemes: entries.map(entry => ({
-      id: entry.id,
-      capacity: entry.capacity,
-      tone: entry.tone,
-      codeList: entry.codeList,
-    })),
-  };
+  const schemeFixture = buildNativeSchemeFixture(data, entries, sourceHashes.html);
   fs.mkdirSync(path.dirname(schemesOutput), {recursive: true});
   fs.writeFileSync(schemesOutput, `${JSON.stringify(schemeFixture, null, 2)}\n`, 'utf8');
   process.stderr.write(`wrote ${output} (${writer.bytesWritten} bytes)\n`);
@@ -202,4 +168,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = {buildTemplates};
+module.exports = {buildNativeSchemeFixture, buildTemplates};
