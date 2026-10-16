@@ -5,6 +5,7 @@ pub mod incremental;
 pub mod model;
 pub mod motor;
 pub mod native;
+pub mod search;
 
 pub use binary::{BinaryCase, BinaryCorpus, BinaryExtension, BinaryFixture, BinaryHeader};
 pub use capability::{
@@ -21,4 +22,8 @@ pub use motor::{MotorValue, ProjectedMotor, Projection, RoleTables, RoleTablesIn
 pub use native::{
     DependencyIndex, GeneratedRows, InputMode, LayoutDiagnostics, NativeCorpus, NativeCorpusCounts,
     NativeCorpusHeader, RegularLayout, SchemeFixture, SchemeInput, SchemeState,
+};
+pub use search::{
+    DEFAULT_MAX_PROPOSAL_ATTEMPTS, PROPOSAL_KIND_COUNT, ProposalContext, ProposalError,
+    ProposalKind, ProposalResult, SearchRng, propose, propose_valid, validate_proposal,
 };

@@ -1,7 +1,8 @@
 use ckt_v4_core::{
-    CognitiveParameters, IncrementalResolver, IncrementalSummary, InputMode, KeyAlphabet,
-    LayoutDiagnostics, NativeCorpus, ProjectedMotor, Projection, RegularLayout, RoleTables,
-    SchemeFixture, SchemeState, Summary, composite_score, resolve, summarize,
+    CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, IncrementalResolver, IncrementalSummary,
+    InputMode, KeyAlphabet, LayoutDiagnostics, NativeCorpus, ProjectedMotor, Projection,
+    ProposalContext, ProposalKind, ProposalResult, RegularLayout, RoleTables, SchemeFixture,
+    SchemeState, SearchRng, Summary, composite_score, propose_valid, resolve, summarize,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -14,8 +15,7 @@ use std::time::{Duration, Instant};
 const CHECKPOINT_VERSION: &str = "ckt-v4-native-anneal-8";
 const INCREMENTAL_MAX_FRACTION: f64 = 0.08;
 const INCREMENTAL_MAX_DIRECT_ROWS: usize = 1_024;
-const MAX_PROPOSAL_ATTEMPTS: usize = 256;
-const PROPOSAL_KIND_COUNT: usize = 10;
+const PROPOSAL_KIND_COUNT: usize = ckt_v4_core::PROPOSAL_KIND_COUNT;
 
 struct ModeState {
     mode: InputMode,
@@ -76,98 +76,6 @@ struct LayoutGuards {
     max_memory: Option<usize>,
     max_displaced_initials: Option<usize>,
     max_displaced_vowels: Option<usize>,
-}
-
-struct ProposalContext<'a> {
-    pinyin_map: &'a [[u8; 2]],
-    common_pinyin: &'a [u16],
-    heads: &'a [String],
-    finals: &'a [String],
-    alphabet: &'a KeyAlphabet,
-    guards: LayoutGuards,
-    only_kind: Option<ProposalKind>,
-}
-
-#[derive(Clone, Copy)]
-struct SplitMix64 {
-    state: u64,
-}
-
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
-enum ProposalKind {
-    ToneSlotSwap,
-    ToneKeyReplacement,
-    HeadKeySwap,
-    HeadKeyReplacement,
-    FinalKeySwap,
-    FinalKeyReplacement,
-    HeadGroupMove,
-    HeadGroupSwap,
-    FinalTokenMove,
-    FinalTokenSwap,
-}
-
-impl ProposalKind {
-    const ALL: [Self; PROPOSAL_KIND_COUNT] = [
-        Self::ToneSlotSwap,
-        Self::ToneKeyReplacement,
-        Self::HeadKeySwap,
-        Self::HeadKeyReplacement,
-        Self::FinalKeySwap,
-        Self::FinalKeyReplacement,
-        Self::HeadGroupMove,
-        Self::HeadGroupSwap,
-        Self::FinalTokenMove,
-        Self::FinalTokenSwap,
-    ];
-
-    fn index(self) -> usize {
-        self as usize
-    }
-
-    fn parse(value: &str) -> Result<Self, String> {
-        Self::ALL
-            .into_iter()
-            .find(|kind| kind.label() == value)
-            .ok_or_else(|| format!("unknown proposal kind {value:?}"))
-    }
-
-    fn label(self) -> &'static str {
-        match self {
-            Self::ToneSlotSwap => "tone-slot-swap",
-            Self::ToneKeyReplacement => "tone-key-replacement",
-            Self::HeadKeySwap => "head-key-swap",
-            Self::HeadKeyReplacement => "head-key-replacement",
-            Self::FinalKeySwap => "final-key-swap",
-            Self::FinalKeyReplacement => "final-key-replacement",
-            Self::HeadGroupMove => "head-group-move",
-            Self::HeadGroupSwap => "head-group-swap",
-            Self::FinalTokenMove => "final-token-move",
-            Self::FinalTokenSwap => "final-token-swap",
-        }
-    }
-}
-
-impl SplitMix64 {
-    fn new(seed: u64) -> Self {
-        Self { state: seed }
-    }
-
-    fn next_u64(&mut self) -> u64 {
-        self.state = self.state.wrapping_add(0x9e37_79b9_7f4a_7c15);
-        let mut value = self.state;
-        value = (value ^ (value >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
-        value = (value ^ (value >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
-        value ^ (value >> 31)
-    }
-
-    fn index(&mut self, limit: usize) -> usize {
-        (self.next_u64() % limit as u64) as usize
-    }
-
-    fn unit(&mut self) -> f64 {
-        (self.next_u64() >> 11) as f64 * (1.0 / ((1_u64 << 53) as f64))
-    }
 }
 
 fn main() -> Result<(), String> {
@@ -262,22 +170,27 @@ fn main() -> Result<(), String> {
         checkpoint.best_score = current_score;
         checkpoint.best_layout = checkpoint.current_layout.clone();
     }
-    let mut rng = SplitMix64::new(checkpoint.rng_state);
+    let mut rng = SearchRng::new(checkpoint.rng_state);
     let started = Instant::now();
 
     for iteration in checkpoint.iteration..args.steps {
         let proposal_context = ProposalContext {
             pinyin_map: &fixture.pinyin_map,
             common_pinyin: &fixture.common_pinyin,
-            heads: &fixture.heads,
-            finals: &fixture.finals,
-            alphabet: &alphabet,
-            guards: args.guards,
             only_kind: args.proposal_kind,
+            max_attempts: DEFAULT_MAX_PROPOSAL_ATTEMPTS,
         };
-        let (proposal, proposal_kind, invalid_attempts) =
-            propose_valid(&checkpoint.current_layout, &proposal_context, &mut rng)?;
+        let (proposal_result, invalid_attempts) = propose_guarded(
+            &checkpoint.current_layout,
+            &proposal_context,
+            &fixture,
+            &alphabet,
+            args.guards,
+            &mut rng,
+        )?;
         checkpoint.invalid_proposals += invalid_attempts;
+        let proposal_kind = proposal_result.kind;
+        let proposal = proposal_result.layout;
         checkpoint.proposal_counts[proposal_kind.index()] += 1;
         let proposed_state = fixture.scheme_state(&proposal)?;
         let affected_by_mode = modes
@@ -352,7 +265,7 @@ fn main() -> Result<(), String> {
         }
         checkpoint.iteration = iteration + 1;
         checkpoint.target_steps = args.steps;
-        checkpoint.rng_state = rng.state;
+        checkpoint.rng_state = rng.state();
         checkpoint.current_score = current_score;
 
         if args.verify_every > 0 && checkpoint.iteration % args.verify_every == 0 {
@@ -407,34 +320,25 @@ fn main() -> Result<(), String> {
     Ok(())
 }
 
-fn propose_valid(
+fn propose_guarded(
     current: &RegularLayout,
     context: &ProposalContext<'_>,
-    rng: &mut SplitMix64,
-) -> Result<(RegularLayout, ProposalKind, usize), String> {
-    for invalid_attempts in 0..MAX_PROPOSAL_ATTEMPTS {
-        let kind = context
-            .only_kind
-            .unwrap_or_else(|| ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]);
-        let mut proposal = current.clone();
-        if mutate(&mut proposal, kind, rng).is_ok()
-            && validate_layout_parts(
-                &proposal,
-                context.pinyin_map,
-                context.common_pinyin,
-                context.heads,
-                context.finals,
-                context.alphabet,
-                context.guards,
-            )
-            .is_ok()
-            && proposal != *current
-        {
-            return Ok((proposal, kind, invalid_attempts));
+    fixture: &SchemeFixture,
+    alphabet: &KeyAlphabet,
+    guards: LayoutGuards,
+    rng: &mut SearchRng,
+) -> Result<(ProposalResult, usize), String> {
+    let mut rejected = 0;
+    for _ in 0..DEFAULT_MAX_PROPOSAL_ATTEMPTS {
+        let result = propose_valid(current, context, rng).map_err(|error| error.to_string())?;
+        rejected += result.structural_rejected + result.uniqueness_rejected;
+        if validate_guards(&result.layout, fixture, alphabet, guards).is_ok() {
+            return Ok((result, rejected));
         }
+        rejected += 1;
     }
     Err(format!(
-        "could not generate a legal proposal in {MAX_PROPOSAL_ATTEMPTS} attempts"
+        "could not generate a guard-compliant proposal in {DEFAULT_MAX_PROPOSAL_ATTEMPTS} attempts"
     ))
 }
 
@@ -444,28 +348,17 @@ fn validate_layout(
     alphabet: &KeyAlphabet,
     guards: LayoutGuards,
 ) -> Result<LayoutDiagnostics, String> {
-    validate_layout_parts(
-        layout,
-        &fixture.pinyin_map,
-        &fixture.common_pinyin,
-        &fixture.heads,
-        &fixture.finals,
-        alphabet,
-        guards,
-    )
+    layout.validate(&fixture.pinyin_map, &fixture.common_pinyin)?;
+    validate_guards(layout, fixture, alphabet, guards)
 }
 
-fn validate_layout_parts(
+fn validate_guards(
     layout: &RegularLayout,
-    pinyin_map: &[[u8; 2]],
-    common_pinyin: &[u16],
-    heads: &[String],
-    finals: &[String],
+    fixture: &SchemeFixture,
     alphabet: &KeyAlphabet,
     guards: LayoutGuards,
 ) -> Result<LayoutDiagnostics, String> {
-    layout.validate(pinyin_map, common_pinyin)?;
-    let diagnostics = layout.diagnostics(alphabet, heads, finals)?;
+    let diagnostics = layout.diagnostics(alphabet, &fixture.heads, &fixture.finals)?;
     if guards
         .max_memory
         .is_some_and(|maximum| diagnostics.memory > maximum)
@@ -482,164 +375,6 @@ fn validate_layout_parts(
         ));
     }
     Ok(diagnostics)
-}
-
-fn mutate(
-    layout: &mut RegularLayout,
-    kind: ProposalKind,
-    rng: &mut SplitMix64,
-) -> Result<(), String> {
-    match kind {
-        ProposalKind::ToneSlotSwap => {
-            let left = rng.index(5);
-            let mut right = rng.index(4);
-            if right >= left {
-                right += 1;
-            }
-            layout.swap_tone_slots(left, right)
-        }
-        ProposalKind::ToneKeyReplacement => {
-            let candidates: Vec<_> = (0_u8..34)
-                .filter(|key| {
-                    !layout.tone.contains(key)
-                        && !layout.head_keys.contains(key)
-                        && (layout.capacity != [21, 21] || !layout.final_keys.contains(key))
-                })
-                .collect();
-            if candidates.is_empty() {
-                return Err("no unused auxiliary key is available".to_owned());
-            }
-            layout.replace_tone_key(rng.index(5), candidates[rng.index(candidates.len())])
-        }
-        ProposalKind::HeadKeySwap => {
-            let keys = layout.distinct_head_keys();
-            let (left, right) = distinct_pair(keys.len(), rng)?;
-            layout.swap_head_keys(keys[left], keys[right])
-        }
-        ProposalKind::HeadKeyReplacement => {
-            let keys = layout.distinct_head_keys();
-            let candidates: Vec<_> = (0_u8..34)
-                .filter(|key| !keys.contains(key) && !layout.tone.contains(key))
-                .collect();
-            if candidates.is_empty() {
-                return Err("no unused head key is available".to_owned());
-            }
-            layout.swap_head_keys(
-                keys[rng.index(keys.len())],
-                candidates[rng.index(candidates.len())],
-            )
-        }
-        ProposalKind::FinalKeySwap => {
-            let keys = layout.distinct_final_keys();
-            let (left, right) = distinct_pair(keys.len(), rng)?;
-            layout.swap_final_keys(keys[left], keys[right])
-        }
-        ProposalKind::FinalKeyReplacement => {
-            let keys = layout.distinct_final_keys();
-            let candidates: Vec<_> = (0_u8..34)
-                .filter(|key| {
-                    !keys.contains(key)
-                        && (layout.capacity != [21, 21] || !layout.tone.contains(key))
-                })
-                .collect();
-            if candidates.is_empty() {
-                return Err("no unused final key is available".to_owned());
-            }
-            layout.swap_final_keys(
-                keys[rng.index(keys.len())],
-                candidates[rng.index(candidates.len())],
-            )
-        }
-        ProposalKind::HeadGroupMove => {
-            let groups = head_groups(layout);
-            let group = &groups[rng.index(groups.len())];
-            let current_key = layout.head_keys[group[0]];
-            let keys: Vec<_> = layout
-                .distinct_head_keys()
-                .into_iter()
-                .filter(|&key| key != current_key)
-                .collect();
-            layout.assign_head_tokens(group, keys[rng.index(keys.len())])
-        }
-        ProposalKind::HeadGroupSwap => {
-            let groups = head_groups(layout);
-            let eligible: Vec<_> = (0..groups.len())
-                .filter(|&index| {
-                    groups.iter().any(|other| {
-                        layout.head_keys[other[0]] != layout.head_keys[groups[index][0]]
-                    })
-                })
-                .collect();
-            let left = eligible[rng.index(eligible.len())];
-            let right_candidates: Vec<_> = (0..groups.len())
-                .filter(|&index| {
-                    layout.head_keys[groups[index][0]] != layout.head_keys[groups[left][0]]
-                })
-                .collect();
-            let right = right_candidates[rng.index(right_candidates.len())];
-            layout.swap_head_token_groups(&groups[left], &groups[right])
-        }
-        ProposalKind::FinalTokenMove => {
-            let counts = key_counts(&layout.final_keys);
-            let tokens: Vec<_> = (0..layout.final_keys.len())
-                .filter(|&index| counts[usize::from(layout.final_keys[index])] > 1)
-                .collect();
-            if tokens.is_empty() {
-                return Err("no movable final token is available".to_owned());
-            }
-            let token = tokens[rng.index(tokens.len())];
-            let current_key = layout.final_keys[token];
-            let keys: Vec<_> = layout
-                .distinct_final_keys()
-                .into_iter()
-                .filter(|&key| key != current_key)
-                .collect();
-            layout.assign_final_token(token, keys[rng.index(keys.len())])
-        }
-        ProposalKind::FinalTokenSwap => {
-            let left = rng.index(layout.final_keys.len());
-            let candidates: Vec<_> = (0..layout.final_keys.len())
-                .filter(|&index| layout.final_keys[index] != layout.final_keys[left])
-                .collect();
-            layout.swap_final_tokens(left, candidates[rng.index(candidates.len())])
-        }
-    }
-}
-
-fn distinct_pair(limit: usize, rng: &mut SplitMix64) -> Result<(usize, usize), String> {
-    if limit < 2 {
-        return Err("proposal needs at least two choices".to_owned());
-    }
-    let left = rng.index(limit);
-    let mut right = rng.index(limit - 1);
-    if right >= left {
-        right += 1;
-    }
-    Ok((left, right))
-}
-
-fn key_counts(values: &[u8]) -> [usize; 34] {
-    let mut counts = [0; 34];
-    for &value in values {
-        counts[usize::from(value)] += 1;
-    }
-    counts
-}
-
-fn head_groups(layout: &RegularLayout) -> Vec<Vec<usize>> {
-    let mut groups: Vec<Vec<usize>> = (0..21).map(|index| vec![index]).collect();
-    for index in 21..27 {
-        if let Some(group) = groups
-            .iter_mut()
-            .skip(21)
-            .find(|group| layout.head_keys[group[0]] == layout.head_keys[index])
-        {
-            group.push(index);
-        } else {
-            groups.push(vec![index]);
-        }
-    }
-    groups
 }
 
 fn build_modes(

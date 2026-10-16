@@ -272,6 +272,11 @@ impl RegularLayout {
     }
 
     pub fn validate(&self, pinyin_map: &[[u8; 2]], common_pinyin: &[u16]) -> Result<(), String> {
+        self.validate_structure()?;
+        self.validate_common399(pinyin_map, common_pinyin)
+    }
+
+    pub fn validate_structure(&self) -> Result<(), String> {
         if self.head_keys.len() != 27
             || self.final_keys.len() != 35
             || self
@@ -307,6 +312,14 @@ impl RegularLayout {
                 self.id
             ));
         }
+        Ok(())
+    }
+
+    pub fn validate_common399(
+        &self,
+        pinyin_map: &[[u8; 2]],
+        common_pinyin: &[u16],
+    ) -> Result<(), String> {
         // Under the no-fly convention, only 21x21 and 23x23 cannot make all
         // Common399 syllables unique.  Those two dimensions deliberately let
         // the downstream candidate model price syllable merges; every other
