@@ -4,6 +4,8 @@ use std::fmt;
 
 pub const PROPOSAL_KIND_COUNT: usize = 14;
 pub const DEFAULT_MAX_PROPOSAL_ATTEMPTS: usize = 256;
+pub const NATIVE_ANNEAL_CHECKPOINT_VERSION: &str = "ckt-v4-native-anneal-9";
+pub const NATIVE_PROPOSAL_POLICY: &str = "regular-compound-v1";
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "kebab-case")]
@@ -72,6 +74,38 @@ impl ProposalKind {
             Self::FinalCycleRegroup => "final-cycle-regroup",
         }
     }
+}
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ProposalStats {
+    pub proposed: usize,
+    pub structural_rejected: usize,
+    pub uniqueness_rejected: usize,
+    pub guard_rejected: usize,
+    pub evaluated: usize,
+    pub accepted: usize,
+}
+
+pub fn validate_checkpoint_contract(
+    version: &str,
+    proposal_policy: &str,
+    proposal_order: &[ProposalKind],
+) -> Result<(), String> {
+    if version != NATIVE_ANNEAL_CHECKPOINT_VERSION {
+        return Err(format!(
+            "checkpoint version mismatch: expected {NATIVE_ANNEAL_CHECKPOINT_VERSION}, got {version}"
+        ));
+    }
+    if proposal_policy != NATIVE_PROPOSAL_POLICY {
+        return Err(format!(
+            "checkpoint proposal policy mismatch: expected {NATIVE_PROPOSAL_POLICY}, got {proposal_policy}"
+        ));
+    }
+    if proposal_order != ProposalKind::ALL {
+        return Err("checkpoint proposal order mismatch".to_owned());
+    }
+    Ok(())
 }
 
 #[derive(Clone, Copy, Debug)]

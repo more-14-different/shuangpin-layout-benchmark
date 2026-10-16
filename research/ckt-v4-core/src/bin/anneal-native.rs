@@ -1,8 +1,10 @@
 use ckt_v4_core::{
     CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, IncrementalResolver, IncrementalSummary,
-    InputMode, KeyAlphabet, LayoutDiagnostics, NativeCorpus, ProjectedMotor, Projection,
-    ProposalContext, ProposalKind, ProposalResult, RegularLayout, RoleTables, SchemeFixture,
-    SchemeState, SearchRng, Summary, composite_score, propose_valid, resolve, summarize,
+    InputMode, KeyAlphabet, LayoutDiagnostics, NATIVE_ANNEAL_CHECKPOINT_VERSION,
+    NATIVE_PROPOSAL_POLICY, NativeCorpus, ProjectedMotor, Projection, ProposalContext,
+    ProposalError, ProposalKind, ProposalStats, RegularLayout, RoleTables, SchemeFixture,
+    SchemeState, SearchRng, Summary, composite_score, propose, resolve, summarize,
+    validate_checkpoint_contract, validate_proposal,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -12,7 +14,6 @@ use std::path::{Path, PathBuf};
 use std::thread;
 use std::time::{Duration, Instant};
 
-const CHECKPOINT_VERSION: &str = "ckt-v4-native-anneal-8";
 const INCREMENTAL_MAX_FRACTION: f64 = 0.08;
 const INCREMENTAL_MAX_DIRECT_ROWS: usize = 1_024;
 const PROPOSAL_KIND_COUNT: usize = ckt_v4_core::PROPOSAL_KIND_COUNT;
@@ -34,6 +35,8 @@ struct Checkpoint {
     target_steps: usize,
     temperature: f64,
     proposal_policy: String,
+    proposal_order: [ProposalKind; PROPOSAL_KIND_COUNT],
+    only_proposal: Option<ProposalKind>,
     guards: LayoutGuards,
     rng_state: u64,
     current_score: f64,
@@ -43,7 +46,7 @@ struct Checkpoint {
     incremental_evaluated: usize,
     full_evaluated: usize,
     invalid_proposals: usize,
-    proposal_counts: [usize; PROPOSAL_KIND_COUNT],
+    proposal_stats: [ProposalStats; PROPOSAL_KIND_COUNT],
     direct_rows_total: usize,
     component_rows_total: usize,
     max_direct_rows: usize,
@@ -106,20 +109,18 @@ fn main() -> Result<(), String> {
         .find(|scheme| scheme.id == args.scheme_id)
         .ok_or_else(|| format!("candidate scheme {} is absent", args.scheme_id))?;
     let initial_layout = fixture.compile_layout(input, &alphabet)?;
-    let proposal_policy = args
-        .proposal_kind
-        .map_or_else(|| "expanded".to_owned(), |kind| kind.label().to_owned());
     let mut checkpoint = if args.resume {
-        let value: Checkpoint = serde_json::from_str(
-            &fs::read_to_string(&args.checkpoint).map_err(|error| error.to_string())?,
-        )
-        .map_err(|error| error.to_string())?;
-        if value.version != CHECKPOINT_VERSION
-            || value.scheme_id != args.scheme_id
+        let value = read_checkpoint(&args.checkpoint)?;
+        validate_checkpoint_contract(
+            &value.version,
+            &value.proposal_policy,
+            &value.proposal_order,
+        )?;
+        if value.scheme_id != args.scheme_id
             || value.reference_id != args.reference_id
             || value.target_steps != args.steps
             || value.temperature.to_bits() != args.temperature.to_bits()
-            || value.proposal_policy != proposal_policy
+            || value.only_proposal != args.proposal_kind
             || value.guards != args.guards
         {
             return Err(
@@ -130,13 +131,15 @@ fn main() -> Result<(), String> {
         value
     } else {
         Checkpoint {
-            version: CHECKPOINT_VERSION.to_owned(),
+            version: NATIVE_ANNEAL_CHECKPOINT_VERSION.to_owned(),
             scheme_id: args.scheme_id.clone(),
             reference_id: args.reference_id.clone(),
             iteration: 0,
             target_steps: args.steps,
             temperature: args.temperature,
-            proposal_policy,
+            proposal_policy: NATIVE_PROPOSAL_POLICY.to_owned(),
+            proposal_order: ProposalKind::ALL,
+            only_proposal: args.proposal_kind,
             guards: args.guards,
             rng_state: args.seed,
             current_score: f64::NAN,
@@ -146,7 +149,7 @@ fn main() -> Result<(), String> {
             incremental_evaluated: 0,
             full_evaluated: 0,
             invalid_proposals: 0,
-            proposal_counts: [0; PROPOSAL_KIND_COUNT],
+            proposal_stats: [ProposalStats::default(); PROPOSAL_KIND_COUNT],
             direct_rows_total: 0,
             component_rows_total: 0,
             max_direct_rows: 0,
@@ -186,12 +189,13 @@ fn main() -> Result<(), String> {
             &fixture,
             &alphabet,
             args.guards,
+            &mut checkpoint.proposal_stats,
             &mut rng,
         )?;
         checkpoint.invalid_proposals += invalid_attempts;
-        let proposal_kind = proposal_result.kind;
-        let proposal = proposal_result.layout;
-        checkpoint.proposal_counts[proposal_kind.index()] += 1;
+        let proposal_kind = proposal_result.1;
+        let proposal = proposal_result.0;
+        checkpoint.proposal_stats[proposal_kind.index()].evaluated += 1;
         let proposed_state = fixture.scheme_state(&proposal)?;
         let affected_by_mode = modes
             .iter()
@@ -252,6 +256,7 @@ fn main() -> Result<(), String> {
             current_state = proposed_state;
             current_score = proposed_score;
             checkpoint.accepted += 1;
+            checkpoint.proposal_stats[proposal_kind.index()].accepted += 1;
             if proposed_score < checkpoint.best_score {
                 checkpoint.best_score = proposed_score;
                 checkpoint.best_layout = checkpoint.current_layout.clone();
@@ -313,7 +318,7 @@ fn main() -> Result<(), String> {
         checkpoint.max_direct_rows,
         checkpoint.component_rows_total,
         checkpoint.max_component_rows,
-        checkpoint.proposal_counts,
+        checkpoint.proposal_stats,
         started.elapsed().as_secs_f64(),
         args.checkpoint.display()
     );
@@ -326,15 +331,42 @@ fn propose_guarded(
     fixture: &SchemeFixture,
     alphabet: &KeyAlphabet,
     guards: LayoutGuards,
+    stats: &mut [ProposalStats; PROPOSAL_KIND_COUNT],
     rng: &mut SearchRng,
-) -> Result<(ProposalResult, usize), String> {
+) -> Result<((RegularLayout, ProposalKind), usize), String> {
     let mut rejected = 0;
     for _ in 0..DEFAULT_MAX_PROPOSAL_ATTEMPTS {
-        let result = propose_valid(current, context, rng).map_err(|error| error.to_string())?;
-        rejected += result.structural_rejected + result.uniqueness_rejected;
-        if validate_guards(&result.layout, fixture, alphabet, guards).is_ok() {
-            return Ok((result, rejected));
+        let kind = context
+            .only_kind
+            .unwrap_or_else(|| ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]);
+        stats[kind.index()].proposed += 1;
+        let candidate = match propose(current, kind, rng) {
+            Ok(candidate) => candidate,
+            Err(ProposalError::MutationRejected(_)) => {
+                stats[kind.index()].structural_rejected += 1;
+                rejected += 1;
+                continue;
+            }
+            Err(error) => return Err(error.to_string()),
+        };
+        match validate_proposal(current, &candidate, context) {
+            Ok(()) => {}
+            Err(ProposalError::StructuralRejected(_)) => {
+                stats[kind.index()].structural_rejected += 1;
+                rejected += 1;
+                continue;
+            }
+            Err(ProposalError::UniquenessRejected(_)) => {
+                stats[kind.index()].uniqueness_rejected += 1;
+                rejected += 1;
+                continue;
+            }
+            Err(error) => return Err(error.to_string()),
         }
+        if validate_guards(&candidate, fixture, alphabet, guards).is_ok() {
+            return Ok(((candidate, kind), rejected));
+        }
+        stats[kind.index()].guard_rejected += 1;
         rejected += 1;
     }
     Err(format!(
@@ -490,6 +522,22 @@ fn write_checkpoint(path: &Path, checkpoint: &Checkpoint) -> Result<(), String> 
         fs::remove_file(path).map_err(|error| error.to_string())?;
     }
     fs::rename(&temporary, path).map_err(|error| error.to_string())
+}
+
+fn read_checkpoint(path: &Path) -> Result<Checkpoint, String> {
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let value: serde_json::Value =
+        serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    let version = value
+        .get("version")
+        .and_then(serde_json::Value::as_str)
+        .ok_or("checkpoint has no string version")?;
+    if version != NATIVE_ANNEAL_CHECKPOINT_VERSION {
+        return Err(format!(
+            "checkpoint version mismatch: expected {NATIVE_ANNEAL_CHECKPOINT_VERSION}, got {version}"
+        ));
+    }
+    serde_json::from_value(value).map_err(|error| error.to_string())
 }
 
 fn parse_args() -> Result<Args, String> {

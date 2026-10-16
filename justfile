@@ -12,6 +12,10 @@ ckt-v4-rust-fmt:
 ckt-v4-rust-test:
     cargo test --manifest-path research/ckt-v4-core/Cargo.toml
 
+ckt-v4-search-test:
+    cargo test --manifest-path research/ckt-v4-core/Cargo.toml --test search_proposals
+    cargo test --manifest-path research/ckt-v4-core/Cargo.toml --test anneal_resume
+
 ckt-v4-rust-verify: ckt-v4-fixture ckt-v4-rust-fmt ckt-v4-rust-test
 
 ckt-v4-real-fixture ids="S005,L600":

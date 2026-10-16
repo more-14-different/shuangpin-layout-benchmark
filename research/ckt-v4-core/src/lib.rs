@@ -24,6 +24,8 @@ pub use native::{
     NativeCorpusHeader, RegularLayout, SchemeFixture, SchemeInput, SchemeState,
 };
 pub use search::{
-    DEFAULT_MAX_PROPOSAL_ATTEMPTS, PROPOSAL_KIND_COUNT, ProposalContext, ProposalError,
-    ProposalKind, ProposalResult, SearchRng, propose, propose_valid, validate_proposal,
+    DEFAULT_MAX_PROPOSAL_ATTEMPTS, NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY,
+    PROPOSAL_KIND_COUNT, ProposalContext, ProposalError, ProposalKind, ProposalResult,
+    ProposalStats, SearchRng, propose, propose_valid, validate_checkpoint_contract,
+    validate_proposal,
 };
