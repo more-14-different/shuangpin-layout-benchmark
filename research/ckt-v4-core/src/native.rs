@@ -1,5 +1,5 @@
 use crate::{BinaryExtension, Contract, KeyAlphabet, Kind, PackedCode, Row, Stage, stage_pools};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::{BTreeSet, HashMap};
 use std::fs::File;
 use std::io::{BufReader, Read};
@@ -82,6 +82,10 @@ pub struct SchemeFixture {
     pub version: String,
     pub key_alphabet: String,
     pub source_hashes: HashMap<String, String>,
+    pub heads: Vec<String>,
+    pub finals: Vec<String>,
+    pub pinyin_map: Vec<[u8; 2]>,
+    pub common_pinyin: Vec<u16>,
     pub schemes: Vec<SchemeInput>,
 }
 
@@ -101,6 +105,16 @@ pub struct SchemeState {
     pub contract: Contract,
     codes: Vec<Option<[u8; 2]>>,
     tone: [u8; 5],
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RegularLayout {
+    pub id: String,
+    pub capacity: [u8; 2],
+    pub head_keys: Vec<u8>,
+    pub final_keys: Vec<u8>,
+    pub tone: [u8; 5],
 }
 
 #[derive(Clone, Debug)]
@@ -141,7 +155,230 @@ impl SchemeFixture {
                 fixture.version
             ));
         }
+        if fixture.heads.len() != 27 || fixture.finals.len() != 35 {
+            return Err("scheme fixture must declare 27 heads and 35 finals".to_owned());
+        }
+        if fixture.pinyin_map.is_empty()
+            || fixture
+                .pinyin_map
+                .iter()
+                .any(|pair| *pair != [u8::MAX, u8::MAX] && (pair[0] >= 27 || pair[1] >= 35))
+            || fixture
+                .common_pinyin
+                .iter()
+                .any(|&index| usize::from(index) >= fixture.pinyin_map.len())
+        {
+            return Err("scheme fixture has invalid pinyin topology".to_owned());
+        }
         Ok(fixture)
+    }
+
+    pub fn compile_layout(
+        &self,
+        input: &SchemeInput,
+        alphabet: &KeyAlphabet,
+    ) -> Result<RegularLayout, String> {
+        RegularLayout::compile(input, alphabet, &self.pinyin_map, &self.common_pinyin)
+    }
+
+    pub fn scheme_state(&self, layout: &RegularLayout) -> Result<SchemeState, String> {
+        layout.to_scheme_state(&self.pinyin_map, &self.common_pinyin)
+    }
+}
+
+impl RegularLayout {
+    fn compile(
+        input: &SchemeInput,
+        alphabet: &KeyAlphabet,
+        pinyin_map: &[[u8; 2]],
+        common_pinyin: &[u16],
+    ) -> Result<Self, String> {
+        if input.code_list.len() != pinyin_map.len() {
+            return Err(format!(
+                "{} has {} codes, expected {}",
+                input.id,
+                input.code_list.len(),
+                pinyin_map.len()
+            ));
+        }
+        let mut head_keys = vec![u8::MAX; 27];
+        let mut final_keys = vec![u8::MAX; 35];
+        // The historical 67-token optimizer derives its state from Common399.
+        // Non-common spellings may retain compatibility branches or null codes
+        // and therefore must not redefine the regular head/final mapping.
+        for &pinyin_index in common_pinyin {
+            let index = usize::from(pinyin_index);
+            let code = &input.code_list[index];
+            let [head, final_index] = pinyin_map[index];
+            if [head, final_index] == [u8::MAX, u8::MAX] {
+                continue;
+            }
+            let Some(code) = code else { continue };
+            let values: Vec<_> = alphabet.pack(code)?.indices().collect();
+            let [first, second]: [u8; 2] = values
+                .try_into()
+                .map_err(|_| format!("{} contains a non-two-key pinyin code {code:?}", input.id))?;
+            assign_consistent(
+                &mut head_keys[usize::from(head)],
+                first,
+                &format!("head {head} at pinyin {index}"),
+                &input.id,
+            )?;
+            assign_consistent(
+                &mut final_keys[usize::from(final_index)],
+                second,
+                &format!("final {final_index} at pinyin {index}"),
+                &input.id,
+            )?;
+        }
+        if head_keys.contains(&u8::MAX) || final_keys.contains(&u8::MAX) {
+            return Err(format!(
+                "{} does not cover all regular heads/finals",
+                input.id
+            ));
+        }
+        let tone_values: Vec<_> = input
+            .tone
+            .chars()
+            .map(|key| {
+                alphabet
+                    .index_of(key)
+                    .ok_or_else(|| format!("{} has an unknown tone key {key:?}", input.id))
+            })
+            .collect::<Result<_, _>>()?;
+        let tone: [u8; 5] = tone_values
+            .try_into()
+            .map_err(|_| format!("{} must have exactly five tone/shape keys", input.id))?;
+        let layout = Self {
+            id: input.id.clone(),
+            capacity: input.capacity,
+            head_keys,
+            final_keys,
+            tone,
+        };
+        layout.validate(pinyin_map, common_pinyin)?;
+        Ok(layout)
+    }
+
+    pub fn validate(&self, pinyin_map: &[[u8; 2]], common_pinyin: &[u16]) -> Result<(), String> {
+        if self.head_keys.len() != 27
+            || self.final_keys.len() != 35
+            || self
+                .head_keys
+                .iter()
+                .chain(&self.final_keys)
+                .chain(&self.tone)
+                .any(|&key| key >= 34)
+        {
+            return Err(format!("{} has an invalid regular state", self.id));
+        }
+        let head_set: BTreeSet<_> = self.head_keys.iter().copied().collect();
+        let final_set: BTreeSet<_> = self.final_keys.iter().copied().collect();
+        let tone_set: BTreeSet<_> = self.tone.iter().copied().collect();
+        if head_set.len() != usize::from(self.capacity[0])
+            || final_set.len() != usize::from(self.capacity[1])
+        {
+            return Err(format!(
+                "{} capacity mismatch: {}x{} declared {}x{}",
+                self.id,
+                head_set.len(),
+                final_set.len(),
+                self.capacity[0],
+                self.capacity[1]
+            ));
+        }
+        if tone_set.len() != 5 || !head_set.is_disjoint(&tone_set) {
+            return Err(format!("{} has invalid auxiliary/head overlap", self.id));
+        }
+        // Under the no-fly convention, only 21x21 and 23x23 cannot make all
+        // Common399 syllables unique.  Those two dimensions deliberately let
+        // the downstream candidate model price syllable merges; every other
+        // dimension must satisfy Common399 uniqueness before it is scored.
+        let allows_common_collisions = matches!(self.capacity, [21, 21] | [23, 23]);
+        if !allows_common_collisions {
+            let mut seen = BTreeSet::new();
+            for &index in common_pinyin {
+                let [head, final_index] = *pinyin_map
+                    .get(usize::from(index))
+                    .ok_or("common pinyin index is outside topology")?;
+                if [head, final_index] == [u8::MAX, u8::MAX] {
+                    return Err("common pinyin is outside the regular topology".to_owned());
+                }
+                let code = (
+                    self.head_keys[usize::from(head)],
+                    self.final_keys[usize::from(final_index)],
+                );
+                if !seen.insert(code) {
+                    return Err(format!("{} collides within common pinyin", self.id));
+                }
+            }
+        }
+        Ok(())
+    }
+
+    pub fn swap_head_keys(&mut self, left: u8, right: u8) -> Result<(), String> {
+        swap_key_labels(&mut self.head_keys, left, right)
+    }
+
+    pub fn swap_final_keys(&mut self, left: u8, right: u8) -> Result<(), String> {
+        swap_key_labels(&mut self.final_keys, left, right)
+    }
+
+    pub fn swap_tone_slots(&mut self, left: usize, right: usize) -> Result<(), String> {
+        if left >= 5 || right >= 5 || left == right {
+            return Err("tone-slot swap needs two distinct indices in 0..5".to_owned());
+        }
+        self.tone.swap(left, right);
+        Ok(())
+    }
+
+    pub fn distinct_head_keys(&self) -> Vec<u8> {
+        self.head_keys
+            .iter()
+            .copied()
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .collect()
+    }
+
+    pub fn distinct_final_keys(&self) -> Vec<u8> {
+        self.final_keys
+            .iter()
+            .copied()
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .collect()
+    }
+
+    fn to_scheme_state(
+        &self,
+        pinyin_map: &[[u8; 2]],
+        common_pinyin: &[u16],
+    ) -> Result<SchemeState, String> {
+        self.validate(pinyin_map, common_pinyin)?;
+        let codes = pinyin_map
+            .iter()
+            .map(|[head, final_index]| {
+                if [*head, *final_index] == [u8::MAX, u8::MAX] {
+                    return None;
+                }
+                Some([
+                    self.head_keys[usize::from(*head)],
+                    self.final_keys[usize::from(*final_index)],
+                ])
+            })
+            .collect();
+        Ok(SchemeState {
+            id: self.id.clone(),
+            capacity: self.capacity,
+            contract: if self.capacity == [21, 21] {
+                Contract::Traditional21x21
+            } else {
+                Contract::FourCodeTop
+            },
+            codes,
+            tone: self.tone,
+        })
     }
 }
 
@@ -677,6 +914,38 @@ fn append(base: &[u8], suffix: &[u8]) -> Vec<u8> {
     result
 }
 
+fn assign_consistent(target: &mut u8, value: u8, label: &str, id: &str) -> Result<(), String> {
+    if *target == u8::MAX || *target == value {
+        *target = value;
+        Ok(())
+    } else {
+        Err(format!(
+            "{id} is not regular: {label} maps to multiple keys"
+        ))
+    }
+}
+
+fn swap_key_labels(values: &mut [u8], left: u8, right: u8) -> Result<(), String> {
+    if left >= 34 || right >= 34 || left == right {
+        return Err("key-label swap needs two distinct keys in the 34-key domain".to_owned());
+    }
+    let mut changed = false;
+    for value in values {
+        if *value == left {
+            *value = right;
+            changed = true;
+        } else if *value == right {
+            *value = left;
+            changed = true;
+        }
+    }
+    if changed {
+        Ok(())
+    } else {
+        Err("key-label swap does not touch the layout".to_owned())
+    }
+}
+
 fn make_stages(
     alphabet: &KeyAlphabet,
     contract: Contract,
@@ -808,4 +1077,38 @@ fn read_string_u16<R: Read>(reader: &mut R) -> Result<String, String> {
         .read_exact(&mut bytes)
         .map_err(|error| error.to_string())?;
     String::from_utf8(bytes).map_err(|error| error.to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::RegularLayout;
+
+    fn colliding_layout(capacity: [u8; 2]) -> (RegularLayout, Vec<[u8; 2]>, Vec<u16>) {
+        let head_capacity = usize::from(capacity[0]);
+        let final_capacity = usize::from(capacity[1]);
+        let layout = RegularLayout {
+            id: format!("{}x{}", capacity[0], capacity[1]),
+            capacity,
+            head_keys: (0..27).map(|index| (index % head_capacity) as u8).collect(),
+            final_keys: (0..35)
+                .map(|index| (index % final_capacity) as u8)
+                .collect(),
+            tone: [29, 30, 31, 32, 33],
+        };
+        let topology = vec![[0, 0], [capacity[0], capacity[1]]];
+        (layout, topology, vec![0, 1])
+    }
+
+    #[test]
+    fn only_no_fly_21x21_and_23x23_allow_common399_collisions() {
+        for capacity in [[21, 21], [23, 23]] {
+            let (layout, topology, common) = colliding_layout(capacity);
+            layout.validate(&topology, &common).unwrap();
+        }
+
+        for capacity in [[21, 26], [21, 28], [25, 30]] {
+            let (layout, topology, common) = colliding_layout(capacity);
+            assert!(layout.validate(&topology, &common).is_err());
+        }
+    }
 }

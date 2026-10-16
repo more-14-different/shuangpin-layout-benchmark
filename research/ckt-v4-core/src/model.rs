@@ -1,4 +1,5 @@
 use crate::compact::PackedCode;
+use crate::incremental::OutcomeChange;
 use serde::{Deserialize, Serialize};
 use std::cmp::Ordering;
 use std::collections::{HashMap, HashSet};
@@ -169,10 +170,133 @@ pub struct Summary {
     tracks: [Option<TrackSummary>; 4],
 }
 
+#[derive(Clone, Copy, Debug, Default)]
+struct TrackAccumulator {
+    count: usize,
+    total_weight: f64,
+    motor: f64,
+    cognitive: f64,
+    first_aux: f64,
+    second_aux: f64,
+    selection: f64,
+    rank: f64,
+    keys: f64,
+}
+
+#[derive(Clone, Debug)]
+pub struct IncrementalSummary {
+    tracks: [TrackAccumulator; 4],
+    parameters: CognitiveParameters,
+}
+
 impl Summary {
     pub fn track(&self, kind: Kind) -> Option<&TrackSummary> {
         self.tracks[kind.index()].as_ref()
     }
+}
+
+impl IncrementalSummary {
+    pub fn new(
+        rows: &[Row],
+        outcomes: &[Outcome],
+        parameters: CognitiveParameters,
+    ) -> Result<Self, String> {
+        if rows.len() != outcomes.len() {
+            return Err("rows/outcomes length mismatch".to_owned());
+        }
+        let mut result = Self {
+            tracks: [TrackAccumulator::default(); 4],
+            parameters,
+        };
+        for outcome in outcomes {
+            let row = rows
+                .get(outcome.row_index)
+                .ok_or("outcome row index is outside rows")?;
+            result.tracks[row.kind.index()].add(row, outcome, parameters, 1.0);
+        }
+        Ok(result)
+    }
+
+    pub fn apply_changes(&mut self, rows: &[Row], changes: &[OutcomeChange]) -> Result<(), String> {
+        for change in changes {
+            let row = rows
+                .get(change.row_index)
+                .ok_or("outcome change row index is outside rows")?;
+            let track = &mut self.tracks[row.kind.index()];
+            track.add(row, &change.old, self.parameters, -1.0);
+            track.add(row, &change.new, self.parameters, 1.0);
+        }
+        Ok(())
+    }
+
+    pub fn summary(&self) -> Summary {
+        let mut summary = Summary::default();
+        for kind in Kind::ALL {
+            let track = self.tracks[kind.index()];
+            if track.count == 0 || track.total_weight <= 0.0 {
+                continue;
+            }
+            let total = track.total_weight;
+            summary.tracks[kind.index()] = Some(TrackSummary {
+                count: track.count,
+                total_weight: total,
+                motor_upper_ms: track.motor / total,
+                cognitive_ms: track.cognitive / total,
+                effective_ms: (track.motor + track.cognitive) / total,
+                first_aux_rate: track.first_aux / total,
+                second_aux_rate: track.second_aux / total,
+                selection_rate: track.selection / total,
+                mean_terminal_rank: track.rank / total,
+                mean_keys: track.keys / total,
+            });
+        }
+        summary
+    }
+}
+
+impl TrackAccumulator {
+    fn add(&mut self, row: &Row, outcome: &Outcome, p: CognitiveParameters, sign: f64) {
+        let weight = row.weight * sign;
+        let cognitive = cognitive_ms(outcome, p);
+        self.motor += weight * outcome.motor_upper_ms;
+        self.cognitive += weight * cognitive;
+        self.first_aux += weight * f64::from(outcome.aux_count >= 1);
+        self.second_aux += weight * f64::from(outcome.aux_count >= 2);
+        self.selection += weight * f64::from(outcome.rank > 1);
+        self.rank += weight * outcome.rank as f64;
+        self.keys += weight * f64::from(outcome.code_length);
+        if sign > 0.0 {
+            self.count += 1;
+            self.total_weight += row.weight;
+        } else {
+            self.count -= 1;
+            self.total_weight -= row.weight;
+        }
+    }
+}
+
+fn cognitive_ms(outcome: &Outcome, p: CognitiveParameters) -> f64 {
+    let first = if outcome.aux_count >= 1 {
+        p.first_aux_ms
+    } else {
+        0.0
+    };
+    let second = if outcome.aux_count >= 2 {
+        p.second_aux_ms
+    } else {
+        0.0
+    };
+    let selection = if outcome.rank > 1 {
+        let page_size = p.page_size.max(2);
+        let inspected = (outcome.rank - 1).min(page_size - 1) as f64;
+        p.selection_decision_ms
+            + inspected * p.scan_per_candidate_ms
+            + p.selection_action_ms
+            + ((outcome.rank - 1) / page_size) as f64 * p.page_action_ms
+    } else {
+        0.0
+    };
+    first + second + selection
 }
 
 #[derive(Clone, Copy)]
@@ -358,29 +482,10 @@ pub fn summarize(
         };
         for out in selected {
             let weight = rows[out.row_index].weight;
-            let first = if out.aux_count >= 1 {
-                p.first_aux_ms
-            } else {
-                0.0
-            };
-            let second = if out.aux_count >= 2 {
-                p.second_aux_ms
-            } else {
-                0.0
-            };
-            let selection = if out.rank > 1 {
-                let page_size = p.page_size.max(2);
-                let inspected = (out.rank - 1).min(page_size - 1) as f64;
-                p.selection_decision_ms
-                    + inspected * p.scan_per_candidate_ms
-                    + p.selection_action_ms
-                    + ((out.rank - 1) / page_size) as f64 * p.page_action_ms
-            } else {
-                0.0
-            };
+            let cognition = cognitive_ms(out, p);
             track.total_weight += weight;
             track.motor_upper_ms += weight * out.motor_upper_ms;
-            track.cognitive_ms += weight * (first + second + selection);
+            track.cognitive_ms += weight * cognition;
             track.first_aux_rate += weight * f64::from(out.aux_count >= 1);
             track.second_aux_rate += weight * f64::from(out.aux_count >= 2);
             track.selection_rate += weight * f64::from(out.rank > 1);

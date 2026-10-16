@@ -10,6 +10,20 @@ type MotorCost = dyn Fn(PackedCode) -> Option<f64> + Send + Sync;
 pub struct UpdateReceipt {
     old_rows: Vec<(usize, Row)>,
     pub affected_rows: usize,
+    outcome_changes: Vec<OutcomeChange>,
+}
+
+#[derive(Clone, Debug)]
+pub struct OutcomeChange {
+    pub row_index: usize,
+    pub old: Outcome,
+    pub new: Outcome,
+}
+
+impl UpdateReceipt {
+    pub fn outcome_changes(&self) -> &[OutcomeChange] {
+        &self.outcome_changes
+    }
 }
 
 pub struct IncrementalResolver {
@@ -111,6 +125,7 @@ impl IncrementalResolver {
             return Ok(UpdateReceipt {
                 old_rows: Vec::new(),
                 affected_rows: 0,
+                outcome_changes: Vec::new(),
             });
         }
         let mut seen = HashSet::new();
@@ -178,19 +193,25 @@ impl IncrementalResolver {
             .map(|&index| self.rows[index].clone())
             .collect();
         let resolved = resolve(&subset, |code| (self.motor_cost)(code))?;
+        let mut outcome_changes = Vec::with_capacity(indices.len());
         for (mut outcome, &global_index) in resolved.into_iter().zip(&indices) {
             outcome.row_index = global_index;
+            outcome_changes.push(OutcomeChange {
+                row_index: global_index,
+                old: self.outcomes[global_index].clone(),
+                new: outcome.clone(),
+            });
             self.outcomes[global_index] = outcome;
         }
         Ok(UpdateReceipt {
             old_rows,
             affected_rows: indices.len(),
+            outcome_changes,
         })
     }
 
-    pub fn rollback(&mut self, receipt: UpdateReceipt) -> Result<usize, String> {
-        let rollback = self.apply_updates(receipt.old_rows)?;
-        Ok(rollback.affected_rows)
+    pub fn rollback(&mut self, receipt: UpdateReceipt) -> Result<UpdateReceipt, String> {
+        self.apply_updates(receipt.old_rows)
     }
 
     pub fn verify_against_full_recompute(&self) -> Result<(), String> {

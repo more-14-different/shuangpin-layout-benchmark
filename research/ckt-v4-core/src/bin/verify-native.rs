@@ -1,6 +1,7 @@
 use ckt_v4_core::{
-    BinaryFixture, IncrementalResolver, InputMode, KeyAlphabet, NativeCorpus, ProjectedMotor,
-    Projection, RoleTables, SchemeFixture, SchemeState,
+    BinaryFixture, CognitiveParameters, IncrementalResolver, IncrementalSummary, InputMode,
+    KeyAlphabet, Kind, NativeCorpus, ProjectedMotor, Projection, RoleTables, SchemeFixture,
+    SchemeState, Summary, summarize,
 };
 use std::collections::{HashMap, HashSet};
 use std::env;
@@ -51,8 +52,17 @@ fn main() -> Result<(), String> {
         .schemes
         .iter()
         .map(|input| {
-            SchemeState::compile(input, &alphabet, corpus.header().pinyin_count)
-                .map(|scheme| (scheme.id.clone(), scheme))
+            let scheme = match schemes.compile_layout(input, &alphabet) {
+                Ok(layout) => {
+                    println!("reconstructed regular state for {}", input.id);
+                    schemes.scheme_state(&layout)?
+                }
+                Err(reason) => {
+                    println!("using direct state for non-regular {}: {reason}", input.id);
+                    SchemeState::compile(input, &alphabet, corpus.header().pinyin_count)?
+                }
+            };
+            Ok::<_, String>((scheme.id.clone(), scheme))
         })
         .collect::<Result<_, _>>()?;
 
@@ -186,18 +196,60 @@ fn verify_incremental_swap(
     let mut resolver = IncrementalResolver::new(generated.rows, move |code| {
         incremental_motor.cost(code).map(|value| value.upper_ms)
     })?;
+    let parameters = CognitiveParameters::default();
+    let mut summary = IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)?;
     let receipt = resolver.apply_updates(updates)?;
+    summary.apply_changes(resolver.rows(), receipt.outcome_changes())?;
+    compare_summaries(
+        &summary.summary(),
+        &summarize(resolver.rows(), resolver.outcomes(), parameters)?,
+    )?;
     resolver.verify_against_full_recompute()?;
     if resolver.rows() != replacement.rows {
         return Err("incremental rows differ from native full regeneration".to_owned());
     }
     let directly_changed = affected.len();
     let collision_component = receipt.affected_rows;
-    resolver.rollback(receipt)?;
+    let rollback = resolver.rollback(receipt)?;
+    summary.apply_changes(resolver.rows(), rollback.outcome_changes())?;
+    compare_summaries(
+        &summary.summary(),
+        &summarize(resolver.rows(), resolver.outcomes(), parameters)?,
+    )?;
     resolver.verify_against_full_recompute()?;
     println!(
         "verified native pinyin swap {left}<->{right}: {directly_changed} direct rows in {:.3} ms, {collision_component} collision-component rows",
         update_elapsed.as_secs_f64() * 1000.0
     );
+    Ok(())
+}
+
+fn compare_summaries(left: &Summary, right: &Summary) -> Result<(), String> {
+    for kind in Kind::ALL {
+        let left = left
+            .track(kind)
+            .ok_or("incremental summary misses a track")?;
+        let right = right.track(kind).ok_or("full summary misses a track")?;
+        if left.count != right.count {
+            return Err(format!("incremental summary count differs for {kind:?}"));
+        }
+        for (a, b) in [
+            (left.total_weight, right.total_weight),
+            (left.motor_upper_ms, right.motor_upper_ms),
+            (left.cognitive_ms, right.cognitive_ms),
+            (left.effective_ms, right.effective_ms),
+            (left.first_aux_rate, right.first_aux_rate),
+            (left.second_aux_rate, right.second_aux_rate),
+            (left.selection_rate, right.selection_rate),
+            (left.mean_terminal_rank, right.mean_terminal_rank),
+            (left.mean_keys, right.mean_keys),
+        ] {
+            if (a - b).abs() > 1e-8_f64.max(b.abs() * 1e-11) {
+                return Err(format!(
+                    "incremental summary differs for {kind:?}: {a} != {b}"
+                ));
+            }
+        }
+    }
     Ok(())
 }
