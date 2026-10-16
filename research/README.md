@@ -22,6 +22,8 @@ The migration boundary is API-based:
   840-scheme regular-topology boundary and its source hash;
 - `notes/2026-10-16-ckt-v4-phase6-frontier-format.md` specifies append-only
   candidate recovery and deterministic exact CKT/M/D/V Pareto merging;
+- `notes/2026-10-17-ckt-v4-phase6-ergonomic-provenance.md` freezes the R11
+  20-track loads and MX34 numerical contract, hashes, units and formal gates;
 - `.cache/` holds restored replay packages and large cross-language fixtures;
 - `checkpoints/` holds resumable annealing state.
 
@@ -33,3 +35,5 @@ Run `just ckt-v4-capability-audit` to rebuild the ignored all-scheme fixture and
 capability JSON and to assert the documented regular/special topology boundary.
 Run `just ckt-v4-frontier-smoke` for a real 21x26 archive/merge path, and
 `just ckt-v4-frontier-memory-smoke` for the bounded-writer-history assertion.
+Run `just ckt-v4-ergonomic-smoke` to prove exact load/MX reproduction,
+CKT-only trajectory preservation, guarded rejection and schema-aware merging.
