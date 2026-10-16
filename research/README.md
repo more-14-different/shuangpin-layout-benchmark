@@ -18,9 +18,14 @@ The migration boundary is API-based:
   neighborhood, optional M/D/V guards and topology capability boundary;
 - `notes/2026-10-16-ckt-v4-phase6-regular-frontier-design.md` specifies the
   phase-6 regular-topology capability audit, compound moves and Pareto boundary;
+- `notes/2026-10-16-ckt-v4-phase6-capability-audit.md` records the reproducible
+  840-scheme regular-topology boundary and its source hash;
 - `.cache/` holds restored replay packages and large cross-language fixtures;
 - `checkpoints/` holds resumable annealing state.
 
 Both `.cache/` and `checkpoints/` are ignored. The first 21×21/21×26 CPU
 annealer now calls the Rust core here; old v3 scripts in Snow Pinyin are
 historical evidence, not the place for new v4 algorithm changes.
+
+Run `just ckt-v4-capability-audit` to rebuild the ignored all-scheme fixture and
+capability JSON and to assert the documented regular/special topology boundary.
