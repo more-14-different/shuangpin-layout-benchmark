@@ -2,6 +2,7 @@ pub mod binary;
 pub mod capability;
 pub mod compact;
 pub mod ergonomics;
+pub mod explorer;
 pub mod frontier;
 pub mod frontier_log;
 pub mod incremental;
@@ -20,6 +21,11 @@ pub use compact::{KeyAlphabet, PackedCode};
 pub use ergonomics::{
     ErgonomicFixture, ErgonomicGuards, ExpectedErgonomics, LoadDiagnostics, TokenLoadModel,
     TrackRoles,
+};
+pub use explorer::{
+    EXPLORATION_ARCHIVE_VERSION, EXPLORATION_PLAN_VERSION, ExplorationArchive, ExplorationBatch,
+    ExplorationConfig, ExplorationEntry, ExplorationPlan, ReviewCandidate, SeedRecommendation,
+    layout_distance, layout_state_bytes, layout_state_key, update_and_plan,
 };
 pub use frontier::{
     ErgonomicFrontierMetrics, ErgonomicMetricSchema, ExactFrontier, FrontierMetrics, FrontierPoint,

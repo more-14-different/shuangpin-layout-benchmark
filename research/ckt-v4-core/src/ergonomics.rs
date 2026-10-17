@@ -77,6 +77,7 @@ pub struct ErgonomicGuards {
     pub max_rp: Option<f64>,
     pub max_w: Option<f64>,
     pub max_y: Option<f64>,
+    pub min_home_floor: Option<f64>,
     pub min_mx_score: Option<f64>,
 }
 
@@ -86,6 +87,7 @@ impl ErgonomicGuards {
             && self.max_rp.is_none()
             && self.max_w.is_none()
             && self.max_y.is_none()
+            && self.min_home_floor.is_none()
             && self.min_mx_score.is_none()
     }
 
@@ -124,6 +126,16 @@ impl ErgonomicGuards {
                 "Y peak load {} exceeds guard {}",
                 loads.y_max,
                 self.max_y.unwrap_or_default()
+            ));
+        }
+        if self
+            .min_home_floor
+            .is_some_and(|limit| loads.home_floor < limit)
+        {
+            return Err(format!(
+                "home-row floor {} is below guard {}",
+                loads.home_floor,
+                self.min_home_floor.unwrap_or_default()
             ));
         }
         if let Some(limit) = self.min_mx_score {

@@ -1,15 +1,16 @@
 use ckt_v4_core::{
     CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, ErgonomicFixture, ErgonomicFrontierMetrics,
-    ErgonomicGuards, ErgonomicMetricSchema, FrontierLogProvenance, FrontierLogWriter,
-    FrontierMetrics, FrontierPoint, IncrementalResolver, IncrementalSummary, InputMode,
-    KeyAlphabet, LayoutDiagnostics, MetricVerification, MovingHandCorpus,
+    ErgonomicGuards, ErgonomicMetricSchema, ExplorationArchive, FrontierLogProvenance,
+    FrontierLogWriter, FrontierMetrics, FrontierPoint, IncrementalResolver, IncrementalSummary,
+    InputMode, KeyAlphabet, LayoutDiagnostics, MetricVerification, MovingHandCorpus,
     NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY, NativeCorpus, ProjectedMotor,
     Projection, ProposalContext, ProposalError, ProposalKind, ProposalStats, RegularLayout,
     RoleTables, SchemeFixture, SchemeState, SearchRng, Summary, canonical_layout_bytes,
-    composite_score, propose, resolve, summarize, validate_checkpoint_contract, validate_proposal,
+    composite_score, layout_state_key, propose, resolve, summarize, validate_checkpoint_contract,
+    validate_proposal,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -40,6 +41,7 @@ struct GuardContext<'a> {
     layout: LayoutGuards,
     ergonomic: Option<&'a ErgonomicRuntime>,
     ergonomic_guards: ErgonomicGuards,
+    explored_states: &'a BTreeSet<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -57,6 +59,8 @@ struct Checkpoint {
     guards: LayoutGuards,
     ergonomic_guards: ErgonomicGuards,
     ergonomic_contract: Option<String>,
+    exploration_archive_generation: Option<usize>,
+    chain_explored_states: BTreeSet<String>,
     rng_state: u64,
     current_score: f64,
     best_score: f64,
@@ -95,6 +99,8 @@ struct Args {
     ergonomic_guards: ErgonomicGuards,
     mx_corpus: String,
     mx_variant: String,
+    initial_layout: Option<PathBuf>,
+    avoid_archive: Option<PathBuf>,
     resume: bool,
 }
 
@@ -109,6 +115,7 @@ struct LayoutGuards {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum RecordMode {
     Accepted,
+    Evaluated,
     Leaders,
 }
 
@@ -129,6 +136,8 @@ fn main() -> Result<(), String> {
     let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
     let ergonomic = load_ergonomic_runtime(&args, &fixture)?;
     let ergonomic_contract = ergonomic.as_ref().map(|runtime| runtime.contract.clone());
+    let (archive_states, exploration_archive_generation) =
+        load_exploration_archive(args.avoid_archive.as_deref(), &fixture)?;
     let motor = load_motor(&corpus, &alphabet, &args.snapshot)?;
     let parameters = CognitiveParameters::default();
 
@@ -146,7 +155,18 @@ fn main() -> Result<(), String> {
         .iter()
         .find(|scheme| scheme.id == args.scheme_id)
         .ok_or_else(|| format!("candidate scheme {} is absent", args.scheme_id))?;
-    let initial_layout = fixture.compile_layout(input, &alphabet)?;
+    let initial_layout = if let Some(path) = &args.initial_layout {
+        if args.resume {
+            return Err("--initial-layout cannot be combined with --resume".to_owned());
+        }
+        let layout = read_initial_layout(path)?;
+        if layout.capacity != input.capacity {
+            return Err("initial layout capacity differs from the scheme template".to_owned());
+        }
+        layout
+    } else {
+        fixture.compile_layout(input, &alphabet)?
+    };
     let mut checkpoint = if args.resume {
         let value = read_checkpoint(&args.checkpoint)?;
         validate_checkpoint_contract(
@@ -162,6 +182,7 @@ fn main() -> Result<(), String> {
             || value.guards != args.guards
             || value.ergonomic_guards != args.ergonomic_guards
             || value.ergonomic_contract != ergonomic_contract
+            || value.exploration_archive_generation != exploration_archive_generation
         {
             return Err(
                 "checkpoint does not match scheme, reference, schedule, proposal, or guards"
@@ -183,6 +204,8 @@ fn main() -> Result<(), String> {
             guards: args.guards,
             ergonomic_guards: args.ergonomic_guards,
             ergonomic_contract: ergonomic_contract.clone(),
+            exploration_archive_generation,
+            chain_explored_states: BTreeSet::new(),
             rng_state: args.seed,
             current_score: f64::NAN,
             best_score: f64::INFINITY,
@@ -208,6 +231,12 @@ fn main() -> Result<(), String> {
         ergonomic.as_ref(),
         args.ergonomic_guards,
     )?;
+    let current_state_key = layout_state_key(&checkpoint.current_layout);
+    checkpoint
+        .chain_explored_states
+        .insert(current_state_key.clone());
+    let mut explored_states = archive_states;
+    explored_states.extend(checkpoint.chain_explored_states.iter().cloned());
     validate_ergonomic_guards(
         &checkpoint.best_layout,
         &fixture,
@@ -272,6 +301,7 @@ fn main() -> Result<(), String> {
                 layout: args.guards,
                 ergonomic: ergonomic.as_ref(),
                 ergonomic_guards: args.ergonomic_guards,
+                explored_states: &explored_states,
             },
             &mut checkpoint.proposal_stats,
             &mut rng,
@@ -333,6 +363,14 @@ fn main() -> Result<(), String> {
             &alphabet,
             ergonomic.as_ref(),
         )?;
+        let proposed_state_key = layout_state_key(&proposal);
+        explored_states.insert(proposed_state_key.clone());
+        checkpoint.chain_explored_states.insert(proposed_state_key);
+        if args.record_mode == RecordMode::Evaluated
+            && let Some(writer) = frontier_writer.as_mut()
+        {
+            writer.append(&frontier_point)?;
+        }
         if args.record_mode == RecordMode::Leaders
             && diagnostic_leaders.consider(&frontier_point)
             && let Some(writer) = frontier_writer.as_mut()
@@ -471,6 +509,9 @@ fn propose_guarded(
             guard_context.layout,
         )
         .is_ok()
+            && !guard_context
+                .explored_states
+                .contains(&layout_state_key(&candidate))
             && validate_ergonomic_guards(
                 &candidate,
                 guard_context.schemes,
@@ -695,7 +736,7 @@ fn leader_values(point: &FrontierPoint, schema: ErgonomicMetricSchema) -> Vec<f6
     ];
     if schema.loads == Some(MetricVerification::Exact) {
         let loads = metrics.ergonomics.expect("exact load metrics").loads;
-        values.extend([loads.rp_max, loads.w_max, loads.y_max]);
+        values.extend([loads.rp_max, loads.w_max, loads.y_max, -loads.home_floor]);
     }
     if schema.moving_hand == Some(MetricVerification::Exact) {
         values.push(
@@ -839,6 +880,40 @@ fn load_motor(
     ProjectedMotor::new(native, projections)
 }
 
+fn read_initial_layout(path: &Path) -> Result<RegularLayout, String> {
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let value: serde_json::Value =
+        serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    if let Ok(layout) = serde_json::from_value::<RegularLayout>(value.clone()) {
+        return Ok(layout);
+    }
+    value
+        .get("layout")
+        .cloned()
+        .ok_or("initial layout file is neither a layout nor a frontier point".to_owned())
+        .and_then(|layout| serde_json::from_value(layout).map_err(|error| error.to_string()))
+}
+
+fn load_exploration_archive(
+    path: Option<&Path>,
+    fixture: &SchemeFixture,
+) -> Result<(BTreeSet<String>, Option<usize>), String> {
+    let Some(path) = path else {
+        return Ok((BTreeSet::new(), None));
+    };
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let archive: ExplorationArchive =
+        serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    archive.validate()?;
+    for entry in &archive.entries {
+        entry
+            .point
+            .layout
+            .validate(&fixture.pinyin_map, &fixture.common_pinyin)?;
+    }
+    Ok((archive.state_keys(), Some(archive.generation)))
+}
+
 fn write_checkpoint(path: &Path, checkpoint: &Checkpoint) -> Result<(), String> {
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent).map_err(|error| error.to_string())?;
@@ -899,6 +974,8 @@ fn parse_args() -> Result<Args, String> {
         ergonomic_guards: ErgonomicGuards::default(),
         mx_corpus: "daily".to_owned(),
         mx_variant: "native-punctuation".to_owned(),
+        initial_layout: None,
+        avoid_archive: None,
         resume: false,
     };
     while let Some(flag) = values.next() {
@@ -931,6 +1008,7 @@ fn parse_args() -> Result<Args, String> {
             "--record" => {
                 result.record_mode = match values.next().ok_or("--record needs a value")?.as_str() {
                     "accepted" => RecordMode::Accepted,
+                    "evaluated" => RecordMode::Evaluated,
                     "leaders" => RecordMode::Leaders,
                     value => return Err(format!("unknown frontier record mode {value:?}")),
                 }
@@ -961,6 +1039,10 @@ fn parse_args() -> Result<Args, String> {
             "--max-y" => {
                 result.ergonomic_guards.max_y = Some(parse_value(values.next(), "--max-y")?)
             }
+            "--min-home-floor" => {
+                result.ergonomic_guards.min_home_floor =
+                    Some(parse_value(values.next(), "--min-home-floor")?)
+            }
             "--min-mx-score" => {
                 result.ergonomic_guards.min_mx_score =
                     Some(parse_value(values.next(), "--min-mx-score")?)
@@ -968,6 +1050,16 @@ fn parse_args() -> Result<Args, String> {
             "--mx-corpus" => result.mx_corpus = values.next().ok_or("--mx-corpus needs a value")?,
             "--mx-variant" => {
                 result.mx_variant = values.next().ok_or("--mx-variant needs a value")?
+            }
+            "--initial-layout" => {
+                result.initial_layout = Some(PathBuf::from(
+                    values.next().ok_or("--initial-layout needs a value")?,
+                ))
+            }
+            "--avoid-archive" => {
+                result.avoid_archive = Some(PathBuf::from(
+                    values.next().ok_or("--avoid-archive needs a value")?,
+                ))
             }
             "--resume" => result.resume = true,
             _ => return Err(format!("unknown option {flag}")),
@@ -981,6 +1073,7 @@ fn parse_args() -> Result<Args, String> {
         result.ergonomic_guards.max_rp,
         result.ergonomic_guards.max_w,
         result.ergonomic_guards.max_y,
+        result.ergonomic_guards.min_home_floor,
         result.ergonomic_guards.min_mx_score,
     ];
     if ergonomic_limits
