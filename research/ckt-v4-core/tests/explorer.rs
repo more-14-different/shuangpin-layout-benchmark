@@ -122,6 +122,11 @@ fn generations_deduplicate_states_and_emit_diverse_seeds_and_review_flags() {
             .iter()
             .any(|seed| seed.reason == "best-new-ckt-v4")
     );
+    assert!(
+        plan.seeds
+            .iter()
+            .any(|seed| seed.reason == "novel-sparse-coverage")
+    );
     assert!(plan.seeds.iter().all(|seed| seed.point.layout.id != "base"));
     assert!(
         plan.review_queue
@@ -129,6 +134,19 @@ fn generations_deduplicate_states_and_emit_diverse_seeds_and_review_flags() {
             .any(|candidate| candidate.kind == "emerging-basin")
     );
     assert_eq!(plan.review_queue.len(), 1);
+
+    let replay = ExplorationBatch {
+        source: "g3.jsonl".to_owned(),
+        provenance: provenance(),
+        points: vec![point("base-replay", &[], 10.0, 0.04, 0.22)],
+    };
+    let (_, replay_plan) = update_and_plan(Some(archive), vec![replay], 3, config).unwrap();
+    assert!(
+        replay_plan
+            .seeds
+            .iter()
+            .all(|seed| seed.nearest_prior_distance == Some(0))
+    );
 }
 
 #[test]

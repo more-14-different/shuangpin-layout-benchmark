@@ -11,6 +11,32 @@ $settings = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
 if ($settings.version -ne 'ckt-v4-explorer-config-1') {
     throw "unsupported explorer config version: $($settings.version)"
 }
+$requiredSettings = @(
+    'schemeTemplate', 'reference', 'corpus', 'schemes', 'snapshot', 'ergonomicFixture',
+    'outputRoot', 'generations', 'stepsPerChain', 'nextSeedCount', 'baseSeed', 'temperature',
+    'checkpointEvery', 'verifyEvery', 'dutyMs', 'mxCorpus', 'mxVariant', 'maxCktDelta',
+    'noveltyDistance', 'basinRadius', 'basinSupport', 'guards'
+)
+foreach ($name in $requiredSettings) {
+    if ($name -notin $settings.PSObject.Properties.Name -or $null -eq $settings.$name) {
+        throw "explorer config is missing required setting: $name"
+    }
+}
+if ([int64]$settings.generations -lt 0 -or
+    [int64]$settings.stepsPerChain -lt 1 -or
+    [int64]$settings.nextSeedCount -lt 1 -or
+    [int64]$settings.checkpointEvery -lt 0 -or
+    [int64]$settings.verifyEvery -lt 0 -or
+    [int64]$settings.dutyMs -lt 0 -or
+    -not [double]::IsFinite([double]$settings.temperature) -or
+    [double]$settings.temperature -le 0 -or
+    -not [double]::IsFinite([double]$settings.maxCktDelta) -or
+    [double]$settings.maxCktDelta -lt 0 -or
+    [int64]$settings.noveltyDistance -lt 0 -or
+    [int64]$settings.basinRadius -lt 0 -or
+    [int64]$settings.basinSupport -lt 1) {
+    throw 'invalid explorer numeric configuration'
+}
 
 function Resolve-RepoPath([string]$Path) {
     if ([IO.Path]::IsPathRooted($Path)) { return [IO.Path]::GetFullPath($Path) }
@@ -62,8 +88,62 @@ $root = Resolve-RepoPath $settings.outputRoot
 $archive = Join-Path $root 'exploration-archive.json'
 $null = New-Item -ItemType Directory -Force -Path $root
 
-$generation = 1
-while ($settings.generations -eq 0 -or $generation -le $settings.generations) {
+$lockPath = Join-Path $root 'run.lock'
+try {
+    $runLock = [IO.File]::Open($lockPath, [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
+} catch {
+    throw "another explorer process is using output root: $root"
+}
+
+$contract = [ordered]@{
+    version = 'ckt-v4-explorer-contract-1'
+    initialSchemes = @($settings.initialSchemes | ForEach-Object { [string]$_ })
+    initialLayouts = @($settings.initialLayouts | ForEach-Object { [string]$_ })
+    schemeTemplate = [string]$settings.schemeTemplate
+    reference = [string]$settings.reference
+    corpus = [string]$settings.corpus
+    schemes = [string]$settings.schemes
+    snapshot = [string]$settings.snapshot
+    ergonomicFixture = [string]$settings.ergonomicFixture
+    stepsPerChain = [uint64]$settings.stepsPerChain
+    nextSeedCount = [uint64]$settings.nextSeedCount
+    baseSeed = [uint64]$settings.baseSeed
+    temperature = [double]$settings.temperature
+    mxCorpus = [string]$settings.mxCorpus
+    mxVariant = [string]$settings.mxVariant
+    maxCktDelta = [double]$settings.maxCktDelta
+    noveltyDistance = [uint64]$settings.noveltyDistance
+    basinRadius = [uint64]$settings.basinRadius
+    basinSupport = [uint64]$settings.basinSupport
+    guards = [ordered]@{
+        maxMemory = $settings.guards.maxMemory
+        maxD = $settings.guards.maxD
+        maxV = $settings.guards.maxV
+        maxRpS2 = $settings.guards.maxRpS2
+        maxRp = $settings.guards.maxRp
+        maxW = $settings.guards.maxW
+        maxY = $settings.guards.maxY
+        minHomeFloor = $settings.guards.minHomeFloor
+        minMxScore = $settings.guards.minMxScore
+    }
+}
+$contractPath = Join-Path $root 'run-contract.json'
+$contractJson = $contract | ConvertTo-Json -Depth 10 -Compress
+if (Test-Path -LiteralPath $contractPath) {
+    $savedContractJson = Get-Content -Raw -LiteralPath $contractPath | ConvertFrom-Json | ConvertTo-Json -Depth 10 -Compress
+    if ($savedContractJson -cne $contractJson) {
+        $runLock.Dispose()
+        throw "explorer scientific contract differs from existing output root: $contractPath"
+    }
+} else {
+    $contractTemporary = "$contractPath.tmp"
+    [IO.File]::WriteAllText($contractTemporary, "$contractJson`n", [Text.UTF8Encoding]::new($false))
+    Move-Item -LiteralPath $contractTemporary -Destination $contractPath
+}
+
+try {
+  $generation = 1
+  while ($settings.generations -eq 0 -or $generation -le $settings.generations) {
     $generationName = 'generation-{0:d4}' -f $generation
     $generationDir = Join-Path $root $generationName
     $planDir = Join-Path $root "$generationName-plan"
@@ -182,5 +262,8 @@ while ($settings.generations -eq 0 -or $generation -le $settings.generations) {
         Write-Warning "generation $generation queued $($reviews.Count) possible basin reviews at $reviewPath"
         if ($settings.pauseOnReview) { break }
     }
-    $generation++
+      $generation++
+  }
+} finally {
+    $runLock.Dispose()
 }

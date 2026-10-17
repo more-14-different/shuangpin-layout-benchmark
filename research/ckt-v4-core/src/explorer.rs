@@ -392,7 +392,6 @@ fn nearest_distance(
 ) -> Result<Option<usize>, String> {
     entries
         .iter()
-        .filter(|entry| entry.state_key != layout_state_key(layout))
         .map(|entry| layout_distance(layout, &entry.point.layout))
         .collect::<Result<Vec<_>, _>>()
         .map(|values| values.into_iter().min())
@@ -423,10 +422,10 @@ fn select_seeds(
         selected.push((best, reason.to_owned()));
         used.insert(best);
     }
-    for metric in ["right-pinky", "home-row", "moving-hand", "memory"] {
-        if selected.len() >= seed_count {
-            break;
-        }
+    let metrics = ["right-pinky", "home-row", "moving-hand", "memory"];
+    let metric_slots = seed_count.saturating_sub(2).min(metrics.len());
+    for offset in 0..metric_slots {
+        let metric = metrics[(generation.saturating_sub(1) + offset) % metrics.len()];
         let candidate = preferred
             .iter()
             .copied()
