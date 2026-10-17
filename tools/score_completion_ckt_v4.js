@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
 const {
+  DEFAULT_COGNITIVE_PRIOR,
   HISTORICAL_COGNITIVE_PRIOR,
   classifyContract,
   makeStages,
@@ -258,11 +259,14 @@ function main() {
   if (!(mass > 0 && mass <= 1)) throw new Error('--mass must be in (0,1]');
   const ids = String(args.ids || 'S005,L600,SNOW-SHENYUN-21X28-SHAPE,H37').split(',').filter(Boolean);
   const parameters = {
-    ...HISTORICAL_COGNITIVE_PRIOR,
-    firstAuxMs: Number(args.firstAux || HISTORICAL_COGNITIVE_PRIOR.firstAuxMs),
-    secondAuxMs: Number(args.secondAux || HISTORICAL_COGNITIVE_PRIOR.secondAuxMs),
-    selectionDecisionMs: Number(args.selection || HISTORICAL_COGNITIVE_PRIOR.selectionDecisionMs),
-    scanPerCandidateMs: Number(args.scan || 0),
+    ...DEFAULT_COGNITIVE_PRIOR,
+    firstAuxMs: Number(args.firstAux ?? DEFAULT_COGNITIVE_PRIOR.firstAuxMs),
+    secondAuxMs: Number(args.secondAux ?? DEFAULT_COGNITIVE_PRIOR.secondAuxMs),
+    selectionDecisionMs: Number(args.selection ?? DEFAULT_COGNITIVE_PRIOR.selectionDecisionMs),
+    scanPerCandidateMs: Number(args.scan ?? DEFAULT_COGNITIVE_PRIOR.scanPerCandidateMs),
+    selectionActionMs: Number(args.selectionAction ?? DEFAULT_COGNITIVE_PRIOR.selectionActionMs),
+    pageSize: Number(args.pageSize ?? DEFAULT_COGNITIVE_PRIOR.pageSize),
+    pageActionMs: Number(args.pageAction ?? DEFAULT_COGNITIVE_PRIOR.pageActionMs),
   };
   const data = loadPayload(html);
   let entries = args.all ? data.entries : ids.map(id => data.entries.find(entry => entry.id === id));
@@ -285,6 +289,7 @@ function main() {
     // it across hundreds of distinct layouts retains millions of dead strings.
     const motor = projectedMotor(nativeMotor, snapshot.keys, data.ckt.calibration.extension_maps);
     const modes = {};
+    const historicalModes = compact ? null : {};
     const motorOnlyModes = compact ? null : {};
     const crossLength = {};
     for (const mode of ['keytao', 'sanpin']) {
@@ -292,6 +297,7 @@ function main() {
       const outcomes = resolveCompetition(rows, {motorCost: motor});
       modes[mode] = summarizeOutcomes(outcomes, parameters);
       if (!compact) {
+        historicalModes[mode] = summarizeOutcomes(outcomes, HISTORICAL_COGNITIVE_PRIOR);
         motorOnlyModes[mode] = summarizeOutcomes(outcomes, {
           firstAuxMs: 0, secondAuxMs: 0, selectionDecisionMs: 0,
           scanPerCandidateMs: 0, selectionActionMs: 0, pageActionMs: 0,
@@ -302,7 +308,8 @@ function main() {
     schemes[entry.id] = compact
       ? {capacity: entry.capacity, contract: classifyContract(entry.capacity), modes}
       : {name: entry.name, capacity: entry.capacity, contract: classifyContract(entry.capacity),
-        modes, scenarios: {historicalCognitivePrior: modes, motorOnly: motorOnlyModes}, crossLength};
+        modes, scenarios: {rankAwareDefault: modes, historical300_300_600: historicalModes,
+          motorOnly: motorOnlyModes}, crossLength};
     process.stderr.write(`scored ${entry.id} (${entry.capacity.join('x')})\n`);
   }
   const reference = compact ? null : schemes.S005;
@@ -310,13 +317,17 @@ function main() {
     for (const scheme of Object.values(schemes)) {
       scheme.score = compositeScore(scheme.modes, reference.modes);
       scheme.scenarioScores = {
-        historicalCognitivePrior: scheme.score,
+        rankAwareDefault: scheme.score,
+        historical300_300_600: compositeScore(
+          scheme.scenarios.historical300_300_600,
+          reference.scenarios.historical300_300_600,
+        ),
         motorOnly: compositeScore(scheme.scenarios.motorOnly, reference.scenarios.motorOnly),
       };
     }
   }
   const output = {
-    version: 'completion-ckt-v4-prototype-1',
+    version: 'completion-ckt-v4-prototype-2',
     upstream: {commit: snapshot.commit, artifactVersion: snapshot.artifactVersion, sourceSha256: snapshot.sourceSha256},
     keyDomain,
     corpus: {snowBaseMass: mass, word3: words.word3.length, word4: words.word4.length,

@@ -27,6 +27,15 @@ const HISTORICAL_COGNITIVE_PRIOR = Object.freeze({
   pageActionMs: 0,
 });
 
+// Engineering prior for the rank-aware v4 scenario.  The non-zero scan/page
+// coefficients are deliberately exposed parameters, not human-performance
+// measurements; keep the historical 300/300/600 prior above for replay.
+const DEFAULT_COGNITIVE_PRIOR = Object.freeze({
+  ...HISTORICAL_COGNITIVE_PRIOR,
+  scanPerCandidateMs: 50,
+  pageActionMs: 300,
+});
+
 function float32Table(spec) {
   const bytes = Buffer.from(spec.base64, 'base64');
   return new Float32Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
@@ -281,12 +290,15 @@ function selectionKeystrokes(rank, pageSize) {
   return {pages: Math.floor((rank - 1) / safePage), selections: 1};
 }
 
-function cognitiveCost(outcome, parameters = HISTORICAL_COGNITIVE_PRIOR) {
-  const p = {...HISTORICAL_COGNITIVE_PRIOR, ...parameters};
+function cognitiveCost(outcome, parameters = DEFAULT_COGNITIVE_PRIOR) {
+  const p = {...DEFAULT_COGNITIVE_PRIOR, ...parameters};
   const first = outcome.auxCount >= 1 ? p.firstAuxMs : 0;
   const second = outcome.auxCount >= 2 ? p.secondAuxMs : 0;
   const {pages, selections} = selectionKeystrokes(outcome.rank, p.pageSize);
-  const inspected = outcome.rank > 1 ? Math.min(outcome.rank - 1, p.pageSize - 1) : 0;
+  // Every higher-ranked candidate must be rejected before the target.  Page
+  // actions are accounted independently, so later pages retain both the
+  // serial visual-search slope and a discrete page-transition penalty.
+  const inspected = outcome.rank > 1 ? outcome.rank - 1 : 0;
   const selection = outcome.rank > 1
     ? p.selectionDecisionMs + inspected * p.scanPerCandidateMs
       + selections * p.selectionActionMs + pages * p.pageActionMs
@@ -294,7 +306,8 @@ function cognitiveCost(outcome, parameters = HISTORICAL_COGNITIVE_PRIOR) {
   return {firstAuxMs: first, secondAuxMs: second, selectionMs: selection, totalMs: first + second + selection};
 }
 
-function summarizeOutcomes(outcomes, parameters = HISTORICAL_COGNITIVE_PRIOR) {
+function summarizeOutcomes(outcomes, parameters = DEFAULT_COGNITIVE_PRIOR) {
+  const p = {...DEFAULT_COGNITIVE_PRIOR, ...parameters};
   const result = {};
   for (const kind of KINDS) {
     const selected = outcomes.filter(row => row.kind === kind);
@@ -309,6 +322,8 @@ function summarizeOutcomes(outcomes, parameters = HISTORICAL_COGNITIVE_PRIOR) {
     let aux2 = 0;
     let selectedWeight = 0;
     let rankWeighted = 0;
+    let rejectedCandidates = 0;
+    let pageActions = 0;
     let codeLength = 0;
     for (const row of selected) {
       const cog = cognitiveCost(row, parameters);
@@ -318,6 +333,8 @@ function summarizeOutcomes(outcomes, parameters = HISTORICAL_COGNITIVE_PRIOR) {
       if (row.auxCount >= 2) aux2 += row.weight;
       if (row.rank > 1) selectedWeight += row.weight;
       rankWeighted += row.weight * row.rank;
+      rejectedCandidates += row.weight * Math.max(0, row.rank - 1);
+      pageActions += row.weight * selectionKeystrokes(row.rank, p.pageSize).pages;
       codeLength += row.weight * row.codeLength;
     }
     result[kind] = {
@@ -330,6 +347,8 @@ function summarizeOutcomes(outcomes, parameters = HISTORICAL_COGNITIVE_PRIOR) {
       secondAuxRate: aux2 / totalWeight,
       selectionRate: selectedWeight / totalWeight,
       meanTerminalRank: rankWeighted / totalWeight,
+      meanRejectedCandidates: rejectedCandidates / totalWeight,
+      meanPageActions: pageActions / totalWeight,
       meanKeys: codeLength / totalWeight,
     };
   }
@@ -360,6 +379,7 @@ module.exports = {
   KINDS,
   DEFAULT_KIND_WEIGHTS,
   HISTORICAL_COGNITIVE_PRIOR,
+  DEFAULT_COGNITIVE_PRIOR,
   upstreamMotor,
   projectedMotor,
   classifyContract,

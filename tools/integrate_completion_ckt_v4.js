@@ -4,6 +4,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const zlib = require('node:zlib');
+const {DEFAULT_COGNITIVE_PRIOR: DEFAULT_COGNITIVE_PARAMETERS} = require('./ckt_v4_model.js');
 
 const TRACKS = [
   ['keytao', 'character', 1], ['keytao', 'word2', 3],
@@ -35,19 +36,25 @@ function replaceRequired(html, before, after, label) {
 }
 
 function installFrontend(html) {
+  const glossary = "UG.bCompositeV4={title:'综合补全 CKT v4 · 联合竞争池 · 上游串击当量',brief:'21×21 联合二/四字池；非 21×21 还将 AAA 未直出的三字词以 AAAU 路由加入四码联合池。冰雪 99% 词频质量、34 键域、字词 1:3:1:1，S005 恒为 10。',detail:'运动项采用上游 e37cbcfe 的 2/3/4 键角色表；5/6 键为同角色表连续窗口外推。认知项分离为辅码、固定选重决策、逐个视觉排除和翻页；默认 β=50 ms/候选、P=9、γpage=300 ms，均是待实验标定的工程先验。',formula:'A=α₁b₁+α₂b₂+I(r>1)[τ+β(r−1)+γsel]+γpage⌊(r−1)/P⌋\\nT=M上游+E[A]；C_v4=10·[Σw(T/T_S005)⁴/Σw]^(1/4)，w=[1,3,1,1]',direction:'仅在同一参数情景下比较，越低越好',related:['bCompositeV3','selectioncost','evidence'],sources:['completionBV4'],controls:['uxTau','uxFirstAuxPenalty','uxSecondAuxPenalty']};" + '\n';
   if (!html.includes('UG.bCompositeV4=')) {
-    const glossary = "UG.bCompositeV4={title:'综合补全 CKT v4 · 联合竞争池 · 上游串击当量',brief:'21×21 联合二/四字池；非 21×21 还将 AAA 未直出的三字词以 AAAU 路由加入四码联合池。冰雪 99% 词频质量、34 键域、字词 1:3:1:1，S005 恒为 10。',detail:'运动项采用上游 e37cbcfe 的 2/3/4 键角色表；5/6 键为同角色表连续窗口外推。认知项与运动项分离：首辅码、次辅码和最终选重分别由 α₁、α₂、τ 三个情景参数控制。',formula:'T=M上游+α₁·P(至少1辅码)+α₂·P(至少2辅码)+τ·P(终态名次>1)\\nC_v4=10·[Σw(T/T_S005)⁴/Σw]^(1/4)，w=[1,3,1,1]',direction:'仅在同一参数情景下比较，越低越好',related:['bCompositeV3','selectioncost','evidence'],sources:['completionBV4'],controls:['uxTau','uxFirstAuxPenalty','uxSecondAuxPenalty']};" + '\n';
     html = replaceRequired(html, 'UG.bCompositeV2=', glossary + 'UG.bCompositeV2=', 'v4 glossary anchor');
+  } else if (!html.includes('逐个视觉排除和翻页')) {
+    html = html.replace(/UG\.bCompositeV4=\{[\s\S]*?\};\n(?=UG\.bCompositeV2=)/, glossary);
+    if (!html.includes('逐个视觉排除和翻页')) throw new Error('cannot upgrade CKT v4 glossary');
   }
-  if (!html.includes('function bCompletionV4Row')) {
-    const functions = `function bCompletionV4Row(e){return D.completionBV4?.schemes?.[e.id]?.modes||null}
+  const functions = `function bCompletionV4Row(e){return D.completionBV4?.schemes?.[e.id]?.modes||null}
 function bCompletionScoreV4(m,tau,firstAux,secondAux,reference){
-  if(!m||!reference)return null;let sum=0,total=0;
-  for(const [, ,mode,kind,weight] of B_COMPLETION_TRACKS_V3){const r=m[mode]?.[kind],b=reference[mode]?.[kind];if(!r||!b)return null;const a=r.motorUpperMs+firstAux*r.firstAuxRate+secondAux*r.secondAuxRate+tau*r.selectionRate,c=b.motorUpperMs+firstAux*b.firstAuxRate+secondAux*b.secondAuxRate+tau*b.selectionRate;if(!(a>0&&c>0))return null;sum+=weight*(a/c)**4;total+=weight}
+  if(!m||!reference)return null;let sum=0,total=0;const p=D.completionBV4?.cognitiveDefaults||{},scan=Number(p.scanPerCandidateMs||0),select=Number(p.selectionActionMs||0),page=Number(p.pageActionMs||0);
+  for(const [, ,mode,kind,weight] of B_COMPLETION_TRACKS_V3){const r=m[mode]?.[kind],b=reference[mode]?.[kind];if(!r||!b)return null;const time=x=>x.motorUpperMs+firstAux*x.firstAuxRate+secondAux*x.secondAuxRate+(tau+select)*x.selectionRate+scan*(x.meanRejectedCandidates??(Number.isFinite(x.meanTerminalRank)?Math.max(0,x.meanTerminalRank-1):0))+page*(x.meanPageActions||0),a=time(r),c=time(b);if(!(a>0&&c>0))return null;sum+=weight*(a/c)**4;total+=weight}
   return 10*(sum/total)**.25;
 }
 `;
+  if (!html.includes('function bCompletionV4Row')) {
     html = replaceRequired(html, 'function bCompletionScoreV2(', functions + 'function bCompletionScoreV2(', 'v4 score function anchor');
+  } else if (!html.includes('meanRejectedCandidates??')) {
+    html = html.replace(/function bCompletionV4Row\(e\)\{[\s\S]*?\n\}\n(?=function bCompletionScoreV2\()/, functions);
+    if (!html.includes('meanRejectedCandidates??')) throw new Error('cannot upgrade CKT v4 realtime rank model');
   }
   if (!html.includes("help:'bCompositeV4'")) {
     const v3Header = "{label:'综合补全 CKT v3 · 四阶词长 · 原生五键 · ×10',help:'bCompositeV3'},";
@@ -71,21 +78,27 @@ function compactModes(modes) {
       secondAuxRate: row.secondAuxRate,
       selectionRate: row.selectionRate,
       meanTerminalRank: row.meanTerminalRank,
+      meanRejectedCandidates: row.meanRejectedCandidates ?? Math.max(0, row.meanTerminalRank - 1),
+      meanPageActions: row.meanPageActions ?? 0,
       meanKeys: row.meanKeys,
     }]))
   ]));
 }
 
 function score(modes, reference, parameters) {
+  const p = {...DEFAULT_COGNITIVE_PARAMETERS, ...parameters};
   let sum = 0;
   let total = 0;
   for (const [mode, kind, weight] of TRACKS) {
     const a = modes[mode][kind];
     const b = reference[mode][kind];
     const time = row => row.motorUpperMs
-      + parameters.firstAuxMs * row.firstAuxRate
-      + parameters.secondAuxMs * row.secondAuxRate
-      + parameters.selectionDecisionMs * row.selectionRate;
+      + p.firstAuxMs * row.firstAuxRate
+      + p.secondAuxMs * row.secondAuxRate
+      + (p.selectionDecisionMs + p.selectionActionMs) * row.selectionRate
+      + p.scanPerCandidateMs * (row.meanRejectedCandidates
+        ?? (Number.isFinite(row.meanTerminalRank) ? Math.max(0, row.meanTerminalRank - 1) : 0))
+      + p.pageActionMs * (row.meanPageActions ?? 0);
     sum += weight * (time(a) / time(b)) ** 4;
     total += weight;
   }
@@ -165,7 +178,7 @@ function main() {
   if (!schemes.S005) throw new Error('S005 reference is missing');
 
   data.completionBV4 = {
-    version: 'completion-ckt-v4-joint-pool-1',
+    version: 'completion-ckt-v4-rank-cognition-2',
     upstream: first.upstream,
     keyDomain: first.keyDomain,
     corpus: first.corpus,
@@ -183,18 +196,29 @@ function main() {
   const encoded = zlib.gzipSync(Buffer.from(JSON.stringify(data)), {level: 9}).toString('base64');
   fs.writeFileSync(htmlFile, html.slice(0, range.start) + encoded + html.slice(range.end), 'utf8');
 
+  const baseline = {...DEFAULT_COGNITIVE_PARAMETERS, ...first.cognitiveParameters};
   const settings = {
-    historical300_300_600: {firstAuxMs: 300, secondAuxMs: 300, selectionDecisionMs: 600},
-    motorOnly0_0_0: {firstAuxMs: 0, secondAuxMs: 0, selectionDecisionMs: 0},
-    noFirst0_300_600: {firstAuxMs: 0, secondAuxMs: 300, selectionDecisionMs: 600},
-    noSecond300_0_600: {firstAuxMs: 300, secondAuxMs: 0, selectionDecisionMs: 600},
-    noSelection300_300_0: {firstAuxMs: 300, secondAuxMs: 300, selectionDecisionMs: 0},
+    rankAwareDefault: baseline,
+    historical300_300_600: {...baseline, scanPerCandidateMs: 0, selectionActionMs: 0, pageActionMs: 0},
+    motorOnly0_0_0: {...baseline, firstAuxMs: 0, secondAuxMs: 0, selectionDecisionMs: 0, scanPerCandidateMs: 0, selectionActionMs: 0, pageActionMs: 0},
+    noFirst0_300_600: {...baseline, firstAuxMs: 0},
+    noSecond300_0_600: {...baseline, secondAuxMs: 0},
+    noSelection300_300_0: {...baseline, selectionDecisionMs: 0, scanPerCandidateMs: 0, selectionActionMs: 0, pageActionMs: 0},
   };
   const values = Object.fromEntries(Object.entries(settings).map(([name, parameters]) => [name,
     Object.fromEntries(Object.entries(schemes).map(([id, scheme]) => [id,
       score(scheme.modes, schemes.S005.modes, parameters)]))
   ]));
-  const base = values.historical300_300_600;
+  const base = values.rankAwareDefault;
+  const historical = values.historical300_300_600;
+  const contractSensitivity = Object.fromEntries([...new Set(Object.values(schemes)
+    .map(scheme => scheme.contract))].sort().map(contract => {
+    const ids = Object.keys(schemes).filter(id => schemes[id].contract === contract);
+    return [contract, compareSettings(
+      Object.fromEntries(ids.map(id => [id, base[id]])),
+      Object.fromEntries(ids.map(id => [id, historical[id]])),
+    )];
+  }));
   const validation = {
     version: data.completionBV4.version,
     schemeCoverage: {expected: expected.size, actual: actual.size, complete: expected.size === actual.size},
@@ -203,10 +227,11 @@ function main() {
     corpus: first.corpus,
     upstream: first.upstream,
     anchorChecks: Object.fromEntries(Object.entries(values).map(([name, rows]) => [name, rows.S005])),
-    sliderSensitivityAgainstHistorical: Object.fromEntries(Object.entries(values)
-      .filter(([name]) => name !== 'historical300_300_600')
+    sliderSensitivityAgainstDefault: Object.fromEntries(Object.entries(values)
+      .filter(([name]) => name !== 'rankAwareDefault')
       .map(([name, rows]) => [name, compareSettings(base, rows)])),
-    scoreExtremesAtHistorical: Object.entries(base).sort((a, b) => a[1] - b[1]).slice(0, 20)
+    rankCognitionSensitivityByContract: contractSensitivity,
+    scoreExtremesAtDefault: Object.entries(base).sort((a, b) => a[1] - b[1]).slice(0, 20)
       .map(([id, value], index) => ({rank: index + 1, id, score: value})),
   };
   fs.writeFileSync(auditFile, `${JSON.stringify(validation, null, 2)}\n`, 'utf8');

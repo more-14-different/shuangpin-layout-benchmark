@@ -3,19 +3,17 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const {resolveCompetition, summarizeOutcomes, upstreamMotor, projectedMotor} = require('./ckt_v4_model.js');
+const {
+  DEFAULT_COGNITIVE_PRIOR,
+  resolveCompetition,
+  summarizeOutcomes,
+  upstreamMotor,
+  projectedMotor,
+} = require('./ckt_v4_model.js');
 const {loadPayload, strokeOptions, multiwords, buildRows} = require('./score_completion_ckt_v4.js');
 
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./";
-const PARAMETERS = {
-  firstAuxMs: 300,
-  secondAuxMs: 300,
-  selectionDecisionMs: 600,
-  scanPerCandidateMs: 0,
-  selectionActionMs: 0,
-  pageSize: 9,
-  pageActionMs: 0,
-};
+const PARAMETERS = DEFAULT_COGNITIVE_PRIOR;
 
 function parseArgs(argv) {
   const args = {};
@@ -89,4 +87,3 @@ function main() {
 }
 
 main();
-

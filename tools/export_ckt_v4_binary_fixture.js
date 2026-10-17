@@ -5,6 +5,7 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const {
+  DEFAULT_COGNITIVE_PRIOR,
   classifyContract,
   projectedMotor,
   resolveCompetition,
@@ -18,15 +19,7 @@ const FORMAT_VERSION = 1;
 const CASE_END = 0xc4e0ca5e;
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./";
 const KEY_INDEX = new Map([...ALPHABET].map((key, index) => [key, index]));
-const PARAMETERS = {
-  firstAuxMs: 300,
-  secondAuxMs: 300,
-  selectionDecisionMs: 600,
-  scanPerCandidateMs: 0,
-  selectionActionMs: 0,
-  pageSize: 9,
-  pageActionMs: 0,
-};
+const PARAMETERS = DEFAULT_COGNITIVE_PRIOR;
 const KIND_IDS = new Map(['character', 'word2', 'word3', 'word4'].map((value, index) => [value, index]));
 const POOL_IDS = new Map([
   'char:base', 'char:aux1', 'char:aux2', 'word:four', 'word:five', 'word:six',

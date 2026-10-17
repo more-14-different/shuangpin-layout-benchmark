@@ -55,6 +55,15 @@ ckt-v4-native-incremental-smoke:
 ckt-v4-native-score:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin score-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json
 
+ckt-v4-rank-stats:
+    $parts = 'research/.cache/ckt-v4-rank-stats-parts'; $total = (Get-Content -Raw research/.cache/ckt-v4-all-schemes.json | ConvertFrom-Json).schemes.Count; New-Item -ItemType Directory -Force -Path $parts | Out-Null; for ($offset = 0; $offset -lt $total; $offset += 50) { $name = 'part-{0:d3}.json' -f $offset; cargo run --quiet --release --manifest-path research/ckt-v4-core/Cargo.toml --bin export-rank-stats -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-all-schemes.json (Join-Path $parts $name) $offset 50; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }
+
+ckt-v4-rank-fallback:
+    $audit = Get-Content -Raw research/.cache/ckt-v4-capabilities.json | ConvertFrom-Json; $ids = (($audit.schemes | Where-Object { -not $_.forwardScore }).id -join ','); if (-not $ids) { throw 'capability audit has no forward-invalid fallback schemes' }; node tools/score_completion_ckt_v4.js --ids $ids --mass 0.99 --no-cross-audit --compact --quiet --output research/.cache/ckt-v4-rank-fallback.json
+
+ckt-v4-rank-prepare:
+    node tools/prepare_ckt_v4_rank_upgrade.js
+
 ckt-v4-anneal scheme="S005-NF" steps="100" checkpoint="research/checkpoints/ckt-v4-anneal.json":
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin anneal-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json "{{scheme}}" --steps "{{steps}}" --checkpoint "{{checkpoint}}" --checkpoint-every 10 --verify-every 50 --duty-ms 5
 

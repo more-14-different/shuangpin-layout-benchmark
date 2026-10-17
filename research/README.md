@@ -24,6 +24,9 @@ The migration boundary is API-based:
   candidate recovery and deterministic exact CKT/M/D/V Pareto merging;
 - `notes/2026-10-17-ckt-v4-phase6-ergonomic-provenance.md` freezes the R11
   20-track loads and MX34 numerical contract, hashes, units and formal gates;
+- `notes/2026-10-17-ckt-v4-rank-aware-cognition.md` specifies the default
+  rank/visual-scan/page cognition scenario, compact sufficient statistics and
+  its experimental-calibration boundary;
 - `.cache/` holds restored replay packages and large cross-language fixtures;
 - `checkpoints/` holds resumable annealing state.
 
@@ -37,3 +40,5 @@ Run `just ckt-v4-frontier-smoke` for a real 21x26 archive/merge path, and
 `just ckt-v4-frontier-memory-smoke` for the bounded-writer-history assertion.
 Run `just ckt-v4-ergonomic-smoke` to prove exact load/MX reproduction,
 CKT-only trajectory preservation, guarded rejection and schema-aware merging.
+Run `just ckt-v4-rank-stats` to export bounded-memory all-scheme rank/page
+statistics from the Rust native corpus before refreshing the HTML payload.

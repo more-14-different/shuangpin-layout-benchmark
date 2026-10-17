@@ -5,6 +5,7 @@ import {createRequire} from 'node:module';
 const require = createRequire(import.meta.url);
 const {
   classifyContract,
+  DEFAULT_COGNITIVE_PRIOR,
   makeStages,
   resolveCompetition,
   cognitiveCost,
@@ -98,6 +99,19 @@ test('terminal rank is preserved and cognitive selection is rank-aware', () => {
     firstAuxMs: 100, secondAuxMs: 200, selectionDecisionMs: 300,
     scanPerCandidateMs: 50, selectionActionMs: 20, pageSize: 9, pageActionMs: 0,
   }), {firstAuxMs: 100, secondAuxMs: 200, selectionMs: 370, totalMs: 670});
+});
+
+test('default selection cognition grows at every rank and jumps at a page boundary', () => {
+  const outcome = rank => ({rank, auxCount: 0});
+  assert.deepEqual(DEFAULT_COGNITIVE_PRIOR, {
+    firstAuxMs: 300, secondAuxMs: 300, selectionDecisionMs: 600,
+    scanPerCandidateMs: 50, selectionActionMs: 0, pageSize: 9, pageActionMs: 300,
+  });
+  assert.equal(cognitiveCost(outcome(1)).selectionMs, 0);
+  assert.equal(cognitiveCost(outcome(2)).selectionMs, 650);
+  assert.equal(cognitiveCost(outcome(9)).selectionMs, 1000);
+  assert.equal(cognitiveCost(outcome(10)).selectionMs, 1350);
+  assert.equal(cognitiveCost(outcome(11)).selectionMs, 1400);
 });
 
 test('fourth-power S005 normalization remains anchored at ten', () => {

@@ -142,10 +142,10 @@ impl Default for CognitiveParameters {
             first_aux_ms: 300.0,
             second_aux_ms: 300.0,
             selection_decision_ms: 600.0,
-            scan_per_candidate_ms: 0.0,
+            scan_per_candidate_ms: 50.0,
             selection_action_ms: 0.0,
             page_size: 9,
-            page_action_ms: 0.0,
+            page_action_ms: 300.0,
         }
     }
 }
@@ -288,7 +288,7 @@ fn cognitive_ms(outcome: &Outcome, p: CognitiveParameters) -> f64 {
     };
     let selection = if outcome.rank > 1 {
         let page_size = p.page_size.max(2);
-        let inspected = (outcome.rank - 1).min(page_size - 1) as f64;
+        let inspected = (outcome.rank - 1) as f64;
         p.selection_decision_ms
             + inspected * p.scan_per_candidate_ms
             + p.selection_action_ms

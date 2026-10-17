@@ -37,9 +37,14 @@ function traditionalRows() {
     row('c-light', 'character', 2, 2, c, ['AB', 'ABO', 'ABOE']),
     row('w2-heavy', 'word2', 10, 4, c, ['ABCD', 'ABCDI', 'ABCDIE']),
     row('w4-light', 'word4', 2, 4, c, ['ABCD', 'ABCDE', 'ABCDEI']),
-    row('w2-terminal-a', 'word2', 4, 4, c, ['WXYZ', 'WXYZI', 'WXYZIE']),
-    row('w4-terminal-b', 'word4', 3, 4, c, ['WXYZ', 'WXYZI', 'WXYZIE']),
-    row('w4-terminal-c', 'word4', 1, 4, c, ['WXYZ', 'WXYZI', 'WXYZIE']),
+    ...Array.from({length: 12}, (_, index) => row(
+      `terminal-${index + 1}`,
+      index % 2 ? 'word2' : 'word4',
+      12 - index,
+      4,
+      c,
+      ['WXYZ', 'WXYZI', 'WXYZIE'],
+    )),
     row('w3-heavy', 'word3', 9, 3, c, ['AAA', 'AAAI', 'AAAIE']),
     row('w3-light', 'word3', 1, 3, c, ['AAA', 'AAAO', 'AAAOE']),
   ];
