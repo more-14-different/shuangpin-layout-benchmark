@@ -74,6 +74,10 @@ function Add-Optional([Collections.Generic.List[string]]$Arguments, [string]$Fla
 }
 
 $initialSchemeIds = @($settings.initialSchemes | ForEach-Object { [string]$_ })
+if ('cudaFull' -in $settings.PSObject.Properties.Name -and $settings.cudaFull -isnot [bool]) {
+    throw 'explorer cudaFull setting must be a JSON boolean'
+}
+$cudaFull = 'cudaFull' -in $settings.PSObject.Properties.Name -and $settings.cudaFull
 $initialRankingPath = $null
 if ('initialRanking' -in $settings.PSObject.Properties.Name -and $null -ne $settings.initialRanking) {
     $initialRankingPath = Resolve-RepoPath ([string]$settings.initialRanking)
@@ -87,7 +91,9 @@ if ('initialRanking' -in $settings.PSObject.Properties.Name -and $null -ne $sett
 }
 
 $manifest = Resolve-RepoPath 'research/ckt-v4-core/Cargo.toml'
-& cargo build --release --manifest-path $manifest --bin anneal-native --bin plan-exploration
+$buildArguments = @('build', '--release', '--manifest-path', $manifest, '--bin', 'anneal-native', '--bin', 'plan-exploration')
+if ($cudaFull) { $buildArguments += @('--features', 'cuda') }
+& cargo @buildArguments
 if ($LASTEXITCODE -ne 0) { throw 'release build failed' }
 
 $binDir = Resolve-RepoPath 'research/ckt-v4-core/target/release'
@@ -239,6 +245,7 @@ try {
         Add-Optional $arguments '--max-y' $settings.guards.maxY
         Add-Optional $arguments '--min-home-floor' $settings.guards.minHomeFloor
         Add-Optional $arguments '--min-mx-score' $settings.guards.minMxScore
+        if ($cudaFull) { $arguments.Add('--cuda-full') }
         if ($resume) { $arguments.Add('--resume') }
         Invoke-LowPriority $annealer $arguments.ToArray() $stdout $stderr
     }

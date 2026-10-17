@@ -1,3 +1,5 @@
+#[cfg(feature = "cuda")]
+use ckt_v4_core::CudaResolvePlan;
 use ckt_v4_core::{
     CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, ErgonomicFixture, ErgonomicFrontierMetrics,
     ErgonomicGuards, ErgonomicMetricSchema, ExplorationArchive, ExplorationStateLookup,
@@ -14,6 +16,8 @@ use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
+#[cfg(feature = "cuda")]
+use std::sync::Arc;
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -26,6 +30,8 @@ struct ModeState {
     dependencies: ckt_v4_core::DependencyIndex,
     resolver: IncrementalResolver,
     summary: IncrementalSummary,
+    #[cfg(feature = "cuda")]
+    cuda_plan: Option<Arc<CudaResolvePlan>>,
 }
 
 struct ErgonomicRuntime {
@@ -120,6 +126,7 @@ struct Args {
     avoid_archive: Option<PathBuf>,
     exploration_database: Option<PathBuf>,
     avoid_generation: Option<usize>,
+    cuda_full: bool,
     resume: bool,
 }
 
@@ -262,7 +269,14 @@ fn main() -> Result<(), String> {
         args.ergonomic_guards,
     )?;
     let mut current_state = fixture.scheme_state(&checkpoint.current_layout)?;
-    let mut modes = build_modes(&corpus, &current_state, &motor, parameters)?;
+    let mut modes = build_modes(
+        &corpus,
+        &current_state,
+        &motor,
+        parameters,
+        args.cuda_full,
+        None,
+    )?;
     let mut current_score = composite_score(&mode_summaries(&modes), &reference)?;
     if checkpoint.current_score.is_finite()
         && (checkpoint.current_score - current_score).abs() > 1e-8
@@ -350,7 +364,14 @@ fn main() -> Result<(), String> {
         let mut receipts = Vec::with_capacity(modes.len());
         let proposed_score = if use_full_recompute {
             checkpoint.full_evaluated += 1;
-            let replacement = build_modes(&corpus, &proposed_state, &motor, parameters)?;
+            let replacement = build_modes(
+                &corpus,
+                &proposed_state,
+                &motor,
+                parameters,
+                args.cuda_full,
+                Some(&modes),
+            )?;
             let score = composite_score(&mode_summaries(&replacement), &reference)?;
             replacement_modes = Some(replacement);
             score
@@ -653,11 +674,46 @@ fn build_modes(
     scheme: &SchemeState,
     motor: &ProjectedMotor,
     parameters: CognitiveParameters,
+    cuda_full: bool,
+    _previous: Option<&[ModeState]>,
 ) -> Result<Vec<ModeState>, String> {
     [InputMode::Keytao, InputMode::Sanpin]
         .into_iter()
-        .map(|mode| {
+        .enumerate()
+        .map(|(_index, mode)| {
             let generated = corpus.generate(scheme, mode)?;
+            #[cfg(feature = "cuda")]
+            if cuda_full {
+                let plan = if let Some(existing) = _previous
+                    .and_then(|modes| modes.get(_index))
+                    .and_then(|mode| mode.cuda_plan.clone())
+                {
+                    existing
+                } else {
+                    Arc::new(CudaResolvePlan::new(&generated.rows)?)
+                };
+                let (outcomes, _) = plan.resolve(&generated.rows, |code| {
+                    motor.cost(code).map(|value| value.upper_ms)
+                })?;
+                let incremental_motor = motor.clone();
+                let resolver =
+                    IncrementalResolver::from_precomputed(generated.rows, outcomes, move |code| {
+                        incremental_motor.cost(code).map(|value| value.upper_ms)
+                    })?;
+                let summary =
+                    IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)?;
+                return Ok(ModeState {
+                    mode,
+                    dependencies: generated.dependencies,
+                    resolver,
+                    summary,
+                    cuda_plan: Some(plan),
+                });
+            }
+            #[cfg(not(feature = "cuda"))]
+            if cuda_full {
+                return Err("--cuda-full requires a build with --features cuda".to_owned());
+            }
             let incremental_motor = motor.clone();
             let resolver = IncrementalResolver::new(generated.rows, move |code| {
                 incremental_motor.cost(code).map(|value| value.upper_ms)
@@ -669,6 +725,8 @@ fn build_modes(
                 dependencies: generated.dependencies,
                 resolver,
                 summary,
+                #[cfg(feature = "cuda")]
+                cuda_plan: None,
             })
         })
         .collect()
@@ -1029,6 +1087,7 @@ fn parse_args() -> Result<Args, String> {
         avoid_archive: None,
         exploration_database: None,
         avoid_generation: None,
+        cuda_full: false,
         resume: false,
     };
     while let Some(flag) = values.next() {
@@ -1124,6 +1183,7 @@ fn parse_args() -> Result<Args, String> {
             "--avoid-generation" => {
                 result.avoid_generation = Some(parse_value(values.next(), "--avoid-generation")?)
             }
+            "--cuda-full" => result.cuda_full = true,
             "--resume" => result.resume = true,
             _ => return Err(format!("unknown option {flag}")),
         }

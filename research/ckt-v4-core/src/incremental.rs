@@ -1,5 +1,5 @@
 use crate::compact::PackedCode;
-use crate::model::{Outcome, Pool, Row, resolve};
+use crate::model::{Outcome, Pool, Row, resolve, validate_rows};
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 
@@ -29,7 +29,7 @@ impl UpdateReceipt {
 pub struct IncrementalResolver {
     rows: Vec<Row>,
     outcomes: Vec<Outcome>,
-    members: HashMap<StageKey, HashSet<usize>>,
+    members: Option<HashMap<StageKey, HashSet<usize>>>,
     motor_cost: Arc<MotorCost>,
 }
 
@@ -40,12 +40,52 @@ impl IncrementalResolver {
     {
         let motor_cost: Arc<MotorCost> = Arc::new(motor_cost);
         let outcomes = resolve(&rows, |code| motor_cost(code))?;
-        let members = Self::build_members(&rows);
         Ok(Self {
             rows,
             outcomes,
-            members,
+            members: None,
             motor_cost,
+        })
+    }
+
+    pub fn from_precomputed<F>(
+        rows: Vec<Row>,
+        outcomes: Vec<Outcome>,
+        motor_cost: F,
+    ) -> Result<Self, String>
+    where
+        F: Fn(PackedCode) -> Option<f64> + Send + Sync + 'static,
+    {
+        validate_rows(&rows)?;
+        if rows.len() != outcomes.len() {
+            return Err("precomputed outcome count differs from rows".to_owned());
+        }
+        for (index, (row, outcome)) in rows.iter().zip(&outcomes).enumerate() {
+            let stage = row
+                .stages
+                .iter()
+                .find(|stage| {
+                    stage.order == outcome.code_length
+                        && stage.pool == outcome.pool
+                        && stage.codes.contains(&outcome.code)
+                })
+                .ok_or_else(|| format!("precomputed outcome {index} is absent from its row"))?;
+            let expected_motor = motor_cost(outcome.code)
+                .filter(|value| value.is_finite())
+                .ok_or_else(|| format!("precomputed outcome {index} has no motor cost"))?;
+            if outcome.row_index != index
+                || outcome.rank == 0
+                || outcome.aux_count != stage.order.saturating_sub(row.base_length)
+                || outcome.motor_upper_ms.to_bits() != expected_motor.to_bits()
+            {
+                return Err(format!("precomputed outcome {index} is inconsistent"));
+            }
+        }
+        Ok(Self {
+            rows,
+            outcomes,
+            members: None,
+            motor_cost: Arc::new(motor_cost),
         })
     }
 
@@ -70,6 +110,10 @@ impl IncrementalResolver {
     }
 
     fn component(&self, seeds: impl IntoIterator<Item = usize>) -> HashSet<usize> {
+        let members = self
+            .members
+            .as_ref()
+            .expect("members are initialized before component search");
         let mut found = HashSet::new();
         let mut pending = Vec::new();
         for seed in seeds {
@@ -80,7 +124,7 @@ impl IncrementalResolver {
         while let Some(index) = pending.pop() {
             for stage in &self.rows[index].stages {
                 for &code in &stage.codes {
-                    if let Some(neighbors) = self.members.get(&(stage.pool, code)) {
+                    if let Some(neighbors) = members.get(&(stage.pool, code)) {
                         for &neighbor in neighbors {
                             if found.insert(neighbor) {
                                 pending.push(neighbor);
@@ -94,13 +138,17 @@ impl IncrementalResolver {
     }
 
     fn remove_memberships(&mut self, index: usize, row: &Row) {
+        let members = self
+            .members
+            .as_mut()
+            .expect("members are initialized before removal");
         for stage in &row.stages {
             for &code in &stage.codes {
                 let key = (stage.pool, code);
-                if let Some(members) = self.members.get_mut(&key) {
-                    members.remove(&index);
-                    if members.is_empty() {
-                        self.members.remove(&key);
+                if let Some(bucket) = members.get_mut(&key) {
+                    bucket.remove(&index);
+                    if bucket.is_empty() {
+                        members.remove(&key);
                     }
                 }
             }
@@ -108,12 +156,13 @@ impl IncrementalResolver {
     }
 
     fn add_memberships(&mut self, index: usize, row: &Row) {
+        let members = self
+            .members
+            .as_mut()
+            .expect("members are initialized before insertion");
         for stage in &row.stages {
             for &code in &stage.codes {
-                self.members
-                    .entry((stage.pool, code))
-                    .or_default()
-                    .insert(index);
+                members.entry((stage.pool, code)).or_default().insert(index);
             }
         }
     }
@@ -127,6 +176,9 @@ impl IncrementalResolver {
                 affected_rows: 0,
                 outcome_changes: Vec::new(),
             });
+        }
+        if self.members.is_none() {
+            self.members = Some(Self::build_members(&self.rows));
         }
         let mut seen = HashSet::new();
         for (index, _) in &updates {

@@ -1,6 +1,8 @@
 pub mod binary;
 pub mod capability;
 pub mod compact;
+#[cfg(feature = "cuda")]
+mod cuda;
 pub mod ergonomics;
 pub mod exploration_db;
 pub mod explorer;
@@ -19,6 +21,8 @@ pub use capability::{
     audit_scheme,
 };
 pub use compact::{KeyAlphabet, PackedCode};
+#[cfg(feature = "cuda")]
+pub use cuda::{CudaResolvePlan, CudaResolveTimings, cuda_device_name, resolve_cuda};
 pub use ergonomics::{
     ErgonomicFixture, ErgonomicGuards, ExpectedErgonomics, LoadDiagnostics, TokenLoadModel,
     TrackRoles,

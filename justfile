@@ -53,6 +53,9 @@ ckt-v4-ranked-explorer-seeds: ckt-v4-capability-audit
 ckt-v4-native-verify:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin verify-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json research/.cache/ckt-v4-real-reference.bin tools/ckt_v4_upstream_role_tables.json
 
+ckt-v4-cuda-benchmark: ckt-v4-native-corpus ckt-v4-all-scheme-fixture
+    cargo run --release --features cuda --manifest-path research/ckt-v4-core/Cargo.toml --bin bench-cuda-full -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-all-schemes.json tools/ckt_v4_upstream_role_tables.json S005 BCW-cdf451dbb5af SY26-V3-R2-M44-D9-HOME-SPEED
+
 ckt-v4-native-incremental-smoke:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin verify-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json research/.cache/ckt-v4-real-reference.bin tools/ckt_v4_upstream_role_tables.json --incremental-smoke
 
