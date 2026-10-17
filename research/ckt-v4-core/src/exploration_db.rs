@@ -88,6 +88,10 @@ impl ExplorationDatabase {
                  CREATE INDEX IF NOT EXISTS states_home ON states(home_floor DESC, ckt_v4);
                  CREATE INDEX IF NOT EXISTS states_mx ON states(mx_score DESC, ckt_v4);
                  CREATE INDEX IF NOT EXISTS states_memory ON states(memory, ckt_v4);
+                 CREATE INDEX IF NOT EXISTS states_displaced_initials
+                    ON states(displaced_initials, ckt_v4);
+                 CREATE INDEX IF NOT EXISTS states_displaced_vowels
+                    ON states(displaced_vowels, ckt_v4);
                  CREATE TABLE IF NOT EXISTS state_bands (
                     band_id INTEGER NOT NULL,
                     signature BLOB NOT NULL,
@@ -171,6 +175,8 @@ impl ExplorationDatabase {
             ("home_floor IS NOT NULL", "home_floor DESC, ckt_v4 ASC"),
             ("mx_score IS NOT NULL", "mx_score DESC, ckt_v4 ASC"),
             ("1", "memory ASC, ckt_v4 ASC"),
+            ("1", "displaced_initials ASC, ckt_v4 ASC"),
+            ("1", "displaced_vowels ASC, ckt_v4 ASC"),
         ] {
             for entry in query_candidate_slice(&transaction, threshold, pool_limit, filter, order)?
             {
@@ -616,6 +622,8 @@ fn query_candidate_slice(
         ("home_floor IS NOT NULL", "home_floor DESC, ckt_v4 ASC"),
         ("mx_score IS NOT NULL", "mx_score DESC, ckt_v4 ASC"),
         ("1", "memory ASC, ckt_v4 ASC"),
+        ("1", "displaced_initials ASC, ckt_v4 ASC"),
+        ("1", "displaced_vowels ASC, ckt_v4 ASC"),
     ];
     if !allowed.contains(&(filter, order)) {
         return Err("invalid database candidate ordering".to_owned());
@@ -800,10 +808,16 @@ fn select_seeds(
         ));
         used.insert(best);
     }
-    let metrics = ["right-pinky", "home-row", "moving-hand", "memory"];
+    let metrics = [
+        "memory",
+        "displaced-initials",
+        "displaced-vowels",
+        "right-pinky",
+        "home-row",
+        "moving-hand",
+    ];
     let metric_slots = seed_count.saturating_sub(2).min(metrics.len());
-    for offset in 0..metric_slots {
-        let metric = metrics[(generation.saturating_sub(1) + offset) % metrics.len()];
+    for &metric in metrics.iter().take(metric_slots) {
         if let Some(index) = preferred
             .iter()
             .copied()
@@ -1064,6 +1078,8 @@ fn metric_order(metric: &str, left: &ExplorationEntry, right: &ExplorationEntry)
             .and_then(|value| value.mx_score)
             .map_or(f64::INFINITY, |value| -value),
         "memory" => entry.point.metrics.memory as f64,
+        "displaced-initials" => entry.point.metrics.displaced_initials as f64,
+        "displaced-vowels" => entry.point.metrics.displaced_vowels as f64,
         _ => f64::INFINITY,
     };
     value(left)

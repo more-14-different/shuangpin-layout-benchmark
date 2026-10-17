@@ -6,11 +6,11 @@
 
 每一代执行以下流程：
 
-1. 从初始方案，或上一代生成的原始布局 JSON，启动若干条短退火链；
+1. 首代先把全部方案按 CKT v4 排序，只保留目标容量、可正向评分且通过 `regularAnneal` 能力审计的方案，去除完全相同的布局后从最强者启动短链；后续代从上一代生成的原始布局 JSON 启动；
 2. 用 `--record evaluated` 追加每个通过结构、唯一性及护栏并实际完成 CKT v4 精确评分的状态；
 3. 在一个事务中把本代日志增量合并到 `exploration.sqlite3`，按紧凑的 69-byte 状态键（容量 + 67 维布局）去重；
 4. 只在距全局最佳 CKT v4 不超过 `maxCktDelta` 的候选中选种；
-5. 优先选择本代新发现的状态，保留本代最佳，并在右小指低值、主行占比高值、MX 高值、记忆量低值之间按代轮换；当种子数不少于 2 时至少为布局距离大、覆盖单元稀疏的候选保留一个名额；
+5. 优先选择本代新发现的状态并保留本代最佳；在强 CKT 性能带内依次保留 M 低、D 低、V 低、右小指低、主行占比高、MX 高的属性极点，最后为布局距离大、覆盖单元稀疏的候选保留一个名额；`nextSeedCount>=8` 时每代可容纳全部方向；
 6. 把代表方案写成 `seed-*.json`，下一代通过 `--initial-layout` 直接接力；
 7. 下一代以只读方式按数据库主键查询；提案若与指定历史代数内的任一已探索状态完全相同，会在昂贵评分前被拒绝，不再把全库 key 装入内存。
 
@@ -52,7 +52,7 @@ just ckt-v4-explore-21x26 "research/config/ckt-v4-explorer-21x26.example.json"
 
 正式使用时应复制配置并修改 `outputRoot`，不要让两个尺寸或两个 worktree 共用同一个档案。`generations=0` 表示持续运行；在确认小型试验的速度、档案增长和选种质量之前不要启用。
 
-首代种子既可写在 `initialSchemes`（fixture 中的方案 ID），也可把历史前沿导出的原始 `RegularLayout` JSON 路径写入 `initialLayouts`；两者会合并开链。21×21 与 21×26 的配置分别用对应的 `schemeTemplate` 校验容量和规则拓扑。
+首代默认读取 `initialRanking` 指向的完整排序清单；清单由 `just ckt-v4-ranked-explorer-seeds` 从全方案 CKT v4 结果、能力审计和全方案 fixture 确定性生成，并保存完整合格排名及前 8 个不重复首种。也可额外在 `initialSchemes` 写入方案 ID，或在 `initialLayouts` 写入历史前沿的原始 `RegularLayout` JSON；三者会合并开链。21×21 与 21×26 的配置分别用对应的 `schemeTemplate` 校验容量和规则拓扑。
 
 主要调节项：
 
@@ -77,6 +77,14 @@ runner 串行启动链，Rust 退火器当前为单线程，进程优先级设�
 - `seed-*.json`：下一代可直接读取的布局；
 - `review-queue.json`：可能的新盆地复核项；
 - `database-state.json`：本代提交后的数据库版本、代数和状态数摘要。
+
+若要把某一代提升为可提交、可跨机器复用的紧凑种子档案，而不提交 SQLite 和完整链日志，可运行：
+
+```powershell
+node tools/archive_ckt_v4_explorer_seeds.mjs --plan <plan.json> --ranking <ranked-seeds.json> --output <archive-directory>
+```
+
+档案包含 8 个独立布局及 `manifest.json`；清单保留 CKT v4、M/D/V、人体工学指标、选种理由、状态键和来源代数。
 
 输出根目录还包含 `exploration.sqlite3`、`run-contract.json` 和 `run.lock`。前者是长期档案；中者冻结会改变科学结果的配置，修改温度、种子、链长、选择阈值或护栏后，不允许静默复用旧目录。`generations`、`dutyMs`、校验/检查点频率和是否遇到 review 暂停属于运行控制项，可以在不改变轨迹的前提下调整。后者阻止两个进程同时写入同一输出根目录。
 

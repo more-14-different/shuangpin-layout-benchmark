@@ -46,6 +46,10 @@ ckt-v4-capability-audit: ckt-v4-all-scheme-fixture
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-capabilities -- research/.cache/ckt-v4-all-schemes.json research/.cache/ckt-v4-capabilities.json
     $fixture = Get-Content -Raw research/.cache/ckt-v4-all-schemes.json | ConvertFrom-Json; $audit = Get-Content -Raw research/.cache/ckt-v4-capabilities.json | ConvertFrom-Json; if ($fixture.schemes.Count -ne $audit.schemes.Count) { throw "capability record count does not match fixture" }; foreach ($id in @('N095', 'H37')) { $record = $audit.schemes | Where-Object id -EQ $id; if ($null -eq $record -or -not $record.forwardScore -or $record.regularAnneal) { throw "$id capability boundary changed" } }; foreach ($id in @('S005-NF', 'SNF4-M36-AE-07', 'SNOW-SHENYUN-21X28-SHAPE')) { $record = $audit.schemes | Where-Object id -EQ $id; if ($null -eq $record -or -not $record.forwardScore -or -not $record.regularAnneal -or $record.reasonCode -ne 'supported') { throw "$id regular capability changed" } }
 
+ckt-v4-ranked-explorer-seeds: ckt-v4-capability-audit
+    node tools/select_ckt_v4_explorer_seeds.mjs --results docs/CKT_v4_ALL_SCHEMES_RESULTS.json --capabilities research/.cache/ckt-v4-capabilities.json --schemes research/.cache/ckt-v4-all-schemes.json --capacity 21,21 --count 8 --output research/config/ckt-v4-ranked-seeds-21x21.json
+    node tools/select_ckt_v4_explorer_seeds.mjs --results docs/CKT_v4_ALL_SCHEMES_RESULTS.json --capabilities research/.cache/ckt-v4-capabilities.json --schemes research/.cache/ckt-v4-all-schemes.json --capacity 21,26 --count 8 --output research/config/ckt-v4-ranked-seeds-21x26.json
+
 ckt-v4-native-verify:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin verify-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json research/.cache/ckt-v4-real-reference.bin tools/ckt_v4_upstream_role_tables.json
 
@@ -84,10 +88,10 @@ ckt-v4-frontier-smoke scheme="SNF4-M36-AE-07" checkpoint="research/checkpoints/c
 ckt-v4-frontier-memory-smoke:
     cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml --test frontier_log writer_memory_does_not_retain_history_while_the_log_grows -- --exact --nocapture
 
-ckt-v4-explore-21x21 config="research/config/ckt-v4-explorer-21x21.example.json": ckt-v4-native-corpus ckt-v4-ergonomic-fixture
+ckt-v4-explore-21x21 config="research/config/ckt-v4-explorer-21x21.example.json": ckt-v4-native-corpus ckt-v4-ergonomic-fixture ckt-v4-ranked-explorer-seeds
     pwsh -NoLogo -NoProfile -File tools/run_ckt_v4_explorer.ps1 -Config "{{config}}"
 
-ckt-v4-explore-21x26 config="research/config/ckt-v4-explorer-21x26.example.json": ckt-v4-native-corpus ckt-v4-ergonomic-fixture
+ckt-v4-explore-21x26 config="research/config/ckt-v4-explorer-21x26.example.json": ckt-v4-native-corpus ckt-v4-ergonomic-fixture ckt-v4-ranked-explorer-seeds
     pwsh -NoLogo -NoProfile -File tools/run_ckt_v4_explorer.ps1 -Config "{{config}}"
 
 ckt-v4-ergonomic-fixture:

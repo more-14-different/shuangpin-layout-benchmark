@@ -431,10 +431,16 @@ fn select_seeds(
         selected.push((best, reason.to_owned()));
         used.insert(best);
     }
-    let metrics = ["right-pinky", "home-row", "moving-hand", "memory"];
+    let metrics = [
+        "memory",
+        "displaced-initials",
+        "displaced-vowels",
+        "right-pinky",
+        "home-row",
+        "moving-hand",
+    ];
     let metric_slots = seed_count.saturating_sub(2).min(metrics.len());
-    for offset in 0..metric_slots {
-        let metric = metrics[(generation.saturating_sub(1) + offset) % metrics.len()];
+    for &metric in metrics.iter().take(metric_slots) {
         let candidate = preferred
             .iter()
             .copied()
@@ -531,6 +537,8 @@ fn metric_order(metric: &str, left: &ExplorationEntry, right: &ExplorationEntry)
             .and_then(|value| value.mx_score)
             .map_or(f64::INFINITY, |value| -value),
         "memory" => entry.point.metrics.memory as f64,
+        "displaced-initials" => entry.point.metrics.displaced_initials as f64,
+        "displaced-vowels" => entry.point.metrics.displaced_vowels as f64,
         _ => f64::INFINITY,
     };
     value(left)

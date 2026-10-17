@@ -73,6 +73,19 @@ function Add-Optional([Collections.Generic.List[string]]$Arguments, [string]$Fla
     }
 }
 
+$initialSchemeIds = @($settings.initialSchemes | ForEach-Object { [string]$_ })
+$initialRankingPath = $null
+if ('initialRanking' -in $settings.PSObject.Properties.Name -and $null -ne $settings.initialRanking) {
+    $initialRankingPath = Resolve-RepoPath ([string]$settings.initialRanking)
+    $ranking = Get-Content -Raw -LiteralPath $initialRankingPath | ConvertFrom-Json
+    if ($ranking.version -ne 'ckt-v4-ranked-explorer-seeds-1') {
+        throw "unsupported initial ranking version: $($ranking.version)"
+    }
+    $rankedIds = @($ranking.selected | Sort-Object rank | ForEach-Object { [string]$_.id })
+    if ($rankedIds.Count -eq 0) { throw "initial ranking contains no selected schemes: $initialRankingPath" }
+    $initialSchemeIds = @($initialSchemeIds + $rankedIds | Select-Object -Unique)
+}
+
 $manifest = Resolve-RepoPath 'research/ckt-v4-core/Cargo.toml'
 & cargo build --release --manifest-path $manifest --bin anneal-native --bin plan-exploration
 if ($LASTEXITCODE -ne 0) { throw 'release build failed' }
@@ -97,7 +110,8 @@ try {
 
 $contract = [ordered]@{
     version = 'ckt-v4-explorer-contract-1'
-    initialSchemes = @($settings.initialSchemes | ForEach-Object { [string]$_ })
+    initialSchemes = $initialSchemeIds
+    initialRanking = if ($null -eq $initialRankingPath) { $null } else { [string]$settings.initialRanking }
     initialLayouts = @($settings.initialLayouts | ForEach-Object { [string]$_ })
     schemeTemplate = [string]$settings.schemeTemplate
     reference = [string]$settings.reference
@@ -149,7 +163,7 @@ try {
     $planDir = Join-Path $root "$generationName-plan"
     $null = New-Item -ItemType Directory -Force -Path $generationDir
     if ($generation -eq 1) {
-        $schemeSeeds = @($settings.initialSchemes | ForEach-Object {
+        $schemeSeeds = @($initialSchemeIds | ForEach-Object {
             [pscustomobject]@{ Kind = 'scheme'; Value = [string]$_; Label = [string]$_ }
         })
         $layoutSeeds = @($settings.initialLayouts | ForEach-Object {

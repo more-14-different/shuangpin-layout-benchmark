@@ -151,6 +151,76 @@ fn generations_deduplicate_states_and_emit_diverse_seeds_and_review_flags() {
 }
 
 #[test]
+fn eight_seed_plan_reserves_every_configured_metric_extreme() {
+    let mut points = Vec::new();
+    for index in 0..8 {
+        let mut candidate = point(
+            &format!("candidate-{index}"),
+            &[(index, (index + 8) as u8), (index + 8, index as u8)],
+            9.0 + index as f64 * 0.01,
+            0.02 + index as f64 * 0.001,
+            0.30 - index as f64 * 0.001,
+        );
+        candidate.metrics.memory = 48 - index;
+        candidate.metrics.displaced_initials = 10 - index;
+        candidate.metrics.displaced_vowels = 9 - index;
+        candidate.metrics.ergonomics.as_mut().unwrap().mx_score = Some(130.0 + index as f64);
+        points.push(candidate);
+    }
+    let batch = ExplorationBatch {
+        source: "g1.jsonl".to_owned(),
+        provenance: provenance(),
+        points,
+    };
+    let config = ExplorationConfig {
+        seed_count: 8,
+        max_ckt_delta: 0.5,
+        novelty_distance: 3,
+        basin_radius: 2,
+        basin_support: 2,
+    };
+    let (_, plan) = update_and_plan(None, vec![batch.clone()], 1, config).unwrap();
+    let reasons: std::collections::BTreeSet<_> =
+        plan.seeds.iter().map(|seed| seed.reason.as_str()).collect();
+    assert_eq!(plan.seeds.len(), 8);
+    assert!(reasons.contains("best-new-ckt-v4"));
+    for metric in [
+        "memory",
+        "displaced-initials",
+        "displaced-vowels",
+        "right-pinky",
+        "home-row",
+        "moving-hand",
+    ] {
+        assert!(reasons.contains(format!("metric-extreme:{metric}").as_str()));
+    }
+    assert!(reasons.contains("novel-sparse-coverage"));
+
+    let directory = std::env::temp_dir().join(format!(
+        "ckt-v4-extreme-seeds-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    std::fs::create_dir_all(&directory).unwrap();
+    let mut database = ExplorationDatabase::open(directory.join("exploration.sqlite3")).unwrap();
+    let database_plan = database
+        .plan_generation(vec![batch], 1, config, "g1")
+        .unwrap();
+    let identity = |seeds: &[ckt_v4_core::SeedRecommendation]| {
+        seeds
+            .iter()
+            .map(|seed| (seed.reason.clone(), seed.state_key.clone()))
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(identity(&database_plan.seeds), identity(&plan.seeds));
+    drop(database);
+    std::fs::remove_dir_all(directory).unwrap();
+}
+
+#[test]
 fn archive_rejects_logs_from_a_different_search_contract() {
     let initial = ExplorationBatch {
         source: "g1.jsonl".to_owned(),
