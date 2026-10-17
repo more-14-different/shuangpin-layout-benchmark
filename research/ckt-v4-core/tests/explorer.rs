@@ -1,7 +1,8 @@
 use ckt_v4_core::{
     ErgonomicFrontierMetrics, ErgonomicMetricSchema, ExplorationBatch, ExplorationConfig,
-    FrontierLogProvenance, FrontierMetrics, FrontierPoint, LoadDiagnostics, MetricVerification,
-    RegularLayout, layout_distance, layout_state_key, update_and_plan,
+    ExplorationDatabase, ExplorationStateLookup, FrontierLogProvenance, FrontierMetrics,
+    FrontierPoint, LoadDiagnostics, MetricVerification, RegularLayout, layout_distance,
+    layout_state_key, update_and_plan,
 };
 
 fn layout(id: &str, changes: &[(usize, u8)]) -> RegularLayout {
@@ -172,4 +173,106 @@ fn archive_rejects_logs_from_a_different_search_contract() {
     )
     .unwrap_err();
     assert!(error.contains("search contract"));
+}
+
+#[test]
+fn sqlite_archive_is_incremental_idempotent_and_uses_bounded_distance_queries() {
+    let directory = std::env::temp_dir().join(format!(
+        "ckt-v4-explorer-db-{}-{}",
+        std::process::id(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos()
+    ));
+    std::fs::create_dir_all(&directory).unwrap();
+    let path = directory.join("exploration.sqlite3");
+    let config = ExplorationConfig {
+        seed_count: 3,
+        max_ckt_delta: 0.5,
+        novelty_distance: 3,
+        basin_radius: 2,
+        basin_support: 2,
+    };
+    {
+        let mut database = ExplorationDatabase::open(&path).unwrap();
+        let first = database
+            .plan_generation(
+                vec![ExplorationBatch {
+                    source: "g1.jsonl".to_owned(),
+                    provenance: provenance(),
+                    points: vec![
+                        point("base", &[], 10.0, 0.04, 0.22),
+                        point("base-alias", &[], 10.0, 0.04, 0.22),
+                    ],
+                }],
+                1,
+                config,
+                "g1",
+            )
+            .unwrap();
+        assert_eq!(first.imported_new_states, 1);
+        assert_eq!(first.total_states, 1);
+
+        let second_batch = ExplorationBatch {
+            source: "g2.jsonl".to_owned(),
+            provenance: provenance(),
+            points: vec![
+                point("new-a", &[(0, 20), (1, 19), (2, 18)], 9.9, 0.03, 0.24),
+                point(
+                    "new-b",
+                    &[(0, 20), (1, 19), (2, 18), (3, 17)],
+                    9.92,
+                    0.029,
+                    0.25,
+                ),
+                point("near-old", &[(0, 20)], 9.95, 0.035, 0.23),
+            ],
+        };
+        let second = database
+            .plan_generation(vec![second_batch.clone()], 2, config, "g2")
+            .unwrap();
+        assert_eq!(second.imported_new_states, 3);
+        assert_eq!(second.total_states, 4);
+        let distance_three = second
+            .seeds
+            .iter()
+            .find(|seed| seed.point.layout.id == "new-a")
+            .unwrap();
+        assert_eq!(distance_three.nearest_prior_distance, Some(3));
+        assert!(distance_three.nearest_prior_distance_exact);
+        let beyond_index_radius = second
+            .seeds
+            .iter()
+            .find(|seed| seed.point.layout.id == "new-b")
+            .unwrap();
+        assert_eq!(beyond_index_radius.nearest_prior_distance, Some(4));
+        assert!(!beyond_index_radius.nearest_prior_distance_exact);
+        assert!(second.review_queue.iter().any(|candidate| {
+            candidate.kind == "emerging-basin"
+                && candidate.nearest_prior_distance == Some(3)
+                && candidate.nearest_prior_distance_exact
+        }));
+
+        let replay = database
+            .plan_generation(vec![second_batch], 2, config, "g2")
+            .unwrap();
+        assert_eq!(replay, second);
+        assert!(
+            database
+                .plan_generation(Vec::new(), 2, config, "different")
+                .unwrap_err()
+                .contains("different inputs")
+        );
+    }
+    {
+        let lookup = ExplorationStateLookup::open(&path, 1, "scheme").unwrap();
+        assert!(lookup.contains(&layout("base", &[])).unwrap());
+        assert!(
+            !lookup
+                .contains(&layout("new-a", &[(0, 20), (1, 19), (2, 18)]))
+                .unwrap()
+        );
+    }
+    std::fs::remove_dir_all(directory).unwrap();
 }

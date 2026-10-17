@@ -4,7 +4,7 @@ use std::cmp::Ordering;
 use std::collections::{BTreeMap, BTreeSet};
 
 pub const EXPLORATION_ARCHIVE_VERSION: &str = "ckt-v4-exploration-archive-1";
-pub const EXPLORATION_PLAN_VERSION: &str = "ckt-v4-exploration-plan-1";
+pub const EXPLORATION_PLAN_VERSION: &str = "ckt-v4-exploration-plan-2";
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -82,6 +82,8 @@ pub struct SeedRecommendation {
     pub reason: String,
     pub state_key: String,
     pub nearest_prior_distance: Option<usize>,
+    #[serde(default = "default_true")]
+    pub nearest_prior_distance_exact: bool,
     pub coverage_cell: String,
     pub coverage_count: usize,
     pub point: FrontierPoint,
@@ -94,8 +96,14 @@ pub struct ReviewCandidate {
     pub rationale: String,
     pub state_key: String,
     pub nearest_prior_distance: Option<usize>,
+    #[serde(default = "default_true")]
+    pub nearest_prior_distance_exact: bool,
     pub new_neighbour_support: usize,
     pub point: FrontierPoint,
+}
+
+const fn default_true() -> bool {
+    true
 }
 
 pub fn layout_state_bytes(layout: &RegularLayout) -> Vec<u8> {
@@ -302,6 +310,7 @@ pub fn update_and_plan(
             reason,
             state_key: entry.state_key.clone(),
             nearest_prior_distance: nearest_distance(&entry.point.layout, &prior_entries)?,
+            nearest_prior_distance_exact: true,
             coverage_cell: coverage_cell(&entry.point),
             coverage_count: coverage[&coverage_cell(&entry.point)],
             point: entry.point.clone(),
@@ -357,7 +366,7 @@ fn bucket(value: f64, width: f64) -> i64 {
     (value / width).floor() as i64
 }
 
-fn coverage_cell(point: &FrontierPoint) -> String {
+pub(crate) fn coverage_cell(point: &FrontierPoint) -> String {
     let metrics = point.metrics;
     let (rp, home, mx) = metrics.ergonomics.map_or((-1, -1, -1), |ergonomics| {
         (
@@ -631,6 +640,7 @@ fn review_candidates(
             rationale,
             state_key: entry.state_key.clone(),
             nearest_prior_distance: prior_distance,
+            nearest_prior_distance_exact: true,
             new_neighbour_support: support,
             point: entry.point.clone(),
         });

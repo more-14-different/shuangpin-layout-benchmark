@@ -1,13 +1,13 @@
 use ckt_v4_core::{
     CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, ErgonomicFixture, ErgonomicFrontierMetrics,
-    ErgonomicGuards, ErgonomicMetricSchema, ExplorationArchive, FrontierLogProvenance,
-    FrontierLogWriter, FrontierMetrics, FrontierPoint, IncrementalResolver, IncrementalSummary,
-    InputMode, KeyAlphabet, LayoutDiagnostics, MetricVerification, MovingHandCorpus,
-    NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY, NativeCorpus, ProjectedMotor,
-    Projection, ProposalContext, ProposalError, ProposalKind, ProposalStats, RegularLayout,
-    RoleTables, SchemeFixture, SchemeState, SearchRng, Summary, canonical_layout_bytes,
-    composite_score, layout_state_key, propose, resolve, summarize, validate_checkpoint_contract,
-    validate_proposal,
+    ErgonomicGuards, ErgonomicMetricSchema, ExplorationArchive, ExplorationStateLookup,
+    FrontierLogProvenance, FrontierLogWriter, FrontierMetrics, FrontierPoint, IncrementalResolver,
+    IncrementalSummary, InputMode, KeyAlphabet, LayoutDiagnostics, MetricVerification,
+    MovingHandCorpus, NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY, NativeCorpus,
+    ProjectedMotor, Projection, ProposalContext, ProposalError, ProposalKind, ProposalStats,
+    RegularLayout, RoleTables, SchemeFixture, SchemeState, SearchRng, Summary,
+    canonical_layout_bytes, composite_score, layout_state_key, propose, resolve, summarize,
+    validate_checkpoint_contract, validate_proposal,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
@@ -41,7 +41,24 @@ struct GuardContext<'a> {
     layout: LayoutGuards,
     ergonomic: Option<&'a ErgonomicRuntime>,
     ergonomic_guards: ErgonomicGuards,
-    explored_states: &'a BTreeSet<String>,
+    archive_lookup: &'a ArchiveLookup,
+    chain_explored_states: &'a BTreeSet<String>,
+}
+
+enum ArchiveLookup {
+    None,
+    LegacyJson(BTreeSet<String>),
+    Database(ExplorationStateLookup),
+}
+
+impl ArchiveLookup {
+    fn contains(&self, layout: &RegularLayout, state_key: &str) -> Result<bool, String> {
+        match self {
+            Self::None => Ok(false),
+            Self::LegacyJson(states) => Ok(states.contains(state_key)),
+            Self::Database(database) => database.contains(layout),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -101,6 +118,8 @@ struct Args {
     mx_variant: String,
     initial_layout: Option<PathBuf>,
     avoid_archive: Option<PathBuf>,
+    exploration_database: Option<PathBuf>,
+    avoid_generation: Option<usize>,
     resume: bool,
 }
 
@@ -136,8 +155,8 @@ fn main() -> Result<(), String> {
     let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
     let ergonomic = load_ergonomic_runtime(&args, &fixture)?;
     let ergonomic_contract = ergonomic.as_ref().map(|runtime| runtime.contract.clone());
-    let (archive_states, exploration_archive_generation) =
-        load_exploration_archive(args.avoid_archive.as_deref(), &fixture)?;
+    let (archive_lookup, exploration_archive_generation) =
+        load_exploration_lookup(&args, &fixture)?;
     let motor = load_motor(&corpus, &alphabet, &args.snapshot)?;
     let parameters = CognitiveParameters::default();
 
@@ -235,8 +254,7 @@ fn main() -> Result<(), String> {
     checkpoint
         .chain_explored_states
         .insert(current_state_key.clone());
-    let mut explored_states = archive_states;
-    explored_states.extend(checkpoint.chain_explored_states.iter().cloned());
+    let mut explored_states = checkpoint.chain_explored_states.clone();
     validate_ergonomic_guards(
         &checkpoint.best_layout,
         &fixture,
@@ -301,7 +319,8 @@ fn main() -> Result<(), String> {
                 layout: args.guards,
                 ergonomic: ergonomic.as_ref(),
                 ergonomic_guards: args.ergonomic_guards,
-                explored_states: &explored_states,
+                archive_lookup: &archive_lookup,
+                chain_explored_states: &explored_states,
             },
             &mut checkpoint.proposal_stats,
             &mut rng,
@@ -502,6 +521,7 @@ fn propose_guarded(
             }
             Err(error) => return Err(error.to_string()),
         }
+        let state_key = layout_state_key(&candidate);
         if validate_guards(
             &candidate,
             guard_context.schemes,
@@ -509,9 +529,10 @@ fn propose_guarded(
             guard_context.layout,
         )
         .is_ok()
+            && !guard_context.chain_explored_states.contains(&state_key)
             && !guard_context
-                .explored_states
-                .contains(&layout_state_key(&candidate))
+                .archive_lookup
+                .contains(&candidate, &state_key)?
             && validate_ergonomic_guards(
                 &candidate,
                 guard_context.schemes,
@@ -914,6 +935,36 @@ fn load_exploration_archive(
     Ok((archive.state_keys(), Some(archive.generation)))
 }
 
+fn load_exploration_lookup(
+    args: &Args,
+    fixture: &SchemeFixture,
+) -> Result<(ArchiveLookup, Option<usize>), String> {
+    if args.avoid_archive.is_some() && args.exploration_database.is_some() {
+        return Err("--avoid-archive and --exploration-database are mutually exclusive".to_owned());
+    }
+    if let Some(path) = args.exploration_database.as_deref() {
+        let generation = args
+            .avoid_generation
+            .ok_or("--exploration-database requires --avoid-generation")?;
+        let scheme_hash = fixture
+            .source_hashes
+            .get("html")
+            .map(String::as_str)
+            .unwrap_or_default();
+        let lookup = ExplorationStateLookup::open(path, generation, scheme_hash)?;
+        return Ok((ArchiveLookup::Database(lookup), Some(generation)));
+    }
+    if args.avoid_generation.is_some() {
+        return Err("--avoid-generation requires --exploration-database".to_owned());
+    }
+    let (states, generation) = load_exploration_archive(args.avoid_archive.as_deref(), fixture)?;
+    if generation.is_some() {
+        Ok((ArchiveLookup::LegacyJson(states), generation))
+    } else {
+        Ok((ArchiveLookup::None, None))
+    }
+}
+
 fn write_checkpoint(path: &Path, checkpoint: &Checkpoint) -> Result<(), String> {
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent).map_err(|error| error.to_string())?;
@@ -976,6 +1027,8 @@ fn parse_args() -> Result<Args, String> {
         mx_variant: "native-punctuation".to_owned(),
         initial_layout: None,
         avoid_archive: None,
+        exploration_database: None,
+        avoid_generation: None,
         resume: false,
     };
     while let Some(flag) = values.next() {
@@ -1060,6 +1113,16 @@ fn parse_args() -> Result<Args, String> {
                 result.avoid_archive = Some(PathBuf::from(
                     values.next().ok_or("--avoid-archive needs a value")?,
                 ))
+            }
+            "--exploration-database" => {
+                result.exploration_database = Some(PathBuf::from(
+                    values
+                        .next()
+                        .ok_or("--exploration-database needs a value")?,
+                ))
+            }
+            "--avoid-generation" => {
+                result.avoid_generation = Some(parse_value(values.next(), "--avoid-generation")?)
             }
             "--resume" => result.resume = true,
             _ => return Err(format!("unknown option {flag}")),

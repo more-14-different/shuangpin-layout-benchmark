@@ -85,7 +85,7 @@ $schemes = Resolve-RepoPath $settings.schemes
 $snapshot = Resolve-RepoPath $settings.snapshot
 $ergonomics = Resolve-RepoPath $settings.ergonomicFixture
 $root = Resolve-RepoPath $settings.outputRoot
-$archive = Join-Path $root 'exploration-archive.json'
+$database = Join-Path $root 'exploration.sqlite3'
 $null = New-Item -ItemType Directory -Force -Path $root
 
 $lockPath = Join-Path $root 'run.lock'
@@ -148,11 +148,6 @@ try {
     $generationDir = Join-Path $root $generationName
     $planDir = Join-Path $root "$generationName-plan"
     $null = New-Item -ItemType Directory -Force -Path $generationDir
-    $archiveInput = Join-Path $generationDir 'archive-input.json'
-    if ((Test-Path -LiteralPath $archive) -and -not (Test-Path -LiteralPath $archiveInput)) {
-        Copy-Item -LiteralPath $archive -Destination $archiveInput
-    }
-
     if ($generation -eq 1) {
         $schemeSeeds = @($settings.initialSchemes | ForEach-Object {
             [pscustomobject]@{ Kind = 'scheme'; Value = [string]$_; Label = [string]$_ }
@@ -214,7 +209,13 @@ try {
             '--mx-variant', [string]$settings.mxVariant
         )) { $arguments.Add($value) }
         if ($item.Kind -eq 'layout' -and -not $resume) { Add-Optional $arguments '--initial-layout' $item.Value }
-        if (Test-Path -LiteralPath $archiveInput) { Add-Optional $arguments '--avoid-archive' $archiveInput }
+        if ($generation -gt 1) {
+            if (-not (Test-Path -LiteralPath $database)) {
+                throw "exploration database is missing before generation ${generation}: $database"
+            }
+            Add-Optional $arguments '--exploration-database' $database
+            Add-Optional $arguments '--avoid-generation' ($generation - 1)
+        }
         Add-Optional $arguments '--max-memory' $settings.guards.maxMemory
         Add-Optional $arguments '--max-d' $settings.guards.maxD
         Add-Optional $arguments '--max-v' $settings.guards.maxV
@@ -231,7 +232,7 @@ try {
     if (-not (Test-Path -LiteralPath $planDir)) {
         $arguments = [Collections.Generic.List[string]]::new()
         foreach ($value in @(
-            '--archive', $archive,
+            '--database', $database,
             '--output-dir', $planDir,
             '--generation', [string]$generation,
             '--seeds', [string]$settings.nextSeedCount,
@@ -250,11 +251,10 @@ try {
         if ($LASTEXITCODE -ne 0) { throw "generation $generation planning failed" }
     }
 
-    $plannedArchive = Join-Path $planDir 'archive-after.json'
-    if (-not (Test-Path -LiteralPath $plannedArchive)) {
-        throw "generation archive snapshot is missing: $plannedArchive"
+    $databaseState = Join-Path $planDir 'database-state.json'
+    if (-not (Test-Path -LiteralPath $databaseState) -or -not (Test-Path -LiteralPath $database)) {
+        throw "generation database state is missing: $databaseState / $database"
     }
-    Copy-Item -LiteralPath $plannedArchive -Destination $archive -Force
 
     $reviewPath = Join-Path $planDir 'review-queue.json'
     $reviews = @(Get-Content -Raw -LiteralPath $reviewPath | ConvertFrom-Json)
