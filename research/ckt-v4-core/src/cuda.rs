@@ -1,5 +1,6 @@
 use crate::PackedCode;
 use crate::model::{Outcome, Pool, Row, row_cmp, validate_rows};
+use rayon::prelude::*;
 use std::collections::HashMap;
 use std::ffi::{c_char, c_int, c_void};
 use std::hash::{BuildHasherDefault, Hasher};
@@ -197,6 +198,13 @@ struct RowContract {
     stages: Vec<(u8, u64, usize)>,
 }
 
+struct FinalistHostData<'a> {
+    row_count: usize,
+    codes: &'a [u64],
+    outcome_ranks: &'a [u32],
+    outcome_stages: &'a [u32],
+}
+
 #[derive(Debug)]
 struct CudaTopology {
     row_first_stage: Vec<u32>,
@@ -284,7 +292,7 @@ pub fn resolve_cuda<F>(
     motor_cost: F,
 ) -> Result<(Vec<Outcome>, CudaResolveTimings), String>
 where
-    F: Fn(PackedCode) -> Option<f64>,
+    F: Fn(PackedCode) -> Option<f64> + Sync,
 {
     CudaResolvePlan::new(rows)?.resolve(rows, motor_cost)
 }
@@ -363,7 +371,7 @@ impl CudaResolvePlan {
         motor_cost: F,
     ) -> Result<(Vec<Outcome>, CudaResolveTimings), String>
     where
-        F: Fn(PackedCode) -> Option<f64>,
+        F: Fn(PackedCode) -> Option<f64> + Sync,
     {
         let (mut batch, timings) = self.resolve_batch(&[rows], motor_cost)?;
         Ok((batch.remove(0), timings))
@@ -512,7 +520,7 @@ impl CudaResolvePlan {
         motor_cost: F,
     ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
     where
-        F: Fn(PackedCode) -> Option<f64>,
+        F: Fn(PackedCode) -> Option<f64> + Sync,
     {
         if rows_batch.is_empty() {
             return Ok((Vec::new(), CudaResolveTimings::default()));
@@ -543,7 +551,7 @@ impl CudaResolvePlan {
         motor_cost: F,
     ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
     where
-        F: Fn(PackedCode) -> Option<f64>,
+        F: Fn(PackedCode) -> Option<f64> + Sync,
     {
         if codes_batch.is_empty() {
             return Ok((Vec::new(), CudaResolveTimings::default()));
@@ -578,7 +586,7 @@ impl CudaResolvePlan {
         prepare_started: Instant,
     ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
     where
-        F: Fn(PackedCode) -> Option<f64>,
+        F: Fn(PackedCode) -> Option<f64> + Sync,
     {
         let row_count = self.contract.len();
         let flat_rows = lane_count
@@ -626,64 +634,36 @@ impl CudaResolvePlan {
         drop(workspace);
 
         let finalize_started = Instant::now();
-        let mut outcomes: Vec<Vec<Outcome>> = (0..lane_count)
-            .map(|_| Vec::with_capacity(row_count))
+        let lane_offsets: Vec<_> = (0..=lane_count)
+            .map(|lane| {
+                let first_source = lane * self.slot_count;
+                finalist_indices.partition_point(|&source| (source as usize) < first_source)
+            })
             .collect();
-        let mut current_flat = None;
-        let mut chosen = None;
-        for source in finalist_indices {
-            let source = source as usize;
-            let lane = source / self.slot_count;
-            let slot = source % self.slot_count;
-            let row_index = self.slot_rows[slot] as usize;
-            let flat = lane * row_count + row_index;
-            if current_flat != Some(flat) {
-                if let Some(previous) = current_flat {
-                    if flat != previous + 1 {
-                        return Err(format!(
-                            "CUDA finalists are not contiguous between rows {previous} and {flat}"
-                        ));
-                    }
-                    outcomes[previous / row_count].push(self.finish_finalist(
-                        previous,
-                        row_count,
-                        outcome_ranks[previous],
-                        outcome_stages[previous],
-                        chosen.take(),
-                    )?);
-                } else if flat != 0 {
-                    return Err(format!(
-                        "CUDA finalists start at row {flat}, expected row 0"
-                    ));
-                }
-                current_flat = Some(flat);
-            }
-            let order = self.slot_orders[slot];
-            let code = PackedCode::from_valid_bits_len(codes[source], order);
-            let cost = motor_cost(code)
-                .filter(|value| value.is_finite())
-                .unwrap_or(f64::NAN);
-            if !cost.is_finite() {
-                continue;
-            }
-            if chosen.is_none_or(|(_, current)| cost < current) {
-                chosen = Some((code, cost));
-            }
-        }
-        let last = current_flat.ok_or("CUDA returned no finalists")?;
-        outcomes[last / row_count].push(self.finish_finalist(
-            last,
+        let host = FinalistHostData {
             row_count,
-            outcome_ranks[last],
-            outcome_stages[last],
-            chosen,
-        )?);
-        if last + 1 != flat_rows {
-            return Err(format!(
-                "CUDA finalist rows differ: expected {flat_rows}, got {}",
-                last + 1
-            ));
-        }
+            codes: &codes,
+            outcome_ranks: &outcome_ranks,
+            outcome_stages: &outcome_stages,
+        };
+        let resolve_lane = |lane: usize| {
+            self.finish_finalist_lane(
+                lane,
+                &finalist_indices[lane_offsets[lane]..lane_offsets[lane + 1]],
+                &host,
+                &motor_cost,
+            )
+        };
+        let outcomes = if lane_count > 1 && finalist_count >= 4096 {
+            (0..lane_count)
+                .into_par_iter()
+                .map(resolve_lane)
+                .collect::<Result<Vec<_>, _>>()?
+        } else {
+            (0..lane_count)
+                .map(resolve_lane)
+                .collect::<Result<Vec<_>, _>>()?
+        };
         let finalization = finalize_started.elapsed();
         Ok((
             outcomes,
@@ -697,6 +677,73 @@ impl CudaResolvePlan {
                 launches: self.orders.len(),
             },
         ))
+    }
+
+    fn finish_finalist_lane<F>(
+        &self,
+        lane: usize,
+        finalists: &[u32],
+        host: &FinalistHostData<'_>,
+        motor_cost: &F,
+    ) -> Result<Vec<Outcome>, String>
+    where
+        F: Fn(PackedCode) -> Option<f64> + Sync,
+    {
+        let flat_base = lane * host.row_count;
+        let mut outcomes = Vec::with_capacity(host.row_count);
+        let mut current_row = None;
+        let mut chosen = None;
+        for &source in finalists {
+            let source = source as usize;
+            if source / self.slot_count != lane {
+                return Err(format!("CUDA finalist crossed lane {lane}"));
+            }
+            let slot = source % self.slot_count;
+            let row_index = self.slot_rows[slot] as usize;
+            if current_row != Some(row_index) {
+                if let Some(previous) = current_row {
+                    outcomes.push(self.finish_finalist(
+                        flat_base + previous,
+                        host.row_count,
+                        host.outcome_ranks[flat_base + previous],
+                        host.outcome_stages[flat_base + previous],
+                        chosen.take(),
+                    )?);
+                }
+                if row_index != outcomes.len() {
+                    return Err(format!(
+                        "CUDA finalists in lane {lane} reached row {row_index}, expected {}",
+                        outcomes.len()
+                    ));
+                }
+                current_row = Some(row_index);
+            }
+            let order = self.slot_orders[slot];
+            let code = PackedCode::from_valid_bits_len(host.codes[source], order);
+            let cost = motor_cost(code)
+                .filter(|value| value.is_finite())
+                .unwrap_or(f64::NAN);
+            if cost.is_finite() && chosen.is_none_or(|(_, current)| cost < current) {
+                chosen = Some((code, cost));
+            }
+        }
+        let last =
+            current_row.ok_or_else(|| format!("CUDA returned no finalists for lane {lane}"))?;
+        outcomes.push(self.finish_finalist(
+            flat_base + last,
+            host.row_count,
+            host.outcome_ranks[flat_base + last],
+            host.outcome_stages[flat_base + last],
+            chosen,
+        )?);
+        if outcomes.len() != host.row_count {
+            return Err(format!(
+                "CUDA finalist rows in lane {lane} differ: expected {}, got {}",
+                host.row_count,
+                outcomes.len()
+            ));
+        }
+        Ok(outcomes)
     }
 
     fn finish_finalist(

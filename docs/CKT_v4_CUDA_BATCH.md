@@ -48,6 +48,8 @@ Explorer 配置中同时设置：
 
 Native 生成器会在每行仍处于 CPU cache 时同步构造 CUDA 平面代码，随后各链把这份表示交给 broker。Broker 只校验 lane 长度并做连续块复制，不再串行重走全部 Row/Stage、比较静态契约和逐个提取 PackedCode。RTX 4060 Laptop、8 lanes 的实测中，host preparation 从约 200–223 ms 降到 6–9 ms；21×21 finalist batch 为 160–165 ms，21×26 为约 173 ms，且均与 CPU 结果 exact 一致。普通 `resolve_batch` 仍保留完整契约校验，平面快路径只接收 native 生成器的同拓扑数据。
 
-目前主要剩余成本转为 host finalization（约 107–120 ms），GPU device 约 43–47 ms。后续优先方向是压缩/并行 finalist 的 ProjectedMotor 归约或进一步降低回传量，以及改进链的阶段对齐，而不是单纯延长收集窗口。
+Finalist 归约现在按 lane 交给 CUDA feature 专属的持久 Rayon 线程池并行；每条 lane 内仍按原始 finalist 顺序处理，保持同成本时选择最早代码的确定性。单 lane 或少于 4096 finalists 时继续顺序执行，避免线程池调度开销。RTX 4060 Laptop、8 lanes 实测中，host finalization 从 107–120 ms 降到 15–22 ms，整批 21×21 为 68–70 ms、21×26 为 63–80 ms，均与 CPU 结果 exact 一致。
+
+并行后 GPU device（约 38–47 ms）重新成为最大单项，host preparation 约 6–8 ms。此时把 ProjectedMotor 迁入 GPU 的理论整批收益上限只剩约 1.3 倍，实际还会被上传、tie 归约和实现复杂度抵消，暂不作为下一优先项。更值得继续观察的是生产 batch 的 lane 宽度、GPU kernel 和 finalist 回传量。
 
 固定窗口从第一条请求开始计时。实验中的“每到一条请求就续时”虽然提高了平均 batch 宽度，却增加总等待时间，已否决。
