@@ -1,6 +1,7 @@
 use ckt_v4_core::{
     CognitiveParameters, CudaResolvePlan, InputMode, KeyAlphabet, NativeCorpus, ProjectedMotor,
-    Projection, RoleTables, SchemeFixture, SchemeState, cuda_device_name, resolve, summarize,
+    Projection, RoleTables, SchemeFixture, SchemeInput, SchemeState, cuda_device_name, resolve,
+    summarize,
 };
 use std::collections::HashMap;
 use std::env;
@@ -48,8 +49,7 @@ fn main() -> Result<(), String> {
     let mut generation_total = 0.0;
     let mut plan_total = 0.0;
     let mut compared_rows = 0_usize;
-    let mut warmed = false;
-    for input in selected {
+    for input in &selected {
         let scheme = SchemeState::compile(input, &alphabet, corpus.header().pinyin_count)?;
         for mode in [InputMode::Keytao, InputMode::Sanpin] {
             let started = Instant::now();
@@ -66,18 +66,17 @@ fn main() -> Result<(), String> {
             })?;
             let cpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
 
-            if !warmed {
-                plan.resolve(&generated.rows, |code| {
-                    motor.cost(code).map(|value| value.upper_ms)
-                })?;
-                warmed = true;
-            }
+            let started = Instant::now();
+            let (cold_gpu, cold_timings) = plan.resolve(&generated.rows, |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            })?;
+            let cold_gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
             let started = Instant::now();
             let (gpu, timings) = plan.resolve(&generated.rows, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             })?;
             let gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
-            if cpu != gpu {
+            if cpu != cold_gpu || cpu != gpu {
                 let mismatch = cpu
                     .iter()
                     .zip(&gpu)
@@ -99,15 +98,17 @@ fn main() -> Result<(), String> {
                 ));
             }
             println!(
-                "{}/{} rows={} entries={} launches={} generation={generation_ms:.1}ms plan={plan_ms:.1}ms cpu={cpu_ms:.1}ms cuda={gpu_ms:.1}ms speedup={:.2}x [prepare={:.1} device={:.1} finalize={:.1}] exact=yes",
+                "{}/{} rows={} entries={} launches={} generation={generation_ms:.1}ms plan={plan_ms:.1}ms cpu={cpu_ms:.1}ms cuda-cold={cold_gpu_ms:.1}ms cuda-warm={gpu_ms:.1}ms workspace={:.2}x cpu-speedup={:.2}x [cold-device={:.1} warm-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
                 scheme.id,
                 mode_name(mode),
                 generated.rows.len(),
                 timings.entries,
                 timings.launches,
+                cold_gpu_ms / gpu_ms,
                 cpu_ms / gpu_ms,
-                timings.preparation.as_secs_f64() * 1_000.0,
+                cold_timings.device.as_secs_f64() * 1_000.0,
                 timings.device.as_secs_f64() * 1_000.0,
+                timings.preparation.as_secs_f64() * 1_000.0,
                 timings.finalization.as_secs_f64() * 1_000.0,
             );
             generation_total += generation_ms;
@@ -121,6 +122,87 @@ fn main() -> Result<(), String> {
         "TOTAL rows={compared_rows} generation={generation_total:.1}ms one-time-plan={plan_total:.1}ms cpu={cpu_total:.1}ms cuda={gpu_total:.1}ms resolver-speedup={:.2}x exact=yes",
         cpu_total / gpu_total
     );
+    benchmark_batch(&corpus, &alphabet, &motor, &selected)?;
+    Ok(())
+}
+
+fn benchmark_batch(
+    corpus: &NativeCorpus,
+    alphabet: &KeyAlphabet,
+    motor: &ProjectedMotor,
+    selected: &[&SchemeInput],
+) -> Result<(), String> {
+    const BATCH_SIZE: usize = 8;
+    println!("BATCH candidates={BATCH_SIZE} (same-mode lanes are rank-isolated)");
+    for mode in [InputMode::Keytao, InputMode::Sanpin] {
+        let generated = selected
+            .iter()
+            .map(|input| {
+                let scheme = SchemeState::compile(input, alphabet, corpus.header().pinyin_count)?;
+                corpus.generate(&scheme, mode)
+            })
+            .collect::<Result<Vec<_>, String>>()?;
+        let lanes: Vec<&[_]> = (0..BATCH_SIZE)
+            .map(|index| generated[index % generated.len()].rows.as_slice())
+            .collect();
+        let expected_unique = generated
+            .iter()
+            .map(|candidate| {
+                resolve(&candidate.rows, |code| {
+                    motor.cost(code).map(|value| value.upper_ms)
+                })
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        let expected: Vec<_> = (0..BATCH_SIZE)
+            .map(|index| expected_unique[index % expected_unique.len()].clone())
+            .collect();
+        let plan = CudaResolvePlan::new(lanes[0])?;
+        plan.resolve(lanes[0], |code| {
+            motor.cost(code).map(|value| value.upper_ms)
+        })?;
+
+        let started = Instant::now();
+        let sequential = lanes
+            .iter()
+            .map(|rows| {
+                plan.resolve(rows, |code| motor.cost(code).map(|value| value.upper_ms))
+                    .map(|(outcomes, _)| outcomes)
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        let sequential_ms = started.elapsed().as_secs_f64() * 1_000.0;
+        if sequential != expected {
+            return Err(format!(
+                "sequential persistent CUDA mismatch for {}",
+                mode_name(mode)
+            ));
+        }
+
+        let started = Instant::now();
+        let (cold_batch, cold_timings) =
+            plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let cold_ms = started.elapsed().as_secs_f64() * 1_000.0;
+        if cold_batch != expected {
+            return Err(format!("cold CUDA batch mismatch for {}", mode_name(mode)));
+        }
+
+        let started = Instant::now();
+        let (warm_batch, warm_timings) =
+            plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let warm_ms = started.elapsed().as_secs_f64() * 1_000.0;
+        if warm_batch != expected {
+            return Err(format!("warm CUDA batch mismatch for {}", mode_name(mode)));
+        }
+        println!(
+            "BATCH/{} sequential={sequential_ms:.1}ms cold={cold_ms:.1}ms warm={warm_ms:.1}ms speedup={:.2}x launches={}->{} entries={} [cold-device={:.1} warm-device={:.1}] exact=yes",
+            mode_name(mode),
+            sequential_ms / warm_ms,
+            BATCH_SIZE * cold_timings.launches,
+            warm_timings.launches,
+            warm_timings.entries,
+            cold_timings.device.as_secs_f64() * 1_000.0,
+            warm_timings.device.as_secs_f64() * 1_000.0,
+        );
+    }
     Ok(())
 }
 
