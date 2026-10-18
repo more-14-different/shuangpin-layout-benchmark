@@ -49,6 +49,12 @@ impl PackedCode {
         Ok(Self { bits, len })
     }
 
+    #[cfg(feature = "cuda")]
+    pub(crate) fn from_valid_bits_len(bits: u64, len: u8) -> Self {
+        debug_assert!(Self::from_bits_len(bits, len).is_ok());
+        Self { bits, len }
+    }
+
     pub fn len(self) -> usize {
         usize::from(self.len)
     }

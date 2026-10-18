@@ -126,6 +126,7 @@ pub struct CudaResolvePlan {
     stage_pools: Vec<u64>,
     slot_count: usize,
     slot_rows: Vec<u32>,
+    slot_orders: Vec<u8>,
     workspace: Mutex<CudaWorkspace>,
 }
 
@@ -325,7 +326,7 @@ impl CudaResolvePlan {
             })
             .collect();
         let topology = CudaTopology::new(rows, &priority_by_row, &orders)?;
-        let stage_orders = rows
+        let stage_orders: Vec<u8> = rows
             .iter()
             .flat_map(|row| row.stages.iter().map(|stage| stage.order))
             .collect();
@@ -335,6 +336,11 @@ impl CudaResolvePlan {
             .collect();
         let slot_count = topology.slot_row.len();
         let slot_rows = topology.slot_row.clone();
+        let slot_orders = topology
+            .slot_stage
+            .iter()
+            .map(|&stage| stage_orders[stage as usize])
+            .collect();
         let mut workspace = CudaWorkspace::new()?;
         workspace.set_topology(&priority_by_row, &topology)?;
         Ok(Self {
@@ -345,6 +351,7 @@ impl CudaResolvePlan {
             stage_pools,
             slot_count,
             slot_rows,
+            slot_orders,
             workspace: Mutex::new(workspace),
         })
     }
@@ -523,14 +530,66 @@ impl CudaResolvePlan {
                     )
                 })?;
         }
-        let row_count = self.contract.len();
-        let flat_rows = rows_batch
+        self.resolve_flattened_codes(codes, rows_batch.len(), motor_cost, prepare_started)
+    }
+
+    /// Resolves candidates whose codes were flattened by the native generator.
+    /// Each lane must use this plan's topology and contain exactly `slot_count`
+    /// entries. The bulk copy keeps contract traversal outside the serialized
+    /// GPU broker while retaining length checks at the boundary.
+    pub fn resolve_batch_flattened<F>(
+        &self,
+        codes_batch: &[&[u64]],
+        motor_cost: F,
+    ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        if codes_batch.is_empty() {
+            return Ok((Vec::new(), CudaResolveTimings::default()));
+        }
+        if codes_batch.len() >= 1 << 23 {
+            return Err("CUDA finalist batch supports fewer than 2^23 candidates".to_owned());
+        }
+        let prepare_started = Instant::now();
+        let capacity = codes_batch
             .len()
+            .checked_mul(self.slot_count)
+            .ok_or("CUDA finalist code count overflows host indexing")?;
+        let mut codes = Vec::with_capacity(capacity);
+        for (candidate, lane) in codes_batch.iter().enumerate() {
+            if lane.len() != self.slot_count {
+                return Err(format!(
+                    "CUDA flattened candidate {candidate} has {} codes, expected {}",
+                    lane.len(),
+                    self.slot_count
+                ));
+            }
+            codes.extend_from_slice(lane);
+        }
+        self.resolve_flattened_codes(codes, codes_batch.len(), motor_cost, prepare_started)
+    }
+
+    fn resolve_flattened_codes<F>(
+        &self,
+        codes: Vec<u64>,
+        lane_count: usize,
+        motor_cost: F,
+        prepare_started: Instant,
+    ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        let row_count = self.contract.len();
+        let flat_rows = lane_count
             .checked_mul(row_count)
             .ok_or("CUDA finalist row count overflows host indexing")?;
-        let mut outcome_ranks = vec![0_u32; flat_rows];
-        let mut outcome_stages = vec![0_u32; flat_rows];
-        let mut finalist_indices = vec![0_u32; codes.len()];
+        // These POD buffers are filled synchronously by the CUDA bridge on
+        // success. Avoid zeroing the (potentially very large) finalist buffer
+        // on the host before immediately overwriting its live prefix.
+        let mut outcome_ranks = Vec::<u32>::with_capacity(flat_rows);
+        let mut outcome_stages = Vec::<u32>::with_capacity(flat_rows);
+        let mut finalist_indices = Vec::<u32>::with_capacity(codes.len());
         let preparation = prepare_started.elapsed();
 
         let workspace = self
@@ -547,80 +606,83 @@ impl CudaResolvePlan {
                 outcome_ranks.as_mut_ptr(),
                 outcome_stages.as_mut_ptr(),
                 finalist_indices.as_mut_ptr(),
-                finalist_indices.len(),
+                codes.len(),
                 &mut finalist_count,
-                rows_batch.len(),
+                lane_count,
                 message.as_mut_ptr(),
                 message.len(),
             )
         };
         cuda_result(status, &message)?;
+        // SAFETY: a successful synchronous bridge call writes every outcome
+        // element and exactly `finalist_count` compacted indices. Both counts
+        // were used as allocation capacities above.
+        unsafe {
+            outcome_ranks.set_len(flat_rows);
+            outcome_stages.set_len(flat_rows);
+            finalist_indices.set_len(finalist_count);
+        }
         let device = device_started.elapsed();
         drop(workspace);
-        finalist_indices.truncate(finalist_count);
 
         let finalize_started = Instant::now();
-        let mut chosen: Vec<Option<(PackedCode, f64)>> = vec![None; flat_rows];
-        let mut motor_cache = (rows_batch.len() > 1).then(|| {
-            MotorCache::with_capacity_and_hasher(finalist_count / 2, BuildHasherDefault::default())
-        });
+        let mut outcomes: Vec<Vec<Outcome>> = (0..lane_count)
+            .map(|_| Vec::with_capacity(row_count))
+            .collect();
+        let mut current_flat = None;
+        let mut chosen = None;
         for source in finalist_indices {
             let source = source as usize;
             let lane = source / self.slot_count;
             let slot = source % self.slot_count;
             let row_index = self.slot_rows[slot] as usize;
             let flat = lane * row_count + row_index;
-            let stage = outcome_stages[flat] as usize;
-            let order = *self
-                .stage_orders
-                .get(stage)
-                .ok_or_else(|| format!("CUDA returned invalid stage {stage}"))?;
-            let code = PackedCode::from_bits_len(codes[source], order)?;
-            let compute = || {
-                motor_cost(code)
-                    .filter(|value| value.is_finite())
-                    .unwrap_or(f64::NAN)
-            };
-            let cost = if let Some(cache) = &mut motor_cache {
-                *cache.entry(code).or_insert_with(compute)
-            } else {
-                compute()
-            };
+            if current_flat != Some(flat) {
+                if let Some(previous) = current_flat {
+                    if flat != previous + 1 {
+                        return Err(format!(
+                            "CUDA finalists are not contiguous between rows {previous} and {flat}"
+                        ));
+                    }
+                    outcomes[previous / row_count].push(self.finish_finalist(
+                        previous,
+                        row_count,
+                        outcome_ranks[previous],
+                        outcome_stages[previous],
+                        chosen.take(),
+                    )?);
+                } else if flat != 0 {
+                    return Err(format!(
+                        "CUDA finalists start at row {flat}, expected row 0"
+                    ));
+                }
+                current_flat = Some(flat);
+            }
+            let order = self.slot_orders[slot];
+            let code = PackedCode::from_valid_bits_len(codes[source], order);
+            let cost = motor_cost(code)
+                .filter(|value| value.is_finite())
+                .unwrap_or(f64::NAN);
             if !cost.is_finite() {
                 continue;
             }
-            if chosen[flat].is_none_or(|(_, current)| cost < current) {
-                chosen[flat] = Some((code, cost));
+            if chosen.is_none_or(|(_, current)| cost < current) {
+                chosen = Some((code, cost));
             }
         }
-        let mut outcomes = Vec::with_capacity(rows_batch.len());
-        for candidate in 0..rows_batch.len() {
-            let mut lane = Vec::with_capacity(row_count);
-            for row_index in 0..row_count {
-                let flat = candidate * row_count + row_index;
-                let stage = outcome_stages[flat] as usize;
-                let order = *self
-                    .stage_orders
-                    .get(stage)
-                    .ok_or_else(|| format!("CUDA returned invalid stage {stage}"))?;
-                let pool = pool_from_index(self.stage_pools[stage])?;
-                let (code, motor_upper_ms) = chosen[flat].take().ok_or_else(|| {
-                    format!(
-                        "no motor cost for candidate {candidate} row {}",
-                        self.contract[row_index].id
-                    )
-                })?;
-                lane.push(Outcome {
-                    row_index,
-                    code,
-                    code_length: order,
-                    aux_count: order.saturating_sub(self.contract[row_index].base_length),
-                    rank: outcome_ranks[flat] as usize,
-                    pool,
-                    motor_upper_ms,
-                });
-            }
-            outcomes.push(lane);
+        let last = current_flat.ok_or("CUDA returned no finalists")?;
+        outcomes[last / row_count].push(self.finish_finalist(
+            last,
+            row_count,
+            outcome_ranks[last],
+            outcome_stages[last],
+            chosen,
+        )?);
+        if last + 1 != flat_rows {
+            return Err(format!(
+                "CUDA finalist rows differ: expected {flat_rows}, got {}",
+                last + 1
+            ));
         }
         let finalization = finalize_started.elapsed();
         Ok((
@@ -629,12 +691,45 @@ impl CudaResolvePlan {
                 preparation,
                 device,
                 finalization,
-                entries: rows_batch.len() * self.slot_count,
+                entries: lane_count * self.slot_count,
                 unique_codes: 0,
                 finalists: finalist_count,
                 launches: self.orders.len(),
             },
         ))
+    }
+
+    fn finish_finalist(
+        &self,
+        flat: usize,
+        row_count: usize,
+        rank: u32,
+        stage: u32,
+        chosen: Option<(PackedCode, f64)>,
+    ) -> Result<Outcome, String> {
+        let candidate = flat / row_count;
+        let row_index = flat % row_count;
+        let stage = stage as usize;
+        let order = *self
+            .stage_orders
+            .get(stage)
+            .ok_or_else(|| format!("CUDA returned invalid stage {stage}"))?;
+        let pool = pool_from_index(self.stage_pools[stage])?;
+        let (code, motor_upper_ms) = chosen.ok_or_else(|| {
+            format!(
+                "no motor cost for candidate {candidate} row {}",
+                self.contract[row_index].id
+            )
+        })?;
+        Ok(Outcome {
+            row_index,
+            code,
+            code_length: order,
+            aux_count: order.saturating_sub(self.contract[row_index].base_length),
+            rank: rank as usize,
+            pool,
+            motor_upper_ms,
+        })
     }
 
     pub fn resolve_rank_only<F>(
@@ -1172,6 +1267,23 @@ mod tests {
             .unwrap();
         assert_eq!(finalists, expected);
         assert!(finalist_timings.finalists >= candidate.len() + second.len());
+
+        let flattened = [&candidate, &second].map(|rows| {
+            rows.iter()
+                .flat_map(|row| &row.stages)
+                .flat_map(|stage| stage.codes.iter().map(|code| code.bits()))
+                .collect::<Vec<_>>()
+        });
+        let flattened_refs = flattened.iter().map(Vec::as_slice).collect::<Vec<_>>();
+        let (fast, _) = plan
+            .resolve_batch_flattened(&flattened_refs, |value| Some(value.bits() as f64))
+            .unwrap();
+        assert_eq!(fast, expected);
+
+        let error = plan
+            .resolve_batch_flattened(&[&flattened[0][1..]], |value| Some(value.bits() as f64))
+            .unwrap_err();
+        assert!(error.contains("codes, expected"));
     }
 
     #[test]

@@ -127,20 +127,12 @@ impl RoleTables {
         })
     }
 
-    pub fn cost(&self, code: PackedCode) -> Option<MotorValue> {
-        if code.len() < 2 {
-            return None;
-        }
-        let native: Option<Vec<u8>> = code
-            .indices()
-            .map(|index| self.native_index[usize::from(index)])
-            .collect();
-        let values = native?;
+    fn cost_indices(&self, values: &[u8]) -> MotorValue {
         let (upper_ms, exact) = match values.len() {
-            2 => (f64::from(self.input.l2i1[self.offset(&values)]), true),
+            2 => (f64::from(self.input.l2i1[self.offset(values)]), true),
             3 => (
-                f64::from(self.input.l3i1[self.offset(&values)])
-                    + f64::from(self.input.l3i2[self.offset(&values)]),
+                f64::from(self.input.l3i1[self.offset(values)])
+                    + f64::from(self.input.l3i2[self.offset(values)]),
                 true,
             ),
             length => {
@@ -155,12 +147,23 @@ impl RoleTables {
                 (total, length == 4)
             }
         };
-        Some(MotorValue {
+        MotorValue {
             upper_ms,
             exact,
             projected: false,
             extension_guard: 1.0,
-        })
+        }
+    }
+
+    pub fn cost(&self, code: PackedCode) -> Option<MotorValue> {
+        if code.len() < 2 {
+            return None;
+        }
+        let mut values = [0_u8; PackedCode::MAX_LEN];
+        for (position, index) in code.indices().enumerate() {
+            values[position] = self.native_index[usize::from(index)]?;
+        }
+        Some(self.cost_indices(&values[..code.len()]))
     }
 }
 
@@ -200,43 +203,84 @@ impl ProjectedMotor {
     }
 
     pub fn cost(&self, code: PackedCode) -> Option<MotorValue> {
-        let mut variants: Vec<(Vec<u8>, f64)> = vec![(Vec::with_capacity(code.len()), 1.0)];
+        if code.len() < 2 {
+            return None;
+        }
+        let mut keys = [0_u8; PackedCode::MAX_LEN];
+        let mut native_values = [0_u8; PackedCode::MAX_LEN];
         let mut guard = 1.0_f64;
         let mut projected = false;
-        for key in code.indices() {
-            if self.native.native_index[usize::from(key)].is_some() {
-                for (variant, _) in &mut variants {
-                    variant.push(key);
-                }
-                continue;
+        for (position, key) in code.indices().enumerate() {
+            keys[position] = key;
+            if let Some(native) = self.native.native_index[usize::from(key)] {
+                native_values[position] = native;
+            } else {
+                let projection = self.projections.get(&key)?;
+                projected = true;
+                guard = guard.max(projection.distance_guard_multiplier);
             }
-            let projection = self.projections.get(&key)?;
-            projected = true;
-            guard = guard.max(projection.distance_guard_multiplier);
-            let mut expanded = Vec::with_capacity(variants.len() * projection.donors.len());
-            for (variant, variant_weight) in variants {
-                for &(donor, donor_weight) in &projection.donors {
-                    let mut next = variant.clone();
-                    next.push(donor);
-                    expanded.push((next, variant_weight * donor_weight));
-                }
-            }
-            variants = expanded;
         }
+        if !projected {
+            return Some(self.native.cost_indices(&native_values[..code.len()]));
+        }
+
         let mut upper_ms = 0.0;
-        let mut exact = !projected;
-        for (indices, weight) in variants {
-            let packed = PackedCode::from_indices(&indices).ok()?;
-            let value = self.native.cost(packed)?;
-            upper_ms += weight * value.upper_ms;
-            exact &= value.exact;
-        }
+        let mut exact = false;
+        self.accumulate_projected(
+            &keys[..code.len()],
+            0,
+            &mut native_values,
+            1.0,
+            &mut upper_ms,
+            &mut exact,
+        )?;
         Some(MotorValue {
             upper_ms: upper_ms * guard,
             exact,
-            projected,
+            projected: true,
             extension_guard: guard,
         })
+    }
+
+    fn accumulate_projected(
+        &self,
+        keys: &[u8],
+        position: usize,
+        native_values: &mut [u8; PackedCode::MAX_LEN],
+        weight: f64,
+        upper_ms: &mut f64,
+        exact: &mut bool,
+    ) -> Option<()> {
+        if position == keys.len() {
+            let value = self.native.cost_indices(&native_values[..keys.len()]);
+            *upper_ms += weight * value.upper_ms;
+            *exact &= value.exact;
+            return Some(());
+        }
+        let key = keys[position];
+        if let Some(native) = self.native.native_index[usize::from(key)] {
+            native_values[position] = native;
+            return self.accumulate_projected(
+                keys,
+                position + 1,
+                native_values,
+                weight,
+                upper_ms,
+                exact,
+            );
+        }
+        for &(donor, donor_weight) in &self.projections.get(&key)?.donors {
+            native_values[position] = self.native.native_index[usize::from(donor)]?;
+            self.accumulate_projected(
+                keys,
+                position + 1,
+                native_values,
+                weight * donor_weight,
+                upper_ms,
+                exact,
+            )?;
+        }
+        Some(())
     }
 }
 
@@ -283,5 +327,50 @@ mod tests {
         let five = native.cost(alphabet.pack("ABABA").unwrap()).unwrap();
         assert_eq!(five.upper_ms, 59.0);
         assert!(!five.exact);
+    }
+
+    #[test]
+    fn projected_motor_preserves_donor_order_weights_and_guard() {
+        let alphabet = KeyAlphabet::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./").unwrap();
+        let native = RoleTables::new(
+            &alphabet,
+            RoleTablesInput {
+                native_keys: "AB".to_owned(),
+                l2i1: vec![10.0, 20.0, 30.0, 40.0],
+                l3i1: table(3, 0.0),
+                l3i2: table(3, 0.0),
+                l4i1: table(3, 0.0),
+                l4i2: table(4, 0.0),
+                l4i3: table(3, 0.0),
+                continuation_guard_ms: 0.0,
+            },
+        )
+        .unwrap();
+        let projection_key = alphabet.index_of('C').unwrap();
+        let projections = HashMap::from([(
+            projection_key,
+            Projection {
+                donors: vec![
+                    (alphabet.index_of('A').unwrap(), 0.25),
+                    (alphabet.index_of('B').unwrap(), 0.75),
+                ],
+                distance_guard_multiplier: 1.2,
+            },
+        )]);
+        let motor = ProjectedMotor::new(native, projections).unwrap();
+
+        let native_value = motor.cost(alphabet.pack("BA").unwrap()).unwrap();
+        assert_eq!(native_value.upper_ms, 30.0);
+        assert!(native_value.exact);
+        assert!(!native_value.projected);
+
+        let projected = motor.cost(alphabet.pack("CA").unwrap()).unwrap();
+        assert_eq!(projected.upper_ms, 30.0);
+        assert!(!projected.exact);
+        assert!(projected.projected);
+        assert_eq!(projected.extension_guard, 1.2);
+
+        let double = motor.cost(alphabet.pack("CC").unwrap()).unwrap();
+        assert_eq!(double.upper_ms, 39.0);
     }
 }

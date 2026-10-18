@@ -154,6 +154,7 @@ struct CudaBatchClient;
 struct CudaBatchRequest {
     mode: InputMode,
     rows: Vec<Row>,
+    codes: Vec<u64>,
     response: mpsc::SyncSender<CudaBatchResponse>,
 }
 
@@ -641,12 +642,18 @@ fn run_chain(
 
 #[cfg(feature = "cuda")]
 impl CudaBatchClient {
-    fn resolve(&self, mode: InputMode, rows: Vec<Row>) -> Result<(Vec<Row>, Vec<Outcome>), String> {
+    fn resolve(
+        &self,
+        mode: InputMode,
+        rows: Vec<Row>,
+        codes: Vec<u64>,
+    ) -> Result<(Vec<Row>, Vec<Outcome>), String> {
         let (response, receiver) = mpsc::sync_channel(1);
         self.sender
             .send(CudaBrokerCommand::Resolve(CudaBatchRequest {
                 mode,
                 rows,
+                codes,
                 response,
             }))
             .map_err(|_| "CUDA batch broker stopped before accepting a request".to_owned())?;
@@ -930,11 +937,11 @@ fn run_cuda_batch_broker(
                 Some(plan) => plan,
                 None => plan_slot.insert(CudaResolvePlan::new(&matching[0].rows)?),
             };
-            let row_refs = matching
+            let code_refs = matching
                 .iter()
-                .map(|request| request.rows.as_slice())
+                .map(|request| request.codes.as_slice())
                 .collect::<Vec<_>>();
-            let resolved = plan.resolve_batch(&row_refs, |code| {
+            let resolved = plan.resolve_batch_flattened(&code_refs, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             });
             let lane_count = matching.len();
@@ -1218,7 +1225,8 @@ fn build_modes(
             if cuda_full {
                 if let Some(client) = _batch_client {
                     let dependencies = generated.dependencies;
-                    let (rows, outcomes) = client.resolve(mode, generated.rows)?;
+                    let (rows, outcomes) =
+                        client.resolve(mode, generated.rows, generated.cuda_codes)?;
                     let incremental_motor = motor.clone();
                     let resolver =
                         IncrementalResolver::from_precomputed(rows, outcomes, move |code| {

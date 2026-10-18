@@ -137,6 +137,10 @@ pub struct DependencyIndex {
 pub struct GeneratedRows {
     pub rows: Vec<Row>,
     pub dependencies: DependencyIndex,
+    /// Codes in CUDA topology order. Building this while each generated row is
+    /// hot avoids re-walking the nested row graph in the serialized GPU broker.
+    #[cfg(feature = "cuda")]
+    pub cuda_codes: Vec<u64>,
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -635,6 +639,8 @@ impl NativeCorpus {
         let capacity =
             self.characters.len() + self.word2.len() + self.word3.len() + self.word4.len();
         let mut rows = Vec::with_capacity(capacity);
+        #[cfg(feature = "cuda")]
+        let mut cuda_codes = Vec::new();
         let mut dependencies = DependencyIndex {
             by_pinyin: vec![Vec::new(); self.header.pinyin_count],
             by_tone_slot: std::array::from_fn(|_| Vec::new()),
@@ -648,11 +654,24 @@ impl NativeCorpus {
             .chain((0..self.word4.len()).map(RowSource::Word4));
         for source in sources {
             if let Some(generated) = self.generate_source(scheme, mode, source)? {
+                #[cfg(feature = "cuda")]
+                cuda_codes.extend(
+                    generated
+                        .row
+                        .stages
+                        .iter()
+                        .flat_map(|stage| stage.codes.iter().map(|code| code.bits())),
+                );
                 push_row(&mut rows, &mut dependencies, source, generated);
             }
         }
         dependencies.row_count = rows.len();
-        Ok(GeneratedRows { rows, dependencies })
+        Ok(GeneratedRows {
+            rows,
+            dependencies,
+            #[cfg(feature = "cuda")]
+            cuda_codes,
+        })
     }
 
     pub fn generate_updates(

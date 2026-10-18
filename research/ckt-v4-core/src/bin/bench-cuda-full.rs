@@ -168,6 +168,9 @@ fn benchmark_batch(
         let lanes: Vec<&[_]> = (0..BATCH_SIZE)
             .map(|index| generated[index % generated.len()].rows.as_slice())
             .collect();
+        let code_lanes: Vec<&[_]> = (0..BATCH_SIZE)
+            .map(|index| generated[index % generated.len()].cuda_codes.as_slice())
+            .collect();
         let expected_unique = generated
             .iter()
             .map(|candidate| {
@@ -227,10 +230,14 @@ fn benchmark_batch(
         if warm_batch != expected {
             return Err(format!("warm CUDA batch mismatch for {}", mode_name(mode)));
         }
-        plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        plan.resolve_batch_flattened(&code_lanes, |code| {
+            motor.cost(code).map(|value| value.upper_ms)
+        })?;
         let started = Instant::now();
-        let (finalist_batch, finalist_timings) =
-            plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let (finalist_batch, finalist_timings) = plan
+            .resolve_batch_flattened(&code_lanes, |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            })?;
         let finalist_ms = started.elapsed().as_secs_f64() * 1_000.0;
         if finalist_batch != expected {
             return Err(format!(

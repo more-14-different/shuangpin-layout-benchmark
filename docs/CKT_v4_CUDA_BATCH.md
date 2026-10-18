@@ -44,6 +44,10 @@ Explorer 配置中同时设置：
 
 ## 当前性能边界
 
-当前路径把活动项构造、逐行最小 rank 选择放在 GPU；ProjectedMotor 只对最小-rank finalists 在 CPU 上计价。短批次中 GPU device 时间已明显小于 host preparation/finalization，因此后续优先方向是降低 finalist/host 成本和改进链的阶段对齐，而不是单纯延长收集窗口。
+当前路径把活动项构造、逐行最小 rank 选择放在 GPU；ProjectedMotor 只对最小-rank finalists 在 CPU 上计价。ProjectedMotor 已改为栈上直接展开 donor，不再为每个 finalist 分配临时容器；实测直接重算快于为数百万 finalists 做 per-batch HashMap 查询，因此 finalist 缓存已移除。
+
+Native 生成器会在每行仍处于 CPU cache 时同步构造 CUDA 平面代码，随后各链把这份表示交给 broker。Broker 只校验 lane 长度并做连续块复制，不再串行重走全部 Row/Stage、比较静态契约和逐个提取 PackedCode。RTX 4060 Laptop、8 lanes 的实测中，host preparation 从约 200–223 ms 降到 6–9 ms；21×21 finalist batch 为 160–165 ms，21×26 为约 173 ms，且均与 CPU 结果 exact 一致。普通 `resolve_batch` 仍保留完整契约校验，平面快路径只接收 native 生成器的同拓扑数据。
+
+目前主要剩余成本转为 host finalization（约 107–120 ms），GPU device 约 43–47 ms。后续优先方向是压缩/并行 finalist 的 ProjectedMotor 归约或进一步降低回传量，以及改进链的阶段对齐，而不是单纯延长收集窗口。
 
 固定窗口从第一条请求开始计时。实验中的“每到一条请求就续时”虽然提高了平均 batch 宽度，却增加总等待时间，已否决。
