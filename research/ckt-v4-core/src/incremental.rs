@@ -78,7 +78,15 @@ impl IncrementalResolver {
                 || outcome.aux_count != stage.order.saturating_sub(row.base_length)
                 || outcome.motor_upper_ms.to_bits() != expected_motor.to_bits()
             {
-                return Err(format!("precomputed outcome {index} is inconsistent"));
+                return Err(format!(
+                    "precomputed outcome {index} is inconsistent: row-index={}/{index} rank={} aux={}/{} motor-bits={}/{}",
+                    outcome.row_index,
+                    outcome.rank,
+                    outcome.aux_count,
+                    stage.order.saturating_sub(row.base_length),
+                    outcome.motor_upper_ms.to_bits(),
+                    expected_motor.to_bits(),
+                ));
             }
         }
         Ok(Self {

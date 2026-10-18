@@ -516,15 +516,12 @@ impl CudaResolvePlan {
         let prepare_started = Instant::now();
         let mut codes = Vec::with_capacity(rows_batch.len() * self.slot_count);
         for (candidate, rows) in rows_batch.iter().enumerate() {
-            self.validate_contract(rows).map_err(|error| {
-                format!("CUDA batch candidate {candidate} has an incompatible contract: {error}")
-            })?;
-            codes.extend(
-                rows.iter()
-                    .flat_map(|row| &row.stages)
-                    .flat_map(|stage| &stage.codes)
-                    .map(|code| code.bits()),
-            );
+            self.validate_contract_with(rows, |code| codes.push(code.bits()))
+                .map_err(|error| {
+                    format!(
+                        "CUDA batch candidate {candidate} has an incompatible contract: {error}"
+                    )
+                })?;
         }
         let row_count = self.contract.len();
         let flat_rows = rows_batch
@@ -900,35 +897,48 @@ impl CudaResolvePlan {
     }
 
     fn validate_contract(&self, rows: &[Row]) -> Result<(), String> {
+        self.validate_contract_with(rows, |_| {})
+    }
+
+    fn validate_contract_with<F>(&self, rows: &[Row], mut code_action: F) -> Result<(), String>
+    where
+        F: FnMut(PackedCode),
+    {
         if rows.len() != self.contract.len() {
             return Err("CUDA resolver plan row count differs".to_owned());
         }
         for (index, (row, expected)) in rows.iter().zip(&self.contract).enumerate() {
-            let matches = row.id == expected.id
-                && row.weight.to_bits() == expected.weight_bits
-                && row.base_length == expected.base_length
-                && row.stages.len() == expected.stages.len()
-                && row.stages.iter().zip(&expected.stages).all(
-                    |(stage, &(order, pool, code_count))| {
-                        stage.order == order
-                            && pool_index(stage.pool) == pool
-                            && stage.codes.len() == code_count
-                            && !stage.codes.is_empty()
-                            && stage
-                                .codes
-                                .iter()
-                                .all(|code| code.len() == usize::from(stage.order))
-                            && !stage
-                                .codes
-                                .iter()
-                                .enumerate()
-                                .any(|(index, code)| stage.codes[..index].contains(code))
-                    },
-                );
-            if !matches {
+            if row.id != expected.id
+                || row.weight.to_bits() != expected.weight_bits
+                || row.base_length != expected.base_length
+                || row.stages.len() != expected.stages.len()
+            {
                 return Err(format!(
                     "CUDA resolver plan contract differs at row {index}"
                 ));
+            }
+            for (stage, &(order, pool, code_count)) in row.stages.iter().zip(&expected.stages) {
+                let valid = stage.order == order
+                    && pool_index(stage.pool) == pool
+                    && stage.codes.len() == code_count
+                    && !stage.codes.is_empty()
+                    && stage
+                        .codes
+                        .iter()
+                        .all(|code| code.len() == usize::from(stage.order))
+                    && !stage
+                        .codes
+                        .iter()
+                        .enumerate()
+                        .any(|(code_index, code)| stage.codes[..code_index].contains(code));
+                if !valid {
+                    return Err(format!(
+                        "CUDA resolver plan contract differs at row {index}"
+                    ));
+                }
+                for &code in &stage.codes {
+                    code_action(code);
+                }
             }
         }
         Ok(())

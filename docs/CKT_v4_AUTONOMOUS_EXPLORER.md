@@ -1,6 +1,6 @@
 # CKT v4 自主代际探索器
 
-状态：已形成适合小型试验和长期增量运行的 CPU 闭环。程序把每代退火产生的精确评分状态增量写入 SQLite，自动选出下一代代表种子，并在后续退火中拒绝已经评分过的精确布局。21×21 与 21×26 使用独立配置、输出目录和数据库。当前实现不是 GPU 后端；投入大型生产前仍应在目标机器做容量和中断恢复压测。
+状态：已形成适合小型试验和长期增量运行的 CPU/CUDA 闭环。程序把每代退火产生的精确评分状态增量写入 SQLite，自动选出下一代代表种子，并在后续退火中拒绝已经评分过的精确布局。21×21 与 21×26 使用独立配置、输出目录和数据库。CUDA 模式可在一个进程内并发运行多条独立链，把同 mode、同静态拓扑的全量复算交给一个持久 GPU broker 合批；投入大型生产前仍应在目标 RTX 3070 机器做容量和中断恢复压测。
 
 ## 代际闭环
 
@@ -59,19 +59,21 @@ just ckt-v4-explore-21x26 "research/config/ckt-v4-explorer-21x26.example.json"
 | 配置 | 作用 |
 |---|---|
 | `stepsPerChain` | 每个代表种子的短链长度；越大越容易沿沟壑前进，也越耗时 |
-| `nextSeedCount` | 下一代并行概念上的代表数；当前 runner 为资源友好而串行执行 |
+| `nextSeedCount` | 下一代代表数；CPU 模式串行执行，CUDA batch 模式在单进程内并发运行各链 |
 | `temperature` | 每条短链的起始温度；链内沿现有二次 schedule 降温，代际接力时重新升温 |
 | `dutyMs` | 每次精确评估后的休息时间，降低长期 CPU 占用 |
+| `cudaFull` / `cudaBatch` | 启用 CUDA 全量解析，并把本代待运行链接入共享 GPU broker；`cudaBatch` 要求 `cudaFull` |
+| `cudaBatchWindowMs` | broker 收集同 mode 请求的时间窗；默认 100 ms，本机较短窗口容易退化成 singleton |
 | `maxCktDelta` | 允许用人体工学极端值换取多少 CKT 劣化 |
 | `noveltyDistance` | 新盆地提示相对历史档案的最小布局距离 |
 | `basinRadius` / `basinSupport` | 新簇的半径与最小支持点数 |
 | `guards` | 可选的 M/D/V、负载、主行下界和 MX 硬约束 |
 
-runner 串行启动链，Rust 退火器当前为单线程，进程优先级设为 `BelowNormal`，并用 `dutyMs` 主动让出时间；因此适合在 64 GiB 机器上后台小跑，但 RTX 3070 当前不会被使用。
+默认 CPU runner 仍串行启动链并把进程优先级设为 `BelowNormal`。同时设 `cudaFull=true`、`cudaBatch=true` 后，runner 每代生成一个 `anneal-batch.json`，只启动一个退火进程；进程内每条链有独立线程、RNG、检查点和 frontier，语料、方案 fixture 与 `ProjectedMotor` 只加载一份。局部增量仍在各链 CPU 执行，全量复算才进入共享 GPU broker。broker 分别维护 Keytao/Sanpin 的持久计划和显存工作区，批次结束会报告 `batches`、`lanes`、`mean-lanes` 与 `singleton`，便于在目标机调窗口和链数。
 
 ## 文件与恢复语义
 
-每代目录包含检查点、完整 evaluated JSONL 和标准输出/错误日志；每代 plan 目录包含：
+每代目录包含各链检查点、完整 evaluated JSONL 和标准输出/错误日志；CUDA batch 模式把进程级输出集中到 `anneal-batch.stdout.log` / `anneal-batch.stderr.log`，但 checkpoint 与 frontier 仍按链分开。每代 plan 目录包含：
 
 - `plan.json`：选种理由、覆盖计数、距上一代档案的最近布局距离；
 - `seed-*.json`：下一代可直接读取的布局；
@@ -98,4 +100,4 @@ node tools/archive_ckt_v4_explorer_seeds.mjs --plan <plan.json> --ranking <ranke
 2. 根据真实日志学习提案命中率，加入分阶段温度或自适应提案权重，而不是永远使用固定分布；
 3. 用合成百万状态与真实长跑分别压测 SQLite 文件大小、索引查询延迟、WAL 检查点和异常断电恢复；
 4. 用真实多代结果校准覆盖桶、布局距离与新盆地阈值；
-5. CPU 基线稳定后，再评估 GPU 是否只负责可批量化的精确复算。GPU 不能替代 CPU 参考结果和恢复路径。
+5. 在 RTX 3070 上复测 CUDA batch 的 lane 占用、显存、功耗和吞吐；GPU 不能替代 CPU 参考结果和恢复路径。

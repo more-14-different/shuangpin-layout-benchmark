@@ -1,8 +1,10 @@
 use crate::{
     CognitiveParameters, Contract, Kind, PackedCode, Pool, Row, Stage, TrackSummary, stage_pools,
 };
-use serde::Deserialize;
+use serde::de::{MapAccess, Visitor};
+use serde::{Deserialize, Deserializer};
 use std::collections::HashMap;
+use std::fmt;
 use std::fs::File;
 use std::io::{BufReader, Read};
 use std::path::Path;
@@ -29,9 +31,38 @@ pub struct BinaryHeader {
 
 #[derive(Clone, Debug, Deserialize)]
 pub struct BinaryExtension {
-    pub donors: HashMap<String, f64>,
+    #[serde(deserialize_with = "deserialize_donors")]
+    pub donors: Vec<(String, f64)>,
     #[serde(alias = "distanceGuardMultiplier")]
     pub distance_guard_multiplier: f64,
+}
+
+fn deserialize_donors<'de, D>(deserializer: D) -> Result<Vec<(String, f64)>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    struct DonorVisitor;
+
+    impl<'de> Visitor<'de> for DonorVisitor {
+        type Value = Vec<(String, f64)>;
+
+        fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+            formatter.write_str("an ordered donor-weight object")
+        }
+
+        fn visit_map<A>(self, mut map: A) -> Result<Self::Value, A::Error>
+        where
+            A: MapAccess<'de>,
+        {
+            let mut donors = Vec::with_capacity(map.size_hint().unwrap_or(0));
+            while let Some(donor) = map.next_entry()? {
+                donors.push(donor);
+            }
+            Ok(donors)
+        }
+    }
+
+    deserializer.deserialize_map(DonorVisitor)
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -316,4 +347,25 @@ fn read_string<R: Read>(reader: &mut R, len: usize) -> Result<String, String> {
         .read_exact(&mut bytes)
         .map_err(|error| error.to_string())?;
     String::from_utf8(bytes).map_err(|error| error.to_string())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn extension_donors_preserve_json_order() {
+        let extension: BinaryExtension = serde_json::from_str(
+            r#"{"donors":{"P":0.68,";":0.28,"/":0.04},"distanceGuardMultiplier":1.0}"#,
+        )
+        .unwrap();
+        assert_eq!(
+            extension
+                .donors
+                .iter()
+                .map(|(donor, _)| donor.as_str())
+                .collect::<Vec<_>>(),
+            ["P", ";", "/"]
+        );
+    }
 }

@@ -78,6 +78,21 @@ if ('cudaFull' -in $settings.PSObject.Properties.Name -and $settings.cudaFull -i
     throw 'explorer cudaFull setting must be a JSON boolean'
 }
 $cudaFull = 'cudaFull' -in $settings.PSObject.Properties.Name -and $settings.cudaFull
+if ('cudaBatch' -in $settings.PSObject.Properties.Name -and $settings.cudaBatch -isnot [bool]) {
+    throw 'explorer cudaBatch setting must be a JSON boolean'
+}
+$cudaBatch = 'cudaBatch' -in $settings.PSObject.Properties.Name -and $settings.cudaBatch
+if ($cudaBatch -and -not $cudaFull) {
+    throw 'explorer cudaBatch requires cudaFull'
+}
+$cudaBatchWindowMs = if ('cudaBatchWindowMs' -in $settings.PSObject.Properties.Name) {
+    [uint64]$settings.cudaBatchWindowMs
+} else {
+    [uint64]100
+}
+if ($cudaBatchWindowMs -lt 1 -or $cudaBatchWindowMs -gt 60000) {
+    throw 'explorer cudaBatchWindowMs must be between 1 and 60000'
+}
 $initialRankingPath = $null
 if ('initialRanking' -in $settings.PSObject.Properties.Name -and $null -ne $settings.initialRanking) {
     $initialRankingPath = Resolve-RepoPath ([string]$settings.initialRanking)
@@ -191,6 +206,7 @@ try {
     if ($seedItems.Count -eq 0) { throw "generation $generation has no seeds" }
 
     $logs = [Collections.Generic.List[string]]::new()
+    $batchChains = [Collections.Generic.List[object]]::new()
     for ($index = 0; $index -lt $seedItems.Count; $index++) {
         $item = $seedItems[$index]
         $jobName = 'chain-{0:d2}-{1}' -f ($index + 1), ($item.Label -replace '[^A-Za-z0-9_.-]', '_')
@@ -247,7 +263,24 @@ try {
         Add-Optional $arguments '--min-mx-score' $settings.guards.minMxScore
         if ($cudaFull) { $arguments.Add('--cuda-full') }
         if ($resume) { $arguments.Add('--resume') }
-        Invoke-LowPriority $annealer $arguments.ToArray() $stdout $stderr
+        if ($cudaBatch) {
+            $batchChains.Add([ordered]@{ arguments = @($arguments.ToArray()) })
+        } else {
+            Invoke-LowPriority $annealer $arguments.ToArray() $stdout $stderr
+        }
+    }
+    if ($cudaBatch -and $batchChains.Count -gt 0) {
+        $batchManifest = Join-Path $generationDir 'anneal-batch.json'
+        $batchDocument = [ordered]@{
+            version = 'ckt-v4-anneal-batch-1'
+            batchWindowMs = $cudaBatchWindowMs
+            chains = @($batchChains)
+        }
+        $batchJson = $batchDocument | ConvertTo-Json -Depth 10
+        [IO.File]::WriteAllText($batchManifest, "$batchJson`n", [Text.UTF8Encoding]::new($false))
+        $batchStdout = Join-Path $generationDir 'anneal-batch.stdout.log'
+        $batchStderr = Join-Path $generationDir 'anneal-batch.stderr.log'
+        Invoke-LowPriority $annealer @('--batch-manifest', $batchManifest) $batchStdout $batchStderr
     }
 
     if (-not (Test-Path -LiteralPath $planDir)) {

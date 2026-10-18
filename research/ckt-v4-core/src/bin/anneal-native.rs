@@ -1,5 +1,3 @@
-#[cfg(feature = "cuda")]
-use ckt_v4_core::CudaResolvePlan;
 use ckt_v4_core::{
     CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, ErgonomicFixture, ErgonomicFrontierMetrics,
     ErgonomicGuards, ErgonomicMetricSchema, ExplorationArchive, ExplorationStateLookup,
@@ -11,13 +9,15 @@ use ckt_v4_core::{
     canonical_layout_bytes, composite_score, layout_state_key, propose, resolve, summarize,
     validate_checkpoint_contract, validate_proposal,
 };
+#[cfg(feature = "cuda")]
+use ckt_v4_core::{CudaResolvePlan, Outcome, Row};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 #[cfg(feature = "cuda")]
-use std::sync::Arc;
+use std::sync::{Arc, mpsc};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -130,6 +130,49 @@ struct Args {
     resume: bool,
 }
 
+#[cfg(feature = "cuda")]
+#[derive(Clone)]
+struct CudaBatchClient {
+    sender: mpsc::Sender<CudaBatchRequest>,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Clone)]
+struct BatchShared {
+    corpus: Arc<NativeCorpus>,
+    fixture: Arc<SchemeFixture>,
+    motor: Arc<ProjectedMotor>,
+}
+
+#[cfg(not(feature = "cuda"))]
+#[derive(Clone)]
+struct CudaBatchClient;
+
+#[cfg(feature = "cuda")]
+struct CudaBatchRequest {
+    mode: InputMode,
+    rows: Vec<Row>,
+    response: mpsc::SyncSender<CudaBatchResponse>,
+}
+
+#[cfg(feature = "cuda")]
+type CudaBatchResponse = Result<(Vec<Row>, Vec<Outcome>), String>;
+
+#[cfg(feature = "cuda")]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchManifest {
+    version: String,
+    batch_window_ms: u64,
+    chains: Vec<BatchChain>,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Deserialize)]
+struct BatchChain {
+    arguments: Vec<String>,
+}
+
 #[derive(Clone, Copy, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct LayoutGuards {
@@ -151,9 +194,44 @@ struct DiagnosticLeaders {
 }
 
 fn main() -> Result<(), String> {
-    let args = parse_args()?;
-    let corpus = NativeCorpus::open(&args.corpus)?;
-    let fixture = SchemeFixture::open(&args.schemes)?;
+    let mut values = env::args().skip(1).collect::<Vec<_>>();
+    if values
+        .first()
+        .is_some_and(|value| value == "--batch-manifest")
+    {
+        if values.len() != 2 {
+            return Err("--batch-manifest needs exactly one path".to_owned());
+        }
+        #[cfg(feature = "cuda")]
+        return run_batch_manifest(Path::new(&values[1]));
+        #[cfg(not(feature = "cuda"))]
+        return Err("--batch-manifest requires a build with --features cuda".to_owned());
+    }
+    let args = parse_args_from(values.drain(..))?;
+    run_chain(args, None, None)
+}
+
+fn run_chain(
+    args: Args,
+    batch_client: Option<CudaBatchClient>,
+    #[cfg(feature = "cuda")] shared: Option<BatchShared>,
+    #[cfg(not(feature = "cuda"))] _shared: Option<()>,
+) -> Result<(), String> {
+    #[cfg(feature = "cuda")]
+    let (corpus, fixture, shared_motor) = if let Some(shared) = shared {
+        (shared.corpus, shared.fixture, Some(shared.motor))
+    } else {
+        (
+            Arc::new(NativeCorpus::open(&args.corpus)?),
+            Arc::new(SchemeFixture::open(&args.schemes)?),
+            None,
+        )
+    };
+    #[cfg(not(feature = "cuda"))]
+    let (corpus, fixture) = (
+        NativeCorpus::open(&args.corpus)?,
+        SchemeFixture::open(&args.schemes)?,
+    );
     if fixture.key_alphabet != corpus.header().key_alphabet
         || fixture.source_hashes.get("html") != corpus.header().source_hashes.get("html")
     {
@@ -164,6 +242,12 @@ fn main() -> Result<(), String> {
     let ergonomic_contract = ergonomic.as_ref().map(|runtime| runtime.contract.clone());
     let (archive_lookup, exploration_archive_generation) =
         load_exploration_lookup(&args, &fixture)?;
+    #[cfg(feature = "cuda")]
+    let motor = match shared_motor {
+        Some(motor) => motor,
+        None => Arc::new(load_motor(&corpus, &alphabet, &args.snapshot)?),
+    };
+    #[cfg(not(feature = "cuda"))]
     let motor = load_motor(&corpus, &alphabet, &args.snapshot)?;
     let parameters = CognitiveParameters::default();
 
@@ -275,6 +359,7 @@ fn main() -> Result<(), String> {
         &motor,
         parameters,
         args.cuda_full,
+        batch_client.as_ref(),
         None,
     )?;
     let mut current_score = composite_score(&mode_summaries(&modes), &reference)?;
@@ -375,6 +460,7 @@ fn main() -> Result<(), String> {
                 &motor,
                 parameters,
                 args.cuda_full,
+                batch_client.as_ref(),
                 Some(&modes),
             )?;
             let score = composite_score(&mode_summaries(&replacement), &reference)?;
@@ -509,6 +595,183 @@ fn main() -> Result<(), String> {
         checkpoint.proposal_stats,
         started.elapsed().as_secs_f64(),
         args.checkpoint.display()
+    );
+    Ok(())
+}
+
+#[cfg(feature = "cuda")]
+impl CudaBatchClient {
+    fn resolve(&self, mode: InputMode, rows: Vec<Row>) -> Result<(Vec<Row>, Vec<Outcome>), String> {
+        let (response, receiver) = mpsc::sync_channel(1);
+        self.sender
+            .send(CudaBatchRequest {
+                mode,
+                rows,
+                response,
+            })
+            .map_err(|_| "CUDA batch broker stopped before accepting a request".to_owned())?;
+        receiver
+            .recv()
+            .map_err(|_| "CUDA batch broker stopped before returning a result".to_owned())?
+    }
+}
+
+#[cfg(feature = "cuda")]
+fn run_batch_manifest(path: &Path) -> Result<(), String> {
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let manifest: BatchManifest = serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    if manifest.version != "ckt-v4-anneal-batch-1" {
+        return Err(format!(
+            "unsupported anneal batch manifest version {:?}",
+            manifest.version
+        ));
+    }
+    if manifest.chains.is_empty() {
+        return Err("anneal batch manifest has no chains".to_owned());
+    }
+    if !(1..=60_000).contains(&manifest.batch_window_ms) {
+        return Err("anneal batch window must be between 1 and 60000 ms".to_owned());
+    }
+    let chains = manifest
+        .chains
+        .into_iter()
+        .map(|chain| parse_args_from(chain.arguments.into_iter()))
+        .collect::<Result<Vec<_>, _>>()?;
+    if chains.iter().any(|args| !args.cuda_full) {
+        return Err("every anneal batch chain must use --cuda-full".to_owned());
+    }
+    let first = &chains[0];
+    if chains.iter().skip(1).any(|args| {
+        args.corpus != first.corpus
+            || args.schemes != first.schemes
+            || args.snapshot != first.snapshot
+    }) {
+        return Err(
+            "anneal batch chains must share corpus, scheme fixture, and motor snapshot".to_owned(),
+        );
+    }
+
+    let corpus = Arc::new(NativeCorpus::open(&first.corpus)?);
+    let fixture = Arc::new(SchemeFixture::open(&first.schemes)?);
+    let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
+    let motor = Arc::new(load_motor(&corpus, &alphabet, &first.snapshot)?);
+    let shared = BatchShared {
+        corpus,
+        fixture,
+        motor: motor.clone(),
+    };
+    let batch_window = Duration::from_millis(manifest.batch_window_ms);
+    let (sender, receiver) = mpsc::channel();
+    let broker = thread::spawn(move || run_cuda_batch_broker(receiver, motor, batch_window));
+    let client = CudaBatchClient { sender };
+    let workers = chains
+        .into_iter()
+        .enumerate()
+        .map(|(index, args)| {
+            let batch_client = client.clone();
+            let shared = shared.clone();
+            thread::spawn(move || {
+                run_chain(args, Some(batch_client), Some(shared))
+                    .map_err(|error| format!("batch chain {index}: {error}"))
+            })
+        })
+        .collect::<Vec<_>>();
+    drop(client);
+
+    let mut first_error = None;
+    for worker in workers {
+        match worker.join() {
+            Ok(Ok(())) => {}
+            Ok(Err(error)) => {
+                first_error.get_or_insert(error);
+            }
+            Err(_) => {
+                first_error.get_or_insert("anneal batch chain panicked".to_owned());
+            }
+        };
+    }
+    match broker.join() {
+        Ok(Ok(())) => {}
+        Ok(Err(error)) => {
+            first_error.get_or_insert(error);
+        }
+        Err(_) => {
+            first_error.get_or_insert("CUDA batch broker panicked".to_owned());
+        }
+    }
+    first_error.map_or(Ok(()), Err)
+}
+
+#[cfg(feature = "cuda")]
+fn run_cuda_batch_broker(
+    receiver: mpsc::Receiver<CudaBatchRequest>,
+    motor: Arc<ProjectedMotor>,
+    batch_window: Duration,
+) -> Result<(), String> {
+    let mut keytao_plan = None;
+    let mut sanpin_plan = None;
+    let mut batch_count = 0_u64;
+    let mut lane_count = 0_u64;
+    let mut singleton_count = 0_u64;
+    let started = Instant::now();
+
+    while let Ok(first) = receiver.recv() {
+        let mut requests = vec![first];
+        let deadline = Instant::now() + batch_window;
+        while let Some(remaining) = deadline.checked_duration_since(Instant::now()) {
+            match receiver.recv_timeout(remaining) {
+                Ok(request) => requests.push(request),
+                Err(mpsc::RecvTimeoutError::Timeout) => break,
+                Err(mpsc::RecvTimeoutError::Disconnected) => break,
+            }
+        }
+        for mode in [InputMode::Keytao, InputMode::Sanpin] {
+            let (matching, rest): (Vec<_>, Vec<_>) = requests
+                .into_iter()
+                .partition(|request| request.mode == mode);
+            requests = rest;
+            if matching.is_empty() {
+                continue;
+            }
+            let plan_slot = match mode {
+                InputMode::Keytao => &mut keytao_plan,
+                InputMode::Sanpin => &mut sanpin_plan,
+            };
+            let plan = match plan_slot {
+                Some(plan) => plan,
+                None => plan_slot.insert(CudaResolvePlan::new(&matching[0].rows)?),
+            };
+            let row_refs = matching
+                .iter()
+                .map(|request| request.rows.as_slice())
+                .collect::<Vec<_>>();
+            let resolved = plan.resolve_batch(&row_refs, |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            });
+            batch_count += 1;
+            lane_count += matching.len() as u64;
+            singleton_count += u64::from(matching.len() == 1);
+            match resolved {
+                Ok((outcomes, _)) => {
+                    for (request, lane_outcomes) in matching.into_iter().zip(outcomes) {
+                        let _ = request.response.send(Ok((request.rows, lane_outcomes)));
+                    }
+                }
+                Err(error) => {
+                    for request in matching {
+                        let _ = request.response.send(Err(error.clone()));
+                    }
+                }
+            }
+        }
+    }
+    println!(
+        "cuda-batch complete batches={} lanes={} mean-lanes={:.2} singleton={} elapsed={:.1}s",
+        batch_count,
+        lane_count,
+        lane_count as f64 / batch_count.max(1) as f64,
+        singleton_count,
+        started.elapsed().as_secs_f64()
     );
     Ok(())
 }
@@ -682,17 +945,35 @@ fn build_modes(
     motor: &ProjectedMotor,
     parameters: CognitiveParameters,
     cuda_full: bool,
+    _batch_client: Option<&CudaBatchClient>,
     _previous: Option<&[ModeState]>,
 ) -> Result<Vec<ModeState>, String> {
     [InputMode::Keytao, InputMode::Sanpin]
         .into_iter()
-        .enumerate()
-        .map(|(_index, mode)| {
+        .map(|mode| {
             let generated = corpus.generate(scheme, mode)?;
             #[cfg(feature = "cuda")]
             if cuda_full {
+                if let Some(client) = _batch_client {
+                    let dependencies = generated.dependencies;
+                    let (rows, outcomes) = client.resolve(mode, generated.rows)?;
+                    let incremental_motor = motor.clone();
+                    let resolver =
+                        IncrementalResolver::from_precomputed(rows, outcomes, move |code| {
+                            incremental_motor.cost(code).map(|value| value.upper_ms)
+                        })?;
+                    let summary =
+                        IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)?;
+                    return Ok(ModeState {
+                        mode,
+                        dependencies,
+                        resolver,
+                        summary,
+                        cuda_plan: None,
+                    });
+                }
                 let plan = if let Some(existing) = _previous
-                    .and_then(|modes| modes.get(_index))
+                    .and_then(|modes| modes.iter().find(|state| state.mode == mode))
                     .and_then(|mode| mode.cuda_plan.clone())
                 {
                     existing
@@ -947,12 +1228,12 @@ fn load_motor(
         let donors = extension
             .donors
             .iter()
-            .map(|(donor, &weight)| {
+            .map(|(donor, weight)| {
                 let donor = donor.chars().next().ok_or("empty donor key")?;
                 alphabet
                     .index_of(donor)
                     .ok_or("unknown donor key")
-                    .map(|index| (index, weight))
+                    .map(|index| (index, *weight))
             })
             .collect::<Result<_, _>>()?;
         projections.insert(
@@ -1059,8 +1340,7 @@ fn read_checkpoint(path: &Path) -> Result<Checkpoint, String> {
     serde_json::from_value(value).map_err(|error| error.to_string())
 }
 
-fn parse_args() -> Result<Args, String> {
-    let mut values = env::args().skip(1);
+fn parse_args_from(mut values: impl Iterator<Item = String>) -> Result<Args, String> {
     let corpus = PathBuf::from(
         values
             .next()

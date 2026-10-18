@@ -282,12 +282,12 @@ fn load_motor(
         let donors = extension
             .donors
             .iter()
-            .map(|(donor, &weight)| {
+            .map(|(donor, weight)| {
                 let donor = donor.chars().next().ok_or("empty donor key")?;
                 alphabet
                     .index_of(donor)
                     .ok_or_else(|| format!("unknown donor {donor:?}"))
-                    .map(|index| (index, weight))
+                    .map(|index| (index, *weight))
             })
             .collect::<Result<_, _>>()?;
         projections.insert(

@@ -75,11 +75,13 @@ cargo run --release --features cuda --manifest-path research/ckt-v4-core/Cargo.t
 
 ```json
 {
-  "cudaFull": true
+  "cudaFull": true,
+  "cudaBatch": true,
+  "cudaBatchWindowMs": 100
 }
 ```
 
-`tools/run_ckt_v4_explorer.ps1` 会自动带 `--features cuda` 构建并为每条链增加 `--cuda-full`。示例配置默认仍为 `false`，避免普通机器意外要求 CUDA 工具链。
+`tools/run_ckt_v4_explorer.ps1` 会自动带 `--features cuda` 构建并为每条链增加 `--cuda-full`；`cudaBatch=true` 时，一代的未完成链写入一个 manifest 并由单进程共享 GPU broker 调度。两个示例配置默认仍关闭 CUDA，避免普通机器意外要求 CUDA 工具链。
 
 仅运行需要真实 CUDA 设备的回归测试：
 
@@ -91,13 +93,26 @@ cargo test --release --features cuda --manifest-path research/ckt-v4-core/Cargo.
 
 ## 距离 GPU 主导仍缺什么
 
-1. finalists 已把单候选 host 工作压到约 70–105 ms；8-lane 的主要余量是契约校验/扁平化约 265 ms，以及含 motor cache 的最终化约 300–323 ms。下一步应减少这些重复遍历和临时分配。
-2. 将 finalist batch 接入多链 explorer 调度；单候选增量本身仍不适合 GPU，batch 必须按完整静态拓扑契约和 mode 分组。
-3. 最终 `f64` 汇总保留 CPU 精确路径作真值。
-4. 在 RTX 3070 目标机复跑 resolver、完整退火以及显存/功耗基准，再决定合理的并发链数和 batch 大小。
+1. finalist batch 已接入多链 explorer；单候选增量仍不适合 GPU，broker 只合并同静态拓扑、同 mode 的全量请求。
+2. host 契约校验和 code 扁平化已合并成一次遍历；进一步减少分配需要引入可复用 host staging buffer，收益应先在 RTX 3070 实测。
+3. 最终 `ProjectedMotor` 和 `f64` 汇总保留 CPU 精确路径作真值。
+4. 在 RTX 3070 目标机复跑 resolver、完整退火以及显存/功耗基准，再决定合理的并发链数、100 ms 收集窗是否合适，以及每个 worktree 的资源配额。
 5. 长期任务保留 CPU fallback，并设置非零 `verifyEvery`，周期性用 CPU 全量评分抽查 GPU 路径。
 
 因此当前最经济的使用方式是：CPU 继续处理被增量解析器命中的局部变更，CUDA finalists 处理不得不全量重算的候选；多链调度器则尽量把同契约、同 mode 候选合成 batch。完整 `ProjectedMotor` GPU 化已不再是近期首选，因为 finalists 保留 CPU 浮点真值的同时已消除了约三分之二的 motor 输入。
+
+### 多链 explorer 接入
+
+2026-10-18 增加 `anneal-native --batch-manifest` 和 explorer 的 `cudaBatch` 调度。每条链仍有独立 RNG、checkpoint、frontier 与避重视图；共享的只读语料、方案 fixture 和同一个 `ProjectedMotor` 由进程内各链复用，GPU broker 独占 CUDA plan/工作区。实跑曾捕获扩展键 donor 经 `HashMap` 随机次序累加导致的 1 ULP 差异；二进制头解析现在保留来源 JSON 的 donor 顺序，batch 内再共享同一个 motor，保证 broker 选择、链内 CPU 校验和独立进程重跑使用同一浮点真值。
+
+本机 RTX 4060 Laptop 以 4 条强种子、每链 2 步、每步 CPU 全量核验做小型试跑：
+
+| 口径 | 串行逐链 | 单进程多链 batch | 加速 | 精确性 | batch 占用 |
+|---|---:|---:|---:|---|---|
+| 21×21 | 39.38 s | 15.10 s | 2.61× | 4/4 checkpoint 的 score/layout/RNG 完全相同 | 24 lanes / 6 batches，mean 4.00 |
+| 21×26 | 46.75 s | 15.12 s | 3.09× | 4/4 checkpoint 的 score/layout/RNG 完全相同 | 24 lanes / 12 batches，mean 2.00 |
+
+这组数字包含 CPU 语料生成、参考评分和并发链收益，不是纯 GPU kernel 加速。短链会因各链生成时间不同而出现 singleton；100 ms 只是本机小试的稳妥默认值，目标 RTX 3070 应根据 `mean-lanes`、长期功耗和墙钟时间重新调参。runner 的一代两链端到端 smoke 也已完成：batch manifest、独立 checkpoint/frontier、SQLite 事务规划和 `integrity_check=ok` 全部通过。
 
 ## 持久显存与 8-lane batch 试验
 
