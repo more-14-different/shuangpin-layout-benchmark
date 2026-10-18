@@ -316,6 +316,11 @@ fn main() -> Result<(), String> {
     }
     let mut rng = SearchRng::new(checkpoint.rng_state);
     let started = Instant::now();
+    let full_backend = if args.cuda_full { "cuda" } else { "cpu" };
+    println!(
+        "scoring full-backend={} start-step={} target-steps={} resume={}",
+        full_backend, checkpoint.iteration, args.steps, args.resume
+    );
 
     for iteration in checkpoint.iteration..args.steps {
         let proposal_context = ProposalContext {
@@ -460,7 +465,7 @@ fn main() -> Result<(), String> {
         if args.checkpoint_every > 0 && checkpoint.iteration % args.checkpoint_every == 0 {
             write_checkpoint(&args.checkpoint, &checkpoint)?;
             println!(
-                "checkpoint step={} current={:.9} best={:.9} accepted={}/{} invalid={} paths=i{}/f{} elapsed={:.1}s",
+                "checkpoint step={} current={:.9} best={:.9} accepted={}/{} invalid={} paths=i{}/f{} full-backend={} elapsed={:.1}s",
                 checkpoint.iteration,
                 current_score,
                 checkpoint.best_score,
@@ -469,6 +474,7 @@ fn main() -> Result<(), String> {
                 checkpoint.invalid_proposals,
                 checkpoint.incremental_evaluated,
                 checkpoint.full_evaluated,
+                full_backend,
                 started.elapsed().as_secs_f64()
             );
         }
@@ -483,7 +489,7 @@ fn main() -> Result<(), String> {
             .current_layout
             .diagnostics(&alphabet, &fixture.heads, &fixture.finals)?;
     println!(
-        "complete steps={} current={:.9} best={:.9} M/D/V={}/{}/{} accepted={}/{} invalid={} paths=i{}/f{} rows=direct:{}/max{},component:{}/max{} proposals={:?} elapsed={:.1}s checkpoint={}",
+        "complete steps={} current={:.9} best={:.9} M/D/V={}/{}/{} accepted={}/{} invalid={} paths=i{}/f{} full-backend={} rows=direct:{}/max{},component:{}/max{} proposals={:?} elapsed={:.1}s checkpoint={}",
         checkpoint.iteration,
         current_score,
         checkpoint.best_score,
@@ -495,6 +501,7 @@ fn main() -> Result<(), String> {
         checkpoint.invalid_proposals,
         checkpoint.incremental_evaluated,
         checkpoint.full_evaluated,
+        full_backend,
         checkpoint.direct_rows_total,
         checkpoint.max_direct_rows,
         checkpoint.component_rows_total,

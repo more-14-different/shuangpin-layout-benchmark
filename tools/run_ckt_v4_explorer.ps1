@@ -91,7 +91,7 @@ if ('initialRanking' -in $settings.PSObject.Properties.Name -and $null -ne $sett
 }
 
 $manifest = Resolve-RepoPath 'research/ckt-v4-core/Cargo.toml'
-$buildArguments = @('build', '--release', '--manifest-path', $manifest, '--bin', 'anneal-native', '--bin', 'plan-exploration')
+$buildArguments = @('build', '--quiet', '--release', '--manifest-path', $manifest, '--bin', 'anneal-native', '--bin', 'plan-exploration')
 if ($cudaFull) { $buildArguments += @('--features', 'cuda') }
 & cargo @buildArguments
 if ($LASTEXITCODE -ne 0) { throw 'release build failed' }
