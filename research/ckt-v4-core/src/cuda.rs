@@ -74,6 +74,18 @@ unsafe extern "C" {
         message: *mut c_char,
         message_capacity: usize,
     ) -> c_int;
+    fn ckt_cuda_resolve_finalists_batch(
+        workspace: *mut c_void,
+        codes: *const u64,
+        outcome_ranks: *mut u32,
+        outcome_stages: *mut u32,
+        finalist_indices: *mut u32,
+        finalist_capacity: usize,
+        finalist_count: *mut usize,
+        lanes: usize,
+        message: *mut c_char,
+        message_capacity: usize,
+    ) -> c_int;
     fn ckt_cuda_rank(
         workspace: *mut c_void,
         groups: *const u64,
@@ -101,6 +113,7 @@ pub struct CudaResolveTimings {
     pub finalization: Duration,
     pub entries: usize,
     pub unique_codes: usize,
+    pub finalists: usize,
     pub launches: usize,
 }
 
@@ -112,6 +125,7 @@ pub struct CudaResolvePlan {
     stage_orders: Vec<u8>,
     stage_pools: Vec<u64>,
     slot_count: usize,
+    slot_rows: Vec<u32>,
     workspace: Mutex<CudaWorkspace>,
 }
 
@@ -320,6 +334,7 @@ impl CudaResolvePlan {
             .flat_map(|row| row.stages.iter().map(|stage| pool_index(stage.pool)))
             .collect();
         let slot_count = topology.slot_row.len();
+        let slot_rows = topology.slot_row.clone();
         let mut workspace = CudaWorkspace::new()?;
         workspace.set_topology(&priority_by_row, &topology)?;
         Ok(Self {
@@ -329,25 +344,13 @@ impl CudaResolvePlan {
             stage_orders,
             stage_pools,
             slot_count,
+            slot_rows,
             workspace: Mutex::new(workspace),
         })
     }
 
-    /// Uses the lower-overhead rank-only path for a single candidate.
+    /// Uses GPU finalist compaction and CPU motor evaluation for one candidate.
     pub fn resolve<F>(
-        &self,
-        rows: &[Row],
-        motor_cost: F,
-    ) -> Result<(Vec<Outcome>, CudaResolveTimings), String>
-    where
-        F: Fn(PackedCode) -> Option<f64>,
-    {
-        self.resolve_rank_only(rows, motor_cost)
-    }
-
-    /// Resolves one candidate through the fused device path. This is retained for
-    /// exact A/B measurements; the rank-only path is currently faster at lane count 1.
-    pub fn resolve_fused<F>(
         &self,
         rows: &[Row],
         motor_cost: F,
@@ -359,9 +362,23 @@ impl CudaResolvePlan {
         Ok((batch.remove(0), timings))
     }
 
+    /// Resolves one candidate through the fused device path. This is retained for
+    /// exact A/B measurements against the finalist path.
+    pub fn resolve_fused<F>(
+        &self,
+        rows: &[Row],
+        motor_cost: F,
+    ) -> Result<(Vec<Outcome>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        let (mut batch, timings) = self.resolve_batch_costs(&[rows], motor_cost)?;
+        Ok((batch.remove(0), timings))
+    }
+
     /// Resolves independent candidates in isolated GPU lanes. The plan topology is
     /// persistent; each call uploads only flattened code bits and motor costs.
-    pub fn resolve_batch<F>(
+    pub fn resolve_batch_costs<F>(
         &self,
         rows_batch: &[&[Row]],
         motor_cost: F,
@@ -474,6 +491,150 @@ impl CudaResolvePlan {
                 finalization,
                 entries: rows_batch.len() * self.slot_count,
                 unique_codes,
+                finalists: 0,
+                launches: self.orders.len(),
+            },
+        ))
+    }
+
+    /// Resolves a batch on the GPU through rank selection, then evaluates motor
+    /// cost on the CPU only for compacted minimum-rank finalists.
+    pub fn resolve_batch<F>(
+        &self,
+        rows_batch: &[&[Row]],
+        motor_cost: F,
+    ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        if rows_batch.is_empty() {
+            return Ok((Vec::new(), CudaResolveTimings::default()));
+        }
+        if rows_batch.len() >= 1 << 23 {
+            return Err("CUDA finalist batch supports fewer than 2^23 candidates".to_owned());
+        }
+        let prepare_started = Instant::now();
+        let mut codes = Vec::with_capacity(rows_batch.len() * self.slot_count);
+        for (candidate, rows) in rows_batch.iter().enumerate() {
+            self.validate_contract(rows).map_err(|error| {
+                format!("CUDA batch candidate {candidate} has an incompatible contract: {error}")
+            })?;
+            codes.extend(
+                rows.iter()
+                    .flat_map(|row| &row.stages)
+                    .flat_map(|stage| &stage.codes)
+                    .map(|code| code.bits()),
+            );
+        }
+        let row_count = self.contract.len();
+        let flat_rows = rows_batch
+            .len()
+            .checked_mul(row_count)
+            .ok_or("CUDA finalist row count overflows host indexing")?;
+        let mut outcome_ranks = vec![0_u32; flat_rows];
+        let mut outcome_stages = vec![0_u32; flat_rows];
+        let mut finalist_indices = vec![0_u32; codes.len()];
+        let preparation = prepare_started.elapsed();
+
+        let workspace = self
+            .workspace
+            .lock()
+            .map_err(|_| "CUDA workspace lock is poisoned".to_owned())?;
+        let device_started = Instant::now();
+        let mut finalist_count = 0_usize;
+        let mut message = vec![0_i8; 1024];
+        let status = unsafe {
+            ckt_cuda_resolve_finalists_batch(
+                workspace.raw,
+                codes.as_ptr(),
+                outcome_ranks.as_mut_ptr(),
+                outcome_stages.as_mut_ptr(),
+                finalist_indices.as_mut_ptr(),
+                finalist_indices.len(),
+                &mut finalist_count,
+                rows_batch.len(),
+                message.as_mut_ptr(),
+                message.len(),
+            )
+        };
+        cuda_result(status, &message)?;
+        let device = device_started.elapsed();
+        drop(workspace);
+        finalist_indices.truncate(finalist_count);
+
+        let finalize_started = Instant::now();
+        let mut chosen: Vec<Option<(PackedCode, f64)>> = vec![None; flat_rows];
+        let mut motor_cache = (rows_batch.len() > 1).then(|| {
+            MotorCache::with_capacity_and_hasher(finalist_count / 2, BuildHasherDefault::default())
+        });
+        for source in finalist_indices {
+            let source = source as usize;
+            let lane = source / self.slot_count;
+            let slot = source % self.slot_count;
+            let row_index = self.slot_rows[slot] as usize;
+            let flat = lane * row_count + row_index;
+            let stage = outcome_stages[flat] as usize;
+            let order = *self
+                .stage_orders
+                .get(stage)
+                .ok_or_else(|| format!("CUDA returned invalid stage {stage}"))?;
+            let code = PackedCode::from_bits_len(codes[source], order)?;
+            let compute = || {
+                motor_cost(code)
+                    .filter(|value| value.is_finite())
+                    .unwrap_or(f64::NAN)
+            };
+            let cost = if let Some(cache) = &mut motor_cache {
+                *cache.entry(code).or_insert_with(compute)
+            } else {
+                compute()
+            };
+            if !cost.is_finite() {
+                continue;
+            }
+            if chosen[flat].is_none_or(|(_, current)| cost < current) {
+                chosen[flat] = Some((code, cost));
+            }
+        }
+        let mut outcomes = Vec::with_capacity(rows_batch.len());
+        for candidate in 0..rows_batch.len() {
+            let mut lane = Vec::with_capacity(row_count);
+            for row_index in 0..row_count {
+                let flat = candidate * row_count + row_index;
+                let stage = outcome_stages[flat] as usize;
+                let order = *self
+                    .stage_orders
+                    .get(stage)
+                    .ok_or_else(|| format!("CUDA returned invalid stage {stage}"))?;
+                let pool = pool_from_index(self.stage_pools[stage])?;
+                let (code, motor_upper_ms) = chosen[flat].take().ok_or_else(|| {
+                    format!(
+                        "no motor cost for candidate {candidate} row {}",
+                        self.contract[row_index].id
+                    )
+                })?;
+                lane.push(Outcome {
+                    row_index,
+                    code,
+                    code_length: order,
+                    aux_count: order.saturating_sub(self.contract[row_index].base_length),
+                    rank: outcome_ranks[flat] as usize,
+                    pool,
+                    motor_upper_ms,
+                });
+            }
+            outcomes.push(lane);
+        }
+        let finalization = finalize_started.elapsed();
+        Ok((
+            outcomes,
+            CudaResolveTimings {
+                preparation,
+                device,
+                finalization,
+                entries: rows_batch.len() * self.slot_count,
+                unique_codes: 0,
+                finalists: finalist_count,
                 launches: self.orders.len(),
             },
         ))
@@ -992,10 +1153,15 @@ mod tests {
         let expected = [&candidate, &second]
             .map(|rows| resolve(rows, |value| Some(value.bits() as f64)).unwrap());
         let (batch, timings) = plan
-            .resolve_batch(&[&candidate, &second], |value| Some(value.bits() as f64))
+            .resolve_batch_costs(&[&candidate, &second], |value| Some(value.bits() as f64))
             .unwrap();
         assert_eq!(batch, expected);
         assert_eq!(timings.launches, 2);
+        let (finalists, finalist_timings) = plan
+            .resolve_batch(&[&candidate, &second], |value| Some(value.bits() as f64))
+            .unwrap();
+        assert_eq!(finalists, expected);
+        assert!(finalist_timings.finalists >= candidate.len() + second.len());
     }
 
     #[test]

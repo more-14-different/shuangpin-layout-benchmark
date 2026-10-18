@@ -1,8 +1,10 @@
 #include <cuda_runtime.h>
 #include <thrust/device_ptr.h>
+#include <thrust/copy.h>
 #include <thrust/execution_policy.h>
 #include <thrust/functional.h>
 #include <thrust/iterator/constant_iterator.h>
+#include <thrust/iterator/counting_iterator.h>
 #include <thrust/scan.h>
 #include <thrust/sort.h>
 #include <cmath>
@@ -23,6 +25,9 @@ struct EntryLess {
         return a.group < b.group || (a.group == b.group && a.priority < b.priority);
     }
 };
+struct NonZero {
+    __host__ __device__ bool operator()(std::uint8_t value) const { return value != 0; }
+};
 
 struct Workspace {
     std::size_t rank_capacity = 0;
@@ -42,6 +47,8 @@ struct Workspace {
     double *costs = nullptr, *out_costs = nullptr;
     std::uint32_t *active = nullptr, *slot_ranks = nullptr, *resolve_sorted_ranks = nullptr;
     std::uint32_t *out_ranks = nullptr, *out_stages = nullptr, *resolver_error = nullptr;
+    std::uint8_t* finalist_flags = nullptr;
+    std::uint32_t* finalist_indices = nullptr;
     Entry* resolve_entries = nullptr;
 
     void release_rank() {
@@ -55,8 +62,10 @@ struct Workspace {
         cudaFree(resolve_entries); cudaFree(resolve_groups); cudaFree(resolve_sorted_ranks);
         cudaFree(out_codes); cudaFree(out_costs); cudaFree(out_ranks); cudaFree(out_stages);
         cudaFree(resolver_error);
+        cudaFree(finalist_flags); cudaFree(finalist_indices);
         codes = out_codes = resolve_groups = nullptr; costs = out_costs = nullptr;
         active = slot_ranks = resolve_sorted_ranks = out_ranks = out_stages = resolver_error = nullptr;
+        finalist_flags = nullptr; finalist_indices = nullptr;
         resolve_entries = nullptr; lane_capacity = 0;
     }
     void release_topology() {
@@ -154,6 +163,32 @@ __global__ void select_row_best(
         out_ranks[flat] = best_rank; out_stages[flat] = stage; active[flat] = NO_STAGE;
     } else active[flat] = next;
 }
+__global__ void select_row_finalists(
+    const std::uint32_t* stage_order, const std::uint32_t* stage_slot_offset,
+    const std::uint32_t* stage_slot_count, const std::uint32_t* stage_next,
+    const std::uint32_t* slot_ranks, std::uint32_t* active, std::uint8_t* finalist_flags,
+    std::uint32_t* out_ranks, std::uint32_t* out_stages, std::uint32_t order,
+    std::size_t row_count, std::size_t slot_count, std::size_t n) {
+    const auto flat = static_cast<std::size_t>(blockIdx.x) * blockDim.x + threadIdx.x;
+    if (flat >= n) return;
+    const auto stage = active[flat];
+    if (stage == NO_STAGE || stage_order[stage] != order) return;
+    const auto lane = flat / row_count;
+    const auto first = stage_slot_offset[stage]; const auto end = first + stage_slot_count[stage];
+    std::uint32_t best_rank = NO_STAGE;
+    for (auto slot = first; slot < end; ++slot) {
+        const auto rank = slot_ranks[lane * slot_count + slot];
+        if (rank < best_rank) best_rank = rank;
+    }
+    const auto next = stage_next[stage];
+    if (best_rank == 1 || next == NO_STAGE) {
+        for (auto slot = first; slot < end; ++slot) {
+            const auto source = lane * slot_count + slot;
+            if (slot_ranks[source] == best_rank) finalist_flags[source] = 1;
+        }
+        out_ranks[flat] = best_rank; out_stages[flat] = stage; active[flat] = NO_STAGE;
+    } else active[flat] = next;
+}
 __global__ void check_unresolved(const std::uint32_t* active, std::uint32_t* error, std::size_t n) {
     const auto i = static_cast<std::size_t>(blockIdx.x) * blockDim.x + threadIdx.x;
     if (i < n && active[i] != NO_STAGE)
@@ -192,6 +227,9 @@ int ensure_resolver(Workspace* w, std::size_t lanes, char* message, std::size_t 
         ||alloc(&w->resolve_sorted_ranks,en,message,cap)||alloc(&w->out_codes,rn,message,cap)
         ||alloc(&w->out_costs,rn,message,cap)||alloc(&w->out_ranks,rn,message,cap)
         ||alloc(&w->out_stages,rn,message,cap)||alloc(&w->resolver_error,1,message,cap)) {
+        w->release_resolver(); return -2;
+    }
+    if(alloc(&w->finalist_flags,sn,message,cap)||alloc(&w->finalist_indices,sn,message,cap)) {
         w->release_resolver(); return -2;
     }
     w->lane_capacity = lanes; return 0;
@@ -301,6 +339,64 @@ extern "C" int ckt_cuda_resolve_batch(
     if(e==cudaSuccess)e=cudaMemcpy(host_out_ranks,w->out_ranks,rn*sizeof(std::uint32_t),cudaMemcpyDeviceToHost);
     if(e==cudaSuccess)e=cudaMemcpy(host_out_stages,w->out_stages,rn*sizeof(std::uint32_t),cudaMemcpyDeviceToHost);
     if(e==cudaSuccess)e=cudaDeviceSynchronize(); return e==cudaSuccess?0:fail(e,message,cap);
+}
+
+extern "C" int ckt_cuda_resolve_finalists_batch(
+    void* opaque, const std::uint64_t* host_codes,
+    std::uint32_t* host_out_ranks, std::uint32_t* host_out_stages,
+    std::uint32_t* host_finalist_indices, std::size_t finalist_capacity,
+    std::size_t* host_finalist_count, std::size_t lanes, char* message, std::size_t cap) {
+    if(!opaque||!lanes||lanes>=(1ULL<<23))return fail_text("invalid CUDA finalist lane count",message,cap);
+    auto* w=static_cast<Workspace*>(opaque); if(!w->slot_count)return fail_text("CUDA topology not initialized",message,cap);
+    const auto sn=lanes*w->slot_count, rn=lanes*w->row_count;
+    if(sn>0xffffffffULL||rn>0x7ffffffeULL||finalist_capacity<sn)
+        return fail_text("CUDA finalist batch exceeds output capacity",message,cap);
+    auto status=ensure_resolver(w,lanes,message,cap); if(status)return status;
+    if((status=upload(w->codes,host_codes,sn,message,cap)))return status;
+    auto e=cudaMemset(w->resolver_error,0,sizeof(std::uint32_t));
+    if(e==cudaSuccess)e=cudaMemset(w->finalist_flags,0,sn*sizeof(std::uint8_t));
+    constexpr unsigned threads=256; const auto row_blocks=static_cast<unsigned>((rn+threads-1)/threads);
+    if(e==cudaSuccess){initialize_active<<<row_blocks,threads>>>(w->row_first_stage,w->active,w->row_count,rn);e=cudaGetLastError();}
+    for(std::uint32_t order=0;e==cudaSuccess&&order<w->order_count;++order){
+        const auto offset=w->host_order_offsets[order];
+        const auto count=w->host_order_offsets[order+1]-offset;
+        const auto en=lanes*count; const auto blocks=static_cast<unsigned>((en+threads-1)/threads);
+        construct_active_entries<<<blocks,threads>>>(w->codes,w->active,w->topology_priorities,
+            w->stage_pool,w->slot_row,w->slot_stage,w->order_slots,offset,count,
+            w->row_count,w->slot_count,w->resolve_entries,en);
+        e=cudaGetLastError(); if(e!=cudaSuccess)break;
+        status=rank_scan(w->resolve_entries,w->resolve_groups,w->resolve_sorted_ranks,
+                         w->slot_ranks,en,message,cap); if(status)return status;
+        select_row_finalists<<<row_blocks,threads>>>(w->stage_order,w->stage_slot_offset,
+            w->stage_slot_count,w->stage_next,w->slot_ranks,w->active,w->finalist_flags,
+            w->out_ranks,w->out_stages,order,w->row_count,w->slot_count,rn);
+        e=cudaGetLastError();
+    }
+    if(e==cudaSuccess){check_unresolved<<<row_blocks,threads>>>(w->active,w->resolver_error,rn);e=cudaGetLastError();}
+    std::uint32_t host_error=0;
+    if(e==cudaSuccess)e=cudaMemcpy(&host_error,w->resolver_error,sizeof(host_error),cudaMemcpyDeviceToHost);
+    if(e!=cudaSuccess)return fail(e,message,cap);
+    if(host_error){
+        const auto flat=(host_error&0x7fffffffU)-1;
+        if(message&&cap)std::snprintf(message,cap,"CUDA finalist row %u unresolved",flat);
+        return -5;
+    }
+    std::size_t finalist_count=0;
+    try {
+        auto first=thrust::make_counting_iterator<std::uint32_t>(0);
+        thrust::device_ptr<std::uint8_t> flags(w->finalist_flags);
+        thrust::device_ptr<std::uint32_t> output(w->finalist_indices);
+        const auto end=thrust::copy_if(thrust::device,first,first+sn,flags,output,NonZero{});
+        finalist_count=static_cast<std::size_t>(end-output);
+    } catch(const std::exception&x){return fail_text(x.what(),message,cap,-3);}
+      catch(...){return fail_text("CUDA finalist compaction exception",message,cap,-4);}
+    e=cudaMemcpy(host_out_ranks,w->out_ranks,rn*sizeof(std::uint32_t),cudaMemcpyDeviceToHost);
+    if(e==cudaSuccess)e=cudaMemcpy(host_out_stages,w->out_stages,rn*sizeof(std::uint32_t),cudaMemcpyDeviceToHost);
+    if(e==cudaSuccess)e=cudaMemcpy(host_finalist_indices,w->finalist_indices,
+        finalist_count*sizeof(std::uint32_t),cudaMemcpyDeviceToHost);
+    if(e==cudaSuccess)e=cudaDeviceSynchronize();
+    if(e!=cudaSuccess)return fail(e,message,cap);
+    *host_finalist_count=finalist_count; return 0;
 }
 
 extern "C" int ckt_cuda_rank(void* opaque,const std::uint64_t* host_groups,

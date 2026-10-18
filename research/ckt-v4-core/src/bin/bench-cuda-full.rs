@@ -46,6 +46,7 @@ fn main() -> Result<(), String> {
 
     let mut cpu_total = 0.0;
     let mut gpu_total = 0.0;
+    let mut finalist_total = 0.0;
     let mut generation_total = 0.0;
     let mut plan_total = 0.0;
     let mut compared_rows = 0_usize;
@@ -76,16 +77,26 @@ fn main() -> Result<(), String> {
             let rank_only_ms = started.elapsed().as_secs_f64() * 1_000.0;
 
             let started = Instant::now();
-            let (cold_gpu, cold_timings) = plan.resolve_fused(&generated.rows, |code| {
+            let (cold_gpu, _cold_timings) = plan.resolve_fused(&generated.rows, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             })?;
-            let cold_gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
+            let _cold_gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
             let started = Instant::now();
             let (gpu, timings) = plan.resolve_fused(&generated.rows, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             })?;
             let gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
-            if cpu != rank_only || cpu != cold_gpu || cpu != gpu {
+            plan.resolve_batch(&[&generated.rows], |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            })?;
+            let started = Instant::now();
+            let (finalist_batch, finalist_timings) = plan
+                .resolve_batch(&[&generated.rows], |code| {
+                    motor.cost(code).map(|value| value.upper_ms)
+                })?;
+            let finalist_ms = started.elapsed().as_secs_f64() * 1_000.0;
+            let finalist = &finalist_batch[0];
+            if cpu != rank_only || cpu != cold_gpu || cpu != gpu || cpu != *finalist {
                 let mismatch = cpu
                     .iter()
                     .zip(&gpu)
@@ -107,31 +118,32 @@ fn main() -> Result<(), String> {
                 ));
             }
             println!(
-                "{}/{} rows={} entries={} unique-codes={} launches={} generation={generation_ms:.1}ms plan={plan_ms:.1}ms cpu={cpu_ms:.1}ms rank-only={rank_only_ms:.1}ms fused-cold={cold_gpu_ms:.1}ms fused-warm={gpu_ms:.1}ms fused/rank-only={:.2}x workspace={:.2}x cpu-speedup={:.2}x [cold-device={:.1} warm-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
+                "{}/{} rows={} entries={} unique-codes={} finalists={} launches={} generation={generation_ms:.1}ms plan={plan_ms:.1}ms cpu={cpu_ms:.1}ms rank-only={rank_only_ms:.1}ms fused={gpu_ms:.1}ms finalist={finalist_ms:.1}ms finalist/rank-only={:.2}x fused/rank-only={:.2}x cpu-speedup={:.2}x [finalist-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
                 scheme.id,
                 mode_name(mode),
                 generated.rows.len(),
                 timings.entries,
                 timings.unique_codes,
+                finalist_timings.finalists,
                 timings.launches,
+                rank_only_ms / finalist_ms,
                 rank_only_ms / gpu_ms,
-                cold_gpu_ms / gpu_ms,
-                cpu_ms / gpu_ms,
-                cold_timings.device.as_secs_f64() * 1_000.0,
-                timings.device.as_secs_f64() * 1_000.0,
-                timings.preparation.as_secs_f64() * 1_000.0,
-                timings.finalization.as_secs_f64() * 1_000.0,
+                cpu_ms / finalist_ms,
+                finalist_timings.device.as_secs_f64() * 1_000.0,
+                finalist_timings.preparation.as_secs_f64() * 1_000.0,
+                finalist_timings.finalization.as_secs_f64() * 1_000.0,
             );
             generation_total += generation_ms;
             plan_total += plan_ms;
             cpu_total += cpu_ms;
             gpu_total += gpu_ms;
+            finalist_total += finalist_ms;
             compared_rows += generated.rows.len();
         }
     }
     println!(
-        "TOTAL rows={compared_rows} generation={generation_total:.1}ms one-time-plan={plan_total:.1}ms cpu={cpu_total:.1}ms cuda={gpu_total:.1}ms resolver-speedup={:.2}x exact=yes",
-        cpu_total / gpu_total
+        "TOTAL rows={compared_rows} generation={generation_total:.1}ms one-time-plan={plan_total:.1}ms cpu={cpu_total:.1}ms fused={gpu_total:.1}ms finalists={finalist_total:.1}ms finalist-speedup={:.2}x exact=yes",
+        cpu_total / finalist_total
     );
     benchmark_batch(&corpus, &alphabet, &motor, &selected)?;
     Ok(())
@@ -202,32 +214,43 @@ fn benchmark_batch(
 
         let started = Instant::now();
         let (cold_batch, cold_timings) =
-            plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
-        let cold_ms = started.elapsed().as_secs_f64() * 1_000.0;
+            plan.resolve_batch_costs(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let _cold_ms = started.elapsed().as_secs_f64() * 1_000.0;
         if cold_batch != expected {
             return Err(format!("cold CUDA batch mismatch for {}", mode_name(mode)));
         }
 
         let started = Instant::now();
         let (warm_batch, warm_timings) =
-            plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+            plan.resolve_batch_costs(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
         let warm_ms = started.elapsed().as_secs_f64() * 1_000.0;
         if warm_batch != expected {
             return Err(format!("warm CUDA batch mismatch for {}", mode_name(mode)));
         }
+        plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let started = Instant::now();
+        let (finalist_batch, finalist_timings) =
+            plan.resolve_batch(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let finalist_ms = started.elapsed().as_secs_f64() * 1_000.0;
+        if finalist_batch != expected {
+            return Err(format!(
+                "finalist CUDA batch mismatch for {}",
+                mode_name(mode)
+            ));
+        }
         println!(
-            "BATCH/{} sequential-fused={sequential_ms:.1}ms rank-only={rank_only_batch_ms:.1}ms fused-cold={cold_ms:.1}ms fused-warm={warm_ms:.1}ms seq-speedup={:.2}x rank-only-speedup={:.2}x launches={}->{} entries={} unique-codes={} [cold-device={:.1} warm-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
+            "BATCH/{} sequential-fused={sequential_ms:.1}ms rank-only={rank_only_batch_ms:.1}ms fused={warm_ms:.1}ms finalists={finalist_ms:.1}ms finalist-vs-rank={:.2}x finalist-vs-fused={:.2}x launches={}->{} entries={} unique-codes={} finalists={} [device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
             mode_name(mode),
-            sequential_ms / warm_ms,
-            rank_only_batch_ms / warm_ms,
+            rank_only_batch_ms / finalist_ms,
+            warm_ms / finalist_ms,
             BATCH_SIZE * cold_timings.launches,
             warm_timings.launches,
             warm_timings.entries,
             warm_timings.unique_codes,
-            cold_timings.device.as_secs_f64() * 1_000.0,
-            warm_timings.device.as_secs_f64() * 1_000.0,
-            warm_timings.preparation.as_secs_f64() * 1_000.0,
-            warm_timings.finalization.as_secs_f64() * 1_000.0,
+            finalist_timings.finalists,
+            finalist_timings.device.as_secs_f64() * 1_000.0,
+            finalist_timings.preparation.as_secs_f64() * 1_000.0,
+            finalist_timings.finalization.as_secs_f64() * 1_000.0,
         );
     }
     Ok(())
