@@ -15,6 +15,8 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
 use std::fs;
+#[cfg(feature = "cuda")]
+use std::io::{self, BufRead, Write};
 use std::path::{Path, PathBuf};
 #[cfg(feature = "cuda")]
 use std::sync::{Arc, mpsc};
@@ -133,7 +135,7 @@ struct Args {
 #[cfg(feature = "cuda")]
 #[derive(Clone)]
 struct CudaBatchClient {
-    sender: mpsc::Sender<CudaBatchRequest>,
+    sender: mpsc::Sender<CudaBrokerCommand>,
 }
 
 #[cfg(feature = "cuda")]
@@ -159,6 +161,13 @@ struct CudaBatchRequest {
 type CudaBatchResponse = Result<(Vec<Row>, Vec<Outcome>), String>;
 
 #[cfg(feature = "cuda")]
+enum CudaBrokerCommand {
+    Resolve(CudaBatchRequest),
+    Report(mpsc::SyncSender<()>),
+    Shutdown,
+}
+
+#[cfg(feature = "cuda")]
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct BatchManifest {
@@ -171,6 +180,25 @@ struct BatchManifest {
 #[derive(Deserialize)]
 struct BatchChain {
     arguments: Vec<String>,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchSessionRequest {
+    version: String,
+    request_id: String,
+    manifest: PathBuf,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchSessionResponse<'a> {
+    version: &'static str,
+    request_id: &'a str,
+    ok: bool,
+    error: Option<String>,
 }
 
 #[derive(Clone, Copy, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -195,6 +223,18 @@ struct DiagnosticLeaders {
 
 fn main() -> Result<(), String> {
     let mut values = env::args().skip(1).collect::<Vec<_>>();
+    if values
+        .first()
+        .is_some_and(|value| value == "--batch-session")
+    {
+        if values.len() != 1 {
+            return Err("--batch-session does not take additional arguments".to_owned());
+        }
+        #[cfg(feature = "cuda")]
+        return run_batch_session();
+        #[cfg(not(feature = "cuda"))]
+        return Err("--batch-session requires a build with --features cuda".to_owned());
+    }
     if values
         .first()
         .is_some_and(|value| value == "--batch-manifest")
@@ -604,11 +644,11 @@ impl CudaBatchClient {
     fn resolve(&self, mode: InputMode, rows: Vec<Row>) -> Result<(Vec<Row>, Vec<Outcome>), String> {
         let (response, receiver) = mpsc::sync_channel(1);
         self.sender
-            .send(CudaBatchRequest {
+            .send(CudaBrokerCommand::Resolve(CudaBatchRequest {
                 mode,
                 rows,
                 response,
-            })
+            }))
             .map_err(|_| "CUDA batch broker stopped before accepting a request".to_owned())?;
         receiver
             .recv()
@@ -617,7 +657,13 @@ impl CudaBatchClient {
 }
 
 #[cfg(feature = "cuda")]
-fn run_batch_manifest(path: &Path) -> Result<(), String> {
+struct PreparedBatch {
+    batch_window_ms: u64,
+    chains: Vec<Args>,
+}
+
+#[cfg(feature = "cuda")]
+fn prepare_batch_manifest(path: &Path) -> Result<PreparedBatch, String> {
     let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
     let manifest: BatchManifest = serde_json::from_str(&text).map_err(|error| error.to_string())?;
     if manifest.version != "ckt-v4-anneal-batch-1" {
@@ -640,7 +686,117 @@ fn run_batch_manifest(path: &Path) -> Result<(), String> {
     if chains.iter().any(|args| !args.cuda_full) {
         return Err("every anneal batch chain must use --cuda-full".to_owned());
     }
-    let first = &chains[0];
+    Ok(PreparedBatch {
+        batch_window_ms: manifest.batch_window_ms,
+        chains,
+    })
+}
+
+#[cfg(feature = "cuda")]
+struct CudaBatchRuntime {
+    shared: BatchShared,
+    client: CudaBatchClient,
+    broker: Option<thread::JoinHandle<Result<(), String>>>,
+    corpus: PathBuf,
+    schemes: PathBuf,
+    snapshot: PathBuf,
+    batch_window_ms: u64,
+}
+
+#[cfg(feature = "cuda")]
+impl CudaBatchRuntime {
+    fn new(batch: &PreparedBatch) -> Result<Self, String> {
+        let first = &batch.chains[0];
+        validate_batch_contract(&batch.chains, first)?;
+        let corpus = Arc::new(NativeCorpus::open(&first.corpus)?);
+        let fixture = Arc::new(SchemeFixture::open(&first.schemes)?);
+        let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
+        let motor = Arc::new(load_motor(&corpus, &alphabet, &first.snapshot)?);
+        let shared = BatchShared {
+            corpus,
+            fixture,
+            motor: motor.clone(),
+        };
+        let batch_window = Duration::from_millis(batch.batch_window_ms);
+        let (sender, receiver) = mpsc::channel();
+        let broker = thread::spawn(move || run_cuda_batch_broker(receiver, motor, batch_window));
+        Ok(Self {
+            shared,
+            client: CudaBatchClient { sender },
+            broker: Some(broker),
+            corpus: first.corpus.clone(),
+            schemes: first.schemes.clone(),
+            snapshot: first.snapshot.clone(),
+            batch_window_ms: batch.batch_window_ms,
+        })
+    }
+
+    fn run(&self, batch: PreparedBatch) -> Result<(), String> {
+        let first = &batch.chains[0];
+        validate_batch_contract(&batch.chains, first)?;
+        if first.corpus != self.corpus
+            || first.schemes != self.schemes
+            || first.snapshot != self.snapshot
+            || batch.batch_window_ms != self.batch_window_ms
+        {
+            return Err(
+                "batch session requires unchanged corpus, scheme fixture, motor snapshot, and window"
+                    .to_owned(),
+            );
+        }
+        let workers = batch
+            .chains
+            .into_iter()
+            .enumerate()
+            .map(|(index, args)| {
+                let batch_client = self.client.clone();
+                let shared = self.shared.clone();
+                thread::spawn(move || {
+                    run_chain(args, Some(batch_client), Some(shared))
+                        .map_err(|error| format!("batch chain {index}: {error}"))
+                })
+            })
+            .collect::<Vec<_>>();
+
+        let mut first_error = None;
+        for worker in workers {
+            match worker.join() {
+                Ok(Ok(())) => {}
+                Ok(Err(error)) => {
+                    first_error.get_or_insert(error);
+                }
+                Err(_) => {
+                    first_error.get_or_insert("anneal batch chain panicked".to_owned());
+                }
+            };
+        }
+        let (response, receiver) = mpsc::sync_channel(1);
+        self.client
+            .sender
+            .send(CudaBrokerCommand::Report(response))
+            .map_err(|_| "CUDA batch broker stopped before reporting statistics".to_owned())?;
+        receiver
+            .recv()
+            .map_err(|_| "CUDA batch broker stopped before acknowledging statistics".to_owned())?;
+        first_error.map_or(Ok(()), Err)
+    }
+
+    fn shutdown(mut self) -> Result<(), String> {
+        let _ = self.client.sender.send(CudaBrokerCommand::Shutdown);
+        match self
+            .broker
+            .take()
+            .expect("CUDA broker handle is present")
+            .join()
+        {
+            Ok(result) => result,
+            Err(_) => Err("CUDA batch broker panicked".to_owned()),
+        }
+    }
+}
+
+#[cfg(feature = "cuda")]
+fn validate_batch_contract(chains: &[Args], first: &Args) -> Result<(), String> {
     if chains.iter().skip(1).any(|args| {
         args.corpus != first.corpus
             || args.schemes != first.schemes
@@ -650,61 +806,67 @@ fn run_batch_manifest(path: &Path) -> Result<(), String> {
             "anneal batch chains must share corpus, scheme fixture, and motor snapshot".to_owned(),
         );
     }
+    Ok(())
+}
 
-    let corpus = Arc::new(NativeCorpus::open(&first.corpus)?);
-    let fixture = Arc::new(SchemeFixture::open(&first.schemes)?);
-    let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
-    let motor = Arc::new(load_motor(&corpus, &alphabet, &first.snapshot)?);
-    let shared = BatchShared {
-        corpus,
-        fixture,
-        motor: motor.clone(),
-    };
-    let batch_window = Duration::from_millis(manifest.batch_window_ms);
-    let (sender, receiver) = mpsc::channel();
-    let broker = thread::spawn(move || run_cuda_batch_broker(receiver, motor, batch_window));
-    let client = CudaBatchClient { sender };
-    let workers = chains
-        .into_iter()
-        .enumerate()
-        .map(|(index, args)| {
-            let batch_client = client.clone();
-            let shared = shared.clone();
-            thread::spawn(move || {
-                run_chain(args, Some(batch_client), Some(shared))
-                    .map_err(|error| format!("batch chain {index}: {error}"))
-            })
-        })
-        .collect::<Vec<_>>();
-    drop(client);
+#[cfg(feature = "cuda")]
+fn run_batch_manifest(path: &Path) -> Result<(), String> {
+    let batch = prepare_batch_manifest(path)?;
+    let runtime = CudaBatchRuntime::new(&batch)?;
+    let result = runtime.run(batch);
+    let shutdown = runtime.shutdown();
+    result.and(shutdown)
+}
 
-    let mut first_error = None;
-    for worker in workers {
-        match worker.join() {
-            Ok(Ok(())) => {}
-            Ok(Err(error)) => {
-                first_error.get_or_insert(error);
+#[cfg(feature = "cuda")]
+fn run_batch_session() -> Result<(), String> {
+    const RESPONSE_PREFIX: &str = "@ckt-v4-batch-session@";
+    let stdin = io::stdin();
+    let mut stdout = io::stdout();
+    let mut runtime = None;
+    for line in stdin.lock().lines() {
+        let line = line.map_err(|error| error.to_string())?;
+        if line.trim().is_empty() {
+            continue;
+        }
+        let request: BatchSessionRequest = serde_json::from_str(&line)
+            .map_err(|error| format!("invalid batch request: {error}"))?;
+        if request.version != "ckt-v4-anneal-session-request-1" {
+            return Err(format!(
+                "unsupported anneal batch session request version {:?}",
+                request.version
+            ));
+        }
+        let result = (|| {
+            let batch = prepare_batch_manifest(&request.manifest)?;
+            if runtime.is_none() {
+                runtime = Some(CudaBatchRuntime::new(&batch)?);
             }
-            Err(_) => {
-                first_error.get_or_insert("anneal batch chain panicked".to_owned());
-            }
+            runtime
+                .as_ref()
+                .expect("CUDA runtime is initialized")
+                .run(batch)
+        })();
+        let response = BatchSessionResponse {
+            version: "ckt-v4-anneal-session-response-1",
+            request_id: &request.request_id,
+            ok: result.is_ok(),
+            error: result.err(),
         };
+        writeln!(
+            stdout,
+            "{RESPONSE_PREFIX}{}",
+            serde_json::to_string(&response).map_err(|error| error.to_string())?
+        )
+        .map_err(|error| error.to_string())?;
+        stdout.flush().map_err(|error| error.to_string())?;
     }
-    match broker.join() {
-        Ok(Ok(())) => {}
-        Ok(Err(error)) => {
-            first_error.get_or_insert(error);
-        }
-        Err(_) => {
-            first_error.get_or_insert("CUDA batch broker panicked".to_owned());
-        }
-    }
-    first_error.map_or(Ok(()), Err)
+    runtime.map_or(Ok(()), CudaBatchRuntime::shutdown)
 }
 
 #[cfg(feature = "cuda")]
 fn run_cuda_batch_broker(
-    receiver: mpsc::Receiver<CudaBatchRequest>,
+    receiver: mpsc::Receiver<CudaBrokerCommand>,
     motor: Arc<ProjectedMotor>,
     batch_window: Duration,
 ) -> Result<(), String> {
@@ -713,14 +875,41 @@ fn run_cuda_batch_broker(
     let mut total_stats = CudaBatchStats::default();
     let mut keytao_stats = CudaBatchStats::default();
     let mut sanpin_stats = CudaBatchStats::default();
-    let started = Instant::now();
+    let mut started = Instant::now();
+    let mut pending = None;
 
-    while let Ok(first) = receiver.recv() {
+    loop {
+        let command = match pending.take() {
+            Some(command) => command,
+            None => match receiver.recv() {
+                Ok(command) => command,
+                Err(_) => break,
+            },
+        };
+        let first = match command {
+            CudaBrokerCommand::Resolve(request) => request,
+            CudaBrokerCommand::Report(response) => {
+                total_stats.print("all", Some(started.elapsed()));
+                keytao_stats.print("keytao", None);
+                sanpin_stats.print("sanpin", None);
+                total_stats = CudaBatchStats::default();
+                keytao_stats = CudaBatchStats::default();
+                sanpin_stats = CudaBatchStats::default();
+                started = Instant::now();
+                let _ = response.send(());
+                continue;
+            }
+            CudaBrokerCommand::Shutdown => break,
+        };
         let mut requests = vec![first];
         let deadline = Instant::now() + batch_window;
         while let Some(remaining) = deadline.checked_duration_since(Instant::now()) {
             match receiver.recv_timeout(remaining) {
-                Ok(request) => requests.push(request),
+                Ok(CudaBrokerCommand::Resolve(request)) => requests.push(request),
+                Ok(control) => {
+                    pending = Some(control);
+                    break;
+                }
                 Err(mpsc::RecvTimeoutError::Timeout) => break,
                 Err(mpsc::RecvTimeoutError::Disconnected) => break,
             }
@@ -773,9 +962,6 @@ fn run_cuda_batch_broker(
             }
         }
     }
-    total_stats.print("all", Some(started.elapsed()));
-    keytao_stats.print("keytao", None);
-    sanpin_stats.print("sanpin", None);
     Ok(())
 }
 

@@ -66,6 +66,80 @@ function Invoke-LowPriority([string]$File, [string[]]$Arguments, [string]$Stdout
     }
 }
 
+function Start-CudaBatchSession([string]$File) {
+    $info = [Diagnostics.ProcessStartInfo]::new()
+    $info.FileName = $File
+    $info.WorkingDirectory = $repo
+    $info.UseShellExecute = $false
+    $info.CreateNoWindow = $true
+    $info.RedirectStandardInput = $true
+    $info.RedirectStandardOutput = $true
+    $info.RedirectStandardError = $true
+    $null = $info.ArgumentList.Add('--batch-session')
+    $process = [Diagnostics.Process]::new()
+    $process.StartInfo = $info
+    if (-not $process.Start()) { throw "failed to start CUDA batch session: $File" }
+    try { $process.PriorityClass = [Diagnostics.ProcessPriorityClass]::BelowNormal } catch {}
+    [pscustomobject]@{
+        Process = $process
+        StderrTask = $process.StandardError.ReadToEndAsync()
+    }
+}
+
+function Invoke-CudaBatchSession(
+    [pscustomobject]$Session,
+    [string]$Manifest,
+    [string]$RequestId,
+    [string]$Stdout,
+    [string]$Stderr
+) {
+    $request = [ordered]@{
+        version = 'ckt-v4-anneal-session-request-1'
+        requestId = $RequestId
+        manifest = $Manifest
+    } | ConvertTo-Json -Compress
+    $Session.Process.StandardInput.WriteLine($request)
+    $Session.Process.StandardInput.Flush()
+
+    $responsePrefix = '@ckt-v4-batch-session@'
+    $output = [Text.StringBuilder]::new()
+    $response = $null
+    while ($null -eq $response) {
+        $line = $Session.Process.StandardOutput.ReadLine()
+        if ($null -eq $line) {
+            throw "CUDA batch session exited before completing request ${RequestId}"
+        }
+        if ($line.StartsWith($responsePrefix, [StringComparison]::Ordinal)) {
+            $response = $line.Substring($responsePrefix.Length) | ConvertFrom-Json
+            if ($response.version -ne 'ckt-v4-anneal-session-response-1' -or
+                $response.requestId -cne $RequestId) {
+                throw "CUDA batch session returned an unexpected response for request ${RequestId}"
+            }
+        } else {
+            $null = $output.AppendLine($line)
+        }
+    }
+    [IO.File]::WriteAllText($Stdout, $output.ToString(), [Text.UTF8Encoding]::new($false))
+    if (-not $response.ok) {
+        [IO.File]::WriteAllText($Stderr, "$($response.error)`n", [Text.UTF8Encoding]::new($false))
+        throw "CUDA batch session request $RequestId failed; see $Stderr"
+    }
+    [IO.File]::WriteAllText($Stderr, '', [Text.UTF8Encoding]::new($false))
+}
+
+function Stop-CudaBatchSession([pscustomobject]$Session, [string]$Stderr) {
+    if (-not $Session.Process.HasExited) {
+        try { $Session.Process.StandardInput.Close() } catch {}
+    }
+    $Session.Process.WaitForExit()
+    [IO.File]::WriteAllText($Stderr, $Session.StderrTask.Result, [Text.UTF8Encoding]::new($false))
+    $exitCode = $Session.Process.ExitCode
+    $Session.Process.Dispose()
+    if ($exitCode -ne 0) {
+        throw "CUDA batch session failed with exit code $exitCode; see $Stderr"
+    }
+}
+
 function Add-Optional([Collections.Generic.List[string]]$Arguments, [string]$Flag, $Value) {
     if ($null -ne $Value) {
         $Arguments.Add($Flag)
@@ -118,6 +192,15 @@ $corpus = Resolve-RepoPath $settings.corpus
 $schemes = Resolve-RepoPath $settings.schemes
 $snapshot = Resolve-RepoPath $settings.snapshot
 $ergonomics = Resolve-RepoPath $settings.ergonomicFixture
+$schemeFixture = Get-Content -Raw -LiteralPath $schemes | ConvertFrom-Json
+$availableSchemeIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+foreach ($scheme in $schemeFixture.schemes) { $null = $availableSchemeIds.Add([string]$scheme.id) }
+foreach ($requiredSchemeId in @([string]$settings.schemeTemplate, [string]$settings.reference) + $initialSchemeIds) {
+    if (-not $availableSchemeIds.Contains($requiredSchemeId)) {
+        throw "explorer scheme $requiredSchemeId is absent from fixture: $schemes"
+    }
+}
+Remove-Variable -Name schemeFixture, availableSchemeIds
 $root = Resolve-RepoPath $settings.outputRoot
 $database = Join-Path $root 'exploration.sqlite3'
 $null = New-Item -ItemType Directory -Force -Path $root
@@ -176,7 +259,11 @@ if (Test-Path -LiteralPath $contractPath) {
     Move-Item -LiteralPath $contractTemporary -Destination $contractPath
 }
 
+$batchSession = $null
 try {
+  if ($cudaBatch) {
+    $batchSession = Start-CudaBatchSession $annealer
+  }
   $generation = 1
   while ($settings.generations -eq 0 -or $generation -le $settings.generations) {
     $generationName = 'generation-{0:d4}' -f $generation
@@ -280,7 +367,7 @@ try {
         [IO.File]::WriteAllText($batchManifest, "$batchJson`n", [Text.UTF8Encoding]::new($false))
         $batchStdout = Join-Path $generationDir 'anneal-batch.stdout.log'
         $batchStderr = Join-Path $generationDir 'anneal-batch.stderr.log'
-        Invoke-LowPriority $annealer @('--batch-manifest', $batchManifest) $batchStdout $batchStderr
+        Invoke-CudaBatchSession $batchSession $batchManifest $generationName $batchStdout $batchStderr
     }
 
     if (-not (Test-Path -LiteralPath $planDir)) {
@@ -319,5 +406,11 @@ try {
       $generation++
   }
 } finally {
-    $runLock.Dispose()
+    try {
+        if ($null -ne $batchSession) {
+            Stop-CudaBatchSession $batchSession (Join-Path $root 'anneal-batch-session.stderr.log')
+        }
+    } finally {
+        $runLock.Dispose()
+    }
 }
