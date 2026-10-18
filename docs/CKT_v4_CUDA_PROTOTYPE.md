@@ -4,14 +4,16 @@
 
 ## 原型边界
 
-CUDA 原型加速全量评分中的候选桶排序和终止名次解析：
+CUDA 原型现在加速全量评分中的活动项构造、候选桶排序、阶段推进和逐行最优选择：
 
 1. Rust 按当前布局生成约 28.96 万行模式记录；
-2. Rust 为每个活动阶段生成 `(pool, code, row-priority)` 紧凑项；
-3. CUDA 使用 64-bit key 排序及 segmented inclusive scan 求出精确名次；
-4. Rust 使用原有 `ProjectedMotor`、`f64` 汇总和认知参数生成最终分数。
+2. `CudaResolvePlan` 将行、阶段、槽位和 order 索引拓扑一次上传并常驻显存；
+3. 每个候选只扁平上传 code bits 和由原有 `ProjectedMotor` 算出的 cost；
+4. CUDA 根据设备端 active-stage 状态构造 `(lane, pool, code, row-priority)`，用排序和 segmented inclusive scan 求精确名次；
+5. CUDA 按行选择最小 rank，并以 motor cost 作 exact tie-break，随后终止该行或推进到下一阶段；
+6. Rust 只取回最终 outcome 数组，再用原有 `f64` 汇总和认知参数生成最终分数。
 
-因此 GPU 不参与浮点累加，不会因 RTX 3070/4060 较弱的 FP64 吞吐改变 CKT v4 数值。原型会逐个比较 CPU/GPU 的完整 `Outcome` 数组和 `Summary`，任一处不同即失败。
+GPU 仅比较已经由 CPU 算出的 `f64` motor cost，不在设备上重新计算或累加评分，因此不会因 RTX 3070/4060 较弱的 FP64 吞吐改变 CKT v4 数值。原型会逐个比较 CPU/GPU 的完整 `Outcome` 数组和 `Summary`，任一处不同即失败。
 
 静态 `CudaResolvePlan` 保存只依赖语料行 ID、权重和阶段拓扑的优先级；同一模式的后续退火布局可复用。每次复用仍检查行契约，防止把计划用于不同语料或拓扑。GPU 结果可以直接初始化 `IncrementalResolver`，其 CPU 碰撞成员索引推迟到首次真正采用小增量路径时才构建。
 
@@ -89,8 +91,8 @@ cargo test --release --features cuda --manifest-path research/ckt-v4-core/Cargo.
 
 ## 距离 GPU 主导仍缺什么
 
-1. 把活动项构造、每行最优阶段选择和部分整数归约迁入 GPU；单纯合批 rank 已证实没有稳定收益。
-2. 在上述 CPU 开销迁移后再评估多链 batch；单候选增量本身仍不适合 GPU。
+1. 当前最大瓶颈已经转移为 CPU `ProjectedMotor` cost 构造；单候选约 173–299 ms，而设备端融合解析通常只有 8–17 ms。下一步若继续追求 GPU 主导，应把 motor cost 计算迁入 GPU，或只回传最小 rank 的少量 tie 候选后再算 cost。
+2. 将 fused batch 接入多链 explorer 调度；单候选增量本身仍不适合 GPU，batch 必须按完整静态拓扑契约和 mode 分组。
 3. 最终 `f64` 汇总保留 CPU 精确路径作真值。
 4. 在 RTX 3070 目标机复跑 resolver、完整退火以及显存/功耗基准，再决定合理的并发链数和 batch 大小。
 5. 长期任务保留 CPU fallback，并设置非零 `verifyEvery`，周期性用 CPU 全量评分抽查 GPU 路径。
@@ -109,6 +111,23 @@ cargo test --release --features cuda --manifest-path research/ckt-v4-core/Cargo.
 | 21×26（3 个真实方案循环成 8 lane） | 1.04× | 0.90× | 40 → 5 |
 
 重复单一方案的补充轮落在 0.91–1.15×，同样没有稳定收益。batch 后 GPU 排序/传输仅约 31–50 ms，完整 resolver 的主要时间已经是 Rust 活动项构造、逐行最终选择和内存流量；简单扩大排序批次反而损害缓存局部性。因此当前只保留 batch 作为精确实验接口和基准，不接入生产 annealer。若继续探索，必须把活动项构造和每行最终选择一并迁到 GPU，才可能获得结构性收益。
+
+### 活动项与逐行选择迁入 GPU 后
+
+2026-10-18 完成下一阶段融合路径。设备端持有静态行/阶段/槽位拓扑和 active-stage 状态，逐 order 构造活动 key、排序求 rank、逐行 tie-break 并推进阶段；host 不再构造每轮 active entry 元数据，也不再接收中间 rank 数组。旧 rank-only 路径仍保留在 benchmark 中作同机 A/B。
+
+8-lane 结果如下，均为 3 个真实强方案循环组成 batch；`device` 包含 code/cost 上传、五次排序与最终 outcome 下载。所有 CPU、旧 CUDA、新 CUDA outcomes 均逐项一致。
+
+| 口径 | mode | 逐候选 fused | 旧 rank-only batch | 新 fused batch | 相对旧 batch | device | host prepare/finalize |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 21×21 | Keytao | 1902.2 ms | 1460.8 ms | 904.0 ms | 1.62× | 52.0 ms | 785.4 / 58.2 ms |
+| 21×21 | Sanpin | 1715.6 ms | 1387.2 ms | 874.8 ms | 1.59× | 57.2 ms | 759.3 / 52.3 ms |
+| 21×26 | Keytao | 2623.0 ms | 2294.7 ms | 1639.5 ms | 1.40× | 63.5 ms | 1490.9 / 67.9 ms |
+| 21×26 | Sanpin | 2374.2 ms | 1542.4 ms | 1077.8 ms | 1.43× | 59.6 ms | 958.2 / 50.1 ms |
+
+这次 batch 已从“不稳定持平”变为结构性正收益，五阶段提交仍是 40 → 5。batch 内使用面向 `PackedCode` 的快速 cost cache：21×21 的约 695 万槽位收敛为约 51–54 万个唯一 code，21×26 的约 754 万槽位收敛为约 88–94 万个唯一 code。单候选不启用该 cache，避免大量唯一 code 使哈希成本反超直接计算。
+
+单候选 fused 仍通常比旧 rank-only 慢约 7–36%，因为它为全部静态槽位预先计算 motor cost，而旧路径只为到达终止选择的活动 code 算 cost；不过 fused 单候选相对纯 CPU resolver 仍约 2.2–3.7×。所以当前 dispatch 保持单候选 `resolve` 走 rank-only，显式 `resolve_fused` 用于 A/B，`resolve_batch` 才走新融合路径。两种口径的 fused 单候选和 8-lane batch 都已通过完整 outcome/summary 对照；单链 `--cuda-full` 继续采用较快的 rank-only 路径。
 
 ## 验算层级
 

@@ -1,15 +1,79 @@
 use crate::PackedCode;
 use crate::model::{Outcome, Pool, Row, row_cmp, validate_rows};
+use std::collections::HashMap;
 use std::ffi::{c_char, c_int, c_void};
+use std::hash::{BuildHasherDefault, Hasher};
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
 const PRIORITY_LIMIT: usize = 1 << 23;
 
+#[derive(Default)]
+struct PackedCodeHasher(u64);
+
+impl Hasher for PackedCodeHasher {
+    fn finish(&self) -> u64 {
+        let mut value = self.0;
+        value ^= value >> 30;
+        value = value.wrapping_mul(0xbf58_476d_1ce4_e5b9);
+        value ^= value >> 27;
+        value = value.wrapping_mul(0x94d0_49bb_1331_11eb);
+        value ^ (value >> 31)
+    }
+
+    fn write(&mut self, bytes: &[u8]) {
+        for &byte in bytes {
+            self.0 = self.0.wrapping_mul(0x100_0000_01b3) ^ u64::from(byte);
+        }
+    }
+
+    fn write_u64(&mut self, value: u64) {
+        self.0 = value;
+    }
+
+    fn write_u8(&mut self, value: u8) {
+        self.0 ^= u64::from(value) << 56;
+    }
+}
+
+type MotorCache = HashMap<PackedCode, f64, BuildHasherDefault<PackedCodeHasher>>;
+
 unsafe extern "C" {
     fn ckt_cuda_device_name(output: *mut c_char, capacity: usize) -> c_int;
     fn ckt_cuda_workspace_create(message: *mut c_char, message_capacity: usize) -> *mut c_void;
     fn ckt_cuda_workspace_destroy(workspace: *mut c_void);
+    fn ckt_cuda_workspace_set_topology(
+        workspace: *mut c_void,
+        priorities: *const u32,
+        row_first_stage: *const u32,
+        stage_order: *const u32,
+        stage_pool: *const u32,
+        stage_slot_offset: *const u32,
+        stage_slot_count: *const u32,
+        stage_next: *const u32,
+        slot_row: *const u32,
+        slot_stage: *const u32,
+        order_offsets: *const u32,
+        order_slots: *const u32,
+        row_count: usize,
+        stage_count: usize,
+        slot_count: usize,
+        order_count: usize,
+        message: *mut c_char,
+        message_capacity: usize,
+    ) -> c_int;
+    fn ckt_cuda_resolve_batch(
+        workspace: *mut c_void,
+        codes: *const u64,
+        costs: *const f64,
+        outcome_codes: *mut u64,
+        outcome_costs: *mut f64,
+        outcome_ranks: *mut u32,
+        outcome_stages: *mut u32,
+        lanes: usize,
+        message: *mut c_char,
+        message_capacity: usize,
+    ) -> c_int;
     fn ckt_cuda_rank(
         workspace: *mut c_void,
         groups: *const u64,
@@ -36,6 +100,7 @@ pub struct CudaResolveTimings {
     pub device: Duration,
     pub finalization: Duration,
     pub entries: usize,
+    pub unique_codes: usize,
     pub launches: usize,
 }
 
@@ -44,6 +109,9 @@ pub struct CudaResolvePlan {
     priority_by_row: Vec<u32>,
     orders: Vec<u8>,
     contract: Vec<RowContract>,
+    stage_orders: Vec<u8>,
+    stage_pools: Vec<u64>,
+    slot_count: usize,
     workspace: Mutex<CudaWorkspace>,
 }
 
@@ -71,6 +139,33 @@ impl CudaWorkspace {
             Ok(Self { raw })
         }
     }
+
+    fn set_topology(&mut self, priorities: &[u32], topology: &CudaTopology) -> Result<(), String> {
+        let mut message = vec![0_i8; 1024];
+        let status = unsafe {
+            ckt_cuda_workspace_set_topology(
+                self.raw,
+                priorities.as_ptr(),
+                topology.row_first_stage.as_ptr(),
+                topology.stage_order.as_ptr(),
+                topology.stage_pool.as_ptr(),
+                topology.stage_slot_offset.as_ptr(),
+                topology.stage_slot_count.as_ptr(),
+                topology.stage_next.as_ptr(),
+                topology.slot_row.as_ptr(),
+                topology.slot_stage.as_ptr(),
+                topology.order_offsets.as_ptr(),
+                topology.order_slots.as_ptr(),
+                priorities.len(),
+                topology.stage_order.len(),
+                topology.slot_row.len(),
+                topology.order_offsets.len() - 1,
+                message.as_mut_ptr(),
+                message.len(),
+            )
+        };
+        cuda_result(status, &message)
+    }
 }
 
 impl Drop for CudaWorkspace {
@@ -84,7 +179,82 @@ struct RowContract {
     id: String,
     weight_bits: u64,
     base_length: u8,
-    stages: Vec<(u8, u64)>,
+    stages: Vec<(u8, u64, usize)>,
+}
+
+#[derive(Debug)]
+struct CudaTopology {
+    row_first_stage: Vec<u32>,
+    stage_order: Vec<u32>,
+    stage_pool: Vec<u32>,
+    stage_slot_offset: Vec<u32>,
+    stage_slot_count: Vec<u32>,
+    stage_next: Vec<u32>,
+    slot_row: Vec<u32>,
+    slot_stage: Vec<u32>,
+    order_offsets: Vec<u32>,
+    order_slots: Vec<u32>,
+}
+
+impl CudaTopology {
+    fn new(rows: &[Row], priorities: &[u32], orders: &[u8]) -> Result<Self, String> {
+        let mut topology = Self {
+            row_first_stage: Vec::with_capacity(rows.len()),
+            stage_order: Vec::new(),
+            stage_pool: Vec::new(),
+            stage_slot_offset: Vec::new(),
+            stage_slot_count: Vec::new(),
+            stage_next: Vec::new(),
+            slot_row: Vec::new(),
+            slot_stage: Vec::new(),
+            order_offsets: Vec::with_capacity(orders.len() + 1),
+            order_slots: Vec::new(),
+        };
+        let mut slots_by_order = vec![Vec::new(); orders.len()];
+        for (row_index, row) in rows.iter().enumerate() {
+            let first_stage = u32::try_from(topology.stage_order.len())
+                .map_err(|_| "CUDA stage count exceeds u32 indexing")?;
+            topology.row_first_stage.push(first_stage);
+            for (local_stage, stage) in row.stages.iter().enumerate() {
+                let stage_index = u32::try_from(topology.stage_order.len())
+                    .map_err(|_| "CUDA stage count exceeds u32 indexing")?;
+                let order_index = orders
+                    .binary_search(&stage.order)
+                    .map_err(|_| "CUDA topology stage order is absent")?;
+                topology.stage_order.push(order_index as u32);
+                topology.stage_pool.push(pool_index(stage.pool) as u32);
+                topology
+                    .stage_slot_offset
+                    .push(topology.slot_row.len() as u32);
+                topology.stage_slot_count.push(stage.codes.len() as u32);
+                topology
+                    .stage_next
+                    .push(if local_stage + 1 < row.stages.len() {
+                        stage_index + 1
+                    } else {
+                        u32::MAX
+                    });
+                for _ in &stage.codes {
+                    let slot = u32::try_from(topology.slot_row.len())
+                        .map_err(|_| "CUDA code slot count exceeds u32 indexing")?;
+                    topology.slot_row.push(row_index as u32);
+                    topology.slot_stage.push(stage_index);
+                    slots_by_order[order_index].push(slot);
+                }
+            }
+        }
+        topology.order_offsets.push(0);
+        for slots in slots_by_order {
+            topology.order_slots.extend(slots);
+            topology
+                .order_offsets
+                .push(topology.order_slots.len() as u32);
+        }
+        if priorities.len() != rows.len() {
+            return Err("CUDA topology priority count differs".to_owned());
+        }
+        Ok(topology)
+    }
 }
 
 pub fn cuda_device_name() -> Result<String, String> {
@@ -107,6 +277,9 @@ where
 impl CudaResolvePlan {
     pub fn new(rows: &[Row]) -> Result<Self, String> {
         validate_rows(rows)?;
+        if rows.is_empty() {
+            return Err("CUDA resolver plan requires at least one row".to_owned());
+        }
         if rows.len() >= PRIORITY_LIMIT {
             return Err(format!(
                 "CUDA resolver supports fewer than {PRIORITY_LIMIT} rows per mode"
@@ -133,19 +306,180 @@ impl CudaResolvePlan {
                 stages: row
                     .stages
                     .iter()
-                    .map(|stage| (stage.order, pool_index(stage.pool)))
+                    .map(|stage| (stage.order, pool_index(stage.pool), stage.codes.len()))
                     .collect(),
             })
             .collect();
+        let topology = CudaTopology::new(rows, &priority_by_row, &orders)?;
+        let stage_orders = rows
+            .iter()
+            .flat_map(|row| row.stages.iter().map(|stage| stage.order))
+            .collect();
+        let stage_pools = rows
+            .iter()
+            .flat_map(|row| row.stages.iter().map(|stage| pool_index(stage.pool)))
+            .collect();
+        let slot_count = topology.slot_row.len();
+        let mut workspace = CudaWorkspace::new()?;
+        workspace.set_topology(&priority_by_row, &topology)?;
         Ok(Self {
             priority_by_row,
             orders,
             contract,
-            workspace: Mutex::new(CudaWorkspace::new()?),
+            stage_orders,
+            stage_pools,
+            slot_count,
+            workspace: Mutex::new(workspace),
         })
     }
 
+    /// Uses the lower-overhead rank-only path for a single candidate.
     pub fn resolve<F>(
+        &self,
+        rows: &[Row],
+        motor_cost: F,
+    ) -> Result<(Vec<Outcome>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        self.resolve_rank_only(rows, motor_cost)
+    }
+
+    /// Resolves one candidate through the fused device path. This is retained for
+    /// exact A/B measurements; the rank-only path is currently faster at lane count 1.
+    pub fn resolve_fused<F>(
+        &self,
+        rows: &[Row],
+        motor_cost: F,
+    ) -> Result<(Vec<Outcome>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        let (mut batch, timings) = self.resolve_batch(&[rows], motor_cost)?;
+        Ok((batch.remove(0), timings))
+    }
+
+    /// Resolves independent candidates in isolated GPU lanes. The plan topology is
+    /// persistent; each call uploads only flattened code bits and motor costs.
+    pub fn resolve_batch<F>(
+        &self,
+        rows_batch: &[&[Row]],
+        motor_cost: F,
+    ) -> Result<(Vec<Vec<Outcome>>, CudaResolveTimings), String>
+    where
+        F: Fn(PackedCode) -> Option<f64>,
+    {
+        if rows_batch.is_empty() {
+            return Ok((Vec::new(), CudaResolveTimings::default()));
+        }
+        if rows_batch.len() >= 1 << 23 {
+            return Err("CUDA resolver batch supports fewer than 2^23 candidates".to_owned());
+        }
+        let prepare_started = Instant::now();
+        let mut codes = Vec::with_capacity(rows_batch.len() * self.slot_count);
+        let mut costs = Vec::with_capacity(rows_batch.len() * self.slot_count);
+        let mut motor_cache = (rows_batch.len() > 1).then(|| {
+            MotorCache::with_capacity_and_hasher(self.slot_count, BuildHasherDefault::default())
+        });
+        for (candidate, rows) in rows_batch.iter().enumerate() {
+            self.validate_contract(rows).map_err(|error| {
+                format!("CUDA batch candidate {candidate} has an incompatible contract: {error}")
+            })?;
+            for row in *rows {
+                for stage in &row.stages {
+                    for &code in &stage.codes {
+                        codes.push(code.bits());
+                        let compute = || {
+                            motor_cost(code)
+                                .filter(|value| value.is_finite())
+                                .unwrap_or(f64::NAN)
+                        };
+                        let cost = if let Some(cache) = &mut motor_cache {
+                            *cache.entry(code).or_insert_with(compute)
+                        } else {
+                            compute()
+                        };
+                        costs.push(cost);
+                    }
+                }
+            }
+        }
+        let flat_rows = rows_batch
+            .len()
+            .checked_mul(self.contract.len())
+            .ok_or("CUDA batch row count overflows host indexing")?;
+        let mut outcome_codes = vec![0_u64; flat_rows];
+        let mut outcome_costs = vec![0.0_f64; flat_rows];
+        let mut outcome_ranks = vec![0_u32; flat_rows];
+        let mut outcome_stages = vec![0_u32; flat_rows];
+        let preparation = prepare_started.elapsed();
+        let unique_codes = motor_cache.as_ref().map_or(0, HashMap::len);
+
+        let workspace = self
+            .workspace
+            .lock()
+            .map_err(|_| "CUDA workspace lock is poisoned".to_owned())?;
+        let device_started = Instant::now();
+        let mut message = vec![0_i8; 1024];
+        let status = unsafe {
+            ckt_cuda_resolve_batch(
+                workspace.raw,
+                codes.as_ptr(),
+                costs.as_ptr(),
+                outcome_codes.as_mut_ptr(),
+                outcome_costs.as_mut_ptr(),
+                outcome_ranks.as_mut_ptr(),
+                outcome_stages.as_mut_ptr(),
+                rows_batch.len(),
+                message.as_mut_ptr(),
+                message.len(),
+            )
+        };
+        cuda_result(status, &message)?;
+        let device = device_started.elapsed();
+        drop(workspace);
+
+        let finalize_started = Instant::now();
+        let row_count = self.contract.len();
+        let mut outcomes = Vec::with_capacity(rows_batch.len());
+        for candidate in 0..rows_batch.len() {
+            let mut lane = Vec::with_capacity(row_count);
+            for row_index in 0..row_count {
+                let flat = candidate * row_count + row_index;
+                let stage = outcome_stages[flat] as usize;
+                let order = *self
+                    .stage_orders
+                    .get(stage)
+                    .ok_or_else(|| format!("CUDA returned invalid stage {stage}"))?;
+                let pool = pool_from_index(self.stage_pools[stage])?;
+                let code = PackedCode::from_bits_len(outcome_codes[flat], order)?;
+                lane.push(Outcome {
+                    row_index,
+                    code,
+                    code_length: order,
+                    aux_count: order.saturating_sub(self.contract[row_index].base_length),
+                    rank: outcome_ranks[flat] as usize,
+                    pool,
+                    motor_upper_ms: outcome_costs[flat],
+                });
+            }
+            outcomes.push(lane);
+        }
+        let finalization = finalize_started.elapsed();
+        Ok((
+            outcomes,
+            CudaResolveTimings {
+                preparation,
+                device,
+                finalization,
+                entries: rows_batch.len() * self.slot_count,
+                unique_codes,
+                launches: self.orders.len(),
+            },
+        ))
+    }
+
+    pub fn resolve_rank_only<F>(
         &self,
         rows: &[Row],
         motor_cost: F,
@@ -249,7 +583,7 @@ impl CudaResolvePlan {
         Ok((outcomes, timings))
     }
 
-    pub fn resolve_batch<F>(
+    pub fn resolve_batch_rank_only<F>(
         &self,
         rows_batch: &[&[Row]],
         motor_cost: F,
@@ -413,13 +747,11 @@ impl CudaResolvePlan {
                 && row.weight.to_bits() == expected.weight_bits
                 && row.base_length == expected.base_length
                 && row.stages.len() == expected.stages.len()
-                && row
-                    .stages
-                    .iter()
-                    .zip(&expected.stages)
-                    .all(|(stage, &(order, pool))| {
+                && row.stages.iter().zip(&expected.stages).all(
+                    |(stage, &(order, pool, code_count))| {
                         stage.order == order
                             && pool_index(stage.pool) == pool
+                            && stage.codes.len() == code_count
                             && !stage.codes.is_empty()
                             && stage
                                 .codes
@@ -430,7 +762,8 @@ impl CudaResolvePlan {
                                 .iter()
                                 .enumerate()
                                 .any(|(index, code)| stage.codes[..index].contains(code))
-                    });
+                    },
+                );
             if !matches {
                 return Err(format!(
                     "CUDA resolver plan contract differs at row {index}"
@@ -508,6 +841,21 @@ const fn pool_index(pool: Pool) -> u64 {
         Pool::Word3Three => 6,
         Pool::Word3FourB => 7,
         Pool::Word3FiveBb => 8,
+    }
+}
+
+fn pool_from_index(index: u64) -> Result<Pool, String> {
+    match index {
+        0 => Ok(Pool::CharBase),
+        1 => Ok(Pool::CharAux1),
+        2 => Ok(Pool::CharAux2),
+        3 => Ok(Pool::WordFour),
+        4 => Ok(Pool::WordFive),
+        5 => Ok(Pool::WordSix),
+        6 => Ok(Pool::Word3Three),
+        7 => Ok(Pool::Word3FourB),
+        8 => Ok(Pool::Word3FiveBb),
+        _ => Err(format!("CUDA returned invalid pool {index}")),
     }
 }
 
@@ -620,6 +968,10 @@ mod tests {
                 .resolve(&candidate, |value| Some(value.bits() as f64))
                 .unwrap();
             assert_eq!(gpu, cpu);
+            let (fused, _) = plan
+                .resolve_fused(&candidate, |value| Some(value.bits() as f64))
+                .unwrap();
+            assert_eq!(fused, cpu);
         }
 
         let candidate = multi_stage_rows();
@@ -629,6 +981,10 @@ mod tests {
             .resolve(&candidate, |value| Some(value.bits() as f64))
             .unwrap();
         assert_eq!(gpu, cpu);
+        let (fused, _) = plan
+            .resolve_fused(&candidate, |value| Some(value.bits() as f64))
+            .unwrap();
+        assert_eq!(fused, cpu);
 
         let mut second = candidate.clone();
         second[0].stages[0].codes[0] = code(&[3]);

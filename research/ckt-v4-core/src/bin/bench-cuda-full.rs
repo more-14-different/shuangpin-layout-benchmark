@@ -66,17 +66,26 @@ fn main() -> Result<(), String> {
             })?;
             let cpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
 
+            plan.resolve_rank_only(&generated.rows, |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            })?;
             let started = Instant::now();
-            let (cold_gpu, cold_timings) = plan.resolve(&generated.rows, |code| {
+            let (rank_only, _) = plan.resolve_rank_only(&generated.rows, |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            })?;
+            let rank_only_ms = started.elapsed().as_secs_f64() * 1_000.0;
+
+            let started = Instant::now();
+            let (cold_gpu, cold_timings) = plan.resolve_fused(&generated.rows, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             })?;
             let cold_gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
             let started = Instant::now();
-            let (gpu, timings) = plan.resolve(&generated.rows, |code| {
+            let (gpu, timings) = plan.resolve_fused(&generated.rows, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             })?;
             let gpu_ms = started.elapsed().as_secs_f64() * 1_000.0;
-            if cpu != cold_gpu || cpu != gpu {
+            if cpu != rank_only || cpu != cold_gpu || cpu != gpu {
                 let mismatch = cpu
                     .iter()
                     .zip(&gpu)
@@ -98,12 +107,14 @@ fn main() -> Result<(), String> {
                 ));
             }
             println!(
-                "{}/{} rows={} entries={} launches={} generation={generation_ms:.1}ms plan={plan_ms:.1}ms cpu={cpu_ms:.1}ms cuda-cold={cold_gpu_ms:.1}ms cuda-warm={gpu_ms:.1}ms workspace={:.2}x cpu-speedup={:.2}x [cold-device={:.1} warm-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
+                "{}/{} rows={} entries={} unique-codes={} launches={} generation={generation_ms:.1}ms plan={plan_ms:.1}ms cpu={cpu_ms:.1}ms rank-only={rank_only_ms:.1}ms fused-cold={cold_gpu_ms:.1}ms fused-warm={gpu_ms:.1}ms fused/rank-only={:.2}x workspace={:.2}x cpu-speedup={:.2}x [cold-device={:.1} warm-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
                 scheme.id,
                 mode_name(mode),
                 generated.rows.len(),
                 timings.entries,
+                timings.unique_codes,
                 timings.launches,
+                rank_only_ms / gpu_ms,
                 cold_gpu_ms / gpu_ms,
                 cpu_ms / gpu_ms,
                 cold_timings.device.as_secs_f64() * 1_000.0,
@@ -157,7 +168,7 @@ fn benchmark_batch(
             .map(|index| expected_unique[index % expected_unique.len()].clone())
             .collect();
         let plan = CudaResolvePlan::new(lanes[0])?;
-        plan.resolve(lanes[0], |code| {
+        plan.resolve_fused(lanes[0], |code| {
             motor.cost(code).map(|value| value.upper_ms)
         })?;
 
@@ -165,7 +176,7 @@ fn benchmark_batch(
         let sequential = lanes
             .iter()
             .map(|rows| {
-                plan.resolve(rows, |code| motor.cost(code).map(|value| value.upper_ms))
+                plan.resolve_fused(rows, |code| motor.cost(code).map(|value| value.upper_ms))
                     .map(|(outcomes, _)| outcomes)
             })
             .collect::<Result<Vec<_>, _>>()?;
@@ -173,6 +184,18 @@ fn benchmark_batch(
         if sequential != expected {
             return Err(format!(
                 "sequential persistent CUDA mismatch for {}",
+                mode_name(mode)
+            ));
+        }
+
+        plan.resolve_batch_rank_only(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let started = Instant::now();
+        let (rank_only_batch, _) = plan
+            .resolve_batch_rank_only(&lanes, |code| motor.cost(code).map(|value| value.upper_ms))?;
+        let rank_only_batch_ms = started.elapsed().as_secs_f64() * 1_000.0;
+        if rank_only_batch != expected {
+            return Err(format!(
+                "rank-only CUDA batch mismatch for {}",
                 mode_name(mode)
             ));
         }
@@ -193,14 +216,18 @@ fn benchmark_batch(
             return Err(format!("warm CUDA batch mismatch for {}", mode_name(mode)));
         }
         println!(
-            "BATCH/{} sequential={sequential_ms:.1}ms cold={cold_ms:.1}ms warm={warm_ms:.1}ms speedup={:.2}x launches={}->{} entries={} [cold-device={:.1} warm-device={:.1}] exact=yes",
+            "BATCH/{} sequential-fused={sequential_ms:.1}ms rank-only={rank_only_batch_ms:.1}ms fused-cold={cold_ms:.1}ms fused-warm={warm_ms:.1}ms seq-speedup={:.2}x rank-only-speedup={:.2}x launches={}->{} entries={} unique-codes={} [cold-device={:.1} warm-device={:.1} prepare={:.1} finalize={:.1}] exact=yes",
             mode_name(mode),
             sequential_ms / warm_ms,
+            rank_only_batch_ms / warm_ms,
             BATCH_SIZE * cold_timings.launches,
             warm_timings.launches,
             warm_timings.entries,
+            warm_timings.unique_codes,
             cold_timings.device.as_secs_f64() * 1_000.0,
             warm_timings.device.as_secs_f64() * 1_000.0,
+            warm_timings.preparation.as_secs_f64() * 1_000.0,
+            warm_timings.finalization.as_secs_f64() * 1_000.0,
         );
     }
     Ok(())
