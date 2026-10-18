@@ -10,7 +10,7 @@ use ckt_v4_core::{
     validate_checkpoint_contract, validate_proposal,
 };
 #[cfg(feature = "cuda")]
-use ckt_v4_core::{CudaResolvePlan, Outcome, Row};
+use ckt_v4_core::{CudaResolvePlan, CudaResolveTimings, Outcome, Row};
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
@@ -710,9 +710,9 @@ fn run_cuda_batch_broker(
 ) -> Result<(), String> {
     let mut keytao_plan = None;
     let mut sanpin_plan = None;
-    let mut batch_count = 0_u64;
-    let mut lane_count = 0_u64;
-    let mut singleton_count = 0_u64;
+    let mut total_stats = CudaBatchStats::default();
+    let mut keytao_stats = CudaBatchStats::default();
+    let mut sanpin_stats = CudaBatchStats::default();
     let started = Instant::now();
 
     while let Ok(first) = receiver.recv() {
@@ -748,16 +748,24 @@ fn run_cuda_batch_broker(
             let resolved = plan.resolve_batch(&row_refs, |code| {
                 motor.cost(code).map(|value| value.upper_ms)
             });
-            batch_count += 1;
-            lane_count += matching.len() as u64;
-            singleton_count += u64::from(matching.len() == 1);
+            let lane_count = matching.len();
             match resolved {
-                Ok((outcomes, _)) => {
+                Ok((outcomes, timings)) => {
+                    total_stats.observe(lane_count, Some(&timings));
+                    match mode {
+                        InputMode::Keytao => keytao_stats.observe(lane_count, Some(&timings)),
+                        InputMode::Sanpin => sanpin_stats.observe(lane_count, Some(&timings)),
+                    }
                     for (request, lane_outcomes) in matching.into_iter().zip(outcomes) {
                         let _ = request.response.send(Ok((request.rows, lane_outcomes)));
                     }
                 }
                 Err(error) => {
+                    total_stats.observe(lane_count, None);
+                    match mode {
+                        InputMode::Keytao => keytao_stats.observe(lane_count, None),
+                        InputMode::Sanpin => sanpin_stats.observe(lane_count, None),
+                    }
                     for request in matching {
                         let _ = request.response.send(Err(error.clone()));
                     }
@@ -765,15 +773,83 @@ fn run_cuda_batch_broker(
             }
         }
     }
-    println!(
-        "cuda-batch complete batches={} lanes={} mean-lanes={:.2} singleton={} elapsed={:.1}s",
-        batch_count,
-        lane_count,
-        lane_count as f64 / batch_count.max(1) as f64,
-        singleton_count,
-        started.elapsed().as_secs_f64()
-    );
+    total_stats.print("all", Some(started.elapsed()));
+    keytao_stats.print("keytao", None);
+    sanpin_stats.print("sanpin", None);
     Ok(())
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Default)]
+struct CudaBatchStats {
+    batches: u64,
+    lanes: u64,
+    singletons: u64,
+    failures: u64,
+    lane_histogram: BTreeMap<usize, u64>,
+    preparation: Duration,
+    device: Duration,
+    finalization: Duration,
+    entries: u64,
+    finalists: u64,
+    launches: u64,
+}
+
+#[cfg(feature = "cuda")]
+impl CudaBatchStats {
+    fn observe(&mut self, lanes: usize, timings: Option<&CudaResolveTimings>) {
+        self.batches += 1;
+        self.lanes += lanes as u64;
+        self.singletons += u64::from(lanes == 1);
+        *self.lane_histogram.entry(lanes).or_default() += 1;
+        let Some(timings) = timings else {
+            self.failures += 1;
+            return;
+        };
+        self.preparation += timings.preparation;
+        self.device += timings.device;
+        self.finalization += timings.finalization;
+        self.entries += timings.entries as u64;
+        self.finalists += timings.finalists as u64;
+        self.launches += timings.launches as u64;
+    }
+
+    fn print(&self, mode: &str, elapsed: Option<Duration>) {
+        let label = if mode == "all" {
+            "complete".to_owned()
+        } else {
+            format!("mode={mode}")
+        };
+        let histogram = self
+            .lane_histogram
+            .iter()
+            .map(|(lanes, batches)| format!("{lanes}:{batches}"))
+            .collect::<Vec<_>>()
+            .join(",");
+        let elapsed = elapsed
+            .map(|value| format!(" elapsed={:.1}s", value.as_secs_f64()))
+            .unwrap_or_default();
+        let finalist_rate = 100.0 * self.finalists as f64 / self.entries.max(1) as f64;
+        println!(
+            "cuda-batch {} batches={} lanes={} mean-lanes={:.2} singleton={} max-lanes={} histogram={} prepare-ms={:.1} device-ms={:.1} finalize-ms={:.1} entries={} finalists={} finalist-rate={:.1}% launches={} failures={}{}",
+            label,
+            self.batches,
+            self.lanes,
+            self.lanes as f64 / self.batches.max(1) as f64,
+            self.singletons,
+            self.lane_histogram.keys().next_back().copied().unwrap_or(0),
+            histogram,
+            self.preparation.as_secs_f64() * 1_000.0,
+            self.device.as_secs_f64() * 1_000.0,
+            self.finalization.as_secs_f64() * 1_000.0,
+            self.entries,
+            self.finalists,
+            finalist_rate,
+            self.launches,
+            self.failures,
+            elapsed,
+        );
+    }
 }
 
 fn propose_guarded(
