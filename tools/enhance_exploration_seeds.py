@@ -154,7 +154,7 @@ def synthesize_compliant_layout(base_head, base_final, target_m, target_d, alpha
 def handle_descent_generation(plan_dir, generation):
     stage, max_m, max_d = get_stage_targets(generation)
     root = os.path.dirname(plan_dir)
-    repo_root = os.path.abspath(os.path.join(root, "..", ".."))
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     alphabet, heads, finals, s005_heads, s005_finals, s005_tone = load_scheme_fixtures(repo_root)
 
     db_path = os.path.join(root, "exploration.sqlite3")
