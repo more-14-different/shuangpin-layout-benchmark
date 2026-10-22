@@ -77,6 +77,9 @@ function Start-CudaBatchSession([string]$File) {
     $info.RedirectStandardInput = $true
     $info.RedirectStandardOutput = $true
     $info.RedirectStandardError = $true
+    $info.StandardInputEncoding = [Text.UTF8Encoding]::new($false)
+    $info.StandardOutputEncoding = [Text.UTF8Encoding]::new($false)
+    $info.StandardErrorEncoding = [Text.UTF8Encoding]::new($false)
     $null = $info.ArgumentList.Add('--batch-session')
     $process = [Diagnostics.Process]::new()
     $process.StartInfo = $info
