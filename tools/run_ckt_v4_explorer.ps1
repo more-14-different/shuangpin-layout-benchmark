@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string]$Config
+    [string]$Config,
+    [Parameter(Mandatory = $false)]
+    [int64]$StopAtGeneration = 0
 )
 
 $ErrorActionPreference = 'Stop'
@@ -271,7 +273,7 @@ try {
     $batchSession = Start-CudaBatchSession $annealer
   }
   $generation = 1
-  while ($settings.generations -eq 0 -or $generation -le $settings.generations) {
+  while (($settings.generations -eq 0 -or $generation -le $settings.generations) -and ($StopAtGeneration -eq 0 -or $generation -le $StopAtGeneration)) {
     $generationName = 'generation-{0:d4}' -f $generation
     $generationDir = Join-Path $root $generationName
     $planDir = Join-Path $root "$generationName-plan"
