@@ -212,6 +212,12 @@ try {
     throw "another explorer process is using output root: $root"
 }
 
+$telemetryFile = Join-Path $root 'telemetry.csv'
+$monitorScript = Join-Path $repo 'tools/monitor_production.ps1'
+if (Test-Path -LiteralPath $monitorScript) {
+    $null = Start-Process -FilePath "pwsh" -ArgumentList "-NoLogo", "-NoProfile", "-File", "`"$monitorScript`"", "-TargetPid", "$PID", "-OutputFile", "`"$telemetryFile`"", "-IntervalSec", "15" -WindowStyle Hidden
+}
+
 $contract = [ordered]@{
     version = 'ckt-v4-explorer-contract-1'
     initialSchemes = $initialSchemeIds
@@ -390,6 +396,12 @@ try {
         $plannerArguments = $arguments.ToArray()
         & $planner @plannerArguments
         if ($LASTEXITCODE -ne 0) { throw "generation $generation planning failed" }
+
+        $enhanceScript = Join-Path $repo 'tools/enhance_exploration_seeds.py'
+        if (Test-Path -LiteralPath $enhanceScript) {
+            & python $enhanceScript $planDir
+            if ($LASTEXITCODE -ne 0) { throw "generation $generation seed enhancement failed" }
+        }
     }
 
     $databaseState = Join-Path $planDir 'database-state.json'
