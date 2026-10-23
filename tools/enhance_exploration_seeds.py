@@ -21,11 +21,13 @@ import sqlite3
 import random
 
 def get_stage_targets(generation):
-    if generation <= 100:
+    # plan.json produced after generation N is used by generation N+1
+    target_gen = generation + 1
+    if target_gen <= 100:
         return 1, 43, 3
-    elif generation <= 200:
+    elif target_gen <= 200:
         return 2, 42, 2
-    elif generation <= 300:
+    elif target_gen <= 300:
         return 3, 41, 1
     else:
         return 4, 40, 0
@@ -207,7 +209,24 @@ def handle_descent_generation(plan_dir, generation):
             if len(layouts) == 8:
                 break
 
-    # If fewer than 8 matching states, synthesize compliant seeds from base/best
+    # If fewer than 8 matching states, first bridge from nearest preceding stage states (e.g. Stage 3 -> Stage 4)
+    if len(layouts) < 8:
+        needed = 8 - len(layouts)
+        cur.execute("""
+            SELECT state_key FROM states
+            WHERE memory <= ? AND displaced_initials <= ?
+            ORDER BY ckt_v4 ASC
+            LIMIT ?;
+        """, (max_m + 2, max_d + 1, needed))
+        bridge_rows = cur.fetchall()
+        for br in bridge_rows:
+            br_bytes = br[0]
+            syn = synthesize_compliant_layout(s005_heads, list(br_bytes[29:64]), max_m, max_d, alphabet, heads, finals, s005_heads, rng)
+            layouts.append(syn)
+            if len(layouts) == 8:
+                break
+
+    # If still fewer than 8, synthesize compliant seeds from base/best
     base_head = s005_heads
     base_final = s005_finals
     if matching_rows:
