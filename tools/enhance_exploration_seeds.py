@@ -154,8 +154,20 @@ def synthesize_compliant_layout(base_head, base_final, target_m, target_d, alpha
     }
 
 def handle_descent_generation(plan_dir, generation):
-    stage, max_m, max_d = get_stage_targets(generation)
     root = os.path.dirname(plan_dir)
+    stage, max_m, max_d = get_stage_targets(generation)
+    contract_file = os.path.join(root, "run-contract.json")
+    if os.path.exists(contract_file):
+        try:
+            with open(contract_file, "r", encoding="utf-8") as f:
+                cdata = json.load(f)
+            g = cdata.get("guards", {})
+            if g.get("maxMemory") is not None and g.get("maxD") is not None:
+                max_m = int(g["maxMemory"])
+                max_d = int(g["maxD"])
+                stage = 4
+        except Exception as e:
+            pass
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     alphabet, heads, finals, s005_heads, s005_finals, s005_tone = load_scheme_fixtures(repo_root)
 

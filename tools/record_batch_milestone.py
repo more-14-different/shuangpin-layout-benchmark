@@ -6,8 +6,20 @@ import csv
 from datetime import datetime
 
 repo = r'D:\CtoD\Default\桌面\Code\Lua\inputMethod\shuangpin-layout-benchmark-prod-2121'
-root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-descent-20261023')
-milestone_dir = os.path.join(repo, 'research', 'milestones', 'descent')
+if len(sys.argv) > 1:
+    root = os.path.abspath(sys.argv[1])
+else:
+    ft_root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-finetune-20261024')
+    if os.path.exists(ft_root):
+        root = ft_root
+    else:
+        root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-descent-20261023')
+
+is_finetune = 'finetune' in root
+if is_finetune:
+    milestone_dir = os.path.join(repo, 'research', 'milestones', 'finetune')
+else:
+    milestone_dir = os.path.join(repo, 'research', 'milestones', 'descent')
 os.makedirs(milestone_dir, exist_ok=True)
 
 db_path = os.path.join(root, 'exploration.sqlite3')
@@ -19,13 +31,13 @@ state_count = cur.execute('SELECT COUNT(*) FROM states;').fetchone()[0]
 best_db_ckt = cur.execute('SELECT MIN(ckt_v4) FROM states;').fetchone()[0]
 
 # Determine stage and batch
-# Stage 1: 1..100 (B1: 1..25, B2: 26..50, B3: 51..75, B4: 76..100)
-# Stage 2: 101..200 (B1: 101..125, B2: 126..150, B3: 151..175, B4: 176..200)
-# Stage 3: 201..300
-# Stage 4: 301..400
-stage = 1 + (gen_count - 1) // 100
-gen_in_stage = (gen_count - 1) % 100 + 1
-batch = (gen_in_stage - 1) // 25 + 1
+if is_finetune:
+    stage = 4
+    batch = (gen_count - 1) // 25 + 1
+else:
+    stage = 1 + (gen_count - 1) // 100
+    gen_in_stage = (gen_count - 1) % 100 + 1
+    batch = (gen_in_stage - 1) // 25 + 1
 
 # Frontier stats
 stages_stats = {}
@@ -103,7 +115,10 @@ milestone = {
     }
 }
 
-out_name = f"stage-{stage:02d}-batch-{batch:02d}-gen-{gen_count:04d}.json"
+if is_finetune:
+    out_name = f"finetune-batch-{batch:02d}-gen-{gen_count:04d}.json"
+else:
+    out_name = f"stage-{stage:02d}-batch-{batch:02d}-gen-{gen_count:04d}.json"
 out_path = os.path.join(milestone_dir, out_name)
 with open(out_path, 'w', encoding='utf-8') as f:
     json.dump(milestone, f, indent=2)
