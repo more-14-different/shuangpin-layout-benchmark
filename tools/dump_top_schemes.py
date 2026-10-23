@@ -6,7 +6,9 @@ from enhance_exploration_seeds import load_scheme_fixtures
 def main():
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     alphabet, heads, finals, s005_heads, s005_finals, s005_tone = load_scheme_fixtures(repo_root)
-    db_path = os.path.join(repo_root, "research", "exploration", "production-ckt-v4-2121-descent-20261023", "exploration.sqlite3")
+    db_path = os.path.join(repo_root, "research", "exploration", "production-ckt-v4-2121-finetune-20261024", "exploration.sqlite3")
+    if not os.path.exists(db_path) or len(sys.argv) > 1 and sys.argv[1] == 'descent':
+        db_path = os.path.join(repo_root, "research", "exploration", "production-ckt-v4-2121-descent-20261023", "exploration.sqlite3")
     con = sqlite3.connect(db_path)
     cur = con.cursor()
 
