@@ -125,17 +125,16 @@ def synthesize_compliant_layout(base_head, base_final, target_m, target_d, alpha
                 # Intentionally displace 1 initial to provide target_d == 1 diversity
                 if target_d == 1:
                     # displace 'r' or 'x'
-                    disp_key = rng.choice([k for k in range(34) if k not in head_cand and k not in final_cand[:5]])
-                    head_cand[17] = disp_key # r displaced
+                    head_cand[17], head_cand[1] = head_cand[1], head_cand[17]
 
-    # Ensure tone is valid and disjoint
-    used = set(head_cand) | set(final_cand)
-    available_tones = [k for k in range(34) if k not in used]
-    if len(available_tones) < 5:
-        # Fallback tones
-        tones = [k for k in range(34) if k not in set(head_cand)][:5]
-    else:
-        tones = available_tones[:5]
+    CONSONANTS = set(alphabet.index(c) for c in 'BCDEFGHJKLMNPQRSTWXYZ')
+    tones = [alphabet.index(c) for c in 'IVUAO']
+    for i in range(len(head_cand)):
+        if head_cand[i] not in CONSONANTS:
+            head_cand[i] = s005_heads[i]
+    for i in range(len(final_cand)):
+        if final_cand[i] not in CONSONANTS:
+            final_cand[i] = s005_finals[i]
 
     mem, d_val, _ = calc_diagnostics(head_cand, final_cand, alphabet, heads, finals)
     

@@ -319,6 +319,34 @@ impl RegularLayout {
         Ok(())
     }
 
+    pub fn validate_strict_2121(&self) -> Result<(), String> {
+        if self.capacity != [21, 21] {
+            return Ok(());
+        }
+        let tone_set: std::collections::BTreeSet<_> = self.tone.iter().copied().collect();
+        const AVUIO: [u8; 5] = [0, 8, 14, 20, 21];
+        if !tone_set.iter().all(|k| AVUIO.contains(k)) {
+            return Err(format!(
+                "{} has invalid 21x21 auxiliary keys: tone must strictly be AVUIO (0, 8, 14, 20, 21)",
+                self.id
+            ));
+        }
+        let is_consonant = |k: u8| matches!(k, 1..=7 | 9..=13 | 15..=19 | 22..=25);
+        if !self.head_keys.iter().copied().all(is_consonant) {
+            return Err(format!(
+                "{} has invalid 21x21 head keys: must strictly be the 21 consonants",
+                self.id
+            ));
+        }
+        if !self.final_keys.iter().copied().all(is_consonant) {
+            return Err(format!(
+                "{} has invalid 21x21 final keys: must strictly be the 21 consonants",
+                self.id
+            ));
+        }
+        Ok(())
+    }
+
     pub fn validate_common399(
         &self,
         pinyin_map: &[[u8; 2]],

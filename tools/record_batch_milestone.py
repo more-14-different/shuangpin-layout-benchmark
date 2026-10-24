@@ -9,14 +9,21 @@ repo = r'D:\CtoD\Default\桌面\Code\Lua\inputMethod\shuangpin-layout-benchmark-
 if len(sys.argv) > 1:
     root = os.path.abspath(sys.argv[1])
 else:
-    ft_root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-finetune-20261024')
-    if os.path.exists(ft_root):
-        root = ft_root
+    sa_root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-strict-avuio-20261024')
+    if os.path.exists(sa_root):
+        root = sa_root
     else:
-        root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-descent-20261023')
+        ft_root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-finetune-20261024')
+        if os.path.exists(ft_root):
+            root = ft_root
+        else:
+            root = os.path.join(repo, 'research', 'exploration', 'production-ckt-v4-2121-descent-20261023')
 
-is_finetune = 'finetune' in root
-if is_finetune:
+is_strict = 'strict-avuio' in root
+is_finetune = 'finetune' in root and not is_strict
+if is_strict:
+    milestone_dir = os.path.join(repo, 'research', 'milestones', 'strict-avuio')
+elif is_finetune:
     milestone_dir = os.path.join(repo, 'research', 'milestones', 'finetune')
 else:
     milestone_dir = os.path.join(repo, 'research', 'milestones', 'descent')
