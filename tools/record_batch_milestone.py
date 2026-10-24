@@ -5,7 +5,7 @@ import sqlite3
 import csv
 from datetime import datetime
 
-repo = r'D:\CtoD\Default\桌面\Code\Lua\inputMethod\shuangpin-layout-benchmark-prod-2121'
+repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if len(sys.argv) > 1:
     root = os.path.abspath(sys.argv[1])
 else:
