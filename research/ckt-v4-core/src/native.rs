@@ -319,6 +319,34 @@ impl RegularLayout {
         Ok(())
     }
 
+    pub fn validate_strict_2126(&self) -> Result<(), String> {
+        if self.capacity != [21, 26] {
+            return Ok(());
+        }
+        let tone_set: BTreeSet<_> = self.tone.iter().copied().collect();
+        const AEUIO: [u8; 5] = [0, 4, 8, 14, 20];
+        if !tone_set.iter().all(|k| AEUIO.contains(k)) || tone_set.len() != 5 {
+            return Err(format!(
+                "{} has invalid 21x26 auxiliary keys: tone must strictly be the 5 vowels aeuio (0, 4, 8, 14, 20)",
+                self.id
+            ));
+        }
+        let is_consonant = |k: u8| matches!(k, 1..=3 | 5..=7 | 9..=13 | 15..=19 | 21..=25);
+        if !self.head_keys.iter().copied().all(is_consonant) {
+            return Err(format!(
+                "{} has invalid 21x26 head keys: must strictly be the 21 consonants",
+                self.id
+            ));
+        }
+        if !self.final_keys.iter().copied().all(|k| k <= 25) {
+            return Err(format!(
+                "{} has invalid 21x26 final keys: must strictly be within the 26 alphabet letters (0..25)",
+                self.id
+            ));
+        }
+        Ok(())
+    }
+
     pub fn validate_common399(
         &self,
         pinyin_map: &[[u8; 2]],
@@ -1333,6 +1361,29 @@ mod tests {
         let (mut larger, topology, common) = colliding_layout([21, 26]);
         larger.tone[0] = 21;
         assert!(larger.validate(&topology, &common[..1]).is_ok());
+    }
+
+    #[test]
+    fn strict_2126_enforces_consonant_heads_and_aeuio_auxiliaries() {
+        let (mut layout, _, _) = colliding_layout([21, 26]);
+        assert!(layout.validate_strict_2126().is_err());
+
+        const CONSONANTS: [u8; 21] = [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25];
+        layout.head_keys = (0..27).map(|i| CONSONANTS[i % 21]).collect();
+        layout.final_keys = (0..35).map(|i| (i % 26) as u8).collect();
+        layout.tone = [0, 4, 8, 14, 20];
+        assert!(layout.validate_strict_2126().is_ok());
+
+        layout.head_keys[0] = 0;
+        assert!(layout.validate_strict_2126().is_err());
+        layout.head_keys[0] = 1;
+
+        layout.final_keys[0] = 26;
+        assert!(layout.validate_strict_2126().is_err());
+        layout.final_keys[0] = 0;
+
+        layout.tone[0] = 21;
+        assert!(layout.validate_strict_2126().is_err());
     }
 
     #[test]

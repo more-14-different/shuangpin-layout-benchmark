@@ -1127,6 +1127,7 @@ fn validate_guards(
     alphabet: &KeyAlphabet,
     guards: LayoutGuards,
 ) -> Result<LayoutDiagnostics, String> {
+    layout.validate_strict_2126()?;
     let diagnostics = layout.diagnostics(alphabet, &fixture.heads, &fixture.finals)?;
     if guards
         .max_memory
