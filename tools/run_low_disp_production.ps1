@@ -108,7 +108,7 @@ foreach ($stage in $stages) {
     $sName = $stage.StageName
     $targetGen = $stage.TargetGen
     Write-Host "============================================================"
-    Write-Host ">>> Entering $sName: Target Generation = $targetGen <<<"
+    Write-Host ">>> Entering ${sName}: Target Generation = $targetGen <<<"
     Write-Host "============================================================"
     
     # Update generations in config
