@@ -1,0 +1,156 @@
+{
+  "version": "ckt-v4-strict-ivuao-stage-seeds-1",
+  "sourceDatabase": "research/exploration/production-ckt-v4-2121-strict-avuio-20261024/exploration.sqlite3",
+  "orderedMapping": "IVUAO",
+  "guards": {
+    "maxMemory": 40,
+    "maxD": 0
+  },
+  "sourceBestCktV4": 9.641742546668643,
+  "seeds": [
+    {
+      "rank": 1,
+      "reason": "best-ckt",
+      "stateKey": "1515010f0c0503130d0b060a070910170f1204111902121102111618180b07040c10120a181309110a090b0302050f0d01060a160d1703190205060f13180706081514000e",
+      "metrics": {
+        "cktV4": 9.641742546668643,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.07666068563716445,
+        "homeFloor": 0.3076429021770193,
+        "mxScore": 131.96144149837437,
+        "wMax": 0.08158043681442671,
+        "yMax": 0.07697277041572462
+      },
+      "firstSeenGeneration": 399,
+      "filename": "seed-01-best-ckt.json"
+    },
+    {
+      "rank": 2,
+      "reason": "lowest-memory",
+      "stateKey": "1515010f0c0503130d0b060a07091017161804111902121717171618181207050f1904160d11090a120c170203010618100b1803091006131701160b0b130716081514000e",
+      "metrics": {
+        "cktV4": 10.3226394673639,
+        "memory": 38,
+        "displacedInitials": 0,
+        "displacedVowels": 4,
+        "rpMax": 0.027738358671465325,
+        "homeFloor": 0.30060258293098435,
+        "mxScore": 134.4309162015144,
+        "wMax": 0.08640670085110072,
+        "yMax": 0.0980530146711589
+      },
+      "firstSeenGeneration": 1,
+      "filename": "seed-02-lowest-memory.json"
+    },
+    {
+      "rank": 3,
+      "reason": "lowest-displaced-initials",
+      "stateKey": "1515010f0c0503130d0b060a070910170f1204111902121102111618180b07040c10120a181309050a090b0302110f1301060a160d0317190211060f13180706081514000e",
+      "metrics": {
+        "cktV4": 9.647484804468885,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.07666068563716445,
+        "homeFloor": 0.342590594197362,
+        "mxScore": 134.15860788660413,
+        "wMax": 0.08158043681442671,
+        "yMax": 0.07697277041572462
+      },
+      "firstSeenGeneration": 328,
+      "filename": "seed-03-lowest-displaced-initials.json"
+    },
+    {
+      "rank": 4,
+      "reason": "lowest-right-pinky",
+      "stateKey": "1515010f0c0503130d0b060a07091017050412111902121616160918181005050b060b0a0a160a1201090b06021103130303090a0717040d0c121909180a0f10081514000e",
+      "metrics": {
+        "cktV4": 11.137589523089748,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.01365068720560976,
+        "homeFloor": 0.4522572447070583,
+        "mxScore": 141.73637006422263,
+        "wMax": 0.021200608327595613,
+        "yMax": 0.06585110194578071
+      },
+      "firstSeenGeneration": 360,
+      "filename": "seed-04-lowest-right-pinky.json"
+    },
+    {
+      "rank": 5,
+      "reason": "highest-home-floor",
+      "stateKey": "1515010f0c0503130d0b060a07091017050412111902121616160918180305050b060b0a0a160a1201090b06021103130303090a0717040d0c121909180a0f10081514000e",
+      "metrics": {
+        "cktV4": 11.290729192994496,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.01365068720560976,
+        "homeFloor": 0.4664979148505852,
+        "mxScore": 146.85933440184735,
+        "wMax": 0.021200608327595613,
+        "yMax": 0.06585110194578071
+      },
+      "firstSeenGeneration": 360,
+      "filename": "seed-05-highest-home-floor.json"
+    },
+    {
+      "rank": 6,
+      "reason": "highest-moving-hand",
+      "stateKey": "1515010f0c0503130d0b060a07091017040511111902121616160a18180b090b0a120a17110518071911010c0a0f090b060d0904091317160219070903051210081514000e",
+      "metrics": {
+        "cktV4": 11.372395036896965,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.021040802723521223,
+        "homeFloor": 0.381315861334237,
+        "mxScore": 158.99207301267998,
+        "wMax": 0.013603746618313284,
+        "yMax": 0.05602828482880977
+      },
+      "firstSeenGeneration": 380,
+      "filename": "seed-06-highest-moving-hand.json"
+    },
+    {
+      "rank": 7,
+      "reason": "best-production-balanced",
+      "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101009181816070b0c191217100d090a0b0f05020106030d13040f05090213040311061811041810081514000e",
+      "metrics": {
+        "cktV4": 9.936905708592157,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3507563825435487,
+        "mxScore": 140.8422565188559,
+        "wMax": 0.03623226230403664,
+        "yMax": 0.06868516416255256
+      },
+      "firstSeenGeneration": 1,
+      "filename": "seed-07-best-production-balanced.json"
+    },
+    {
+      "rank": 8,
+      "reason": "novel-basin",
+      "stateKey": "1515010f0c0503130d0b060a0709101704050a11190212161616111818180a0b0902090613120b0a160d190c170f0204130b04110719061303051601040b1001081514000e",
+      "metrics": {
+        "cktV4": 10.871304274153534,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpMax": 0.021040802723521223,
+        "homeFloor": 0.3690326692153324,
+        "mxScore": 145.37678596127597,
+        "wMax": 0.014462707540886246,
+        "yMax": 0.06871408139869711
+      },
+      "firstSeenGeneration": 322,
+      "filename": "seed-08-novel-basin.json"
+    }
+  ]
+}

@@ -45,8 +45,7 @@ impl ProposalKind {
         Self::FinalCycleRegroup,
     ];
 
-    pub const STRICT_2121_KINDS: [Self; 11] = [
-        Self::ToneSlotSwap,
+    pub const STRICT_2121_KINDS: [Self; 10] = [
         Self::HeadKeySwap,
         Self::FinalKeySwap,
         Self::HeadGroupMove,
@@ -254,15 +253,13 @@ pub fn propose_valid(
     let mut structural_rejected = 0;
     let mut uniqueness_rejected = 0;
     for _ in 0..attempts {
-        let kind = context
-            .only_kind
-            .unwrap_or_else(|| {
-                if current.capacity == [21, 21] {
-                    ProposalKind::STRICT_2121_KINDS[rng.index(ProposalKind::STRICT_2121_KINDS.len())]
-                } else {
-                    ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]
-                }
-            });
+        let kind = context.only_kind.unwrap_or_else(|| {
+            if current.capacity == [21, 21] {
+                ProposalKind::STRICT_2121_KINDS[rng.index(ProposalKind::STRICT_2121_KINDS.len())]
+            } else {
+                ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]
+            }
+        });
         let candidate = match propose(current, kind, rng) {
             Ok(candidate) => candidate,
             Err(ProposalError::MutationRejected(_)) => {
@@ -299,12 +296,20 @@ fn mutate(
 ) -> Result<(), String> {
     match kind {
         ProposalKind::ToneSlotSwap => {
+            if layout.capacity == [21, 21] {
+                return Err(
+                    "tone-slot-swap is disabled for strict 21x21 production IVUAO layouts"
+                        .to_owned(),
+                );
+            }
             let (left, right) = distinct_pair(5, rng)?;
             layout.swap_tone_slots(left, right)
         }
         ProposalKind::ToneKeyReplacement => {
             if layout.capacity == [21, 21] {
-                return Err("tone-key-replacement is disabled for strict 21x21 AVUIO layouts".to_owned());
+                return Err(
+                    "tone-key-replacement is disabled for strict 21x21 AVUIO layouts".to_owned(),
+                );
             }
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| {

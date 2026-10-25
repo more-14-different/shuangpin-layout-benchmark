@@ -1,0 +1,963 @@
+{
+  "version": "ckt-v4-strict-ivuao-stage-final-1",
+  "stage": 5,
+  "generationPerTier": 100,
+  "orderedMapping": "IVUAO",
+  "productionBaseline": {
+    "id": "R9-21X21-M40-02",
+    "cktV4": 9.936905708592157,
+    "maxMemory": 40,
+    "maxD": 0,
+    "maxV": 5,
+    "maxRpS2": 0.0418079455791114,
+    "maxRp": 0.05104491472386687,
+    "minHomeFloor": 0.3507563825435487,
+    "maxW": 0.03623226230403664,
+    "maxY": 0.06868516416255256,
+    "minMxScore": 140.8422565188559,
+    "orderedMapping": "IVUAO"
+  },
+  "tiers": [
+    {
+      "tier": "m43d3",
+      "guards": {
+        "maxMemory": 43,
+        "maxD": 3
+      },
+      "generations": 100,
+      "states": 32008,
+      "invalidOrderedMappings": 0,
+      "best": {
+        "stateKey": "1515010f0c0503130d04060f070910170a120b111902021105111618180b070d1810120f041309050f090b0302110a1806060f160c1703190911010a04130701081514000e",
+        "layoutId": "descent-s4-gen0094-best-ckt",
+        "cktV4": 9.519825406611666,
+        "memory": 43,
+        "displacedInitials": 3,
+        "displacedVowels": 5,
+        "rpS2": 0.051810734249379806,
+        "rpMax": 0.05891389827291739,
+        "homeFloor": 0.3584937606027627,
+        "wMax": 0.08158043681442671,
+        "yMax": 0.07736787498217837,
+        "mxScore": 134.04266758161924,
+        "firstSeenGeneration": 95,
+        "sourceTier": "m43d3"
+      },
+      "cumulativeBestByGeneration": {
+        "25": 9.535360134204108,
+        "50": 9.528945294441863,
+        "75": 9.52126222721687,
+        "100": 9.519825406611666
+      }
+    },
+    {
+      "tier": "m42d2",
+      "guards": {
+        "maxMemory": 42,
+        "maxD": 2
+      },
+      "generations": 100,
+      "states": 32008,
+      "invalidOrderedMappings": 0,
+      "best": {
+        "stateKey": "1515010f0c0503130d0b060f070910170a12041119020d1105111618180b07040d10120f18130a110f090b0203050a1001060f160c1701190305060a13180706081514000e",
+        "layoutId": "descent-s4-gen0074-p5",
+        "cktV4": 9.555407183402032,
+        "memory": 42,
+        "displacedInitials": 2,
+        "displacedVowels": 5,
+        "rpS2": 0.051810734249379806,
+        "rpMax": 0.05891389827291739,
+        "homeFloor": 0.3148385989896102,
+        "wMax": 0.08158043681442671,
+        "yMax": 0.07697277041572462,
+        "mxScore": 130.4554160837075,
+        "firstSeenGeneration": 75,
+        "sourceTier": "m42d2"
+      },
+      "cumulativeBestByGeneration": {
+        "25": 9.560464759614458,
+        "50": 9.556924822556011,
+        "75": 9.555407183402032,
+        "100": 9.555407183402032
+      }
+    },
+    {
+      "tier": "m41d1",
+      "guards": {
+        "maxMemory": 41,
+        "maxD": 1
+      },
+      "generations": 100,
+      "states": 32008,
+      "invalidOrderedMappings": 0,
+      "best": {
+        "stateKey": "1515010f0c0503130d0b060f070910170a1204111902121102111618180b07040c10120f181109050f090b0203130a0c01060f160d1701031913060a11180706081514000e",
+        "layoutId": "descent-s4-gen0093-p8",
+        "cktV4": 9.561220307525732,
+        "memory": 41,
+        "displacedInitials": 1,
+        "displacedVowels": 5,
+        "rpS2": 0.051810734249379806,
+        "rpMax": 0.05891389827291739,
+        "homeFloor": 0.3482603538908145,
+        "wMax": 0.08158043681442671,
+        "yMax": 0.07697277041572462,
+        "mxScore": 133.9292631598865,
+        "firstSeenGeneration": 94,
+        "sourceTier": "m41d1"
+      },
+      "cumulativeBestByGeneration": {
+        "25": 9.571501298401794,
+        "50": 9.56557689282302,
+        "75": 9.561355679622618,
+        "100": 9.561220307525732
+      }
+    },
+    {
+      "tier": "m40d0",
+      "guards": {
+        "maxMemory": 40,
+        "maxD": 0
+      },
+      "generations": 100,
+      "states": 32008,
+      "invalidOrderedMappings": 0,
+      "best": {
+        "stateKey": "1515010f0c0503130d0b060a070910170f1204111902121102111618180b07040c10120a181109050a090b0203130f0d06060a160d0217031913010f11180701081514000e",
+        "layoutId": "descent-s4-gen0095-best-ckt",
+        "cktV4": 9.63950448127296,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.07278332836713115,
+        "rpMax": 0.07666068563716445,
+        "homeFloor": 0.34393292383603613,
+        "wMax": 0.08158043681442671,
+        "yMax": 0.07697277041572462,
+        "mxScore": 134.26623244759236,
+        "firstSeenGeneration": 96,
+        "sourceTier": "m40d0"
+      },
+      "cumulativeBestByGeneration": {
+        "25": 9.641742546668643,
+        "50": 9.64063149007698,
+        "75": 9.64063149007698,
+        "100": 9.63950448127296
+      }
+    }
+  ],
+  "productionScreen": {
+    "uniqueStateCount": 127982,
+    "m40d0PoolCount": 32488,
+    "fasterThanProductionCount": 20046,
+    "allGuardsPassCount": 1027,
+    "replacementCount": 0,
+    "decision": "reject",
+    "topProductionSafe": [
+      {
+        "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101009181816070b0c191217100d090a0b0f05020106030d13040f05090213040311061811041810081514000e",
+        "layoutId": "strict-ivuao-m43d3-seed-07-best-production-balanced",
+        "cktV4": 9.936905708592157,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3507563825435487,
+        "wMax": 0.03623226230403664,
+        "yMax": 0.06868516416255256,
+        "mxScore": 140.8422565188559,
+        "firstSeenGeneration": 1,
+        "sourceTier": "m43d3"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101009181816070b0c191202100d090a0b0f05170106030d13040f05090213040311061811041810081514000e",
+        "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+        "cktV4": 9.96201098759009,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3507563825435487,
+        "wMax": 0.03623226230403664,
+        "yMax": 0.06868516416255256,
+        "mxScore": 140.8422565188559,
+        "firstSeenGeneration": 1,
+        "sourceTier": "m40d0"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101009181816070b0c051217100d090a0b0f05020106030d13190f06090213040311041811191810081514000e",
+        "layoutId": "strict-ivuao-m41d1-seed-07-best-production-balanced",
+        "cktV4": 10.018715794206976,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3603365120652839,
+        "wMax": 0.03623226230403664,
+        "yMax": 0.06868516416255256,
+        "mxScore": 141.89742379940145,
+        "firstSeenGeneration": 1,
+        "sourceTier": "m41d1"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101009181816070b0c191217100d060a0b0f05020109030d13040f05090213040311091811041810081514000e",
+        "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+        "cktV4": 10.026380081305131,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3507563825435487,
+        "wMax": 0.03623226230403664,
+        "yMax": 0.06868516416255256,
+        "mxScore": 143.10292695005074,
+        "firstSeenGeneration": 1,
+        "sourceTier": "m40d0"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101009181816070b0c051217100d090a0b0f05020106030d13040f19090213040307061811041810081514000e",
+        "layoutId": "strict-ivuao-m41d1-seed-07-best-production-balanced",
+        "cktV4": 10.05929796308235,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3533733326741967,
+        "wMax": 0.03623226230403664,
+        "yMax": 0.06868516416255256,
+        "mxScore": 141.34659494201563,
+        "firstSeenGeneration": 1,
+        "sourceTier": "m41d1"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a07091017051604111902121010100918180b070b0c051217100d090a060f05020116030d13040f19090213040311161811041810081514000e",
+        "layoutId": "strict-ivuao-m41d1-seed-07-best-production-balanced",
+        "cktV4": 10.081064177794154,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3616637945053997,
+        "wMax": 0.03587281977523173,
+        "yMax": 0.06868516416255256,
+        "mxScore": 142.4615378560615,
+        "firstSeenGeneration": 1,
+        "sourceTier": "m41d1"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a07091017040511111902121616160a181819090710160a040d0f160b0a0c0109070f09060206050309101706061211190d181013081514000e",
+        "layoutId": "descent-s4-gen0017-mx",
+        "cktV4": 10.628201251865583,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.029213619644428576,
+        "rpMax": 0.03704411178945227,
+        "homeFloor": 0.3813867568779607,
+        "wMax": 0.030194429290653208,
+        "yMax": 0.06373122682323569,
+        "mxScore": 143.96599302131625,
+        "firstSeenGeneration": 18,
+        "sourceTier": "m40d0"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a0709101705040a111902121616160918180d05040b02030a0a16181210060d010a05111917110910070c020b030d17060f0a1306081514000e",
+        "layoutId": "descent-s4-gen0039-home",
+        "cktV4": 10.636324107131344,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.01681495489391385,
+        "rpMax": 0.02076187796527871,
+        "homeFloor": 0.3863763587332371,
+        "wMax": 0.021200608327595613,
+        "yMax": 0.05602828482880977,
+        "mxScore": 141.88964048691042,
+        "firstSeenGeneration": 40,
+        "sourceTier": "m40d0"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a0709101705040a111902121616160918180d05110b02030a0a16181210060d010a05041917040910070c020b030d17060f0a1306081514000e",
+        "layoutId": "descent-s4-gen0039-home",
+        "cktV4": 10.657825339159784,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.01681495489391385,
+        "rpMax": 0.02076187796527871,
+        "homeFloor": 0.3863763587332371,
+        "wMax": 0.021200608327595613,
+        "yMax": 0.05602828482880977,
+        "mxScore": 141.91460107879075,
+        "firstSeenGeneration": 40,
+        "sourceTier": "m40d0"
+      },
+      {
+        "stateKey": "1515010f0c0503130d0b060a0709101705040a111902121616160918180d05110b02030a0a16181210060d010a05041917040910070f020b030d17060c0a1306081514000e",
+        "layoutId": "descent-s4-gen0039-home",
+        "cktV4": 10.688205102354186,
+        "memory": 40,
+        "displacedInitials": 0,
+        "displacedVowels": 5,
+        "rpS2": 0.00800277501634901,
+        "rpMax": 0.01151911663686939,
+        "homeFloor": 0.3863763587332371,
+        "wMax": 0.021200608327595613,
+        "yMax": 0.05602828482880977,
+        "mxScore": 142.57573565678268,
+        "firstSeenGeneration": 40,
+        "sourceTier": "m40d0"
+      }
+    ],
+    "closestFasterMisses": [
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b0c191217100d090a0b0f05020106030d13040f05090213040311061811041810081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.848484073982204,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.32156894407039077,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 141.17597995980736,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 1,
+        "violationScore": 0.09076572539532557,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.32156894407039077,
+            "limit": 0.3507563825435487,
+            "relative": 0.09076572539532557
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b0c191217100d090a0b0f05020106031913040f05090213040311061811041810081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.851120621339389,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.32156894407039077,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 141.17597995980736,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 1,
+        "violationScore": 0.09076572539532557,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.32156894407039077,
+            "limit": 0.3507563825435487,
+            "relative": 0.09076572539532557
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b0c191217100d090a0b0f05020106031913040f05090213040311061811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.856663736914737,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.32156894407039077,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 141.17597995980736,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 1,
+        "violationScore": 0.09076572539532557,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.32156894407039077,
+            "limit": 0.3507563825435487,
+            "relative": 0.09076572539532557
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170a1604111902120505051118181619030c1206040b0d0f05030b0a13020109191109100a070217011813110f040d0f07081514000e",
+          "layoutId": "descent-s4-gen0096-rp",
+          "cktV4": 9.861680798585263,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.03062570227805262,
+          "rpMax": 0.03062570227805262,
+          "homeFloor": 0.3536375082070847,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.05860932849548903,
+          "mxScore": 127.65383378201533,
+          "firstSeenGeneration": 97,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 1,
+        "violationScore": 0.10331395733371718,
+        "failures": {
+          "mxScore": {
+            "actual": 127.65383378201533,
+            "limit": 140.8422565188559,
+            "relative": 0.10331395733371718
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05020106031913040f050c0213040311051811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.88750213987195,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.3177188290771939,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 140.84760738490166,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 1,
+        "violationScore": 0.10398361835309378,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.3177188290771939,
+            "limit": 0.3507563825435487,
+            "relative": 0.10398361835309378
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816120b09190717100d0c0a0b0f05020106031913040f050c0213040311061811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.911076641234796,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.3177188290771939,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 141.61217978456,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 1,
+        "violationScore": 0.10398361835309378,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.3177188290771939,
+            "limit": 0.3507563825435487,
+            "relative": 0.10398361835309378
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170416051119021210101011181816070b09191217100d0c0a0b0f05020113031906040f050c0206040311131811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.936176317833738,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.33950556471121773,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 139.87661462721826,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.040042358210260476,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.33950556471121773,
+            "limit": 0.3507563825435487,
+            "relative": 0.03313883188306743
+          },
+          "mxScore": {
+            "actual": 139.87661462721826,
+            "limit": 140.8422565188559,
+            "relative": 0.006903526327193044
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b0c191217100d050a0b0f05020106031913040f05090213040311061811041810081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.8669648642362,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.32156894407039077,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 140.80224592293223,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.09104988702684924,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.32156894407039077,
+            "limit": 0.3507563825435487,
+            "relative": 0.09076572539532557
+          },
+          "mxScore": {
+            "actual": 140.80224592293223,
+            "limit": 140.8422565188559,
+            "relative": 0.0002841616315236717
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05020113031906040f050c0206040311131811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.858665234015152,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.3215656987551022,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 140.39123318515888,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.09398935116288465,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.3215656987551022,
+            "limit": 0.3507563825435487,
+            "relative": 0.09077673365490857
+          },
+          "mxScore": {
+            "actual": 140.39123318515888,
+            "limit": 140.8422565188559,
+            "relative": 0.003212617507976079
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05170113031906040f050c0206040311131811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.92101348806002,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.3215656987551022,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 140.39123318515888,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.09398935116288465,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.3215656987551022,
+            "limit": 0.3507563825435487,
+            "relative": 0.09077673365490857
+          },
+          "mxScore": {
+            "actual": 140.39123318515888,
+            "limit": 140.8422565188559,
+            "relative": 0.003212617507976079
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b0c191217100d090a0b0f05020106031913040f06090213040311061811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.901054311239534,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.32156894407039077,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 139.9342936867386,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.09725421944632551,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.32156894407039077,
+            "limit": 0.3507563825435487,
+            "relative": 0.09076572539532557
+          },
+          "mxScore": {
+            "actual": 139.9342936867386,
+            "limit": 140.8422565188559,
+            "relative": 0.006488494050999938
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05020106031913040f050c0213040311061811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.863639550617892,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.3177188290771939,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 140.71986829029777,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.10485334790902012,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.3177188290771939,
+            "limit": 0.3507563825435487,
+            "relative": 0.10398361835309378
+          },
+          "mxScore": {
+            "actual": 140.71986829029777,
+            "limit": 140.8422565188559,
+            "relative": 0.0008697295559263463
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05020113031902040f050c0206040311131811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.91956685085283,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.31693566066282763,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 140.62816465372805,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.10823402970314189,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.31693566066282763,
+            "limit": 0.3507563825435487,
+            "relative": 0.10671163292256103
+          },
+          "mxScore": {
+            "actual": 140.62816465372805,
+            "limit": 140.8422565188559,
+            "relative": 0.0015223967805808591
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05110106031913040f050c0213040311061811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.916320222799312,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.3177188290771939,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 139.83373748600428,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.11119589094898674,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.3177188290771939,
+            "limit": 0.3507563825435487,
+            "relative": 0.10398361835309378
+          },
+          "mxScore": {
+            "actual": 139.83373748600428,
+            "limit": 140.8422565188559,
+            "relative": 0.007212272595892966
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a07091017121604111902120505050a181816190f071206040b0d0a050f0b091802111303070909100c0217111318070a040d0a01081514000e",
+          "layoutId": "descent-s4-gen0091-rp",
+          "cktV4": 9.879161616163078,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.030114240993805975,
+          "rpMax": 0.03927457386522796,
+          "homeFloor": 0.36846558910198746,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.07078436014667155,
+          "mxScore": 130.02528152950958,
+          "firstSeenGeneration": 92,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.11375390375038208,
+        "failures": {
+          "yMax": {
+            "actual": 0.07078436014667155,
+            "limit": 0.06868516416255256,
+            "relative": 0.03056258232346898
+          },
+          "mxScore": {
+            "actual": 130.02528152950958,
+            "limit": 140.8422565188559,
+            "relative": 0.0831913214269131
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a07091017121604111902120505050a181816190f071206040a0d0b050f0b091802111303070909100c0217111318070a040d0a01081514000e",
+          "layoutId": "descent-s4-gen0091-rp",
+          "cktV4": 9.92238036938713,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.030114240993805975,
+          "rpMax": 0.03927457386522796,
+          "homeFloor": 0.36846558910198746,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.07078436014667155,
+          "mxScore": 130.02528152950958,
+          "firstSeenGeneration": 92,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.11375390375038208,
+        "failures": {
+          "yMax": {
+            "actual": 0.07078436014667155,
+            "limit": 0.06868516416255256,
+            "relative": 0.03056258232346898
+          },
+          "mxScore": {
+            "actual": 130.02528152950958,
+            "limit": 140.8422565188559,
+            "relative": 0.0831913214269131
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070b09191217100d0c0a0b0f05020313011906040f050c0206040111131811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.867636366821548,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.32174446926585976,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 137.16400582936362,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.11698710923114808,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.32174446926585976,
+            "limit": 0.3507563825435487,
+            "relative": 0.09017066662835527
+          },
+          "mxScore": {
+            "actual": 137.16400582936362,
+            "limit": 140.8422565188559,
+            "relative": 0.02681644260279281
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a07091017121604111902120505050a181816190f071206040b0d0a050f0b091802011303070909100c0217011318070a040d0a11081514000e",
+          "layoutId": "descent-s4-gen0091-rp",
+          "cktV4": 9.89396984578337,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.030114240993805975,
+          "rpMax": 0.03927457386522796,
+          "homeFloor": 0.36846558910198746,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.07078436014667155,
+          "mxScore": 129.5552834812027,
+          "firstSeenGeneration": 92,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.11768348341192847,
+        "failures": {
+          "yMax": {
+            "actual": 0.07078436014667155,
+            "limit": 0.06868516416255256,
+            "relative": 0.03056258232346898
+          },
+          "mxScore": {
+            "actual": 129.5552834812027,
+            "limit": 140.8422565188559,
+            "relative": 0.08712090108845949
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a070910170516041119021210101011181816070c12190b17100d090a0c0f05020106031913040f05090213040311061811041817081514000e",
+          "layoutId": "strict-ivuao-m40d0-seed-07-best-production-balanced",
+          "cktV4": 9.905228929335522,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.0418079455791114,
+          "rpMax": 0.051044914723866866,
+          "homeFloor": 0.31904585051840817,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.06868516416255256,
+          "mxScore": 138.14100309940355,
+          "firstSeenGeneration": 1,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.11894609101148301,
+        "failures": {
+          "homeFloor": {
+            "actual": 0.31904585051840817,
+            "limit": 0.3507563825435487,
+            "relative": 0.09939177072391003
+          },
+          "mxScore": {
+            "actual": 138.14100309940355,
+            "limit": 140.8422565188559,
+            "relative": 0.01955432028757298
+          }
+        }
+      },
+      {
+        "state": {
+          "stateKey": "1515010f0c0503130d0b060a07091017121604111902120505050a181816190f031206040b0d0a050f0b091802111307030909100c0217111318030a040d0a01081514000e",
+          "layoutId": "descent-s4-gen0091-rp",
+          "cktV4": 9.90277257502484,
+          "memory": 40,
+          "displacedInitials": 0,
+          "displacedVowels": 5,
+          "rpS2": 0.030114240993805975,
+          "rpMax": 0.03927457386522796,
+          "homeFloor": 0.36846558910198746,
+          "wMax": 0.03623226230403664,
+          "yMax": 0.07078436014667155,
+          "mxScore": 128.96616698769304,
+          "firstSeenGeneration": 92,
+          "sourceTier": "m40d0"
+        },
+        "failedGuardCount": 2,
+        "violationScore": 0.12264944361861896,
+        "failures": {
+          "yMax": {
+            "actual": 0.07078436014667155,
+            "limit": 0.06868516416255256,
+            "relative": 0.03056258232346898
+          },
+          "mxScore": {
+            "actual": 128.96616698769304,
+            "limit": 140.8422565188559,
+            "relative": 0.09208686129514998
+          }
+        }
+      }
+    ]
+  },
+  "basins": {
+    "rawReviewCount": 3137,
+    "uniqueReviewStates": 3137,
+    "mergedBasinCount": 3137,
+    "crossTierBasinCount": 0,
+    "lateBasinCount": 708,
+    "radius": 5,
+    "artifact": "research/milestones/strict-ivuao/stage-05-merged-basins-gen-0100.jsonl"
+  },
+  "continuation": [
+    {
+      "tier": "m43d3",
+      "config": "research/config/ckt-v4-production-21x21-strict-ivuao-stage6-m43d3-20261025.json"
+    },
+    {
+      "tier": "m42d2",
+      "config": "research/config/ckt-v4-production-21x21-strict-ivuao-stage6-m42d2-20261025.json"
+    },
+    {
+      "tier": "m41d1",
+      "config": "research/config/ckt-v4-production-21x21-strict-ivuao-stage6-m41d1-20261025.json"
+    },
+    {
+      "tier": "m40d0",
+      "config": "research/config/ckt-v4-production-21x21-strict-ivuao-stage6-m40d0-20261025.json"
+    },
+    {
+      "tier": "m40d0-prodgate",
+      "config": "research/config/ckt-v4-production-21x21-strict-ivuao-stage6-m40d0-prodgate-20261025.json"
+    }
+  ]
+}

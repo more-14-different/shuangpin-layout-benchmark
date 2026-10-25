@@ -323,11 +323,12 @@ impl RegularLayout {
         if self.capacity != [21, 21] {
             return Ok(());
         }
-        let tone_set: std::collections::BTreeSet<_> = self.tone.iter().copied().collect();
-        const AVUIO: [u8; 5] = [0, 8, 14, 20, 21];
-        if !tone_set.iter().all(|k| AVUIO.contains(k)) {
+        // AVUIO is the auxiliary-key class. The production ordered mapping is
+        // IVUAO (折、横、撇、竖、点), matching R9-21X21-M40-02.
+        const PRODUCTION_IVUAO: [u8; 5] = [8, 21, 20, 0, 14];
+        if self.tone != PRODUCTION_IVUAO {
             return Err(format!(
-                "{} has invalid 21x21 auxiliary keys: tone must strictly be AVUIO (0, 8, 14, 20, 21)",
+                "{} has invalid 21x21 auxiliary mapping: tone must be production IVUAO (8, 21, 20, 0, 14)",
                 self.id
             ));
         }

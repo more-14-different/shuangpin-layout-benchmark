@@ -1,5 +1,5 @@
 use ckt_v4_core::{
-    ProposalContext, ProposalError, ProposalKind, RegularLayout, SearchRng, propose_valid,
+    ProposalContext, ProposalError, ProposalKind, RegularLayout, SearchRng, propose, propose_valid,
     validate_proposal,
 };
 use std::collections::{BTreeMap, BTreeSet};
@@ -17,6 +17,22 @@ fn frozen_21x26() -> RegularLayout {
             3, 6, 23, 10, 14, 17, 9, 21, 17, 19, 23,
         ],
         tone: [8, 4, 20, 0, 14],
+    }
+}
+
+fn strict_21x21() -> RegularLayout {
+    RegularLayout {
+        id: "R9-21X21-M40-02".to_owned(),
+        capacity: [21, 21],
+        head_keys: vec![
+            1, 15, 12, 5, 3, 19, 13, 11, 6, 10, 7, 9, 16, 23, 5, 22, 4, 17, 25, 2, 18, 16, 16, 16,
+            9, 24, 24,
+        ],
+        final_keys: vec![
+            22, 7, 11, 12, 25, 18, 23, 16, 13, 9, 10, 11, 15, 5, 2, 1, 6, 3, 13, 19, 4, 15, 5, 9,
+            2, 19, 4, 3, 17, 6, 24, 17, 4, 24, 16,
+        ],
+        tone: [8, 21, 20, 0, 14],
     }
 }
 
@@ -115,4 +131,18 @@ fn uniqueness_is_classified_before_any_scoring_work() {
 
     let error = validate_proposal(&seed, &colliding, &context).unwrap_err();
     assert!(matches!(error, ProposalError::UniquenessRejected(_)));
+}
+
+#[test]
+fn strict_21x21_requires_the_production_ivuao_order_and_cannot_swap_slots() {
+    let seed = strict_21x21();
+    seed.validate_strict_2121().unwrap();
+
+    let mut reordered = seed.clone();
+    reordered.tone.swap(0, 1);
+    assert!(reordered.validate_strict_2121().is_err());
+
+    let mut rng = SearchRng::new(0x2121);
+    let error = propose(&seed, ProposalKind::ToneSlotSwap, &mut rng).unwrap_err();
+    assert!(matches!(error, ProposalError::MutationRejected(_)));
 }
