@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 
 pub const PROPOSAL_KIND_COUNT: usize = 14;
-pub const DEFAULT_MAX_PROPOSAL_ATTEMPTS: usize = 256;
+pub const DEFAULT_MAX_PROPOSAL_ATTEMPTS: usize = 4096;
 pub const NATIVE_ANNEAL_CHECKPOINT_VERSION: &str = "ckt-v4-native-anneal-11";
 pub const NATIVE_PROPOSAL_POLICY: &str = "regular-compound-v1";
 
