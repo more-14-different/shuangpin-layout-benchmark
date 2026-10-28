@@ -343,7 +343,10 @@ try {
             '--mx-variant', [string]$settings.mxVariant
         )) { $arguments.Add($value) }
         if ($item.Kind -eq 'layout' -and -not $resume) { Add-Optional $arguments '--initial-layout' $item.Value }
-        if ($generation -gt 1) {
+        if ($generation -gt 1 -or (Test-Path -LiteralPath $database)) {
+            Add-Optional $arguments '--exploration-database' $database
+            Add-Optional $arguments '--avoid-generation' ([Math]::Max(0, ($generation - 1)))
+        } elseif ($false) {
             if (-not (Test-Path -LiteralPath $database)) {
                 throw "exploration database is missing before generation ${generation}: $database"
             }
