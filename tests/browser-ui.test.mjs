@@ -36,7 +36,7 @@ try {
       selected: window.App7.data.entries.filter(entry => entry.id.startsWith('BPW-')).length,
     };
   });
-  assert.deepEqual(bPathCoverage, { count: 301, complete: true, selected: 19 });
+  assert.deepEqual(bPathCoverage, { count: 302, complete: true, selected: 19 });
 
   assert.equal(await page.locator('#nf6SelectionFilters').isVisible(), true);
   assert.equal(await page.locator('#uxFilters').isVisible(), false);
@@ -121,13 +121,20 @@ try {
   assert.equal(fairHeaders.includes('宿主键域'), false, 'the filtered common host domain should be summarized instead of repeated');
   const v4Header = '综合补全 CKT v4 · 联合池 · 上游串击 · ×10';
   assert.equal(fairHeaders.includes(v4Header), true, 'CKT v4 should be displayed in the disambiguation table');
-  assert.deepEqual(await page.evaluate(() => ({
+  const completionV4Coverage = await page.evaluate(() => ({
     count: Object.keys(window.App7.data.completionBV4?.schemes ?? {}).length,
     s005: window.bCompletionScoreV4(
       window.App7.data.completionBV4.schemes.S005.modes, 600, 300, 300,
       window.App7.data.completionBV4.schemes.S005.modes,
     ),
-  })), {count: 840, s005: 10});
+    prodgate: window.bCompletionScoreV4(
+      window.App7.data.completionBV4.schemes['descent-s4-gen0107-p5'].modes, 600, 300, 300,
+      window.App7.data.completionBV4.schemes.S005.modes,
+    ),
+  }));
+  assert.equal(completionV4Coverage.count, 841);
+  assert.equal(completionV4Coverage.s005, 10);
+  assert.ok(Math.abs(completionV4Coverage.prodgate - 9.70558083772736) < 1e-12);
   const v4Column = fairHeaders.indexOf(v4Header);
   const v4Before = await page.locator('table[data-ux-table="fair"] tbody tr').evaluateAll((rows, column) =>
     Object.fromEntries(rows.map(row => [row.cells[0].innerText, row.cells[column].innerText])), v4Column);
