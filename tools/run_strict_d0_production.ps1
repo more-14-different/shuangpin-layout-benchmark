@@ -22,6 +22,7 @@ function Invoke-GitSync([string]$CommitMessage) {
         }
         & git add tools/run_strict_d0_production.ps1
         & git add tools/archive_ckt_v4_explorer_seeds.mjs
+        & git add tools/run_ckt_v4_explorer.ps1
         $status = & git status --porcelain
         if ($status) {
             & git commit -m "$CommitMessage"
