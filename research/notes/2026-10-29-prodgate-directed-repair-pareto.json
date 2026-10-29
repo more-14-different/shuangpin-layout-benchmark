@@ -1,0 +1,2566 @@
+{
+  "version": "prodgate-directed-repair-pareto-1",
+  "date": "2026-10-29",
+  "reference": {
+    "id": "S005",
+    "score": 10.0
+  },
+  "prodGateCriteria": {
+    "maxMemory": 40,
+    "maxD": 0,
+    "maxV": 5,
+    "maxRpS2": 0.041807945580111396,
+    "maxRp": 0.05104491472486687,
+    "maxW": 0.036232262305036636,
+    "maxY": 0.06868516416355257,
+    "minHomeFloor": 0.3507563825425487,
+    "minMxScore": 140.8422565188549
+  },
+  "originalBaseline": {
+    "id": "BCW-3c47744cf2f7",
+    "cktV4": 9.696908,
+    "u": 360,
+    "prodGateCompliant": false,
+    "failedMetrics": [
+      "rp_s2",
+      "rp_max",
+      "home_floor",
+      "w_max",
+      "y_max",
+      "mx_score"
+    ]
+  },
+  "candidates": [
+    {
+      "id": "custom-layout",
+      "stateKey": "1515010f0c0503130d0b060a070910170a160411190212111111121818160a0c0d0512040911040b050f09021901130d03030f10070217031306011806110a04081514000e",
+      "referenceId": "S005",
+      "referenceScore": 10.0,
+      "cktV4": 9.703547533132962,
+      "memory": 40,
+      "displacedInitials": 0,
+      "displacedVowels": 5,
+      "common399": {
+        "u": 353,
+        "total": 399,
+        "collisionBucketCount": 46,
+        "affectedSyllables": 92,
+        "bucketDistribution": {
+          "2": 46
+        },
+        "collisionPairs": [
+          {
+            "code": "DD",
+            "syllables": [
+              "d+iu",
+              "d+uan"
+            ]
+          },
+          {
+            "code": "DP",
+            "syllables": [
+              "d+ian",
+              "d+ong"
+            ]
+          },
+          {
+            "code": "KB",
+            "syllables": [
+              "k+un",
+              "zh+un"
+            ]
+          },
+          {
+            "code": "KC",
+            "syllables": [
+              "k+ua",
+              "zh+ua"
+            ]
+          },
+          {
+            "code": "KD",
+            "syllables": [
+              "k+uan",
+              "zh+uan"
+            ]
+          },
+          {
+            "code": "KF",
+            "syllables": [
+              "k+ao",
+              "zh+ao"
+            ]
+          },
+          {
+            "code": "KG",
+            "syllables": [
+              "k+ui",
+              "zh+ui"
+            ]
+          },
+          {
+            "code": "KH",
+            "syllables": [
+              "k+u",
+              "zh+u"
+            ]
+          },
+          {
+            "code": "KJ",
+            "syllables": [
+              "k+en",
+              "zh+en"
+            ]
+          },
+          {
+            "code": "KK",
+            "syllables": [
+              "k+ai",
+              "zh+ai"
+            ]
+          },
+          {
+            "code": "KM",
+            "syllables": [
+              "k+an",
+              "zh+an"
+            ]
+          },
+          {
+            "code": "KN",
+            "syllables": [
+              "k+ang",
+              "zh+ang"
+            ]
+          },
+          {
+            "code": "KP",
+            "syllables": [
+              "k+ong",
+              "zh+ong"
+            ]
+          },
+          {
+            "code": "KQ",
+            "syllables": [
+              "k+ou",
+              "zh+ou"
+            ]
+          },
+          {
+            "code": "KR",
+            "syllables": [
+              "k+eng",
+              "zh+eng"
+            ]
+          },
+          {
+            "code": "KS",
+            "syllables": [
+              "k+e",
+              "zh+e"
+            ]
+          },
+          {
+            "code": "KT",
+            "syllables": [
+              "k+uang",
+              "zh+uang"
+            ]
+          },
+          {
+            "code": "KW",
+            "syllables": [
+              "k+a",
+              "zh+a"
+            ]
+          },
+          {
+            "code": "KX",
+            "syllables": [
+              "k+uai",
+              "zh+uai"
+            ]
+          },
+          {
+            "code": "KY",
+            "syllables": [
+              "k+uo",
+              "zh+uo"
+            ]
+          },
+          {
+            "code": "LB",
+            "syllables": [
+              "l+in",
+              "l+un"
+            ]
+          },
+          {
+            "code": "LD",
+            "syllables": [
+              "l+iu",
+              "l+uan"
+            ]
+          },
+          {
+            "code": "LK",
+            "syllables": [
+              "l+ai",
+              "l+ve"
+            ]
+          },
+          {
+            "code": "LP",
+            "syllables": [
+              "l+ian",
+              "l+ong"
+            ]
+          },
+          {
+            "code": "MD",
+            "syllables": [
+              "m+iu",
+              "m+o"
+            ]
+          },
+          {
+            "code": "ND",
+            "syllables": [
+              "n+iu",
+              "n+uan"
+            ]
+          },
+          {
+            "code": "NJ",
+            "syllables": [
+              "n+en",
+              "n+iang"
+            ]
+          },
+          {
+            "code": "NK",
+            "syllables": [
+              "n+ai",
+              "n+ve"
+            ]
+          },
+          {
+            "code": "NP",
+            "syllables": [
+              "n+ian",
+              "n+ong"
+            ]
+          },
+          {
+            "code": "RD",
+            "syllables": [
+              "O+o",
+              "r+uan"
+            ]
+          },
+          {
+            "code": "RF",
+            "syllables": [
+              "A+ao",
+              "r+ao"
+            ]
+          },
+          {
+            "code": "RJ",
+            "syllables": [
+              "E+en",
+              "r+en"
+            ]
+          },
+          {
+            "code": "RM",
+            "syllables": [
+              "A+an",
+              "r+an"
+            ]
+          },
+          {
+            "code": "RN",
+            "syllables": [
+              "A+ang",
+              "r+ang"
+            ]
+          },
+          {
+            "code": "RQ",
+            "syllables": [
+              "O+ou",
+              "r+ou"
+            ]
+          },
+          {
+            "code": "RR",
+            "syllables": [
+              "E+eng",
+              "r+eng"
+            ]
+          },
+          {
+            "code": "RS",
+            "syllables": [
+              "E+e",
+              "r+e"
+            ]
+          },
+          {
+            "code": "SD",
+            "syllables": [
+              "s+uan",
+              "W+o"
+            ]
+          },
+          {
+            "code": "SH",
+            "syllables": [
+              "s+u",
+              "W+u"
+            ]
+          },
+          {
+            "code": "SJ",
+            "syllables": [
+              "s+en",
+              "W+en"
+            ]
+          },
+          {
+            "code": "SK",
+            "syllables": [
+              "s+ai",
+              "W+ai"
+            ]
+          },
+          {
+            "code": "SM",
+            "syllables": [
+              "s+an",
+              "W+an"
+            ]
+          },
+          {
+            "code": "SN",
+            "syllables": [
+              "s+ang",
+              "W+ang"
+            ]
+          },
+          {
+            "code": "SR",
+            "syllables": [
+              "s+eng",
+              "W+eng"
+            ]
+          },
+          {
+            "code": "SW",
+            "syllables": [
+              "s+a",
+              "W+a"
+            ]
+          },
+          {
+            "code": "TP",
+            "syllables": [
+              "t+ian",
+              "t+ong"
+            ]
+          }
+        ]
+      },
+      "tracks": {
+        "keytao": {
+          "character": 0.004865171983598633,
+          "word2": 0.004367544048079496,
+          "word3": 0.04948250439280748,
+          "word4": 0.0034728523638421723
+        },
+        "sanpin": {
+          "character": 0.007792378486971749,
+          "word2": 0.006299994240886466,
+          "word3": 0.06947811695537248,
+          "word4": 0.005516941306028994
+        }
+      },
+      "ergonomics": {
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.37515572500684075,
+        "wMax": 0.036232262304036644,
+        "yMax": 0.06392364530990335,
+        "mxScore": 141.03384602128477
+      },
+      "prodGate": {
+        "passesAll": true,
+        "rpS2Pass": true,
+        "rpMaxPass": true,
+        "homeFloorPass": true,
+        "wMaxPass": true,
+        "yMaxPass": true,
+        "mxPass": true
+      },
+      "initialMap": {
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "S",
+        "Y": "Y",
+        "YU": "Y",
+        "b": "B",
+        "c": "C",
+        "ch": "W",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "X",
+        "z": "Z",
+        "zh": "K"
+      },
+      "finalMap": {
+        "a": "W",
+        "ai": "K",
+        "an": "M",
+        "ang": "N",
+        "ao": "F",
+        "e": "S",
+        "ei": "E",
+        "en": "J",
+        "eng": "R",
+        "er": "E",
+        "i": "L",
+        "ia": "F",
+        "ian": "P",
+        "iang": "J",
+        "iao": "C",
+        "ie": "Z",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "D",
+        "o": "D",
+        "ong": "P",
+        "ou": "Q",
+        "u": "H",
+        "ua": "C",
+        "uai": "X",
+        "uan": "D",
+        "uang": "T",
+        "ui": "G",
+        "un": "B",
+        "uo": "Y",
+        "v": "G",
+        "van": "R",
+        "ve": "K",
+        "vn": "E"
+      },
+      "candidateId": "gen0107-p5-f1h-25_29-d2-f4_22-d3-f2_7-d4-f25_29",
+      "candidateU": 353,
+      "candidateTier": "Tier-B",
+      "hammingToBcw": 39
+    },
+    {
+      "id": "custom-layout",
+      "stateKey": "1515010f0c0503130d0b060a070910170a160411190212111111121818160a0c0d1205040911040b050f09021901130d03030f10070201031306171806110a04081514000e",
+      "referenceId": "S005",
+      "referenceScore": 10.0,
+      "cktV4": 9.704071772970739,
+      "memory": 40,
+      "displacedInitials": 0,
+      "displacedVowels": 5,
+      "common399": {
+        "u": 354,
+        "total": 399,
+        "collisionBucketCount": 45,
+        "affectedSyllables": 90,
+        "bucketDistribution": {
+          "2": 45
+        },
+        "collisionPairs": [
+          {
+            "code": "DD",
+            "syllables": [
+              "d+iu",
+              "d+uan"
+            ]
+          },
+          {
+            "code": "DP",
+            "syllables": [
+              "d+ian",
+              "d+ong"
+            ]
+          },
+          {
+            "code": "KB",
+            "syllables": [
+              "k+uai",
+              "zh+uai"
+            ]
+          },
+          {
+            "code": "KC",
+            "syllables": [
+              "k+ua",
+              "zh+ua"
+            ]
+          },
+          {
+            "code": "KD",
+            "syllables": [
+              "k+uan",
+              "zh+uan"
+            ]
+          },
+          {
+            "code": "KF",
+            "syllables": [
+              "k+e",
+              "zh+e"
+            ]
+          },
+          {
+            "code": "KG",
+            "syllables": [
+              "k+ui",
+              "zh+ui"
+            ]
+          },
+          {
+            "code": "KH",
+            "syllables": [
+              "k+u",
+              "zh+u"
+            ]
+          },
+          {
+            "code": "KJ",
+            "syllables": [
+              "k+en",
+              "zh+en"
+            ]
+          },
+          {
+            "code": "KK",
+            "syllables": [
+              "k+ai",
+              "zh+ai"
+            ]
+          },
+          {
+            "code": "KM",
+            "syllables": [
+              "k+an",
+              "zh+an"
+            ]
+          },
+          {
+            "code": "KN",
+            "syllables": [
+              "k+ang",
+              "zh+ang"
+            ]
+          },
+          {
+            "code": "KP",
+            "syllables": [
+              "k+ong",
+              "zh+ong"
+            ]
+          },
+          {
+            "code": "KQ",
+            "syllables": [
+              "k+ou",
+              "zh+ou"
+            ]
+          },
+          {
+            "code": "KR",
+            "syllables": [
+              "k+eng",
+              "zh+eng"
+            ]
+          },
+          {
+            "code": "KS",
+            "syllables": [
+              "k+ao",
+              "zh+ao"
+            ]
+          },
+          {
+            "code": "KT",
+            "syllables": [
+              "k+uang",
+              "zh+uang"
+            ]
+          },
+          {
+            "code": "KW",
+            "syllables": [
+              "k+a",
+              "zh+a"
+            ]
+          },
+          {
+            "code": "KX",
+            "syllables": [
+              "k+un",
+              "zh+un"
+            ]
+          },
+          {
+            "code": "KY",
+            "syllables": [
+              "k+uo",
+              "zh+uo"
+            ]
+          },
+          {
+            "code": "LD",
+            "syllables": [
+              "l+iu",
+              "l+uan"
+            ]
+          },
+          {
+            "code": "LK",
+            "syllables": [
+              "l+ai",
+              "l+ve"
+            ]
+          },
+          {
+            "code": "LP",
+            "syllables": [
+              "l+ian",
+              "l+ong"
+            ]
+          },
+          {
+            "code": "MD",
+            "syllables": [
+              "m+iu",
+              "m+o"
+            ]
+          },
+          {
+            "code": "ND",
+            "syllables": [
+              "n+iu",
+              "n+uan"
+            ]
+          },
+          {
+            "code": "NJ",
+            "syllables": [
+              "n+en",
+              "n+iang"
+            ]
+          },
+          {
+            "code": "NK",
+            "syllables": [
+              "n+ai",
+              "n+ve"
+            ]
+          },
+          {
+            "code": "NP",
+            "syllables": [
+              "n+ian",
+              "n+ong"
+            ]
+          },
+          {
+            "code": "RD",
+            "syllables": [
+              "O+o",
+              "r+uan"
+            ]
+          },
+          {
+            "code": "RF",
+            "syllables": [
+              "E+e",
+              "r+e"
+            ]
+          },
+          {
+            "code": "RJ",
+            "syllables": [
+              "E+en",
+              "r+en"
+            ]
+          },
+          {
+            "code": "RM",
+            "syllables": [
+              "A+an",
+              "r+an"
+            ]
+          },
+          {
+            "code": "RN",
+            "syllables": [
+              "A+ang",
+              "r+ang"
+            ]
+          },
+          {
+            "code": "RQ",
+            "syllables": [
+              "O+ou",
+              "r+ou"
+            ]
+          },
+          {
+            "code": "RR",
+            "syllables": [
+              "E+eng",
+              "r+eng"
+            ]
+          },
+          {
+            "code": "RS",
+            "syllables": [
+              "A+ao",
+              "r+ao"
+            ]
+          },
+          {
+            "code": "SD",
+            "syllables": [
+              "s+uan",
+              "W+o"
+            ]
+          },
+          {
+            "code": "SH",
+            "syllables": [
+              "s+u",
+              "W+u"
+            ]
+          },
+          {
+            "code": "SJ",
+            "syllables": [
+              "s+en",
+              "W+en"
+            ]
+          },
+          {
+            "code": "SK",
+            "syllables": [
+              "s+ai",
+              "W+ai"
+            ]
+          },
+          {
+            "code": "SM",
+            "syllables": [
+              "s+an",
+              "W+an"
+            ]
+          },
+          {
+            "code": "SN",
+            "syllables": [
+              "s+ang",
+              "W+ang"
+            ]
+          },
+          {
+            "code": "SR",
+            "syllables": [
+              "s+eng",
+              "W+eng"
+            ]
+          },
+          {
+            "code": "SW",
+            "syllables": [
+              "s+a",
+              "W+a"
+            ]
+          },
+          {
+            "code": "TP",
+            "syllables": [
+              "t+ian",
+              "t+ong"
+            ]
+          }
+        ]
+      },
+      "tracks": {
+        "keytao": {
+          "character": 0.004854324364057573,
+          "word2": 0.004351581702431857,
+          "word3": 0.04948250439280748,
+          "word4": 0.0034853396403769625
+        },
+        "sanpin": {
+          "character": 0.007784211200884494,
+          "word2": 0.006312096201076413,
+          "word3": 0.06947811695537248,
+          "word4": 0.0055806814646752545
+        }
+      },
+      "ergonomics": {
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.37515572500684075,
+        "wMax": 0.036232262304036644,
+        "yMax": 0.06392364530990335,
+        "mxScore": 141.31582455324423
+      },
+      "prodGate": {
+        "passesAll": true,
+        "rpS2Pass": true,
+        "rpMaxPass": true,
+        "homeFloorPass": true,
+        "wMaxPass": true,
+        "yMaxPass": true,
+        "mxPass": true
+      },
+      "initialMap": {
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "S",
+        "Y": "Y",
+        "YU": "Y",
+        "b": "B",
+        "c": "C",
+        "ch": "W",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "X",
+        "z": "Z",
+        "zh": "K"
+      },
+      "finalMap": {
+        "a": "W",
+        "ai": "K",
+        "an": "M",
+        "ang": "N",
+        "ao": "S",
+        "e": "F",
+        "ei": "E",
+        "en": "J",
+        "eng": "R",
+        "er": "E",
+        "i": "L",
+        "ia": "F",
+        "ian": "P",
+        "iang": "J",
+        "iao": "C",
+        "ie": "Z",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "D",
+        "o": "D",
+        "ong": "P",
+        "ou": "Q",
+        "u": "H",
+        "ua": "C",
+        "uai": "B",
+        "uan": "D",
+        "uang": "T",
+        "ui": "G",
+        "un": "X",
+        "uo": "Y",
+        "v": "G",
+        "van": "R",
+        "ve": "K",
+        "vn": "E"
+      },
+      "candidateId": "gen0107-p5-f1h-25_29-d2-f4_22-d3-f2_7-d4-f4_5",
+      "candidateU": 354,
+      "candidateTier": "Tier-B",
+      "hammingToBcw": 40
+    },
+    {
+      "id": "custom-layout",
+      "stateKey": "1515010f0c0503130d0b060a070910170a160411190212111111121818160a0d090512040c11040b050f09021901130d03030f10070203011306171806110a04081514000e",
+      "referenceId": "S005",
+      "referenceScore": 10.0,
+      "cktV4": 9.713832369310046,
+      "memory": 40,
+      "displacedInitials": 0,
+      "displacedVowels": 5,
+      "common399": {
+        "u": 356,
+        "total": 399,
+        "collisionBucketCount": 43,
+        "affectedSyllables": 86,
+        "bucketDistribution": {
+          "2": 43
+        },
+        "collisionPairs": [
+          {
+            "code": "DP",
+            "syllables": [
+              "d+ian",
+              "d+ong"
+            ]
+          },
+          {
+            "code": "KB",
+            "syllables": [
+              "k+uan",
+              "zh+uan"
+            ]
+          },
+          {
+            "code": "KC",
+            "syllables": [
+              "k+ua",
+              "zh+ua"
+            ]
+          },
+          {
+            "code": "KD",
+            "syllables": [
+              "k+uai",
+              "zh+uai"
+            ]
+          },
+          {
+            "code": "KF",
+            "syllables": [
+              "k+ao",
+              "zh+ao"
+            ]
+          },
+          {
+            "code": "KG",
+            "syllables": [
+              "k+ui",
+              "zh+ui"
+            ]
+          },
+          {
+            "code": "KH",
+            "syllables": [
+              "k+u",
+              "zh+u"
+            ]
+          },
+          {
+            "code": "KJ",
+            "syllables": [
+              "k+ang",
+              "zh+ang"
+            ]
+          },
+          {
+            "code": "KK",
+            "syllables": [
+              "k+ai",
+              "zh+ai"
+            ]
+          },
+          {
+            "code": "KM",
+            "syllables": [
+              "k+en",
+              "zh+en"
+            ]
+          },
+          {
+            "code": "KN",
+            "syllables": [
+              "k+an",
+              "zh+an"
+            ]
+          },
+          {
+            "code": "KP",
+            "syllables": [
+              "k+ong",
+              "zh+ong"
+            ]
+          },
+          {
+            "code": "KQ",
+            "syllables": [
+              "k+ou",
+              "zh+ou"
+            ]
+          },
+          {
+            "code": "KR",
+            "syllables": [
+              "k+eng",
+              "zh+eng"
+            ]
+          },
+          {
+            "code": "KS",
+            "syllables": [
+              "k+e",
+              "zh+e"
+            ]
+          },
+          {
+            "code": "KT",
+            "syllables": [
+              "k+uang",
+              "zh+uang"
+            ]
+          },
+          {
+            "code": "KW",
+            "syllables": [
+              "k+a",
+              "zh+a"
+            ]
+          },
+          {
+            "code": "KX",
+            "syllables": [
+              "k+un",
+              "zh+un"
+            ]
+          },
+          {
+            "code": "KY",
+            "syllables": [
+              "k+uo",
+              "zh+uo"
+            ]
+          },
+          {
+            "code": "LB",
+            "syllables": [
+              "l+in",
+              "l+uan"
+            ]
+          },
+          {
+            "code": "LJ",
+            "syllables": [
+              "l+ang",
+              "l+iang"
+            ]
+          },
+          {
+            "code": "LK",
+            "syllables": [
+              "l+ai",
+              "l+ve"
+            ]
+          },
+          {
+            "code": "LP",
+            "syllables": [
+              "l+ian",
+              "l+ong"
+            ]
+          },
+          {
+            "code": "MD",
+            "syllables": [
+              "m+iu",
+              "m+o"
+            ]
+          },
+          {
+            "code": "NB",
+            "syllables": [
+              "n+in",
+              "n+uan"
+            ]
+          },
+          {
+            "code": "NJ",
+            "syllables": [
+              "n+ang",
+              "n+iang"
+            ]
+          },
+          {
+            "code": "NK",
+            "syllables": [
+              "n+ai",
+              "n+ve"
+            ]
+          },
+          {
+            "code": "NP",
+            "syllables": [
+              "n+ian",
+              "n+ong"
+            ]
+          },
+          {
+            "code": "RF",
+            "syllables": [
+              "A+ao",
+              "r+ao"
+            ]
+          },
+          {
+            "code": "RJ",
+            "syllables": [
+              "A+ang",
+              "r+ang"
+            ]
+          },
+          {
+            "code": "RM",
+            "syllables": [
+              "E+en",
+              "r+en"
+            ]
+          },
+          {
+            "code": "RN",
+            "syllables": [
+              "A+an",
+              "r+an"
+            ]
+          },
+          {
+            "code": "RQ",
+            "syllables": [
+              "O+ou",
+              "r+ou"
+            ]
+          },
+          {
+            "code": "RR",
+            "syllables": [
+              "E+eng",
+              "r+eng"
+            ]
+          },
+          {
+            "code": "RS",
+            "syllables": [
+              "E+e",
+              "r+e"
+            ]
+          },
+          {
+            "code": "SH",
+            "syllables": [
+              "s+u",
+              "W+u"
+            ]
+          },
+          {
+            "code": "SJ",
+            "syllables": [
+              "s+ang",
+              "W+ang"
+            ]
+          },
+          {
+            "code": "SK",
+            "syllables": [
+              "s+ai",
+              "W+ai"
+            ]
+          },
+          {
+            "code": "SM",
+            "syllables": [
+              "s+en",
+              "W+en"
+            ]
+          },
+          {
+            "code": "SN",
+            "syllables": [
+              "s+an",
+              "W+an"
+            ]
+          },
+          {
+            "code": "SR",
+            "syllables": [
+              "s+eng",
+              "W+eng"
+            ]
+          },
+          {
+            "code": "SW",
+            "syllables": [
+              "s+a",
+              "W+a"
+            ]
+          },
+          {
+            "code": "TP",
+            "syllables": [
+              "t+ian",
+              "t+ong"
+            ]
+          }
+        ]
+      },
+      "tracks": {
+        "keytao": {
+          "character": 0.004863710040264258,
+          "word2": 0.00435925724637753,
+          "word3": 0.04948250439280748,
+          "word4": 0.0036773085802998496
+        },
+        "sanpin": {
+          "character": 0.007722344008773532,
+          "word2": 0.006297815854756347,
+          "word3": 0.06947811695537248,
+          "word4": 0.005716283823395277
+        }
+      },
+      "ergonomics": {
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3722521678795211,
+        "wMax": 0.036232262304036644,
+        "yMax": 0.06392364530990335,
+        "mxScore": 141.63311514968768
+      },
+      "prodGate": {
+        "passesAll": true,
+        "rpS2Pass": true,
+        "rpMaxPass": true,
+        "homeFloorPass": true,
+        "wMaxPass": true,
+        "yMaxPass": true,
+        "mxPass": true
+      },
+      "initialMap": {
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "S",
+        "Y": "Y",
+        "YU": "Y",
+        "b": "B",
+        "c": "C",
+        "ch": "W",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "X",
+        "z": "Z",
+        "zh": "K"
+      },
+      "finalMap": {
+        "a": "W",
+        "ai": "K",
+        "an": "N",
+        "ang": "J",
+        "ao": "F",
+        "e": "S",
+        "ei": "E",
+        "en": "M",
+        "eng": "R",
+        "er": "E",
+        "i": "L",
+        "ia": "F",
+        "ian": "P",
+        "iang": "J",
+        "iao": "C",
+        "ie": "Z",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "D",
+        "o": "D",
+        "ong": "P",
+        "ou": "Q",
+        "u": "H",
+        "ua": "C",
+        "uai": "D",
+        "uan": "B",
+        "uang": "T",
+        "ui": "G",
+        "un": "X",
+        "uo": "Y",
+        "v": "G",
+        "van": "R",
+        "ve": "K",
+        "vn": "E"
+      },
+      "candidateId": "gen0107-p5-f1h-25_29-d2-f4_22-d3-f2_3-d4-f25_26",
+      "candidateU": 356,
+      "candidateTier": "Tier-A",
+      "hammingToBcw": 40
+    },
+    {
+      "id": "custom-layout",
+      "stateKey": "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d0512040c11040b050f09021901130d03030f10070203171306011806110a04081514000e",
+      "referenceId": "S005",
+      "referenceScore": 10.0,
+      "cktV4": 9.716420811869073,
+      "memory": 40,
+      "displacedInitials": 0,
+      "displacedVowels": 5,
+      "common399": {
+        "u": 357,
+        "total": 399,
+        "collisionBucketCount": 42,
+        "affectedSyllables": 84,
+        "bucketDistribution": {
+          "2": 42
+        },
+        "collisionPairs": [
+          {
+            "code": "DP",
+            "syllables": [
+              "d+ian",
+              "d+ong"
+            ]
+          },
+          {
+            "code": "KB",
+            "syllables": [
+              "k+un",
+              "zh+un"
+            ]
+          },
+          {
+            "code": "KC",
+            "syllables": [
+              "k+ua",
+              "zh+ua"
+            ]
+          },
+          {
+            "code": "KD",
+            "syllables": [
+              "k+uai",
+              "zh+uai"
+            ]
+          },
+          {
+            "code": "KF",
+            "syllables": [
+              "k+ao",
+              "zh+ao"
+            ]
+          },
+          {
+            "code": "KG",
+            "syllables": [
+              "k+ui",
+              "zh+ui"
+            ]
+          },
+          {
+            "code": "KH",
+            "syllables": [
+              "k+u",
+              "zh+u"
+            ]
+          },
+          {
+            "code": "KJ",
+            "syllables": [
+              "k+an",
+              "zh+an"
+            ]
+          },
+          {
+            "code": "KK",
+            "syllables": [
+              "k+ai",
+              "zh+ai"
+            ]
+          },
+          {
+            "code": "KM",
+            "syllables": [
+              "k+en",
+              "zh+en"
+            ]
+          },
+          {
+            "code": "KN",
+            "syllables": [
+              "k+ang",
+              "zh+ang"
+            ]
+          },
+          {
+            "code": "KP",
+            "syllables": [
+              "k+ong",
+              "zh+ong"
+            ]
+          },
+          {
+            "code": "KQ",
+            "syllables": [
+              "k+ou",
+              "zh+ou"
+            ]
+          },
+          {
+            "code": "KR",
+            "syllables": [
+              "k+eng",
+              "zh+eng"
+            ]
+          },
+          {
+            "code": "KS",
+            "syllables": [
+              "k+e",
+              "zh+e"
+            ]
+          },
+          {
+            "code": "KT",
+            "syllables": [
+              "k+uang",
+              "zh+uang"
+            ]
+          },
+          {
+            "code": "KW",
+            "syllables": [
+              "k+a",
+              "zh+a"
+            ]
+          },
+          {
+            "code": "KX",
+            "syllables": [
+              "k+uan",
+              "zh+uan"
+            ]
+          },
+          {
+            "code": "KY",
+            "syllables": [
+              "k+uo",
+              "zh+uo"
+            ]
+          },
+          {
+            "code": "LB",
+            "syllables": [
+              "l+in",
+              "l+un"
+            ]
+          },
+          {
+            "code": "LJ",
+            "syllables": [
+              "l+an",
+              "l+iang"
+            ]
+          },
+          {
+            "code": "LK",
+            "syllables": [
+              "l+ai",
+              "l+ve"
+            ]
+          },
+          {
+            "code": "LP",
+            "syllables": [
+              "l+ian",
+              "l+ong"
+            ]
+          },
+          {
+            "code": "MD",
+            "syllables": [
+              "m+iu",
+              "m+o"
+            ]
+          },
+          {
+            "code": "NJ",
+            "syllables": [
+              "n+an",
+              "n+iang"
+            ]
+          },
+          {
+            "code": "NK",
+            "syllables": [
+              "n+ai",
+              "n+ve"
+            ]
+          },
+          {
+            "code": "NP",
+            "syllables": [
+              "n+ian",
+              "n+ong"
+            ]
+          },
+          {
+            "code": "RF",
+            "syllables": [
+              "A+ao",
+              "r+ao"
+            ]
+          },
+          {
+            "code": "RJ",
+            "syllables": [
+              "A+an",
+              "r+an"
+            ]
+          },
+          {
+            "code": "RM",
+            "syllables": [
+              "E+en",
+              "r+en"
+            ]
+          },
+          {
+            "code": "RN",
+            "syllables": [
+              "A+ang",
+              "r+ang"
+            ]
+          },
+          {
+            "code": "RQ",
+            "syllables": [
+              "O+ou",
+              "r+ou"
+            ]
+          },
+          {
+            "code": "RR",
+            "syllables": [
+              "E+eng",
+              "r+eng"
+            ]
+          },
+          {
+            "code": "RS",
+            "syllables": [
+              "E+e",
+              "r+e"
+            ]
+          },
+          {
+            "code": "SH",
+            "syllables": [
+              "s+u",
+              "W+u"
+            ]
+          },
+          {
+            "code": "SJ",
+            "syllables": [
+              "s+an",
+              "W+an"
+            ]
+          },
+          {
+            "code": "SK",
+            "syllables": [
+              "s+ai",
+              "W+ai"
+            ]
+          },
+          {
+            "code": "SM",
+            "syllables": [
+              "s+en",
+              "W+en"
+            ]
+          },
+          {
+            "code": "SN",
+            "syllables": [
+              "s+ang",
+              "W+ang"
+            ]
+          },
+          {
+            "code": "SR",
+            "syllables": [
+              "s+eng",
+              "W+eng"
+            ]
+          },
+          {
+            "code": "SW",
+            "syllables": [
+              "s+a",
+              "W+a"
+            ]
+          },
+          {
+            "code": "TP",
+            "syllables": [
+              "t+ian",
+              "t+ong"
+            ]
+          }
+        ]
+      },
+      "tracks": {
+        "keytao": {
+          "character": 0.004885405279346378,
+          "word2": 0.004403161535325068,
+          "word3": 0.04948250439280748,
+          "word4": 0.003664212874977981
+        },
+        "sanpin": {
+          "character": 0.007858796024188468,
+          "word2": 0.006323204277796981,
+          "word3": 0.06947811695537248,
+          "word4": 0.005654950821497893
+        }
+      },
+      "ergonomics": {
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3762039577208698,
+        "wMax": 0.036232262304036644,
+        "yMax": 0.06392364530990335,
+        "mxScore": 143.37998127078376
+      },
+      "prodGate": {
+        "passesAll": true,
+        "rpS2Pass": true,
+        "rpMaxPass": true,
+        "homeFloorPass": true,
+        "wMaxPass": true,
+        "yMaxPass": true,
+        "mxPass": true
+      },
+      "initialMap": {
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "S",
+        "Y": "Y",
+        "YU": "Y",
+        "b": "B",
+        "c": "C",
+        "ch": "W",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "X",
+        "z": "Z",
+        "zh": "K"
+      },
+      "finalMap": {
+        "a": "W",
+        "ai": "K",
+        "an": "J",
+        "ang": "N",
+        "ao": "F",
+        "e": "S",
+        "ei": "E",
+        "en": "M",
+        "eng": "R",
+        "er": "E",
+        "i": "L",
+        "ia": "F",
+        "ian": "P",
+        "iang": "J",
+        "iao": "C",
+        "ie": "Z",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "D",
+        "o": "D",
+        "ong": "P",
+        "ou": "Q",
+        "u": "H",
+        "ua": "C",
+        "uai": "D",
+        "uan": "X",
+        "uang": "T",
+        "ui": "G",
+        "un": "B",
+        "uo": "Y",
+        "v": "G",
+        "van": "R",
+        "ve": "K",
+        "vn": "E"
+      },
+      "candidateId": "gen0107-p5-f1h-11_13-d2-f25_26-d3-f4_22-d4-f11_13",
+      "candidateU": 357,
+      "candidateTier": "Tier-A",
+      "hammingToBcw": 39
+    },
+    {
+      "id": "custom-layout",
+      "stateKey": "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1012040c11040b090f05021901130d03030f05070203171306011806110a04081514000e",
+      "referenceId": "S005",
+      "referenceScore": 10.0,
+      "cktV4": 9.720904837323744,
+      "memory": 40,
+      "displacedInitials": 0,
+      "displacedVowels": 5,
+      "common399": {
+        "u": 358,
+        "total": 399,
+        "collisionBucketCount": 41,
+        "affectedSyllables": 82,
+        "bucketDistribution": {
+          "2": 41
+        },
+        "collisionPairs": [
+          {
+            "code": "DP",
+            "syllables": [
+              "d+ian",
+              "d+ong"
+            ]
+          },
+          {
+            "code": "KB",
+            "syllables": [
+              "k+un",
+              "zh+un"
+            ]
+          },
+          {
+            "code": "KC",
+            "syllables": [
+              "k+ua",
+              "zh+ua"
+            ]
+          },
+          {
+            "code": "KD",
+            "syllables": [
+              "k+uai",
+              "zh+uai"
+            ]
+          },
+          {
+            "code": "KF",
+            "syllables": [
+              "k+ou",
+              "zh+ou"
+            ]
+          },
+          {
+            "code": "KG",
+            "syllables": [
+              "k+ui",
+              "zh+ui"
+            ]
+          },
+          {
+            "code": "KH",
+            "syllables": [
+              "k+u",
+              "zh+u"
+            ]
+          },
+          {
+            "code": "KJ",
+            "syllables": [
+              "k+an",
+              "zh+an"
+            ]
+          },
+          {
+            "code": "KK",
+            "syllables": [
+              "k+ai",
+              "zh+ai"
+            ]
+          },
+          {
+            "code": "KM",
+            "syllables": [
+              "k+en",
+              "zh+en"
+            ]
+          },
+          {
+            "code": "KN",
+            "syllables": [
+              "k+ang",
+              "zh+ang"
+            ]
+          },
+          {
+            "code": "KP",
+            "syllables": [
+              "k+ong",
+              "zh+ong"
+            ]
+          },
+          {
+            "code": "KQ",
+            "syllables": [
+              "k+ao",
+              "zh+ao"
+            ]
+          },
+          {
+            "code": "KR",
+            "syllables": [
+              "k+eng",
+              "zh+eng"
+            ]
+          },
+          {
+            "code": "KS",
+            "syllables": [
+              "k+e",
+              "zh+e"
+            ]
+          },
+          {
+            "code": "KT",
+            "syllables": [
+              "k+uang",
+              "zh+uang"
+            ]
+          },
+          {
+            "code": "KW",
+            "syllables": [
+              "k+a",
+              "zh+a"
+            ]
+          },
+          {
+            "code": "KX",
+            "syllables": [
+              "k+uan",
+              "zh+uan"
+            ]
+          },
+          {
+            "code": "KY",
+            "syllables": [
+              "k+uo",
+              "zh+uo"
+            ]
+          },
+          {
+            "code": "LB",
+            "syllables": [
+              "l+in",
+              "l+un"
+            ]
+          },
+          {
+            "code": "LF",
+            "syllables": [
+              "l+iang",
+              "l+ou"
+            ]
+          },
+          {
+            "code": "LK",
+            "syllables": [
+              "l+ai",
+              "l+ve"
+            ]
+          },
+          {
+            "code": "LP",
+            "syllables": [
+              "l+ian",
+              "l+ong"
+            ]
+          },
+          {
+            "code": "MD",
+            "syllables": [
+              "m+iu",
+              "m+o"
+            ]
+          },
+          {
+            "code": "NK",
+            "syllables": [
+              "n+ai",
+              "n+ve"
+            ]
+          },
+          {
+            "code": "NP",
+            "syllables": [
+              "n+ian",
+              "n+ong"
+            ]
+          },
+          {
+            "code": "RF",
+            "syllables": [
+              "O+ou",
+              "r+ou"
+            ]
+          },
+          {
+            "code": "RJ",
+            "syllables": [
+              "A+an",
+              "r+an"
+            ]
+          },
+          {
+            "code": "RM",
+            "syllables": [
+              "E+en",
+              "r+en"
+            ]
+          },
+          {
+            "code": "RN",
+            "syllables": [
+              "A+ang",
+              "r+ang"
+            ]
+          },
+          {
+            "code": "RQ",
+            "syllables": [
+              "A+ao",
+              "r+ao"
+            ]
+          },
+          {
+            "code": "RR",
+            "syllables": [
+              "E+eng",
+              "r+eng"
+            ]
+          },
+          {
+            "code": "RS",
+            "syllables": [
+              "E+e",
+              "r+e"
+            ]
+          },
+          {
+            "code": "SH",
+            "syllables": [
+              "s+u",
+              "W+u"
+            ]
+          },
+          {
+            "code": "SJ",
+            "syllables": [
+              "s+an",
+              "W+an"
+            ]
+          },
+          {
+            "code": "SK",
+            "syllables": [
+              "s+ai",
+              "W+ai"
+            ]
+          },
+          {
+            "code": "SM",
+            "syllables": [
+              "s+en",
+              "W+en"
+            ]
+          },
+          {
+            "code": "SN",
+            "syllables": [
+              "s+ang",
+              "W+ang"
+            ]
+          },
+          {
+            "code": "SR",
+            "syllables": [
+              "s+eng",
+              "W+eng"
+            ]
+          },
+          {
+            "code": "SW",
+            "syllables": [
+              "s+a",
+              "W+a"
+            ]
+          },
+          {
+            "code": "TP",
+            "syllables": [
+              "t+ian",
+              "t+ong"
+            ]
+          }
+        ]
+      },
+      "tracks": {
+        "keytao": {
+          "character": 0.0048573067284596975,
+          "word2": 0.004377540873182293,
+          "word3": 0.04948250439280748,
+          "word4": 0.003588350014189187
+        },
+        "sanpin": {
+          "character": 0.007838348640091445,
+          "word2": 0.006305893447040136,
+          "word3": 0.06947811695537248,
+          "word4": 0.005555011564420442
+        }
+      },
+      "ergonomics": {
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3758392182419183,
+        "wMax": 0.036232262304036644,
+        "yMax": 0.06392364530990335,
+        "mxScore": 141.35376566919118
+      },
+      "prodGate": {
+        "passesAll": true,
+        "rpS2Pass": true,
+        "rpMaxPass": true,
+        "homeFloorPass": true,
+        "wMaxPass": true,
+        "yMaxPass": true,
+        "mxPass": true
+      },
+      "initialMap": {
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "S",
+        "Y": "Y",
+        "YU": "Y",
+        "b": "B",
+        "c": "C",
+        "ch": "W",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "X",
+        "z": "Z",
+        "zh": "K"
+      },
+      "finalMap": {
+        "a": "W",
+        "ai": "K",
+        "an": "J",
+        "ang": "N",
+        "ao": "Q",
+        "e": "S",
+        "ei": "E",
+        "en": "M",
+        "eng": "R",
+        "er": "E",
+        "i": "L",
+        "ia": "J",
+        "ian": "P",
+        "iang": "F",
+        "iao": "C",
+        "ie": "Z",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "D",
+        "o": "D",
+        "ong": "P",
+        "ou": "F",
+        "u": "H",
+        "ua": "C",
+        "uai": "D",
+        "uan": "X",
+        "uang": "T",
+        "ui": "G",
+        "un": "B",
+        "uo": "Y",
+        "v": "G",
+        "van": "R",
+        "ve": "K",
+        "vn": "E"
+      },
+      "candidateId": "gen0107-p5-f1h-11_13-d2-f25_26",
+      "candidateU": 358,
+      "candidateTier": "Tier-B",
+      "hammingToBcw": 37
+    },
+    {
+      "id": "custom-layout",
+      "stateKey": "1515010f0c0503130d0b060a070910170a160411190212111111121818160c090d1712040a11040b090f05021901130d03030f05070203101306011806110a04081514000e",
+      "referenceId": "S005",
+      "referenceScore": 10.0,
+      "cktV4": 9.74220384265198,
+      "memory": 40,
+      "displacedInitials": 0,
+      "displacedVowels": 5,
+      "common399": {
+        "u": 359,
+        "total": 399,
+        "collisionBucketCount": 40,
+        "affectedSyllables": 80,
+        "bucketDistribution": {
+          "2": 40
+        },
+        "collisionPairs": [
+          {
+            "code": "DP",
+            "syllables": [
+              "d+ian",
+              "d+ong"
+            ]
+          },
+          {
+            "code": "KB",
+            "syllables": [
+              "k+un",
+              "zh+un"
+            ]
+          },
+          {
+            "code": "KC",
+            "syllables": [
+              "k+ua",
+              "zh+ua"
+            ]
+          },
+          {
+            "code": "KD",
+            "syllables": [
+              "k+uai",
+              "zh+uai"
+            ]
+          },
+          {
+            "code": "KF",
+            "syllables": [
+              "k+ou",
+              "zh+ou"
+            ]
+          },
+          {
+            "code": "KG",
+            "syllables": [
+              "k+ui",
+              "zh+ui"
+            ]
+          },
+          {
+            "code": "KH",
+            "syllables": [
+              "k+u",
+              "zh+u"
+            ]
+          },
+          {
+            "code": "KJ",
+            "syllables": [
+              "k+an",
+              "zh+an"
+            ]
+          },
+          {
+            "code": "KK",
+            "syllables": [
+              "k+en",
+              "zh+en"
+            ]
+          },
+          {
+            "code": "KM",
+            "syllables": [
+              "k+ai",
+              "zh+ai"
+            ]
+          },
+          {
+            "code": "KN",
+            "syllables": [
+              "k+ang",
+              "zh+ang"
+            ]
+          },
+          {
+            "code": "KP",
+            "syllables": [
+              "k+ong",
+              "zh+ong"
+            ]
+          },
+          {
+            "code": "KQ",
+            "syllables": [
+              "k+uan",
+              "zh+uan"
+            ]
+          },
+          {
+            "code": "KR",
+            "syllables": [
+              "k+eng",
+              "zh+eng"
+            ]
+          },
+          {
+            "code": "KS",
+            "syllables": [
+              "k+e",
+              "zh+e"
+            ]
+          },
+          {
+            "code": "KT",
+            "syllables": [
+              "k+uang",
+              "zh+uang"
+            ]
+          },
+          {
+            "code": "KW",
+            "syllables": [
+              "k+a",
+              "zh+a"
+            ]
+          },
+          {
+            "code": "KX",
+            "syllables": [
+              "k+ao",
+              "zh+ao"
+            ]
+          },
+          {
+            "code": "KY",
+            "syllables": [
+              "k+uo",
+              "zh+uo"
+            ]
+          },
+          {
+            "code": "LB",
+            "syllables": [
+              "l+in",
+              "l+un"
+            ]
+          },
+          {
+            "code": "LF",
+            "syllables": [
+              "l+iang",
+              "l+ou"
+            ]
+          },
+          {
+            "code": "LP",
+            "syllables": [
+              "l+ian",
+              "l+ong"
+            ]
+          },
+          {
+            "code": "MD",
+            "syllables": [
+              "m+iu",
+              "m+o"
+            ]
+          },
+          {
+            "code": "NK",
+            "syllables": [
+              "n+en",
+              "n+ve"
+            ]
+          },
+          {
+            "code": "NP",
+            "syllables": [
+              "n+ian",
+              "n+ong"
+            ]
+          },
+          {
+            "code": "RF",
+            "syllables": [
+              "O+ou",
+              "r+ou"
+            ]
+          },
+          {
+            "code": "RJ",
+            "syllables": [
+              "A+an",
+              "r+an"
+            ]
+          },
+          {
+            "code": "RK",
+            "syllables": [
+              "E+en",
+              "r+en"
+            ]
+          },
+          {
+            "code": "RN",
+            "syllables": [
+              "A+ang",
+              "r+ang"
+            ]
+          },
+          {
+            "code": "RR",
+            "syllables": [
+              "E+eng",
+              "r+eng"
+            ]
+          },
+          {
+            "code": "RS",
+            "syllables": [
+              "E+e",
+              "r+e"
+            ]
+          },
+          {
+            "code": "RX",
+            "syllables": [
+              "A+ao",
+              "r+ao"
+            ]
+          },
+          {
+            "code": "SH",
+            "syllables": [
+              "s+u",
+              "W+u"
+            ]
+          },
+          {
+            "code": "SJ",
+            "syllables": [
+              "s+an",
+              "W+an"
+            ]
+          },
+          {
+            "code": "SK",
+            "syllables": [
+              "s+en",
+              "W+en"
+            ]
+          },
+          {
+            "code": "SM",
+            "syllables": [
+              "s+ai",
+              "W+ai"
+            ]
+          },
+          {
+            "code": "SN",
+            "syllables": [
+              "s+ang",
+              "W+ang"
+            ]
+          },
+          {
+            "code": "SR",
+            "syllables": [
+              "s+eng",
+              "W+eng"
+            ]
+          },
+          {
+            "code": "SW",
+            "syllables": [
+              "s+a",
+              "W+a"
+            ]
+          },
+          {
+            "code": "TP",
+            "syllables": [
+              "t+ian",
+              "t+ong"
+            ]
+          }
+        ]
+      },
+      "tracks": {
+        "keytao": {
+          "character": 0.004857072817526197,
+          "word2": 0.004386113464938268,
+          "word3": 0.04948250439280748,
+          "word4": 0.0037821563124730514
+        },
+        "sanpin": {
+          "character": 0.007833010735255847,
+          "word2": 0.006357134771325686,
+          "word3": 0.06947811695537248,
+          "word4": 0.005663466410117035
+        }
+      },
+      "ergonomics": {
+        "rpS2": 0.0418079455791114,
+        "rpMax": 0.051044914723866866,
+        "homeFloor": 0.3735679214405345,
+        "wMax": 0.036232262304036644,
+        "yMax": 0.06392364530990335,
+        "mxScore": 141.1739253821773
+      },
+      "prodGate": {
+        "passesAll": true,
+        "rpS2Pass": true,
+        "rpMaxPass": true,
+        "homeFloorPass": true,
+        "wMaxPass": true,
+        "yMaxPass": true,
+        "mxPass": true
+      },
+      "initialMap": {
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "S",
+        "Y": "Y",
+        "YU": "Y",
+        "b": "B",
+        "c": "C",
+        "ch": "W",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "L",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "X",
+        "z": "Z",
+        "zh": "K"
+      },
+      "finalMap": {
+        "a": "W",
+        "ai": "M",
+        "an": "J",
+        "ang": "N",
+        "ao": "X",
+        "e": "S",
+        "ei": "E",
+        "en": "K",
+        "eng": "R",
+        "er": "E",
+        "i": "L",
+        "ia": "J",
+        "ian": "P",
+        "iang": "F",
+        "iao": "C",
+        "ie": "Z",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "D",
+        "o": "D",
+        "ong": "P",
+        "ou": "F",
+        "u": "H",
+        "ua": "C",
+        "uai": "D",
+        "uan": "Q",
+        "uang": "T",
+        "ui": "G",
+        "un": "B",
+        "uo": "Y",
+        "v": "G",
+        "van": "R",
+        "ve": "K",
+        "vn": "E"
+      },
+      "candidateId": "gen0107-p5-f1h-11_13-d2-f4_25-d3-f1_7-d4-f25_26",
+      "candidateU": 359,
+      "candidateTier": "Tier-B",
+      "hammingToBcw": 38
+    }
+  ]
+}
