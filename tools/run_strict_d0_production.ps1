@@ -81,12 +81,12 @@ function Get-ProcessRamSample([int[]]$Pids) {
 # Initial Commit for Branch Setup & Config
 Invoke-GitSync "chore(strict-d0): initialize 21x26 strict D0 / low memory production branch configuration and 4-stage runner"
 
-# Stage Definitions: Target Generations & Guards
+# Stage Definitions: Target Generations & Guards (Frozen Scientific Contract: M<=40, D<=1, V<=1)
 $stages = @(
     [pscustomobject]@{ StageName = "Stage A"; TargetGen = 15;  MaxD = 1; VerifyInterrupt = $true;  CommitInterval = 0  },
-    [pscustomobject]@{ StageName = "Stage B"; TargetGen = 90;  MaxD = 0; VerifyInterrupt = $false; CommitInterval = 30 },
-    [pscustomobject]@{ StageName = "Stage C"; TargetGen = 250; MaxD = 0; VerifyInterrupt = $false; CommitInterval = 50 },
-    [pscustomobject]@{ StageName = "Stage D"; TargetGen = 400; MaxD = 0; VerifyInterrupt = $false; CommitInterval = 50 }
+    [pscustomobject]@{ StageName = "Stage B"; TargetGen = 90;  MaxD = 1; VerifyInterrupt = $false; CommitInterval = 30 },
+    [pscustomobject]@{ StageName = "Stage C"; TargetGen = 250; MaxD = 1; VerifyInterrupt = $false; CommitInterval = 50 },
+    [pscustomobject]@{ StageName = "Stage D"; TargetGen = 400; MaxD = 1; VerifyInterrupt = $false; CommitInterval = 50 }
 )
 
 $config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
@@ -149,8 +149,10 @@ foreach ($stage in $stages) {
                         } catch { $allReached = $false }
                     }
                     if ($allReached) {
-                        Write-Host "[$sName] All 8 chains reached step >= 15! Interrupting PID $runnerPid and child $childAnnealerPid..."
-                        if ($childAnnealerPid) { try { Stop-Process -Id $childAnnealerPid -Force -ErrorAction SilentlyContinue } catch {} }
+                        Write-Host "[$sName] All 8 chains reached step >= 15! Interrupting PID $runnerPid and child processes..."
+                        Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq $runnerPid } | ForEach-Object {
+                            try { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue } catch {}
+                        }
                         try { Stop-Process -Id $runnerPid -Force -ErrorAction SilentlyContinue } catch {}
                         [void]$runnerProc.WaitForExit(5000)
                         $interrupted = $true
