@@ -1,10 +1,24 @@
 {
-  "version": "ckt-v4-strict-d0-milestone-summary-1",
-  "timestamp": "2026-10-30T09:47:59.797768+00:00",
+  "version": "ckt-v4-strict-d0-milestone-summary-2",
+  "timestamp": "2026-10-30T11:49:24.594754+00:00",
   "status": "COMPLETED",
+  "characterization": "在 M<=40、D<=1、V<=1、当前提案邻域与 CKT v4 冻结模型下，可信且高度饱和的最新经验前沿",
   "totalGenerations": 400,
   "totalStates": 128008,
   "bestCktV4": 9.167862175046617,
+  "improvementFromBaseline": {
+    "baselineCkt": 9.207973,
+    "bestCkt": 9.167862,
+    "deltaCkt": 0.040111,
+    "percent": 0.436
+  },
+  "saturationTimeline": {
+    "gen140Best": 9.171897,
+    "gen142Discovery": 9.167862,
+    "gen190Checkpoint": 9.167862,
+    "subsequentGenerationsWithoutImprovement": 210,
+    "subsequentStatesExplored": 67200
+  },
   "stages": [
     {
       "stage": "Stage A",
@@ -35,6 +49,26 @@
       "durationMinutes": 290.3
     }
   ],
+  "paretoSlices": {
+    "overallChampion": {
+      "slice": "M37/D1/V1",
+      "bestCkt": 9.167862
+    },
+    "lowMemory": {
+      "slice": "M36/D1/V1",
+      "bestCkt": 9.184898
+    },
+    "fastestV0": {
+      "slice": "M36/D1/V0",
+      "bestCkt": 9.212834219115091,
+      "archivedSeedCkt": 9.221313
+    },
+    "minMemoryV0": {
+      "slice": "M35/D1/V0",
+      "bestCkt": 9.207972786403865,
+      "archivedSeedCkt": 9.262348
+    }
+  },
   "globalBestCandidate": {
     "rank": 1,
     "layoutId": "SY26-V3-R2-M35-D1-V0-LP-01",
