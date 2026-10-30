@@ -6,6 +6,7 @@ const require = createRequire(import.meta.url);
 const {
   buildSchemeFixture,
   selectSchemeEntries,
+  splitPinyin,
 } = require('../tools/ckt_v4_scheme_fixture.js');
 const {
   buildNativeSchemeFixture,
@@ -35,6 +36,12 @@ test('explicit scheme selection preserves caller order and rejects unknown ids',
   );
   assert.throws(() => selectSchemeEntries(payload, ['missing']), /unknown scheme id.*missing/);
   assert.throws(() => selectSchemeEntries(payload, ['all', 'first']), /all.*alone/);
+});
+
+test('source ue spellings normalize to the canonical ve final', () => {
+  assert.deepEqual(splitPinyin('gue'), splitPinyin('gve'));
+  assert.deepEqual(splitPinyin('jue'), splitPinyin('jve'));
+  assert.notDeepEqual(splitPinyin('gue'), [0xff, 0xff]);
 });
 
 test('standalone and native exporters share identical scheme topology fields', () => {

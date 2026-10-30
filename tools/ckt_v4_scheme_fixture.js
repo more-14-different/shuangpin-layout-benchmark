@@ -26,6 +26,8 @@ function splitPinyin(py) {
   if (['j', 'q', 'x', 'Y', 'YU'].includes(head) && final.startsWith('u')) {
     final = `v${final.slice(1)}`;
   }
+  // 来源拼写 ue 与规范韵母 ve 都表示 üe，不建立独立韵母槽位。
+  if (final === 'ue') final = 've';
   const headIndex = HEADS.indexOf(head);
   const finalIndex = FINALS.indexOf(final);
   if (headIndex < 0 || finalIndex < 0) return [0xff, 0xff];

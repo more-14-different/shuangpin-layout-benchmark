@@ -4,6 +4,8 @@
 
 指标速读：[M-R2](https://github.com/more-14-different/shuangpin-layout-benchmark)[^memory] 的 `M` 为记忆项，`D`/`V` 为普通声母/基础韵母原键偏移数[^dv]，均越低越易记；`U` 为 Common399 中的不同二键码数[^u]，越高越好；[A7E-v5/v4](https://github.com/more-14-different/shuangpin-layout-benchmark)[^ensemble]、[v6-CW150](https://github.com/more-14-different/shuangpin-layout-benchmark)[^v6] 与 [CKT](https://github.com/zhanghaozhecn/conditional-keystroke-timing)[^ckt] 均越低越好。所有结果都是冻结合同[^contracts]下的模型值，不代表全局最优或真人实验结论。
 
+拼音拓扑以 `ve` 作为 `üe` 的唯一规范韵母，来源中写成 `ue` 的形式在进入布局映射前统一规范化为 `ve`。冻结语料里的 `jue/que/xue/yue` 原已按同一语义处理，且当前评测集不含 `gue`，因此这一别名规则不改变 Common399、CKT、人因或搜索排名；未来扩展集若加入 `gue`，它会复用各方案的 `ve` 键，只影响 Common399 之外的扩展重码与空码统计。
+
 ## 探索阶段
 
 PR1–NF3 建立了历史方案、五类键域和单首键前沿；R11 页面保留其结果，并以 NF4 为后续演进起点。
