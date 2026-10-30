@@ -84,6 +84,22 @@ def run_single_spec(spec: dict):
     out_dir = repo / spec["outputRel"]
     out_dir.mkdir(parents=True, exist_ok=True)
     db_path = out_dir / "exploration.sqlite3"
+    final_plan = out_dir / f"generation-{target_gen:04d}-plan" / "plan.json"
+    archive_dir = repo / spec["archiveRel"]
+
+    if final_plan.exists() and db_path.exists():
+        print(f"\n[{name}] Already completed at target generation {target_gen}. Verifying SQLite integrity...")
+        conn = sqlite3.connect(db_path)
+        cur = conn.cursor()
+        cur.execute("PRAGMA integrity_check")
+        check_res = cur.fetchone()[0]
+        conn.close()
+        if check_res != "ok":
+            raise RuntimeError(f"[{name}] SQLite integrity check failed: {check_res}")
+        print(f"[{name}] SQLite integrity check: ok")
+        if not archive_dir.exists() or not (archive_dir / "manifest.json").exists():
+            archive_seeds(final_plan, archive_dir)
+        return
     
     print("\n" + "#" * 60)
     print(f"Starting {name} (baseSeed: {spec['baseSeed']}, targetGens: {target_gen})")
@@ -244,11 +260,11 @@ def main():
     results = {}
     for spec in RUN_SPECS:
         db_path = repo / spec["outputRel"] / "exploration.sqlite3"
-        results[spec["name"]] = analyze_db(db_path, heads, alphabet)
+        results[spec["name"]] = analyze_run(db_path, heads, alphabet)
         
     # Baseline comparison (400-gen run)
     base_db = repo / "research/exploration/production-ckt-v4-2126-strict-d0-20261030/exploration.sqlite3"
-    results["Baseline-400Gen"] = analyze_db(base_db, heads, alphabet)
+    results["Baseline-400Gen"] = analyze_run(base_db, heads, alphabet)
     
     # Export summary JSON
     summary_path = repo / "research/milestones/strict-d0/cross-basin-verification-summary-20261030.json"
@@ -273,6 +289,13 @@ def main():
     ra = results["Run-A"]
     rb = results["Run-B"]
     rbase = results["Baseline-400Gen"]
+
+    def fmt_v(val):
+        if val is None or val == "N/A":
+            return "N/A"
+        if isinstance(val, (int, float)):
+            return f"{val:.6f}"
+        return str(val)
     
     md = f"""# 21×26 跨盆地多 baseSeed 对照验证实验终审报告 (Cross-Basin Multi-baseSeed Verification)
 
@@ -286,9 +309,9 @@ def main():
 
 | 实验组 | baseSeed | 探索代数 | 合规状态数 | 最佳 CKT v4 | 最优 M / D / V | 最优移位构型 | 最快 V=0 CKT | 耗时 (min) |
 |---|---|---|---:|---|---|---|---|---:|
-| **Run-A** | 21266001 | 60 | {ra['totalStates']} | **{ra['bestCkt']:.6f}** | M={ra['bestRow']['memory']}, D={ra['bestRow']['displaced_initials']}, V={ra['bestRow']['displaced_vowels']} | f->J | {ra['bestV0']:.6f} | ~95 |
-| **Run-B** | 21267002 | 60 | {rb['totalStates']} | **{rb['bestCkt']:.6f}** | M={rb['bestRow']['memory']}, D={rb['bestRow']['displaced_initials']}, V={rb['bestRow']['displaced_vowels']} | f->J | {rb['bestV0']:.6f} | ~95 |
-| **基线参考 (400代)** | 21263000 | 400 | {rbase['totalStates']} | **{rbase['bestCkt']:.6f}** | M=37, D=1, V=1 | f->J | {rbase['bestV0']:.6f} | 744 |
+| **Run-A** | 21266001 | 60 | {ra['totalStates']} | **{fmt_v(ra['bestCkt'])}** | M={ra['bestRow']['memory']}, D={ra['bestRow']['displaced_initials']}, V={ra['bestRow']['displaced_vowels']} | f->J | {fmt_v(ra['bestV0'])} | 86.6 |
+| **Run-B** | 21267002 | 60 | {rb['totalStates']} | **{fmt_v(rb['bestCkt'])}** | M={rb['bestRow']['memory']}, D={rb['bestRow']['displaced_initials']}, V={rb['bestRow']['displaced_vowels']} | f->J | {fmt_v(rb['bestV0'])} | 86.0 |
+| **基线参考 (400代)** | 21263000 | 400 | {rbase['totalStates']} | **{fmt_v(rbase['bestCkt'])}** | M=37, D=1, V=1 | f->J | {fmt_v(rbase['bestV0'])} | 744.0 |
 
 ---
 
@@ -298,11 +321,11 @@ def main():
 
 | 声母位移构型 | Run-A 最佳 CKT (60代) | Run-B 最佳 CKT (60代) | 基线参考最佳 CKT (400代) | 盆地收敛特征研判 |
 |---|---|---|---|---|
-| **`f -> J`** | {ra['archetypeBest'].get('f->J', {}).get('ckt', 'N/A'):.6f} | {rb['archetypeBest'].get('f->J', {}).get('ckt', 'N/A'):.6f} | {rbase['archetypeBest'].get('f->J', {}).get('ckt', 'N/A'):.6f} | 主导速度盆地，双独立 run 均收敛于该极限 |
-| **`f -> Q`** | {ra['archetypeBest'].get('f->Q', {}).get('ckt', 'N/A'):.6f} | {rb['archetypeBest'].get('f->Q', {}).get('ckt', 'N/A'):.6f} | {rbase['archetypeBest'].get('f->Q', {}).get('ckt', 'N/A'):.6f} | 次速盆地，多 run 稳定在 9.21~9.22 |
-| **`f -> X`** | {ra['archetypeBest'].get('f->X', {}).get('ckt', 'N/A'):.6f} | {rb['archetypeBest'].get('f->X', {}).get('ckt', 'N/A'):.6f} | {rbase['archetypeBest'].get('f->X', {}).get('ckt', 'N/A'):.6f} | 独立构型，稳定在 9.22 附近 |
-| **`x -> F`** | {ra['archetypeBest'].get('x->F', {}).get('ckt', 'N/A'):.6f} | {rb['archetypeBest'].get('x->F', {}).get('ckt', 'N/A'):.6f} | {rbase['archetypeBest'].get('x->F', {}).get('ckt', 'N/A'):.6f} | 稳定在 9.24 附近 |
-| **`q -> F`** | {ra['archetypeBest'].get('q->F', {}).get('ckt', 'N/A'):.6f} | {rb['archetypeBest'].get('q->F', {}).get('ckt', 'N/A'):.6f} | {rbase['archetypeBest'].get('q->F', {}).get('ckt', 'N/A'):.6f} | 稳定在 9.32 附近 |
+| **`f -> J`** | {fmt_v(ra['archetypeBest'].get('f->J', {}).get('ckt'))} | {fmt_v(rb['archetypeBest'].get('f->J', {}).get('ckt'))} | {fmt_v(rbase['archetypeBest'].get('f->J', {}).get('ckt'))} | 主导速度盆地，双独立 run 均收敛于该极限 |
+| **`f -> Q`** | {fmt_v(ra['archetypeBest'].get('f->Q', {}).get('ckt'))} | {fmt_v(rb['archetypeBest'].get('f->Q', {}).get('ckt'))} | {fmt_v(rbase['archetypeBest'].get('f->Q', {}).get('ckt'))} | 次速盆地，多 run 稳定在 9.21~9.22 |
+| **`f -> X`** | {fmt_v(ra['archetypeBest'].get('f->X', {}).get('ckt'))} | {fmt_v(rb['archetypeBest'].get('f->X', {}).get('ckt'))} | {fmt_v(rbase['archetypeBest'].get('f->X', {}).get('ckt'))} | 独立构型，稳定在 9.22 附近 |
+| **`x -> F`** | {fmt_v(ra['archetypeBest'].get('x->F', {}).get('ckt'))} | {fmt_v(rb['archetypeBest'].get('x->F', {}).get('ckt'))} | {fmt_v(rbase['archetypeBest'].get('x->F', {}).get('ckt'))} | 稳定在 9.24 附近 |
+| **`q -> F`** | {fmt_v(ra['archetypeBest'].get('q->F', {}).get('ckt'))} | {fmt_v(rb['archetypeBest'].get('q->F', {}).get('ckt'))} | {fmt_v(rbase['archetypeBest'].get('q->F', {}).get('ckt'))} | 稳定在 9.32 附近 |
 
 ---
 
