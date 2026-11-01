@@ -5,6 +5,11 @@ New CKT v4 algorithm development lives in this repository. The historical
 Snow Pinyin dictionaries and replay reports live; they are not copied wholesale
 because such a copy cannot run independently and would immediately diverge.
 
+The chronological map of post-R11 method development and production searches is
+[`../docs/POST_R11_EXPLORATION.md`](../docs/POST_R11_EXPLORATION.md). It separates
+mathematical lower bounds, empirically saturated frontiers and finite-search
+negative results, and points to the evidence retained on each pushed branch.
+
 The migration boundary is API-based:
 
 - `ckt-v4-core/` owns compact competition, motor-cost and incremental-update code;
@@ -16,6 +21,8 @@ The migration boundary is API-based:
   hybrid incremental/full annealer and resumable checkpoint contract;
 - `../docs/CKT_v4_SEARCH_NEIGHBORHOOD.md` specifies the phase-5 expanded
   neighborhood, optional M/D/V guards and topology capability boundary;
+- `../docs/CKT_v4_CUDA_BATCH.md` specifies the optional multi-chain CUDA
+  backend, persistent cross-generation session and per-generation diagnostics;
 - `notes/2026-10-16-ckt-v4-phase6-regular-frontier-design.md` specifies the
   phase-6 regular-topology capability audit, compound moves and Pareto boundary;
 - `notes/2026-10-16-ckt-v4-phase6-capability-audit.md` records the reproducible

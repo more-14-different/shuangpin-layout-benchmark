@@ -311,7 +311,7 @@ fn js_string_cmp(left: &str, right: &str) -> Ordering {
     left.encode_utf16().cmp(right.encode_utf16())
 }
 
-fn row_cmp(left: usize, right: usize, rows: &[Row]) -> Ordering {
+pub(crate) fn row_cmp(left: usize, right: usize, rows: &[Row]) -> Ordering {
     let a = &rows[left];
     let b = &rows[right];
     b.weight
@@ -320,7 +320,7 @@ fn row_cmp(left: usize, right: usize, rows: &[Row]) -> Ordering {
         .then_with(|| js_string_cmp(&a.id, &b.id))
 }
 
-fn validate_rows(rows: &[Row]) -> Result<(), String> {
+pub(crate) fn validate_rows(rows: &[Row]) -> Result<(), String> {
     let mut ids = HashSet::with_capacity(rows.len());
     for row in rows {
         if row.id.is_empty() || !ids.insert(&row.id) {

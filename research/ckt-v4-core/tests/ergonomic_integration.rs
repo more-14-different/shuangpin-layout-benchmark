@@ -118,6 +118,7 @@ fn provisional_metrics_never_change_membership_or_enforce_guards() {
         max_rp: Some(0.01),
         max_w: Some(0.01),
         max_y: Some(0.01),
+        min_home_floor: Some(0.99),
         min_mx_score: Some(999.0),
     };
     let metrics = ErgonomicFrontierMetrics {

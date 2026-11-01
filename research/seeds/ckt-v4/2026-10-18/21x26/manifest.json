@@ -1,0 +1,266 @@
+{
+  "version": "ckt-v4-seed-archive-1",
+  "capacity": [
+    21,
+    26
+  ],
+  "generation": 2,
+  "bestCktV4": 9.00465420251326,
+  "totalStates": 40,
+  "sources": {
+    "plan": "research/exploration/ranked-round-21x26-20261018/generation-0002-plan/plan.json",
+    "planSha256": "1781076f03a07bee4a844e43b779110aa5ef4f8d3cabd4e49a190cce68cc8d23",
+    "initialRanking": "research/config/ckt-v4-ranked-seeds-21x26.json",
+    "initialRankingSha256": "795905ce75fc541f902782147e7ca6c3167b0d6eeb30da79946b728b82e44091"
+  },
+  "seeds": [
+    {
+      "rank": 1,
+      "reason": "best-new-ckt-v4",
+      "stateKey": "151a01190c0a07130d0b06160f09120a0515031110021709090912181800070f1816040a0c090a080b1206170205030d010e0b101403050d12111e0e111e151908040e0014",
+      "filename": "seed-01-best-new-ckt-v4.json",
+      "originId": "SY26-V3-R2-M44-D9-HOME-SPEED",
+      "iteration": 2,
+      "metrics": {
+        "cktV4": 9.00465420251326,
+        "memory": 44,
+        "displacedInitials": 9,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.04910849900153768,
+            "rp_max": 0.06044433964627321,
+            "home_s2": 0.44867567754395177,
+            "home_c4": 0.27921208483982213,
+            "home_wx": 0.3578389223907763,
+            "home_floor": 0.27921208483982213,
+            "w_max": 0.031131445316690542,
+            "y_max": 0.07695774976451161
+          },
+          "mxScore": 135.69619904615828
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c180-m44-d9-v0-rp24-h27-mx135",
+      "coverageCount": 1
+    },
+    {
+      "rank": 2,
+      "reason": "metric-extreme:memory",
+      "stateKey": "151a01170c0f07130d0b06100a09160f0515031119021209090916181800090f070b04100c0a1008120313170205110d010e12161411131803050d0e15180619140400080e",
+      "filename": "seed-02-metric-extreme-memory.json",
+      "originId": "SY26-V3-R2-M40-D7-BALANCED-01",
+      "iteration": 1,
+      "metrics": {
+        "cktV4": 9.04877914169636,
+        "memory": 40,
+        "displacedInitials": 7,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.05877804378116277,
+            "rp_max": 0.07898950586484087,
+            "home_s2": 0.3996520067614416,
+            "home_c4": 0.3312190453371061,
+            "home_wx": 0.32323400753827725,
+            "home_floor": 0.32323400753827725,
+            "w_max": 0.0889134251848166,
+            "y_max": 0.06900546144193884
+          },
+          "mxScore": 134.39036033216718
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c180-m40-d7-v0-rp31-h32-mx134",
+      "coverageCount": 2
+    },
+    {
+      "rank": 3,
+      "reason": "metric-extreme:displaced-initials",
+      "stateKey": "151a010f0c0a07130d0b06171009030a0515161119021209090903181800090e180104100c0b1008031211170213160d0a07030f1413150d1611050715050619080414000e",
+      "filename": "seed-03-metric-extreme-displaced-initials.json",
+      "originId": "SY26-V3-R2-M41-D6-V1-ULP-01",
+      "iteration": 1,
+      "metrics": {
+        "cktV4": 9.080737490956816,
+        "memory": 41,
+        "displacedInitials": 6,
+        "displacedVowels": 1,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.02272909816615143,
+            "rp_max": 0.027808863630305936,
+            "home_s2": 0.3939867619800229,
+            "home_c4": 0.27987248761298356,
+            "home_wx": 0.31318752344624484,
+            "home_floor": 0.27987248761298356,
+            "w_max": 0.0781703453696163,
+            "y_max": 0.07695774976451161
+          },
+          "mxScore": 130.81128939780234
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c181-m41-d6-v1-rp11-h27-mx130",
+      "coverageCount": 1
+    },
+    {
+      "rank": 4,
+      "reason": "metric-extreme:displaced-vowels",
+      "stateKey": "151a01190c0a07130d0b06160f09120a0515031117021009090912181800070f0912040a0c0b0a08160313021711050d010e16101405131803110d0e1518061908040e0014",
+      "filename": "seed-04-metric-extreme-displaced-vowels.json",
+      "originId": "SY26-V3-R2-M43-D9-HOME-SPEED",
+      "iteration": 1,
+      "metrics": {
+        "cktV4": 9.020677398244818,
+        "memory": 43,
+        "displacedInitials": 9,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.04173126558308713,
+            "rp_max": 0.04802057308577285,
+            "home_s2": 0.4368010377601736,
+            "home_c4": 0.2813125765256936,
+            "home_wx": 0.34731061028903915,
+            "home_floor": 0.2813125765256936,
+            "w_max": 0.03777273431422487,
+            "y_max": 0.06900546144193884
+          },
+          "mxScore": 139.43231131908942
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c180-m43-d9-v0-rp19-h28-mx139",
+      "coverageCount": 1
+    },
+    {
+      "rank": 5,
+      "reason": "metric-extreme:right-pinky",
+      "stateKey": "151a010f020a07130d0b06171009030a05151611190c1209090903181800090e180a04100c0b1008031211170213160d0107030f1413150d1611050715050619080414000e",
+      "filename": "seed-05-metric-extreme-right-pinky.json",
+      "originId": "SY26-V3-R2-M41-D6-V1-ULP-01",
+      "iteration": 2,
+      "metrics": {
+        "cktV4": 9.037200884747852,
+        "memory": 43,
+        "displacedInitials": 8,
+        "displacedVowels": 1,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.02272909816615143,
+            "rp_max": 0.027808863630305936,
+            "home_s2": 0.40596006041677635,
+            "home_c4": 0.285118180903593,
+            "home_wx": 0.3226846239379408,
+            "home_floor": 0.285118180903593,
+            "w_max": 0.0781703453696163,
+            "y_max": 0.07695774976451161
+          },
+          "mxScore": 130.3811967518453
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c180-m43-d8-v1-rp11-h28-mx130",
+      "coverageCount": 1
+    },
+    {
+      "rank": 6,
+      "reason": "metric-extreme:home-row",
+      "stateKey": "151a01190c0f07130d0b06170a09120f0515031110021609090912181800090f180b040a0c070a08161006170205030d010e16121403050d1011130e11131519000414080e",
+      "filename": "seed-06-metric-extreme-home-row.json",
+      "originId": "SY26-V3-R2-M44-D9-ULTIMATE-384",
+      "iteration": 2,
+      "metrics": {
+        "cktV4": 9.053192856577288,
+        "memory": 44,
+        "displacedInitials": 9,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.05877804378116277,
+            "rp_max": 0.07898950586484087,
+            "home_s2": 0.4149505070081857,
+            "home_c4": 0.35623649405807667,
+            "home_wx": 0.34391325108683163,
+            "home_floor": 0.34391325108683163,
+            "w_max": 0.04165473470360733,
+            "y_max": 0.07695774976451161
+          },
+          "mxScore": 130.78500190138635
+        }
+      },
+      "nearestPriorDistance": 3,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c181-m44-d9-v0-rp31-h34-mx130",
+      "coverageCount": 1
+    },
+    {
+      "rank": 7,
+      "reason": "metric-extreme:moving-hand",
+      "stateKey": "151a01190c0a07130d0b06160f09120a0515031110021709090912181800140f0912040a0c0b0a08160313021711050d010e16100705131803110d0e15180619140408000e",
+      "filename": "seed-07-metric-extreme-moving-hand.json",
+      "originId": "SY26-V3-R2-M43-D9-HOME-SPEED",
+      "iteration": 2,
+      "metrics": {
+        "cktV4": 9.05108741337378,
+        "memory": 44,
+        "displacedInitials": 9,
+        "displacedVowels": 1,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.04173126558308713,
+            "rp_max": 0.04802057308577285,
+            "home_s2": 0.44930920382931694,
+            "home_c4": 0.27363637560922,
+            "home_wx": 0.35956184803558344,
+            "home_floor": 0.27363637560922,
+            "w_max": 0.03777273431422487,
+            "y_max": 0.06900546144193884
+          },
+          "mxScore": 141.13429329144455
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c181-m44-d9-v1-rp19-h27-mx141",
+      "coverageCount": 1
+    },
+    {
+      "rank": 8,
+      "reason": "novel-sparse-coverage",
+      "stateKey": "151a01060c0a07130d0b0f171009030a0515161119021209090903181800090f180a04100c071008031211170213160d010e030b1413150d1611050e15050619080414000e",
+      "filename": "seed-08-novel-sparse-coverage.json",
+      "originId": "SY26-V3-R2-M40-D6-V0-LP-01",
+      "iteration": 1,
+      "metrics": {
+        "cktV4": 9.070947645164274,
+        "memory": 42,
+        "displacedInitials": 8,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.042523330485824885,
+            "rp_max": 0.04937030289252713,
+            "home_s2": 0.38280017330613586,
+            "home_c4": 0.25539680049345276,
+            "home_wx": 0.31383362773666545,
+            "home_floor": 0.25539680049345276,
+            "w_max": 0.0781703453696163,
+            "y_max": 0.07695774976451161
+          },
+          "mxScore": 133.57282290689042
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c181-m42-d8-v0-rp19-h25-mx133",
+      "coverageCount": 1
+    }
+  ]
+}

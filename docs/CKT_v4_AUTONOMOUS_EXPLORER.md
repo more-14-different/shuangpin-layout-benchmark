@@ -1,0 +1,103 @@
+# CKT v4 自主代际探索器
+
+状态：已形成适合小型试验和长期增量运行的 CPU/CUDA 闭环。程序把每代退火产生的精确评分状态增量写入 SQLite，自动选出下一代代表种子，并在后续退火中拒绝已经评分过的精确布局。21×21 与 21×26 使用独立配置、输出目录和数据库。CUDA 模式可在一个进程内并发运行多条独立链，把同 mode、同静态拓扑的全量复算交给一个持久 GPU broker 合批；投入大型生产前仍应在目标 RTX 3070 机器做容量和中断恢复压测。
+
+## 代际闭环
+
+每一代执行以下流程：
+
+1. 首代先把全部方案按 CKT v4 排序，只保留目标容量、可正向评分且通过 `regularAnneal` 能力审计的方案，去除完全相同的布局后从最强者启动短链；后续代从上一代生成的原始布局 JSON 启动；
+2. 用 `--record evaluated` 追加每个通过结构、唯一性及护栏并实际完成 CKT v4 精确评分的状态；
+3. 在一个事务中把本代日志增量合并到 `exploration.sqlite3`，按紧凑的 69-byte 状态键（容量 + 67 维布局）去重；
+4. 只在距全局最佳 CKT v4 不超过 `maxCktDelta` 的候选中选种；
+5. 优先选择本代新发现的状态并保留本代最佳；在强 CKT 性能带内依次保留 M 低、D 低、V 低、右小指低、主行占比高、MX 高的属性极点，最后为布局距离大、覆盖单元稀疏的候选保留一个名额；`nextSeedCount>=8` 时每代可容纳全部方向；
+6. 把代表方案写成 `seed-*.json`，下一代通过 `--initial-layout` 直接接力；
+7. 下一代以只读方式按数据库主键查询；提案若与指定历史代数内的任一已探索状态完全相同，会在昂贵评分前被拒绝，不再把全库 key 装入内存。
+
+CKT v4 仍是唯一退火能量。M/D/V、右小指、W/Y、主行占比和 MX 都只作为显式护栏、选种维度或诊断项，不会暗中改写目标函数。
+
+## “未知区域”与“可能的新盆地”
+
+当前避让分成两层：
+
+- 硬避重：状态键覆盖容量、27 个声母槽、35 个韵母槽和 5 个辅码槽；历史显示 ID 不参与身份。档案内已有的精确状态不再评分。
+- 软避密：规划器统计 CKT、M/D/V、右小指、主行下界和 MX 的离散覆盖单元，并在补充种子时优先布局距离更远、覆盖更稀疏、近期没有用作种子的候选。
+
+历史距离使用确定性的 Hamming 分段索引。若索引半径为 `r`，67 个槽位被分成 `r+1` 个互斥分段；任意距离不超过 `r` 的两个布局依据鸽巢原理至少共享一个完整分段。数据库先用分段索引召回，再精算召回集，所以阈值内不会漏掉邻居。阈值外不再扫描全库：输出距离记作 `r+1`，同时 `nearestPriorDistanceExact=false`，其含义是“至少这么远”而不是伪造的精确最近距离。新一代内部的盆地支持计数也使用相同的分段索引。
+
+`review-queue.json` 是给 agent 或人工判断的非阻塞队列。只有已有历史基线后，才会报告：
+
+- `emerging-basin`：多个有竞争力的新状态在布局距离上形成新簇，同时远离既有档案；
+- `isolated-breakthrough`：一个远离既有档案的新状态改善了此前最佳值，但附近支持点还不足。
+
+同一局部簇只保留 CKT 最好的一个复核代表。默认 `pauseOnReview=false`，所以无人监督运行不会因提示而停下；设为 `true` 才会在一代完成后暂停。
+
+这些信号是启发式线索，不是“存在新盆地”的数学证明。当前没有学习型聚类、路径重连或自动提升某个盆地预算；review queue 正是把这种高价值但仍需判断的分界显式保存下来。
+
+## 运行
+
+先生成与当前 HTML 来源一致的本地夹具：
+
+```powershell
+just ckt-v4-native-corpus
+just ckt-v4-ergonomic-fixture
+```
+
+然后分别运行两个尺寸。示例配置默认是 3 代、每链 20 次精确评估，适合作为小型试验：
+
+```powershell
+just ckt-v4-explore-21x21 "research/config/ckt-v4-explorer-21x21.example.json"
+just ckt-v4-explore-21x26 "research/config/ckt-v4-explorer-21x26.example.json"
+```
+
+正式使用时应复制配置并修改 `outputRoot`，不要让两个尺寸或两个 worktree 共用同一个档案。`generations=0` 表示持续运行；在确认小型试验的速度、档案增长和选种质量之前不要启用。
+
+首代默认读取 `initialRanking` 指向的完整排序清单；清单由 `just ckt-v4-ranked-explorer-seeds` 从全方案 CKT v4 结果、能力审计和全方案 fixture 确定性生成，并保存完整合格排名及前 8 个不重复首种。也可额外在 `initialSchemes` 写入方案 ID，或在 `initialLayouts` 写入历史前沿的原始 `RegularLayout` JSON；三者会合并开链。21×21 与 21×26 的配置分别用对应的 `schemeTemplate` 校验容量和规则拓扑。
+
+主要调节项：
+
+| 配置 | 作用 |
+|---|---|
+| `stepsPerChain` | 每个代表种子的短链长度；越大越容易沿沟壑前进，也越耗时 |
+| `nextSeedCount` | 下一代代表数；CPU 模式串行执行，CUDA batch 模式在单进程内并发运行各链 |
+| `temperature` | 每条短链的起始温度；链内沿现有二次 schedule 降温，代际接力时重新升温 |
+| `dutyMs` | 每次精确评估后的休息时间，降低长期 CPU 占用 |
+| `cudaFull` / `cudaBatch` | 启用 CUDA 全量解析，并把本代待运行链接入共享 GPU broker；`cudaBatch` 要求 `cudaFull` |
+| `cudaBatchWindowMs` | broker 收集同 mode 请求的时间窗；默认 100 ms，本机较短窗口容易退化成 singleton |
+| `maxCktDelta` | 允许用人体工学极端值换取多少 CKT 劣化 |
+| `noveltyDistance` | 新盆地提示相对历史档案的最小布局距离 |
+| `basinRadius` / `basinSupport` | 新簇的半径与最小支持点数 |
+| `guards` | 可选的 M/D/V、负载、主行下界和 MX 硬约束 |
+
+默认 CPU runner 仍串行启动链并把进程优先级设为 `BelowNormal`。同时设 `cudaFull=true`、`cudaBatch=true` 后，runner 每代生成一个 `anneal-batch.json`，只启动一个退火进程；进程内每条链有独立线程、RNG、检查点和 frontier，语料、方案 fixture 与 `ProjectedMotor` 只加载一份。局部增量仍在各链 CPU 执行，全量复算才进入共享 GPU broker。broker 分别维护 Keytao/Sanpin 的持久计划和显存工作区，批次结束会报告 `batches`、`lanes`、`mean-lanes` 与 `singleton`，便于在目标机调窗口和链数。
+
+## 文件与恢复语义
+
+每代目录包含各链检查点、完整 evaluated JSONL 和标准输出/错误日志；CUDA batch 模式把进程级输出集中到 `anneal-batch.stdout.log` / `anneal-batch.stderr.log`，但 checkpoint 与 frontier 仍按链分开。每代 plan 目录包含：
+
+- `plan.json`：选种理由、覆盖计数、距上一代档案的最近布局距离；
+- `seed-*.json`：下一代可直接读取的布局；
+- `review-queue.json`：可能的新盆地复核项；
+- `database-state.json`：本代提交后的数据库版本、代数和状态数摘要。
+
+若要把某一代提升为可提交、可跨机器复用的紧凑种子档案，而不提交 SQLite 和完整链日志，可运行：
+
+```powershell
+node tools/archive_ckt_v4_explorer_seeds.mjs --plan <plan.json> --ranking <ranked-seeds.json> --output <archive-directory>
+```
+
+档案包含 8 个独立布局及 `manifest.json`；清单保留 CKT v4、M/D/V、人体工学指标、选种理由、状态键和来源代数。
+
+输出根目录还包含 `exploration.sqlite3`、`run-contract.json` 和 `run.lock`。前者是长期档案；中者冻结会改变科学结果的配置，修改温度、种子、链长、选择阈值或护栏后，不允许静默复用旧目录。`generations`、`dutyMs`、校验/检查点频率和是否遇到 review 暂停属于运行控制项，可以在不改变轨迹的前提下调整。后者阻止两个进程同时写入同一输出根目录。
+
+数据库逐行记录每个结构状态首次/最近出现代数、评估次数、来源和最近播种代数，并为 CKT、代数、人体工学极值、覆盖单元和 Hamming 分段建索引。每条链查询时固定 `--avoid-generation`，检查点另存本链已经评分过的状态，因此数据库后来增长也不会改变既有链的避重视图。历史种子回补时，其相对既有档案的距离正确记为 0，不会被误判为新颖状态。检查点格式为 `ckt-v4-native-anneal-11`；旧检查点不会隐式迁移。
+
+每代导入、播种标记和计划 JSON 在同一个 SQLite 事务中提交，`generations` 表还保存输入签名和计划。若数据库已提交但文件发布时中断，使用相同日志重跑规划器会取回同一计划；若日志或参数不同则拒绝覆盖。计划文件先在进程专属临时目录完整写入再原子发布，避免半成品目录被当成已完成的一代。旧 `exploration-archive.json` 只保留在库 API 中作兼容，不再是 runner 的生产路径；已有旧输出应换新 `outputRoot` 重新开始。
+
+## 大型试验前仍需完成
+
+1. 在目标 Ryzen 7 / 64 GiB 机器测出各提案类型的每步时间、增量/全量比例和合适的 `dutyMs`；
+2. 根据真实日志学习提案命中率，加入分阶段温度或自适应提案权重，而不是永远使用固定分布；
+3. 用合成百万状态与真实长跑分别压测 SQLite 文件大小、索引查询延迟、WAL 检查点和异常断电恢复；
+4. 用真实多代结果校准覆盖桶、布局距离与新盆地阈值；
+5. 在 RTX 3070 上复测 CUDA batch 的 lane 占用、显存、功耗和吞吐；GPU 不能替代 CPU 参考结果和恢复路径。

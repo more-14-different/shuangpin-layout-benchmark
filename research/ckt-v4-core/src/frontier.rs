@@ -59,13 +59,18 @@ impl ErgonomicMetricSchema {
         .collect::<Vec<_>>();
         if let Some(verification) = self.loads {
             definitions.extend(
-                ["rightPinkyPeak", "wPeak", "yPeak"]
-                    .into_iter()
-                    .map(|name| MetricDefinition {
-                        name: name.to_owned(),
-                        direction: MetricDirection::Minimize,
-                        verification,
-                    }),
+                [
+                    ("rightPinkyPeak", MetricDirection::Minimize),
+                    ("wPeak", MetricDirection::Minimize),
+                    ("yPeak", MetricDirection::Minimize),
+                    ("homeRowFloor", MetricDirection::Maximize),
+                ]
+                .into_iter()
+                .map(|(name, direction)| MetricDefinition {
+                    name: name.to_owned(),
+                    direction,
+                    verification,
+                }),
             );
         }
         if let Some(verification) = self.moving_hand {
@@ -199,6 +204,8 @@ fn dominates(left: FrontierMetrics, right: FrontierMetrics, schema: ErgonomicMet
             .iter()
             .zip(right_values)
             .any(|(left, right)| *left < right);
+        no_worse &= left.home_floor >= right.home_floor;
+        strictly_better |= left.home_floor > right.home_floor;
     }
     if schema.moving_hand == Some(MetricVerification::Exact) {
         let left = left
@@ -236,6 +243,7 @@ fn metrics_order(
             .then_with(|| left.rp_max.total_cmp(&right.rp_max))
             .then_with(|| left.w_max.total_cmp(&right.w_max))
             .then_with(|| left.y_max.total_cmp(&right.y_max));
+        ordering = ordering.then_with(|| right.home_floor.total_cmp(&left.home_floor));
     }
     if schema.moving_hand == Some(MetricVerification::Exact) {
         let left = left
@@ -272,7 +280,7 @@ pub(crate) fn validate_ergonomic_metrics(
         let loads = ergonomic
             .ok_or("exact load frontier requires ergonomic metrics")?
             .loads;
-        if [loads.rp_max, loads.w_max, loads.y_max]
+        if [loads.rp_max, loads.w_max, loads.y_max, loads.home_floor]
             .into_iter()
             .any(|value| !value.is_finite())
         {

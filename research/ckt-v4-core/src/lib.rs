@@ -1,7 +1,11 @@
 pub mod binary;
 pub mod capability;
 pub mod compact;
+#[cfg(feature = "cuda")]
+mod cuda;
 pub mod ergonomics;
+pub mod exploration_db;
+pub mod explorer;
 pub mod frontier;
 pub mod frontier_log;
 pub mod incremental;
@@ -17,9 +21,19 @@ pub use capability::{
     audit_scheme,
 };
 pub use compact::{KeyAlphabet, PackedCode};
+#[cfg(feature = "cuda")]
+pub use cuda::{CudaResolvePlan, CudaResolveTimings, cuda_device_name, resolve_cuda};
 pub use ergonomics::{
     ErgonomicFixture, ErgonomicGuards, ExpectedErgonomics, LoadDiagnostics, TokenLoadModel,
     TrackRoles,
+};
+pub use exploration_db::{
+    EXPLORATION_DATABASE_VERSION, ExplorationDatabase, ExplorationStateLookup,
+};
+pub use explorer::{
+    EXPLORATION_ARCHIVE_VERSION, EXPLORATION_PLAN_VERSION, ExplorationArchive, ExplorationBatch,
+    ExplorationConfig, ExplorationEntry, ExplorationPlan, ReviewCandidate, SeedRecommendation,
+    layout_distance, layout_state_bytes, layout_state_key, update_and_plan,
 };
 pub use frontier::{
     ErgonomicFrontierMetrics, ErgonomicMetricSchema, ExactFrontier, FrontierMetrics, FrontierPoint,

@@ -1,18 +1,25 @@
 use ckt_v4_core::{
     CognitiveParameters, DEFAULT_MAX_PROPOSAL_ATTEMPTS, ErgonomicFixture, ErgonomicFrontierMetrics,
-    ErgonomicGuards, ErgonomicMetricSchema, FrontierLogProvenance, FrontierLogWriter,
-    FrontierMetrics, FrontierPoint, IncrementalResolver, IncrementalSummary, InputMode,
-    KeyAlphabet, LayoutDiagnostics, MetricVerification, MovingHandCorpus,
-    NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY, NativeCorpus, ProjectedMotor,
-    Projection, ProposalContext, ProposalError, ProposalKind, ProposalStats, RegularLayout,
-    RoleTables, SchemeFixture, SchemeState, SearchRng, Summary, canonical_layout_bytes,
-    composite_score, propose, resolve, summarize, validate_checkpoint_contract, validate_proposal,
+    ErgonomicGuards, ErgonomicMetricSchema, ExplorationArchive, ExplorationStateLookup,
+    FrontierLogProvenance, FrontierLogWriter, FrontierMetrics, FrontierPoint, IncrementalResolver,
+    IncrementalSummary, InputMode, KeyAlphabet, LayoutDiagnostics, MetricVerification,
+    MovingHandCorpus, NATIVE_ANNEAL_CHECKPOINT_VERSION, NATIVE_PROPOSAL_POLICY, NativeCorpus,
+    ProjectedMotor, Projection, ProposalContext, ProposalError, ProposalKind, ProposalStats,
+    RegularLayout, RoleTables, SchemeFixture, SchemeState, SearchRng, Summary,
+    canonical_layout_bytes, composite_score, layout_state_key, propose, resolve, summarize,
+    validate_checkpoint_contract, validate_proposal,
 };
+#[cfg(feature = "cuda")]
+use ckt_v4_core::{CudaResolvePlan, CudaResolveTimings, Outcome, Row};
 use serde::{Deserialize, Serialize};
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::env;
 use std::fs;
+#[cfg(feature = "cuda")]
+use std::io::{self, BufRead, Write};
 use std::path::{Path, PathBuf};
+#[cfg(feature = "cuda")]
+use std::sync::{Arc, mpsc};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -25,6 +32,8 @@ struct ModeState {
     dependencies: ckt_v4_core::DependencyIndex,
     resolver: IncrementalResolver,
     summary: IncrementalSummary,
+    #[cfg(feature = "cuda")]
+    cuda_plan: Option<Arc<CudaResolvePlan>>,
 }
 
 struct ErgonomicRuntime {
@@ -40,6 +49,24 @@ struct GuardContext<'a> {
     layout: LayoutGuards,
     ergonomic: Option<&'a ErgonomicRuntime>,
     ergonomic_guards: ErgonomicGuards,
+    archive_lookup: &'a ArchiveLookup,
+    chain_explored_states: &'a BTreeSet<String>,
+}
+
+enum ArchiveLookup {
+    None,
+    LegacyJson(BTreeSet<String>),
+    Database(ExplorationStateLookup),
+}
+
+impl ArchiveLookup {
+    fn contains(&self, layout: &RegularLayout, state_key: &str) -> Result<bool, String> {
+        match self {
+            Self::None => Ok(false),
+            Self::LegacyJson(states) => Ok(states.contains(state_key)),
+            Self::Database(database) => database.contains(layout),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -57,6 +84,8 @@ struct Checkpoint {
     guards: LayoutGuards,
     ergonomic_guards: ErgonomicGuards,
     ergonomic_contract: Option<String>,
+    exploration_archive_generation: Option<usize>,
+    chain_explored_states: BTreeSet<String>,
     rng_state: u64,
     current_score: f64,
     best_score: f64,
@@ -95,7 +124,82 @@ struct Args {
     ergonomic_guards: ErgonomicGuards,
     mx_corpus: String,
     mx_variant: String,
+    initial_layout: Option<PathBuf>,
+    avoid_archive: Option<PathBuf>,
+    exploration_database: Option<PathBuf>,
+    avoid_generation: Option<usize>,
+    cuda_full: bool,
     resume: bool,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Clone)]
+struct CudaBatchClient {
+    sender: mpsc::Sender<CudaBrokerCommand>,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Clone)]
+struct BatchShared {
+    corpus: Arc<NativeCorpus>,
+    fixture: Arc<SchemeFixture>,
+    motor: Arc<ProjectedMotor>,
+}
+
+#[cfg(not(feature = "cuda"))]
+#[derive(Clone)]
+struct CudaBatchClient;
+
+#[cfg(feature = "cuda")]
+struct CudaBatchRequest {
+    mode: InputMode,
+    rows: Vec<Row>,
+    codes: Vec<u64>,
+    response: mpsc::SyncSender<CudaBatchResponse>,
+}
+
+#[cfg(feature = "cuda")]
+type CudaBatchResponse = Result<(Vec<Row>, Vec<Outcome>), String>;
+
+#[cfg(feature = "cuda")]
+enum CudaBrokerCommand {
+    Resolve(CudaBatchRequest),
+    Report(mpsc::SyncSender<()>),
+    Shutdown,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchManifest {
+    version: String,
+    batch_window_ms: u64,
+    chains: Vec<BatchChain>,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Deserialize)]
+struct BatchChain {
+    arguments: Vec<String>,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchSessionRequest {
+    version: String,
+    request_id: String,
+    manifest: PathBuf,
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct BatchSessionResponse<'a> {
+    version: &'static str,
+    request_id: &'a str,
+    ok: bool,
+    error: Option<String>,
 }
 
 #[derive(Clone, Copy, Debug, Default, Deserialize, Eq, PartialEq, Serialize)]
@@ -109,6 +213,7 @@ struct LayoutGuards {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 enum RecordMode {
     Accepted,
+    Evaluated,
     Leaders,
 }
 
@@ -118,9 +223,56 @@ struct DiagnosticLeaders {
 }
 
 fn main() -> Result<(), String> {
-    let args = parse_args()?;
-    let corpus = NativeCorpus::open(&args.corpus)?;
-    let fixture = SchemeFixture::open(&args.schemes)?;
+    let mut values = env::args().skip(1).collect::<Vec<_>>();
+    if values
+        .first()
+        .is_some_and(|value| value == "--batch-session")
+    {
+        if values.len() != 1 {
+            return Err("--batch-session does not take additional arguments".to_owned());
+        }
+        #[cfg(feature = "cuda")]
+        return run_batch_session();
+        #[cfg(not(feature = "cuda"))]
+        return Err("--batch-session requires a build with --features cuda".to_owned());
+    }
+    if values
+        .first()
+        .is_some_and(|value| value == "--batch-manifest")
+    {
+        if values.len() != 2 {
+            return Err("--batch-manifest needs exactly one path".to_owned());
+        }
+        #[cfg(feature = "cuda")]
+        return run_batch_manifest(Path::new(&values[1]));
+        #[cfg(not(feature = "cuda"))]
+        return Err("--batch-manifest requires a build with --features cuda".to_owned());
+    }
+    let args = parse_args_from(values.drain(..))?;
+    run_chain(args, None, None)
+}
+
+fn run_chain(
+    args: Args,
+    batch_client: Option<CudaBatchClient>,
+    #[cfg(feature = "cuda")] shared: Option<BatchShared>,
+    #[cfg(not(feature = "cuda"))] _shared: Option<()>,
+) -> Result<(), String> {
+    #[cfg(feature = "cuda")]
+    let (corpus, fixture, shared_motor) = if let Some(shared) = shared {
+        (shared.corpus, shared.fixture, Some(shared.motor))
+    } else {
+        (
+            Arc::new(NativeCorpus::open(&args.corpus)?),
+            Arc::new(SchemeFixture::open(&args.schemes)?),
+            None,
+        )
+    };
+    #[cfg(not(feature = "cuda"))]
+    let (corpus, fixture) = (
+        NativeCorpus::open(&args.corpus)?,
+        SchemeFixture::open(&args.schemes)?,
+    );
     if fixture.key_alphabet != corpus.header().key_alphabet
         || fixture.source_hashes.get("html") != corpus.header().source_hashes.get("html")
     {
@@ -129,6 +281,14 @@ fn main() -> Result<(), String> {
     let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
     let ergonomic = load_ergonomic_runtime(&args, &fixture)?;
     let ergonomic_contract = ergonomic.as_ref().map(|runtime| runtime.contract.clone());
+    let (archive_lookup, exploration_archive_generation) =
+        load_exploration_lookup(&args, &fixture)?;
+    #[cfg(feature = "cuda")]
+    let motor = match shared_motor {
+        Some(motor) => motor,
+        None => Arc::new(load_motor(&corpus, &alphabet, &args.snapshot)?),
+    };
+    #[cfg(not(feature = "cuda"))]
     let motor = load_motor(&corpus, &alphabet, &args.snapshot)?;
     let parameters = CognitiveParameters::default();
 
@@ -146,7 +306,18 @@ fn main() -> Result<(), String> {
         .iter()
         .find(|scheme| scheme.id == args.scheme_id)
         .ok_or_else(|| format!("candidate scheme {} is absent", args.scheme_id))?;
-    let initial_layout = fixture.compile_layout(input, &alphabet)?;
+    let initial_layout = if let Some(path) = &args.initial_layout {
+        if args.resume {
+            return Err("--initial-layout cannot be combined with --resume".to_owned());
+        }
+        let layout = read_initial_layout(path)?;
+        if layout.capacity != input.capacity {
+            return Err("initial layout capacity differs from the scheme template".to_owned());
+        }
+        layout
+    } else {
+        fixture.compile_layout(input, &alphabet)?
+    };
     let mut checkpoint = if args.resume {
         let value = read_checkpoint(&args.checkpoint)?;
         validate_checkpoint_contract(
@@ -162,6 +333,7 @@ fn main() -> Result<(), String> {
             || value.guards != args.guards
             || value.ergonomic_guards != args.ergonomic_guards
             || value.ergonomic_contract != ergonomic_contract
+            || value.exploration_archive_generation != exploration_archive_generation
         {
             return Err(
                 "checkpoint does not match scheme, reference, schedule, proposal, or guards"
@@ -183,6 +355,8 @@ fn main() -> Result<(), String> {
             guards: args.guards,
             ergonomic_guards: args.ergonomic_guards,
             ergonomic_contract: ergonomic_contract.clone(),
+            exploration_archive_generation,
+            chain_explored_states: BTreeSet::new(),
             rng_state: args.seed,
             current_score: f64::NAN,
             best_score: f64::INFINITY,
@@ -208,6 +382,11 @@ fn main() -> Result<(), String> {
         ergonomic.as_ref(),
         args.ergonomic_guards,
     )?;
+    let current_state_key = layout_state_key(&checkpoint.current_layout);
+    checkpoint
+        .chain_explored_states
+        .insert(current_state_key.clone());
+    let mut explored_states = checkpoint.chain_explored_states.clone();
     validate_ergonomic_guards(
         &checkpoint.best_layout,
         &fixture,
@@ -215,7 +394,15 @@ fn main() -> Result<(), String> {
         args.ergonomic_guards,
     )?;
     let mut current_state = fixture.scheme_state(&checkpoint.current_layout)?;
-    let mut modes = build_modes(&corpus, &current_state, &motor, parameters)?;
+    let mut modes = build_modes(
+        &corpus,
+        &current_state,
+        &motor,
+        parameters,
+        args.cuda_full,
+        batch_client.as_ref(),
+        None,
+    )?;
     let mut current_score = composite_score(&mode_summaries(&modes), &reference)?;
     if checkpoint.current_score.is_finite()
         && (checkpoint.current_score - current_score).abs() > 1e-8
@@ -255,6 +442,11 @@ fn main() -> Result<(), String> {
     }
     let mut rng = SearchRng::new(checkpoint.rng_state);
     let started = Instant::now();
+    let full_backend = if args.cuda_full { "cuda" } else { "cpu" };
+    println!(
+        "scoring full-backend={} start-step={} target-steps={} resume={}",
+        full_backend, checkpoint.iteration, args.steps, args.resume
+    );
 
     for iteration in checkpoint.iteration..args.steps {
         let proposal_context = ProposalContext {
@@ -272,6 +464,8 @@ fn main() -> Result<(), String> {
                 layout: args.guards,
                 ergonomic: ergonomic.as_ref(),
                 ergonomic_guards: args.ergonomic_guards,
+                archive_lookup: &archive_lookup,
+                chain_explored_states: &explored_states,
             },
             &mut checkpoint.proposal_stats,
             &mut rng,
@@ -301,7 +495,15 @@ fn main() -> Result<(), String> {
         let mut receipts = Vec::with_capacity(modes.len());
         let proposed_score = if use_full_recompute {
             checkpoint.full_evaluated += 1;
-            let replacement = build_modes(&corpus, &proposed_state, &motor, parameters)?;
+            let replacement = build_modes(
+                &corpus,
+                &proposed_state,
+                &motor,
+                parameters,
+                args.cuda_full,
+                batch_client.as_ref(),
+                Some(&modes),
+            )?;
             let score = composite_score(&mode_summaries(&replacement), &reference)?;
             replacement_modes = Some(replacement);
             score
@@ -333,6 +535,14 @@ fn main() -> Result<(), String> {
             &alphabet,
             ergonomic.as_ref(),
         )?;
+        let proposed_state_key = layout_state_key(&proposal);
+        explored_states.insert(proposed_state_key.clone());
+        checkpoint.chain_explored_states.insert(proposed_state_key);
+        if args.record_mode == RecordMode::Evaluated
+            && let Some(writer) = frontier_writer.as_mut()
+        {
+            writer.append(&frontier_point)?;
+        }
         if args.record_mode == RecordMode::Leaders
             && diagnostic_leaders.consider(&frontier_point)
             && let Some(writer) = frontier_writer.as_mut()
@@ -382,7 +592,7 @@ fn main() -> Result<(), String> {
         if args.checkpoint_every > 0 && checkpoint.iteration % args.checkpoint_every == 0 {
             write_checkpoint(&args.checkpoint, &checkpoint)?;
             println!(
-                "checkpoint step={} current={:.9} best={:.9} accepted={}/{} invalid={} paths=i{}/f{} elapsed={:.1}s",
+                "checkpoint step={} current={:.9} best={:.9} accepted={}/{} invalid={} paths=i{}/f{} full-backend={} elapsed={:.1}s",
                 checkpoint.iteration,
                 current_score,
                 checkpoint.best_score,
@@ -391,6 +601,7 @@ fn main() -> Result<(), String> {
                 checkpoint.invalid_proposals,
                 checkpoint.incremental_evaluated,
                 checkpoint.full_evaluated,
+                full_backend,
                 started.elapsed().as_secs_f64()
             );
         }
@@ -405,7 +616,7 @@ fn main() -> Result<(), String> {
             .current_layout
             .diagnostics(&alphabet, &fixture.heads, &fixture.finals)?;
     println!(
-        "complete steps={} current={:.9} best={:.9} M/D/V={}/{}/{} accepted={}/{} invalid={} paths=i{}/f{} rows=direct:{}/max{},component:{}/max{} proposals={:?} elapsed={:.1}s checkpoint={}",
+        "complete steps={} current={:.9} best={:.9} M/D/V={}/{}/{} accepted={}/{} invalid={} paths=i{}/f{} full-backend={} rows=direct:{}/max{},component:{}/max{} proposals={:?} elapsed={:.1}s checkpoint={}",
         checkpoint.iteration,
         current_score,
         checkpoint.best_score,
@@ -417,6 +628,7 @@ fn main() -> Result<(), String> {
         checkpoint.invalid_proposals,
         checkpoint.incremental_evaluated,
         checkpoint.full_evaluated,
+        full_backend,
         checkpoint.direct_rows_total,
         checkpoint.max_direct_rows,
         checkpoint.component_rows_total,
@@ -426,6 +638,411 @@ fn main() -> Result<(), String> {
         args.checkpoint.display()
     );
     Ok(())
+}
+
+#[cfg(feature = "cuda")]
+impl CudaBatchClient {
+    fn resolve(
+        &self,
+        mode: InputMode,
+        rows: Vec<Row>,
+        codes: Vec<u64>,
+    ) -> Result<(Vec<Row>, Vec<Outcome>), String> {
+        let (response, receiver) = mpsc::sync_channel(1);
+        self.sender
+            .send(CudaBrokerCommand::Resolve(CudaBatchRequest {
+                mode,
+                rows,
+                codes,
+                response,
+            }))
+            .map_err(|_| "CUDA batch broker stopped before accepting a request".to_owned())?;
+        receiver
+            .recv()
+            .map_err(|_| "CUDA batch broker stopped before returning a result".to_owned())?
+    }
+}
+
+#[cfg(feature = "cuda")]
+struct PreparedBatch {
+    batch_window_ms: u64,
+    chains: Vec<Args>,
+}
+
+#[cfg(feature = "cuda")]
+fn prepare_batch_manifest(path: &Path) -> Result<PreparedBatch, String> {
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let manifest: BatchManifest = serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    if manifest.version != "ckt-v4-anneal-batch-1" {
+        return Err(format!(
+            "unsupported anneal batch manifest version {:?}",
+            manifest.version
+        ));
+    }
+    if manifest.chains.is_empty() {
+        return Err("anneal batch manifest has no chains".to_owned());
+    }
+    if !(1..=60_000).contains(&manifest.batch_window_ms) {
+        return Err("anneal batch window must be between 1 and 60000 ms".to_owned());
+    }
+    let chains = manifest
+        .chains
+        .into_iter()
+        .map(|chain| parse_args_from(chain.arguments.into_iter()))
+        .collect::<Result<Vec<_>, _>>()?;
+    if chains.iter().any(|args| !args.cuda_full) {
+        return Err("every anneal batch chain must use --cuda-full".to_owned());
+    }
+    Ok(PreparedBatch {
+        batch_window_ms: manifest.batch_window_ms,
+        chains,
+    })
+}
+
+#[cfg(feature = "cuda")]
+struct CudaBatchRuntime {
+    shared: BatchShared,
+    client: CudaBatchClient,
+    broker: Option<thread::JoinHandle<Result<(), String>>>,
+    corpus: PathBuf,
+    schemes: PathBuf,
+    snapshot: PathBuf,
+    batch_window_ms: u64,
+}
+
+#[cfg(feature = "cuda")]
+impl CudaBatchRuntime {
+    fn new(batch: &PreparedBatch) -> Result<Self, String> {
+        let first = &batch.chains[0];
+        validate_batch_contract(&batch.chains, first)?;
+        let corpus = Arc::new(NativeCorpus::open(&first.corpus)?);
+        let fixture = Arc::new(SchemeFixture::open(&first.schemes)?);
+        let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
+        let motor = Arc::new(load_motor(&corpus, &alphabet, &first.snapshot)?);
+        let shared = BatchShared {
+            corpus,
+            fixture,
+            motor: motor.clone(),
+        };
+        let batch_window = Duration::from_millis(batch.batch_window_ms);
+        let (sender, receiver) = mpsc::channel();
+        let broker = thread::spawn(move || run_cuda_batch_broker(receiver, motor, batch_window));
+        Ok(Self {
+            shared,
+            client: CudaBatchClient { sender },
+            broker: Some(broker),
+            corpus: first.corpus.clone(),
+            schemes: first.schemes.clone(),
+            snapshot: first.snapshot.clone(),
+            batch_window_ms: batch.batch_window_ms,
+        })
+    }
+
+    fn run(&self, batch: PreparedBatch) -> Result<(), String> {
+        let first = &batch.chains[0];
+        validate_batch_contract(&batch.chains, first)?;
+        if first.corpus != self.corpus
+            || first.schemes != self.schemes
+            || first.snapshot != self.snapshot
+            || batch.batch_window_ms != self.batch_window_ms
+        {
+            return Err(
+                "batch session requires unchanged corpus, scheme fixture, motor snapshot, and window"
+                    .to_owned(),
+            );
+        }
+        let workers = batch
+            .chains
+            .into_iter()
+            .enumerate()
+            .map(|(index, args)| {
+                let batch_client = self.client.clone();
+                let shared = self.shared.clone();
+                thread::spawn(move || {
+                    run_chain(args, Some(batch_client), Some(shared))
+                        .map_err(|error| format!("batch chain {index}: {error}"))
+                })
+            })
+            .collect::<Vec<_>>();
+
+        let mut first_error = None;
+        for worker in workers {
+            match worker.join() {
+                Ok(Ok(())) => {}
+                Ok(Err(error)) => {
+                    first_error.get_or_insert(error);
+                }
+                Err(_) => {
+                    first_error.get_or_insert("anneal batch chain panicked".to_owned());
+                }
+            };
+        }
+        let (response, receiver) = mpsc::sync_channel(1);
+        self.client
+            .sender
+            .send(CudaBrokerCommand::Report(response))
+            .map_err(|_| "CUDA batch broker stopped before reporting statistics".to_owned())?;
+        receiver
+            .recv()
+            .map_err(|_| "CUDA batch broker stopped before acknowledging statistics".to_owned())?;
+        first_error.map_or(Ok(()), Err)
+    }
+
+    fn shutdown(mut self) -> Result<(), String> {
+        let _ = self.client.sender.send(CudaBrokerCommand::Shutdown);
+        match self
+            .broker
+            .take()
+            .expect("CUDA broker handle is present")
+            .join()
+        {
+            Ok(result) => result,
+            Err(_) => Err("CUDA batch broker panicked".to_owned()),
+        }
+    }
+}
+
+#[cfg(feature = "cuda")]
+fn validate_batch_contract(chains: &[Args], first: &Args) -> Result<(), String> {
+    if chains.iter().skip(1).any(|args| {
+        args.corpus != first.corpus
+            || args.schemes != first.schemes
+            || args.snapshot != first.snapshot
+    }) {
+        return Err(
+            "anneal batch chains must share corpus, scheme fixture, and motor snapshot".to_owned(),
+        );
+    }
+    Ok(())
+}
+
+#[cfg(feature = "cuda")]
+fn run_batch_manifest(path: &Path) -> Result<(), String> {
+    let batch = prepare_batch_manifest(path)?;
+    let runtime = CudaBatchRuntime::new(&batch)?;
+    let result = runtime.run(batch);
+    let shutdown = runtime.shutdown();
+    result.and(shutdown)
+}
+
+#[cfg(feature = "cuda")]
+fn run_batch_session() -> Result<(), String> {
+    const RESPONSE_PREFIX: &str = "@ckt-v4-batch-session@";
+    let stdin = io::stdin();
+    let mut stdout = io::stdout();
+    let mut runtime = None;
+    for line in stdin.lock().lines() {
+        let line = line.map_err(|error| error.to_string())?;
+        if line.trim().is_empty() {
+            continue;
+        }
+        let request: BatchSessionRequest = serde_json::from_str(&line)
+            .map_err(|error| format!("invalid batch request: {error}"))?;
+        if request.version != "ckt-v4-anneal-session-request-1" {
+            return Err(format!(
+                "unsupported anneal batch session request version {:?}",
+                request.version
+            ));
+        }
+        let result = (|| {
+            let batch = prepare_batch_manifest(&request.manifest)?;
+            if runtime.is_none() {
+                runtime = Some(CudaBatchRuntime::new(&batch)?);
+            }
+            runtime
+                .as_ref()
+                .expect("CUDA runtime is initialized")
+                .run(batch)
+        })();
+        let response = BatchSessionResponse {
+            version: "ckt-v4-anneal-session-response-1",
+            request_id: &request.request_id,
+            ok: result.is_ok(),
+            error: result.err(),
+        };
+        writeln!(
+            stdout,
+            "{RESPONSE_PREFIX}{}",
+            serde_json::to_string(&response).map_err(|error| error.to_string())?
+        )
+        .map_err(|error| error.to_string())?;
+        stdout.flush().map_err(|error| error.to_string())?;
+    }
+    runtime.map_or(Ok(()), CudaBatchRuntime::shutdown)
+}
+
+#[cfg(feature = "cuda")]
+fn run_cuda_batch_broker(
+    receiver: mpsc::Receiver<CudaBrokerCommand>,
+    motor: Arc<ProjectedMotor>,
+    batch_window: Duration,
+) -> Result<(), String> {
+    let mut keytao_plan = None;
+    let mut sanpin_plan = None;
+    let mut total_stats = CudaBatchStats::default();
+    let mut keytao_stats = CudaBatchStats::default();
+    let mut sanpin_stats = CudaBatchStats::default();
+    let mut started = Instant::now();
+    let mut pending = None;
+
+    loop {
+        let command = match pending.take() {
+            Some(command) => command,
+            None => match receiver.recv() {
+                Ok(command) => command,
+                Err(_) => break,
+            },
+        };
+        let first = match command {
+            CudaBrokerCommand::Resolve(request) => request,
+            CudaBrokerCommand::Report(response) => {
+                total_stats.print("all", Some(started.elapsed()));
+                keytao_stats.print("keytao", None);
+                sanpin_stats.print("sanpin", None);
+                total_stats = CudaBatchStats::default();
+                keytao_stats = CudaBatchStats::default();
+                sanpin_stats = CudaBatchStats::default();
+                started = Instant::now();
+                let _ = response.send(());
+                continue;
+            }
+            CudaBrokerCommand::Shutdown => break,
+        };
+        let mut requests = vec![first];
+        let deadline = Instant::now() + batch_window;
+        while let Some(remaining) = deadline.checked_duration_since(Instant::now()) {
+            match receiver.recv_timeout(remaining) {
+                Ok(CudaBrokerCommand::Resolve(request)) => requests.push(request),
+                Ok(control) => {
+                    pending = Some(control);
+                    break;
+                }
+                Err(mpsc::RecvTimeoutError::Timeout) => break,
+                Err(mpsc::RecvTimeoutError::Disconnected) => break,
+            }
+        }
+        for mode in [InputMode::Keytao, InputMode::Sanpin] {
+            let (matching, rest): (Vec<_>, Vec<_>) = requests
+                .into_iter()
+                .partition(|request| request.mode == mode);
+            requests = rest;
+            if matching.is_empty() {
+                continue;
+            }
+            let plan_slot = match mode {
+                InputMode::Keytao => &mut keytao_plan,
+                InputMode::Sanpin => &mut sanpin_plan,
+            };
+            let plan = match plan_slot {
+                Some(plan) => plan,
+                None => plan_slot.insert(CudaResolvePlan::new(&matching[0].rows)?),
+            };
+            let code_refs = matching
+                .iter()
+                .map(|request| request.codes.as_slice())
+                .collect::<Vec<_>>();
+            let resolved = plan.resolve_batch_flattened(&code_refs, |code| {
+                motor.cost(code).map(|value| value.upper_ms)
+            });
+            let lane_count = matching.len();
+            match resolved {
+                Ok((outcomes, timings)) => {
+                    total_stats.observe(lane_count, Some(&timings));
+                    match mode {
+                        InputMode::Keytao => keytao_stats.observe(lane_count, Some(&timings)),
+                        InputMode::Sanpin => sanpin_stats.observe(lane_count, Some(&timings)),
+                    }
+                    for (request, lane_outcomes) in matching.into_iter().zip(outcomes) {
+                        let _ = request.response.send(Ok((request.rows, lane_outcomes)));
+                    }
+                }
+                Err(error) => {
+                    total_stats.observe(lane_count, None);
+                    match mode {
+                        InputMode::Keytao => keytao_stats.observe(lane_count, None),
+                        InputMode::Sanpin => sanpin_stats.observe(lane_count, None),
+                    }
+                    for request in matching {
+                        let _ = request.response.send(Err(error.clone()));
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
+#[cfg(feature = "cuda")]
+#[derive(Default)]
+struct CudaBatchStats {
+    batches: u64,
+    lanes: u64,
+    singletons: u64,
+    failures: u64,
+    lane_histogram: BTreeMap<usize, u64>,
+    preparation: Duration,
+    device: Duration,
+    finalization: Duration,
+    entries: u64,
+    finalists: u64,
+    launches: u64,
+}
+
+#[cfg(feature = "cuda")]
+impl CudaBatchStats {
+    fn observe(&mut self, lanes: usize, timings: Option<&CudaResolveTimings>) {
+        self.batches += 1;
+        self.lanes += lanes as u64;
+        self.singletons += u64::from(lanes == 1);
+        *self.lane_histogram.entry(lanes).or_default() += 1;
+        let Some(timings) = timings else {
+            self.failures += 1;
+            return;
+        };
+        self.preparation += timings.preparation;
+        self.device += timings.device;
+        self.finalization += timings.finalization;
+        self.entries += timings.entries as u64;
+        self.finalists += timings.finalists as u64;
+        self.launches += timings.launches as u64;
+    }
+
+    fn print(&self, mode: &str, elapsed: Option<Duration>) {
+        let label = if mode == "all" {
+            "complete".to_owned()
+        } else {
+            format!("mode={mode}")
+        };
+        let histogram = self
+            .lane_histogram
+            .iter()
+            .map(|(lanes, batches)| format!("{lanes}:{batches}"))
+            .collect::<Vec<_>>()
+            .join(",");
+        let elapsed = elapsed
+            .map(|value| format!(" elapsed={:.1}s", value.as_secs_f64()))
+            .unwrap_or_default();
+        let finalist_rate = 100.0 * self.finalists as f64 / self.entries.max(1) as f64;
+        println!(
+            "cuda-batch {} batches={} lanes={} mean-lanes={:.2} singleton={} max-lanes={} histogram={} prepare-ms={:.1} device-ms={:.1} finalize-ms={:.1} entries={} finalists={} finalist-rate={:.1}% launches={} failures={}{}",
+            label,
+            self.batches,
+            self.lanes,
+            self.lanes as f64 / self.batches.max(1) as f64,
+            self.singletons,
+            self.lane_histogram.keys().next_back().copied().unwrap_or(0),
+            histogram,
+            self.preparation.as_secs_f64() * 1_000.0,
+            self.device.as_secs_f64() * 1_000.0,
+            self.finalization.as_secs_f64() * 1_000.0,
+            self.entries,
+            self.finalists,
+            finalist_rate,
+            self.launches,
+            self.failures,
+            elapsed,
+        );
+    }
 }
 
 fn propose_guarded(
@@ -464,6 +1081,7 @@ fn propose_guarded(
             }
             Err(error) => return Err(error.to_string()),
         }
+        let state_key = layout_state_key(&candidate);
         if validate_guards(
             &candidate,
             guard_context.schemes,
@@ -471,6 +1089,10 @@ fn propose_guarded(
             guard_context.layout,
         )
         .is_ok()
+            && !guard_context.chain_explored_states.contains(&state_key)
+            && !guard_context
+                .archive_lookup
+                .contains(&candidate, &state_key)?
             && validate_ergonomic_guards(
                 &candidate,
                 guard_context.schemes,
@@ -591,11 +1213,65 @@ fn build_modes(
     scheme: &SchemeState,
     motor: &ProjectedMotor,
     parameters: CognitiveParameters,
+    cuda_full: bool,
+    _batch_client: Option<&CudaBatchClient>,
+    _previous: Option<&[ModeState]>,
 ) -> Result<Vec<ModeState>, String> {
     [InputMode::Keytao, InputMode::Sanpin]
         .into_iter()
         .map(|mode| {
             let generated = corpus.generate(scheme, mode)?;
+            #[cfg(feature = "cuda")]
+            if cuda_full {
+                if let Some(client) = _batch_client {
+                    let dependencies = generated.dependencies;
+                    let (rows, outcomes) =
+                        client.resolve(mode, generated.rows, generated.cuda_codes)?;
+                    let incremental_motor = motor.clone();
+                    let resolver =
+                        IncrementalResolver::from_precomputed(rows, outcomes, move |code| {
+                            incremental_motor.cost(code).map(|value| value.upper_ms)
+                        })?;
+                    let summary =
+                        IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)?;
+                    return Ok(ModeState {
+                        mode,
+                        dependencies,
+                        resolver,
+                        summary,
+                        cuda_plan: None,
+                    });
+                }
+                let plan = if let Some(existing) = _previous
+                    .and_then(|modes| modes.iter().find(|state| state.mode == mode))
+                    .and_then(|mode| mode.cuda_plan.clone())
+                {
+                    existing
+                } else {
+                    Arc::new(CudaResolvePlan::new(&generated.rows)?)
+                };
+                let (outcomes, _) = plan.resolve(&generated.rows, |code| {
+                    motor.cost(code).map(|value| value.upper_ms)
+                })?;
+                let incremental_motor = motor.clone();
+                let resolver =
+                    IncrementalResolver::from_precomputed(generated.rows, outcomes, move |code| {
+                        incremental_motor.cost(code).map(|value| value.upper_ms)
+                    })?;
+                let summary =
+                    IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)?;
+                return Ok(ModeState {
+                    mode,
+                    dependencies: generated.dependencies,
+                    resolver,
+                    summary,
+                    cuda_plan: Some(plan),
+                });
+            }
+            #[cfg(not(feature = "cuda"))]
+            if cuda_full {
+                return Err("--cuda-full requires a build with --features cuda".to_owned());
+            }
             let incremental_motor = motor.clone();
             let resolver = IncrementalResolver::new(generated.rows, move |code| {
                 incremental_motor.cost(code).map(|value| value.upper_ms)
@@ -607,6 +1283,8 @@ fn build_modes(
                 dependencies: generated.dependencies,
                 resolver,
                 summary,
+                #[cfg(feature = "cuda")]
+                cuda_plan: None,
             })
         })
         .collect()
@@ -695,7 +1373,7 @@ fn leader_values(point: &FrontierPoint, schema: ErgonomicMetricSchema) -> Vec<f6
     ];
     if schema.loads == Some(MetricVerification::Exact) {
         let loads = metrics.ergonomics.expect("exact load metrics").loads;
-        values.extend([loads.rp_max, loads.w_max, loads.y_max]);
+        values.extend([loads.rp_max, loads.w_max, loads.y_max, -loads.home_floor]);
     }
     if schema.moving_hand == Some(MetricVerification::Exact) {
         values.push(
@@ -820,12 +1498,12 @@ fn load_motor(
         let donors = extension
             .donors
             .iter()
-            .map(|(donor, &weight)| {
+            .map(|(donor, weight)| {
                 let donor = donor.chars().next().ok_or("empty donor key")?;
                 alphabet
                     .index_of(donor)
                     .ok_or("unknown donor key")
-                    .map(|index| (index, weight))
+                    .map(|index| (index, *weight))
             })
             .collect::<Result<_, _>>()?;
         projections.insert(
@@ -837,6 +1515,70 @@ fn load_motor(
         );
     }
     ProjectedMotor::new(native, projections)
+}
+
+fn read_initial_layout(path: &Path) -> Result<RegularLayout, String> {
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let value: serde_json::Value =
+        serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    if let Ok(layout) = serde_json::from_value::<RegularLayout>(value.clone()) {
+        return Ok(layout);
+    }
+    value
+        .get("layout")
+        .cloned()
+        .ok_or("initial layout file is neither a layout nor a frontier point".to_owned())
+        .and_then(|layout| serde_json::from_value(layout).map_err(|error| error.to_string()))
+}
+
+fn load_exploration_archive(
+    path: Option<&Path>,
+    fixture: &SchemeFixture,
+) -> Result<(BTreeSet<String>, Option<usize>), String> {
+    let Some(path) = path else {
+        return Ok((BTreeSet::new(), None));
+    };
+    let text = fs::read_to_string(path).map_err(|error| error.to_string())?;
+    let archive: ExplorationArchive =
+        serde_json::from_str(&text).map_err(|error| error.to_string())?;
+    archive.validate()?;
+    for entry in &archive.entries {
+        entry
+            .point
+            .layout
+            .validate(&fixture.pinyin_map, &fixture.common_pinyin)?;
+    }
+    Ok((archive.state_keys(), Some(archive.generation)))
+}
+
+fn load_exploration_lookup(
+    args: &Args,
+    fixture: &SchemeFixture,
+) -> Result<(ArchiveLookup, Option<usize>), String> {
+    if args.avoid_archive.is_some() && args.exploration_database.is_some() {
+        return Err("--avoid-archive and --exploration-database are mutually exclusive".to_owned());
+    }
+    if let Some(path) = args.exploration_database.as_deref() {
+        let generation = args
+            .avoid_generation
+            .ok_or("--exploration-database requires --avoid-generation")?;
+        let scheme_hash = fixture
+            .source_hashes
+            .get("html")
+            .map(String::as_str)
+            .unwrap_or_default();
+        let lookup = ExplorationStateLookup::open(path, generation, scheme_hash)?;
+        return Ok((ArchiveLookup::Database(lookup), Some(generation)));
+    }
+    if args.avoid_generation.is_some() {
+        return Err("--avoid-generation requires --exploration-database".to_owned());
+    }
+    let (states, generation) = load_exploration_archive(args.avoid_archive.as_deref(), fixture)?;
+    if generation.is_some() {
+        Ok((ArchiveLookup::LegacyJson(states), generation))
+    } else {
+        Ok((ArchiveLookup::None, None))
+    }
 }
 
 fn write_checkpoint(path: &Path, checkpoint: &Checkpoint) -> Result<(), String> {
@@ -868,8 +1610,7 @@ fn read_checkpoint(path: &Path) -> Result<Checkpoint, String> {
     serde_json::from_value(value).map_err(|error| error.to_string())
 }
 
-fn parse_args() -> Result<Args, String> {
-    let mut values = env::args().skip(1);
+fn parse_args_from(mut values: impl Iterator<Item = String>) -> Result<Args, String> {
     let corpus = PathBuf::from(
         values
             .next()
@@ -899,6 +1640,11 @@ fn parse_args() -> Result<Args, String> {
         ergonomic_guards: ErgonomicGuards::default(),
         mx_corpus: "daily".to_owned(),
         mx_variant: "native-punctuation".to_owned(),
+        initial_layout: None,
+        avoid_archive: None,
+        exploration_database: None,
+        avoid_generation: None,
+        cuda_full: false,
         resume: false,
     };
     while let Some(flag) = values.next() {
@@ -931,6 +1677,7 @@ fn parse_args() -> Result<Args, String> {
             "--record" => {
                 result.record_mode = match values.next().ok_or("--record needs a value")?.as_str() {
                     "accepted" => RecordMode::Accepted,
+                    "evaluated" => RecordMode::Evaluated,
                     "leaders" => RecordMode::Leaders,
                     value => return Err(format!("unknown frontier record mode {value:?}")),
                 }
@@ -961,6 +1708,10 @@ fn parse_args() -> Result<Args, String> {
             "--max-y" => {
                 result.ergonomic_guards.max_y = Some(parse_value(values.next(), "--max-y")?)
             }
+            "--min-home-floor" => {
+                result.ergonomic_guards.min_home_floor =
+                    Some(parse_value(values.next(), "--min-home-floor")?)
+            }
             "--min-mx-score" => {
                 result.ergonomic_guards.min_mx_score =
                     Some(parse_value(values.next(), "--min-mx-score")?)
@@ -969,6 +1720,27 @@ fn parse_args() -> Result<Args, String> {
             "--mx-variant" => {
                 result.mx_variant = values.next().ok_or("--mx-variant needs a value")?
             }
+            "--initial-layout" => {
+                result.initial_layout = Some(PathBuf::from(
+                    values.next().ok_or("--initial-layout needs a value")?,
+                ))
+            }
+            "--avoid-archive" => {
+                result.avoid_archive = Some(PathBuf::from(
+                    values.next().ok_or("--avoid-archive needs a value")?,
+                ))
+            }
+            "--exploration-database" => {
+                result.exploration_database = Some(PathBuf::from(
+                    values
+                        .next()
+                        .ok_or("--exploration-database needs a value")?,
+                ))
+            }
+            "--avoid-generation" => {
+                result.avoid_generation = Some(parse_value(values.next(), "--avoid-generation")?)
+            }
+            "--cuda-full" => result.cuda_full = true,
             "--resume" => result.resume = true,
             _ => return Err(format!("unknown option {flag}")),
         }
@@ -981,6 +1753,7 @@ fn parse_args() -> Result<Args, String> {
         result.ergonomic_guards.max_rp,
         result.ergonomic_guards.max_w,
         result.ergonomic_guards.max_y,
+        result.ergonomic_guards.min_home_floor,
         result.ergonomic_guards.min_mx_score,
     ];
     if ergonomic_limits
