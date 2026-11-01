@@ -1,5 +1,11 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+readme-representatives:
+    node tools/update_readme_representatives.mjs
+
+readme-representatives-check:
+    node tools/update_readme_representatives.mjs --check
+
 ckt-v4-fixture:
     node tools/export_ckt_v4_kernel_fixture.js --output tests/fixtures/ckt_v4_kernel_reference.json
 

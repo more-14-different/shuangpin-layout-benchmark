@@ -21,12 +21,21 @@ test('git ignores raster images but keeps SVG eligible for tracking', () => {
   assert.doesNotMatch(ignore, /^\*\.svg$/m);
 });
 
-test('adoption copy names the current Shenyun R9 scheme', () => {
-  for (const name of ['README.md', 'README_CN.md', 'release/R11_RELEASE_NOTES.md']) {
+test('generated README sections name and link the current production schemes', () => {
+  for (const name of ['README.md', 'README_CN.md']) {
     const path = fileURLToPath(new URL(`../${name}`, import.meta.url));
     const markdown = readFileSync(path, 'utf8');
-    assert.match(markdown, /`R9-21X21-M40-02` 已(?:投入生产\/实战，被|用于) .*“无(?:\[[^\]]+\]\([^)]+\)|飞键)道・神韵”/);
-    assert.doesNotMatch(markdown, /`R8-21X21-M40-01` 已(?:投入生产\/实战，被|用于)/);
-    assert.doesNotMatch(markdown, /`R10-21X26-M39-08` (?:也)?即将被/);
+    assert.match(markdown, /README_REPRESENTATIVES:START/);
+    assert.match(markdown, /README_ADOPTION:START/);
+    assert.match(markdown, /\| CKT v4 ↓ \|/);
+    assert.match(markdown, /U357-21X21-M40-D0/);
+    assert.match(markdown, /SNOW-SHENYUN-21X26-PRODUCTION/);
+    assert.match(markdown, /snow_jiandao\.schema\.yaml/);
+    assert.match(markdown, /snow_sanpin\.schema\.yaml/);
+    assert.match(markdown, /snow_shenyun_shape\.schema\.yaml/);
+    assert.match(markdown, /snow_shenyun_tone\.schema\.yaml/);
+    assert.match(markdown, /^下载：/m);
+    assert.match(markdown, /^\[\^common399\]:/m);
+    assert.doesNotMatch(markdown, /`R9-21X21-M40-02` 已投入生产/);
   }
 });
