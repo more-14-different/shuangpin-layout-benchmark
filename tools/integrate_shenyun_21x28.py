@@ -79,6 +79,7 @@ DEFAULT_CONSTRAINED_CONTINUATION_5 = Path(
 )
 SNOW_REPO = Path(r"D:\C2D\Documents\rime-snow-pinyin")
 SCHEME_NAMES = {
+    "SNOW-SHENYUN-21X26-PRODUCTION": "冰雪神韵·21×26 生产版",
     "SHENYUN-R10X28-D3-M38": "神韵盆地·D3-M38",
     "SHENYUN-HYBRID-D4-M38": "神韵盆地·D4-M38",
     "SHENYUN-HYBRID-D4-M39": "神韵盆地·D4-M39",
