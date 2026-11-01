@@ -24,6 +24,18 @@ PR1–NF3 建立了历史方案、五类键域和单首键前沿；R11 页面保
 | R10 | 修正跨键域比较资格，将日常纯汉字 [MX34](https://macroxue.github.io/shuangpin/eval.html)[^mx34] 纳入目标；限定 21×26、D≤5、V≤1、Common399 无重无飞、固定五辅 | +8 / 484 | `R10-21X26-M39-08` |
 | R11 | 在 R10 约束内加入复合操作、定向韵键与有限两层搜索；同时整合文稿热图、检索和说明卡片 | +8 / 492 | `R11-21X26-M39-05` |
 
+### R11 之后：CKT v4 多级探索
+
+R11 冻结后没有直接顺延为 R12，而是先重建 CKT v4 精确评分、代际避重与 CUDA 后端，再分成两条生产路线。21×21 从 M/D 逐级收紧进入固定 IVUAO 与 ProdGate，形成 U357 及其严格不退化的 M40 下界；21×26 先画出 M≤46/D≤10/V≤1 宽域，再证明固定拓扑下 D≥1，分别压实 D≤1 与 D≤3 的经验前沿。
+
+| 路线 | 已探索区域 | 当前结论 |
+|---|---|---|
+| 方法层 | CKT v4 CPU/JS 精确回归、SQLite 避重、多目标选种、CUDA finalists | 后续轮次共享同一状态与评分合同；CUDA 不改变分数 |
+| 21×21 | 分级下降 → 严格 IVUAO → ProdGate → 23 盆地 / 3 baseSeed 复核 | ProdGate 前沿 9.705581；U357 的 M<40 在严格不退化合同下不可行 |
+| 21×26 | 宽域低 V → M≤40/D≤1/V≤1 → M≤40/D≤3/V≤1 | D=0 结构不可行；D≤1 前沿 9.167862，D≤3 前沿 9.050693，后二者尚未加入完整 ProdGate |
+
+完整的时间线、状态规模、负结果、证据分支和可复用方法见 [`docs/POST_R11_EXPLORATION.md`](docs/POST_R11_EXPLORATION.md)。后续 CKT v4 约 9.x 的归一化分数与本页 R11“补全 CKT ms”不是同一数值轴，不能直接横向比较。
+
 ## 代表方案性能
 
 | 方案 | 键域 | M/D/V | U | [A7E-v5 / v4 / v6](https://github.com/more-14-different/shuangpin-layout-benchmark)[^ensemble] | 补全 [CKT](https://github.com/zhanghaozhecn/conditional-keystroke-timing)[^ckt] ms |
