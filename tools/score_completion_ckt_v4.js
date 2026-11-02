@@ -15,9 +15,13 @@ const {
   upstreamMotor,
   projectedMotor,
 } = require('./ckt_v4_model.js');
+const {
+  SNOWSHAPE_SLOT_SYMBOLS,
+  physicalShape,
+} = require('./auxiliary_semantics.js');
 
 const FIXED_ONE_KEY = new Set([...'的一是在了不有和人中大为上个国我以要他时来用生到作']);
-const SHAPE_FROM = 'IEUAO';
+const SHAPE_FROM = SNOWSHAPE_SLOT_SYMBOLS;
 const STROKE_SLOT = {s: 0, h: 1, p: 2, z: 3, n: 4};
 
 function parseArgs(argv) {
@@ -89,10 +93,6 @@ function multiwords(file, data, mass) {
     result[`word${length}`] = length === 2 ? rows : rows.slice(0, count);
   }
   return result;
-}
-
-function physicalShape(abstract, toneKeys) {
-  return [...(abstract || '')].map(key => toneKeys[SHAPE_FROM.indexOf(key)] || '').join('');
 }
 
 function stage(length, code) {

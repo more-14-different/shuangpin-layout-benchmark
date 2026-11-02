@@ -10,12 +10,12 @@ const {
 } = require('./export_ckt_v4_binary_fixture.js');
 const {
   FIXED_ONE_KEY,
-  SHAPE_FROM,
   STROKE_SLOT,
   loadPayload,
   strokeOptions,
   multiwords,
 } = require('./score_completion_ckt_v4.js');
+const {shapeSlot} = require('./auxiliary_semantics.js');
 const {
   ALPHABET,
   buildSchemeFixture,
@@ -25,12 +25,6 @@ const {
 const MAGIC = Buffer.from('CKTV4COR', 'ascii');
 const FORMAT_VERSION = 1;
 const FILE_END = 0xc4c0ca5e;
-function shapeSlot(abstract, offset = 0) {
-  const key = [...(abstract || '')][offset];
-  const slot = SHAPE_FROM.indexOf(key);
-  return slot < 0 ? 0xff : slot;
-}
-
 function strokeMask(options) {
   let mask = 0;
   for (const value of options || []) {

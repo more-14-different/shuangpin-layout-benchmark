@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const vm = require('vm');
+const {physicalShape} = require('./auxiliary_semantics.js');
 
 function parseArgs(argv) {
   const args = {};
@@ -103,11 +104,7 @@ function strokeOptions(file) {
   return {primary, alternatives};
 }
 
-const SHAPE_FROM = 'IEUAO';
 const STROKE_SLOT = {s:0, h:1, p:2, z:3, n:4};
-function physicalShape(abstract, toneKeys) {
-  return [...(abstract || '')].map(key => toneKeys[SHAPE_FROM.indexOf(key)] || '').join('');
-}
 function physicalStroke(strk, toneKeys) {
   return strk && toneKeys[STROKE_SLOT[strk]] || null;
 }
