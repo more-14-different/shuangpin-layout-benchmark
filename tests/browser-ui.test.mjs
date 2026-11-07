@@ -32,11 +32,17 @@ try {
     const layouts = window.App7.data.entries.filter(entry => entry.capacity.join('x') === '21x21');
     return {
       count: layouts.length,
-      complete: layouts.every(entry => Object.values(entry.bPathMetrics ?? {}).length === 8),
+      complete: layouts.filter(entry => Object.values(entry.bPathMetricsNative ?? {}).length === 8).length,
+      missing: layouts.filter(entry => Object.values(entry.bPathMetricsNative ?? {}).length !== 8).map(entry => entry.id),
       selected: window.App7.data.entries.filter(entry => entry.id.startsWith('BPW-')).length,
     };
   });
-  assert.deepEqual(bPathCoverage, { count: 302, complete: true, selected: 19 });
+  assert.deepEqual(bPathCoverage, {
+    count: 303,
+    complete: 303,
+    missing: [],
+    selected: 19,
+  });
 
   assert.equal(await page.locator('#nf6SelectionFilters').isVisible(), true);
   assert.equal(await page.locator('#uxFilters').isVisible(), false);
@@ -75,7 +81,7 @@ try {
   await page.waitForTimeout(250);
   assert.equal(
     await page.locator('#nf6SelectionCount').innerText(),
-    `60 / ${await page.evaluate(() => window.App7.data.entries.length)}`,
+    `61 / ${await page.evaluate(() => window.App7.data.entries.length)}`,
   );
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
@@ -107,7 +113,7 @@ try {
     .map(text => text.replace(/[↕↑↓]/g, '').trim());
   assert.deepEqual(collisionHeaders, ['方案', '宿主键域', '零声母 scope', '词频截点', '跨族受影响', '高频首选损失', '跨族碰撞桶', '全部碰撞桶', '最大桶']);
   const collisionRows = await page.locator('table[data-ux-table="four-code-collision"] tbody tr').count();
-  assert.equal(collisionRows, 300, 'the active 21x26/M<=36 filter should retain all 60 schemes at five cuts');
+  assert.equal(collisionRows, 305, 'the active 21x26/M<=36 filter should retain all 61 schemes at five cuts');
   await page.locator('#uxSubnav [data-r9-bench="table"]').click();
   await page.waitForSelector('table[data-ux-table="benchmark"]');
   await page.locator('#uxSubnav [data-r9-bench="collision"]').click();
@@ -132,7 +138,7 @@ try {
       window.App7.data.completionBV4.schemes.S005.modes,
     ),
   }));
-  assert.equal(completionV4Coverage.count, 841);
+  assert.equal(completionV4Coverage.count, await page.evaluate(() => window.App7.data.entries.length));
   assert.equal(completionV4Coverage.s005, 10);
   assert.ok(Math.abs(completionV4Coverage.prodgate - 9.70558083772736) < 1e-12);
   const v4Column = fairHeaders.indexOf(v4Header);
@@ -166,6 +172,29 @@ try {
   assert.match(await page.locator('#view h2').first().innerText(), /S005/);
   await page.locator('#run').click();
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
+
+  const balancedId = 'SNOW-SHENYUN-21X26-D3V1-BALANCED';
+  await page.locator('#nf6SchemeQuery').fill(balancedId);
+  await page.locator('#nf6SchemeList').selectOption(balancedId);
+  await page.waitForFunction(id => window.App7.current().id === id, balancedId);
+  const balancedAudit = await page.evaluate(id => {
+    const entry = window.App7.data.entries.find(value => value.id === id);
+    return {
+      title: document.querySelector('#view h2')?.innerText,
+      cktV4: entry.productionCandidateMetrics.replayedCktV4,
+      cktV5: entry.productionCandidateMetrics.replayedCktV5,
+      cktV51: entry.productionCandidateMetrics.replayedCktV51,
+      maxFinger: entry.productionCandidateMetrics.maxFingerAudit,
+      nativeBPaths: Object.keys(entry.bPathMetricsNative ?? {}).length,
+    };
+  }, balancedId);
+  assert.match(balancedAudit.title, /SNOW-SHENYUN-21X26-D3V1-BALANCED/);
+  assert.ok(Math.abs(balancedAudit.cktV4 - 9.083575240979211) < 1e-12);
+  assert.equal(balancedAudit.cktV5, 9.096336062543223);
+  assert.equal(balancedAudit.cktV51, 9.104619328754065);
+  assert.equal(balancedAudit.maxFinger.track, 'C2');
+  assert.equal(balancedAudit.maxFinger.finger, '右食指');
+  assert.equal(balancedAudit.nativeBPaths, 8);
 
   const lowMissIds = [
     'LOWM-21X21-234186882e', 'LOWM-21X21-e51b9fed23',

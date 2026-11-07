@@ -58,6 +58,27 @@ test('auxiliaryClass and scheme-id suffixes are set labels, not ordered mappings
   assert.equal(production.tone, 'IEUAO');
   assert.equal(shapeKeysFromToneKeys(production.tone), 'AEUIO');
 
+  const balanced = byId('SNOW-SHENYUN-21X26-D3V1-BALANCED');
+  assert.equal(balanced.auxiliaryClass, 'AEUIO');
+  assert.equal(balanced.tone, 'IEUAO');
+  assert.equal(shapeKeysFromToneKeys(balanced.tone), 'AEUIO');
+  assert.equal(balanced.productionCandidateMetrics.replayedCktV51, 9.104619328754065);
+  assert.equal(balanced.productionCandidateMetrics.maxFingerAudit.track, 'C2');
+  assert.equal(balanced.productionCandidateMetrics.maxFingerAudit.finger, '右食指');
+  assert.ok(Math.abs(
+    balanced.productionCandidateMetrics.maxFingerAudit.load - 0.34438623462871315,
+  ) < 1e-15);
+  assert.equal(Object.keys(balanced.bPathMetricsNative).length, 8);
+  for (const block of ['completionB', 'completionBFixed', 'completionBV2', 'completionBV3', 'completionBV4']) {
+    assert.ok(payload[block].schemes[balanced.id], `${block} missing balanced flagship`);
+  }
+
+  const u357 = byId('gen0107-p5-f1h-11_13-d2-f25_26-d3-f4_22-d4-f11_13');
+  assert.equal(Object.keys(u357.bPathMetricsNative).length, 8);
+  for (const block of ['completionB', 'completionBFixed', 'completionBV2', 'completionBV3', 'completionBV4']) {
+    assert.ok(payload[block].schemes[u357.id], `${block} missing U357`);
+  }
+
   const historical = byId('TG6-21X26-AEUIO-M32');
   assert.equal(historical.auxiliaryClass, 'AEUIO');
   assert.equal(historical.tone, 'AEUIO');
