@@ -31,6 +31,61 @@ SOURCE_COMMIT = "f247355"
 TONE_KEYS_BY_TONE = "IVUAO"
 SHAPE_KEYS_BY_MEANING = "AVUIO"
 TONE_DIGITS_BY_SHAPE_MEANING = "42310"
+E8F37A_ID = "QZ-e8f37a0998f9"
+E8F37A_ROBUSTNESS = {
+    "version": "e8f37a-ckt51-aux-order-robustness-1",
+    "report": "research/notes/2026-11-09-e8f37a-ckt-v51-aux-order-robustness.md",
+    "selectedPolicies": {
+        "keytao": {"word2": "12", "word3": "213", "word4": "24"},
+        "sanpin": {"word2": "12", "word3": "213", "word4": "23"},
+    },
+    "cases": {
+        "keytao": {
+            "main0To500Step50": {
+                "winner": {"policy": "12/213/24", "meanRank": 1.1810668670172801},
+                "runnerUp": {"policy": "12/231/24", "meanRank": 1.9415634008651128},
+                "meanRankDistance": 0.7604965338478327,
+            },
+            "mainPositive50To500Step50": {
+                "winner": {"policy": "12/213/24", "meanRank": 1.109},
+                "runnerUp": {"policy": "12/231/24", "meanRank": 1.952278},
+                "meanRankDistance": 0.843278,
+            },
+            "extreme0To1000Step100": {
+                "winner": {"policy": "12/213/24", "meanRank": 1.1502629601803156},
+                "runnerUp": {"policy": "12/231/24", "meanRank": 2.0330911552015425},
+                "meanRankDistance": 0.8828281950212269,
+            },
+            "extremePositive100To1000Step100": {
+                "winner": {"policy": "12/213/24", "meanRank": 1.079},
+                "runnerUp": {"policy": "12/231/24", "meanRank": 2.014432},
+                "meanRankDistance": 0.9354319999999998,
+            },
+        },
+        "sanpin": {
+            "main0To500Step50": {
+                "winner": {"policy": "12/213/23", "meanRank": 2.2261192247966624},
+                "runnerUp": {"policy": "12/213/21", "meanRank": 3.7478624783453687},
+                "meanRankDistance": 1.5217432535487063,
+            },
+            "mainPositive50To500Step50": {
+                "winner": {"policy": "12/213/23", "meanRank": 1.43565},
+                "runnerUp": {"policy": "12/213/21", "meanRank": 2.723167},
+                "meanRankDistance": 1.287517,
+            },
+            "extreme0To1000Step100": {
+                "winner": {"policy": "12/213/23", "meanRank": 1.6540632809144027},
+                "runnerUp": {"policy": "12/213/21", "meanRank": 2.748019966571854},
+                "meanRankDistance": 1.0939566856574512,
+            },
+            "extremePositive100To1000Step100": {
+                "winner": {"policy": "12/213/23", "meanRank": 1.212486},
+                "runnerUp": {"policy": "12/213/21", "meanRank": 2.121716},
+                "meanRankDistance": 0.9092300000000002,
+            },
+        },
+    },
+}
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ[]\\;',./"
 HEADS = [
     "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j",
@@ -228,6 +283,7 @@ def aggregate_completion(scheme: dict) -> dict[str, float]:
 def score_v5_v51_21x21(
     scorer_source: Path, staged: Path, output: Path, ident: str, temp: Path
 ) -> dict:
+    v51_keytao_word3 = "213" if ident == E8F37A_ID else "231"
     source = scorer_source.read_text(encoding="utf-8")
     source = source.replace(
         'require("./auxiliary_semantics.js")',
@@ -244,7 +300,7 @@ def score_v5_v51_21x21(
     source = source.replace(
         'keytao: { word2: "12", word3: "21", word4: "14" },\n'
         '    sanpin: { word2: "12", word3: "21", word4: "13" },',
-        'keytao: { word2: "12", word3: "231", word4: "24" },\n'
+        f'keytao: {{ word2: "12", word3: "{v51_keytao_word3}", word4: "24" }},\n'
         '    sanpin: { word2: "12", word3: "213", word4: "23" },',
         1,
     )
@@ -276,7 +332,7 @@ def score_v5_v51_21x21(
     )
     source = source.replace(
         'ckt-v5-v5.1-fixed-21x26-production-policies-1',
-        'ckt-v5-v5.1-fixed-21x21-production-policies-1',
+        'ckt-v5-v5.1-fixed-21x21-production-policies-2',
         1,
     )
     generated = temp / f"score-{ident}.js"
@@ -584,7 +640,7 @@ def main() -> None:
                 cached = json.loads(output.read_text(encoding="utf-8"))
                 if (
                     cached.get("id") == ident
-                    and cached.get("version") == "ckt-v5-v5.1-fixed-21x21-production-policies-1"
+                    and cached.get("version") == "ckt-v5-v5.1-fixed-21x21-production-policies-2"
                 ):
                     v5_results[ident] = cached
                     continue
@@ -615,6 +671,10 @@ def main() -> None:
             "cktV5Policies": v5_results[ident]["cktV5"]["policies"],
             "cktV51Policies": v5_results[ident]["cktV51"]["policies"],
         })
+        if ident == E8F37A_ID:
+            entry["productionCandidateMetrics"]["cktV51AuxOrderRobustness"] = copy.deepcopy(
+                E8F37A_ROBUSTNESS
+            )
     data["bPathBenchmark"]["schemeCount"] = sum(
         len(candidate.get("bPathMetricsNative", {})) == len(NATIVE_B_PATHS)
         for candidate in data["entries"]
