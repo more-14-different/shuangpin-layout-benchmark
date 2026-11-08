@@ -184,6 +184,7 @@ try {
       cktV4: entry.productionCandidateMetrics.replayedCktV4,
       cktV5: entry.productionCandidateMetrics.replayedCktV5,
       cktV51: entry.productionCandidateMetrics.replayedCktV51,
+      robustness: entry.productionCandidateMetrics.cktV51AuxOrderRobustness,
       maxFinger: entry.productionCandidateMetrics.maxFingerAudit,
       nativeBPaths: Object.keys(entry.bPathMetricsNative ?? {}).length,
     };
@@ -191,7 +192,10 @@ try {
   assert.match(balancedAudit.title, /SNOW-SHENYUN-21X26-D3V1-BALANCED/);
   assert.ok(Math.abs(balancedAudit.cktV4 - 9.083575240979211) < 1e-12);
   assert.equal(balancedAudit.cktV5, 9.096336062543223);
-  assert.equal(balancedAudit.cktV51, 9.104619328754065);
+  assert.equal(balancedAudit.cktV51, 9.10299979136027);
+  assert.equal(balancedAudit.robustness.lengthBalance.version, 'soft-page-fill-v2');
+  assert.equal(balancedAudit.robustness.cases.keytao.meanRankDistance, 1.0374325241975863);
+  assert.equal(balancedAudit.robustness.cases.sanpin.meanRankDistance, 1.4037806205939283);
   assert.equal(balancedAudit.maxFinger.track, 'C2');
   assert.equal(balancedAudit.maxFinger.finger, '右食指');
   assert.equal(balancedAudit.nativeBPaths, 8);

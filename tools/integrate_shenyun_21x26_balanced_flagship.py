@@ -35,7 +35,102 @@ STATE_KEY = (
 )
 EXPECTED_CKT_V4 = 9.083575240979211
 EXPECTED_CKT_V5 = 9.096336062543223
-EXPECTED_CKT_V51 = 9.104619328754065
+EXPECTED_CKT_V51_PRE_SOFT_BALANCE = 9.104619328754065
+EXPECTED_CKT_V51_SOFT_BALANCE_FIXED = 9.104645274517786
+EXPECTED_CKT_V51 = 9.10299979136027
+CKT_V51_ROBUSTNESS = {
+    "version": "d3v1-ckt51-soft-balance-aux-order-robustness-1",
+    "report": (
+        "research/notes/2026-11-09-d3v1-ckt-v51-"
+        "soft-balance-aux-order-robustness.md"
+    ),
+    "contract": "native-four-code-top-six-code",
+    "lengthBalance": {
+        "version": "soft-page-fill-v2",
+        "pageSize": 6,
+        "maximumCandidates": 120,
+        "minimumInputLength": 4,
+        "sourceCommit": "a1f471d3704093c3624f56129dd8622db68b6e2d",
+        "snowHead": "b719b65f09c016a9ed1417dd3014fe34a7dafbf3",
+        "sourceFile": "lua/snow/length_balance.lua",
+    },
+    "selectedPolicies": {
+        "keytao": {"word2": "12", "word3": "12", "word4": "24"},
+        "sanpin": {"word2": "12", "word3": "21", "word4": "13"},
+    },
+    "referencePolicies": {
+        "keytao": {"word2": "12", "word3": "213", "word4": "24"},
+        "sanpin": {"word2": "12", "word3": "213", "word4": "23"},
+    },
+    "normalized": {
+        "selectedPairScore": EXPECTED_CKT_V51,
+        "historicalFixedPairScore": EXPECTED_CKT_V51_SOFT_BALANCE_FIXED,
+        "preSoftBalancePairScore": EXPECTED_CKT_V51_PRE_SOFT_BALANCE,
+    },
+    "grid": {
+        "rangePercent": [0, 500],
+        "stepPercent": 50,
+        "coefficients": [
+            "firstAuxMs", "secondAuxMs", "thirdAuxMs",
+            "selectionDecisionMs", "scanPerCandidateMs", "pageActionMs",
+        ],
+        "combinations": 1771561,
+    },
+    "cases": {
+        "keytao": {
+            "winner": {
+                "policy": "12/12/24", "top1Rate": 0.993030440385626,
+                "top3Rate": 0.9995851116614105,
+                "meanRank": 1.0087312827500718, "worstRank": 16,
+            },
+            "runnerUp": {
+                "policy": "12/12/23", "top1Rate": 0.0,
+                "top3Rate": 0.988968485984959,
+                "meanRank": 2.046163806947658, "worstRank": 22,
+            },
+            "meanRankDistance": 1.0374325241975863,
+            "historicalFixed": {
+                "policy": "12/21/14", "meanRank": 5.406295916426248,
+                "worstRank": 42,
+            },
+        },
+        "sanpin": {
+            "winner": {
+                "policy": "12/21/13", "top1Rate": 0.887770728752778,
+                "top3Rate": 0.9645149108610993,
+                "meanRank": 1.2983893865353775, "worstRank": 13,
+            },
+            "runnerUp": {
+                "policy": "12/21/14", "top1Rate": 0.0,
+                "top3Rate": 0.8824008882561764,
+                "meanRank": 2.7021700071293058, "worstRank": 19,
+            },
+            "meanRankDistance": 1.4037806205939283,
+            "historicalFixed": {
+                "policy": "12/21/13", "meanRank": 1.2983893865353775,
+                "worstRank": 13,
+            },
+        },
+    },
+    "scope": {
+        "learnedPriority": "excluded: no personal user history in frozen corpus",
+        "downstreamFilters": (
+            "fixed/postpone/simplified excluded to match historical CKT scope"
+        ),
+    },
+}
+CKT_V51_ROBUST_AGGREGATE = {
+    "motorUpperMs": 340.56857871474125,
+    "cognitiveMs": 80.28268875775984,
+    "effectiveMs": 420.8512674725011,
+    "firstAuxRate": 0.20939963883278057,
+    "secondAuxRate": 0.04473679923108823,
+    "thirdAuxRate": 0.0,
+    "selectionRate": 0.006073662615525337,
+    "meanRejectedCandidates": 0.007829687436980128,
+    "meanPageActions": 2.0251324783289845e-05,
+    "meanKeys": 3.841243883358151,
+}
 NATIVE_B_PATHS = (
     ("j1", "keytao", "character", "p1"),
     ("j2", "keytao", "character", "p2"),
@@ -83,6 +178,38 @@ SCHEME = {
 
 def run(*args: str, cwd: Path | None = None) -> None:
     subprocess.run(list(args), cwd=cwd, check=True)
+
+
+def apply_ckt_v51_robustness(entry: dict) -> None:
+    metrics = entry.setdefault("productionCandidateMetrics", {})
+    metrics["replayedCktV51PreSoftBalance"] = EXPECTED_CKT_V51_PRE_SOFT_BALANCE
+    metrics["replayedCktV51SoftBalanceFixed"] = EXPECTED_CKT_V51_SOFT_BALANCE_FIXED
+    metrics["replayedCktV51"] = EXPECTED_CKT_V51
+    metrics["cktV51Aggregate"] = copy.deepcopy(CKT_V51_ROBUST_AGGREGATE)
+    metrics["cktV51Policies"] = {
+        "candidate": copy.deepcopy(CKT_V51_ROBUSTNESS["selectedPolicies"]),
+        "reference": copy.deepcopy(CKT_V51_ROBUSTNESS["referencePolicies"]),
+    }
+    metrics["cktV51AuxOrderRobustness"] = copy.deepcopy(CKT_V51_ROBUSTNESS)
+    note = (
+        "CKT v5.1 soft-page-fill-v2 稳健辅序："
+        "形笔辅 12/12/24，调笔辅 12/21/13。"
+    )
+    if note not in entry.setdefault("notes", []):
+        entry["notes"].append(note)
+
+
+def refresh_audit(entry: dict, catalogue_count: int) -> None:
+    if not AUDIT.exists():
+        raise FileNotFoundError(f"missing integrated audit: {AUDIT}")
+    audit = json.loads(AUDIT.read_text(encoding="utf-8"))
+    audit["version"] = "shenyun-21x26-d3v1-balanced-flagship-v2"
+    audit["catalogueCount"] = catalogue_count
+    audit["productionCandidateMetrics"] = entry["productionCandidateMetrics"]
+    audit["cktV51SoftBalanceRobustness"] = copy.deepcopy(CKT_V51_ROBUSTNESS)
+    AUDIT.write_text(
+        json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
 
 def max_finger_audit(data: dict) -> dict:
@@ -149,14 +276,30 @@ def main() -> None:
             if IDENT in missing
         ]
         metrics = present.get("productionCandidateMetrics", {})
+        replayed_v51 = metrics.get("replayedCktV51", math.inf)
         if (
             present.get("r11Provenance", {}).get("stateKey") != STATE_KEY
             or incomplete
-            or not math.isclose(metrics.get("replayedCktV51", math.inf), EXPECTED_CKT_V51)
+            or not any(math.isclose(
+                replayed_v51, expected, rel_tol=0, abs_tol=1e-12,
+            ) for expected in (
+                EXPECTED_CKT_V51_PRE_SOFT_BALANCE, EXPECTED_CKT_V51,
+            ))
             or len(present.get("bPathMetricsNative", {})) != len(NATIVE_B_PATHS)
         ):
             raise ValueError(f"partial or mismatched integration: {incomplete}")
-        print(json.dumps({"alreadyIntegrated": IDENT, "catalogue": len(existing_ids)}))
+        apply_ckt_v51_robustness(present)
+        refresh_audit(present, len(existing_ids))
+        fixed.write_payload(HTML, html, body, end, data)
+        print(json.dumps({
+            "updatedIntegration": IDENT,
+            "catalogue": len(existing_ids),
+            "cktV51PreSoftBalance": EXPECTED_CKT_V51_PRE_SOFT_BALANCE,
+            "cktV51SoftBalanceFixed": EXPECTED_CKT_V51_SOFT_BALANCE_FIXED,
+            "cktV51": EXPECTED_CKT_V51,
+            "policies": CKT_V51_ROBUSTNESS["selectedPolicies"],
+            "report": CKT_V51_ROBUSTNESS["report"],
+        }, ensure_ascii=False, indent=2))
         return
 
     before_missing = production.missing_by_map(data, existing_ids)
@@ -349,8 +492,11 @@ def main() -> None:
         raise ValueError(f"CKT v4 mismatch: {v4_score} != {EXPECTED_CKT_V4}")
     if not math.isclose(v5_v51["cktV5"]["score"], EXPECTED_CKT_V5, rel_tol=0, abs_tol=1e-12):
         raise ValueError("CKT v5 mismatch")
-    if not math.isclose(v5_v51["cktV51"]["score"], EXPECTED_CKT_V51, rel_tol=0, abs_tol=1e-12):
-        raise ValueError("CKT v5.1 mismatch")
+    if not math.isclose(
+        v5_v51["cktV51"]["score"], EXPECTED_CKT_V51_PRE_SOFT_BALANCE,
+        rel_tol=0, abs_tol=1e-12,
+    ):
+        raise ValueError("pre-soft-balance CKT v5.1 mismatch")
 
     finger_audit = max_finger_audit(data)
     entry["productionCandidateMetrics"].update({
@@ -367,6 +513,7 @@ def main() -> None:
         "cktV51Policies": v5_v51["cktV51"]["policies"],
         "maxFingerAudit": finger_audit,
     })
+    apply_ckt_v51_robustness(entry)
 
     all_ids = existing_ids | {IDENT}
     after_missing = production.missing_by_map(data, all_ids)
@@ -376,7 +523,7 @@ def main() -> None:
 
     AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text(json.dumps({
-        "version": "shenyun-21x26-d3v1-balanced-flagship-v1",
+        "version": "shenyun-21x26-d3v1-balanced-flagship-v2",
         "id": IDENT,
         "catalogueCount": len(data["entries"]),
         "source": entry["r11Provenance"],
@@ -402,6 +549,7 @@ def main() -> None:
         "completionBV3": data["completionBV3"]["schemes"][IDENT],
         "completionBV4": data["completionBV4"]["schemes"][IDENT],
         "cktV5V51": v5_v51,
+        "cktV51SoftBalanceRobustness": CKT_V51_ROBUSTNESS,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     fixed.write_payload(HTML, html, body, end, data)
@@ -413,7 +561,9 @@ def main() -> None:
         "cktV3": v3_score,
         "cktV4": v4_score,
         "cktV5": v5_v51["cktV5"]["score"],
-        "cktV51": v5_v51["cktV51"]["score"],
+        "cktV51PreSoftBalance": v5_v51["cktV51"]["score"],
+        "cktV51SoftBalanceFixed": EXPECTED_CKT_V51_SOFT_BALANCE_FIXED,
+        "cktV51": EXPECTED_CKT_V51,
         "M": entry["memoryAuditR2"]["M"],
         "D": entry["memoryAuditR2"]["ordinaryDisplacedCount"],
         "V": entry["mappingAudit"]["baseFinalDisplacements"],

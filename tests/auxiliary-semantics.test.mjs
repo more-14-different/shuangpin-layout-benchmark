@@ -62,7 +62,23 @@ test('auxiliaryClass and scheme-id suffixes are set labels, not ordered mappings
   assert.equal(balanced.auxiliaryClass, 'AEUIO');
   assert.equal(balanced.tone, 'IEUAO');
   assert.equal(shapeKeysFromToneKeys(balanced.tone), 'AEUIO');
-  assert.equal(balanced.productionCandidateMetrics.replayedCktV51, 9.104619328754065);
+  assert.equal(balanced.productionCandidateMetrics.replayedCktV51, 9.10299979136027);
+  assert.equal(
+    balanced.productionCandidateMetrics.replayedCktV51PreSoftBalance,
+    9.104619328754065,
+  );
+  assert.equal(
+    balanced.productionCandidateMetrics.replayedCktV51SoftBalanceFixed,
+    9.104645274517786,
+  );
+  const robustness = balanced.productionCandidateMetrics.cktV51AuxOrderRobustness;
+  assert.equal(robustness.lengthBalance.version, 'soft-page-fill-v2');
+  assert.deepEqual(robustness.selectedPolicies, {
+    keytao: {word2: '12', word3: '12', word4: '24'},
+    sanpin: {word2: '12', word3: '21', word4: '13'},
+  });
+  assert.equal(robustness.cases.keytao.runnerUp.policy, '12/12/23');
+  assert.equal(robustness.cases.sanpin.runnerUp.policy, '12/21/14');
   assert.equal(balanced.productionCandidateMetrics.maxFingerAudit.track, 'C2');
   assert.equal(balanced.productionCandidateMetrics.maxFingerAudit.finger, '右食指');
   assert.ok(Math.abs(
