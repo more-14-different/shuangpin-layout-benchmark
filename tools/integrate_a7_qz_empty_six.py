@@ -354,7 +354,9 @@ def readme_metrics(data: dict, entry: dict, v5_v51: dict, production) -> dict:
         },
         "maxFingerPeak20Contracts": load["maxFinger20"],
         "homeShareS2": load["homeS2"],
-        "homeFloor20Contracts": load["homeFloor"],
+        "homeFloor20Contracts": min(
+            track["home"] for track in data["ckt"]["tracks"][ident].values()
+        ),
         "indexFingerTYBPeak20Contracts": group_peak(data, ident, "TYB"),
         "dailyEightScenarioMovingHand": macro["score"],
         "dailyAverageOverlapDistance": macro["avg_overlap_distance"],
