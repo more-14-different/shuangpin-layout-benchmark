@@ -1,0 +1,496 @@
+{
+  "version": "completion-ckt-v4-prototype-2",
+  "upstream": {
+    "commit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+    "artifactVersion": 6,
+    "sourceSha256": "c32ddfcedac1df106e3db25c441fe5f50b8e1d75ca1d9fba3e2aaca5d21da2e7"
+  },
+  "keyDomain": {
+    "nativeKeys": "ABCDEFGHIJKLMNOPQRSTUVWXYZ;,./",
+    "extensionKeys": "'[\\]",
+    "supportedKeyCount": 34,
+    "schemesAudited": 852,
+    "nullCodes": 14229,
+    "commonPinyinCount": 399,
+    "commonPinyinComplete": true,
+    "usage": {
+      "'": {
+        "schemes": 68,
+        "first": 716,
+        "second": 274,
+        "auxiliary": 0
+      },
+      ",": {
+        "schemes": 17,
+        "first": 0,
+        "second": 299,
+        "auxiliary": 0
+      },
+      ".": {
+        "schemes": 17,
+        "first": 0,
+        "second": 336,
+        "auxiliary": 0
+      },
+      "/": {
+        "schemes": 131,
+        "first": 1471,
+        "second": 1390,
+        "auxiliary": 9
+      },
+      ";": {
+        "schemes": 137,
+        "first": 2101,
+        "second": 2200,
+        "auxiliary": 13
+      },
+      "A": {
+        "schemes": 852,
+        "first": 1434,
+        "second": 9380,
+        "auxiliary": 792
+      },
+      "B": {
+        "schemes": 852,
+        "first": 14057,
+        "second": 9358,
+        "auxiliary": 0
+      },
+      "C": {
+        "schemes": 852,
+        "first": 14577,
+        "second": 10312,
+        "auxiliary": 1
+      },
+      "D": {
+        "schemes": 852,
+        "first": 17191,
+        "second": 14199,
+        "auxiliary": 17
+      },
+      "E": {
+        "schemes": 852,
+        "first": 8525,
+        "second": 15230,
+        "auxiliary": 431
+      },
+      "F": {
+        "schemes": 852,
+        "first": 13728,
+        "second": 14119,
+        "auxiliary": 5
+      },
+      "G": {
+        "schemes": 852,
+        "first": 16133,
+        "second": 12523,
+        "auxiliary": 2
+      },
+      "H": {
+        "schemes": 852,
+        "first": 16054,
+        "second": 16033,
+        "auxiliary": 5
+      },
+      "I": {
+        "schemes": 852,
+        "first": 1717,
+        "second": 9055,
+        "auxiliary": 822
+      },
+      "J": {
+        "schemes": 852,
+        "first": 16795,
+        "second": 15788,
+        "auxiliary": 5
+      },
+      "K": {
+        "schemes": 852,
+        "first": 17069,
+        "second": 15549,
+        "auxiliary": 3
+      },
+      "L": {
+        "schemes": 852,
+        "first": 20468,
+        "second": 17343,
+        "auxiliary": 2
+      },
+      "M": {
+        "schemes": 852,
+        "first": 15944,
+        "second": 14849,
+        "auxiliary": 1
+      },
+      "N": {
+        "schemes": 852,
+        "first": 19634,
+        "second": 15031,
+        "auxiliary": 1
+      },
+      "O": {
+        "schemes": 852,
+        "first": 1342,
+        "second": 10284,
+        "auxiliary": 828
+      },
+      "P": {
+        "schemes": 852,
+        "first": 15752,
+        "second": 16067,
+        "auxiliary": 9
+      },
+      "Q": {
+        "schemes": 852,
+        "first": 16049,
+        "second": 14132,
+        "auxiliary": 15
+      },
+      "R": {
+        "schemes": 852,
+        "first": 13651,
+        "second": 14326,
+        "auxiliary": 19
+      },
+      "S": {
+        "schemes": 852,
+        "first": 15989,
+        "second": 15416,
+        "auxiliary": 1
+      },
+      "T": {
+        "schemes": 852,
+        "first": 16469,
+        "second": 11545,
+        "auxiliary": 5
+      },
+      "U": {
+        "schemes": 852,
+        "first": 1650,
+        "second": 10334,
+        "auxiliary": 820
+      },
+      "V": {
+        "schemes": 852,
+        "first": 7621,
+        "second": 5327,
+        "auxiliary": 394
+      },
+      "W": {
+        "schemes": 852,
+        "first": 14416,
+        "second": 15209,
+        "auxiliary": 23
+      },
+      "X": {
+        "schemes": 852,
+        "first": 15185,
+        "second": 11411,
+        "auxiliary": 1
+      },
+      "Y": {
+        "schemes": 852,
+        "first": 13266,
+        "second": 16180,
+        "auxiliary": 25
+      },
+      "Z": {
+        "schemes": 852,
+        "first": 14702,
+        "second": 10199,
+        "auxiliary": 0
+      },
+      "[": {
+        "schemes": 68,
+        "first": 731,
+        "second": 713,
+        "auxiliary": 11
+      },
+      "\\": {
+        "schemes": 0,
+        "first": 0,
+        "second": 0,
+        "auxiliary": 0
+      },
+      "]": {
+        "schemes": 0,
+        "first": 0,
+        "second": 0,
+        "auxiliary": 0
+      }
+    }
+  },
+  "corpus": {
+    "snowBaseMass": 0.99,
+    "word3": 72923,
+    "word4": 77674,
+    "word2": 132814,
+    "charactersPositiveBeforeFixedOneKey": 6263
+  },
+  "cognitiveParameters": {
+    "firstAuxMs": 300,
+    "secondAuxMs": 300,
+    "selectionDecisionMs": 600,
+    "scanPerCandidateMs": 50,
+    "selectionActionMs": 0,
+    "pageSize": 9,
+    "pageActionMs": 300
+  },
+  "caveats": [
+    "2/3/4-key motor costs are native upstream values",
+    "5/6-key motor costs are role-table continuation extrapolations",
+    "cognitive coefficients are declared scenario parameters, not fitted by the upstream motor experiment"
+  ],
+  "schemes": {
+    "U357-21X21-M40-D0": {
+      "capacity": [
+        21,
+        21
+      ],
+      "contract": "traditional-21x21",
+      "modes": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 103.38060004481365,
+            "cognitiveMs": 83.07518289203502,
+            "effectiveMs": 186.45578293684866,
+            "firstAuxRate": 0.21960473613501713,
+            "secondAuxRate": 0.04652871496467419,
+            "selectionRate": 0.004885405279346378,
+            "meanTerminalRank": 1.0060772107243952,
+            "meanRejectedCandidates": 0.006077210724395261,
+            "meanPageActions": 1.461943334374627e-7,
+            "meanKeys": 2.2661334510996913
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 403.645635855684,
+            "cognitiveMs": 74.49152174629225,
+            "effectiveMs": 478.1371576019763,
+            "firstAuxRate": 0.20066270262968833,
+            "secondAuxRate": 0.03794801357220962,
+            "selectionRate": 0.004403161535325068,
+            "meanTerminalRank": 1.0053281992905565,
+            "meanRejectedCandidates": 0.005328199290556601,
+            "meanPageActions": 0,
+            "meanKeys": 4.238610716201898
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 330.79136610754745,
+            "cognitiveMs": 244.27525135666542,
+            "effectiveMs": 575.0666174642129,
+            "firstAuxRate": 0.5036489291655059,
+            "secondAuxRate": 0.19783123422691012,
+            "selectionRate": 0.04948250439280748,
+            "meanTerminalRank": 1.0811852324303874,
+            "meanRejectedCandidates": 0.08118523243038746,
+            "meanPageActions": 0.00027479360578920223,
+            "meanKeys": 3.701480163392416
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 434.7743929038377,
+            "cognitiveMs": 86.79732571452368,
+            "effectiveMs": 521.5717186183614,
+            "firstAuxRate": 0.2430098642772593,
+            "secondAuxRate": 0.038215745303558715,
+            "selectionRate": 0.003664212874977981,
+            "meanTerminalRank": 1.0045954662503997,
+            "meanRejectedCandidates": 0.004595466250399649,
+            "meanPageActions": 0.00000447267590500752,
+            "meanKeys": 4.281225609580818
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 105.84135436173986,
+            "cognitiveMs": 87.70240941356727,
+            "effectiveMs": 193.54376377530713,
+            "firstAuxRate": 0.22111229452493728,
+            "secondAuxRate": 0.05378569169650108,
+            "selectionRate": 0.007858796024188468,
+            "meanTerminalRank": 1.010305014882837,
+            "meanRejectedCandidates": 0.010305014882837072,
+            "meanPageActions": 0.00000828396160278789,
+            "meanKeys": 2.2748979862214385
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 404.4460502965221,
+            "cognitiveMs": 77.21706553177064,
+            "effectiveMs": 481.6631158282928,
+            "firstAuxRate": 0.20066270262968833,
+            "secondAuxRate": 0.042749447132411966,
+            "selectionRate": 0.006323204277796981,
+            "meanTerminalRank": 1.0079899607292473,
+            "meanRejectedCandidates": 0.007989960729247396,
+            "meanPageActions": 0,
+            "meanKeys": 4.243412149762101
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 338.8890136607718,
+            "cognitiveMs": 265.3980414522432,
+            "effectiveMs": 604.2870551130151,
+            "firstAuxRate": 0.5036489291655059,
+            "secondAuxRate": 0.22102790177903295,
+            "selectionRate": 0.06947811695537248,
+            "meanTerminalRank": 1.1238905174121196,
+            "meanRejectedCandidates": 0.12389051741211962,
+            "meanPageActions": 0.00037865375017365026,
+            "meanKeys": 3.7246768309445386
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 438.08396223598686,
+            "cognitiveMs": 90.2587528963685,
+            "effectiveMs": 528.3427151323554,
+            "firstAuxRate": 0.2430098642772593,
+            "secondAuxRate": 0.04534501565214442,
+            "selectionRate": 0.005654950821497893,
+            "meanTerminalRank": 1.007186368492973,
+            "meanRejectedCandidates": 0.007186368492973032,
+            "meanPageActions": 0,
+            "meanKeys": 4.288354879929404
+          }
+        }
+      }
+    },
+    "U359-21X21-M40-D0": {
+      "capacity": [
+        21,
+        21
+      ],
+      "contract": "traditional-21x21",
+      "modes": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 104.45991571934516,
+            "cognitiveMs": 83.11712750824157,
+            "effectiveMs": 187.57704322758673,
+            "firstAuxRate": 0.2194404721819668,
+            "secondAuxRate": 0.046894288514867905,
+            "selectionRate": 0.004857072817526197,
+            "meanTerminalRank": 1.006048235007508,
+            "meanRejectedCandidates": 0.006048235007507956,
+            "meanPageActions": 1.461943334374627e-7,
+            "meanKeys": 2.266334760696835
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 405.35588030573655,
+            "cognitiveMs": 74.47104347384557,
+            "effectiveMs": 479.82692377958216,
+            "firstAuxRate": 0.20050926555674997,
+            "secondAuxRate": 0.038070957401317385,
+            "selectionRate": 0.004386113464938268,
+            "meanTerminalRank": 1.0053061701492478,
+            "meanRejectedCandidates": 0.005306170149247893,
+            "meanPageActions": 0,
+            "meanKeys": 4.238580222958068
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 330.79136610754745,
+            "cognitiveMs": 244.27525135666542,
+            "effectiveMs": 575.0666174642129,
+            "firstAuxRate": 0.5036489291655059,
+            "secondAuxRate": 0.19783123422691012,
+            "selectionRate": 0.04948250439280748,
+            "meanTerminalRank": 1.0811852324303874,
+            "meanRejectedCandidates": 0.08118523243038746,
+            "meanPageActions": 0.00027479360578920223,
+            "meanKeys": 3.701480163392416
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 434.55670092986253,
+            "cognitiveMs": 86.41419985774066,
+            "effectiveMs": 520.9709007876032,
+            "firstAuxRate": 0.2417331633859744,
+            "secondAuxRate": 0.037964992968084296,
+            "selectionRate": 0.0037821563124730514,
+            "meanTerminalRank": 1.0046823472253545,
+            "meanRejectedCandidates": 0.004682347225354436,
+            "meanPageActions": 0.00000447267590500752,
+            "meanKeys": 4.279698156354058
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 106.61882716377391,
+            "cognitiveMs": 87.4953074566097,
+            "effectiveMs": 194.1141346203836,
+            "firstAuxRate": 0.22094842376337226,
+            "secondAuxRate": 0.05331977719410203,
+            "selectionRate": 0.007833010735255847,
+            "meanTerminalRank": 1.010251635834481,
+            "meanRejectedCandidates": 0.01025163583448108,
+            "meanPageActions": 0.000008196454966138723,
+            "meanKeys": 2.2742682009574744
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 406.5702710509178,
+            "cognitiveMs": 77.2194954270216,
+            "effectiveMs": 483.7897664779394,
+            "firstAuxRate": 0.20050926555674997,
+            "secondAuxRate": 0.04284176980583002,
+            "selectionRate": 0.006357134771325686,
+            "meanTerminalRank": 1.0079980791090437,
+            "meanRejectedCandidates": 0.007998079109043746,
+            "meanPageActions": 0,
+            "meanKeys": 4.24335103536258
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 338.8890136607718,
+            "cognitiveMs": 265.3980414522432,
+            "effectiveMs": 604.2870551130151,
+            "firstAuxRate": 0.5036489291655059,
+            "secondAuxRate": 0.22102790177903295,
+            "selectionRate": 0.06947811695537248,
+            "meanTerminalRank": 1.1238905174121196,
+            "meanRejectedCandidates": 0.12389051741211962,
+            "meanPageActions": 0.00037865375017365026,
+            "meanKeys": 3.7246768309445386
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 437.924997699837,
+            "cognitiveMs": 89.90218543902142,
+            "effectiveMs": 527.8271831388585,
+            "firstAuxRate": 0.2417331633859744,
+            "secondAuxRate": 0.045403409122104235,
+            "selectionRate": 0.005663466410117035,
+            "meanTerminalRank": 1.0072626768105524,
+            "meanRejectedCandidates": 0.007262676810552365,
+            "meanPageActions": 0,
+            "meanKeys": 4.287136572508079
+          }
+        }
+      }
+    }
+  }
+}

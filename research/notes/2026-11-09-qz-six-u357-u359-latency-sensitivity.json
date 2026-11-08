@@ -1,0 +1,2692 @@
+{
+  "contract": {
+    "wide": "tau=0..3000 step300; aux1/aux2=0..1500 step150 (0%-500%, 1331)",
+    "core": "tau=300..1200 step150; aux1/aux2=150..600 step75 (343)",
+    "fixedScanPerCandidateMs": 50,
+    "fixedPageActionMs": 300
+  },
+  "default": [
+    {
+      "id": "QZ-c6f1cd673f93",
+      "short": "c6f1cd",
+      "rank": 1,
+      "score": 9.55283864991326
+    },
+    {
+      "id": "QZ-e8f37a0998f9",
+      "short": "e8f37a",
+      "rank": 2,
+      "score": 9.56073454942596
+    },
+    {
+      "id": "QZ-1a16aa4efe93",
+      "short": "1a16aa",
+      "rank": 3,
+      "score": 9.576377236511231
+    },
+    {
+      "id": "QZ-ffc213d4eda1",
+      "short": "ffc213",
+      "rank": 4,
+      "score": 9.591254911945663
+    },
+    {
+      "id": "QZ-39397c912347",
+      "short": "39397c",
+      "rank": 5,
+      "score": 9.62504838122717
+    },
+    {
+      "id": "QZ-69bef3e03438",
+      "short": "69bef3",
+      "rank": 6,
+      "score": 9.630363234043134
+    },
+    {
+      "id": "U357-21X21-M40-D0",
+      "short": "U357",
+      "rank": 7,
+      "score": 9.716420811869073
+    },
+    {
+      "id": "U359-21X21-M40-D0",
+      "short": "U359",
+      "rank": 8,
+      "score": 9.74220384265198
+    }
+  ],
+  "wide": {
+    "QZ-1a16aa4efe93": {
+      "meanRank": 3.0,
+      "medianRank": 3,
+      "bestRank": 3,
+      "worstRank": 3,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.576434254128912,
+      "minScore": 9.483520923732012,
+      "maxScore": 9.65338811327077,
+      "wins": 0
+    },
+    "QZ-e8f37a0998f9": {
+      "meanRank": 2.0,
+      "medianRank": 2,
+      "bestRank": 2,
+      "worstRank": 2,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.56541787247062,
+      "minScore": 9.473368393556559,
+      "maxScore": 9.642632068911526,
+      "wins": 0
+    },
+    "QZ-c6f1cd673f93": {
+      "meanRank": 1.0,
+      "medianRank": 1,
+      "bestRank": 1,
+      "worstRank": 1,
+      "top1Rate": 1.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.553942465199203,
+      "minScore": 9.463063096428796,
+      "maxScore": 9.629922900297531,
+      "wins": 1331
+    },
+    "QZ-ffc213d4eda1": {
+      "meanRank": 4.0,
+      "medianRank": 4,
+      "bestRank": 4,
+      "worstRank": 4,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.589001777679277,
+      "minScore": 9.510399753946528,
+      "maxScore": 9.65647769326316,
+      "wins": 0
+    },
+    "QZ-69bef3e03438": {
+      "meanRank": 5.568745304282494,
+      "medianRank": 6,
+      "bestRank": 5,
+      "worstRank": 6,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.43125469571750563,
+      "meanScore": 9.633413645259644,
+      "minScore": 9.543456463652598,
+      "maxScore": 9.70871179618594,
+      "wins": 0
+    },
+    "QZ-39397c912347": {
+      "meanRank": 5.431254695717506,
+      "medianRank": 5,
+      "bestRank": 5,
+      "worstRank": 6,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.5687453042824944,
+      "meanScore": 9.632493405142137,
+      "minScore": 9.537921417509509,
+      "maxScore": 9.71045050590577,
+      "wins": 0
+    },
+    "U357-21X21-M40-D0": {
+      "meanRank": 7.0,
+      "medianRank": 7,
+      "bestRank": 7,
+      "worstRank": 7,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.781437660487999,
+      "minScore": 9.62748455656551,
+      "maxScore": 9.866487497015687,
+      "wins": 0
+    },
+    "U359-21X21-M40-D0": {
+      "meanRank": 8.0,
+      "medianRank": 8,
+      "bestRank": 8,
+      "worstRank": 8,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.801258439101774,
+      "minScore": 9.66153922912602,
+      "maxScore": 9.878682380665518,
+      "wins": 0
+    }
+  },
+  "core": {
+    "QZ-1a16aa4efe93": {
+      "meanRank": 3.0,
+      "medianRank": 3,
+      "bestRank": 3,
+      "worstRank": 3,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.575653990269663,
+      "minScore": 9.539126516919996,
+      "maxScore": 9.609144495326994,
+      "wins": 0
+    },
+    "QZ-e8f37a0998f9": {
+      "meanRank": 2.0,
+      "medianRank": 2,
+      "bestRank": 2,
+      "worstRank": 2,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.561081035846136,
+      "minScore": 9.523936375265421,
+      "maxScore": 9.595313062210236,
+      "wins": 0
+    },
+    "QZ-c6f1cd673f93": {
+      "meanRank": 1.0,
+      "medianRank": 1,
+      "bestRank": 1,
+      "worstRank": 1,
+      "top1Rate": 1.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.55240607699308,
+      "minScore": 9.516102052247978,
+      "maxScore": 9.585806627231065,
+      "wins": 343
+    },
+    "QZ-ffc213d4eda1": {
+      "meanRank": 4.0,
+      "medianRank": 4,
+      "bestRank": 4,
+      "worstRank": 4,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.589767450304292,
+      "minScore": 9.558968865027943,
+      "maxScore": 9.618288228286346,
+      "wins": 0
+    },
+    "QZ-69bef3e03438": {
+      "meanRank": 6.0,
+      "medianRank": 6,
+      "bestRank": 6,
+      "worstRank": 6,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.630496031867015,
+      "minScore": 9.593964734516543,
+      "maxScore": 9.664152382262118,
+      "wins": 0
+    },
+    "QZ-39397c912347": {
+      "meanRank": 5.0,
+      "medianRank": 5,
+      "bestRank": 5,
+      "worstRank": 5,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.626071402190583,
+      "minScore": 9.588919756937734,
+      "maxScore": 9.660512686297416,
+      "wins": 0
+    },
+    "U357-21X21-M40-D0": {
+      "meanRank": 7.0,
+      "medianRank": 7,
+      "bestRank": 7,
+      "worstRank": 7,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.729686054607301,
+      "minScore": 9.678042330914385,
+      "maxScore": 9.771026320361353,
+      "wins": 0
+    },
+    "U359-21X21-M40-D0": {
+      "meanRank": 8.0,
+      "medianRank": 8,
+      "bestRank": 8,
+      "worstRank": 8,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.754175148260744,
+      "minScore": 9.707377176235694,
+      "maxScore": 9.791593921069673,
+      "wins": 0
+    }
+  },
+  "high": {
+    "QZ-1a16aa4efe93": {
+      "meanRank": 3.0,
+      "medianRank": 3,
+      "bestRank": 3,
+      "worstRank": 3,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.580698002984212,
+      "minScore": 9.516225660491685,
+      "maxScore": 9.637186707724613,
+      "wins": 0
+    },
+    "QZ-e8f37a0998f9": {
+      "meanRank": 2.0,
+      "medianRank": 2,
+      "bestRank": 2,
+      "worstRank": 2,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.571282006418912,
+      "minScore": 9.507843904365107,
+      "maxScore": 9.627376619576424,
+      "wins": 0
+    },
+    "QZ-c6f1cd673f93": {
+      "meanRank": 1.0,
+      "medianRank": 1,
+      "bestRank": 1,
+      "worstRank": 1,
+      "top1Rate": 1.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.558538503891604,
+      "minScore": 9.495603982028296,
+      "maxScore": 9.614027195437426,
+      "wins": 729
+    },
+    "QZ-ffc213d4eda1": {
+      "meanRank": 4.0,
+      "medianRank": 4,
+      "bestRank": 4,
+      "worstRank": 4,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.59162506583739,
+      "minScore": 9.535881910867465,
+      "maxScore": 9.641698859959506,
+      "wins": 0
+    },
+    "QZ-69bef3e03438": {
+      "meanRank": 5.425240054869684,
+      "medianRank": 5,
+      "bestRank": 5,
+      "worstRank": 6,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.5747599451303155,
+      "meanScore": 9.638721761141527,
+      "minScore": 9.576896357937402,
+      "maxScore": 9.693275151059972,
+      "wins": 0
+    },
+    "QZ-39397c912347": {
+      "meanRank": 5.574759945130316,
+      "medianRank": 6,
+      "bestRank": 5,
+      "worstRank": 6,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.4252400548696845,
+      "meanScore": 9.63916567995089,
+      "minScore": 9.575432712021545,
+      "maxScore": 9.69575914929404,
+      "wins": 0
+    },
+    "U357-21X21-M40-D0": {
+      "meanRank": 7.0,
+      "medianRank": 7,
+      "bestRank": 7,
+      "worstRank": 7,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.804978199040622,
+      "minScore": 9.715017252502708,
+      "maxScore": 9.866487497015687,
+      "wins": 0
+    },
+    "U359-21X21-M40-D0": {
+      "meanRank": 8.0,
+      "medianRank": 8,
+      "bestRank": 8,
+      "worstRank": 8,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.822503164480198,
+      "minScore": 9.74054277328872,
+      "maxScore": 9.878682380665518,
+      "wins": 0
+    }
+  },
+  "low": {
+    "QZ-1a16aa4efe93": {
+      "meanRank": 3.0,
+      "medianRank": 3,
+      "bestRank": 3,
+      "worstRank": 3,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.57817632107357,
+      "minScore": 9.544830614267497,
+      "maxScore": 9.608879932817823,
+      "wins": 0
+    },
+    "QZ-e8f37a0998f9": {
+      "meanRank": 2.0,
+      "medianRank": 2,
+      "bestRank": 2,
+      "worstRank": 2,
+      "top1Rate": 0.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.558711233004194,
+      "minScore": 9.524119461020392,
+      "maxScore": 9.590943759628846,
+      "wins": 0
+    },
+    "QZ-c6f1cd673f93": {
+      "meanRank": 1.0,
+      "medianRank": 1,
+      "bestRank": 1,
+      "worstRank": 1,
+      "top1Rate": 1.0,
+      "top3Rate": 1.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.5532323148568,
+      "minScore": 9.519634339285309,
+      "maxScore": 9.584386232077417,
+      "wins": 27
+    },
+    "QZ-ffc213d4eda1": {
+      "meanRank": 4.0,
+      "medianRank": 4,
+      "bestRank": 4,
+      "worstRank": 4,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.597667988642435,
+      "minScore": 9.570077189444854,
+      "maxScore": 9.622697214024303,
+      "wins": 0
+    },
+    "QZ-69bef3e03438": {
+      "meanRank": 6.0,
+      "medianRank": 6,
+      "bestRank": 6,
+      "worstRank": 6,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.628321714713172,
+      "minScore": 9.594089174331495,
+      "maxScore": 9.66030248847256,
+      "wins": 0
+    },
+    "QZ-39397c912347": {
+      "meanRank": 5.0,
+      "medianRank": 5,
+      "bestRank": 5,
+      "worstRank": 5,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 1.0,
+      "meanScore": 9.6203207644788,
+      "minScore": 9.58574672674608,
+      "maxScore": 9.653003140661172,
+      "wins": 0
+    },
+    "U357-21X21-M40-D0": {
+      "meanRank": 7.0,
+      "medianRank": 7,
+      "bestRank": 7,
+      "worstRank": 7,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.677672016238164,
+      "minScore": 9.629391474986237,
+      "maxScore": 9.718241026651533,
+      "wins": 0
+    },
+    "U359-21X21-M40-D0": {
+      "meanRank": 8.0,
+      "medianRank": 8,
+      "bestRank": 8,
+      "worstRank": 8,
+      "top1Rate": 0.0,
+      "top3Rate": 0.0,
+      "top5Rate": 0.0,
+      "meanScore": 9.707613672595649,
+      "minScore": 9.663989081966019,
+      "maxScore": 9.744127684172456,
+      "wins": 0
+    }
+  },
+  "sweeps": {
+    "tau": {
+      "0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.568657250108936
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.576290298287686
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.592467009970461
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.60678124310356
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.63992208777767
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.645830441188659
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.718241026651533
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.744127684172456
+        }
+      ],
+      "300": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.560435124034889
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.568200531025424
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.584110294681281
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.598702936552497
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.632191197208915
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.637791385620897
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.71721919002916
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.743054404716862
+        }
+      ],
+      "600": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.55283864991326
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.56073454942596
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.576377236511231
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.591254911945663
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.62504838122717
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.630363234043134
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.716420811869073
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.74220384265198
+        }
+      ],
+      "900": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.545797860251943
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.553822488947663
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.569198382820844
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.584366548503745
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.618428131583702
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.623477576173512
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715821334722358
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.741551615164237
+        }
+      ],
+      "1200": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.539252866117788
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.547404550857193
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.562514278339144
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.577977410520633
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.612274348590613
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.617075865004438
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715399511182177
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.741076622863245
+        }
+      ],
+      "1500": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.533152104564032
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.541429251779366
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.556273726605943
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.572035473996674
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.606538708297181
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.611107700364101
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715136864598504
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.740760514911459
+        }
+      ],
+      "1800": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.527450939970487
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.535852026744543
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.550432402574412
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.56649571181513
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.60117935893978
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.605529459334774
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715017252502708
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.740587256028869
+        }
+      ],
+      "2100": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.522110538496404
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.530634105025316
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.544951736182487
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.56131895551659
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.596159871566774
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.600303194287426
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715026510479358
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.74054277328872
+        }
+      ],
+      "2400": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.51709695529264
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.525741598478628
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.539798006999368
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.55647097248231
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.591448388729232
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.595395739356597
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715152159602454
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.740614665957676
+        }
+      ],
+      "2700": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.512380388917961
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.521144756890935
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.534941604742146
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.551921712354542
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.58701692887463
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.590777980697318
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.715383164506846
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.740791965555696
+        }
+      ],
+      "3000": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.507934568237058
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.516817355644632
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.530356421209596
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.547644687511932
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.5828408141461
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.586424256491645
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.71570973210229
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.741064936224227
+        }
+      ]
+    },
+    "firstAux": {
+      "0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.519634339285309
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.524119461020392
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.544830614267497
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.570077189444854
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.58574672674608
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.594089174331495
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.650730026569462
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.684061378773542
+        }
+      ],
+      "150": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.538571574856519
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.54498923893963
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.562707634739766
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.581734080807474
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.608195670288566
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.614872489351393
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.687393118077772
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.71648699004277
+        }
+      ],
+      "300": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.55283864991326
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.56073454942596
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.576377236511231
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.591254911945663
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.62504838122717
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.630363234043134
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.716420811869073
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.74220384265198
+        }
+      ],
+      "450": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.56437053409903
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.573437108936961
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.587575225616034
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.599549137368598
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.638592789334965
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.64270069739898
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.740499153152397
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.763587537865503
+        }
+      ],
+      "600": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.574120762922968
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.58413904285352
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.597149473754481
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.607020091002493
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.649972653572863
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.652968873095638
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.761081975881982
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.781913115306361
+        }
+      ],
+      "750": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.582611377339589
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.593419413222255
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.605562233290785
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.613870145512596
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.659821641300448
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.66177582510528
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.779042629287453
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.79794245600106
+        }
+      ],
+      "900": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.59015388102131
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.60162827459061
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.613089398398216
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.62021358946297
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.668521383068867
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.669491349385872
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.79494907571291
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.812169566232745
+        }
+      ],
+      "1050": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.596948135031134
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.60899257616928
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.619908744887276
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.62612281751587
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.676318295902554
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.676355711511755
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.80919408640213
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.824935679265685
+        }
+      ],
+      "1200": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.60313051170709
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.615668324479238
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.626142501224656
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.631648707277762
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.682533820967986
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.683381087939065
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.822062663487454
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.836488443753996
+        }
+      ],
+      "1350": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.608799017748161
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.621768126837784
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.631879383262392
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.636830168145048
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.68814415876372
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.689831078829041
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.83376961110769
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.847014715731168
+        }
+      ],
+      "1500": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.614027195437426
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.627376619576424
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.637186707724613
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.641698859959506
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.693275151059972
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.69575914929404
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.844481792993774
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.856659894284759
+        }
+      ]
+    },
+    "secondAux": {
+      "0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.565098600310073
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.571937493610953
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.589313232056163
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.60365865472726
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.634949621941558
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.6414599840074
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.703294090206336
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.729668666842992
+        }
+      ],
+      "150": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.558582578544648
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.5659596336508
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.582449362614243
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.597052251024515
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.62967065349248
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.635547100974213
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.709899978798077
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.735972372619518
+        }
+      ],
+      "300": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.55283864991326
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.56073454942596
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.576377236511231
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.591254911945663
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.62504838122717
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.630363234043134
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.716420811869073
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.74220384265198
+        }
+      ],
+      "450": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.547738750642647
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.556135227938247
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.570967742849415
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.58613349002659
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.620972062972484
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.625784867265894
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.722837525973326
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.748343572828901
+        }
+      ],
+      "600": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.543182349422139
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.552062125227613
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.566119259309408
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.581583211225302
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.617355006472126
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.621715309041253
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.729137905030917
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.754378838644426
+        }
+      ],
+      "750": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.539089407610367
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.548436127163944
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.561750658605604
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.577520456856952
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.61412838562352
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.618077802238444
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.735314537927733
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.760301686441625
+        }
+      ],
+      "900": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.535395381744928
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.545193554202733
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.55779633892177
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.573877634686687
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.611236854960564
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.61481063735753
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.741363402060683
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.766107539435186
+        }
+      ],
+      "1050": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.532047613510704
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.542282554477037
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.554202630069376
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.570599469829148
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.608635385557402
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.611863625778478
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.747282869037132
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.771794218292309
+        }
+      ],
+      "1200": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.529002680520659
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.539660458107376
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.550925152918225
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.567640279366957
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.606286946396592
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.609195514343563
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.753072999550467
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.777361245687153
+        }
+      ],
+      "1350": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.52622442407851
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.537291808615528
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.547926850974944
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.564961940546656
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.604160781052629
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.606772062791663
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.758735039075319
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.782809348096789
+        }
+      ],
+      "1500": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.523682461505656
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.535146878857034
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.54517650345432
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.562532355811976
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.602231110114966
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.60456459532612
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.76427105471876
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.788140096288682
+        }
+      ]
+    },
+    "diagonal": {
+      "0.0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.559498448416763
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.562098817649215
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.586455035509884
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.612162352225937
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.619455384936973
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.63128743885558
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.63309034037408
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.667974095230662
+        }
+      ],
+      "0.5": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.554059340567333
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.55971495598818
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.578807878410418
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.597507828564877
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.621629492432156
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.629414908915614
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.680496267739096
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.710089339557484
+        }
+      ],
+      "1.0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.55283864991326
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.56073454942596
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.576377236511231
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.591254911945663
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.62504838122717
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.630363234043134
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.716420811869073
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.74220384265198
+        }
+      ],
+      "1.5": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.553591288175662
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.56320838492255
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.576437680844185
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.589091609075165
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.628986088806906
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.632460368826191
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.745527792845918
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.768384584558616
+        }
+      ],
+      "2.0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.555414805410535
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.56640054837407
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.577857162053215
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.589180246045526
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.6331672570436
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.635114211341504
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.770043596232545
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.790551913158616
+        }
+      ],
+      "2.5": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.557838990279565
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.569941907103578
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.580047185419671
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.59057399808322
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 5,
+          "score": 9.637427878681763
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 6,
+          "score": 9.638035931809798
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.791201678188004
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.809766030316661
+        }
+      ],
+      "3.0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.56058981943508
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.573623643965748
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.582668419466911
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.592734513438355
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.641063223464148
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.641661927616097
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.809766467454361
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.826684812151287
+        }
+      ],
+      "3.5": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.563499329581632
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.577321912557826
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.585514762874395
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.595337845379817
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.644099642716698
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.64580191478837
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.826252579106129
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.841752944888473
+        }
+      ],
+      "4.0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.566462199160812
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.580962393832571
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.58845760591207
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.598182195762728
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.64708704021789
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.649806731249559
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.841028173874333
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.855290297965368
+        }
+      ],
+      "4.5": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.569411941118721
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.58450107201485
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.591415725057065
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.601139191273436
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.649990787868662
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.65365313346912
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.854368744421196
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.867537639565024
+        }
+      ],
+      "5.0": [
+        {
+          "id": "QZ-c6f1cd673f93",
+          "short": "c6f1cd",
+          "rank": 1,
+          "score": 9.572306855184582
+        },
+        {
+          "id": "QZ-e8f37a0998f9",
+          "short": "e8f37a",
+          "rank": 2,
+          "score": 9.587912959731003
+        },
+        {
+          "id": "QZ-1a16aa4efe93",
+          "short": "1a16aa",
+          "rank": 3,
+          "score": 9.594337824571076
+        },
+        {
+          "id": "QZ-ffc213d4eda1",
+          "short": "ffc213",
+          "rank": 4,
+          "score": 9.60412627622069
+        },
+        {
+          "id": "QZ-69bef3e03438",
+          "short": "69bef3",
+          "rank": 5,
+          "score": 9.652791116804288
+        },
+        {
+          "id": "QZ-39397c912347",
+          "short": "39397c",
+          "rank": 6,
+          "score": 9.657329795305888
+        },
+        {
+          "id": "U357-21X21-M40-D0",
+          "short": "U357",
+          "rank": 7,
+          "score": 9.866487497015687
+        },
+        {
+          "id": "U359-21X21-M40-D0",
+          "short": "U359",
+          "rank": 8,
+          "score": 9.878682380665518
+        }
+      ]
+    }
+  }
+}
