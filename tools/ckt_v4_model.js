@@ -188,7 +188,95 @@ function validateRows(rows) {
   }
 }
 
-function rankBuckets(active, order) {
+function lengthGroup(row) {
+  const length = [...String(row.text || '')].length;
+  if (length === 2) return 0;
+  if (length === 3) return 1;
+  if (length >= 4) return 2;
+  return null;
+}
+
+function groupCounts(rows) {
+  const counts = [0, 0, 0];
+  for (const row of rows) {
+    const group = lengthGroup(row);
+    if (group !== null) counts[group] += 1;
+  }
+  return counts;
+}
+
+function balancedTargets(available, slots) {
+  const targets = [0, 0, 0];
+  while (slots > 0) {
+    let selected = null;
+    for (let group = 0; group < targets.length; group++) {
+      if (targets[group] < available[group]
+          && (selected === null || targets[group] < targets[selected])) {
+        selected = group;
+      }
+    }
+    if (selected === null) break;
+    targets[selected] += 1;
+    slots -= 1;
+  }
+  return targets;
+}
+
+function takeLengthBalancedPage(rows, pageSize) {
+  const pageLength = Math.min(pageSize, rows.length);
+  const available = groupCounts(rows);
+  const groupedSlots = Math.min(pageLength, available.reduce((sum, value) => sum + value, 0));
+  const targets = balancedTargets(available, groupedSlots);
+  const selected = rows.map((_, index) => index < pageLength);
+  const counts = groupCounts(rows.slice(0, pageLength));
+  for (let needed = 0; needed < targets.length; needed++) {
+    while (counts[needed] < targets[needed]) {
+      let replacement = null;
+      for (let index = pageLength; index < rows.length; index++) {
+        if (!selected[index] && lengthGroup(rows[index]) === needed) {
+          replacement = index;
+          break;
+        }
+      }
+      if (replacement === null) break;
+      let displaced = null;
+      for (let index = pageLength - 1; index >= 0; index--) {
+        const group = lengthGroup(rows[index]);
+        if (selected[index] && group !== null && counts[group] > targets[group]) {
+          displaced = index;
+          break;
+        }
+      }
+      if (displaced === null) break;
+      const displacedGroup = lengthGroup(rows[displaced]);
+      selected[displaced] = false;
+      selected[replacement] = true;
+      counts[displacedGroup] -= 1;
+      counts[needed] += 1;
+    }
+  }
+  return {
+    page: rows.filter((_, index) => selected[index]),
+    remaining: rows.filter((_, index) => !selected[index]),
+  };
+}
+
+function lengthBalanceRows(rows, options = {}) {
+  const pageSize = Math.max(1, Math.floor(options.pageSize || 6));
+  const maximumCandidates = Math.max(1, Math.floor(options.maximumCandidates || 120));
+  const result = [];
+  for (let offset = 0; offset < rows.length; offset += maximumCandidates) {
+    let remaining = rows.slice(offset, offset + maximumCandidates);
+    while (remaining.length) {
+      const {page, remaining: next} = takeLengthBalancedPage(remaining, pageSize);
+      result.push(...page);
+      remaining = next;
+    }
+  }
+  return result;
+}
+
+function rankBuckets(active, order, options = {}) {
   const buckets = new Map();
   for (const state of active) {
     const stage = state.row.stages[state.stageIndex];
@@ -201,7 +289,11 @@ function rankBuckets(active, order) {
   }
   for (const [key, rows] of buckets) {
     rows.sort(compareRows);
-    buckets.set(key, new Map(rows.map((row, index) => [row.id, index + 1])));
+    const balance = options.lengthBalance;
+    const ranked = balance && order >= (balance.minimumInputLength || 4)
+      ? lengthBalanceRows(rows, balance)
+      : rows;
+    buckets.set(key, new Map(ranked.map((row, index) => [row.id, index + 1])));
   }
   return buckets;
 }
@@ -236,7 +328,7 @@ function resolveCompetition(rows, options = {}) {
   const orders = [...new Set(rows.flatMap(row => row.stages.map(stage => stage.order)))].sort((a, b) => a - b);
 
   for (const order of orders) {
-    const buckets = rankBuckets(active, order);
+    const buckets = rankBuckets(active, order, options);
     const nextActive = [];
     for (const state of active) {
       const stage = state.row.stages[state.stageIndex];
@@ -385,6 +477,7 @@ module.exports = {
   classifyContract,
   stagePools,
   makeStages,
+  lengthBalanceRows,
   resolveCompetition,
   selectionKeystrokes,
   cognitiveCost,

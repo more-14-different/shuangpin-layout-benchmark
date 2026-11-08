@@ -199,8 +199,14 @@ def main() -> None:
     if args.chunk_size < 1:
         raise ValueError("--chunk-size must be positive")
     payload = json.loads(args.input.read_text(encoding="utf-8"))
-    if payload["version"] != "ckt5.1-single-21x26-aux-order-components-1":
+    supported = {
+        "ckt5.1-single-21x26-aux-order-components-2",
+        "ckt5.1-single-native-aux-order-components-3",
+    }
+    if payload["version"] not in supported:
         raise ValueError(f"unsupported input version: {payload['version']}")
+    if payload["contract"]["name"] != "native-four-code-top-six-code":
+        raise ValueError("this analyzer only supports the 21x26 four-code-top contract")
     grid = make_grid()
     results = {}
     for mode in ("keytao", "sanpin"):
@@ -216,9 +222,14 @@ def main() -> None:
         result["referenceTracks"] = reference["tracks"]
         results[mode] = result
     output = {
-        "version": "ckt5.1-single-21x26-aux-order-robustness-1",
+        "version": (
+            "ckt5.1-single-native-aux-order-robustness-3"
+            if payload["version"].endswith("components-3")
+            else "ckt5.1-single-21x26-aux-order-robustness-2"
+        ),
         "id": payload["id"],
         "contract": payload["contract"],
+        "lengthBalance": payload["lengthBalance"],
         "corpus": payload["corpus"],
         "trackWeights": WEIGHTS,
         "baselineCostsMs": payload["baselineCostsMs"],

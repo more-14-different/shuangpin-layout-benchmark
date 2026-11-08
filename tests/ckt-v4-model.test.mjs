@@ -7,6 +7,7 @@ const {
   classifyContract,
   DEFAULT_COGNITIVE_PRIOR,
   makeStages,
+  lengthBalanceRows,
   resolveCompetition,
   cognitiveCost,
   compositeScore,
@@ -26,6 +27,55 @@ test('capacity classification is exact, not based on a vague key-count threshold
   assert.equal(classifyContract([21, 26]), 'four-code-top');
   assert.equal(classifyContract([25, 30]), 'four-code-top');
   assert.equal(classifyContract([29, 34]), 'four-code-top');
+});
+
+test('soft length balance mirrors deployed page fill and preserves the original first candidate', () => {
+  const rows = [
+    ['九霄', 'word2'], ['风萧萧', 'word3'], ['非学校', 'word3'],
+    ['就小', 'word2'], ['旧校', 'word2'], ['发儿小', 'word3'],
+    ['分学校', 'word3'], ['方案选单', 'word4'], ['分享心得', 'word4'],
+  ].map(([text, kind], index) => ({id: String(index), text, kind}));
+  const balanced = lengthBalanceRows(rows, {pageSize: 6, maximumCandidates: 120});
+  assert.deepEqual(balanced.slice(0, 6).map(value => value.text), [
+    '九霄', '风萧萧', '非学校', '就小', '方案选单', '分享心得',
+  ]);
+  assert.equal(balanced[0], rows[0]);
+});
+
+test('soft length balance changes terminal ranks without changing an early-commit winner', () => {
+  const c = 'four-code-top';
+  const rows = [
+    row('二甲', 'word2', 100, 4, c, [
+      {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+    row('二乙', 'word2', 90, 4, c, [
+      {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+    row('二丙', 'word2', 80, 4, c, [
+      {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+    row('二丁', 'word2', 79, 4, c, [
+      {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+    row('二戊', 'word2', 78, 4, c, [
+      {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+    row('三甲甲', 'word3', 70, 4, c, [
+      {length: 3, codes: ['AAA']}, {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+    row('四甲甲甲', 'word4', 60, 4, c, [
+      {length: 4, codes: ['ABCD']}, {length: 5, codes: ['ABCDI']}, {length: 6, codes: ['ABCDIE']},
+    ]),
+  ];
+  const plain = resolveCompetition(rows, {motorCost});
+  const balanced = resolveCompetition(rows, {
+    motorCost,
+    lengthBalance: {pageSize: 3, maximumCandidates: 120, minimumInputLength: 4},
+  });
+  assert.equal(plain.find(value => value.text === '二甲').codeLength, 4);
+  assert.equal(balanced.find(value => value.text === '二甲').codeLength, 4);
+  assert.equal(plain.find(value => value.text === '四甲甲甲').rank, 4);
+  assert.equal(balanced.find(value => value.text === '四甲甲甲').rank, 3);
 });
 
 test('21x21 joins two- and four-character words at four keys', () => {
