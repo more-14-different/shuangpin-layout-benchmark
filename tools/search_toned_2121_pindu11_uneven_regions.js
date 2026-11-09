@@ -17,6 +17,22 @@ const PROFILE_GRID = Object.freeze([
   [220, 0.25], [441, 0.25], [882, 0.25],
   [220, 1], [441, 1], [882, 1],
 ]);
+const TONE_PROFILES = Object.freeze({
+  primary: Object.freeze({
+    id: 'primary',
+    label: 'upper4-home32-lower15',
+    regions: Object.freeze({upper: Object.freeze([4]), home: Object.freeze([3, 2]),
+      lower: Object.freeze([1, 5])}),
+    neutralToneRule: 0,
+  }),
+  'upper35-home12-lower4': Object.freeze({
+    id: 'upper35-home12-lower4',
+    label: 'upper35-home12-lower4',
+    regions: Object.freeze({upper: Object.freeze([3, 5]), home: Object.freeze([1, 2]),
+      lower: Object.freeze([4])}),
+    neutralToneRule: 1,
+  }),
+});
 
 function parseArgs(argv) {
   const args = {};
@@ -51,6 +67,18 @@ function shuffle(values, random) {
 
 function randomSurjection(items, groups, random) {
   return shuffle(Array.from({length: items}, (_, index) => index % groups), random);
+}
+
+function toneRegionIndex(tone, profile) {
+  const numericTone = Number(tone);
+  const rows = ['upper', 'home', 'lower'];
+  const row = rows.findIndex(value => profile.regions[value].includes(numericTone));
+  if (row < 0) throw new Error(`tone ${tone} is not covered by profile ${profile.id}`);
+  return row;
+}
+
+function applyToneProfile(tokens, profile) {
+  return tokens.map(token => ({...token, row: toneRegionIndex(token.tone, profile)}));
 }
 
 function buildDecomposition(seedInventory) {
@@ -241,11 +269,15 @@ function rhymeMapRecord(state, contract) {
       [rhyme, contract.soundKeysByRow[row][state.regionMaps[index][rhymeIndex]]]))]));
 }
 
-function makeLayout({candidate, layoutTokens, decomposition, contract, tables, ordinal}) {
+function makeLayout({candidate, layoutTokens, decomposition, contract, tables, ordinal,
+  toneProfile}) {
   const firstProjection = destinationRecord(candidate.state, tables);
   const secondMap = rhymeMapRecord(candidate.state, contract);
+  const idStem = toneProfile.id === 'primary'
+    ? 'UNEVEN786-pindu11-D8'
+    : `UNEVEN786-${toneProfile.label}-pindu11-D8`;
   return {
-    id: `UNEVEN786-pindu11-D8-${String(ordinal + 1).padStart(3, '0')}`,
+    id: `${idStem}-${String(ordinal + 1).padStart(3, '0')}`,
     factorization: 'shengjie-pindu11-rhyme-tone-specific-regions',
     origin: 'AVUIO-7-8-6-tone-region-multistart-search',
     forbiddenSourceProjection: firstProjection,
@@ -257,11 +289,12 @@ function makeLayout({candidate, layoutTokens, decomposition, contract, tables, o
       motorUpperMs: candidate.motorUpperMs,
     },
     memoryAudit: {
-      lowerM: 29,
-      conservativeMGuard: 34,
+      lowerM: 29 + toneProfile.neutralToneRule,
+      conservativeMGuard: 34 + toneProfile.neutralToneRule,
       firstRuleLower: 14,
       normalizedRhymeRules: 3,
       toneRegionMergeLower: toneRegionMemoryLower(candidate.state),
+      neutralToneRule: toneProfile.neutralToneRule,
       traditionalOnsetD: 8,
       onsetKeyIncidences: 26,
       onsetFragmentation: 8,
@@ -290,12 +323,16 @@ function main() {
   const starts = Number(args.starts || 192);
   const retain = Number(args.retain || 192);
   const seed = Number(args.seed || 786110721);
+  const toneProfile = TONE_PROFILES[args['tone-profile'] || 'primary'];
+  if (!toneProfile) {
+    throw new Error(`unknown --tone-profile ${args['tone-profile']}; expected ${Object.keys(TONE_PROFILES).join(', ')}`);
+  }
 
   const data = scorer.loadPayload(html);
   const seedInventory = JSON.parse(fs.readFileSync(seedsFile, 'utf8'));
-  const auditTokens = buildTokenInventory(data, seedInventory);
-  const layoutTokens = buildTokenInventory(data, {...seedInventory,
-    auditTokenKeys: seedInventory.layoutTokenKeys});
+  const auditTokens = applyToneProfile(buildTokenInventory(data, seedInventory), toneProfile);
+  const layoutTokens = applyToneProfile(buildTokenInventory(data, {...seedInventory,
+    auditTokenKeys: seedInventory.layoutTokenKeys}), toneProfile);
   const decomposition = buildDecomposition(seedInventory);
   const contract = buildVariableToneRegionContract('AVUIO');
   const motor = projectedMotor(data);
@@ -324,11 +361,12 @@ function main() {
     right.occupiedBuckets - left.occupiedBuckets ||
     left.motorUpperMs - right.motorUpperMs).slice(0, retain);
   const layouts = candidates.map((candidate, index) => makeLayout({candidate, layoutTokens,
-    decomposition, contract, tables, ordinal: index}));
+    decomposition, contract, tables, ordinal: index, toneProfile}));
   const result = {
     version: 'ckt-v5.1-toned-2121-pindu11-uneven786-layouts-1',
-    purpose: 'AVUIO 7/8/6 tone-specific Pindu11 rhyme-region candidates under D8/F8 first grammar',
+    purpose: `AVUIO 7/8/6 ${toneProfile.label} tone-specific Pindu11 rhyme-region candidates under D8/F8 first grammar`,
     contract,
+    toneProfile,
     tokenKeys: seedInventory.layoutTokenKeys,
     layouts,
   };
@@ -338,13 +376,11 @@ function main() {
       uniqueLocalOptima: unique.size, retained: layouts.length, profiles: PROFILE_GRID},
     firstConstraint: {traditionalOnsetD: 8, onsetKeyIncidences: 26,
       onsetFragmentation: 8, forbiddenSourceKeys: FORBIDDEN_SOURCE_KEYS},
-    toneRegions: {
-      upper: {tones: [4], keys: contract.soundKeysByRow.upper},
-      home: {tones: [3, 2], keys: contract.soundKeysByRow.home},
-      lower: {tones: [1, 5], keys: contract.soundKeysByRow.lower},
-    },
-    memoryAudit: {lowerM: 29, conservativeMGuard: 34,
-      definition: '4 zero rules + 10 upstream first exceptions + 3 normalized-rhyme rules + (4+3+5) tone-region merge links; five forbidden-bucket projections add 0..5 guard items',
+    toneRegions: Object.fromEntries(['upper', 'home', 'lower'].map(row => [row,
+      {tones: toneProfile.regions[row], keys: contract.soundKeysByRow[row]}])),
+    memoryAudit: {lowerM: 29 + toneProfile.neutralToneRule,
+      conservativeMGuard: 34 + toneProfile.neutralToneRule,
+      definition: '4 zero rules + 10 upstream first exceptions + 3 normalized-rhyme rules + (4+3+5) tone-region merge links + optional neutral-tone reassignment; five forbidden-bucket projections add 0..5 guard items',
       qzComparability: 'not comparable to QZ M-R2=42'},
     candidates: layouts.map(layout => ({id: layout.id,
       forbiddenSourceProjection: layout.forbiddenSourceProjection,
@@ -362,4 +398,5 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = {FORBIDDEN_SOURCE_KEYS, scoreState, toneRegionMemoryLower};
+module.exports = {FORBIDDEN_SOURCE_KEYS, TONE_PROFILES, applyToneProfile, scoreState,
+  toneRegionIndex, toneRegionMemoryLower};

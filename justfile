@@ -71,6 +71,16 @@ pindu11-2121-uneven786 starts="576" retain="576":
     node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/uneven786-pindu11-layouts.json --policy 12/213/24 --shape AVUIO --sample 1800 --output research/.cache/uneven786-pindu11-sample1800.json
     node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/uneven786-pindu11-layouts.json --rank-from research/.cache/uneven786-pindu11-sample1800.json --top 32 --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-10-ckt-v51-toned-2121-pindu11-uneven786-full.json
 
+pindu11-2121-uneven786-alt starts="576" retain="576":
+    node tools/search_toned_2121_pindu11_uneven_regions.js --tone-profile upper35-home12-lower4 --starts "{{starts}}" --retain "{{retain}}" --output-layouts research/.cache/uneven786-alt35-12-4-layouts.json --output-report research/.cache/uneven786-alt35-12-4-search.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/uneven786-alt35-12-4-layouts.json --policy 12/213/24 --shape AVUIO --sample 1800 --output research/.cache/uneven786-alt35-12-4-sample1800.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/uneven786-alt35-12-4-layouts.json --rank-from research/.cache/uneven786-alt35-12-4-sample1800.json --top 32 --policy 12/213/24 --shape AVUIO --output research/.cache/uneven786-alt35-12-4-full32.json
+
+pindu11-2121-four-regions starts_per_partition="4" region_swaps="0" seed="41143016":
+    node tools/search_toned_2121_pindu11_four_regions.js --starts-per-partition "{{starts_per_partition}}" --region-swaps "{{region_swaps}}" --seed "{{seed}}" --retain 1024 --output-layouts research/.cache/fourregion-pindu11-layouts.json --output-report research/.cache/fourregion-pindu11-search.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/fourregion-pindu11-layouts.json --policy 12/213/24 --shape AVUIO --sample 1800 --output research/.cache/fourregion-pindu11-sample1800.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/fourregion-pindu11-layouts.json --rank-from research/.cache/fourregion-pindu11-sample1800.json --top 32 --policy 12/213/24 --shape AVUIO --output research/.cache/fourregion-pindu11-full32.json
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 

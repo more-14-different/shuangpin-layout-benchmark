@@ -8,6 +8,8 @@ import {fileURLToPath} from 'node:url';
 const require = createRequire(import.meta.url);
 const {
   FORBIDDEN_SOURCE_KEYS,
+  TONE_PROFILES,
+  toneRegionIndex,
   toneRegionMemoryLower,
 } = require('../tools/search_toned_2121_pindu11_uneven_regions.js');
 
@@ -24,6 +26,13 @@ test('independent 11-to-7/8/6 rhyme regions spend twelve merge links', () => {
     ],
   };
   assert.equal(toneRegionMemoryLower(state), 12);
+});
+
+test('alternative profile maps tone3/neutral, tone1/2, and tone4 to 7/8/6', () => {
+  const profile = TONE_PROFILES['upper35-home12-lower4'];
+  assert.deepEqual([1, 2, 3, 4, 5].map(tone => toneRegionIndex(tone, profile)),
+    [1, 1, 0, 2, 0]);
+  assert.equal(profile.neutralToneRule, 1);
 });
 
 test('tracked 7/8/6 finalists preserve the full-score champion and audit', () => {
