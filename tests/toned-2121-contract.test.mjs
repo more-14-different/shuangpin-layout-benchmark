@@ -17,6 +17,7 @@ const {
   TONED_BUCKET_COUNT,
   TONE_ROWS,
   buildToned2121Contract,
+  buildVariableToneRegionContract,
   enumerateRowBalancedAuxiliaryKeySets,
   enumerateToneRowAssignments,
   rowForTone,
@@ -64,6 +65,25 @@ test('3x7 second-key topology exposes exactly 441 toned syllable buckets', () =>
   assert.equal(contract.secondKeyCount, 21);
   assert.equal(TONED_BUCKET_COUNT, 441);
   assert.equal(contract.tonedSyllableBuckets, 441);
+});
+
+test('AVUIO exposes the QZ-compatible 7/8/6 tone-region topology', () => {
+  const contract = buildVariableToneRegionContract('AVUIO');
+  assert.deepEqual(contract.soundKeysByRow, {
+    upper: 'QWERTYP',
+    home: 'SDFGHJKL',
+    lower: 'ZXCBNM',
+  });
+  assert.deepEqual(contract.soundKeyCountByRow, {upper: 7, home: 8, lower: 6});
+  assert.deepEqual(contract.auxiliaryKeyCountByRow, {upper: 3, home: 1, lower: 1});
+  assert.equal(contract.soundKeys.length, 21);
+  assert.equal(contract.tonedSyllableBuckets, 441);
+  assert.equal(contract.auxiliaryKeySetLabel, 'AVUIO');
+  assert.equal(contract.auxiliaryKeySet, 'AIOUV');
+  assert.equal(contract.shapeKeysByMeaning, 'AVUIO');
+  assert.equal(contract.toneKeysByTone, 'IVUAO');
+  assert.throws(() => buildVariableToneRegionContract('AEUIO'),
+    /freezes auxiliaryKeySet=AVUIO/);
 });
 
 test('QAOPL is frozen out of the 3/2/0 topology universe and only meaning order is searched', () => {

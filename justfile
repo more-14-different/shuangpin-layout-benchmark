@@ -66,6 +66,11 @@ pindu11-2121-dmin-rhyme-partitions bases="8" retain="256" uniform="256" orders="
 pindu16-2121-dmin-rhyme-search bases="8" starts="256" retain="64" orders="2":
     node tools/search_toned_2121_pindu16_rhyme.js --bases "{{bases}}" --starts "{{starts}}" --retain "{{retain}}" --orders "{{orders}}"
 
+pindu11-2121-uneven786 starts="576" retain="576":
+    node tools/search_toned_2121_pindu11_uneven_regions.js --starts "{{starts}}" --retain "{{retain}}" --output-layouts research/.cache/uneven786-pindu11-layouts.json --output-report research/.cache/uneven786-pindu11-search.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/uneven786-pindu11-layouts.json --policy 12/213/24 --shape AVUIO --sample 1800 --output research/.cache/uneven786-pindu11-sample1800.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/uneven786-pindu11-layouts.json --rank-from research/.cache/uneven786-pindu11-sample1800.json --top 32 --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-10-ckt-v51-toned-2121-pindu11-uneven786-full.json
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 

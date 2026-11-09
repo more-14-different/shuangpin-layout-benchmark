@@ -16,6 +16,8 @@ const LEXICAL_TONES = Object.freeze([1, 2, 3, 4]);
 const FINAL_COLUMNS_PER_ROW = 7;
 const AUXILIARY_KEY_SET_LABEL = 'QAOPL';
 const AUXILIARY_KEY_SET = [...AUXILIARY_KEY_SET_LABEL].sort().join('');
+const QZ_AUXILIARY_KEY_SET_LABEL = 'AVUIO';
+const QZ_AUXILIARY_KEY_SET = [...QZ_AUXILIARY_KEY_SET_LABEL].sort().join('');
 const DEFAULT_SHAPE_KEYS_BY_MEANING = AUXILIARY_KEY_SET_LABEL;
 const PRIMARY_TONE_ROW_ASSIGNMENT = Object.freeze({
   upper: Object.freeze([4]),
@@ -172,6 +174,54 @@ function buildToned2121Contract(shapeKeysByMeaning = DEFAULT_SHAPE_KEYS_BY_MEANI
   };
 }
 
+function buildVariableToneRegionContract(shapeKeysByMeaning = 'AVUIO') {
+  const toneKeysByTone = toneKeysFromShapeKeys(shapeKeysByMeaning);
+  const semantics = auxiliarySemantics(toneKeysByTone);
+  if (semantics.toneKeySet !== QZ_AUXILIARY_KEY_SET) {
+    throw new Error(`7/8/6 research freezes auxiliaryKeySet=${QZ_AUXILIARY_KEY_SET_LABEL}: ${shapeKeysByMeaning}`);
+  }
+  const auxiliaryKeySet = new Set(semantics.shapeKeysByMeaning);
+  const soundKeysByRow = Object.fromEntries(Object.entries(PHYSICAL_ROWS).map(([row, keys]) => [
+    row,
+    [...keys].filter(key => !auxiliaryKeySet.has(key)).join(''),
+  ]));
+  const auxiliaryKeyCountByRow = Object.fromEntries(Object.entries(PHYSICAL_ROWS).map(([row, keys]) => [
+    row,
+    [...keys].filter(key => auxiliaryKeySet.has(key)).length,
+  ]));
+  const soundKeyCountByRow = Object.fromEntries(Object.entries(soundKeysByRow)
+    .map(([row, keys]) => [row, keys.length]));
+  const soundKeys = Object.values(soundKeysByRow).join('');
+  if (soundKeys.length !== 21 || new Set(soundKeys).size !== 21) {
+    throw new Error('variable tone-region contract requires 21 distinct sound keys');
+  }
+  return {
+    version: 'ckt-v5.1-toned-21x21-variable-tone-regions-1',
+    objective: 'CKT v5.1',
+    firstKeyCount: 21,
+    firstKeySemantics: 'selected by secondCodeFactorization',
+    secondKeyCount: 21,
+    secondKeySemantics: 'tone region x tone-specific rhyme partition',
+    toneRows: [...TONE_ROWS],
+    primaryToneRowAssignment: PRIMARY_TONE_ROW_ASSIGNMENT,
+    neutralTonePolicy: 'follow-tone1',
+    tonedSyllableBuckets: 21 * 21,
+    physicalRows: PHYSICAL_ROWS,
+    soundKeys,
+    soundKeysByRow,
+    soundKeyCountByRow,
+    auxiliaryKeyCountByRow,
+    auxiliaryKeySetLabel: QZ_AUXILIARY_KEY_SET_LABEL,
+    auxiliaryKeySet: semantics.toneKeySet,
+    shapeKeysByMeaning: semantics.shapeKeysByMeaning,
+    toneKeysByTone: semantics.toneKeysByTone,
+    toneDigitsByShapeMeaning: semantics.toneDigitsByShapeMeaning,
+    shapeAuxiliaryEnabled: true,
+    toneAuxiliaryEnabled: false,
+    secondCodeFactorizationSelectionStatus: 'pindu11-tone-specific-region-partitions',
+  };
+}
+
 module.exports = {
   AUXILIARY_KEY_SET,
   AUXILIARY_KEY_SET_LABEL,
@@ -181,10 +231,13 @@ module.exports = {
   LEXICAL_TONES,
   PHYSICAL_ROWS,
   PRIMARY_TONE_ROW_ASSIGNMENT,
+  QZ_AUXILIARY_KEY_SET,
+  QZ_AUXILIARY_KEY_SET_LABEL,
   SECOND_CODE_FACTORIZATIONS,
   TONED_BUCKET_COUNT,
   TONE_ROWS,
   buildToned2121Contract,
+  buildVariableToneRegionContract,
   enumerateRowBalancedAuxiliaryKeySets,
   enumerateToneRowAssignments,
   rowForTone,
