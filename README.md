@@ -2,7 +2,7 @@
 
 当前离线页为 `a7_CKT_R11.html`：在 [Common399](https://wwwhomes.uni-bielefeld.de/gibbon/Syllables/Mandarin)[^common399]、统一语料和冻结模型下，汇集 **467 个完整方案**，可筛选比较、查看键图与逐音节码表，并回看各轮探索结果。
 
-指标速读：[M-R2](https://github.com/more-14-different/shuangpin-layout-benchmark)[^memory] 的 `M` 为记忆项，`D`/`V` 为普通声母/基础韵母原键偏移数[^dv]，均越低越易记；`U` 为 Common399 中的不同二键码数[^u]，越高越好；[A7E-v5/v4](https://github.com/more-14-different/shuangpin-layout-benchmark)[^ensemble]、[v6-CW150](https://github.com/more-14-different/shuangpin-layout-benchmark)[^v6] 与 [CKT](https://github.com/zhanghaozhecn/conditional-keystroke-timing)[^ckt] 均越低越好。所有结果都是冻结合同[^contracts]下的模型值，不代表全局最优或真人实验结论。
+指标速读：[M-R2](https://github.com/more-14-different/shuangpin-layout-benchmark)[^memory] 的 `M` 为记忆项，`D`/`V` 为传统声母/基础韵母原键偏移数[^dv]，均越低越易记；诊断量 `I` 在 `D` 外计入 W/Y，`A` 再计入 A/E/O，合写为 `A/I/D/V`，但不改写 M、D 或历史 D+V 排名；`U` 为 Common399 中的不同二键码数[^u]，越高越好；[A7E-v5/v4](https://github.com/more-14-different/shuangpin-layout-benchmark)[^ensemble]、[v6-CW150](https://github.com/more-14-different/shuangpin-layout-benchmark)[^v6] 与 [CKT](https://github.com/zhanghaozhecn/conditional-keystroke-timing)[^ckt] 均越低越好。所有结果都是冻结合同[^contracts]下的模型值，不代表全局最优或真人实验结论。
 
 拼音拓扑以 `ve` 作为 `üe` 的唯一规范韵母，来源中写成 `ue` 的形式在进入布局映射前统一规范化为 `ve`。冻结语料里的 `jue/que/xue/yue` 原已按同一语义处理，且当前评测集不含 `gue`，因此这一别名规则不改变 Common399、CKT、人因或搜索排名；未来扩展集若加入 `gue`，它会复用各方案的 `ve` 键，只影响 Common399 之外的扩展重码与空码统计。
 
@@ -85,7 +85,7 @@ P3/P5/P6/P8 的“速度极值”用于标记已探索地形，不等于可直�
 
 [^common399]: 普通话的 399 个共同音节集合；本项目以它作为方案覆盖、二键唯一性与多项评测的共同口径。
 [^memory]: M-R1/M-R2 是本项目的记忆账本版本；M-R2 逐项计入非原键声韵映射与额外路由规则，M-R1 是其上一版口径。
-[^dv]: D 是 18 个普通声母偏离同名原键的数量；V 是 `a/e/i/o/u` 五个基础韵母偏离原键的数量。偏移对应的映射费已经计入 M。
+[^dv]: D 是 18 个传统单字母声母 `b/p/m/f/d/t/n/l/g/k/h/j/q/x/r/z/c/s` 的可用键集不再恰好等于同名原键的数量，明确不含翘舌声母，也不含零声母载体 A/E/O/W/Y；I＝D 加 W/Y 乱序，A＝I 再加 A/E/O 乱序；V 是 `a/e/i/o/u` 五个基础韵母的同口径乱序数量。因此保留原键同时增加飞键仍计乱序，例如 B04 的 E→E/U 使 A 增加 1，但不影响 I、D。所有非直映映射和额外路由费用都已进入 M，故 M 与 D 本身不因新增 A/I 诊断而修正；历史排名仍按 D+V。
 [^u]: U 是 Common399 实际得到的不同二键码数量；U 越小，音节重码越多。
 [^ensemble]: A7E-v5 仅以 CKT 计时模型汇总冻结合同；A7E-v4 是同时汇总公开击键当量与几何模型的历史综合分，二者均越低越好。
 [^v6]: v6-CW150 是实验性字词情景分：对 19 个合同的组内 CKT 加入 `150 ms × 非首选率`，并以 S005＝10 归一化；不含抽象 S2。
