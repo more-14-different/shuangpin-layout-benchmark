@@ -14,6 +14,7 @@ const {
   explicitMemoryAudit,
   guardRecord,
 } = require('../tools/search_toned_2121_constrained_ckt.js');
+const {traditionalOnsetD} = require('../tools/search_toned_2121_pindu11_lowmd.js');
 
 const seeds = JSON.parse(fs.readFileSync(new URL(
   '../research/config/ckt-v51-toned-2121-seeds.json', import.meta.url), 'utf8'));
@@ -116,8 +117,9 @@ test('Pindu11 low-MD projection exhausts 21^5 and freezes auditable M/D bounds',
   assert.equal(report.enumeration.maximumOccupied, 437);
   assert.equal(report.memoryAndDisorderAudit.lowerM.total, 24);
   assert.equal(report.memoryAndDisorderAudit.conservativeMGuard.total, 26);
-  assert.equal(report.memoryAndDisorderAudit.ordinaryFamilyDMinimum, 3);
-  assert.deepEqual(report.memoryAndDisorderAudit.forcedOrdinaryFamilies, ['q', 'p', 'l']);
+  assert.equal(report.memoryAndDisorderAudit.traditionalOnsetDMinimum, 11);
+  assert.equal(report.enumeration.minimumDExactSearchSpace, 2 * 21 ** 4);
+  assert.deepEqual(report.memoryAndDisorderAudit.forcedOccupiedKeyFamilies, ['q', 'p', 'l']);
 });
 
 test('Pindu11 low-MD CKT champion retains the upstream first grammar', () => {
@@ -136,7 +138,25 @@ test('Pindu11 low-MD CKT champion retains the upstream first grammar', () => {
   assert.equal(champion.tonedCodes.length, 1407);
   assert.ok(champion.tonedCodes.every(Boolean));
   assert.equal(report.results[0].id, champion.id);
+  assert.equal(traditionalOnsetD(['R', 'N', 'H', 'V', 'Y']), 12);
   assert.ok(report.results[0].score < 9.542);
+});
+
+test('Pindu11 minimum-D champion reaches D11 without reopening the first grammar', () => {
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu11-dmin-column-finalists.json',
+    import.meta.url), 'utf8'));
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-column-full.json',
+    import.meta.url), 'utf8'));
+  const champion = layouts.layouts.find(value =>
+    value.id === 'LOWMD-pindu11-499309-C0412356');
+  assert.ok(champion);
+  assert.deepEqual(champion.forbiddenSourceProjection,
+    {Q: 'R', A: 'H', O: 'N', P: 'Y', L: 'K'});
+  assert.equal(champion.memoryAudit.traditionalOnsetD, 11);
+  assert.equal(report.results[0].id, champion.id);
+  assert.ok(report.results[0].score < 9.56);
 });
 
 test('auxiliary-order refinement renames only the frozen QAOPL auxiliary domain', () => {

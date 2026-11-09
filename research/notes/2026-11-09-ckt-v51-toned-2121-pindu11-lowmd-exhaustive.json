@@ -64,8 +64,21 @@
       "replacesForcedOrdinaryBucketMigrationsWithAllForbiddenBucketProjections": 5,
       "total": 26
     },
-    "ordinaryFamilyDMinimum": 3,
-    "forcedOrdinaryFamilies": [
+    "traditionalOnsetDMinimum": 11,
+    "minimumDCondition": "A source bucket projects to B or H; this preserves exactly one of b/h",
+    "alwaysDisorderedTraditionalOnsets": [
+      "d",
+      "g",
+      "j",
+      "l",
+      "m",
+      "n",
+      "p",
+      "q",
+      "s",
+      "z"
+    ],
+    "forcedOccupiedKeyFamilies": [
       "q",
       "p",
       "l"
@@ -122,13 +135,18 @@
       "436": 120,
       "437": 36
     },
+    "minimumTraditionalOnsetD": 11,
+    "minimumDExactSearchSpace": 388962,
     "candidatePoolCounts": {
       "topWeighted": 256,
       "topCapacity": 256,
+      "minimumDWeighted": 256,
+      "minimumDCapacity": 256,
       "conditional": 105,
-      "uniform": 512
+      "uniform": 512,
+      "uniformMinimumD": 512
     },
-    "retainedUniqueCandidates": 1043,
+    "retainedUniqueCandidates": 1981,
     "best": [
       {
         "ordinal": 2166293,
@@ -142,6 +160,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68375978,
         "tonedSyllableTop1": 0.93607344362099,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>V"
       },
       {
@@ -156,6 +175,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68364116,
         "tonedSyllableTop1": 0.9359110517472206,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>V,L>R"
       },
       {
@@ -170,6 +190,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68349620,
         "tonedSyllableTop1": 0.9357126001705758,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>N,P>Y,L>V"
       },
       {
@@ -184,6 +205,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68348852,
         "tonedSyllableTop1": 0.9357020861797601,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>N,P>Y,L>V"
       },
       {
@@ -198,6 +220,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68348014,
         "tonedSyllableTop1": 0.93569061388249,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>V,L>R"
       },
       {
@@ -212,6 +235,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68345011,
         "tonedSyllableTop1": 0.9356495025355899,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>K"
       },
       {
@@ -226,6 +250,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68344396,
         "tonedSyllableTop1": 0.9356410831288821,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>W,L>V"
       },
       {
@@ -240,6 +265,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68342307,
         "tonedSyllableTop1": 0.9356124845262599,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>N,P>Y,L>V"
       },
       {
@@ -254,6 +280,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68341301,
         "tonedSyllableTop1": 0.9355987122934988,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>R,L>V"
       },
       {
@@ -268,6 +295,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68340221,
         "tonedSyllableTop1": 0.9355839269939143,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>N,P>Y,L>R"
       },
       {
@@ -282,6 +310,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68339747,
         "tonedSyllableTop1": 0.9355774378902079,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>H,L>V"
       },
       {
@@ -296,6 +325,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68337739,
         "tonedSyllableTop1": 0.9355499481850545,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>V,O>N,P>Y,L>R"
       },
       {
@@ -310,6 +340,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68336706,
         "tonedSyllableTop1": 0.9355358063198038,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>N,P>Y,L>V"
       },
       {
@@ -324,6 +355,7 @@
         "occupiedBuckets": 437,
         "topWeight": 68335076,
         "tonedSyllableTop1": 0.935513491469505,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>N,L>V"
       },
       {
@@ -338,6 +370,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68332750,
         "tonedSyllableTop1": 0.9354816483150296,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>E,O>N,P>Y,L>V"
       },
       {
@@ -352,6 +385,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68332659,
         "tonedSyllableTop1": 0.9354804025166387,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>B,L>V"
       },
       {
@@ -366,6 +400,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68327512,
         "tonedSyllableTop1": 0.935409939612045,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>N,L>V"
       },
       {
@@ -380,6 +415,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68327083,
         "tonedSyllableTop1": 0.9354040665624878,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>V,L>R"
       },
       {
@@ -394,6 +430,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68325199,
         "tonedSyllableTop1": 0.9353782744287682,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>R,L>V"
       },
       {
@@ -408,6 +445,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68324119,
         "tonedSyllableTop1": 0.9353634891291838,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>N,P>Y,L>R"
       },
       {
@@ -422,6 +460,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68322047,
         "tonedSyllableTop1": 0.9353351232581292,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>U,L>V"
       },
       {
@@ -436,6 +475,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68321699,
         "tonedSyllableTop1": 0.9353303591060408,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>F,L>V"
       },
       {
@@ -450,6 +490,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68321116,
         "tonedSyllableTop1": 0.9353223777822837,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>K"
       },
       {
@@ -464,6 +505,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68320604,
         "tonedSyllableTop1": 0.9353153684550732,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>N,P>Y,L>V"
       },
       {
@@ -478,6 +520,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68319519,
         "tonedSyllableTop1": 0.9353005147050277,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>H,P>V,L>R"
       },
       {
@@ -492,6 +535,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68318898,
         "tonedSyllableTop1": 0.9352920131577667,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>T,O>N,P>V,L>R"
       },
       {
@@ -506,6 +550,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68317800,
         "tonedSyllableTop1": 0.9352769814365225,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>E,L>V"
       },
       {
@@ -520,6 +565,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68317316,
         "tonedSyllableTop1": 0.9352703554318939,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>N,P>V,L>R"
       },
       {
@@ -534,6 +580,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68315210,
         "tonedSyllableTop1": 0.9352415240977041,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>H,P>Y,L>V"
       },
       {
@@ -548,6 +595,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68314334,
         "tonedSyllableTop1": 0.9352295315769301,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>W"
       },
       {
@@ -562,6 +610,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68313863,
         "tonedSyllableTop1": 0.9352230835435003,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>N,P>Y,L>R"
       },
       {
@@ -576,6 +625,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68313649,
         "tonedSyllableTop1": 0.9352201538637678,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>M,L>V"
       },
       {
@@ -590,6 +640,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68311650,
         "tonedSyllableTop1": 0.9351927873694442,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>F"
       },
       {
@@ -604,6 +655,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68311381,
         "tonedSyllableTop1": 0.9351891047346403,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>V,O>N,P>Y,L>R"
       },
       {
@@ -618,6 +670,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68311319,
         "tonedSyllableTop1": 0.9351882559489235,
+        "traditionalOnsetD": 12,
         "assignment": "Q>F,A>R,O>N,P>Y,L>V"
       },
       {
@@ -632,6 +685,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68310981,
         "tonedSyllableTop1": 0.9351836286977572,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>Y,P>V,L>R"
       },
       {
@@ -646,6 +700,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68310912,
         "tonedSyllableTop1": 0.9351826840813949,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>C,O>Y,P>V,L>R"
       },
       {
@@ -660,6 +715,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68310348,
         "tonedSyllableTop1": 0.9351749628693896,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>N,P>Y,L>V"
       },
       {
@@ -674,6 +730,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68309947,
         "tonedSyllableTop1": 0.9351694731424143,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>Y,L>V"
       },
       {
@@ -688,6 +745,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68308718,
         "tonedSyllableTop1": 0.9351526480190909,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>Y,P>N,L>V"
       },
       {
@@ -702,6 +760,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68308639,
         "tonedSyllableTop1": 0.9351515665018064,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>W,L>R"
       },
       {
@@ -716,6 +775,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68307978,
         "tonedSyllableTop1": 0.9351425173508571,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>V,L>K"
       },
       {
@@ -730,6 +790,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68307950,
         "tonedSyllableTop1": 0.9351421340282753,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>Y,P>N,L>V"
       },
       {
@@ -744,6 +805,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68307363,
         "tonedSyllableTop1": 0.9351340979441493,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>W,L>V"
       },
       {
@@ -758,6 +820,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68306717,
         "tonedSyllableTop1": 0.935125254144583,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>R,O>N,P>Y,L>V"
       },
       {
@@ -772,6 +835,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68306550,
         "tonedSyllableTop1": 0.9351229678991843,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>C,O>N,P>Y,L>R"
       },
       {
@@ -786,6 +850,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68306157,
         "tonedSyllableTop1": 0.9351175876929466,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>W,L>R"
       },
       {
@@ -800,6 +865,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68305739,
         "tonedSyllableTop1": 0.9351118652344037,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>V,L>K"
       },
       {
@@ -814,6 +880,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68305124,
         "tonedSyllableTop1": 0.9351034458276959,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>W,L>V"
       },
       {
@@ -828,6 +895,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68305023,
         "tonedSyllableTop1": 0.935102063128383,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>H,P>Y,L>V"
       },
       {
@@ -842,6 +910,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68304268,
         "tonedSyllableTop1": 0.935091727108766,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>R,L>V"
       },
       {
@@ -856,6 +925,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68304255,
         "tonedSyllableTop1": 0.9350915491375673,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>H,P>Y,L>V"
       },
       {
@@ -870,6 +940,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68304068,
         "tonedSyllableTop1": 0.9350889890903245,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>V,O>N,P>Y,L>R"
       },
       {
@@ -884,6 +955,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68303990,
         "tonedSyllableTop1": 0.9350879212631322,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>H,L>R"
       },
       {
@@ -898,6 +970,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68303722,
         "tonedSyllableTop1": 0.9350842523184205,
+        "traditionalOnsetD": 12,
         "assignment": "Q>V,A>C,O>N,P>Y,L>R"
       },
       {
@@ -912,6 +985,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68303634,
         "tonedSyllableTop1": 0.9350830475903062,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>T,O>N,P>Y,L>V"
       },
       {
@@ -926,6 +1000,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68303417,
         "tonedSyllableTop1": 0.9350800768402971,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>H,P>V,L>R"
       },
       {
@@ -940,6 +1015,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68303139,
         "tonedSyllableTop1": 0.9350762709946634,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>K,L>V"
       },
       {
@@ -954,6 +1030,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68303035,
         "tonedSyllableTop1": 0.9350748472250737,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>C,O>N,P>Y,L>V"
       },
       {
@@ -968,6 +1045,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68301508,
         "tonedSyllableTop1": 0.9350539424542724,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>H,L>R"
       },
       {
@@ -982,6 +1060,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68301405,
         "tonedSyllableTop1": 0.935052532374775,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>Y,P>N,L>V"
       },
       {
@@ -996,6 +1075,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68301214,
         "tonedSyllableTop1": 0.9350499175671633,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>N,P>V,L>R"
       },
       {
@@ -1010,6 +1090,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68300725,
         "tonedSyllableTop1": 0.9350432231120737,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>Y,P>V,L>R"
       },
       {
@@ -1024,6 +1105,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68300475,
         "tonedSyllableTop1": 0.9350398005890217,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>H,L>V"
       },
       {
@@ -1038,6 +1120,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68300414,
         "tonedSyllableTop1": 0.935038965493397,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>V,L>K"
       },
       {
@@ -1052,6 +1135,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68299799,
         "tonedSyllableTop1": 0.9350305460866892,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>W,L>V"
       },
       {
@@ -1066,6 +1150,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68299319,
         "tonedSyllableTop1": 0.9350239748424294,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>N,L>R"
       },
       {
@@ -1080,6 +1165,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68298992,
         "tonedSyllableTop1": 0.9350194981822775,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>E"
       },
       {
@@ -1094,6 +1180,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68298313,
         "tonedSyllableTop1": 0.9350102026096684,
+        "traditionalOnsetD": 12,
         "assignment": "Q>X,A>R,O>N,P>Y,L>V"
       },
       {
@@ -1108,6 +1195,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68298211,
         "tonedSyllableTop1": 0.9350088062202632,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>V,L>K"
       },
       {
@@ -1122,6 +1210,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68297761,
         "tonedSyllableTop1": 0.9350026456787697,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>E,O>N,P>Y,L>R"
       },
       {
@@ -1136,6 +1225,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68297710,
         "tonedSyllableTop1": 0.9350019474840671,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>H,P>Y,L>V"
       },
       {
@@ -1150,6 +1240,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68297596,
         "tonedSyllableTop1": 0.9350003868135554,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>W,L>V"
       },
       {
@@ -1164,6 +1255,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68297283,
         "tonedSyllableTop1": 0.9349961018146943,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>D,L>V"
       },
       {
@@ -1178,6 +1270,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68296902,
         "tonedSyllableTop1": 0.9349908858895631,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>B,L>R"
       },
       {
@@ -1192,6 +1285,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68296837,
         "tonedSyllableTop1": 0.9349899960335696,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>V,O>Y,P>N,L>R"
       },
       {
@@ -1206,6 +1300,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68296704,
         "tonedSyllableTop1": 0.934988175251306,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>H,P>R,L>V"
       },
       {
@@ -1220,6 +1315,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68296519,
         "tonedSyllableTop1": 0.9349856425842475,
+        "traditionalOnsetD": 12,
         "assignment": "Q>E,A>R,O>N,P>Y,L>V"
       },
       {
@@ -1234,6 +1330,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68296125,
         "tonedSyllableTop1": 0.9349802486879176,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>G"
       },
       {
@@ -1248,6 +1345,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68296111,
         "tonedSyllableTop1": 0.9349800570266267,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>V"
       },
       {
@@ -1262,6 +1360,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68296083,
         "tonedSyllableTop1": 0.9349796737040449,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>T,O>N,P>R,L>V"
       },
       {
@@ -1276,6 +1375,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68295804,
         "tonedSyllableTop1": 0.9349758541683189,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>N,L>V"
       },
       {
@@ -1290,6 +1390,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68295626,
         "tonedSyllableTop1": 0.9349734173319059,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>B,L>V"
       },
       {
@@ -1304,6 +1405,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68295003,
         "tonedSyllableTop1": 0.9349648884044605,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>T,O>N,P>Y,L>R"
       },
       {
@@ -1318,6 +1420,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68294810,
         "tonedSyllableTop1": 0.9349622462166643,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>E,O>Y,P>V,L>R"
       },
       {
@@ -1332,6 +1435,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68294501,
         "tonedSyllableTop1": 0.9349580159781721,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>N,P>R,L>V"
       },
       {
@@ -1346,6 +1450,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68294420,
         "tonedSyllableTop1": 0.9349569070807032,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>B,L>R"
       },
       {
@@ -1360,6 +1465,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68294246,
         "tonedSyllableTop1": 0.934954525004659,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>E,O>N,P>Y,L>V"
       },
       {
@@ -1374,6 +1480,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68293990,
         "tonedSyllableTop1": 0.9349510203410539,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>N,P>Y,L>K"
       },
       {
@@ -1388,6 +1495,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68293412,
         "tonedSyllableTop1": 0.9349431074677578,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>C,O>Y,P>V,L>R"
       },
       {
@@ -1402,6 +1510,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68293387,
         "tonedSyllableTop1": 0.9349427652154525,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>B,L>V"
       },
       {
@@ -1416,6 +1525,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68293363,
         "tonedSyllableTop1": 0.9349424366532395,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>N,O>Y,P>V,L>R"
       },
       {
@@ -1430,6 +1540,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68292675,
         "tonedSyllableTop1": 0.9349330178698005,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>M,O>N,P>V,L>R"
       },
       {
@@ -1444,6 +1555,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68292593,
         "tonedSyllableTop1": 0.9349318952822395,
+        "traditionalOnsetD": 12,
         "assignment": "Q>W,A>R,O>N,P>Y,L>V"
       },
       {
@@ -1458,6 +1570,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68292537,
         "tonedSyllableTop1": 0.9349311286370758,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>W,L>R"
       },
       {
@@ -1472,6 +1585,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68292340,
         "tonedSyllableTop1": 0.9349284316889109,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>C,L>V"
       },
       {
@@ -1486,6 +1600,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68291848,
         "tonedSyllableTop1": 0.9349216961635447,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>E,O>Y,P>N,L>V"
       },
       {
@@ -1500,6 +1615,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68291807,
         "tonedSyllableTop1": 0.9349211348697641,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>Y,P>V,L>K"
       },
       {
@@ -1514,6 +1630,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68291755,
         "tonedSyllableTop1": 0.9349204229849694,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>H,P>N,L>R"
       },
       {
@@ -1528,6 +1645,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68291508,
         "tonedSyllableTop1": 0.934917041532194,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>V,O>N,P>Y,L>K"
       },
       {
@@ -1542,6 +1660,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68291488,
         "tonedSyllableTop1": 0.9349167677303498,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>T,O>N,P>Y,L>V"
       },
       {
@@ -1556,6 +1675,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68291192,
         "tonedSyllableTop1": 0.9349127154630563,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>Y,P>W,L>V"
       },
       {
@@ -1570,6 +1690,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68291130,
         "tonedSyllableTop1": 0.9349118666773395,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>B"
       },
       {
@@ -1584,6 +1705,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68290958,
         "tonedSyllableTop1": 0.9349095119814798,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>N,P>V,L>R"
       },
       {
@@ -1598,6 +1720,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68290448,
         "tonedSyllableTop1": 0.9349025300344537,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>E,O>N,P>Y,L>R"
       },
       {
@@ -1612,6 +1735,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68290439,
         "tonedSyllableTop1": 0.9349024068236238,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>W"
       },
       {
@@ -1626,6 +1750,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68289928,
         "tonedSyllableTop1": 0.9348954111865057,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>E,P>Y,L>V"
       },
       {
@@ -1640,6 +1765,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68289637,
         "tonedSyllableTop1": 0.9348914273696731,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>V,L>K"
       },
       {
@@ -1654,6 +1780,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68289534,
         "tonedSyllableTop1": 0.9348900172901757,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>W,L>K"
       },
       {
@@ -1668,6 +1795,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68289328,
         "tonedSyllableTop1": 0.934887197131181,
+        "traditionalOnsetD": 12,
         "assignment": "Q>U,A>R,O>N,P>Y,L>V"
       },
       {
@@ -1682,6 +1810,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68289273,
         "tonedSyllableTop1": 0.9348864441761096,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>H,P>N,L>R"
       },
       {
@@ -1696,6 +1825,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68289022,
         "tonedSyllableTop1": 0.9348830079629653,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>W,L>V"
       },
       {
@@ -1710,6 +1840,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68288240,
         "tonedSyllableTop1": 0.9348723023108588,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>H,P>N,L>V"
       },
       {
@@ -1724,6 +1855,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68288166,
         "tonedSyllableTop1": 0.9348712892440354,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>Y,P>R,L>V"
       },
       {
@@ -1738,6 +1870,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68288153,
         "tonedSyllableTop1": 0.9348711112728367,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>E,O>H,P>Y,L>V"
       },
       {
@@ -1752,6 +1885,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68288097,
         "tonedSyllableTop1": 0.934870344627673,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>C,O>Y,P>R,L>V"
       },
       {
@@ -1766,6 +1900,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68288062,
         "tonedSyllableTop1": 0.9348698654744458,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>B,L>V"
       },
       {
@@ -1780,6 +1915,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68287888,
         "tonedSyllableTop1": 0.9348674833984016,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>H,L>R"
       },
       {
@@ -1794,6 +1930,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68287755,
         "tonedSyllableTop1": 0.934865662616138,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>F"
       },
       {
@@ -1808,6 +1945,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68287620,
         "tonedSyllableTop1": 0.9348638144536899,
+        "traditionalOnsetD": 12,
         "assignment": "Q>V,A>E,O>N,P>Y,L>R"
       },
       {
@@ -1822,6 +1960,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68287445,
         "tonedSyllableTop1": 0.9348614186875536,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>N,P>Y,L>K"
       },
       {
@@ -1836,6 +1975,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68286933,
         "tonedSyllableTop1": 0.9348544093603431,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>E,O>N,P>Y,L>V"
       },
       {
@@ -1850,6 +1990,7 @@
         "occupiedBuckets": 437,
         "topWeight": 68286543,
         "tonedSyllableTop1": 0.9348490702243821,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>Y,P>H,L>V"
       },
       {
@@ -1864,6 +2005,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68286439,
         "tonedSyllableTop1": 0.9348476464547925,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>R,L>K"
       },
       {
@@ -1878,6 +2020,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68286290,
         "tonedSyllableTop1": 0.9348456066310535,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>U,L>R"
       },
       {
@@ -1892,6 +2035,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68286059,
         "tonedSyllableTop1": 0.9348424442197535,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>E,P>N,L>V"
       },
       {
@@ -1906,6 +2050,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68285942,
         "tonedSyllableTop1": 0.9348408424789653,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>F,L>R"
       },
       {
@@ -1920,6 +2065,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68285859,
         "tonedSyllableTop1": 0.934839706201312,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>B,L>V"
       },
       {
@@ -1934,6 +2080,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68285799,
         "tonedSyllableTop1": 0.9348388847957795,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>N,O>H,P>V,L>R"
       },
       {
@@ -1948,6 +2095,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68285313,
         "tonedSyllableTop1": 0.9348322314109665,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>K,O>N,P>V,L>R"
       },
       {
@@ -1962,6 +2110,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68285014,
         "tonedSyllableTop1": 0.9348281380733964,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>U,L>V"
       },
       {
@@ -1976,6 +2125,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68284885,
         "tonedSyllableTop1": 0.9348263720515015,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>H,L>K"
       },
       {
@@ -1990,6 +2140,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68284666,
         "tonedSyllableTop1": 0.934823373921308,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>F,L>V"
       },
       {
@@ -2004,6 +2155,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68284623,
         "tonedSyllableTop1": 0.9348227852473431,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>E,O>Y,P>V,L>R"
       },
       {
@@ -2018,6 +2170,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68284617,
         "tonedSyllableTop1": 0.9348227031067898,
+        "traditionalOnsetD": 12,
         "assignment": "Q>V,A>R,O>N,P>Y,L>K"
       },
       {
@@ -2032,6 +2185,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68284373,
         "tonedSyllableTop1": 0.9348193627242911,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>H,L>V"
       },
       {
@@ -2046,6 +2200,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68284094,
         "tonedSyllableTop1": 0.9348155431885651,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>M"
       },
       {
@@ -2060,6 +2215,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68284082,
         "tonedSyllableTop1": 0.9348153789074586,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>T,L>V"
       },
       {
@@ -2074,6 +2230,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68283957,
         "tonedSyllableTop1": 0.9348136676459327,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>R,L>K"
       },
       {
@@ -2088,6 +2245,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68283808,
         "tonedSyllableTop1": 0.9348116278221937,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>U,L>R"
       },
       {
@@ -2102,6 +2260,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68283722,
         "tonedSyllableTop1": 0.9348104504742638,
+        "traditionalOnsetD": 12,
         "assignment": "Q>I,A>R,O>N,P>Y,L>V"
       },
       {
@@ -2116,6 +2275,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68283645,
         "tonedSyllableTop1": 0.9348093963371638,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>C,O>N,P>V,L>R"
       },
       {
@@ -2130,6 +2290,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68283460,
         "tonedSyllableTop1": 0.9348068636701053,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>F,L>R"
       },
       {
@@ -2144,6 +2305,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68283217,
         "tonedSyllableTop1": 0.9348035369776988,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>Y,P>N,L>R"
       },
       {
@@ -2158,6 +2320,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68282775,
         "tonedSyllableTop1": 0.934797485956943,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>U,L>V"
       },
       {
@@ -2172,6 +2335,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68282427,
         "tonedSyllableTop1": 0.9347927218048546,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>F,L>V"
       },
       {
@@ -2186,6 +2350,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68282043,
         "tonedSyllableTop1": 0.9347874648094469,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>E,L>R"
       },
       {
@@ -2200,6 +2365,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68281865,
         "tonedSyllableTop1": 0.9347850279730339,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>T,O>Y,P>V,L>R"
       },
       {
@@ -2214,6 +2380,7 @@
         "occupiedBuckets": 420,
         "topWeight": 68281844,
         "tonedSyllableTop1": 0.9347847404810975,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>N,P>Y,L>K"
       },
       {
@@ -2228,6 +2395,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68281005,
         "tonedSyllableTop1": 0.9347732544937352,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>Y,P>W,L>V"
       },
       {
@@ -2242,6 +2410,7 @@
         "occupiedBuckets": 431,
         "topWeight": 68280852,
         "tonedSyllableTop1": 0.9347711599096273,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>Y,P>V,L>K"
       },
       {
@@ -2256,6 +2425,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68280800,
         "tonedSyllableTop1": 0.9347704480248326,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>B,L>R"
       },
       {
@@ -2270,6 +2440,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68280767,
         "tonedSyllableTop1": 0.9347699962517897,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>E,L>V"
       },
       {
@@ -2284,6 +2455,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68280602,
         "tonedSyllableTop1": 0.9347677373865754,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>H,P>R,L>V"
       },
       {
@@ -2298,6 +2470,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68280237,
         "tonedSyllableTop1": 0.9347627405029195,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>Y,P>W,L>V"
       },
       {
@@ -2312,6 +2485,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68280214,
         "tonedSyllableTop1": 0.9347624256307987,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>N,L>K"
       },
       {
@@ -2326,6 +2500,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68279702,
         "tonedSyllableTop1": 0.9347554163035883,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>Y,P>N,L>V"
       },
       {
@@ -2340,6 +2515,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68279561,
         "tonedSyllableTop1": 0.934753486000587,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>E,L>R"
       },
       {
@@ -2354,6 +2530,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68279455,
         "tonedSyllableTop1": 0.9347520348508129,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>Y,P>B,L>V"
       },
       {
@@ -2368,6 +2545,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68279453,
         "tonedSyllableTop1": 0.9347520074706286,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>C,O>H,P>Y,L>R"
       },
       {
@@ -2382,6 +2560,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68279423,
         "tonedSyllableTop1": 0.9347515967678623,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>I,L>V"
       },
       {
@@ -2396,6 +2575,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68279362,
         "tonedSyllableTop1": 0.9347507616722377,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>V,O>N,P>Y,L>K"
       },
       {
@@ -2410,6 +2590,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68278528,
         "tonedSyllableTop1": 0.9347393441353363,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>E,L>V"
       },
       {
@@ -2424,6 +2605,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68278399,
         "tonedSyllableTop1": 0.9347375781134415,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>E,O>N,P>R,L>V"
       },
       {
@@ -2438,6 +2620,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68278066,
         "tonedSyllableTop1": 0.9347330193127363,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>E,P>V,L>R"
       },
       {
@@ -2452,6 +2635,7 @@
         "occupiedBuckets": 431,
         "topWeight": 68277910,
         "tonedSyllableTop1": 0.9347308836583519,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>Y,P>R,L>V"
       },
       {
@@ -2466,6 +2650,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68277892,
         "tonedSyllableTop1": 0.9347306372366921,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>M,L>R"
       },
       {
@@ -2480,6 +2665,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68277888,
         "tonedSyllableTop1": 0.9347305824763233,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>E,O>N,P>Y,L>K"
       },
       {
@@ -2494,6 +2680,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68277797,
         "tonedSyllableTop1": 0.9347293366779323,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>B,L>K"
       },
       {
@@ -2508,6 +2695,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68277450,
         "tonedSyllableTop1": 0.9347245862159362,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>U,L>V"
       },
       {
@@ -2522,6 +2710,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68277411,
         "tonedSyllableTop1": 0.9347240523023401,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>M,O>N,P>Y,L>V"
       },
       {
@@ -2536,6 +2725,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68277310,
         "tonedSyllableTop1": 0.9347226696030272,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>E,O>Y,P>V,L>R"
       },
       {
@@ -2550,6 +2740,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68277301,
         "tonedSyllableTop1": 0.9347225463921973,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>V,L>W"
       },
       {
@@ -2564,6 +2755,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68277285,
         "tonedSyllableTop1": 0.9347223273507219,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>B,L>V"
       },
       {
@@ -2578,6 +2770,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68277102,
         "tonedSyllableTop1": 0.934719822063848,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>F,L>V"
       },
       {
@@ -2592,6 +2785,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68276971,
         "tonedSyllableTop1": 0.9347180286617687,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>V,O>H,P>Y,L>R"
       },
       {
@@ -2606,6 +2800,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68276616,
         "tonedSyllableTop1": 0.934713168679035,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>M,L>V"
       },
       {
@@ -2620,6 +2815,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68276356,
         "tonedSyllableTop1": 0.9347096092550609,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>Y,P>H,L>V"
       },
       {
@@ -2634,6 +2830,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68275938,
         "tonedSyllableTop1": 0.9347038867965181,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>C,O>H,P>Y,L>V"
       },
       {
@@ -2648,6 +2845,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68275718,
         "tonedSyllableTop1": 0.9347008749762323,
+        "traditionalOnsetD": 12,
         "assignment": "Q>T,A>R,O>N,P>Y,L>V"
       },
       {
@@ -2662,6 +2860,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68275653,
         "tonedSyllableTop1": 0.9346999851202388,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>H,P>N,L>R"
       },
       {
@@ -2676,6 +2875,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68275588,
         "tonedSyllableTop1": 0.9346990952642452,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>Y,P>H,L>V"
       },
       {
@@ -2690,6 +2890,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68275562,
         "tonedSyllableTop1": 0.9346987393218479,
+        "traditionalOnsetD": 12,
         "assignment": "Q>F,A>C,O>N,P>Y,L>R"
       },
       {
@@ -2704,6 +2905,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68275410,
         "tonedSyllableTop1": 0.9346966584278322,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>M,L>R"
       },
       {
@@ -2718,6 +2920,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68275247,
         "tonedSyllableTop1": 0.9346944269428024,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>U,L>V"
       },
       {
@@ -2732,6 +2935,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68275097,
         "tonedSyllableTop1": 0.9346923734289713,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>E"
       },
       {
@@ -2746,6 +2950,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68275062,
         "tonedSyllableTop1": 0.934691894275744,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>V,L>W"
       },
       {
@@ -2760,6 +2965,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68274899,
         "tonedSyllableTop1": 0.9346896627907141,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>F,L>V"
       },
       {
@@ -2774,6 +2980,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68274856,
         "tonedSyllableTop1": 0.9346890741167492,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>E,O>N,P>V,L>R"
       },
       {
@@ -2788,6 +2995,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68274617,
         "tonedSyllableTop1": 0.9346858021847114,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>V,L>F"
       },
       {
@@ -2802,6 +3010,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68274441,
         "tonedSyllableTop1": 0.9346833927284829,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>R"
       },
       {
@@ -2816,6 +3025,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68274377,
         "tonedSyllableTop1": 0.9346825165625816,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>M,L>V"
       },
       {
@@ -2830,6 +3040,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68274307,
         "tonedSyllableTop1": 0.934681558256127,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>Y,P>V,L>K"
       },
       {
@@ -2844,6 +3055,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68274301,
         "tonedSyllableTop1": 0.9346814761155738,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>T,O>H,P>V,L>R"
       },
       {
@@ -2858,6 +3070,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68274190,
         "tonedSyllableTop1": 0.9346799565153388,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>Y,L>R"
       },
       {
@@ -2872,6 +3085,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68273757,
         "tonedSyllableTop1": 0.9346740287054127,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>E,P>Y,L>V"
       },
       {
@@ -2886,6 +3100,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68273692,
         "tonedSyllableTop1": 0.9346731388494192,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>Y,P>W,L>V"
       },
       {
@@ -2900,6 +3115,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68273653,
         "tonedSyllableTop1": 0.9346726049358232,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>Y,P>Y,L>V"
       },
       {
@@ -2914,6 +3130,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68273203,
         "tonedSyllableTop1": 0.9346664443943296,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>E,L>V"
       },
       {
@@ -2928,6 +3145,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68273080,
         "tonedSyllableTop1": 0.934664760512988,
+        "traditionalOnsetD": 12,
         "assignment": "Q>F,A>V,O>N,P>Y,L>R"
       },
       {
@@ -2942,6 +3160,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68272961,
         "tonedSyllableTop1": 0.9346631313920153,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>Y,P>N,L>R"
       },
       {
@@ -2956,6 +3175,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68272650,
         "tonedSyllableTop1": 0.9346588737733387,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>N,L>K"
       },
       {
@@ -2970,6 +3190,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68272378,
         "tonedSyllableTop1": 0.9346551500682582,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>V,L>F"
       },
       {
@@ -2984,6 +3205,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68272230,
         "tonedSyllableTop1": 0.9346531239346113,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>G"
       },
       {
@@ -2998,6 +3220,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68272138,
         "tonedSyllableTop1": 0.9346518644461282,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>H,P>N,L>V"
       },
       {
@@ -3012,6 +3235,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68272098,
         "tonedSyllableTop1": 0.93465131684244,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>T,O>N,P>V,L>R"
       },
       {
@@ -3026,6 +3250,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68272047,
         "tonedSyllableTop1": 0.9346506186477374,
+        "traditionalOnsetD": 12,
         "assignment": "Q>F,A>C,O>N,P>Y,L>V"
       },
       {
@@ -3040,6 +3265,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68271995,
         "tonedSyllableTop1": 0.9346499067629425,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>E,O>Y,P>R,L>V"
       },
       {
@@ -3054,6 +3280,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68271708,
         "tonedSyllableTop1": 0.9346459777064788,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>V,O>N,P>Y,L>R"
       },
       {
@@ -3068,6 +3295,7 @@
         "occupiedBuckets": 425,
         "topWeight": 68271606,
         "tonedSyllableTop1": 0.9346445813170736,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>W,L>R"
       },
       {
@@ -3082,6 +3310,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68271308,
         "tonedSyllableTop1": 0.9346405016695958,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>N,L>V"
       },
       {
@@ -3096,6 +3325,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68271238,
         "tonedSyllableTop1": 0.9346395433631411,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>N,P>W,L>V"
       },
       {
@@ -3110,6 +3340,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68271085,
         "tonedSyllableTop1": 0.9346374487790334,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>N,P>V,L>K"
       },
       {
@@ -3124,6 +3355,7 @@
         "occupiedBuckets": 429,
         "topWeight": 68271000,
         "tonedSyllableTop1": 0.9346362851211957,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>E,L>V"
       },
       {
@@ -3138,6 +3370,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68270675,
         "tonedSyllableTop1": 0.9346318358412282,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>Y,L>V"
       },
       {
@@ -3152,6 +3385,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68270597,
         "tonedSyllableTop1": 0.934630768014036,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>C,O>Y,P>R,L>V"
       },
       {
@@ -3166,6 +3400,7 @@
         "occupiedBuckets": 437,
         "topWeight": 68270548,
         "tonedSyllableTop1": 0.9346300971995177,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>N,O>Y,P>R,L>V"
       },
       {
@@ -3180,6 +3415,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68270535,
         "tonedSyllableTop1": 0.9346299192283191,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>N,O>H,P>Y,L>V"
       },
       {
@@ -3194,6 +3430,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68270479,
         "tonedSyllableTop1": 0.9346291525831555,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>V,O>Y,P>N,L>R"
       },
       {
@@ -3208,6 +3445,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68270470,
         "tonedSyllableTop1": 0.9346290293723256,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>N,P>W,L>V"
       },
       {
@@ -3222,6 +3460,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68270425,
         "tonedSyllableTop1": 0.9346284133181763,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>U"
       },
       {
@@ -3236,6 +3475,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68270417,
         "tonedSyllableTop1": 0.9346283037974386,
+        "traditionalOnsetD": 12,
         "assignment": "Q>F,A>R,O>Y,P>N,L>V"
       },
       {
@@ -3250,6 +3490,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68270337,
         "tonedSyllableTop1": 0.9346272085900619,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>R,L>K"
       },
       {
@@ -3264,6 +3505,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68270188,
         "tonedSyllableTop1": 0.934625168766323,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>U,L>R"
       },
       {
@@ -3278,6 +3520,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68270049,
         "tonedSyllableTop1": 0.9346232658435061,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>K,O>N,P>Y,L>V"
       },
       {
@@ -3292,6 +3535,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68269860,
         "tonedSyllableTop1": 0.9346206784160788,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>M,O>N,P>R,L>V"
       },
       {
@@ -3306,6 +3550,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68269840,
         "tonedSyllableTop1": 0.9346204046142347,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>F,L>R"
       },
       {
@@ -3320,6 +3565,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68269737,
         "tonedSyllableTop1": 0.9346189945347372,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>V,L>W"
       },
       {
@@ -3334,6 +3580,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68269446,
         "tonedSyllableTop1": 0.9346150107179048,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>Y,P>N,L>V"
       },
       {
@@ -3348,6 +3595,7 @@
         "occupiedBuckets": 431,
         "topWeight": 68269268,
         "tonedSyllableTop1": 0.9346125738814918,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>R,O>Y,P>B,L>V"
       },
       {
@@ -3362,6 +3610,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68269266,
         "tonedSyllableTop1": 0.9346125465013073,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>H,P>Y,L>R"
       },
       {
@@ -3376,6 +3625,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68269124,
         "tonedSyllableTop1": 0.9346106025082138,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>V,O>Y,P>W,L>R"
       },
       {
@@ -3390,6 +3640,7 @@
         "occupiedBuckets": 435,
         "topWeight": 68269052,
         "tonedSyllableTop1": 0.9346096168215748,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>M,L>V"
       },
       {
@@ -3404,6 +3655,7 @@
         "occupiedBuckets": 436,
         "topWeight": 68269043,
         "tonedSyllableTop1": 0.934609493610745,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>R,O>Y,P>H,L>V"
       },
       {
@@ -3418,6 +3670,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68268843,
         "tonedSyllableTop1": 0.9346067555923034,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>Y,P>U,L>V"
       },
       {
@@ -3432,6 +3685,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68268780,
         "tonedSyllableTop1": 0.9346058931164943,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>M,O>N,P>Y,L>R"
       },
       {
@@ -3446,6 +3700,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68268706,
         "tonedSyllableTop1": 0.9346048800496709,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>V,L>K"
       },
       {
@@ -3460,6 +3715,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68268645,
         "tonedSyllableTop1": 0.9346040449540463,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>T,O>N,P>Y,L>R"
       },
       {
@@ -3474,6 +3730,7 @@
         "occupiedBuckets": 431,
         "topWeight": 68268500,
         "tonedSyllableTop1": 0.9346020598906761,
+        "traditionalOnsetD": 12,
         "assignment": "Q>R,A>C,O>Y,P>B,L>V"
       },
       {
@@ -3488,6 +3745,7 @@
         "occupiedBuckets": 434,
         "topWeight": 68268495,
         "tonedSyllableTop1": 0.934601991440215,
+        "traditionalOnsetD": 12,
         "assignment": "Q>N,A>R,O>Y,P>F,L>V"
       },
       {
@@ -3502,6 +3760,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68268143,
         "tonedSyllableTop1": 0.934597172527758,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>C,O>N,P>R,L>V"
       },
       {
@@ -3516,6 +3775,7 @@
         "occupiedBuckets": 428,
         "topWeight": 68268091,
         "tonedSyllableTop1": 0.9345964606429631,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>C,O>Y,P>W,L>V"
       },
       {
@@ -3530,6 +3790,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68267779,
         "tonedSyllableTop1": 0.9345921893341943,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>J,L>V"
       },
       {
@@ -3544,6 +3805,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68267543,
         "tonedSyllableTop1": 0.9345889584724332,
+        "traditionalOnsetD": 12,
         "assignment": "Q>M,A>E,O>N,P>V,L>R"
       },
       {
@@ -3558,6 +3820,7 @@
         "occupiedBuckets": 430,
         "topWeight": 68267534,
         "tonedSyllableTop1": 0.9345888352616033,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>V,L>W"
       },
       {
@@ -3572,6 +3835,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68267427,
         "tonedSyllableTop1": 0.9345873704217371,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>V,L>T"
       },
       {
@@ -3586,6 +3850,7 @@
         "occupiedBuckets": 423,
         "topWeight": 68267382,
         "tonedSyllableTop1": 0.9345867543675878,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>C,O>N,P>K,L>R"
       },
       {
@@ -3600,6 +3865,7 @@
         "occupiedBuckets": 427,
         "topWeight": 68267235,
         "tonedSyllableTop1": 0.9345847419240332,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>Y,L>B"
       },
       {
@@ -3614,6 +3880,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68267185,
         "tonedSyllableTop1": 0.9345840574194229,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>U,L>K"
       },
       {
@@ -3628,6 +3895,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68267053,
         "tonedSyllableTop1": 0.9345822503272514,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>H,P>V,L>F"
       },
       {
@@ -3642,6 +3910,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68267005,
         "tonedSyllableTop1": 0.9345815932028254,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>N,O>Y,P>V,L>R"
       },
       {
@@ -3656,6 +3925,7 @@
         "occupiedBuckets": 431,
         "topWeight": 68266849,
         "tonedSyllableTop1": 0.934579457548441,
+        "traditionalOnsetD": 12,
         "assignment": "Q>H,A>R,O>N,P>M,L>V"
       },
       {
@@ -3670,6 +3940,7 @@
         "occupiedBuckets": 424,
         "topWeight": 68266837,
         "tonedSyllableTop1": 0.9345792932673345,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>R,O>N,P>F,L>K"
       },
       {
@@ -3684,6 +3955,7 @@
         "occupiedBuckets": 432,
         "topWeight": 68266784,
         "tonedSyllableTop1": 0.9345785676924475,
+        "traditionalOnsetD": 12,
         "assignment": "Q>K,A>V,O>H,P>Y,L>R"
       },
       {
@@ -3698,6 +3970,7 @@
         "occupiedBuckets": 433,
         "topWeight": 68266722,
         "tonedSyllableTop1": 0.9345777189067306,
+        "traditionalOnsetD": 12,
         "assignment": "Q>F,A>R,O>H,P>Y,L>V"
       },
       {
@@ -3712,6 +3985,7 @@
         "occupiedBuckets": 426,
         "topWeight": 68266673,
         "tonedSyllableTop1": 0.9345770480922124,
+        "traditionalOnsetD": 12,
         "assignment": "Q>Y,A>E,O>N,P>U,L>V"
       }
     ]

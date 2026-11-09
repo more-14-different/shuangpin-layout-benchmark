@@ -44,6 +44,13 @@ pindu11-2121-lowmd retain="256" sample_retain="512":
     node tools/search_toned_2121_pindu11_lowmd.js --retain "{{retain}}" --sample-retain "{{sample_retain}}"
     node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-layouts.json --policy 12/213/24 --shape QAOPL --sample 160 --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-sample-ckt.json
 
+pindu11-2121-dmin:
+    node tools/search_toned_2121_pindu11_lowmd.js --retain 256 --sample-retain 512
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-layouts.json --max-d 11 --policy 12/213/24 --shape QAOPL --sample 160 --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-sample.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-layouts.json --rank-from research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-sample.json --top 64 --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-full.json
+    node tools/optimize_toned_2121_pindu11_lowmd_columns.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-layouts.json --reports research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-full.json --bases 8 --sample 120 --retain 4 --output-layouts research/config/ckt-v51-toned-2121-pindu11-dmin-column-finalists.json --output-report research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-column-screen.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-dmin-column-finalists.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-column-full.json
+
 pindu11-2121-lowmd-columns bases="8" sample="120":
     node tools/optimize_toned_2121_pindu11_lowmd_columns.js --bases "{{bases}}" --sample "{{sample}}"
     node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-column-finalists.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-column-full.json

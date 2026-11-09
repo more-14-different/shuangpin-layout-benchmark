@@ -281,9 +281,15 @@ function main() {
   const motor = projectedMotor(data);
   const layouts = JSON.parse(fs.readFileSync(layoutsFile, 'utf8'));
   const reference = buildReference({data, words, strokes, motor, snow});
-  const selected = args.ids
-    ? layouts.layouts.filter(value => String(args.ids).split(',').includes(value.id))
-    : layouts.layouts;
+  const rankedIds = args['rank-from']
+    ? JSON.parse(fs.readFileSync(path.resolve(args['rank-from']), 'utf8')).results
+      .slice(0, Number(args.top || 64)).map(value => value.id)
+    : null;
+  const selectedIds = args.ids ? String(args.ids).split(',') : rankedIds;
+  const maximumD = args['max-d'] === undefined ? null : Number(args['max-d']);
+  const selected = layouts.layouts.filter(value =>
+    (!selectedIds || selectedIds.includes(value.id)) &&
+    (maximumD === null || Number(value.memoryAudit?.traditionalOnsetD) <= maximumD));
   const results = selected.map(layout => (forcedPolicy ? scoreFixedPolicy : scoreLayout)({
     layout, layouts, data, words, motor, reference,
     shapeKeysByMeaning: forcedShapeKeysByMeaning || layout.recommendedShapeKeysByMeaning || 'QAOPL',
@@ -297,6 +303,7 @@ function main() {
       policy: forcedPolicy,
       shapeKeysByMeaning: forcedShapeKeysByMeaning || 'layout recommendation or QAOPL fallback',
       sampleRowsPerTrack: Number(args.sample || 0) || null,
+      maximumTraditionalOnsetD: maximumD,
     } : {kind: 'exhaustive-word-auxiliary-policy', combinationsPerLayout: 144},
     reference: {id: 'S005', policy: REFERENCE_POLICY, tracks: reference.tracks},
     results,

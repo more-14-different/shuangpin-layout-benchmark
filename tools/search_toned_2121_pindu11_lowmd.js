@@ -79,6 +79,11 @@ function assignmentId(destinations) {
   return FORBIDDEN_SOURCE_KEYS.map((source, index) => `${source}>${destinations[index]}`).join(',');
 }
 
+function traditionalOnsetD(destinations) {
+  const aDestination = destinations[1];
+  return aDestination === 'B' || aDestination === 'H' ? 11 : 12;
+}
+
 function enumerateProjection(tokens, decomposition, soundKeys, retain, sampleRetain) {
   const destinationIndex = new Map(soundKeys.map((key, index) => [key, index]));
   const sourceIndex = new Map(FORBIDDEN_SOURCE_KEYS.map((key, index) => [key, index]));
@@ -132,10 +137,20 @@ function enumerateProjection(tokens, decomposition, soundKeys, retain, sampleRet
   const capacityBest = minHeap(retain, (left, right) =>
     left.occupiedBuckets - right.occupiedBuckets || left.topWeight - right.topWeight ||
     right.ordinal - left.ordinal);
+  const minimumDWeighted = minHeap(retain, (left, right) =>
+    left.topWeight - right.topWeight || left.occupiedBuckets - right.occupiedBuckets ||
+    right.ordinal - left.ordinal);
+  const minimumDCapacity = minHeap(retain, (left, right) =>
+    left.occupiedBuckets - right.occupiedBuckets || left.topWeight - right.topWeight ||
+    right.ordinal - left.ordinal);
   const conditionalBest = Array.from({length: 5}, () => Array(soundKeys.length));
   const uniform = [];
+  const uniformMinimumD = [];
   const exactSpace = 21 ** 5;
   const uniformStride = Math.max(1, Math.floor(exactSpace / sampleRetain));
+  const minimumDSpace = 2 * 21 ** 4;
+  const minimumDUniformStride = Math.max(1, Math.floor(minimumDSpace / sampleRetain));
+  let minimumDOrdinal = 0;
   let ordinal = 0;
   let maximumOccupied = 0;
   let maximumTopWeight = 0;
@@ -169,9 +184,17 @@ function enumerateProjection(tokens, decomposition, soundKeys, retain, sampleRet
         occupiedBuckets: occupied,
         topWeight,
         tonedSyllableTop1: topWeight / totalWeight,
+        traditionalOnsetD: traditionalOnsetD(destinations.map(value => soundKeys[value])),
       };
       best.push(candidate);
       capacityBest.push(candidate);
+      if (candidate.traditionalOnsetD === 11) {
+        minimumDWeighted.push(candidate);
+        minimumDCapacity.push(candidate);
+        if (uniformMinimumD.length < sampleRetain &&
+            minimumDOrdinal % minimumDUniformStride === 0) uniformMinimumD.push(candidate);
+        minimumDOrdinal++;
+      }
       for (let variable = 0; variable < 5; variable++) {
         const destination = destinations[variable];
         const previous = conditionalBest[variable][destination];
@@ -189,8 +212,11 @@ function enumerateProjection(tokens, decomposition, soundKeys, retain, sampleRet
   const candidatePools = {
     topWeighted: best.sorted(),
     topCapacity: capacityBest.sorted(),
+    minimumDWeighted: minimumDWeighted.sorted(),
+    minimumDCapacity: minimumDCapacity.sorted(),
     conditional: conditionalBest.flat().filter(Boolean),
     uniform,
+    uniformMinimumD,
   };
   const unique = new Map();
   for (const [pool, candidates] of Object.entries(candidatePools)) for (const candidate of candidates) {
@@ -205,6 +231,8 @@ function enumerateProjection(tokens, decomposition, soundKeys, retain, sampleRet
     maximumTop1: maximumTopWeight / totalWeight,
     maximumTop1AtCapacity,
     occupiedHistogram: Object.fromEntries([...occupiedHistogram].sort((left, right) => left[0] - right[0])),
+    minimumTraditionalOnsetD: 11,
+    minimumDExactSearchSpace: minimumDSpace,
     candidatePoolCounts: Object.fromEntries(Object.entries(candidatePools)
       .map(([key, values]) => [key, values.length])),
     retainedUniqueCandidates: unique.size,
@@ -241,7 +269,8 @@ function encodeLayout(candidate, inventory, decomposition, contract) {
     memoryAudit: {
       lowerM: 24,
       conservativeMGuard: 26,
-      ordinaryFamilyD: 3,
+      traditionalOnsetD: candidate.traditionalOnsetD,
+      forcedOccupiedKeyFamilyCount: 3,
       sourceExceptionRules: Object.keys(IMAGE_FIRST_EXCEPTIONS).length,
     },
     tonedCodes,
@@ -294,8 +323,10 @@ function main() {
         replacesForcedOrdinaryBucketMigrationsWithAllForbiddenBucketProjections: 5,
         total: 26,
       },
-      ordinaryFamilyDMinimum: 3,
-      forcedOrdinaryFamilies: ['q', 'p', 'l'],
+      traditionalOnsetDMinimum: 11,
+      minimumDCondition: 'A source bucket projects to B or H; this preserves exactly one of b/h',
+      alwaysDisorderedTraditionalOnsets: ['d', 'g', 'j', 'l', 'm', 'n', 'p', 'q', 's', 'z'],
+      forcedOccupiedKeyFamilies: ['q', 'p', 'l'],
       forcedOrdinaryShengjieAtoms: ['qi', 'qv', 'p', 'pi', 'pu', 'l', 'lu', 'lv'],
       forcedOrdinaryShengjieAtomCount: 8,
       upstreamExceptionRuleCount: 10,
@@ -339,4 +370,5 @@ module.exports = {
   PINYU11_COLUMN,
   assignmentId,
   enumerateProjection,
+  traditionalOnsetD,
 };
