@@ -1,0 +1,5103 @@
+{
+  "version": "ckt-v5.1-toned-2121-weighted-lowm-pair-audit-1",
+  "base": {
+    "id": "HIST-qaopl_nasal_minimal-D0V0-C1",
+    "score": 9.659329215730638,
+    "ruleOrientation": "nasal an/ang: i -1, u +1 (seed); umlaut +2",
+    "flyingAudit": {
+      "shengjieFamilyCount": 55,
+      "tonedFullFinalFamilyCount": 161,
+      "shengjieFlying": [],
+      "tonedFullFinalFlying": []
+    }
+  },
+  "fixedEvaluation": {
+    "shapeKeysByMeaning": "QOLAP",
+    "wordPolicy": {
+      "word2": "21",
+      "word3": "213",
+      "word4": "23"
+    }
+  },
+  "candidateCount": 12,
+  "pairCount": 61,
+  "compatibility": "No repeated family; initial/shengjie and rhymeBody/fullFinal rules with overlapping token domains are not combined.",
+  "globalOptimality": "not proven; complete pair audit only over the selected best single-rule candidates",
+  "candidates": [
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "di",
+        "destination": "K",
+        "proxyDeltaTop1Share": 0.006436044432467497
+      },
+      "score": 9.586239719284112,
+      "deltaVsBase": -0.07308949644652607
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "shu",
+        "destination": "C",
+        "proxyDeltaTop1Share": 0.005047506318090684
+      },
+      "score": 9.59370287532276,
+      "deltaVsBase": -0.06562634040787785
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "d",
+        "destination": "C",
+        "proxyDeltaTop1Share": 0.00497789439965603
+      },
+      "score": 9.598448064447016,
+      "deltaVsBase": -0.06088115128362226
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "di",
+        "destination": "N",
+        "proxyDeltaTop1Share": 0.005202933758861051
+      },
+      "score": 9.600904119616535,
+      "deltaVsBase": -0.05842509611410307
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "di",
+        "destination": "C",
+        "proxyDeltaTop1Share": 0.004925215336137181
+      },
+      "score": 9.608317309711222,
+      "deltaVsBase": -0.05101190601941674
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "shu",
+        "destination": "N",
+        "proxyDeltaTop1Share": 0.006392090341856616
+      },
+      "score": 9.611961383456913,
+      "deltaVsBase": -0.047367832273724986
+    },
+    {
+      "move": {
+        "property": "initial",
+        "position": "first",
+        "family": "r",
+        "destination": "C",
+        "proxyDeltaTop1Share": 0.0009464312554074032
+      },
+      "score": 9.61261828651432,
+      "deltaVsBase": -0.04671092921631903
+    },
+    {
+      "move": {
+        "property": "initial",
+        "position": "first",
+        "family": "r",
+        "destination": "K",
+        "proxyDeltaTop1Share": 0.0008474616460194541
+      },
+      "score": 9.617946114655314,
+      "deltaVsBase": -0.041383101075323836
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "du",
+        "destination": "N",
+        "proxyDeltaTop1Share": 0.004752833524836829
+      },
+      "score": 9.622776146321499,
+      "deltaVsBase": -0.03655306940913938
+    },
+    {
+      "move": {
+        "property": "fullFinal",
+        "position": "second",
+        "family": "ou",
+        "destination": 3,
+        "proxyDeltaTop1Share": 0.002169682343558093
+      },
+      "score": 9.626542682906795,
+      "deltaVsBase": -0.03278653282384347
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "jv",
+        "destination": "C",
+        "proxyDeltaTop1Share": 0.004287272512878257
+      },
+      "score": 9.628767878000094,
+      "deltaVsBase": -0.03056133773054448
+    },
+    {
+      "move": {
+        "property": "shengjie",
+        "position": "first",
+        "family": "ch",
+        "destination": "K",
+        "provenance": "prior full-CKT M13 champion"
+      },
+      "score": 9.62912082433779,
+      "deltaVsBase": -0.03020839139284881
+    }
+  ],
+  "pairs": [
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.521493796523044,
+      "deltaVsM12": -0.1378354192075939,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.51460697383186,
+          "firstAuxRate": 0.19421431831979905,
+          "secondAuxRate": 0.03312582314719442,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027814641491144777,
+          "meanRejectedCandidates": 0.0031533532945126953,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2273401414669936,
+          "effectiveMs": 187.54351134788445
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.2996470644976,
+          "firstAuxRate": 0.1368228004998741,
+          "secondAuxRate": 0.016849058679162216,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009931018474535393,
+          "meanRejectedCandidates": 0.0011089392155290041,
+          "meanPageActions": 0,
+          "meanKeys": 4.1536718591790365,
+          "effectiveMs": 466.0525128874571
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 334.05020147166357,
+          "firstAuxRate": 0.4684207929047659,
+          "secondAuxRate": 0.16027632931965138,
+          "thirdAuxRate": 0.032650003368100956,
+          "selectionRate": 0.00359582431161056,
+          "meanRejectedCandidates": 0.0042265422744369695,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6613471255925183,
+          "effectiveMs": 534.8236884124316
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.4045212811678,
+          "firstAuxRate": 0.2218689401126587,
+          "secondAuxRate": 0.023550030541435032,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013425500282863855,
+          "meanRejectedCandidates": 0.0015420193016499773,
+          "meanPageActions": 0,
+          "meanKeys": 4.245418970654094,
+          "effectiveMs": 517.9128434594503
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.535656796002515,
+      "deltaVsM12": -0.12367241972812337,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.45678095610947,
+          "firstAuxRate": 0.197357262577771,
+          "secondAuxRate": 0.03337432427517142,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028764904658488285,
+          "meanRejectedCandidates": 0.0032636715385246044,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2307315868529423,
+          "effectiveMs": 188.56565064818795
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.1930107138431,
+          "firstAuxRate": 0.13780505897323964,
+          "secondAuxRate": 0.01696384805788429,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001006053686221572,
+          "meanRejectedCandidates": 0.0011224942655372455,
+          "meanPageActions": 0,
+          "meanKeys": 4.154768907031124,
+          "effectiveMs": 466.28343974819006
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.5300761310195,
+          "firstAuxRate": 0.46825889818110145,
+          "secondAuxRate": 0.15917802463441696,
+          "thirdAuxRate": 0.032281217239512223,
+          "selectionRate": 0.003477513625983391,
+          "meanRejectedCandidates": 0.004099086630467278,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6597181400550305,
+          "effectiveMs": 535.7375082169663
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.6234219288627,
+          "firstAuxRate": 0.2185992063877026,
+          "secondAuxRate": 0.02330846620496547,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001289010709423475,
+          "meanRejectedCandidates": 0.0014795768829761542,
+          "meanPageActions": 0,
+          "meanKeys": 4.241907672592668,
+          "effectiveMs": 518.043108976466
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.54050331191205,
+      "deltaVsM12": -0.11882590381858904,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.86719442871443,
+          "firstAuxRate": 0.19384482676146922,
+          "secondAuxRate": 0.03317237142296091,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027149164885337447,
+          "meanRejectedCandidates": 0.0030701687187867787,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2270171981844302,
+          "effectiveMs": 187.75512799286327
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.18952001446587,
+          "firstAuxRate": 0.1359228318042345,
+          "secondAuxRate": 0.01674743034862635,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009854074358149798,
+          "meanRejectedCandidates": 0.0011009526321167833,
+          "meanPageActions": 0,
+          "meanKeys": 4.152670262152861,
+          "effectiveMs": 466.6368907534189
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.50868053283824,
+          "firstAuxRate": 0.47092403664137233,
+          "secondAuxRate": 0.16240593981830834,
+          "thirdAuxRate": 0.03328702375332524,
+          "selectionRate": 0.0036736803815579123,
+          "meanRejectedCandidates": 0.004306710685186308,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.666617000213006,
+          "effectiveMs": 537.9138519222585
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.06068454470386,
+          "firstAuxRate": 0.22304149224055558,
+          "secondAuxRate": 0.023590233922181177,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013049143618857068,
+          "meanRejectedCandidates": 0.0014881117867948867,
+          "meanPageActions": 0,
+          "meanKeys": 4.246631726162737,
+          "effectiveMs": 518.9075565999962
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.540953164345545,
+      "deltaVsM12": -0.1183760513850931,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.15862565474724,
+          "firstAuxRate": 0.19458363444492877,
+          "secondAuxRate": 0.03339613646972029,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002766289177303669,
+          "meanRejectedCandidates": 0.0031132375694174555,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.227979770914649,
+          "effectiveMs": 187.36828177877524
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.4555203151649,
+          "firstAuxRate": 0.13750778487598297,
+          "secondAuxRate": 0.017263023907597437,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009545629199374256,
+          "meanRejectedCandidates": 0.0010671766871901004,
+          "meanPageActions": 0,
+          "meanKeys": 4.154770808783581,
+          "effectiveMs": 466.51285953656105
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.1089562058779,
+          "firstAuxRate": 0.4690493555880227,
+          "secondAuxRate": 0.16270274196972837,
+          "thirdAuxRate": 0.034024694968157757,
+          "selectionRate": 0.0038436115562546207,
+          "meanRejectedCandidates": 0.004514662480395921,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6657767925259086,
+          "effectiveMs": 537.3744215837474
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.6728041628213,
+          "firstAuxRate": 0.22628025283576947,
+          "secondAuxRate": 0.025140032420465936,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015095806311389228,
+          "meanRejectedCandidates": 0.0017406302558317984,
+          "meanPageActions": 0,
+          "meanKeys": 4.251420285256235,
+          "effectiveMs": 521.0916696311668
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.551826860755492,
+      "deltaVsM12": -0.10750235497514637,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.02086125442598,
+          "firstAuxRate": 0.18855917063603775,
+          "secondAuxRate": 0.0341942113359554,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029515466366356216,
+          "meanRejectedCandidates": 0.003328289433903963,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.222753381971993,
+          "effectiveMs": 185.7845340794607
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.6171662352658,
+          "firstAuxRate": 0.13630552299931295,
+          "secondAuxRate": 0.01674834237960453,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009853769145470761,
+          "meanRejectedCandidates": 0.001103051940416424,
+          "meanPageActions": 0,
+          "meanKeys": 4.153053865378918,
+          "effectiveMs": 469.1797045946901
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.1401470278175,
+          "firstAuxRate": 0.46754777122240104,
+          "secondAuxRate": 0.158490344284885,
+          "thirdAuxRate": 0.03213501229744964,
+          "selectionRate": 0.0033846913455449754,
+          "meanRejectedCandidates": 0.003977185325338008,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.658173127804736,
+          "effectiveMs": 537.8222870051566
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.34917285535846,
+          "firstAuxRate": 0.21508737836548822,
+          "secondAuxRate": 0.022049407334105868,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012274495467309355,
+          "meanRejectedCandidates": 0.0013810428066688605,
+          "meanPageActions": 0,
+          "meanKeys": 4.237136785699594,
+          "effectiveMs": 519.2957304336087
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.55223952177951,
+      "deltaVsM12": -0.10708969395112788,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.7622115744679,
+          "firstAuxRate": 0.19831793478165524,
+          "secondAuxRate": 0.03317497368209609,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028981857049309476,
+          "meanRejectedCandidates": 0.0032786418382686005,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.231492908463751,
+          "effectiveMs": 188.1132170932455
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.66557630780494,
+          "firstAuxRate": 0.13810057005107573,
+          "secondAuxRate": 0.01721527199663151,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009865658566649668,
+          "meanRejectedCandidates": 0.001106241412912376,
+          "meanPageActions": 0,
+          "meanKeys": 4.155315842047707,
+          "effectiveMs": 467.90758050676175
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 334.18965542373735,
+          "firstAuxRate": 0.4712277440398045,
+          "secondAuxRate": 0.16253150981962167,
+          "thirdAuxRate": 0.03413716533640009,
+          "selectionRate": 0.003905719741022842,
+          "meanRejectedCandidates": 0.004641214795312618,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6678964191958263,
+          "effectiveMs": 537.134601329189
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 441.35390446956006,
+          "firstAuxRate": 0.2269656744228122,
+          "secondAuxRate": 0.02515279252419493,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014093371596679337,
+          "meanRejectedCandidates": 0.0016278741566265575,
+          "meanPageActions": 0,
+          "meanKeys": 4.252118466947008,
+          "effectiveMs": 517.9164405572943
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.55359665942922,
+      "deltaVsM12": -0.10573255630141887,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.10079963702485,
+          "firstAuxRate": 0.19772657870290072,
+          "secondAuxRate": 0.033644637597697286,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00286131549403802,
+          "meanRejectedCandidates": 0.0032235558134293646,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.231371216300598,
+          "effectiveMs": 188.39042107907872
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.3368305573762,
+          "firstAuxRate": 0.13851299534281217,
+          "secondAuxRate": 0.017341515452265754,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009717658163923203,
+          "meanRejectedCandidates": 0.0010849872343423536,
+          "meanPageActions": 0,
+          "meanKeys": 4.155854510795078,
+          "effectiveMs": 466.730492647452
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.56900114826,
+          "firstAuxRate": 0.469121476653319,
+          "secondAuxRate": 0.16146002175103785,
+          "thirdAuxRate": 0.03361743882420061,
+          "selectionRate": 0.003724818792509723,
+          "meanRejectedCandidates": 0.004387555457889898,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6641989372285573,
+          "effectiveMs": 538.283478927552
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.7277318520241,
+          "firstAuxRate": 0.2222048084967254,
+          "secondAuxRate": 0.02477031173471821,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014691684047972138,
+          "meanRejectedCandidates": 0.001693047261642385,
+          "meanPageActions": 0,
+          "meanKeys": 4.246975120231443,
+          "effectiveMs": 520.7864213274177
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.554993788248074,
+      "deltaVsM12": -0.10433542748256386,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.83970811331368,
+          "firstAuxRate": 0.19425311829589337,
+          "secondAuxRate": 0.03352551845481244,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0026680758241003815,
+          "meanRejectedCandidates": 0.0030149364996141055,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2277786367507058,
+          "effectiveMs": 187.92520723772657
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.3611881602335,
+          "firstAuxRate": 0.1369521507431149,
+          "secondAuxRate": 0.016969367412985593,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009666113291755044,
+          "meanRejectedCandidates": 0.001052729861226923,
+          "meanPageActions": 0,
+          "meanKeys": 4.153921518156101,
+          "effectiveMs": 467.1702468976303
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.5828269673491,
+          "firstAuxRate": 0.46827867881769103,
+          "secondAuxRate": 0.16244542573841073,
+          "thirdAuxRate": 0.03382924452074687,
+          "selectionRate": 0.0036858322000245716,
+          "meanRejectedCandidates": 0.0042981485783533556,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6645533490768485,
+          "effectiveMs": 537.3757660016604
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.8830089350586,
+          "firstAuxRate": 0.22529519455749053,
+          "secondAuxRate": 0.024612453437270868,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00148193695892603,
+          "meanRejectedCandidates": 0.0017086020333120266,
+          "meanPageActions": 0,
+          "meanKeys": 4.249907647994761,
+          "effectiveMs": 521.8298956105082
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.55583816149079,
+      "deltaVsM12": -0.10349105423984817,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.72318164434122,
+          "firstAuxRate": 0.18635225021733248,
+          "secondAuxRate": 0.03514336342636478,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002718045047269306,
+          "meanRejectedCandidates": 0.003042976572767411,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.221495613643697,
+          "effectiveMs": 185.95515737421056
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.59080733246105,
+          "firstAuxRate": 0.13894466262916555,
+          "secondAuxRate": 0.01778624112435876,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011032303511006258,
+          "meanRejectedCandidates": 0.0012390746877531328,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.156730903753524,
+          "effectiveMs": 466.33397057004606
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.25633750184534,
+          "firstAuxRate": 0.47543796374836833,
+          "secondAuxRate": 0.16792112320272176,
+          "thirdAuxRate": 0.035682669651365115,
+          "selectionRate": 0.004043859180264528,
+          "meanRejectedCandidates": 0.004754016535519115,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.679041756602455,
+          "effectiveMs": 543.633408379841
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 446.05906547861986,
+          "firstAuxRate": 0.2336094958601081,
+          "secondAuxRate": 0.02645020896703988,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016628250102842573,
+          "meanRejectedCandidates": 0.0019220458535788214,
+          "meanPageActions": 0,
+          "meanKeys": 4.260059704827148,
+          "effectiveMs": 525.1707742256137
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.557589821791396,
+      "deltaVsM12": -0.10173939393924236,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.36374909760404,
+          "firstAuxRate": 0.19025303666097756,
+          "secondAuxRate": 0.03329836169951731,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028261703762796535,
+          "meanRejectedCandidates": 0.0032092872464858685,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.223551398360495,
+          "effectiveMs": 187.28565097360482
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.31065928083297,
+          "firstAuxRate": 0.13870872878881169,
+          "secondAuxRate": 0.017391489311535082,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010605283226424273,
+          "meanRejectedCandidates": 0.0011830226567137927,
+          "meanPageActions": 0,
+          "meanKeys": 4.156100218100347,
+          "effectiveMs": 468.8361928373581
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.99149403782894,
+          "firstAuxRate": 0.46935412156100337,
+          "secondAuxRate": 0.16051251582194453,
+          "thirdAuxRate": 0.03299919406525268,
+          "selectionRate": 0.003525974733038439,
+          "meanRejectedCandidates": 0.00416894165624977,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6628658314482005,
+          "effectiveMs": 537.1758029572491
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.8460060629978,
+          "firstAuxRate": 0.2200197415343327,
+          "secondAuxRate": 0.023420927747376967,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001322959587102455,
+          "meanRejectedCandidates": 0.0015224976708645855,
+          "meanPageActions": 0,
+          "meanKeys": 4.24344066928171,
+          "effectiveMs": 518.7481074833154
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.558897696614725,
+      "deltaVsM12": -0.1004315191159133,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 115.93338045091357,
+          "firstAuxRate": 0.1888307119909645,
+          "secondAuxRate": 0.03425777663213401,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031176818771539543,
+          "meanRejectedCandidates": 0.003489892650085734,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2230884886230986,
+          "effectiveMs": 184.90532026141997
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.6806413433518,
+          "firstAuxRate": 0.1375787212969808,
+          "secondAuxRate": 0.01730620123543672,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009530629383529874,
+          "meanRejectedCandidates": 0.0010672865637545543,
+          "meanPageActions": 0,
+          "meanKeys": 4.154884922532418,
+          "effectiveMs": 469.77132019427654
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.8746058880585,
+          "firstAuxRate": 0.46842381156717916,
+          "secondAuxRate": 0.1609504660884672,
+          "thirdAuxRate": 0.03342742560060719,
+          "selectionRate": 0.0036296741847169772,
+          "meanRejectedCandidates": 0.004274682903948593,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6628017032562536,
+          "effectiveMs": 538.1071830832866
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.3654014689652,
+          "firstAuxRate": 0.22644385378349485,
+          "secondAuxRate": 0.0248049052571835,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015127241798721588,
+          "meanRejectedCandidates": 0.0017248364585672334,
+          "meanPageActions": 0,
+          "meanKeys": 4.251248759040679,
+          "effectiveMs": 521.7339055120204
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.560691240811794,
+      "deltaVsM12": -0.0986379749188444,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.61890438728383,
+          "firstAuxRate": 0.1905538168825918,
+          "secondAuxRate": 0.03470249979445077,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002734769679014552,
+          "meanRejectedCandidates": 0.0030892616987337113,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2252563166770427,
+          "effectiveMs": 186.99144006250225
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.0090693318875,
+          "firstAuxRate": 0.13985053830000885,
+          "secondAuxRate": 0.017815571785348285,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011650403580630623,
+          "meanRejectedCandidates": 0.0013045128410711212,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.157666110085357,
+          "effectiveMs": 467.0731523808657
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.31254319100753,
+          "firstAuxRate": 0.47527459010708845,
+          "secondAuxRate": 0.16585859873124267,
+          "thirdAuxRate": 0.03525363556034945,
+          "selectionRate": 0.003988030721184307,
+          "meanRejectedCandidates": 0.004743882908494472,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6763868243986804,
+          "effectiveMs": 542.8591306510714
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.4587535546261,
+          "firstAuxRate": 0.22661000071596615,
+          "secondAuxRate": 0.025148835322678975,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014986108049719043,
+          "meanRejectedCandidates": 0.0017234747369961542,
+          "meanPageActions": 0,
+          "meanKeys": 4.251758836038645,
+          "effectiveMs": 521.9717445860525
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.560824073043015,
+      "deltaVsM12": -0.09850514268762289,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.72188760747963,
+          "firstAuxRate": 0.1972593123743679,
+          "secondAuxRate": 0.033484437847116515,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029760780457864277,
+          "meanRejectedCandidates": 0.0033420901789804596,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2307437502214844,
+          "effectiveMs": 187.89805347512603
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.17829653370296,
+          "firstAuxRate": 0.13820433625769524,
+          "secondAuxRate": 0.01739405670509794,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009739744463242712,
+          "meanRejectedCandidates": 0.001086940040556056,
+          "meanPageActions": 0,
+          "meanKeys": 4.155598392962793,
+          "effectiveMs": 467.49654609236325
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.7177151790786,
+          "firstAuxRate": 0.4716747094394892,
+          "secondAuxRate": 0.16372956654475332,
+          "thirdAuxRate": 0.03420018683677365,
+          "selectionRate": 0.0038282422521961914,
+          "meanRejectedCandidates": 0.00450724428774063,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6696044628210163,
+          "effectiveMs": 539.1218891534124
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.2640902455693,
+          "firstAuxRate": 0.23024534461075727,
+          "secondAuxRate": 0.026131878784200705,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015357177177838129,
+          "meanRejectedCandidates": 0.0017720186623651588,
+          "meanPageActions": 0,
+          "meanKeys": 4.256377223394958,
+          "effectiveMs": 521.1872888278454
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.562004753408406,
+      "deltaVsM12": -0.09732446232223246,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.67125923896765,
+          "firstAuxRate": 0.1957917259387226,
+          "secondAuxRate": 0.03347321012230852,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027259687801416167,
+          "meanRejectedCandidates": 0.003081162532661276,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.229264936061031,
+          "effectiveMs": 188.24069523175524
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.68081797274544,
+          "firstAuxRate": 0.1370942053253876,
+          "secondAuxRate": 0.016791676753240482,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.000983899407714458,
+          "meanRejectedCandidates": 0.0011008652303041496,
+          "meanPageActions": 0,
+          "meanKeys": 4.153885882078628,
+          "effectiveMs": 468.4919655024778
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.3255958608026,
+          "firstAuxRate": 0.4680677900682237,
+          "secondAuxRate": 0.15998277370561176,
+          "thirdAuxRate": 0.03255310294283234,
+          "selectionRate": 0.0035212983029359536,
+          "meanRejectedCandidates": 0.004138463606362267,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6606036667166677,
+          "effectiveMs": 536.826925600207
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.6908118441106,
+          "firstAuxRate": 0.21870939597976236,
+          "secondAuxRate": 0.022936106580073792,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012407722056479837,
+          "meanRejectedCandidates": 0.001427573122480631,
+          "meanPageActions": 0,
+          "meanKeys": 4.2416455025598365,
+          "effectiveMs": 519.0003045915743
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.56419625845947,
+      "deltaVsM12": -0.09513295727116855,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.23912727646908,
+          "firstAuxRate": 0.1963185518386978,
+          "secondAuxRate": 0.033984568661806075,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029240621019493785,
+          "meanRejectedCandidates": 0.003310921547091592,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.230303120500504,
+          "effectiveMs": 188.25036254490465
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.7231272931248,
+          "firstAuxRate": 0.14016284550903851,
+          "secondAuxRate": 0.017700460268516786,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001134673638761239,
+          "meanRejectedCandidates": 0.001266387060535997,
+          "meanPageActions": 0,
+          "meanKeys": 4.157863305777555,
+          "effectiveMs": 466.8262425626749
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.00278796800535,
+          "firstAuxRate": 0.474182755799905,
+          "secondAuxRate": 0.16468777896582848,
+          "thirdAuxRate": 0.03483154212321333,
+          "selectionRate": 0.0038929405854952587,
+          "meanRejectedCandidates": 0.004584946020060838,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.673702076888947,
+          "effectiveMs": 540.6789502493139
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.79976883480725,
+          "firstAuxRate": 0.22962859580145603,
+          "secondAuxRate": 0.025366861674048446,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001536871800959302,
+          "meanRejectedCandidates": 0.0017889689572051616,
+          "meanPageActions": 0,
+          "meanKeys": 4.254995457475505,
+          "effectiveMs": 522.3099776058945
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.5659583373968,
+      "deltaVsM12": -0.09337087833383784,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.4937110588957,
+          "firstAuxRate": 0.19841570955185822,
+          "secondAuxRate": 0.033381721708443356,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027168754926018067,
+          "meanRejectedCandidates": 0.0030769228969915897,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2317974312603015,
+          "effectiveMs": 188.81720134217701
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.76833362921525,
+          "firstAuxRate": 0.1375739549847985,
+          "secondAuxRate": 0.017147170446489803,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009776453224548882,
+          "meanRejectedCandidates": 0.0010963333769525721,
+          "meanPageActions": 0,
+          "meanKeys": 4.154721125431288,
+          "effectiveMs": 467.8260751209223
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.4525961723229,
+          "firstAuxRate": 0.4708509949975235,
+          "secondAuxRate": 0.1627605740943563,
+          "thirdAuxRate": 0.03431082512659494,
+          "selectionRate": 0.0038878928372192314,
+          "meanRejectedCandidates": 0.004607364014337806,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6679223942184747,
+          "effectiveMs": 539.392945903238
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.5841015097849,
+          "firstAuxRate": 0.22044799813963722,
+          "secondAuxRate": 0.024039748111834215,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013167099128351882,
+          "meanRejectedCandidates": 0.0015065529736032254,
+          "meanPageActions": 0,
+          "meanKeys": 4.244487746251472,
+          "effectiveMs": 518.7957789816076
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.568225531466934,
+      "deltaVsM12": -0.09110368426370385,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.41029615291475,
+          "firstAuxRate": 0.18683132904800706,
+          "secondAuxRate": 0.035067371611843985,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003143558274172385,
+          "meanRejectedCandidates": 0.003522172358908726,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.221898700659851,
+          "effectiveMs": 185.04246571307917
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.70856702065294,
+          "firstAuxRate": 0.13959877196812895,
+          "secondAuxRate": 0.017622773930388986,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010798790839595372,
+          "meanRejectedCandidates": 0.0012047479726738216,
+          "meanPageActions": 0,
+          "meanKeys": 4.157221545898518,
+          "effectiveMs": 468.58319563921776
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.56987250942086,
+          "firstAuxRate": 0.4710398416102294,
+          "secondAuxRate": 0.16297778523932618,
+          "thirdAuxRate": 0.034076235564808544,
+          "selectionRate": 0.003661374225464108,
+          "meanRejectedCandidates": 0.004296804025260407,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.668093862414364,
+          "effectiveMs": 541.4102235325959
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 448.6419602672954,
+          "firstAuxRate": 0.22863621826973254,
+          "secondAuxRate": 0.02507938510815399,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016030903411529262,
+          "meanRejectedCandidates": 0.001848389754343159,
+          "meanPageActions": 0,
+          "meanKeys": 4.253715603377887,
+          "effectiveMs": 525.8109149730703
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.568628331184772,
+      "deltaVsM12": -0.09070088454586589,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.58377843545524,
+          "firstAuxRate": 0.19606326729364934,
+          "secondAuxRate": 0.033536775418487125,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028921040206599494,
+          "meanRejectedCandidates": 0.0032427657488430474,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2296000427121365,
+          "effectiveMs": 187.36148141371453
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.74617763650076,
+          "firstAuxRate": 0.1383593720901396,
+          "secondAuxRate": 0.017343605604185026,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009536442297735198,
+          "meanRejectedCandidates": 0.0010678098647660694,
+          "meanPageActions": 0,
+          "meanKeys": 4.155702977694324,
+          "effectiveMs": 469.08264797590056
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.08079293949606,
+          "firstAuxRate": 0.4687135986195113,
+          "secondAuxRate": 0.162397877946961,
+          "thirdAuxRate": 0.03380835265324184,
+          "selectionRate": 0.0037746643988670987,
+          "meanRejectedCandidates": 0.004446946392551977,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.664919829219714,
+          "effectiveMs": 537.0444152266824
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.7478501544978,
+          "firstAuxRate": 0.2300443784094255,
+          "secondAuxRate": 0.02570627922603976,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001515654054209933,
+          "meanRejectedCandidates": 0.001764461590525659,
+          "meanPageActions": 0,
+          "meanKeys": 4.255750657635465,
+          "effectiveMs": 521.4706629571897
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.569330421698414,
+      "deltaVsM12": -0.08999879403222444,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.78188209559129,
+          "firstAuxRate": 0.1973960625538653,
+          "secondAuxRate": 0.033774019582789444,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027631021408347323,
+          "meanRejectedCandidates": 0.003125254743626015,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.231170082136655,
+          "effectiveMs": 188.9473465380301
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.25409193247924,
+          "firstAuxRate": 0.13795220089593976,
+          "secondAuxRate": 0.017077109708414744,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.000981679679139633,
+          "meanRejectedCandidates": 0.0010682368850506512,
+          "meanPageActions": 0,
+          "meanKeys": 4.1550293106043545,
+          "effectiveMs": 467.40530476552186
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.0445932186747,
+          "firstAuxRate": 0.4683483640720837,
+          "secondAuxRate": 0.16161618782513004,
+          "thirdAuxRate": 0.03341330552346024,
+          "selectionRate": 0.003570636410860541,
+          "meanRejectedCandidates": 0.0041738078308468035,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.663377857420674,
+          "effectiveMs": 538.4095502452599
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.05542813804385,
+          "firstAuxRate": 0.2220405254810145,
+          "secondAuxRate": 0.024330574657657523,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014368914990827235,
+          "meanRejectedCandidates": 0.0016541705936680632,
+          "meanPageActions": 0,
+          "meanKeys": 4.246371100138672,
+          "effectiveMs": 521.9116016087785
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.570235522480143,
+      "deltaVsM12": -0.08909369325049532,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.66536924716426,
+          "firstAuxRate": 0.18949519447530444,
+          "secondAuxRate": 0.035392010748675214,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002813071364003657,
+          "meanRejectedCandidates": 0.00315329481677932,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.22488720522398,
+          "effectiveMs": 186.97735415335956
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.4886313498216,
+          "firstAuxRate": 0.13985438259243435,
+          "secondAuxRate": 0.01788446050673584,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011148733824077272,
+          "meanRejectedCandidates": 0.001251090633460805,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.15773884309917,
+          "effectiveMs": 466.54176300716995
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.7728572568385,
+          "firstAuxRate": 0.4754648248505703,
+          "secondAuxRate": 0.1670220447895529,
+          "thirdAuxRate": 0.03527449746819745,
+          "selectionRate": 0.00391967821759549,
+          "meanRejectedCandidates": 0.004620690614507555,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6777613671083205,
+          "effectiveMs": 544.6846364129417
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.3015211415401,
+          "firstAuxRate": 0.230684185945437,
+          "secondAuxRate": 0.0261473369798724,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016177493704415918,
+          "meanRejectedCandidates": 0.0018680671139252433,
+          "meanPageActions": 0,
+          "meanKeys": 4.256831522925309,
+          "effectiveMs": 525.4150309970942
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.572918345935857,
+      "deltaVsM12": -0.08641086979478096,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.11479902935046,
+          "firstAuxRate": 0.19794844322332542,
+          "secondAuxRate": 0.033221521957862585,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028316380443502145,
+          "meanRejectedCandidates": 0.0031954572625426843,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.231169965181188,
+          "effectiveMs": 188.3248337382243
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.5873414243972,
+          "firstAuxRate": 0.13724006479990367,
+          "secondAuxRate": 0.017145453486437177,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009812027149621173,
+          "meanRejectedCandidates": 0.001101759780919804,
+          "meanPageActions": 0,
+          "meanKeys": 4.1543855182863405,
+          "effectiveMs": 468.54680652832275
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.6941216501041,
+          "firstAuxRate": 0.4736974928798469,
+          "secondAuxRate": 0.16500444527773045,
+          "thirdAuxRate": 0.034787737473156076,
+          "selectionRate": 0.003979273422646436,
+          "meanRejectedCandidates": 0.004717080817738199,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6734896756307336,
+          "effectiveMs": 540.3649699961234
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 442.1868089825733,
+          "firstAuxRate": 0.22824227994529916,
+          "secondAuxRate": 0.025269579464114563,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013867552769475367,
+          "meanRejectedCandidates": 0.0015890204254517485,
+          "meanPageActions": 0,
+          "meanKeys": 4.2535118594094135,
+          "effectiveMs": 519.1518709928386
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.573504424356479,
+      "deltaVsM12": -0.08582479137415966,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.58745318287251,
+          "firstAuxRate": 0.18661697891632106,
+          "secondAuxRate": 0.03399395433801276,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002828509485614653,
+          "meanRejectedCandidates": 0.0031937906471414972,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.220610933254334,
+          "effectiveMs": 186.62784416265876
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.1917699276595,
+          "firstAuxRate": 0.139395051106319,
+          "secondAuxRate": 0.017649154572102567,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010309754113293492,
+          "meanRejectedCandidates": 0.0011523818009329784,
+          "meanPageActions": 0,
+          "meanKeys": 4.157044205678422,
+          "effectiveMs": 468.98123596803026
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.5718285877254,
+          "firstAuxRate": 0.470904422144699,
+          "secondAuxRate": 0.1638168390256933,
+          "thirdAuxRate": 0.03424919720420766,
+          "selectionRate": 0.003778044392901568,
+          "meanRejectedCandidates": 0.00443852772892543,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6689704583746,
+          "effectiveMs": 539.752246684617
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.88811919942486,
+          "firstAuxRate": 0.22893167322025756,
+          "secondAuxRate": 0.025403339635673712,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015547238741801526,
+          "meanRejectedCandidates": 0.00179957058738,
+          "meanPageActions": 0,
+          "meanKeys": 4.254335012855932,
+          "effectiveMs": 523.2114359100814
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.574287180674643,
+      "deltaVsM12": -0.08504203505599506,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.19880330948081,
+          "firstAuxRate": 0.19525992943141046,
+          "secondAuxRate": 0.0342940328268265,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030019544428048586,
+          "meanRejectedCandidates": 0.0033743698878034513,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2295539622582368,
+          "effectiveMs": 188.0351989267852
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.2584693693967,
+          "firstAuxRate": 0.14045523453863412,
+          "secondAuxRate": 0.017782508928226262,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010918681154582395,
+          "meanRejectedCandidates": 0.0012145655546942013,
+          "meanPageActions": 0,
+          "meanKeys": 4.15823774346686,
+          "effectiveMs": 466.44564155646447
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.82125257610784,
+          "firstAuxRate": 0.4739623117355806,
+          "secondAuxRate": 0.16574778159134756,
+          "thirdAuxRate": 0.034939257984671214,
+          "selectionRate": 0.003837727661186827,
+          "meanRejectedCandidates": 0.004498568697358306,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6746493513115994,
+          "effectiveMs": 542.744150563492
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 446.9373419231347,
+          "firstAuxRate": 0.23284255688759664,
+          "secondAuxRate": 0.026390700044303755,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001644766505867791,
+          "meanRejectedCandidates": 0.0019091577866525433,
+          "meanPageActions": 0,
+          "meanKeys": 4.259233256931901,
+          "effectiveMs": 525.789636795558
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.576594018149477,
+      "deltaVsM12": -0.08273519758116166,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.00776777851942,
+          "firstAuxRate": 0.19062235278610729,
+          "secondAuxRate": 0.03356867502204318,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002810995404468845,
+          "meanRejectedCandidates": 0.0031691715213906287,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2241910278081503,
+          "effectiveMs": 187.11042140449558
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.45654365749044,
+          "firstAuxRate": 0.1393667897995704,
+          "secondAuxRate": 0.017737558592187837,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009955252361251046,
+          "meanRejectedCandidates": 0.0011080896144169898,
+          "meanPageActions": 0,
+          "meanKeys": 4.1571043483917585,
+          "effectiveMs": 469.24056779741375
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.03051220614594,
+          "firstAuxRate": 0.47046895762184177,
+          "secondAuxRate": 0.1628267468059288,
+          "thirdAuxRate": 0.03428725595519315,
+          "selectionRate": 0.0037877758342272404,
+          "meanRejectedCandidates": 0.004474348584317325,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6675829603829637,
+          "effectiveMs": 539.8023108131116
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 446.08891385362625,
+          "firstAuxRate": 0.22465511419428483,
+          "secondAuxRate": 0.02479301554463602,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014963533410198493,
+          "meanRejectedCandidates": 0.0017270637425199295,
+          "meanPageActions": 0,
+          "meanKeys": 4.249448129738921,
+          "effectiveMs": 521.9075179670402
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.577032210210026,
+      "deltaVsM12": -0.08229700552061203,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.06069413745642,
+          "firstAuxRate": 0.1940638843506919,
+          "secondAuxRate": 0.03434637039819711,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029179804176783803,
+          "meanRejectedCandidates": 0.003275045457666039,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.228410254748889,
+          "effectiveMs": 187.4986268653737
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.7824162110073,
+          "firstAuxRate": 0.1405307671851122,
+          "secondAuxRate": 0.017683861415700317,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010758877345159298,
+          "meanRejectedCandidates": 0.0012000682299059466,
+          "meanPageActions": 0,
+          "meanKeys": 4.158214628600812,
+          "effectiveMs": 467.9523408434559
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.6965228616568,
+          "firstAuxRate": 0.4712810776765353,
+          "secondAuxRate": 0.1641785737404583,
+          "thirdAuxRate": 0.03453778133091644,
+          "selectionRate": 0.003798278963688636,
+          "meanRejectedCandidates": 0.004454020503085575,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.66999743274791,
+          "effectiveMs": 540.1979486517216
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 446.8947554557942,
+          "firstAuxRate": 0.23142990234239916,
+          "secondAuxRate": 0.025901971170683574,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016322683645332316,
+          "meanRejectedCandidates": 0.0019091662370523638,
+          "meanPageActions": 0,
+          "meanKeys": 4.257331873513083,
+          "effectiveMs": 525.1691368402917
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.57738502716619,
+      "deltaVsM12": -0.08194418856444763,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.18107936873572,
+          "firstAuxRate": 0.1907723481722141,
+          "secondAuxRate": 0.034386076779158725,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002717635703135681,
+          "meanRejectedCandidates": 0.00304707001410366,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2251584249513727,
+          "effectiveMs": 186.51183124151436
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.22507726966205,
+          "firstAuxRate": 0.14039708597395587,
+          "secondAuxRate": 0.018088863935082536,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010867879891486804,
+          "meanRejectedCandidates": 0.0012117667544274187,
+          "meanPageActions": 0,
+          "meanKeys": 4.158485949909038,
+          "effectiveMs": 467.48352337358415
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.3450527076397,
+          "firstAuxRate": 0.4757179594400607,
+          "secondAuxRate": 0.1683271174096099,
+          "thirdAuxRate": 0.03662751461819276,
+          "selectionRate": 0.004271715990033835,
+          "meanRejectedCandidates": 0.005067410889725607,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6806725914678635,
+          "effectiveMs": 545.3637578488297
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 446.73914741677135,
+          "firstAuxRate": 0.231111007189972,
+          "secondAuxRate": 0.0267420568040415,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016717824340940159,
+          "meanRejectedCandidates": 0.001923820437541132,
+          "meanPageActions": 0,
+          "meanKeys": 4.2578530639940135,
+          "effectiveMs": 525.1943270973089
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.577574564822328,
+      "deltaVsM12": -0.08175465090831047,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.52726007513988,
+          "firstAuxRate": 0.18829914939458586,
+          "secondAuxRate": 0.03544434832004583,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027290973388771783,
+          "meanRejectedCandidates": 0.0030539703866419078,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2237434977146315,
+          "effectiveMs": 186.44078209194802
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.06732797086954,
+          "firstAuxRate": 0.14000103340018732,
+          "secondAuxRate": 0.017827359653944892,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011017833655359115,
+          "meanRejectedCandidates": 0.0012394836727430444,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.157828393054133,
+          "effectiveMs": 468.13889025654754
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.1822815949224,
+          "firstAuxRate": 0.47258253970398556,
+          "secondAuxRate": 0.16551891795552823,
+          "thirdAuxRate": 0.03487757195870665,
+          "selectionRate": 0.003875567615889133,
+          "meanRejectedCandidates": 0.004569859970941639,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6729790296182205,
+          "effectiveMs": 542.6303516107935
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.87447619616574,
+          "firstAuxRate": 0.22971786944676,
+          "secondAuxRate": 0.02570743693081517,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001599137968436868,
+          "meanRejectedCandidates": 0.0018619623036548998,
+          "meanPageActions": 0,
+          "meanKeys": 4.2554253063775755,
+          "effectiveMs": 525.5546490056832
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.57811827362274,
+      "deltaVsM12": -0.08121094210789792,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.58583250359044,
+          "firstAuxRate": 0.1971421814744178,
+          "secondAuxRate": 0.034155411359861096,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002914003931808881,
+          "meanRejectedCandidates": 0.003307734510622656,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.231297592834279,
+          "effectiveMs": 188.88921521825083
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.1580474211759,
+          "firstAuxRate": 0.1396253984447822,
+          "secondAuxRate": 0.017492559380334376,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001060496691510236,
+          "meanRejectedCandidates": 0.0011851094790402,
+          "meanPageActions": 0,
+          "meanKeys": 4.1571179578251165,
+          "effectiveMs": 468.988988257569
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.21234876902804,
+          "firstAuxRate": 0.46932445696119773,
+          "secondAuxRate": 0.16088399105671916,
+          "thirdAuxRate": 0.03271776575723304,
+          "selectionRate": 0.003520964207366605,
+          "meanRejectedCandidates": 0.004141341549174319,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.66292621377515,
+          "effectiveMs": 537.4103860657762
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.80855667539186,
+          "firstAuxRate": 0.22165056367329666,
+          "secondAuxRate": 0.023564829605920722,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001307352905833916,
+          "meanRejectedCandidates": 0.001514155919041751,
+          "meanPageActions": 0,
+          "meanKeys": 4.245215393279217,
+          "effectiveMs": 520.2332941986094
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.578982809069908,
+      "deltaVsM12": -0.08034640666073045,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.97203782824606,
+          "firstAuxRate": 0.19018432532426197,
+          "secondAuxRate": 0.03475118250748544,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002668455929367319,
+          "meanRejectedCandidates": 0.0030063987505413578,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.224935507831747,
+          "effectiveMs": 187.20439945267796
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.90745751855377,
+          "firstAuxRate": 0.13890491422704224,
+          "secondAuxRate": 0.017706564244631483,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011505757742712862,
+          "meanRejectedCandidates": 0.0012899627977292145,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.156611478471674,
+          "effectiveMs": 467.6457448309847
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.66096818328117,
+          "firstAuxRate": 0.4778040458199944,
+          "secondAuxRate": 0.1682834852545477,
+          "thirdAuxRate": 0.03592473550938408,
+          "selectionRate": 0.0040699594887514895,
+          "meanRejectedCandidates": 0.004828124016863641,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6820122665839263,
+          "effectiveMs": 545.9485576148774
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.8982644978487,
+          "firstAuxRate": 0.22754914314322028,
+          "secondAuxRate": 0.02521208656533562,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001469440024791445,
+          "meanRejectedCandidates": 0.001678032108361283,
+          "meanPageActions": 0,
+          "meanKeys": 4.252761229708556,
+          "effectiveMs": 522.6921990307085
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.579955335257413,
+      "deltaVsM12": -0.07937388047322536,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.17479351746212,
+          "firstAuxRate": 0.19808519340282282,
+          "secondAuxRate": 0.03351110369353551,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002618662139398519,
+          "meanRejectedCandidates": 0.0029786218271882397,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2315962970963583,
+          "effectiveMs": 189.3741268011284
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.6717540026779,
+          "firstAuxRate": 0.13697613380050158,
+          "secondAuxRate": 0.016937511810742205,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010130044887875652,
+          "meanRejectedCandidates": 0.0011082619208476105,
+          "meanPageActions": 0,
+          "meanKeys": 4.153913645611244,
+          "effectiveMs": 468.509063475366
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.038396834618,
+          "firstAuxRate": 0.4710493951093496,
+          "secondAuxRate": 0.16293246172544415,
+          "thirdAuxRate": 0.034055353683855864,
+          "selectionRate": 0.003699218719508389,
+          "meanRejectedCandidates": 0.004355142740452717,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6680372105186496,
+          "effectiveMs": 539.8873759212648
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.30829055174314,
+          "firstAuxRate": 0.21918687254242153,
+          "secondAuxRate": 0.023549189123052903,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012954764724861525,
+          "meanRejectedCandidates": 0.00148679231722291,
+          "meanPageActions": 0,
+          "meanKeys": 4.242736061665474,
+          "effectiveMs": 518.9807345507384
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.579959616640117,
+      "deltaVsM12": -0.07936959909052099,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.89897671278517,
+          "firstAuxRate": 0.19860099625005687,
+          "secondAuxRate": 0.033945066952911274,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002736991832882801,
+          "meanRejectedCandidates": 0.0031181789378876418,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2325460632029683,
+          "effectiveMs": 189.4612155000599
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.9479909153542,
+          "firstAuxRate": 0.1384731606487405,
+          "secondAuxRate": 0.017176367646298766,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010418723363692377,
+          "meanRejectedCandidates": 0.0011382329735309712,
+          "meanPageActions": 0,
+          "meanKeys": 4.155649528295039,
+          "effectiveMs": 468.32488445436405
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.66320285033845,
+          "firstAuxRate": 0.47088376087576633,
+          "secondAuxRate": 0.162148854185563,
+          "thirdAuxRate": 0.03373290243454116,
+          "selectionRate": 0.0036575294028114145,
+          "meanRejectedCandidates": 0.004317219261858073,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6667655174958704,
+          "effectiveMs": 539.1037642662037
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.9821547878548,
+          "firstAuxRate": 0.22016133281212555,
+          "secondAuxRate": 0.02387092481701975,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013450054730342357,
+          "meanRejectedCandidates": 0.0015525931662254053,
+          "meanPageActions": 0,
+          "meanKeys": 4.244032257629145,
+          "effectiveMs": 520.0764650187302
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.581610062222211,
+      "deltaVsM12": -0.0777191535084274,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.88314595738446,
+          "firstAuxRate": 0.19668786796382753,
+          "secondAuxRate": 0.03425488198433194,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00290888713013857,
+          "meanRejectedCandidates": 0.003270805821996353,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2309427499481593,
+          "effectiveMs": 188.07513297579547
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.848923333687,
+          "firstAuxRate": 0.14080974017520156,
+          "secondAuxRate": 0.01802174017537804,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010592411575351007,
+          "meanRejectedCandidates": 0.0011802457762666863,
+          "meanPageActions": 0,
+          "meanKeys": 4.15883148035058,
+          "effectiveMs": 467.1929244221953
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.9295788744529,
+          "firstAuxRate": 0.4745158418195983,
+          "secondAuxRate": 0.16715216321152504,
+          "thirdAuxRate": 0.03620906990413601,
+          "selectionRate": 0.004188883893413657,
+          "meanRejectedCandidates": 0.0049204378910008735,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6778770749352594,
+          "effectiveMs": 543.0525811479532
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.8523805977985,
+          "firstAuxRate": 0.23400007696141276,
+          "secondAuxRate": 0.026873233567655516,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001692388130456384,
+          "meanRejectedCandidates": 0.0019680667310014114,
+          "meanPageActions": 0,
+          "meanKeys": 4.260873310529068,
+          "effectiveMs": 525.2282099713428
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.582580629360763,
+      "deltaVsM12": -0.07674858636987558,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.6288557489742,
+          "firstAuxRate": 0.19015508645757445,
+          "secondAuxRate": 0.03340847527146241,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002925757956217253,
+          "meanRejectedCandidates": 0.0032877058869417233,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.223563561729037,
+          "effectiveMs": 186.6180538005429
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.26342558897665,
+          "firstAuxRate": 0.1390193684267495,
+          "secondAuxRate": 0.017767418103510315,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009974106180833467,
+          "meanRejectedCandidates": 0.0011112119401235532,
+          "meanPageActions": 0,
+          "meanKeys": 4.15678678653026,
+          "effectiveMs": 469.9534685159108
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.21516182212355,
+          "firstAuxRate": 0.472899292263385,
+          "secondAuxRate": 0.16510271567640705,
+          "thirdAuxRate": 0.034812617606520206,
+          "selectionRate": 0.0038662093084737927,
+          "meanRejectedCandidates": 0.004561798099594314,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6728146255463123,
+          "effectiveMs": 540.6078925384055
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.47645285784483,
+          "firstAuxRate": 0.23233230122403364,
+          "secondAuxRate": 0.026159654041210803,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015569282213333357,
+          "meanRejectedCandidates": 0.0018040843080841357,
+          "meanPageActions": 0,
+          "meanKeys": 4.258491955265244,
+          "effectiveMs": 522.0484005856224
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.582818072579084,
+      "deltaVsM12": -0.0765111431515546,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.30916468245499,
+          "firstAuxRate": 0.1995222252227797,
+          "secondAuxRate": 0.033715190983014204,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027886276714529134,
+          "meanRejectedCandidates": 0.0031662476347218793,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2332374162057937,
+          "effectiveMs": 189.1121679935812
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.26929545903204,
+          "firstAuxRate": 0.14030174530207426,
+          "secondAuxRate": 0.017731055064929672,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001053793388680336,
+          "meanRejectedCandidates": 0.0012007976882088484,
+          "meanPageActions": 0,
+          "meanKeys": 4.158032800367004,
+          "effectiveMs": 468.3714514867519
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 336.6530342346479,
+          "firstAuxRate": 0.47296446541185466,
+          "secondAuxRate": 0.1643139142214383,
+          "thirdAuxRate": 0.0347655373672939,
+          "selectionRate": 0.0039224136250695305,
+          "meanRejectedCandidates": 0.004647965704697607,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.672043917000587,
+          "effectiveMs": 540.852583357425
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.8697223587753,
+          "firstAuxRate": 0.2235437417538886,
+          "secondAuxRate": 0.024969935529678522,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014532840675345717,
+          "meanRejectedCandidates": 0.0016935639432314115,
+          "meanPageActions": 0,
+          "meanKeys": 4.248513677283567,
+          "effectiveMs": 520.3804741815277
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.583811767737995,
+      "deltaVsM12": -0.07551744799264348,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.59171473135164,
+          "firstAuxRate": 0.195949060280368,
+          "secondAuxRate": 0.03403111693757256,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028575144413686454,
+          "meanRejectedCandidates": 0.003227736971365676,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2299801772179406,
+          "effectiveMs": 188.4619791898835
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.6489530959733,
+          "firstAuxRate": 0.13934140720331728,
+          "secondAuxRate": 0.017602375457184558,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001127328279441071,
+          "meanRejectedCandidates": 0.0012582195692449278,
+          "meanPageActions": 0,
+          "meanKeys": 4.156943782660502,
+          "effectiveMs": 467.47139584025075
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.4030217783352,
+          "firstAuxRate": 0.4766078965263606,
+          "secondAuxRate": 0.16715358674916836,
+          "thirdAuxRate": 0.03551926514255984,
+          "selectionRate": 0.0039758789027176476,
+          "meanRejectedCandidates": 0.004670196678085212,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6792807484180887,
+          "effectiveMs": 543.806811041621
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.47636295658594,
+          "firstAuxRate": 0.23041267339200347,
+          "secondAuxRate": 0.02542748604956088,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014999218241440603,
+          "meanRejectedCandidates": 0.001735747131935508,
+          "meanPageActions": 0,
+          "meanKeys": 4.255840159441564,
+          "effectiveMs": 523.2151512401385
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.586549353910529,
+      "deltaVsM12": -0.0727798618201092,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.00806905600365,
+          "firstAuxRate": 0.1948004991191499,
+          "secondAuxRate": 0.033835772069233425,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002904267389201946,
+          "meanRejectedCandidates": 0.003255396939252044,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.228636271188383,
+          "effectiveMs": 187.50457015778258
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.6481081415034,
+          "firstAuxRate": 0.13907484221849511,
+          "secondAuxRate": 0.017759473972407087,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009786614032100144,
+          "meanRejectedCandidates": 0.0010957973125017518,
+          "meanPageActions": 0,
+          "meanKeys": 4.156834316190902,
+          "effectiveMs": 468.3403897063252
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.94709748249335,
+          "firstAuxRate": 0.4761882171112867,
+          "secondAuxRate": 0.16876429508012844,
+          "thirdAuxRate": 0.036016143330863136,
+          "selectionRate": 0.004285623625976364,
+          "meanRejectedCandidates": 0.005077939439502062,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6809686555222783,
+          "effectiveMs": 543.0634928490622
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.14266405549137,
+          "firstAuxRate": 0.23938102598313002,
+          "secondAuxRate": 0.027891266513234127,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0017244248033759762,
+          "meanRejectedCandidates": 0.0019849276930433116,
+          "meanPageActions": 0,
+          "meanKeys": 4.267272292496364,
+          "effectiveMs": 524.4582530710784
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.586961072047247,
+      "deltaVsM12": -0.0723681436833914,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.08731271394971,
+          "firstAuxRate": 0.19835673475774956,
+          "secondAuxRate": 0.03357466898971412,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027847973799168518,
+          "meanRejectedCandidates": 0.003140225043370011,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.231931403747464,
+          "effectiveMs": 188.4949129830876
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.7354547558015,
+          "firstAuxRate": 0.13827237121597968,
+          "secondAuxRate": 0.01737566431159301,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009588653088475803,
+          "meanRejectedCandidates": 0.0010450207438865552,
+          "meanPageActions": 0,
+          "meanKeys": 4.155648035527573,
+          "effectiveMs": 469.0574356365762
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.8542132492407,
+          "firstAuxRate": 0.4713423633325377,
+          "secondAuxRate": 0.1650433601486124,
+          "thirdAuxRate": 0.035194360832841935,
+          "selectionRate": 0.0040035906776056795,
+          "meanRejectedCandidates": 0.004724254793795243,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.671580084313992,
+          "effectiveMs": 539.9671332520157
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.92768060960935,
+          "firstAuxRate": 0.23046392748131492,
+          "secondAuxRate": 0.02608228218045406,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015435210584180824,
+          "meanRejectedCandidates": 0.0017866161244551322,
+          "meanPageActions": 0,
+          "meanKeys": 4.256546209661769,
+          "effectiveMs": 521.9069869494136
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.587212909410752,
+      "deltaVsM12": -0.07211630631988619,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.01949991037823,
+          "firstAuxRate": 0.1984188088717271,
+          "secondAuxRate": 0.03400372011948638,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028772799152493905,
+          "meanRejectedCandidates": 0.0032559232388524187,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2324225289912136,
+          "effectiveMs": 189.63573849859478
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.44079814757066,
+          "firstAuxRate": 0.1386734750595863,
+          "secondAuxRate": 0.01729488672395869,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010367672381132117,
+          "meanRejectedCandidates": 0.0011563298656693767,
+          "meanPageActions": 0,
+          "meanKeys": 4.155968361783545,
+          "effectiveMs": 467.91118351878555
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.01016806079673,
+          "firstAuxRate": 0.47359850435726986,
+          "secondAuxRate": 0.164017122964439,
+          "thirdAuxRate": 0.03372366124214877,
+          "selectionRate": 0.003638951691845165,
+          "meanRejectedCandidates": 0.004273569857296361,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.671339288563858,
+          "effectiveMs": 541.8095317002503
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.8742011868615,
+          "firstAuxRate": 0.22376794051872698,
+          "secondAuxRate": 0.02416752540032043,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013066865314480688,
+          "meanRejectedCandidates": 0.001490547916343147,
+          "meanPageActions": 0,
+          "meanKeys": 4.247935465919047,
+          "effectiveMs": 521.1133802772617
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.59154932614829,
+      "deltaVsM12": -0.06777988958234893,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.68885023708586,
+          "firstAuxRate": 0.19029183663707186,
+          "secondAuxRate": 0.03369805700713534,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027127820512655577,
+          "meanRejectedCandidates": 0.0030708704515872787,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.223989893644207,
+          "effectiveMs": 187.66734686344694
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.35397306340025,
+          "firstAuxRate": 0.13880150706151972,
+          "secondAuxRate": 0.017511387118106046,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010346976186832591,
+          "meanRejectedCandidates": 0.0011273665697589866,
+          "meanPageActions": 0,
+          "meanKeys": 4.156312894179626,
+          "effectiveMs": 469.9250282169859
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.6420276118302,
+          "firstAuxRate": 0.46968401188394643,
+          "secondAuxRate": 0.16285218346261904,
+          "thirdAuxRate": 0.03402785616590904,
+          "selectionRate": 0.003638422404570898,
+          "meanRejectedCandidates": 0.004282129240524128,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6665640515124744,
+          "effectiveMs": 540.0089305326657
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.3323768706375,
+          "firstAuxRate": 0.22349548152051357,
+          "secondAuxRate": 0.024435486371429366,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014906082763418652,
+          "meanRejectedCandidates": 0.0017149422475773706,
+          "meanPageActions": 0,
+          "meanKeys": 4.247930967891943,
+          "effectiveMs": 522.6917793164044
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.594723287736027,
+      "deltaVsM12": -0.06460592799461118,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.10577145097537,
+          "firstAuxRate": 0.18815570351461702,
+          "secondAuxRate": 0.03421807025117239,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002951634353235684,
+          "meanRejectedCandidates": 0.003319985595764715,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2223737737657894,
+          "effectiveMs": 186.75519925220206
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.3675588363702,
+          "firstAuxRate": 0.1412234451404614,
+          "secondAuxRate": 0.018175819027340594,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011434282482603495,
+          "meanRejectedCandidates": 0.0012717743417870974,
+          "meanPageActions": 0,
+          "meanKeys": 4.159399264167802,
+          "effectiveMs": 468.9369837527564
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.9471157278152,
+          "firstAuxRate": 0.4754150527815529,
+          "secondAuxRate": 0.16722634876955153,
+          "thirdAuxRate": 0.035555218546737405,
+          "selectionRate": 0.0039019330219474263,
+          "meanRejectedCandidates": 0.004575133778448013,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6781966200978418,
+          "effectiveMs": 543.9765458215829
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 446.9526013311244,
+          "firstAuxRate": 0.234498737469222,
+          "secondAuxRate": 0.026501846945943174,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016891673209247888,
+          "meanRejectedCandidates": 0.0019695443437700295,
+          "meanPageActions": 0,
+          "meanKeys": 4.261000584415165,
+          "effectiveMs": 526.3647542654173
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.59531546247998,
+      "deltaVsM12": -0.0640137532506575,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.39151799312573,
+          "firstAuxRate": 0.18856387809357444,
+          "secondAuxRate": 0.03429479303736037,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002839561777222525,
+          "meanRejectedCandidates": 0.0032047844610159945,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.222858671130935,
+          "effectiveMs": 187.11341140155074
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.6797822296679,
+          "firstAuxRate": 0.14054049847518424,
+          "secondAuxRate": 0.017694843800290336,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010296954603398907,
+          "meanRejectedCandidates": 0.001152909541401643,
+          "meanPageActions": 0,
+          "meanKeys": 4.158235342275475,
+          "effectiveMs": 470.8258476655843
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.44609840412016,
+          "firstAuxRate": 0.46793889091350604,
+          "secondAuxRate": 0.1613921422468828,
+          "thirdAuxRate": 0.03348106882046072,
+          "selectionRate": 0.0036098127478402416,
+          "meanRejectedCandidates": 0.004254431083662021,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6628121019808497,
+          "effectiveMs": 538.6688657635866
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.60626827077715,
+          "firstAuxRate": 0.22486261496907783,
+          "secondAuxRate": 0.024676480909511026,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014906058619419164,
+          "meanRejectedCandidates": 0.0017390560670652317,
+          "meanPageActions": 0,
+          "meanKeys": 4.249539095878589,
+          "effectiveMs": 523.4493133548723
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.595617756736289,
+      "deltaVsM12": -0.06371145899434971,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.94455151284531,
+          "firstAuxRate": 0.19059261685868611,
+          "secondAuxRate": 0.035104329539336974,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0026216152649339557,
+          "meanRejectedCandidates": 0.002951166531368684,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.225696946398023,
+          "effectiveMs": 187.37447869754126
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.07630394752476,
+          "firstAuxRate": 0.1399582744911844,
+          "secondAuxRate": 0.01793768155144406,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001138507110009962,
+          "meanRejectedCandidates": 0.0012484053168174104,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.157895956042628,
+          "effectiveMs": 468.19061545863974
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.02657924016773,
+          "firstAuxRate": 0.475465773573043,
+          "secondAuxRate": 0.1681641859002384,
+          "thirdAuxRate": 0.036309658998693393,
+          "selectionRate": 0.0040890056598095435,
+          "meanRejectedCandidates": 0.004819382152088485,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6799396184719746,
+          "effectiveMs": 545.7033648475748
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 448.103621763236,
+          "firstAuxRate": 0.2298853346416033,
+          "secondAuxRate": 0.026235605027597725,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001659619894352329,
+          "meanRejectedCandidates": 0.0019113235034065468,
+          "meanPageActions": 0,
+          "meanKeys": 4.256120939669201,
+          "effectiveMs": 526.031241775778
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.595938588130942,
+      "deltaVsM12": -0.06339062759969671,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.2774560959866,
+          "firstAuxRate": 0.1883168681477985,
+          "secondAuxRate": 0.034971526606842385,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028219015017432797,
+          "meanRejectedCandidates": 0.0031548444767137574,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2232883947546407,
+          "effectiveMs": 186.11517342702075
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.1433233085766,
+          "firstAuxRate": 0.1425052260186638,
+          "secondAuxRate": 0.01870106396615502,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012490396042576667,
+          "meanRejectedCandidates": 0.0013946291042858,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.161206289984819,
+          "effectiveMs": 467.32436568827086
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.1544969419954,
+          "firstAuxRate": 0.481155712544804,
+          "secondAuxRate": 0.17262780892733756,
+          "thirdAuxRate": 0.03787006506549344,
+          "selectionRate": 0.00437112667141454,
+          "meanRejectedCandidates": 0.0051471117482515365,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.691653586537635,
+          "effectiveMs": 549.5311320558715
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.24965133059607,
+          "firstAuxRate": 0.24069717816957706,
+          "secondAuxRate": 0.02838953830265163,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001868795055509783,
+          "meanRejectedCandidates": 0.0021685464307435436,
+          "meanPageActions": 0,
+          "meanKeys": 4.269086716472229,
+          "effectiveMs": 529.2053706271078
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.596452316586202,
+      "deltaVsM12": -0.0628768991444364,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.03185205787483,
+          "firstAuxRate": 0.19098547027149926,
+          "secondAuxRate": 0.03472214831286476,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028385676557551504,
+          "meanRejectedCandidates": 0.003166423067922004,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.225707618584364,
+          "effectiveMs": 186.60588884481342
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.38548258658005,
+          "firstAuxRate": 0.14123126441183229,
+          "secondAuxRate": 0.018302080240803438,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011168489408393215,
+          "meanRejectedCandidates": 0.0012532060347926134,
+          "meanPageActions": 0,
+          "meanKeys": 4.159533344652636,
+          "effectiveMs": 468.97825564861404
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.3629235029892,
+          "firstAuxRate": 0.47819387270650493,
+          "secondAuxRate": 0.1705493640756843,
+          "thirdAuxRate": 0.037181125502497664,
+          "selectionRate": 0.004368876065663412,
+          "meanRejectedCandidates": 0.005185644406539204,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.685924362284687,
+          "effectiveMs": 546.0213676104446
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.070543676587,
+          "firstAuxRate": 0.23908082794390575,
+          "secondAuxRate": 0.02823609835711045,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0017471805228926813,
+          "meanRejectedCandidates": 0.002016028785982774,
+          "meanPageActions": 0,
+          "meanKeys": 4.2673169263010164,
+          "effectiveMs": 525.4147313199265
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.596895029568161,
+      "deltaVsM12": -0.06243418616247709,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.5642284159509,
+          "firstAuxRate": 0.19635735181479214,
+          "secondAuxRate": 0.0343842639694241,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028106737769352827,
+          "meanRejectedCandidates": 0.003172504752193003,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.230741615784216,
+          "effectiveMs": 188.6320584347468
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.76391678985954,
+          "firstAuxRate": 0.1402759223671651,
+          "secondAuxRate": 0.017805058040953625,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011121389542696144,
+          "meanRejectedCandidates": 0.0012137167859804026,
+          "meanPageActions": 0,
+          "meanKeys": 4.158080980408119,
+          "effectiveMs": 467.9161801241559
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.64510931382245,
+          "firstAuxRate": 0.47438835349236647,
+          "secondAuxRate": 0.16705167942970148,
+          "thirdAuxRate": 0.035904811429588096,
+          "selectionRate": 0.004009395588123111,
+          "meanRejectedCandidates": 0.004680465577500706,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.677344844351656,
+          "effectiveMs": 543.4887508133925
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.09111761782844,
+          "firstAuxRate": 0.23237986731742344,
+          "secondAuxRate": 0.026346574470840912,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016327271005234887,
+          "meanRejectedCandidates": 0.0019104241394256479,
+          "meanPageActions": 0,
+          "meanKeys": 4.258726441788264,
+          "effectiveMs": 525.7842076215932
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.598379239614923,
+      "deltaVsM12": -0.06094997611571529,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.48867207115264,
+          "firstAuxRate": 0.1989703123751866,
+          "secondAuxRate": 0.03377048167992026,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00267380664197113,
+          "meanRejectedCandidates": 0.0030277723620899147,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2327407940551067,
+          "effectiveMs": 189.06687235575208
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.05737612130196,
+          "firstAuxRate": 0.138918679873799,
+          "secondAuxRate": 0.017483825580790657,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009687594715037914,
+          "meanRejectedCandidates": 0.0010541274578308472,
+          "meanPageActions": 0,
+          "meanKeys": 4.156402505454589,
+          "effectiveMs": 468.61208981347266
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.9330319711304,
+          "firstAuxRate": 0.4725668226863318,
+          "secondAuxRate": 0.16537025813732564,
+          "thirdAuxRate": 0.03520523709621366,
+          "selectionRate": 0.003987808293427539,
+          "meanRejectedCandidates": 0.0046896232460007575,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6731423179198712,
+          "effectiveMs": 542.5034210477727
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.22463764968415,
+          "firstAuxRate": 0.22540327758559503,
+          "secondAuxRate": 0.025258671205146237,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015448465639899308,
+          "meanRejectedCandidates": 0.0017763947622722175,
+          "meanPageActions": 0,
+          "meanKeys": 4.250661948790741,
+          "effectiveMs": 523.4389499634141
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.600104864461565,
+      "deltaVsM12": -0.059224351269072883,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.66256381921505,
+          "firstAuxRate": 0.19627460582206652,
+          "secondAuxRate": 0.03398798960920851,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028963144174629484,
+          "meanRejectedCandidates": 0.0032944308262798467,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.230262595431275,
+          "effectiveMs": 188.64416842014953
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.1444935757589,
+          "firstAuxRate": 0.13945651428069164,
+          "secondAuxRate": 0.017358493878668523,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010059285490231662,
+          "meanRejectedCandidates": 0.0010958333830910928,
+          "meanPageActions": 0,
+          "meanKeys": 4.15681500815936,
+          "effectiveMs": 469.84734482213537
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.64557813073907,
+          "firstAuxRate": 0.46922271487377876,
+          "secondAuxRate": 0.1621282655461019,
+          "thirdAuxRate": 0.033549355957525104,
+          "selectionRate": 0.0035799266281462587,
+          "meanRejectedCandidates": 0.004183854302505529,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6649003363774058,
+          "effectiveMs": 539.4733552982982
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 448.1873318513655,
+          "firstAuxRate": 0.22330917434847042,
+          "secondAuxRate": 0.0244099697855713,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001488082813995502,
+          "meanRejectedCandidates": 0.0017279003321021616,
+          "meanPageActions": 0,
+          "meanKeys": 4.247719144134042,
+          "effectiveMs": 523.4823197965806
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.601173043392883,
+      "deltaVsM12": -0.05815617233775505,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.88145554498259,
+          "firstAuxRate": 0.18989600085985658,
+          "secondAuxRate": 0.03587600170895328,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027664061327704187,
+          "meanRejectedCandidates": 0.0031132375694174555,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2257720025688097,
+          "effectiveMs": 187.42887765351892
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.1347987947989,
+          "firstAuxRate": 0.14005051447971303,
+          "secondAuxRate": 0.01792065151635193,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011203486204036052,
+          "meanRejectedCandidates": 0.001260714821629103,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.157971165996065,
+          "effectiveMs": 469.2613936734217
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.03547613527707,
+          "firstAuxRate": 0.4721563908187291,
+          "secondAuxRate": 0.16407425966187636,
+          "thirdAuxRate": 0.03443121573871498,
+          "selectionRate": 0.0037288751484984444,
+          "meanRejectedCandidates": 0.004398440799945576,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6706618662193207,
+          "effectiveMs": 543.691810692494
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 449.498620760686,
+          "firstAuxRate": 0.22580969715056332,
+          "secondAuxRate": 0.024793057796635123,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015908964142119055,
+          "meanRejectedCandidates": 0.001831167839508925,
+          "meanPageActions": 0,
+          "meanKeys": 4.250602754947199,
+          "effectiveMs": 525.7255434853482
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.602084981730355,
+      "deltaVsM12": -0.057244234000283,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.15789988912884,
+          "firstAuxRate": 0.1968960779335092,
+          "secondAuxRate": 0.03442736205892146,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002797750197859411,
+          "meanRejectedCandidates": 0.003150721796510821,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2313234399924307,
+          "effectiveMs": 188.3914075601794
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.2667933215783,
+          "firstAuxRate": 0.14028317061336013,
+          "secondAuxRate": 0.0177196276247604,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009826821640572384,
+          "meanRejectedCandidates": 0.0011021288107953687,
+          "meanPageActions": 0,
+          "meanKeys": 4.158002798238121,
+          "effectiveMs": 469.31234853198856
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.83574929106504,
+          "firstAuxRate": 0.4716722672735067,
+          "secondAuxRate": 0.1647407766912532,
+          "thirdAuxRate": 0.0345999539743407,
+          "selectionRate": 0.0039178234424645676,
+          "meanRejectedCandidates": 0.004651497312754036,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6710129979391004,
+          "effectiveMs": 541.723445166236
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.56947174352155,
+          "firstAuxRate": 0.22837715798403457,
+          "secondAuxRate": 0.025726165431217408,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015618270388292927,
+          "meanRejectedCandidates": 0.0018031801153033395,
+          "meanPageActions": 0,
+          "meanKeys": 4.254103323415252,
+          "effectiveMs": 524.8277239971599
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "jv",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004287272512878257
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.60402700270653,
+      "deltaVsM12": -0.05530221302410787,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.04590911011118,
+          "firstAuxRate": 0.1890321677824413,
+          "secondAuxRate": 0.03495959714923389,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002982686029657801,
+          "meanRejectedCandidates": 0.0033522360657210195,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.223991764931675,
+          "effectiveMs": 186.20097779045474
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 423.1931754019639,
+          "firstAuxRate": 0.1394414273405007,
+          "secondAuxRate": 0.017435077011694635,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010080947266461239,
+          "meanRejectedCandidates": 0.0010999260076509265,
+          "meanPageActions": 0,
+          "meanKeys": 4.156876504352195,
+          "effectiveMs": 470.9159798439927
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.4352566550154,
+          "firstAuxRate": 0.47102272193590544,
+          "secondAuxRate": 0.16344362159146872,
+          "thirdAuxRate": 0.03408273408677973,
+          "selectionRate": 0.0036190475851538657,
+          "meanRejectedCandidates": 0.004252648938002697,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.668549077614154,
+          "effectiveMs": 543.3845684995782
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 450.06928348103276,
+          "firstAuxRate": 0.22120998034905395,
+          "secondAuxRate": 0.023738715897427657,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001445343106103225,
+          "meanRejectedCandidates": 0.0016478702170018731,
+          "meanPageActions": 0,
+          "meanKeys": 4.244948696246482,
+          "effectiveMs": 524.5034917294893
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.613715567600114,
+      "deltaVsM12": -0.04561364813052471,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.6993623552974,
+          "firstAuxRate": 0.1904715094728665,
+          "secondAuxRate": 0.03456741623035455,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029526284747030587,
+          "meanRejectedCandidates": 0.003346739158783771,
+          "meanPageActions": 0.000001198793534187194,
+          "meanKeys": 2.2250389257032213,
+          "effectiveMs": 188.150313747085
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.39973368042115,
+          "firstAuxRate": 0.14197529079337076,
+          "secondAuxRate": 0.01803365678823199,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010674474940762292,
+          "meanRejectedCandidates": 0.0011927414608125925,
+          "meanPageActions": 0,
+          "meanKeys": 4.160008947581603,
+          "effectiveMs": 470.10252352438835
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.03114057103505,
+          "firstAuxRate": 0.47353890370500856,
+          "secondAuxRate": 0.1650634421975091,
+          "thirdAuxRate": 0.034803173959475735,
+          "selectionRate": 0.003778805186616552,
+          "meanRejectedCandidates": 0.00449672390877973,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6734055198619933,
+          "effectiveMs": 543.5454433993665
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.5969849400643,
+          "firstAuxRate": 0.22881325052437265,
+          "secondAuxRate": 0.02574142685329328,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001586015704715564,
+          "meanRejectedCandidates": 0.0018472743015668495,
+          "meanPageActions": 0,
+          "meanKeys": 4.254554677377666,
+          "effectiveMs": 525.0073612912719
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.614675980165735,
+      "deltaVsM12": -0.04465323556490297,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.73078745120746,
+          "firstAuxRate": 0.19500253968796047,
+          "secondAuxRate": 0.03489401437125384,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031403712377034484,
+          "meanRejectedCandidates": 0.003500623314160044,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.229896554059214,
+          "effectiveMs": 188.75932335706204
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 418.78580749149535,
+          "firstAuxRate": 0.1417333051405237,
+          "secondAuxRate": 0.018301902939983523,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011235880367924905,
+          "meanRejectedCandidates": 0.0012609068281508255,
+          "meanPageActions": 0,
+          "meanKeys": 4.160035208080507,
+          "effectiveMs": 467.53356807913053
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.45696593571375,
+          "firstAuxRate": 0.4782596868100614,
+          "secondAuxRate": 0.1710296564162799,
+          "thirdAuxRate": 0.03715155804461032,
+          "selectionRate": 0.004221664297550802,
+          "meanRejectedCandidates": 0.004967193113341775,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.686440901270952,
+          "effectiveMs": 547.1711221135212
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.0333660432412,
+          "firstAuxRate": 0.24158512083151856,
+          "secondAuxRate": 0.028691794617832188,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0018914071182295391,
+          "meanRejectedCandidates": 0.002205980494748504,
+          "meanPageActions": 0,
+          "meanKeys": 4.270276915449351,
+          "effectiveMs": 529.3615839737216
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.006436044432467497
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.615183985096573,
+      "deltaVsM12": -0.04414523063406506,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.67900913168236,
+          "firstAuxRate": 0.18966872714909472,
+          "secondAuxRate": 0.03486103292963035,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00305511070244272,
+          "meanRejectedCandidates": 0.003429222001709187,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2245297600787253,
+          "effectiveMs": 187.0427804566112
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.9020695400738,
+          "firstAuxRate": 0.13956091200009066,
+          "secondAuxRate": 0.017597308649246447,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010485256953062041,
+          "meanRejectedCandidates": 0.0011720133579148037,
+          "meanPageActions": 0,
+          "meanKeys": 4.157158220649337,
+          "effectiveMs": 469.73725181995434
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.58896052945227,
+          "firstAuxRate": 0.4767260183753616,
+          "secondAuxRate": 0.16782939671943609,
+          "thirdAuxRate": 0.035496221626958736,
+          "selectionRate": 0.003914222836410121,
+          "meanRejectedCandidates": 0.004597406513781786,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6800516367217564,
+          "effectiveMs": 547.1833831358387
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 449.0407832586044,
+          "firstAuxRate": 0.22997745727884678,
+          "secondAuxRate": 0.025439950389296157,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015762096193238297,
+          "meanRejectedCandidates": 0.0018109931135374038,
+          "meanPageActions": 0,
+          "meanKeys": 4.255417407668143,
+          "effectiveMs": 526.7022809863186
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.0009464312554074032
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.62106213947319,
+      "deltaVsM12": -0.03826707625744774,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.40264872225713,
+          "firstAuxRate": 0.1895927645734406,
+          "secondAuxRate": 0.034637677227004594,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030366024998295374,
+          "meanRejectedCandidates": 0.003415450495499378,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.224230441800445,
+          "effectiveMs": 185.6648047518436
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.1751638509124,
+          "firstAuxRate": 0.13949147889027014,
+          "secondAuxRate": 0.01767794472918412,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009999005986121568,
+          "meanRejectedCandidates": 0.0011220561466097894,
+          "meanPageActions": 0,
+          "meanKeys": 4.157169423619454,
+          "effectiveMs": 469.98203410324646
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 342.4540940475631,
+          "firstAuxRate": 0.47919262780649424,
+          "secondAuxRate": 0.17044968557312706,
+          "thirdAuxRate": 0.037005107978081084,
+          "selectionRate": 0.004109060472654407,
+          "meanRejectedCandidates": 0.004875734451232603,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6866474213577023,
+          "effectiveMs": 551.1580710233525
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 450.0306792892053,
+          "firstAuxRate": 0.23032186780993205,
+          "secondAuxRate": 0.026108556887896026,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016088160906313203,
+          "meanRejectedCandidates": 0.0018228840332848598,
+          "meanPageActions": 0,
+          "meanKeys": 4.256430424697828,
+          "effectiveMs": 528.0162405545968
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        },
+        {
+          "property": "fullFinal",
+          "position": "second",
+          "family": "ou",
+          "destination": 3,
+          "proxyDeltaTop1Share": 0.002169682343558093
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.622497250628596,
+      "deltaVsM12": -0.03683196510204212,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 119.22747333932406,
+          "firstAuxRate": 0.19088442074822728,
+          "secondAuxRate": 0.03510535289967104,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002763336051768232,
+          "meanRejectedCandidates": 0.0030999338850746464,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2259897736478984,
+          "effectiveMs": 188.83771953876843
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.7501902326524,
+          "firstAuxRate": 0.14136870306853366,
+          "secondAuxRate": 0.018483991714433576,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011860819976220454,
+          "meanRejectedCandidates": 0.00132932996146981,
+          "meanPageActions": 5.549321437062812e-10,
+          "meanKeys": 4.159852694782967,
+          "effectiveMs": 469.484114530669
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.22401000209237,
+          "firstAuxRate": 0.47659552500374236,
+          "secondAuxRate": 0.16844205808775495,
+          "thirdAuxRate": 0.03597788030948878,
+          "selectionRate": 0.003973464880655425,
+          "meanRejectedCandidates": 0.004694799911588871,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.681015463400986,
+          "effectiveMs": 546.1479955086852
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.4221041769519,
+          "firstAuxRate": 0.23159503160529207,
+          "secondAuxRate": 0.026212932604879252,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016716762004962721,
+          "meanRejectedCandidates": 0.0019386581324260031,
+          "meanPageActions": 0,
+          "meanKeys": 4.257807964210171,
+          "effectiveMs": 525.8644320669224
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.005202933758861051
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.628755076741058,
+      "deltaVsM12": -0.03057413898958039,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.62118311395997,
+          "firstAuxRate": 0.19281167140706665,
+          "secondAuxRate": 0.035109534057607354,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003150137019177071,
+          "meanRejectedCandidates": 0.0035395402457210966,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.227921205464674,
+          "effectiveMs": 188.0649197569147
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.7903236036643,
+          "firstAuxRate": 0.14050945890065816,
+          "secondAuxRate": 0.017732092510572332,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010639295017512032,
+          "meanRejectedCandidates": 0.0011877995126068162,
+          "meanPageActions": 0,
+          "meanKeys": 4.158241551411231,
+          "effectiveMs": 469.9605367037145
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 342.10085222677486,
+          "firstAuxRate": 0.47674743589866736,
+          "secondAuxRate": 0.16680232338847092,
+          "thirdAuxRate": 0.03507291800125212,
+          "selectionRate": 0.0037886401249392506,
+          "meanRejectedCandidates": 0.004462066940670185,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6786226772883905,
+          "effectiveMs": 548.1844703976134
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 450.2053863320732,
+          "firstAuxRate": 0.22653101965764358,
+          "secondAuxRate": 0.025011232633601437,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015174081157726795,
+          "meanRejectedCandidates": 0.0017432885101753414,
+          "meanPageActions": 0,
+          "meanKeys": 4.251542252291245,
+          "effectiveMs": 526.6656713144191
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.633929670945507,
+      "deltaVsM12": -0.025399544785130956,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.39123679536628,
+          "firstAuxRate": 0.18972132787026552,
+          "secondAuxRate": 0.034879541132243536,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030481810910377846,
+          "meanRejectedCandidates": 0.003423578900438501,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.224600869002509,
+          "effectiveMs": 187.7719008755238
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 423.56192369054037,
+          "firstAuxRate": 0.13960132992784535,
+          "secondAuxRate": 0.01770309453140296,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00103875084306089,
+          "meanRejectedCandidates": 0.0011625145844109833,
+          "meanPageActions": 0,
+          "meanKeys": 4.157304424459248,
+          "effectiveMs": 471.4346272633719
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 341.37732233893877,
+          "firstAuxRate": 0.47317655617907695,
+          "secondAuxRate": 0.16584345639428297,
+          "thirdAuxRate": 0.03498415752401279,
+          "selectionRate": 0.0037885947315195023,
+          "meanRejectedCandidates": 0.004480566574954467,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6740041700973727,
+          "effectiveMs": 546.0762860981345
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 449.9017571452324,
+          "firstAuxRate": 0.22525452881915423,
+          "secondAuxRate": 0.024623751621830912,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001524984502811769,
+          "meanRejectedCandidates": 0.001761234744994192,
+          "meanPageActions": 0,
+          "meanKeys": 4.249878280440985,
+          "effectiveMs": 525.8682937164648
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.006392090341856616
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "du",
+          "destination": "N",
+          "proxyDeltaTop1Share": 0.004752833524836829
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.64034924867786,
+      "deltaVsM12": -0.018979967052779045,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 120.07492003846106,
+          "firstAuxRate": 0.199806251573782,
+          "secondAuxRate": 0.03417543998354203,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028165507891394687,
+          "meanRejectedCandidates": 0.003189434056005061,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.233981691557324,
+          "effectiveMs": 192.11914546170246
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.613269376845,
+          "firstAuxRate": 0.1401079355283509,
+          "secondAuxRate": 0.017593605587051496,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010853995489251273,
+          "meanRejectedCandidates": 0.0012114074358643688,
+          "meanPageActions": 0,
+          "meanKeys": 4.157701541115403,
+          "effectiveMs": 470.63554181261406
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.28605891418295,
+          "firstAuxRate": 0.4744928119220232,
+          "secondAuxRate": 0.1648414129949671,
+          "thirdAuxRate": 0.03428176879861396,
+          "selectionRate": 0.0036868008956020036,
+          "meanRejectedCandidates": 0.0043699464425010805,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6736159937156043,
+          "effectiveMs": 542.8019624506748
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 445.8389182109092,
+          "firstAuxRate": 0.2233809846389453,
+          "secondAuxRate": 0.02409452963947074,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013280093045952071,
+          "meanRejectedCandidates": 0.0015127362518719024,
+          "meanPageActions": 0,
+          "meanKeys": 4.247475514278416,
+          "effectiveMs": 520.9540148897847
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "initial",
+          "position": "first",
+          "family": "r",
+          "destination": "K",
+          "proxyDeltaTop1Share": 0.0008474616460194541
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "ch",
+          "destination": "K",
+          "provenance": "prior full-CKT M13 champion"
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.642268499178128,
+      "deltaVsM12": -0.017060716552510513,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.70333635542343,
+          "firstAuxRate": 0.19705268130348738,
+          "secondAuxRate": 0.03485831371502841,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003216509246557679,
+          "meanRejectedCandidates": 0.0035943338818934575,
+          "meanPageActions": 9.648826006872538e-7,
+          "meanKeys": 2.2319109950185156,
+          "effectiveMs": 188.38654656778766
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.2209228405686,
+          "firstAuxRate": 0.14355375504356288,
+          "secondAuxRate": 0.018766895566362896,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011549960862619786,
+          "meanRejectedCandidates": 0.0012900293895864593,
+          "meanPageActions": 0,
+          "meanKeys": 4.162320650609926,
+          "effectiveMs": 469.67461714478287
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.0910529141889,
+          "firstAuxRate": 0.4823582169172026,
+          "secondAuxRate": 0.17385533142909632,
+          "thirdAuxRate": 0.038471773001627005,
+          "selectionRate": 0.004581479778528846,
+          "meanRejectedCandidates": 0.005420521762606806,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.694685321347926,
+          "effectiveMs": 549.5170908361387
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 444.99673438582386,
+          "firstAuxRate": 0.24860494401602876,
+          "secondAuxRate": 0.03053897234340109,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001954565406488158,
+          "meanRejectedCandidates": 0.002287892634608821,
+          "meanPageActions": 0,
+          "meanKeys": 4.27914391635943,
+          "effectiveMs": 530.0270431692761
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "shu",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.005047506318090684
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.662124602817661,
+      "deltaVsM12": 0.0027953870870227604,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.89785130571042,
+          "firstAuxRate": 0.210602293754005,
+          "secondAuxRate": 0.03481629746359849,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003064642572982843,
+          "meanRejectedCandidates": 0.0034586363015968046,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2454185912176037,
+          "effectiveMs": 194.5354618096212
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 422.13734938259256,
+          "firstAuxRate": 0.13951257907517028,
+          "secondAuxRate": 0.017329037525548447,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010414436512882245,
+          "meanRejectedCandidates": 0.0011651999010543778,
+          "meanPageActions": 0,
+          "meanKeys": 4.156841616600719,
+          "effectiveMs": 469.8729605486338
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.8000464908986,
+          "firstAuxRate": 0.4733350718165753,
+          "secondAuxRate": 0.16409194221460519,
+          "thirdAuxRate": 0.03414029021941558,
+          "selectionRate": 0.0036726172676674034,
+          "meanRejectedCandidates": 0.004330574005948067,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.671567304250596,
+          "effectiveMs": 543.6908643892996
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 448.1888912485121,
+          "firstAuxRate": 0.22143427689709025,
+          "secondAuxRate": 0.024159662906887414,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013979713719093248,
+          "meanRejectedCandidates": 0.0015761963401241116,
+          "meanPageActions": 0,
+          "meanKeys": 4.245593939803977,
+          "effectiveMs": 522.7846658298572
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    },
+    {
+      "moves": [
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "d",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.00497789439965603
+        },
+        {
+          "property": "shengjie",
+          "position": "first",
+          "family": "di",
+          "destination": "C",
+          "proxyDeltaTop1Share": 0.004925215336137181
+        }
+      ],
+      "MGuard": 14,
+      "score": 9.71256828062886,
+      "deltaVsM12": 0.0532390648982215,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.12727336403617,
+          "firstAuxRate": 0.19418703845717963,
+          "secondAuxRate": 0.035450225332250014,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003108822500547644,
+          "meanRejectedCandidates": 0.0034832554273476735,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2296372637894297,
+          "effectiveMs": 189.05822455232126
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 423.96133285275965,
+          "firstAuxRate": 0.14376788865211731,
+          "secondAuxRate": 0.018482008664418043,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011651111119113848,
+          "meanRejectedCandidates": 0.0013026646395665074,
+          "meanPageActions": 0,
+          "meanKeys": 4.162249897316535,
+          "effectiveMs": 473.4005019468454
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.12949112390726,
+          "firstAuxRate": 0.48435710616927313,
+          "secondAuxRate": 0.17494948897150253,
+          "thirdAuxRate": 0.038259405334544264,
+          "selectionRate": 0.004280239966394198,
+          "meanRejectedCandidates": 0.005082123804934474,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.69756600047532,
+          "effectiveMs": 557.2220689989108
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.2393737433916,
+          "firstAuxRate": 0.2338274594370789,
+          "secondAuxRate": 0.026708464050354958,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016823043890705465,
+          "meanRejectedCandidates": 0.0019462779786641698,
+          "meanPageActions": 0,
+          "meanKeys": 4.260535923487434,
+          "effectiveMs": 531.5068473219973
+        }
+      },
+      "flyingAudit": {
+        "shengjieFamilyCount": 55,
+        "tonedFullFinalFamilyCount": 161,
+        "shengjieFlying": [],
+        "tonedFullFinalFlying": []
+      }
+    }
+  ]
+}
