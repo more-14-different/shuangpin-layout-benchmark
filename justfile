@@ -25,6 +25,9 @@ toned-2121-aux-order:
 toned-2121-constrained-search:
     node tools/search_toned_2121_constrained_ckt.js --sample 160 --resample 1200 --preselect 48 --finalists 5 --max-m 15 --max-d 2 --max-v 1
 
+toned-2121-written-lowm steps="10000" restarts="8":
+    node tools/search_toned_2121_written_lowm.js --steps "{{steps}}" --restarts "{{restarts}}"
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 
