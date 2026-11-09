@@ -1,34 +1,74 @@
 {
+  "version": "a7-1a16aa-directed-seed-manifest-2",
+  "sourceArchive": {
+    "exploration": "production-ckt-v4-2121-strict-ivuao-stage5-m43d3-20261025/exploration.sqlite3",
+    "table": "states",
+    "note": "sourceStateId records the archived database row used to reconstruct each seed"
+  },
   "seeds": [
     {
       "id": "seed-01-a7-1a16aa",
       "description": "A7-1a16aa comprehensive center",
+      "sourceStateId": 17477,
+      "archivedCktV4": 9.576377236511233,
       "path": "seed-01-a7-1a16aa.json"
     },
     {
       "id": "seed-02-qz-e8f37a",
       "description": "QZ-e8f37a nearest speed neighbor",
+      "sourceStateId": 17221,
+      "archivedCktV4": 9.56073454942596,
       "path": "seed-02-qz-e8f37a.json"
     },
     {
       "id": "seed-03-qz-c6f1cd",
       "description": "QZ-c6f1cd speed endpoint",
+      "sourceStateId": 9457,
+      "archivedCktV4": 9.55283864991326,
       "path": "seed-03-qz-c6f1cd.json"
     },
     {
       "id": "seed-04-a7-ffc213",
       "description": "A7-ffc213 low-TYB/low-SFB endpoint",
+      "sourceStateId": 16281,
+      "archivedCktV4": 9.591254911945663,
       "path": "seed-04-a7-ffc213.json"
     },
     {
       "id": "seed-05-qz-69bef3",
       "description": "QZ-69bef3 low-single-finger/low-SFB endpoint",
+      "sourceStateId": 11869,
+      "archivedCktV4": 9.630363234043132,
       "path": "seed-05-qz-69bef3.json"
     },
     {
       "id": "seed-06-qz-39397c",
       "description": "QZ-39397c extreme-TYB endpoint",
+      "sourceStateId": 9159,
+      "archivedCktV4": 9.62504838122717,
       "path": "seed-06-qz-39397c.json"
+    }
+  ],
+  "unselectedSourceStates": [
+    {
+      "id": "exact-ckt-9542",
+      "sourceStateId": 22690,
+      "description": "lowest archived CKT endpoint considered during seed selection"
+    },
+    {
+      "id": "exact-ckt-9543",
+      "sourceStateId": 21421,
+      "description": "second-lowest archived CKT endpoint considered during seed selection"
+    },
+    {
+      "id": "exact-homefloor-3625",
+      "sourceStateId": 22695,
+      "description": "highest archived home-floor endpoint considered during seed selection"
+    },
+    {
+      "id": "exact-s2home-5458",
+      "sourceStateId": 6400,
+      "description": "highest archived S2-home endpoint considered during seed selection"
     }
   ]
 }
