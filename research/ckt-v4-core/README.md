@@ -17,6 +17,14 @@ reference fixtures.
   format, retaining explicit keyboard contract and source provenance.
 - generate the same rows natively from a phase-3 shared corpus plus a small
   scheme state, with inverted pinyin/auxiliary dependencies for exact updates.
+- accept a direct `pinyin × lexical tone` two-key table while preserving the
+  historical untoned regular-layout path; a changed toned code reuses the
+  existing pinyin dependency index for exact incremental updates.
+
+The direct toned state is the first boundary needed by the CKT v5.1 toned
+21×21 search. Its specialized corpus adapter and search runner are still
+separate work: v5.1 word-three rows have three auxiliary stages, while the
+historical native corpus stores two auxiliary positions for that track.
 
 The incremental resolver is correctness-first. It finds the transitive component
 of rows sharing any old or new stage bucket and recomputes only that component.

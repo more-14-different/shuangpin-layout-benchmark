@@ -104,6 +104,7 @@ pub struct SchemeState {
     pub capacity: [u8; 2],
     pub contract: Contract,
     codes: Vec<Option<[u8; 2]>>,
+    toned_codes: Option<Vec<[Option<[u8; 2]>; 5]>>,
     tone: [u8; 5],
 }
 
@@ -504,6 +505,7 @@ impl RegularLayout {
                 Contract::FourCodeTop
             },
             codes,
+            toned_codes: None,
             tone: self.tone,
         })
     }
@@ -556,7 +558,46 @@ impl SchemeState {
             capacity: input.capacity,
             contract,
             codes,
+            toned_codes: None,
             tone,
+        })
+    }
+
+    /// Build a direct code table whose two-key base code may differ by lexical
+    /// tone. This is the state boundary needed by toned 21x21 research; the
+    /// historical regular-layout compiler continues to use one code per
+    /// untoned pinyin and leaves `toned_codes` absent.
+    pub fn from_toned_codes(
+        id: impl Into<String>,
+        capacity: [u8; 2],
+        toned_codes: Vec<[Option<[u8; 2]>; 5]>,
+        tone_keys_by_tone: [u8; 5],
+    ) -> Result<Self, String> {
+        if toned_codes.is_empty() {
+            return Err("toned code table must not be empty".to_owned());
+        }
+        if toned_codes
+            .iter()
+            .flatten()
+            .flatten()
+            .flatten()
+            .any(|&key| key >= 34)
+            || tone_keys_by_tone.iter().any(|&key| key >= 34)
+        {
+            return Err("toned code table contains a key outside the 34-key domain".to_owned());
+        }
+        let contract = if capacity == [21, 21] {
+            Contract::Traditional21x21
+        } else {
+            Contract::FourCodeTop
+        };
+        Ok(Self {
+            id: id.into(),
+            capacity,
+            contract,
+            codes: vec![None; toned_codes.len()],
+            toned_codes: Some(toned_codes),
+            tone: tone_keys_by_tone,
         })
     }
 
@@ -564,7 +605,42 @@ impl SchemeState {
         self.codes.get(index).copied().flatten()
     }
 
+    pub fn code_at_tone(&self, index: usize, tone: u8) -> Option<[u8; 2]> {
+        self.code(index, tone).copied()
+    }
+
+    pub fn assign_toned_code(
+        &mut self,
+        pinyin: usize,
+        tone: u8,
+        code: Option<[u8; 2]>,
+    ) -> Result<(), String> {
+        let tone_index = tone
+            .checked_sub(1)
+            .filter(|&index| index < 5)
+            .ok_or_else(|| "toned code assignment needs a tone in 1..=5".to_owned())?;
+        if code.is_some_and(|pair| pair.into_iter().any(|key| key >= 34)) {
+            return Err(
+                "toned code assignment contains a key outside the 34-key domain".to_owned(),
+            );
+        }
+        let table = self
+            .toned_codes
+            .as_mut()
+            .ok_or_else(|| "scheme state does not use a direct toned code table".to_owned())?;
+        let row = table
+            .get_mut(pinyin)
+            .ok_or_else(|| "toned code pinyin index is outside the scheme".to_owned())?;
+        row[usize::from(tone_index)] = code;
+        Ok(())
+    }
+
     pub fn swap_pinyin_codes(&mut self, left: usize, right: usize) -> Result<(), String> {
+        if self.toned_codes.is_some() {
+            return Err(
+                "untoned pinyin swap is unavailable for a direct toned code table".to_owned(),
+            );
+        }
         if left >= self.codes.len() || right >= self.codes.len() {
             return Err("pinyin swap index is outside the scheme".to_owned());
         }
@@ -590,6 +666,7 @@ impl DependencyIndex {
         if old.codes.len() != new.codes.len()
             || old.capacity != new.capacity
             || old.contract != new.contract
+            || old.toned_codes.is_some() != new.toned_codes.is_some()
         {
             return Err(
                 "incremental updates require an unchanged scheme topology and capacity".to_owned(),
@@ -607,6 +684,16 @@ impl DependencyIndex {
         for (index, (left, right)) in old.codes.iter().zip(&new.codes).enumerate() {
             if left != right {
                 affected.extend(&self.by_pinyin[index]);
+            }
+        }
+        if let (Some(old_codes), Some(new_codes)) = (&old.toned_codes, &new.toned_codes) {
+            if old_codes.len() != new_codes.len() || old_codes.len() != old.codes.len() {
+                return Err("incremental toned code table length changed".to_owned());
+            }
+            for (index, (left, right)) in old_codes.iter().zip(new_codes).enumerate() {
+                if left != right {
+                    affected.extend(&self.by_pinyin[index]);
+                }
             }
         }
         for slot in 0..5 {
@@ -724,7 +811,7 @@ impl NativeCorpus {
         mode: InputMode,
     ) -> Result<Option<GeneratedTemplate>, String> {
         let item = &self.characters[index];
-        let Some(base) = scheme.code(usize::from(item.py)) else {
+        let Some(base) = scheme.code(usize::from(item.py), item.tone) else {
             return Ok(None);
         };
         let mut tone_slots = Vec::new();
@@ -794,7 +881,7 @@ impl NativeCorpus {
         mode: InputMode,
     ) -> Result<Option<GeneratedTemplate>, String> {
         let item = &self.word2[index];
-        let Some(base) = scheme.word_base(&item.py) else {
+        let Some(base) = scheme.word_base(&item.py, &item.tones) else {
             return Ok(None);
         };
         let slots = match mode {
@@ -839,7 +926,7 @@ impl NativeCorpus {
         scheme: &SchemeState,
         mode: InputMode,
     ) -> Result<Option<GeneratedTemplate>, String> {
-        let Some(codes) = scheme.word_codes(&item.py) else {
+        let Some(codes) = scheme.word_codes(&item.py, &item.tones) else {
             return Ok(None);
         };
         let mut stem: Vec<u8> = codes.iter().map(|code| code[0]).collect();
@@ -1018,20 +1105,33 @@ impl NativeCorpus {
 }
 
 impl SchemeState {
-    fn code(&self, py: usize) -> Option<&[u8; 2]> {
+    fn code(&self, py: usize, tone: u8) -> Option<&[u8; 2]> {
+        if let Some(toned) = &self.toned_codes {
+            let tone_index = usize::from(tone.checked_sub(1)?);
+            return toned.get(py)?.get(tone_index)?.as_ref();
+        }
         self.codes.get(py).and_then(Option::as_ref)
     }
 
-    fn word_codes<const N: usize>(&self, pinyin: &[u16; N]) -> Option<[[u8; 2]; N]> {
+    fn word_codes<const N: usize>(
+        &self,
+        pinyin: &[u16; N],
+        tones: &[u8; N],
+    ) -> Option<[[u8; 2]; N]> {
         let mut result = [[0_u8; 2]; N];
-        for (target, &py) in result.iter_mut().zip(pinyin) {
-            *target = *self.code(usize::from(py))?;
+        for ((target, &py), &tone) in result.iter_mut().zip(pinyin).zip(tones) {
+            *target = *self.code(usize::from(py), tone)?;
         }
         Some(result)
     }
 
-    fn word_base<const N: usize>(&self, pinyin: &[u16; N]) -> Option<Vec<u8>> {
-        Some(self.word_codes(pinyin)?.into_iter().flatten().collect())
+    fn word_base<const N: usize>(&self, pinyin: &[u16; N], tones: &[u8; N]) -> Option<Vec<u8>> {
+        Some(
+            self.word_codes(pinyin, tones)?
+                .into_iter()
+                .flatten()
+                .collect(),
+        )
     }
 }
 
@@ -1272,8 +1372,8 @@ fn read_string_u16<R: Read>(reader: &mut R) -> Result<String, String> {
 
 #[cfg(test)]
 mod tests {
-    use super::RegularLayout;
-    use crate::KeyAlphabet;
+    use super::{DependencyIndex, RegularLayout, RowSource, SchemeState};
+    use crate::{Contract, KeyAlphabet};
 
     fn colliding_layout(capacity: [u8; 2]) -> (RegularLayout, Vec<[u8; 2]>, Vec<u16>) {
         let head_capacity = usize::from(capacity[0]);
@@ -1375,5 +1475,52 @@ mod tests {
         assert_eq!(diagnostics.memory, 35);
         assert_eq!(diagnostics.displaced_initials, 0);
         assert_eq!(diagnostics.displaced_vowels, 0);
+    }
+
+    #[test]
+    fn direct_toned_state_selects_and_mutates_codes_by_lexical_tone() {
+        let mut state = SchemeState::from_toned_codes(
+            "toned",
+            [21, 21],
+            vec![[Some([1, 2]), Some([1, 3]), None, Some([1, 4]), Some([1, 5])]],
+            [15, 0, 14, 16, 11],
+        )
+        .unwrap();
+        assert_eq!(state.contract, Contract::Traditional21x21);
+        assert_eq!(state.code_at(0), None);
+        assert_eq!(state.code_at_tone(0, 1), Some([1, 2]));
+        assert_eq!(state.code_at_tone(0, 2), Some([1, 3]));
+        assert_eq!(state.code_at_tone(0, 3), None);
+        assert_eq!(state.code_at_tone(0, 5), Some([1, 5]));
+
+        state.assign_toned_code(0, 2, Some([6, 7])).unwrap();
+        assert_eq!(state.code_at_tone(0, 2), Some([6, 7]));
+        assert!(state.assign_toned_code(0, 0, Some([1, 2])).is_err());
+        assert!(state.assign_toned_code(1, 1, Some([1, 2])).is_err());
+        assert!(state.swap_pinyin_codes(0, 0).is_err());
+    }
+
+    #[test]
+    fn toned_code_change_reuses_the_existing_pinyin_dependency_index() {
+        let old = SchemeState::from_toned_codes(
+            "toned",
+            [21, 21],
+            vec![[Some([1, 2]); 5], [Some([3, 4]); 5]],
+            [15, 0, 14, 16, 11],
+        )
+        .unwrap();
+        let mut new = old.clone();
+        new.assign_toned_code(1, 4, Some([8, 9])).unwrap();
+        let dependencies = DependencyIndex {
+            by_pinyin: vec![vec![0], vec![1, 2]],
+            by_tone_slot: std::array::from_fn(|_| Vec::new()),
+            row_count: 3,
+            sources: vec![
+                RowSource::Character(0),
+                RowSource::Character(1),
+                RowSource::Character(2),
+            ],
+        };
+        assert_eq!(dependencies.affected_rows(&old, &new).unwrap(), vec![1, 2]);
     }
 }
