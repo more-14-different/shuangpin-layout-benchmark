@@ -23,7 +23,7 @@ const {
 } = require('./ckt_v4_scheme_fixture.js');
 
 const MAGIC = Buffer.from('CKTV4COR', 'ascii');
-const FORMAT_VERSION = 1;
+const FORMAT_VERSION = 2;
 const FILE_END = 0xc4c0ca5e;
 function strokeMask(options) {
   let mask = 0;
@@ -60,8 +60,7 @@ function buildTemplates(data, strokes, words) {
         py: item.py,
         tones: item.tones,
         weight: item.weight,
-        shape1: shapeSlot(shape[chars[0]], 0),
-        shape2: shapeSlot(shape[chars[1]], 0),
+        shapeSlots: chars.map(char => shapeSlot(shape[char], 0)),
       };
     });
   }
@@ -72,8 +71,7 @@ function writeWord(writer, item) {
   for (const py of item.py) writer.u16(py);
   for (const tone of item.tones) writer.u8(tone);
   writer.f64(item.weight);
-  writer.u8(item.shape1);
-  writer.u8(item.shape2);
+  for (const slot of item.shapeSlots) writer.u8(slot);
 }
 
 function buildNativeSchemeFixture(data, entries, htmlHash) {
@@ -108,7 +106,7 @@ function main() {
     stroke: hashFile(strokeFile),
   };
   const header = {
-    version: 'ckt-v4-native-corpus-1',
+    version: 'ckt-v4-native-corpus-2',
     source: 'tools/export_ckt_v4_native_corpus.js',
     keyAlphabet: ALPHABET,
     mass,

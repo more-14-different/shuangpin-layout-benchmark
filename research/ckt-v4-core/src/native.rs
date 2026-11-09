@@ -6,7 +6,7 @@ use std::io::{BufReader, Read};
 use std::path::Path;
 
 const MAGIC: &[u8; 8] = b"CKTV4COR";
-const FORMAT_VERSION: u16 = 1;
+const FORMAT_VERSION: u16 = 2;
 const FILE_END: u32 = 0xc4c0_ca5e;
 const MAX_HEADER_BYTES: usize = 1 << 20;
 const MAX_ITEMS: usize = 5_000_000;
@@ -47,7 +47,7 @@ struct WordTemplate<const N: usize> {
     py: [u16; N],
     tones: [u8; N],
     weight: f64,
-    shape: [u8; 2],
+    shape: [u8; N],
 }
 
 #[derive(Clone, Debug)]
@@ -63,6 +63,7 @@ pub struct NativeCorpus {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum InputMode {
     Keytao,
+    KeytaoV51,
     Sanpin,
 }
 
@@ -70,6 +71,7 @@ impl InputMode {
     pub fn parse(value: &str) -> Result<Self, String> {
         match value {
             "keytao" => Ok(Self::Keytao),
+            "keytao-v51" => Ok(Self::KeytaoV51),
             "sanpin" => Ok(Self::Sanpin),
             _ => Err(format!("unknown input mode {value:?}")),
         }
@@ -795,9 +797,7 @@ impl NativeCorpus {
         match source {
             RowSource::Character(index) => self.generate_character(index, scheme, mode),
             RowSource::Word2(index) => self.generate_word2(index, scheme, mode),
-            RowSource::Word3(index) => {
-                self.generate_long_word(&self.word3[index], index, Kind::Word3, scheme, mode)
-            }
+            RowSource::Word3(index) => self.generate_word3(index, scheme, mode),
             RowSource::Word4(index) => {
                 self.generate_long_word(&self.word4[index], index, Kind::Word4, scheme, mode)
             }
@@ -816,7 +816,7 @@ impl NativeCorpus {
         };
         let mut tone_slots = Vec::new();
         let stages = match mode {
-            InputMode::Keytao => {
+            InputMode::Keytao | InputMode::KeytaoV51 => {
                 if item.shape.contains(&u8::MAX) {
                     return Ok(None);
                 }
@@ -885,6 +885,7 @@ impl NativeCorpus {
             return Ok(None);
         };
         let slots = match mode {
+            InputMode::KeytaoV51 => [item.shape[0], item.shape[1]],
             InputMode::Keytao if scheme.contract == Contract::Traditional21x21 => item.shape,
             InputMode::Keytao => [item.shape[1], item.shape[0]],
             InputMode::Sanpin => [item.tones[1] - 1, item.tones[0] - 1],
@@ -918,6 +919,58 @@ impl NativeCorpus {
         }))
     }
 
+    fn generate_word3(
+        &self,
+        index: usize,
+        scheme: &SchemeState,
+        mode: InputMode,
+    ) -> Result<Option<GeneratedTemplate>, String> {
+        let item = &self.word3[index];
+        if mode != InputMode::KeytaoV51 {
+            return self.generate_long_word(item, index, Kind::Word3, scheme, mode);
+        }
+        let Some(codes) = scheme.word_codes(&item.py, &item.tones) else {
+            return Ok(None);
+        };
+        let stem: Vec<u8> = codes.iter().map(|code| code[0]).collect();
+        let slots = [item.shape[1], item.shape[0], item.shape[2]];
+        if slots.contains(&u8::MAX) {
+            return Ok(None);
+        }
+        let first = scheme.tone[usize::from(slots[0])];
+        let second = scheme.tone[usize::from(slots[1])];
+        let third = scheme.tone[usize::from(slots[2])];
+        let paths = vec![
+            stem.clone(),
+            append(&stem, &[first]),
+            append(&stem, &[first, second]),
+            append(&stem, &[first, second, third]),
+        ];
+        let pools = [
+            crate::Pool::Word3Three,
+            crate::Pool::Word3FourB,
+            crate::Pool::Word3FiveBb,
+            crate::Pool::Word3SixBbb,
+        ];
+        let stages = make_stages_with_pools(
+            &self.alphabet,
+            paths.into_iter().map(|path| vec![path]).collect(),
+            &pools,
+        )?;
+        Ok(Some(GeneratedTemplate {
+            row: Row {
+                id: format!("word3:{index}"),
+                text: String::new(),
+                kind: Kind::Word3,
+                weight: item.weight,
+                base_length: 3,
+                stages,
+            },
+            pinyin: item.py.to_vec(),
+            tone_slots: slots.to_vec(),
+        }))
+    }
+
     fn generate_long_word<const N: usize>(
         &self,
         item: &WordTemplate<N>,
@@ -931,7 +984,9 @@ impl NativeCorpus {
         };
         let mut stem: Vec<u8> = codes.iter().map(|code| code[0]).collect();
         let slots = match mode {
-            InputMode::Keytao => item.shape,
+            InputMode::KeytaoV51 if kind == Kind::Word4 => [item.shape[1], item.shape[3]],
+            InputMode::KeytaoV51 => [item.shape[0], item.shape[1]],
+            InputMode::Keytao => [item.shape[0], item.shape[1]],
             InputMode::Sanpin if scheme.contract == Contract::Traditional21x21 => {
                 [item.tones[N - 1] - 1, item.tones[0] - 1]
             }
@@ -991,7 +1046,8 @@ impl NativeCorpus {
         if &magic != MAGIC {
             return Err("not a CKT v4 native corpus".to_owned());
         }
-        if read_u16(&mut reader)? != FORMAT_VERSION {
+        let format_version = read_u16(&mut reader)?;
+        if !(1..=FORMAT_VERSION).contains(&format_version) {
             return Err("unsupported native corpus format version".to_owned());
         }
         if read_u16(&mut reader)? != 0 {
@@ -1007,7 +1063,10 @@ impl NativeCorpus {
             .map_err(|error| error.to_string())?;
         let header: NativeCorpusHeader =
             serde_json::from_slice(&bytes).map_err(|error| error.to_string())?;
-        if header.version != "ckt-v4-native-corpus-1" {
+        if !matches!(
+            header.version.as_str(),
+            "ckt-v4-native-corpus-1" | "ckt-v4-native-corpus-2"
+        ) {
             return Err(format!(
                 "unsupported native corpus metadata {}",
                 header.version
@@ -1033,9 +1092,9 @@ impl NativeCorpus {
                 stroke_mask: read_u8(&mut reader)?,
             });
         }
-        let word2 = read_words(&mut reader, counts.word2)?;
-        let word3 = read_words(&mut reader, counts.word3)?;
-        let word4 = read_words(&mut reader, counts.word4)?;
+        let word2 = read_words(&mut reader, counts.word2, format_version)?;
+        let word3 = read_words(&mut reader, counts.word3, format_version)?;
+        let word4 = read_words(&mut reader, counts.word4, format_version)?;
         if read_u32(&mut reader)? != FILE_END {
             return Err("invalid native corpus end marker".to_owned());
         }
@@ -1058,7 +1117,7 @@ impl NativeCorpus {
                 &[item.py],
                 &[item.tone],
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
             if item.stroke_mask & !0x1f != 0 {
@@ -1070,7 +1129,7 @@ impl NativeCorpus {
                 &item.py,
                 &item.tones,
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
         }
@@ -1079,7 +1138,7 @@ impl NativeCorpus {
                 &item.py,
                 &item.tones,
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
         }
@@ -1088,7 +1147,7 @@ impl NativeCorpus {
                 &item.py,
                 &item.tones,
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
         }
@@ -1258,8 +1317,16 @@ fn make_stages_multi(
     paths: Vec<Vec<Vec<u8>>>,
 ) -> Result<Vec<Stage>, String> {
     let pools = stage_pools(contract, kind);
+    make_stages_with_pools(alphabet, paths, pools)
+}
+
+fn make_stages_with_pools(
+    alphabet: &KeyAlphabet,
+    paths: Vec<Vec<Vec<u8>>>,
+    pools: &[crate::Pool],
+) -> Result<Vec<Stage>, String> {
     if paths.len() != pools.len() {
-        return Err(format!("{contract:?}/{kind:?} stage count mismatch"));
+        return Err("native stage count/pool count mismatch".to_owned());
     }
     paths
         .into_iter()
@@ -1287,6 +1354,7 @@ fn make_stages_multi(
 fn read_words<const N: usize, R: Read>(
     reader: &mut R,
     count: usize,
+    format_version: u16,
 ) -> Result<Vec<WordTemplate<N>>, String> {
     let mut result = Vec::with_capacity(count);
     for _ in 0..count {
@@ -1298,11 +1366,17 @@ fn read_words<const N: usize, R: Read>(
         for value in &mut tones {
             *value = read_u8(reader)?;
         }
+        let weight = read_f64(reader)?;
+        let mut shape = [u8::MAX; N];
+        let shape_count = if format_version >= 2 { N } else { N.min(2) };
+        for slot in shape.iter_mut().take(shape_count) {
+            *slot = read_u8(reader)?;
+        }
         result.push(WordTemplate {
             py,
             tones,
-            weight: read_f64(reader)?,
-            shape: [read_u8(reader)?, read_u8(reader)?],
+            weight,
+            shape,
         });
     }
     Ok(result)
@@ -1312,7 +1386,7 @@ fn validate_template_fields(
     pinyin: &[u16],
     tones: &[u8],
     weight: f64,
-    shape: [u8; 2],
+    shape: &[u8],
     pinyin_count: usize,
 ) -> Result<(), String> {
     if pinyin

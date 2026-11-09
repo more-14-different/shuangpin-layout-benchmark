@@ -1154,6 +1154,7 @@ const fn pool_index(pool: Pool) -> u64 {
         Pool::Word3Three => 6,
         Pool::Word3FourB => 7,
         Pool::Word3FiveBb => 8,
+        Pool::Word3SixBbb => 9,
     }
 }
 
@@ -1168,6 +1169,7 @@ fn pool_from_index(index: u64) -> Result<Pool, String> {
         6 => Ok(Pool::Word3Three),
         7 => Ok(Pool::Word3FourB),
         8 => Ok(Pool::Word3FiveBb),
+        9 => Ok(Pool::Word3SixBbb),
         _ => Err(format!("CUDA returned invalid pool {index}")),
     }
 }

@@ -140,6 +140,16 @@ ckt-v4-native-incremental-smoke:
 ckt-v4-native-score:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin score-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json
 
+ckt-v51-toned-rust-trial-prepare:
+    node tools/export_ckt_v4_native_corpus.js --ids S005 --output research/.cache/ckt-v51-toned-native-corpus.bin --schemes research/.cache/ckt-v51-toned-native-schemes.json
+    node tools/export_toned_2121_rust_trial.js --output research/.cache/ckt-v51-toned-2121-rust-trial.json
+
+ckt-v51-toned-rust-trial max_evaluations="120" beam="0" duty_ms="5": ckt-v51-toned-rust-trial-prepare
+    $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-2121-rust-trial.json tools/ckt_v4_upstream_role_tables.json --max-evaluations "{{max_evaluations}}" --beam "{{beam}}" --duty-ms "{{duty_ms}}" --checkpoint research/.cache/ckt-v51-toned-rust-trial-checkpoint.json --output research/.cache/ckt-v51-toned-rust-trial-result.json
+
+ckt-v51-toned-rust-trial-resume max_evaluations="120" beam="0" duty_ms="5":
+    $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-2121-rust-trial.json tools/ckt_v4_upstream_role_tables.json --max-evaluations "{{max_evaluations}}" --beam "{{beam}}" --duty-ms "{{duty_ms}}" --resume --checkpoint research/.cache/ckt-v51-toned-rust-trial-checkpoint.json --output research/.cache/ckt-v51-toned-rust-trial-result.json
+
 ckt-v4-rank-stats:
     $parts = 'research/.cache/ckt-v4-rank-stats-parts'; $total = (Get-Content -Raw research/.cache/ckt-v4-all-schemes.json | ConvertFrom-Json).schemes.Count; New-Item -ItemType Directory -Force -Path $parts | Out-Null; for ($offset = 0; $offset -lt $total; $offset += 50) { $name = 'part-{0:d3}.json' -f $offset; cargo run --quiet --release --manifest-path research/ckt-v4-core/Cargo.toml --bin export-rank-stats -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-all-schemes.json (Join-Path $parts $name) $offset 50; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }
 

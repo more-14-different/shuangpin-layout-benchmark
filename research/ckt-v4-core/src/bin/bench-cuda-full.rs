@@ -266,6 +266,7 @@ fn benchmark_batch(
 const fn mode_name(mode: InputMode) -> &'static str {
     match mode {
         InputMode::Keytao => "keytao",
+        InputMode::KeytaoV51 => "keytao-v51",
         InputMode::Sanpin => "sanpin",
     }
 }

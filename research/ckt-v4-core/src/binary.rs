@@ -281,6 +281,7 @@ fn pool_from_id(value: u8) -> Result<Pool, String> {
         6 => Ok(Pool::Word3Three),
         7 => Ok(Pool::Word3FourB),
         8 => Ok(Pool::Word3FiveBb),
+        9 => Ok(Pool::Word3SixBbb),
         _ => Err(format!("unknown pool id {value}")),
     }
 }
@@ -294,6 +295,7 @@ fn read_track<R: Read>(reader: &mut R) -> Result<TrackSummary, String> {
         effective_ms: read_f64(reader)?,
         first_aux_rate: read_f64(reader)?,
         second_aux_rate: read_f64(reader)?,
+        third_aux_rate: 0.0,
         selection_rate: read_f64(reader)?,
         mean_terminal_rank: read_f64(reader)?,
         mean_keys: read_f64(reader)?,

@@ -44,6 +44,7 @@ pub enum Pool {
     Word3Three,
     Word3FourB,
     Word3FiveBb,
+    Word3SixBbb,
 }
 
 impl Pool {
@@ -58,6 +59,7 @@ impl Pool {
             "word3:three" => Ok(Self::Word3Three),
             "word3:four-b" => Ok(Self::Word3FourB),
             "word3:five-bb" => Ok(Self::Word3FiveBb),
+            "word3:six-bbb" => Ok(Self::Word3SixBbb),
             _ => Err(format!("unknown CKT v4 pool {value:?}")),
         }
     }
@@ -73,6 +75,7 @@ impl Pool {
             Self::Word3Three => "word3:three",
             Self::Word3FourB => "word3:four-b",
             Self::Word3FiveBb => "word3:five-bb",
+            Self::Word3SixBbb => "word3:six-bbb",
         }
     }
 }
@@ -129,6 +132,8 @@ pub struct Outcome {
 pub struct CognitiveParameters {
     pub first_aux_ms: f64,
     pub second_aux_ms: f64,
+    #[serde(default = "default_auxiliary_ms")]
+    pub third_aux_ms: f64,
     pub selection_decision_ms: f64,
     pub scan_per_candidate_ms: f64,
     pub selection_action_ms: f64,
@@ -141,6 +146,7 @@ impl Default for CognitiveParameters {
         Self {
             first_aux_ms: 300.0,
             second_aux_ms: 300.0,
+            third_aux_ms: 300.0,
             selection_decision_ms: 600.0,
             scan_per_candidate_ms: 50.0,
             selection_action_ms: 0.0,
@@ -160,6 +166,8 @@ pub struct TrackSummary {
     pub effective_ms: f64,
     pub first_aux_rate: f64,
     pub second_aux_rate: f64,
+    #[serde(default)]
+    pub third_aux_rate: f64,
     pub selection_rate: f64,
     pub mean_terminal_rank: f64,
     pub mean_keys: f64,
@@ -178,6 +186,7 @@ struct TrackAccumulator {
     cognitive: f64,
     first_aux: f64,
     second_aux: f64,
+    third_aux: f64,
     selection: f64,
     rank: f64,
     keys: f64,
@@ -245,6 +254,7 @@ impl IncrementalSummary {
                 effective_ms: (track.motor + track.cognitive) / total,
                 first_aux_rate: track.first_aux / total,
                 second_aux_rate: track.second_aux / total,
+                third_aux_rate: track.third_aux / total,
                 selection_rate: track.selection / total,
                 mean_terminal_rank: track.rank / total,
                 mean_keys: track.keys / total,
@@ -262,6 +272,7 @@ impl TrackAccumulator {
         self.cognitive += weight * cognitive;
         self.first_aux += weight * f64::from(outcome.aux_count >= 1);
         self.second_aux += weight * f64::from(outcome.aux_count >= 2);
+        self.third_aux += weight * f64::from(outcome.aux_count >= 3);
         self.selection += weight * f64::from(outcome.rank > 1);
         self.rank += weight * outcome.rank as f64;
         self.keys += weight * f64::from(outcome.code_length);
@@ -286,6 +297,11 @@ fn cognitive_ms(outcome: &Outcome, p: CognitiveParameters) -> f64 {
     } else {
         0.0
     };
+    let third = if outcome.aux_count >= 3 {
+        p.third_aux_ms
+    } else {
+        0.0
+    };
     let selection = if outcome.rank > 1 {
         let page_size = p.page_size.max(2);
         let inspected = (outcome.rank - 1) as f64;
@@ -296,7 +312,11 @@ fn cognitive_ms(outcome: &Outcome, p: CognitiveParameters) -> f64 {
     } else {
         0.0
     };
-    first + second + selection
+    first + second + third + selection
+}
+
+const fn default_auxiliary_ms() -> f64 {
+    300.0
 }
 
 #[derive(Clone, Copy)]
@@ -488,6 +508,7 @@ pub fn summarize(
             track.cognitive_ms += weight * cognition;
             track.first_aux_rate += weight * f64::from(out.aux_count >= 1);
             track.second_aux_rate += weight * f64::from(out.aux_count >= 2);
+            track.third_aux_rate += weight * f64::from(out.aux_count >= 3);
             track.selection_rate += weight * f64::from(out.rank > 1);
             track.mean_terminal_rank += weight * out.rank as f64;
             track.mean_keys += weight * f64::from(out.code_length);
@@ -498,6 +519,7 @@ pub fn summarize(
         track.effective_ms = track.motor_upper_ms + track.cognitive_ms;
         track.first_aux_rate /= total;
         track.second_aux_rate /= total;
+        track.third_aux_rate /= total;
         track.selection_rate /= total;
         track.mean_terminal_rank /= total;
         track.mean_keys /= total;
@@ -535,4 +557,40 @@ pub fn composite_score(
         }
     }
     Ok(10.0 * (weighted / total).powf(0.25))
+}
+
+#[cfg(test)]
+mod v51_tests {
+    use super::{CognitiveParameters, Kind, Outcome, Pool, Row, Stage, summarize};
+    use crate::PackedCode;
+
+    #[test]
+    fn third_auxiliary_stage_is_counted_in_v51_cognition() {
+        let code = PackedCode::from_indices(&[0, 1, 2, 3, 4, 5]).unwrap();
+        let rows = vec![Row {
+            id: "word3:0".to_owned(),
+            text: String::new(),
+            kind: Kind::Word3,
+            weight: 1.0,
+            base_length: 3,
+            stages: vec![Stage {
+                order: 6,
+                pool: Pool::Word3SixBbb,
+                codes: vec![code],
+            }],
+        }];
+        let outcomes = vec![Outcome {
+            row_index: 0,
+            code,
+            code_length: 6,
+            aux_count: 3,
+            rank: 1,
+            pool: Pool::Word3SixBbb,
+            motor_upper_ms: 100.0,
+        }];
+        let summary = summarize(&rows, &outcomes, CognitiveParameters::default()).unwrap();
+        let track = summary.track(Kind::Word3).unwrap();
+        assert_eq!(track.third_aux_rate, 1.0);
+        assert_eq!(track.effective_ms, 1_000.0);
+    }
 }

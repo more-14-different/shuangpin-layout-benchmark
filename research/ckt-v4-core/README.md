@@ -44,6 +44,8 @@ just ckt-v4-native-corpus "S005,L600"
 just ckt-v4-native-verify
 just ckt-v4-native-incremental-smoke
 cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml
+just ckt-v51-toned-rust-trial 120 0 5
+just ckt-v51-toned-rust-trial-resume 120 0 5
 ```
 
 `Cargo.lock` is committed. `target/`, restored corpora and annealing checkpoints
