@@ -49,6 +49,12 @@ const SECOND_CODE_FACTORIZATIONS = Object.freeze([
     secondComponent: '书写韵部',
     priorTemplate: 'writtenZero',
   }),
+  Object.freeze({
+    id: 'mars-written-onset-headless-final',
+    firstComponent: '火星书写声母（卷舌声母可单列）',
+    secondComponent: '忽略 i/u/ü 韵头后归并的火星10韵列',
+    priorTemplate: 'mars10',
+  }),
 ]);
 const TONED_BUCKET_COUNT = 21 * TONE_ROWS.length * FINAL_COLUMNS_PER_ROW;
 

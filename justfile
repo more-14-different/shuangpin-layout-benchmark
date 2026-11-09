@@ -160,6 +160,22 @@ ckt-v51-toned-avuio786-rust-trial proposal_space="joint" max_evaluations="120" b
 ckt-v51-toned-avuio786-rust-resume proposal_space="joint" max_evaluations="120" beam="0" duty_ms="5":
     $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-2121-avuio786-rust.json tools/ckt_v4_upstream_role_tables.json --proposal-space "{{proposal_space}}" --max-evaluations "{{max_evaluations}}" --beam "{{beam}}" --duty-ms "{{duty_ms}}" --resume --checkpoint research/.cache/ckt-v51-toned-avuio786-rust-{{proposal_space}}-checkpoint.json --output research/.cache/ckt-v51-toned-avuio786-rust-{{proposal_space}}-result.json
 
+ckt-v51-toned-mars10-search:
+    node tools/search_toned_2121_mars10_uneven_regions.js --first-mode mars-zh-e --rhyme-mode mars10 --starts 512 --retain 64 --seed 1410786 --output-layouts research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-layouts.json --output-report research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-search.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-layouts.json --policy 12/213/24 --shape AVUIO --sample 1800 --output research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-sample1800.json
+    node tools/score_toned_2121_ckt_v51.js --layouts research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-layouts.json --rank-from research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-sample1800.json --top 3 --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-10-ckt-v51-toned-2121-marsfirst-zh-e-mars10-full3.json
+    node tools/select_toned_2121_scored_layouts.js --layouts research/.cache/ckt-v51-toned-2121-marsfirst-zh-mars10-layouts.json --scores research/notes/2026-11-10-ckt-v51-toned-2121-marsfirst-zh-e-mars10-full3.json --output research/config/ckt-v51-toned-2121-marsfirst-zh-e-mars10-uneven786-finalist.json --top 1
+
+ckt-v51-toned-mars10-rust-prepare:
+    node tools/export_ckt_v4_native_corpus.js --ids S005 --output research/.cache/ckt-v51-toned-native-corpus.bin --schemes research/.cache/ckt-v51-toned-native-schemes.json
+    node tools/export_toned_2121_rust_trial.js --layouts research/config/ckt-v51-toned-2121-marsfirst-zh-e-mars10-uneven786-finalist.json --scores research/notes/2026-11-10-ckt-v51-toned-2121-marsfirst-zh-e-mars10-full3.json --id UNEVEN786-marsfirst-zh-e-mars10-D1-014 --shape AVUIO --output research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json
+
+ckt-v51-toned-mars10-rust-trial max_evaluations="30" beam="0" duty_ms="5": ckt-v51-toned-mars10-rust-prepare
+    $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json tools/ckt_v4_upstream_role_tables.json --proposal-space rhyme --max-evaluations "{{max_evaluations}}" --beam "{{beam}}" --duty-ms "{{duty_ms}}" --checkpoint research/.cache/ckt-v51-toned-marsfirst-zh-e-mars10-rhyme-checkpoint.json --output research/.cache/ckt-v51-toned-marsfirst-zh-e-mars10-rhyme-result.json
+
+ckt-v51-toned-mars10-rust-resume max_evaluations="30" beam="0" duty_ms="5":
+    $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json tools/ckt_v4_upstream_role_tables.json --proposal-space rhyme --max-evaluations "{{max_evaluations}}" --beam "{{beam}}" --duty-ms "{{duty_ms}}" --resume --checkpoint research/.cache/ckt-v51-toned-marsfirst-zh-e-mars10-rhyme-checkpoint.json --output research/.cache/ckt-v51-toned-marsfirst-zh-e-mars10-rhyme-result.json
+
 ckt-v4-rank-stats:
     $parts = 'research/.cache/ckt-v4-rank-stats-parts'; $total = (Get-Content -Raw research/.cache/ckt-v4-all-schemes.json | ConvertFrom-Json).schemes.Count; New-Item -ItemType Directory -Force -Path $parts | Out-Null; for ($offset = 0; $offset -lt $total; $offset += 50) { $name = 'part-{0:d3}.json' -f $offset; cargo run --quiet --release --manifest-path research/ckt-v4-core/Cargo.toml --bin export-rank-stats -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-all-schemes.json (Join-Path $parts $name) $offset 50; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }
 

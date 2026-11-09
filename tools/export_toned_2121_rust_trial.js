@@ -13,6 +13,7 @@ const {
   normalizeRhymeBody,
   RHYME_ORDER,
 } = require('./audit_pindu_nextgen_image.js');
+const {MARS_RHYME_ORDER, marsRhymeIndex} = require('./mars_toned_factorization.js');
 
 const TRADITIONAL_INITIALS = Object.freeze(
   ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'r', 'z', 'c', 's']);
@@ -69,6 +70,11 @@ function main() {
   const scored = scores.results.find(value => value.id === requestedId);
   if (!layout) throw new Error(`layout not found: ${requestedId}`);
   if (!scored) throw new Error(`score not found: ${requestedId}`);
+  const rhymeMode = layouts.factorization?.rhymeMode || 'pindu11';
+  const rhymeOrder = rhymeMode === 'mars10' ? MARS_RHYME_ORDER : RHYME_ORDER;
+  const rhymeNameFor = split => rhymeMode === 'mars10'
+    ? MARS_RHYME_ORDER[marsRhymeIndex(split.fullFinal)]
+    : normalizeRhymeBody(split.rhymeBody);
 
   const decomposition = new Map(seeds.decomposition.map(value => [value.pinyin, value]));
   const pinyinIndex = new Map(data.pinyin.map((value, index) => [value, index]));
@@ -101,15 +107,17 @@ function main() {
     }
     existing.pinyin.push(py);
     atoms.set(split.shengjie, existing);
-    const rhymeName = normalizeRhymeBody(split.rhymeBody);
+    const rhymeName = rhymeNameFor(split);
     const rhyme = rhymeAtoms.get(rhymeName) || {name: rhymeName, pinyin: []};
     rhyme.pinyin.push(py);
     rhymeAtoms.set(rhymeName, rhyme);
   }
 
   const orderedAtoms = [...atoms.values()].sort((left, right) => left.name.localeCompare(right.name));
-  const orderedRhymes = RHYME_ORDER.map(name => rhymeAtoms.get(name));
-  if (orderedRhymes.some(value => !value)) throw new Error('fixture does not cover all Pindu11 rhymes');
+  const orderedRhymes = rhymeOrder.map(name => rhymeAtoms.get(name));
+  if (orderedRhymes.some(value => !value)) {
+    throw new Error(`fixture does not cover all ${rhymeMode} rhymes`);
+  }
   const regions = toneRegions(layouts.contract);
   for (const rhyme of orderedRhymes) {
     rhyme.baselineKeys = {};
@@ -189,6 +197,8 @@ function main() {
         shapeKeysByMeaning,
         soundKeys: layouts.contract.soundKeys,
         toneRegions: regions,
+        rhymeMode,
+        rhymeOrder,
       }),
     },
   };
@@ -225,14 +235,14 @@ function main() {
       if (!region.keys.includes(destination)) {
         throw new Error(`candidate rhyme destination leaves ${regionName}: ${destination}`);
       }
-      if (!RHYME_ORDER.includes(rhymeName)) throw new Error(`unknown Pindu11 rhyme: ${rhymeName}`);
+      if (!rhymeOrder.includes(rhymeName)) throw new Error(`unknown ${rhymeMode} rhyme: ${rhymeName}`);
       suffixes.push(`${regionName}:${rhymeName}>${destination}`);
       trial.trialRhymeException = {region: regionName, rhyme: rhymeName, destination};
       candidateCodes = candidateCodes.map((code, index) => {
         const token = layouts.tokenKeys[index].match(/^([a-z]+)([1-5])$/u);
         const split = decomposition.get(token[1]);
         return region.tones.includes(Number(token[2])) &&
-          normalizeRhymeBody(split.rhymeBody) === rhymeName ? code[0] + destination : code;
+          rhymeNameFor(split) === rhymeName ? code[0] + destination : code;
       });
     }
     const firstExceptionCount = trial.trialShengjieException ? 1 : 0;

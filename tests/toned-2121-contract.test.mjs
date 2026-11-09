@@ -116,7 +116,7 @@ test('primary tone rows are upper 4, home 3/2, lower 1/neutral', () => {
   assert.equal(rowForTone(5), 'lower');
 });
 
-test('second-code factorization is unresolved and preserves four explicit research candidates', () => {
+test('second-code factorization keeps the five explicit research candidates', () => {
   const contract = buildToned2121Contract();
   assert.equal(contract.secondCodeFactorizationSelectionStatus, 'unresolved-for-toned-3x7');
   assert.deepEqual(SECOND_CODE_FACTORIZATIONS.map(value => value.id), [
@@ -124,6 +124,7 @@ test('second-code factorization is unresolved and preserves four explicit resear
     'shengjie-pindu11-rhyme',
     'restored-onset-full-final',
     'written-onset-written-final',
+    'mars-written-onset-headless-final',
   ]);
 });
 
