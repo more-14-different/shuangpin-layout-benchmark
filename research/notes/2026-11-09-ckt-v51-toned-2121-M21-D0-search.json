@@ -1,0 +1,6114 @@
+{
+  "version": "ckt-v5.1-toned-2121-M21-Dordinary0-beam-search-1",
+  "objective": "minimize full shape-only CKT v5.1 under M<=21 and ordinary-shengjie displacement D=0",
+  "base": {
+    "id": "HIST-qaopl_nasal_minimal-D0V0-C1",
+    "score": 9.659329215730638,
+    "M": 12,
+    "deltaDOrdinary": 0,
+    "deltaSpecial": 0,
+    "deltaV": 0
+  },
+  "guardSemantics": {
+    "deltaDOrdinary": "ordinary single-letter initial/medial families are frozen at the M12 placement",
+    "deltaSpecial": "movable without D penalty but with +1 M each: _, _i, _u, _v, ch, chu, sh, shu, zh, zhu",
+    "deltaV": "one rhyme-body family cyclic reassignment costs +1 M",
+    "MGuard": "12 + deltaSpecial + deltaV <= 21",
+    "toneMergeM": 0
+  },
+  "search": {
+    "atomicCandidates": 296,
+    "specialTargetsRetainedPerFamily": 3,
+    "rhymeDeltasRetainedPerFamily": 2,
+    "screenMultiplier": 5,
+    "atomicRerankedCandidates": 246,
+    "moveMenu": [
+      {
+        "kind": "second-family-shift",
+        "family": "o",
+        "delta": 3
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "o",
+        "delta": 1
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "eng",
+        "delta": 1
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "eng",
+        "delta": 4
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_i",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_i",
+        "key": "I"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_i",
+        "key": "S"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ou",
+        "delta": 5
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ou",
+        "delta": 3
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_v",
+        "key": "I"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_v",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_v",
+        "key": "F"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "ch",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "ch",
+        "key": "I"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "ch",
+        "key": "U"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "n",
+        "delta": 5
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "n",
+        "delta": 1
+      },
+      {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "C"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "E"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "C"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "N"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ai",
+        "delta": 1
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ai",
+        "delta": 5
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ong",
+        "delta": 3
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ong",
+        "delta": 6
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "er",
+        "delta": 6
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "er",
+        "delta": 2
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "e",
+        "delta": 3
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "e",
+        "delta": 1
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ng",
+        "delta": 2
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ng",
+        "delta": 4
+      },
+      {
+        "kind": "special-first-family",
+        "family": "zhu",
+        "key": "Z"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "zhu",
+        "key": "C"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "zhu",
+        "key": "G"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "a",
+        "delta": 6
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "a",
+        "delta": 2
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_",
+        "key": "C"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_",
+        "key": "I"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_",
+        "key": "D"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "zh",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "zh",
+        "key": "I"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "zh",
+        "key": "E"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ao",
+        "delta": 6
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ao",
+        "delta": 2
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ei",
+        "delta": 1
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ei",
+        "delta": 4
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "en",
+        "delta": 2
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "en",
+        "delta": 5
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ang",
+        "delta": 5
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "ang",
+        "delta": 4
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_u",
+        "key": "C"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_u",
+        "key": "S"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "_u",
+        "key": "K"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "an",
+        "delta": 1
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "an",
+        "delta": 2
+      },
+      {
+        "kind": "special-first-family",
+        "family": "sh",
+        "key": "K"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "sh",
+        "key": "E"
+      },
+      {
+        "kind": "special-first-family",
+        "family": "sh",
+        "key": "C"
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "_",
+        "delta": 3
+      },
+      {
+        "kind": "second-family-shift",
+        "family": "_",
+        "delta": 5
+      }
+    ],
+    "sampleRowsPerTrack": 240,
+    "resampleRowsPerTrack": 1800,
+    "beamWidth": 10,
+    "maxMoves": 9,
+    "depthAudit": [
+      {
+        "depth": 1,
+        "proposed": 62,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 8.018765787414482,
+        "bestSampleScore": 7.221031843837508,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 0,
+          "deltaV": 1,
+          "MGuard": 13,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "second-family-shift",
+            "family": "o",
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "depth": 2,
+        "proposed": 554,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.995479373795331,
+        "bestSampleScore": 7.167854781057674,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 1,
+          "deltaV": 1,
+          "MGuard": 14,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "second-family-shift",
+            "family": "o",
+            "delta": 3
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          }
+        ]
+      },
+      {
+        "depth": 3,
+        "proposed": 556,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 8.021919122638234,
+        "bestSampleScore": 7.0842221351842944,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 1,
+          "deltaV": 2,
+          "MGuard": 15,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "K"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 5
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ai",
+            "delta": 5
+          }
+        ]
+      },
+      {
+        "depth": 4,
+        "proposed": 536,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.970987924852744,
+        "bestSampleScore": 7.070985317911278,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 3,
+          "deltaV": 1,
+          "MGuard": 16,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 3
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "S"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "ch",
+            "key": "K"
+          }
+        ]
+      },
+      {
+        "depth": 5,
+        "proposed": 509,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.966261468049849,
+        "bestSampleScore": 7.0330567337800165,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 3,
+          "deltaV": 2,
+          "MGuard": 17,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 3
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "S"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "ch",
+            "key": "K"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "n",
+            "delta": 1
+          }
+        ]
+      },
+      {
+        "depth": 6,
+        "proposed": 483,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.980259039321654,
+        "bestSampleScore": 7.01360309081225,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 3,
+          "deltaV": 3,
+          "MGuard": 18,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 5
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ai",
+            "delta": 5
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "n",
+            "delta": 5
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "K"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "zhu",
+            "key": "Z"
+          }
+        ]
+      },
+      {
+        "depth": 7,
+        "proposed": 464,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.964909873148892,
+        "bestSampleScore": 6.995507427521749,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 3,
+          "deltaV": 4,
+          "MGuard": 19,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 3
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "S"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "ch",
+            "key": "K"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "n",
+            "delta": 1
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ong",
+            "delta": 6
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ng",
+            "delta": 2
+          }
+        ]
+      },
+      {
+        "depth": 8,
+        "proposed": 442,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.9550196862278995,
+        "bestSampleScore": 6.9724379784459,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 5,
+          "deltaV": 3,
+          "MGuard": 20,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 3
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "S"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "ch",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "n",
+            "delta": 1
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ng",
+            "delta": 2
+          },
+          {
+            "kind": "special-first-family",
+            "family": "sh",
+            "key": "E"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_",
+            "key": "I"
+          }
+        ]
+      },
+      {
+        "depth": 9,
+        "proposed": 409,
+        "reranked": 50,
+        "retained": 10,
+        "bestScore": 7.929250419237651,
+        "bestSampleScore": 6.955022640762737,
+        "bestGuard": {
+          "seedM": 12,
+          "deltaDOrdinary": 0,
+          "deltaSpecial": 6,
+          "deltaV": 3,
+          "MGuard": 21,
+          "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+        },
+        "bestMoves": [
+          {
+            "kind": "special-first-family",
+            "family": "_v",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ou",
+            "delta": 3
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_i",
+            "key": "S"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "ch",
+            "key": "I"
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "n",
+            "delta": 1
+          },
+          {
+            "kind": "second-family-shift",
+            "family": "ng",
+            "delta": 2
+          },
+          {
+            "kind": "special-first-family",
+            "family": "sh",
+            "key": "E"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "_",
+            "key": "I"
+          },
+          {
+            "kind": "special-first-family",
+            "family": "zhu",
+            "key": "C"
+          }
+        ]
+      }
+    ],
+    "uniqueFrontierStates": 91,
+    "fullFixedPolicyPrefinalists": 91,
+    "fullCorpusFinalists": 10,
+    "fixedShapeKeysByMeaning": "QOLAP",
+    "shapeMeaningOrdersSearched": 1,
+    "fixedWordPolicy": {
+      "word2": "21",
+      "word3": "213",
+      "word4": "23"
+    },
+    "wordPoliciesSearched": 1,
+    "globalOptimality": "not proven; atomic pruning and finite beam search are heuristic"
+  },
+  "atomicTop": [
+    {
+      "score": 8.018765787414482,
+      "sampleScore": 7.221031843837508,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "o",
+        "delta": 3
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.041024165612967,
+      "sampleScore": 7.258552793444236,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "o",
+        "delta": 1
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.053269907250515,
+      "sampleScore": 7.244485563126308,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "eng",
+        "delta": 1
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.055453605217474,
+      "sampleScore": 7.196161446932191,
+      "move": {
+        "kind": "special-first-family",
+        "family": "_i",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.059258884510925,
+      "sampleScore": 7.183306624548742,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "ou",
+        "delta": 5
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.060888438922492,
+      "sampleScore": 7.18888762615565,
+      "move": {
+        "kind": "special-first-family",
+        "family": "_v",
+        "key": "I"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.062607648514819,
+      "sampleScore": 7.243725326987845,
+      "move": {
+        "kind": "special-first-family",
+        "family": "ch",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.063373706685537,
+      "sampleScore": 7.246689757217101,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "eng",
+        "delta": 4
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.063519941796578,
+      "sampleScore": 7.238766713363933,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "n",
+        "delta": 5
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.063521206175002,
+      "sampleScore": 7.2177023122802195,
+      "move": {
+        "kind": "special-first-family",
+        "family": "_v",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.064259203686166,
+      "sampleScore": 7.230935616241404,
+      "move": {
+        "kind": "special-first-family",
+        "family": "ch",
+        "key": "I"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.066027024630088,
+      "sampleScore": 7.183764189435584,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "ou",
+        "delta": 3
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.06966270312974,
+      "sampleScore": 7.237917046311951,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "C"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.070401901352449,
+      "sampleScore": 7.237246660553654,
+      "move": {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "C"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.070552019296445,
+      "sampleScore": 7.236669966316111,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.071769277638673,
+      "sampleScore": 7.239276818017535,
+      "move": {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.074240892997668,
+      "sampleScore": 7.236826496643991,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "E"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.075921460830799,
+      "sampleScore": 7.237004312919767,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "W"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.077230735408042,
+      "sampleScore": 7.23813971714347,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "Z"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.077422891642147,
+      "sampleScore": 7.260161453750719,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "o",
+        "delta": 2
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.07790196978427,
+      "sampleScore": 7.208207905159223,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "eng",
+        "delta": 6
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.078077752986783,
+      "sampleScore": 7.2378659694852265,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "D"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.078435574886889,
+      "sampleScore": 7.261543161777792,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "ai",
+        "delta": 1
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.078620790839278,
+      "sampleScore": 7.207591829885884,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "n",
+        "delta": 1
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.078891996279067,
+      "sampleScore": 7.249885728762047,
+      "move": {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "N"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.080001208787532,
+      "sampleScore": 7.209877219714418,
+      "move": {
+        "kind": "second-family-shift",
+        "family": "ong",
+        "delta": 3
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.080453277986203,
+      "sampleScore": 7.235853609105609,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "F"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.080755927330904,
+      "sampleScore": 7.239060082329992,
+      "move": {
+        "kind": "special-first-family",
+        "family": "_v",
+        "key": "F"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.081335920917793,
+      "sampleScore": 7.24228795783333,
+      "move": {
+        "kind": "special-first-family",
+        "family": "shu",
+        "key": "E"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    },
+    {
+      "score": 8.081425746188977,
+      "sampleScore": 7.236988104995296,
+      "move": {
+        "kind": "special-first-family",
+        "family": "chu",
+        "key": "R"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      }
+    }
+  ],
+  "fullCorpusAudit": [
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-ch-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 8.062607648514819,
+      "score": 9.62912082433779
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 3
+        }
+      ],
+      "resampleScore": 8.018765787414482,
+      "score": 9.62913359865118
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-n-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.063519941796578,
+      "score": 9.63385169185959
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 8.063521206175002,
+      "score": 9.63557285394476
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.041024165612967,
+      "score": 9.63805540252299
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-eng-4",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 4
+        }
+      ],
+      "resampleScore": 8.063373706685537,
+      "score": 9.646228254621894
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 8.020232630880331,
+      "score": 9.648250565283693
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 8.034969263444726,
+      "score": 9.652695205191554
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-eng-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.053269907250515,
+      "score": 9.654397084203193
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-3-S-_v-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 7.995479373795331,
+      "score": 9.65570301491717
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-K-V-ai-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 2,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.03131628556606,
+      "score": 9.658009729462393
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 0,
+        "MGuard": 12,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [],
+      "resampleScore": 8.083969085662062,
+      "score": 9.659329215730638
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 3,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 7.997287145581896,
+      "score": 9.668249303687887
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.059258884510925,
+      "score": 9.67536108644645
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.060888438922492,
+      "score": 9.680779225908823
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-K-V-ou-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        }
+      ],
+      "resampleScore": 8.046405657017736,
+      "score": 9.703595345072351
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 2,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.026655142504241,
+      "score": 9.706582912076296
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.040460070674962,
+      "score": 9.708909088888387
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-ch-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.046590497538666,
+      "score": 9.710414060432255
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-3-S-_v-I-V-ai-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 2,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.030243771765734,
+      "score": 9.723791401077111
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        }
+      ],
+      "resampleScore": 8.045512941054367,
+      "score": 9.747510807241332
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-V-n-1-S-chu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 3,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 8.002615707108818,
+      "score": 9.785379627890503
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.046428148600732,
+      "score": 9.792332697944994
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 8.055453605217474,
+      "score": 9.79550721568248
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 3,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.9934746460316735,
+      "score": 9.8044479841492
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 2,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.997195278806583,
+      "score": 9.808735172978013
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-shu-C-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 7.994865358855638,
+      "score": 9.812087417387131
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 2,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.034944806736044,
+      "score": 9.818871026158039
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.04371162054615,
+      "score": 9.821444083182108
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-S-_v-I-V-ong-6",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 1,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        }
+      ],
+      "resampleScore": 8.032640363257164,
+      "score": 9.824051594917723
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 3,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.01394486416788,
+      "score": 9.824224947271883
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 2,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.021919122638234,
+      "score": 9.825014614592497
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-S-_v-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 0,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.036178085249682,
+      "score": 9.825864204800679
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-shu-N",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 2,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "N"
+        }
+      ],
+      "resampleScore": 8.001562442803081,
+      "score": 9.826252062005816
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-V-n-1-S-_v-F",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 3,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "F"
+        }
+      ],
+      "resampleScore": 7.998579283696497,
+      "score": 9.826919158022786
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-S-_v-I-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 1,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.035481378247264,
+      "score": 9.831418790496345
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 2,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.992320624759547,
+      "score": 9.832129802153407
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-shu-N-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "N"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.000531352605467,
+      "score": 9.834128791372384
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 7.992288292360494,
+      "score": 9.83902189655656
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-er-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "er",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.993343365061301,
+      "score": 9.839247582102137
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-er-6",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "er",
+          "delta": 6
+        }
+      ],
+      "resampleScore": 7.992679506548929,
+      "score": 9.839723261811688
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-S-zhu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 6,
+        "deltaV": 3,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.929250419237651,
+      "score": 9.84264317516896
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-zhu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 8.0236118747055,
+      "score": 9.842780148677214
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-ng-2-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 4,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.990889107903236,
+      "score": 9.843036484387106
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 3,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 7.977998349677968,
+      "score": 9.843050017938417
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-shu-C-V-n-1-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.993120099248394,
+      "score": 9.852152210882007
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-S-_v-I-V-ou-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 1,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.028802054129336,
+      "score": 9.863768086474723
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-C-V-eng-4",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 4,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 4
+        }
+      ],
+      "resampleScore": 7.949794803856719,
+      "score": 9.869089694571901
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.003929282052404,
+      "score": 9.871359989417712
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-V-ong-6-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 5,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.971766740785714,
+      "score": 9.872956925526012
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-zhu-Z",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "Z"
+        }
+      ],
+      "resampleScore": 8.02376269495199,
+      "score": 9.875157057275949
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-S-zhu-Z",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 6,
+        "deltaV": 3,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "Z"
+        }
+      ],
+      "resampleScore": 7.932815958896178,
+      "score": 9.878037940736302
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 3,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.00359908654565,
+      "score": 9.878132608894099
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.989894802322804,
+      "score": 9.878845153526226
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-ng-2-V-er-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 5,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "er",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.990876523261345,
+      "score": 9.879139161270034
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-V-ong-6",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 4,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        }
+      ],
+      "resampleScore": 7.989524232408394,
+      "score": 9.88310475949091
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 3,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.963650279001345,
+      "score": 9.884083262181296
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-G-S-shu-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 6,
+        "deltaV": 3,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 7.961564526333671,
+      "score": 9.88517942155963
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 3,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 8.023683517829669,
+      "score": 9.88815613579938
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 2,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 7.966261468049849,
+      "score": 9.888275717524422
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 1,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 7.970987924852744,
+      "score": 9.889673192189075
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-S-zhu-G",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 2,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        }
+      ],
+      "resampleScore": 7.9991928838122295,
+      "score": 9.891491159180653
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-S-zhu-Z",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "Z"
+        }
+      ],
+      "resampleScore": 7.980259039321654,
+      "score": 9.89343222618659
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-S-zhu-G",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 6,
+        "deltaV": 3,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        }
+      ],
+      "resampleScore": 7.942357954565811,
+      "score": 9.896349150862688
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-S-zhu-G",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        }
+      ],
+      "resampleScore": 7.985016836966191,
+      "score": 9.90244127559164
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-C-V-ong-6",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 4,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        }
+      ],
+      "resampleScore": 7.97922936401349,
+      "score": 9.906379203672152
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-S-zhu-G-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.974056502057747,
+      "score": 9.913633454821658
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-Z",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 3,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "Z"
+        }
+      ],
+      "resampleScore": 7.967769313592647,
+      "score": 9.919833178448897
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 3,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 7.9550196862278995,
+      "score": 9.920254745362465
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-V-eng-4",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 4,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 4
+        }
+      ],
+      "resampleScore": 7.951800089666424,
+      "score": 9.921149925205395
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-G-V-eng-4",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 4,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 4
+        }
+      ],
+      "resampleScore": 7.96299800487894,
+      "score": 9.92356148729144
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-V-ong-6-V-ng-2-S-zhu-Z",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 5,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "Z"
+        }
+      ],
+      "resampleScore": 7.976187307135203,
+      "score": 9.925545389287258
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-ng-2-S-zhu-Z",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 4,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "Z"
+        }
+      ],
+      "resampleScore": 7.9919507187938175,
+      "score": 9.929004455983897
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K-V-n-1-V-ong-6",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        }
+      ],
+      "resampleScore": 7.983097644057744,
+      "score": 9.929945023057217
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-V-n-5-S-_i-K-V-ong-6-V-ng-2-S-zhu-G",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 5,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        }
+      ],
+      "resampleScore": 7.984453202647151,
+      "score": 9.936344882319121
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-zhu-G",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 3,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "G"
+        }
+      ],
+      "resampleScore": 7.976894143003395,
+      "score": 9.937585894753798
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-V-ong-6",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 4,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        }
+      ],
+      "resampleScore": 7.965198384715018,
+      "score": 9.939055471707912
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K-V-n-1-V-ong-6-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 6
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.964909873148892,
+      "score": 9.941805227632482
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-V-eng-4",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 4,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 4
+        }
+      ],
+      "resampleScore": 7.979750050305618,
+      "score": 9.960991065828221
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 3,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        }
+      ],
+      "resampleScore": 7.993561234608608,
+      "score": 9.971739781602238
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-3-S-_i-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.03106843057722,
+      "score": 9.976965862539338
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K-V-n-1-V-ong-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 3
+        }
+      ],
+      "resampleScore": 7.994092979721109,
+      "score": 9.988739606428647
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K-V-ong-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 2,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 3
+        }
+      ],
+      "resampleScore": 7.999900523420761,
+      "score": 9.990119651540684
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 2,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.002459344528969,
+      "score": 10.004222858634735
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-K-V-ou-3-S-_i-S-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 8.025400414535978,
+      "score": 10.004276020229252
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 1,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        }
+      ],
+      "resampleScore": 8.010232003775217,
+      "score": 10.00658805341569
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-K-V-ou-3-S-_i-S",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 1,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        }
+      ],
+      "resampleScore": 8.02931720298272,
+      "score": 10.012059640541132
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-V-ong-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 5,
+        "deltaV": 4,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 3
+        }
+      ],
+      "resampleScore": 7.9765097787882455,
+      "score": 10.01520537678629
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-K-V-n-1-V-ong-3-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 4,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ong",
+          "delta": 3
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.989409605070245,
+      "score": 10.026117161549958
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        }
+      ],
+      "resampleScore": 7.995699081331007,
+      "score": 10.037856619387496
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 1,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        }
+      ],
+      "resampleScore": 8.039057942660293,
+      "score": 10.066247648901447
+    }
+  ],
+  "bestByM": [
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 0,
+        "MGuard": 12,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [],
+      "resampleScore": 8.083969085662062,
+      "score": 9.659329215730638
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-ch-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 8.062607648514819,
+      "score": 9.62912082433779
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        }
+      ],
+      "resampleScore": 8.034969263444726,
+      "score": 9.652695205191554
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-K-V-ai-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 2,
+        "MGuard": 15,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        }
+      ],
+      "resampleScore": 8.03131628556606,
+      "score": 9.658009729462393
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 8.020232630880331,
+      "score": 9.648250565283693
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-V-n-1-S-chu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 3,
+        "MGuard": 17,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 8.002615707108818,
+      "score": 9.785379627890503
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-shu-C-V-n-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 3,
+        "deltaV": 3,
+        "MGuard": 18,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        }
+      ],
+      "resampleScore": 7.994865358855638,
+      "score": 9.812087417387131
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 3,
+        "MGuard": 19,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.9934746460316735,
+      "score": 9.8044479841492
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_i-K-V-ou-5-V-ai-5-S-_v-I-S-chu-C-V-n-1-V-ng-2-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 4,
+        "deltaV": 4,
+        "MGuard": 20,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "K"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "chu",
+          "key": "C"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.990889107903236,
+      "score": 9.843036484387106
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-I-V-ou-3-S-_i-S-S-ch-I-V-n-1-V-ng-2-S-sh-E-S-_-I-S-zhu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 6,
+        "deltaV": 3,
+        "MGuard": 21,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_i",
+          "key": "S"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 1
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ng",
+          "delta": 2
+        },
+        {
+          "kind": "special-first-family",
+          "family": "sh",
+          "key": "E"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_",
+          "key": "I"
+        },
+        {
+          "kind": "special-first-family",
+          "family": "zhu",
+          "key": "C"
+        }
+      ],
+      "resampleScore": 7.929250419237651,
+      "score": 9.84264317516896
+    }
+  ],
+  "finalists": [
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-ch-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "ch",
+          "key": "K"
+        }
+      ],
+      "sampleScore": 8.062607648514819,
+      "fixedPolicyFull": 9.62912082433779,
+      "score": 9.62912082433779,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.5515067605312,
+          "firstAuxRate": 0.19639767221195417,
+          "secondAuxRate": 0.03474062727661126,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029645871711782433,
+          "meanRejectedCandidates": 0.0033437567943816466,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2311382994885656,
+          "effectiveMs": 188.83925252928708
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.27188510600774,
+          "firstAuxRate": 0.14264471126511116,
+          "secondAuxRate": 0.01846093400639651,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011882617710825235,
+          "meanRejectedCandidates": 0.0013273435818614134,
+          "meanPageActions": 0,
+          "meanKeys": 4.161105645271507,
+          "effectiveMs": 468.38290292920266
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.1544969419954,
+          "firstAuxRate": 0.481155712544804,
+          "secondAuxRate": 0.17262780892733756,
+          "thirdAuxRate": 0.03787006506549344,
+          "selectionRate": 0.00437112667141454,
+          "meanRejectedCandidates": 0.0051471117482515365,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.691653586537635,
+          "effectiveMs": 549.5311320558715
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.12345729471417,
+          "firstAuxRate": 0.24049464019387864,
+          "secondAuxRate": 0.028132399879312837,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0017785061550273748,
+          "meanRejectedCandidates": 0.0020849140309197618,
+          "meanPageActions": 0,
+          "meanKeys": 4.268627040073191,
+          "effectiveMs": 528.8829187112341
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-3",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 3
+        }
+      ],
+      "sampleScore": 8.018765787414482,
+      "fixedPolicyFull": 9.62913359865118,
+      "score": 9.62913359865118,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.61799888244357,
+          "firstAuxRate": 0.1969488540878801,
+          "secondAuxRate": 0.03526988000252156,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031109861766825185,
+          "meanRejectedCandidates": 0.0035683112905415893,
+          "meanPageActions": 0.0000014619433343746268,
+          "meanKeys": 2.232218734090402,
+          "effectiveMs": 188.329064963101
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 417.4183661832325,
+          "firstAuxRate": 0.1486591698883768,
+          "secondAuxRate": 0.019713579837190052,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012488062552912381,
+          "meanRejectedCandidates": 0.0013910600582035528,
+          "meanPageActions": 0,
+          "meanKeys": 4.168372749725567,
+          "effectiveMs": 468.7490278569875
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.52572403041984,
+          "firstAuxRate": 0.48237695895234833,
+          "secondAuxRate": 0.17379438259226848,
+          "thirdAuxRate": 0.03829732245806014,
+          "selectionRate": 0.0044568739334509624,
+          "meanRejectedCandidates": 0.005292165513189306,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.694468664002677,
+          "effectiveMs": 551.8055834292774
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.4252536301048,
+          "firstAuxRate": 0.23422581007741855,
+          "secondAuxRate": 0.027437848238864002,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016868325961743745,
+          "meanRejectedCandidates": 0.001975344939646834,
+          "meanPageActions": 0,
+          "meanKeys": 4.261663658316283,
+          "effectiveMs": 527.0352179296765
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-n-5",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "n",
+          "delta": 5
+        }
+      ],
+      "sampleScore": 8.063519941796578,
+      "fixedPolicyFull": 9.63385169185959,
+      "score": 9.63385169185959,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.42740555975531,
+          "firstAuxRate": 0.1966351210483233,
+          "secondAuxRate": 0.03430376936943343,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002624276001802518,
+          "meanRejectedCandidates": 0.0030197901514842293,
+          "meanPageActions": 0.00000184204860131203,
+          "meanKeys": 2.230938890417757,
+          "effectiveMs": 188.43518040831844
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.2829742025227,
+          "firstAuxRate": 0.1407394075203761,
+          "secondAuxRate": 0.01807735935934529,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011279542428991715,
+          "meanRejectedCandidates": 0.0012620710757883212,
+          "meanPageActions": 0,
+          "meanKeys": 4.158816766879721,
+          "effectiveMs": 468.667880365968
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.52572403041984,
+          "firstAuxRate": 0.48237695895234833,
+          "secondAuxRate": 0.17379438259226848,
+          "thirdAuxRate": 0.03829732245806014,
+          "selectionRate": 0.0044568739334509624,
+          "meanRejectedCandidates": 0.005292165513189306,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.694468664002677,
+          "effectiveMs": 551.8055834292774
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.8415818011208,
+          "firstAuxRate": 0.2377883127329567,
+          "secondAuxRate": 0.027637701401819443,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016719272980909392,
+          "meanRejectedCandidates": 0.00197236798451006,
+          "meanPageActions": 0,
+          "meanKeys": 4.265426014134776,
+          "effectiveMs": 528.5711608196337
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-S-_v-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        }
+      ],
+      "sampleScore": 8.063521206175002,
+      "fixedPolicyFull": 9.63557285394476,
+      "score": 9.63557285394476,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.13599485978011,
+          "firstAuxRate": 0.19734118120109287,
+          "secondAuxRate": 0.03419649196755702,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027385999705506134,
+          "meanRejectedCandidates": 0.003120635002689391,
+          "meanPageActions": 0.0000010818380674372239,
+          "meanKeys": 2.23153767316865,
+          "effectiveMs": 189.39681309426012
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.01016027372907,
+          "firstAuxRate": 0.14296853720064776,
+          "secondAuxRate": 0.018582857870224144,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012068173146377024,
+          "meanRejectedCandidates": 0.0013602249761724414,
+          "meanPageActions": 0,
+          "meanKeys": 4.161551395070872,
+          "effectiveMs": 470.26768043258187
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.1058683668871,
+          "firstAuxRate": 0.4805390311352322,
+          "secondAuxRate": 0.1712861682761996,
+          "thirdAuxRate": 0.03715091527378668,
+          "selectionRate": 0.00431790924183825,
+          "meanRejectedCandidates": 0.005132282625888114,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6889761146852185,
+          "effectiveMs": 547.6465900111745
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.90681130503185,
+          "firstAuxRate": 0.23701338330381497,
+          "secondAuxRate": 0.028006112275594984,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016808702355010055,
+          "meanRejectedCandidates": 0.001971152334135878,
+          "meanPageActions": 0,
+          "meanKeys": 4.26501949557941,
+          "effectiveMs": 524.5197397368622
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 1
+        }
+      ],
+      "sampleScore": 8.041024165612967,
+      "fixedPolicyFull": 9.63805540252299,
+      "score": 9.63805540252299,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.30826780641603,
+          "firstAuxRate": 0.1932808090230675,
+          "secondAuxRate": 0.036418353447139576,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030786187512594643,
+          "meanRejectedCandidates": 0.003495448034756358,
+          "meanPageActions": 0.0000011110769341247163,
+          "meanKeys": 2.229699162470207,
+          "effectiveMs": 188.2402935230519
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 419.09711142886584,
+          "firstAuxRate": 0.1454232753763414,
+          "secondAuxRate": 0.019162134054676604,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0012890904443993083,
+          "meanRejectedCandidates": 0.0014342945440536374,
+          "meanPageActions": 0,
+          "meanKeys": 4.164585409431018,
+          "effectiveMs": 469.3179032520135
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.52572403041984,
+          "firstAuxRate": 0.48237695895234833,
+          "secondAuxRate": 0.17379438259226848,
+          "thirdAuxRate": 0.03829732245806014,
+          "selectionRate": 0.0044568739334509624,
+          "meanRejectedCandidates": 0.005292165513189306,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.694468664002677,
+          "effectiveMs": 551.8055834292774
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.80427155758156,
+          "firstAuxRate": 0.23685572177996345,
+          "secondAuxRate": 0.02756821376409525,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001708867617306386,
+          "meanRejectedCandidates": 0.0019993368319372847,
+          "meanPageActions": 0,
+          "meanKeys": 4.264423935544059,
+          "effectiveMs": 528.2567396327798
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-eng-4",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 4
+        }
+      ],
+      "sampleScore": 8.063373706685537,
+      "fixedPolicyFull": 9.646228254621894,
+      "score": 9.646228254621894,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.2391885652978,
+          "firstAuxRate": 0.19308265722352633,
+          "secondAuxRate": 0.03420608231583052,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002942716498895999,
+          "meanRejectedCandidates": 0.0033340787295080866,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.227288739539357,
+          "effectiveMs": 188.35846004267808
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.9748229988067,
+          "firstAuxRate": 0.143389101959602,
+          "secondAuxRate": 0.018779158456874518,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011920694379865641,
+          "meanRejectedCandidates": 0.0013367932438705158,
+          "meanPageActions": 0,
+          "meanKeys": 4.162168260416476,
+          "effectiveMs": 470.40738244873506
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.52572403041984,
+          "firstAuxRate": 0.48237695895234833,
+          "secondAuxRate": 0.17379438259226848,
+          "thirdAuxRate": 0.03829732245806014,
+          "selectionRate": 0.0044568739334509624,
+          "meanRejectedCandidates": 0.005292165513189306,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.694468664002677,
+          "effectiveMs": 551.8055834292774
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.2859494019745,
+          "firstAuxRate": 0.23413923210965734,
+          "secondAuxRate": 0.027293200330736095,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016940118144218995,
+          "meanRejectedCandidates": 0.0019923471440857344,
+          "meanPageActions": 0,
+          "meanKeys": 4.261432432440394,
+          "effectiveMs": 526.8317035799499
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-I-V-ai-5-S-shu-C",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 2,
+        "deltaV": 2,
+        "MGuard": 16,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        },
+        {
+          "kind": "second-family-shift",
+          "family": "ai",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "shu",
+          "key": "C"
+        }
+      ],
+      "sampleScore": 8.020232630880331,
+      "fixedPolicyFull": 9.648250565283693,
+      "score": 9.648250565283693,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.10145175686075,
+          "firstAuxRate": 0.20015141639502784,
+          "secondAuxRate": 0.03919902814685349,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0033083192879564054,
+          "meanRejectedCandidates": 0.00383918015153452,
+          "meanPageActions": 0.00000184204860131203,
+          "meanKeys": 2.2393504445418815,
+          "effectiveMs": 192.0840883143561
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 415.64830775665394,
+          "firstAuxRate": 0.15590482815734422,
+          "secondAuxRate": 0.022094000390334274,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014936745031587843,
+          "meanRejectedCandidates": 0.0016744208967532134,
+          "meanPageActions": 0,
+          "meanKeys": 4.177998828547678,
+          "effectiveMs": 470.0278820676904
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.6173546522544,
+          "firstAuxRate": 0.4833280627638909,
+          "secondAuxRate": 0.17285649552881988,
+          "thirdAuxRate": 0.03719582570754901,
+          "selectionRate": 0.004349990587311268,
+          "meanRejectedCandidates": 0.005238209986607906,
+          "meanPageActions": 0.000002993242098212633,
+          "meanKeys": 3.69338038400026,
+          "effectiveMs": 548.5042726766789
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 441.56523094891986,
+          "firstAuxRate": 0.23213641612739394,
+          "secondAuxRate": 0.02817336138164288,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0017932146795149894,
+          "meanRejectedCandidates": 0.0020766338462956196,
+          "meanPageActions": 0,
+          "meanKeys": 4.260309777509037,
+          "effectiveMs": 520.8379247016547
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-ou-5-S-_v-K",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "ou",
+          "delta": 5
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "K"
+        }
+      ],
+      "sampleScore": 8.034969263444726,
+      "fixedPolicyFull": 9.652695205191554,
+      "score": 9.652695205191554,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 118.07026806531817,
+          "firstAuxRate": 0.1927459131958865,
+          "secondAuxRate": 0.037704249565188815,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0034116202039633165,
+          "meanRejectedCandidates": 0.0038339463943974587,
+          "meanPageActions": 0.0000014034656009996417,
+          "meanKeys": 2.230450162761075,
+          "effectiveMs": 189.44440737541893
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 420.01513851267714,
+          "firstAuxRate": 0.14952044926988933,
+          "secondAuxRate": 0.020647120817659594,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001388983224655732,
+          "meanRejectedCandidates": 0.001569860582236076,
+          "meanPageActions": 0,
+          "meanKeys": 4.170167570087549,
+          "effectiveMs": 471.9772925028471
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.1058683668871,
+          "firstAuxRate": 0.4805390311352322,
+          "secondAuxRate": 0.1712861682761996,
+          "thirdAuxRate": 0.03715091527378668,
+          "selectionRate": 0.00431790924183825,
+          "meanRejectedCandidates": 0.005132282625888114,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6889761146852185,
+          "effectiveMs": 547.6465900111745
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.78261215827877,
+          "firstAuxRate": 0.23539656106295367,
+          "secondAuxRate": 0.028269124934009016,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0017559761819058754,
+          "meanRejectedCandidates": 0.0020378718623188623,
+          "meanPageActions": 0,
+          "meanKeys": 4.263665685996963,
+          "effectiveMs": 524.037797259627
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-eng-1",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 0,
+        "deltaV": 1,
+        "MGuard": 13,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "eng",
+          "delta": 1
+        }
+      ],
+      "sampleScore": 8.053269907250515,
+      "fixedPolicyFull": 9.654397084203193,
+      "score": 9.654397084203193,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 117.3256874486517,
+          "firstAuxRate": 0.19213838802385377,
+          "secondAuxRate": 0.03379504232793775,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003033795568627538,
+          "meanRejectedCandidates": 0.0034251577992396257,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.2259334303517915,
+          "effectiveMs": 187.09756756508793
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 421.82444991931095,
+          "firstAuxRate": 0.14556835711345806,
+          "secondAuxRate": 0.019368587402362154,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001271402814716886,
+          "meanRejectedCandidates": 0.001449375934923143,
+          "meanPageActions": 7.65806358314668e-8,
+          "meanKeys": 4.16493694451582,
+          "effectiveMs": 472.140866733824
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.52572403041984,
+          "firstAuxRate": 0.48237695895234833,
+          "secondAuxRate": 0.17379438259226848,
+          "thirdAuxRate": 0.03829732245806014,
+          "selectionRate": 0.0044568739334509624,
+          "meanRejectedCandidates": 0.005292165513189306,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.694468664002677,
+          "effectiveMs": 551.8055834292774
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 447.3371488332903,
+          "firstAuxRate": 0.23421203834011103,
+          "secondAuxRate": 0.02747737075882461,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016944500280125926,
+          "meanRejectedCandidates": 0.002002858234262496,
+          "meanPageActions": 0,
+          "meanKeys": 4.261689409098936,
+          "effectiveMs": 526.9607844914917
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1-V-o-3-S-_v-I",
+      "guard": {
+        "seedM": 12,
+        "deltaDOrdinary": 0,
+        "deltaSpecial": 1,
+        "deltaV": 1,
+        "MGuard": 14,
+        "definition": "MGuard=12+deltaSpecial+deltaV; ordinary shengjie displacement is frozen at zero"
+      },
+      "moveHistory": [
+        {
+          "kind": "second-family-shift",
+          "family": "o",
+          "delta": 3
+        },
+        {
+          "kind": "special-first-family",
+          "family": "_v",
+          "key": "I"
+        }
+      ],
+      "sampleScore": 7.995479373795331,
+      "fixedPolicyFull": 9.65570301491717,
+      "score": 9.65570301491717,
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 116.8569450143673,
+          "firstAuxRate": 0.19677643249102397,
+          "secondAuxRate": 0.03512494294035166,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002964031632711181,
+          "meanRejectedCandidates": 0.0034278770138415626,
+          "meanPageActions": 0.0000014619433343746268,
+          "meanKeys": 2.2319013754313755,
+          "effectiveMs": 188.3776090570991
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 417.2925542779526,
+          "firstAuxRate": 0.15101197257859303,
+          "secondAuxRate": 0.020373615019050013,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0013075480424311228,
+          "meanRejectedCandidates": 0.001456848096238148,
+          "meanPageActions": 0,
+          "meanKeys": 4.171385587597643,
+          "effectiveMs": 469.56560178751613
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.8597532547362,
+          "firstAuxRate": 0.4902881368562653,
+          "secondAuxRate": 0.1809648624481241,
+          "thirdAuxRate": 0.04044776762851322,
+          "selectionRate": 0.0048333188398196536,
+          "meanRejectedCandidates": 0.005818168119603207,
+          "meanPageActions": 0.000002993242098212633,
+          "meanKeys": 3.7117007669329025,
+          "effectiveMs": 557.5617810171084
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.9859873155692,
+          "firstAuxRate": 0.2435068226331047,
+          "secondAuxRate": 0.030789562914078947,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0020180399811400595,
+          "meanRejectedCandidates": 0.002343843939020505,
+          "meanPageActions": 0,
+          "meanKeys": 4.274296385547184,
+          "effectiveMs": 527.6029191653594
+        }
+      },
+      "shapeMeaningSearch": "not searched; QOLAP fixed from prior empirical results",
+      "wordPolicySearch": "not searched; 21/213/23 fixed from the M12 D0/V0 seed"
+    }
+  ]
+}
