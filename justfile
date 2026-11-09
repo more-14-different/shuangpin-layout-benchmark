@@ -12,6 +12,13 @@ ckt-v4-fixture:
 ckt-v4-js-test:
     node --test tests/*.test.mjs
 
+toned-2121-factorization-search steps="30000" restarts="4":
+    node tools/search_toned_2121_factorizations.js --steps "{{steps}}" --restarts "{{restarts}}"
+    node tools/optimize_toned_2121_physical.js --steps 5000 --restarts 3
+
+toned-2121-ckt-v51:
+    node tools/score_toned_2121_ckt_v51.js
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 
