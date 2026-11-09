@@ -1,0 +1,140 @@
+{
+  "version": "ckt-v5.1-toned-21x21-shape5-research-config-2",
+  "objective": {
+    "primary": "CKT v5.1 shape-only member normalized to the S005 keytao member",
+    "trackWeights": {
+      "character": 1,
+      "word2": 3,
+      "word3": 1,
+      "word4": 1
+    },
+    "secondary": [
+      "minimize explicit memory M after its definition is frozen",
+      "maximize occupied toned-syllable buckets out of 441",
+      "minimize frequency-weighted collision cost"
+    ]
+  },
+  "topology": {
+    "firstKeyDomain": "21 sound keys; component semantics depend on secondCodeFactorization",
+    "secondKeyDomain": "3 tone rows x 7 factorization-specific component columns",
+    "tonedSyllableBuckets": 441,
+    "physicalRows": {
+      "upper": "QWERTYUIOP",
+      "home": "ASDFGHJKL",
+      "lower": "ZXCVBNM"
+    },
+    "auxiliaryKeySetLabel": "QAOPL",
+    "auxiliaryKeySet": "ALOPQ",
+    "auxiliarySelectionStatus": "frozen-from-prior-research",
+    "soundKeysByRow": {
+      "upper": "WERTYUI",
+      "home": "SDFGHJK",
+      "lower": "ZXCVBNM"
+    },
+    "soundKeyCountByRow": {
+      "upper": 7,
+      "home": 7,
+      "lower": 7
+    },
+    "auxiliaryKeyCountByRow": {
+      "upper": 3,
+      "home": 2,
+      "lower": 0
+    },
+    "rowBalancedAuxiliaryKeySetUniverseCount": 4320,
+    "auxiliaryKeySetCandidateCount": 1,
+    "auxiliaryLayoutCandidateCountIncludingShapeMeaningOrder": 120,
+    "shapeKeysByMeaning": "search variable over the 120 permutations of QAOPL",
+    "toneKeysByTone": "derived from shapeKeysByMeaning through tools/auxiliary_semantics.js",
+    "toneDigitsByShapeMeaning": "42310",
+    "shapeAuxiliaryEnabled": true,
+    "toneAuxiliaryEnabled": false,
+    "deterministicSeedOnly": {
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL"
+    }
+  },
+  "toneRows": {
+    "lexicalTones": [1, 2, 3, 4],
+    "primaryAssignment": {
+      "upper": [4],
+      "home": [3, 2],
+      "lower": [1]
+    },
+    "neutralTonePolicy": "follow-tone1",
+    "primaryAssignmentIncludingNeutral": {
+      "upper": [4],
+      "home": [3, 2],
+      "lower": [1, 0]
+    },
+    "mergeRule": "exactly one lexical-tone pair and two singleton groups",
+    "labelledAssignmentCountForSensitivity": 36,
+    "neutralToneSensitivityRequired": true,
+    "dragonSpiritPriorArtComparator": {
+      "lexicalRows": {
+        "upper": [4],
+        "home": [2, 3],
+        "lower": [1]
+      },
+      "neutralTonePolicy": "follow-tone4"
+    }
+  },
+  "secondCodeFactorization": {
+    "selectionStatus": "unresolved-for-toned-3x7",
+    "candidates": [
+      {
+        "id": "shengjie-rhyme-body",
+        "firstComponent": "声母+介音",
+        "secondComponent": "剩余韵身（韵腹/韵尾）",
+        "priorTemplate": "shengjie"
+      },
+      {
+        "id": "restored-onset-full-final",
+        "firstComponent": "统一还原声类",
+        "secondComponent": "完整还原韵母",
+        "priorTemplate": "restored"
+      },
+      {
+        "id": "written-onset-written-final",
+        "firstComponent": "书写声母（含规则零声母分型）",
+        "secondComponent": "书写韵部",
+        "priorTemplate": "writtenZero"
+      }
+    ],
+    "priorResearchBoundary": "R11 defines the decomposition templates and deeply studies the shengjie Pindu family with 25/26 physical second keys; it does not select a winner for seven shared columns per tone row.",
+    "columnConstraint": "derive the second-component inventory and legal aliases separately for each candidate; do not assume 35 full finals before selecting a factorization"
+  },
+  "wordContract": {
+    "name": "traditional-21x21-native-six-code",
+    "word2": "four main plus two shape auxiliaries",
+    "word3": "three main plus three shape auxiliaries",
+    "word4": "four main plus two shape auxiliaries",
+    "candidateRanking": "word2+word4 joint same-length pool; independent staged word3 pool; no soft length balance",
+    "pageSize": 6
+  },
+  "shapeAuxiliaryOrder": {
+    "policyCount": 144,
+    "reference": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "selection": "default-point CKT v5.1 plus the existing wide cognitive-cost robustness grid"
+  },
+  "corpus": {
+    "benchmarkHtml": "a7_CKT_R11.html",
+    "snowRepository": "D:/C2D/Documents/rime-snow-pinyin",
+    "snowDictionary": "snow_pinyin.base.dict.yaml",
+    "wordFrequencyMass": 0.99,
+    "inventoryAudit": "research/notes/2026-11-09-ckt-v51-toned-2121-inventory.json"
+  },
+  "search": {
+    "phase0": "freeze QAOPL, tone normalization, bucket, memory, and CKT normalization semantics",
+    "phase1": "compare factorization feasibility and collision lower bounds under the same fixed QAOPL 3x7 topology",
+    "phase2": "build deterministic scorers for surviving factorizations and reproduce the upper4/home32/lower10 baseline",
+    "phase3": "audit all 36 lexical-tone row assignments and neutral-tone sensitivity",
+    "phase4": "jointly search first-component placement, seven second-component columns, and the 120 shape-key meaning orders under CKT v5.1",
+    "phase5": "re-optimize and robustly audit the 144 shape-auxiliary orders",
+    "phase6": "Pareto audit CKT v5.1, M, bucket use, collision cost, and ergonomics"
+  }
+}

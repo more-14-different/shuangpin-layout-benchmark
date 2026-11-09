@@ -1,0 +1,355 @@
+{
+  "version": "ckt-v5.1-toned-21x21-inventory-audit-1",
+  "contract": {
+    "version": "ckt-v5.1-toned-21x21-shape5-contract-2",
+    "objective": "CKT v5.1",
+    "firstKeyCount": 21,
+    "firstKeySemantics": "selected by secondCodeFactorization",
+    "secondKeyCount": 21,
+    "secondKeySemantics": "tone row x factorization-specific second component column",
+    "finalColumnsPerRow": 7,
+    "toneRows": [
+      "upper",
+      "home",
+      "lower"
+    ],
+    "primaryToneRowAssignment": {
+      "upper": [
+        4
+      ],
+      "home": [
+        3,
+        2
+      ],
+      "lower": [
+        1
+      ]
+    },
+    "lexicalToneRowAssignmentCount": 36,
+    "neutralTonePolicy": "follow-tone1",
+    "tonedSyllableBuckets": 441,
+    "physicalRows": {
+      "upper": "QWERTYUIOP",
+      "home": "ASDFGHJKL",
+      "lower": "ZXCVBNM"
+    },
+    "soundKeys": "WERTYUISDFGHJKZXCVBNM",
+    "soundKeysByRow": {
+      "upper": "WERTYUI",
+      "home": "SDFGHJK",
+      "lower": "ZXCVBNM"
+    },
+    "soundKeyCountByRow": {
+      "upper": 7,
+      "home": 7,
+      "lower": 7
+    },
+    "auxiliaryKeyCountByRow": {
+      "upper": 3,
+      "home": 2,
+      "lower": 0
+    },
+    "rowBalancedAuxiliaryKeySetUniverseCount": 4320,
+    "auxiliaryKeySetCandidateCount": 1,
+    "auxiliaryLayoutCandidateCount": 120,
+    "auxiliarySelectionStatus": "frozen-from-prior-research",
+    "auxiliaryKeySetLabel": "QAOPL",
+    "auxiliaryKeySet": "ALOPQ",
+    "shapeKeysByMeaning": "QAOPL",
+    "toneKeysByTone": "PAOQL",
+    "toneDigitsByShapeMeaning": "42310",
+    "shapeAuxiliaryEnabled": true,
+    "toneAuxiliaryEnabled": false,
+    "secondCodeFactorizationSelectionStatus": "unresolved-for-toned-3x7",
+    "secondCodeFactorizations": [
+      {
+        "id": "shengjie-rhyme-body",
+        "firstComponent": "声母+介音",
+        "secondComponent": "剩余韵身（韵腹/韵尾）",
+        "priorTemplate": "shengjie"
+      },
+      {
+        "id": "restored-onset-full-final",
+        "firstComponent": "统一还原声类",
+        "secondComponent": "完整还原韵母",
+        "priorTemplate": "restored"
+      },
+      {
+        "id": "written-onset-written-final",
+        "firstComponent": "书写声母（含规则零声母分型）",
+        "secondComponent": "书写韵部",
+        "priorTemplate": "writtenZero"
+      }
+    ]
+  },
+  "sources": {
+    "benchmarkHtml": {
+      "file": "a7_CKT_R11.html",
+      "sha256": "851B40FCCD91D624223059F1C6BF4C04661A7979354A6390A668241B6DED76F0"
+    },
+    "snowPinyin": {
+      "commit": "0e4e034350d371e1cd0612a8475389209718897f",
+      "dictionary": "snow_pinyin.base.dict.yaml",
+      "dictionarySha256": "FBB591096DB8521012220B80CF3730ED72E94C32DC9C92B4E01E0CF14298E4BE"
+    }
+  },
+  "inventory": {
+    "commonPinyin": 399,
+    "commonCharactersAll": {
+      "rows": 8095,
+      "tokenOccurrences": 8095,
+      "tokenWeight": 73045527,
+      "distinctTonedSyllables": 1237,
+      "minimumCollisionExcessAt441Buckets": 796,
+      "byTone": {
+        "1": {
+          "distinctSyllables": 320,
+          "tokenOccurrences": 2040,
+          "tokenWeight": 8047744
+        },
+        "2": {
+          "distinctSyllables": 250,
+          "tokenOccurrences": 2141,
+          "tokenWeight": 8040684
+        },
+        "3": {
+          "distinctSyllables": 304,
+          "tokenOccurrences": 1352,
+          "tokenWeight": 19167552
+        },
+        "4": {
+          "distinctSyllables": 340,
+          "tokenOccurrences": 2533,
+          "tokenWeight": 23497663
+        },
+        "5": {
+          "distinctSyllables": 23,
+          "tokenOccurrences": 29,
+          "tokenWeight": 14291884
+        }
+      }
+    },
+    "commonCharactersPositiveWeight": {
+      "rows": 6263,
+      "tokenOccurrences": 6263,
+      "tokenWeight": 73045527,
+      "distinctTonedSyllables": 1216,
+      "minimumCollisionExcessAt441Buckets": 775,
+      "byTone": {
+        "1": {
+          "distinctSyllables": 318,
+          "tokenOccurrences": 1587,
+          "tokenWeight": 8047744
+        },
+        "2": {
+          "distinctSyllables": 247,
+          "tokenOccurrences": 1600,
+          "tokenWeight": 8040684
+        },
+        "3": {
+          "distinctSyllables": 297,
+          "tokenOccurrences": 1048,
+          "tokenWeight": 19167552
+        },
+        "4": {
+          "distinctSyllables": 334,
+          "tokenOccurrences": 2003,
+          "tokenWeight": 23497663
+        },
+        "5": {
+          "distinctSyllables": 20,
+          "tokenOccurrences": 25,
+          "tokenWeight": 14291884
+        }
+      }
+    },
+    "wordCorpusAllEligible": {
+      "rows": 454952,
+      "tokenOccurrences": 1400602,
+      "tokenWeight": 13892830420,
+      "distinctTonedSyllables": 1259,
+      "minimumCollisionExcessAt441Buckets": 818,
+      "byTone": {
+        "1": {
+          "distinctSyllables": 330,
+          "tokenOccurrences": 341197,
+          "tokenWeight": 3010152699
+        },
+        "2": {
+          "distinctSyllables": 252,
+          "tokenOccurrences": 328181,
+          "tokenWeight": 2924873783
+        },
+        "3": {
+          "distinctSyllables": 307,
+          "tokenOccurrences": 245769,
+          "tokenWeight": 2567616312
+        },
+        "4": {
+          "distinctSyllables": 342,
+          "tokenOccurrences": 467137,
+          "tokenWeight": 5101832013
+        },
+        "5": {
+          "distinctSyllables": 28,
+          "tokenOccurrences": 18318,
+          "tokenWeight": 288355613
+        }
+      },
+      "rowsByLength": {
+        "word2": 132814,
+        "word3": 153578,
+        "word4": 168560
+      }
+    },
+    "wordCorpusCktV51": {
+      "frequencyMass": 0.99,
+      "rows": 283411,
+      "tokenOccurrences": 795093,
+      "tokenWeight": 13825984884,
+      "distinctTonedSyllables": 1255,
+      "minimumCollisionExcessAt441Buckets": 814,
+      "byTone": {
+        "1": {
+          "distinctSyllables": 329,
+          "tokenOccurrences": 181928,
+          "tokenWeight": 2994148292
+        },
+        "2": {
+          "distinctSyllables": 252,
+          "tokenOccurrences": 178626,
+          "tokenWeight": 2909497484
+        },
+        "3": {
+          "distinctSyllables": 305,
+          "tokenOccurrences": 143211,
+          "tokenWeight": 2555718223
+        },
+        "4": {
+          "distinctSyllables": 341,
+          "tokenOccurrences": 278167,
+          "tokenWeight": 5079273535
+        },
+        "5": {
+          "distinctSyllables": 28,
+          "tokenOccurrences": 13161,
+          "tokenWeight": 287347350
+        }
+      },
+      "rowsByLength": {
+        "word2": 132814,
+        "word3": 72923,
+        "word4": 77674
+      }
+    }
+  },
+  "toneRowSearch": {
+    "lexicalTones": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "neutralTonePolicy": "follow-tone1",
+    "labelledAssignmentCount": 36,
+    "primaryAssignment": {
+      "upper": [
+        4
+      ],
+      "home": [
+        3,
+        2
+      ],
+      "lower": [
+        1
+      ]
+    },
+    "priorArtAssignment": {
+      "upper": [
+        4
+      ],
+      "home": [
+        2,
+        3
+      ],
+      "lower": [
+        1
+      ]
+    },
+    "priorArtAssignmentIncluded": true
+  },
+  "secondCodeFactorizationResearch": {
+    "selectionStatus": "unresolved-for-toned-3x7",
+    "candidates": [
+      {
+        "id": "shengjie-rhyme-body",
+        "firstComponent": "声母+介音",
+        "secondComponent": "剩余韵身（韵腹/韵尾）",
+        "priorTemplate": "shengjie"
+      },
+      {
+        "id": "restored-onset-full-final",
+        "firstComponent": "统一还原声类",
+        "secondComponent": "完整还原韵母",
+        "priorTemplate": "restored"
+      },
+      {
+        "id": "written-onset-written-final",
+        "firstComponent": "书写声母（含规则零声母分型）",
+        "secondComponent": "书写韵部",
+        "priorTemplate": "writtenZero"
+      }
+    ],
+    "warning": "R11 defines these decomposition families and deeply studies the shengjie Pindu family in untoned 21x25/26 projections; it does not select a winner for the toned 3x7 second-key domain.",
+    "priorEvidence": {
+      "version": "logic-v13-k30-joint",
+      "templates": {
+        "written": "书写声母｜书写韵部",
+        "writtenZero": "书写声母 + 规则零声母分型｜书写韵部",
+        "restored": "统一还原声类｜完整还原韵母",
+        "shengjie": "声母+介音｜剩余韵身（拼读型）",
+        "sipin": "冰雪四拼组件投影"
+      },
+      "pinduStructuralFindings": [
+        {
+          "family": "Pindu K30 / 两跨组精确骨架",
+          "finding": "从自然K32的62个声介单元出发，每个单元可移向其它20个第一类；对所有不同声介的两移动组合共756,400案无预筛穷举。最少韵身子类数为30，且恰好只有6个骨架。",
+          "status": "精确：K=30仅6解",
+          "next": "六解都必须移动 Ø 与 Øu，并分别落到 J/Q/X 中两个不同目标；不存在其它“2跨组→30类”结构。"
+        },
+        {
+          "family": "Pindu K30 / 六骨架",
+          "finding": "六个可行目标对为 J/Q、J/X、Q/J、Q/X、X/J、X/Q。J/Q 在完整A7E-v4联合边界搜索中形成最强前沿；X/Q、Q/J次之，其它明显较弱。",
+          "status": "J/Q 当前性能主骨架",
+          "next": "同LU≈81.33时：J/Q 10.49070；X/Q 10.50167；Q/J 10.50657；J/X 10.58685；Q/X 10.60727。X/J 的可比高LU点也被J/Q前沿支配。"
+        },
+        {
+          "family": "Pindu K30 / 物理第二键硬墙",
+          "finding": "J/Q骨架在30个最少韵身子类条件下，用对称性消除后的0-1可行性模型精确证明25个物理第二键不可行；26键已有大量399/399见证。J/Q/X三个自然组的声介-韵身关联完全同构，因此六个目标排列在纯25键可行性上同构。",
+          "status": "精确：K30需要26物理第二键",
+          "next": "K30的结构交换已明确：30逻辑韵身类 + 26物理第二键；K32则是32逻辑韵身类 + 25物理第二键。"
+        },
+        {
+          "family": "Pindu K30 vs K32 / 性能-统一度",
+          "finding": "允许K30全部16韵身边界联合重画后，旧P27/P33/P38均被新前沿支配。K30在中高LU区真正追上并超过K32自然骨架锚点。",
+          "status": "K30在约LU80.7–81.3占优；极高LU端K32反超",
+          "next": "LU≈80.70：K30 10.47584 < K32-P36 10.49337；LU≈81.17：K30 10.48693 < K32-P39 10.49665；K30到LU≈81.33仍为10.49070。到LU≈81.64时K30≈10.51557，而K32-P42 LU≈81.65 / 10.50320，K32重新占优。"
+        },
+        {
+          "family": "Pindu K30 / 因子化硬顶",
+          "finding": "固定J/Q两跨组与30逻辑韵身类时，逐韵身模态覆盖理论上限为282/399=70.6767%；联合边界已构造达到该上限的399/399方案。",
+          "status": "第二码因子化上限已达",
+          "next": "上限端LU≈81.96、v4≈10.55441；说明继续强推规则一致性会明显牺牲性能。下一次再突破应改变K=30的第一类骨架定义或进入K29，而不是继续重画同一30类边界。"
+        }
+      ]
+    }
+  },
+  "optimizationBoundary": {
+    "primary": "CKT v5.1",
+    "secondary": [
+      "minimize explicit memory M under a separately frozen definition",
+      "maximize used toned-syllable buckets out of 441"
+    ],
+    "warning": "441 is the code-bucket capacity, not the number of distinct toned syllables; bucket utilization must not be reported as syllable uniqueness."
+  }
+}
