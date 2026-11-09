@@ -28,6 +28,9 @@ toned-2121-constrained-search:
 toned-2121-written-lowm steps="10000" restarts="8":
     node tools/search_toned_2121_written_lowm.js --steps "{{steps}}" --restarts "{{restarts}}"
 
+pindu-nextgen-image-audit:
+    node tools/audit_pindu_nextgen_image.js
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 
