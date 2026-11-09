@@ -70,6 +70,10 @@ test('publication sync is idempotent and injects source, legend, and runtime che
 function keyboardSVG(){const zeroMoved={W:true,Y:true};let ni=0;return \`<div><span class="legenditem"><span style="color:#e83e8c">Q／old</span> legacy <span class="legenditem"><span class="legzero">Ø A/E/O</span> 保持常规零声母配色</span></div>\`;}`;
   const generated = syncPublicationHtml(legacy);
   assert.match(generated, /KEYMAP_LINK_COLORS_START/u);
+  assert.ok(
+    generated.indexOf('KEYMAP_LINK_COLORS_START') < generated.indexOf('function keyboardSVG'),
+    'generated helpers must be visible to the separate keyboard legend renderer',
+  );
   assert.match(generated, /\$\{keymapLinkLegendHtml\(\)\}/u);
   assert.match(generated, /KEYMAP_LINK_RUNTIME_START/u);
   assert.match(generated, /resolveKeymapLinkColors\(keymapLinkState\)/u);

@@ -64,6 +64,22 @@ function syncPublicationHtml(source) {
     output = output.replace(legacyPattern, `;${newline}${generated}`);
   }
 
+  // The legacy constants lived inside keyboardSVG. Generated helpers are also
+  // used by the separate legend renderer, so keep the source block in the
+  // surrounding script scope rather than inheriting that function scope.
+  const generatedIndex = output.indexOf(START);
+  const keyboardDeclarationIndex = Math.max(
+    output.lastIndexOf('function keyboardSVG', generatedIndex),
+    output.lastIndexOf('keyboardSVG=function', generatedIndex),
+  );
+  if (keyboardDeclarationIndex >= 0 && generatedIndex - keyboardDeclarationIndex < 512) {
+    const generatedEnd = output.indexOf(END, generatedIndex) + END.length;
+    output = output.slice(0, generatedIndex) + output.slice(generatedEnd);
+    output = output.slice(0, keyboardDeclarationIndex)
+      + generated + newline
+      + output.slice(keyboardDeclarationIndex);
+  }
+
   if (!output.includes('${keymapLinkLegendHtml()}')) {
     const legendPattern = /<span class="legenditem"><span style="color:#e83e8c">Q／[\s\S]*?<span class="legenditem"><span class="legzero">Ø A\/E\/O<\/span> 保持常规零声母配色<\/span>/u;
     if (!legendPattern.test(output)) throw new Error('找不到键位图 link 配色图例');
