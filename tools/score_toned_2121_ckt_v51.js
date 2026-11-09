@@ -117,6 +117,32 @@ function projectedMotor(data) {
     data.ckt.calibration.extension_maps);
 }
 
+function evaluateLayoutPolicy({layout, layouts, data, words, motor, reference,
+  shapeKeysByMeaning, policy}) {
+  const toneKeysByTone = toneKeysFromShapeKeys(shapeKeysByMeaning);
+  const characterRows = buildCharacterRows(layout, layouts, data, toneKeysByTone);
+  const word2Rows = buildWordRows(layout, layouts, data, words, toneKeysByTone,
+    'word2', policy.word2);
+  const word3Rows = buildWordRows(layout, layouts, data, words, toneKeysByTone,
+    'word3', policy.word3);
+  const word4Rows = buildWordRows(layout, layouts, data, words, toneKeysByTone,
+    'word4', policy.word4);
+  const characterOutcomes = model.resolveCompetition(characterRows, {motorCost: motor});
+  const pairOutcomes = model.resolveCompetition([...word2Rows, ...word4Rows], {motorCost: motor});
+  const word3Outcomes = model.resolveCompetition(word3Rows, {motorCost: motor});
+  const outcomes = [...characterOutcomes, ...pairOutcomes, ...word3Outcomes];
+  const tracks = Object.fromEntries(Object.keys(TRACK_WEIGHTS).map(kind => [kind,
+    reference.summarize(outcomes.filter(value => value.kind === kind))]));
+  return {
+    score: normalizedScore(tracks, reference.tracks),
+    policy,
+    shapeKeysByMeaning,
+    toneKeysByTone,
+    tracks,
+    outcomes,
+  };
+}
+
 function normalizedScore(tracks, reference) {
   let sum = 0;
   let denominator = 0;
@@ -204,7 +230,7 @@ function main() {
   const snow = path.resolve(args.snow || 'D:/C2D/Documents/rime-snow-pinyin');
   const layoutsFile = path.resolve(args.layouts || path.join(root, 'research/config/ckt-v51-toned-2121-layouts.json'));
   const output = path.resolve(args.output || path.join(root, 'research/notes/2026-11-09-ckt-v51-toned-2121-ckt-search.json'));
-  const shapeKeysByMeaning = String(args.shape || 'QAOPL').toUpperCase();
+  const forcedShapeKeysByMeaning = args.shape ? String(args.shape).toUpperCase() : null;
   const data = scorer.loadPayload(html);
   const words = scorer.multiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), data, 0.99);
   const strokes = scorer.strokeOptions(path.join(snow, 'rime-stroke/stroke.dict.yaml'));
@@ -215,7 +241,8 @@ function main() {
     ? layouts.layouts.filter(value => String(args.ids).split(',').includes(value.id))
     : layouts.layouts;
   const results = selected.map(layout => scoreLayout({
-    layout, layouts, data, words, motor, reference, shapeKeysByMeaning,
+    layout, layouts, data, words, motor, reference,
+    shapeKeysByMeaning: forcedShapeKeysByMeaning || layout.recommendedShapeKeysByMeaning || 'QAOPL',
   })).sort((left, right) => left.score - right.score);
   const report = {
     version: 'shape-only-ckt-v5.1-toned-2121-search-1',
@@ -235,7 +262,10 @@ if (require.main === module) main();
 
 module.exports = {
   buildCharacterRows,
+  buildReference,
   buildWordRows,
+  evaluateLayoutPolicy,
   normalizedScore,
+  projectedMotor,
   scoreLayout,
 };

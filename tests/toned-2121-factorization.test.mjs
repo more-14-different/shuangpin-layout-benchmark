@@ -9,6 +9,11 @@ const {
   indexedFactorization,
   strictBounds,
 } = require('../tools/search_toned_2121_factorizations.js');
+const {remapAuxiliaryKeys} = require('../tools/optimize_toned_2121_aux_order.js');
+const {
+  explicitMemoryAudit,
+  guardRecord,
+} = require('../tools/search_toned_2121_constrained_ckt.js');
 
 const seeds = JSON.parse(fs.readFileSync(new URL(
   '../research/config/ckt-v51-toned-2121-seeds.json', import.meta.url), 'utf8'));
@@ -69,4 +74,68 @@ test('first structural search reaches the rigorous 441-bucket capacity ceiling f
     assert.equal(factorization.heuristicSearch.champion.occupiedBuckets, 441);
     assert.equal(factorization.heuristicSearch.champion.collisionExcess, 796);
   }
+});
+
+test('auxiliary-order refinement renames only the frozen QAOPL auxiliary domain', () => {
+  assert.equal(remapAuxiliaryKeys('WZQAOPL', 'QOLAP'), 'WZQOLAP');
+  assert.equal(remapAuxiliaryKeys('WSDF', 'QOLAP'), 'WSDF');
+});
+
+test('seed-relative MDV guard accumulates without claiming an exact new M', () => {
+  const seed = {id: 'M12', declaredMemory: {M: 12}};
+  assert.deepEqual(guardRecord(seed, 1, 0), {
+    seedM: 12,
+    deltaD: 1,
+    deltaV: 0,
+    MGuard: 13,
+    definition: 'conservative seed-relative guard: MGuard = seedM + deltaD + deltaV',
+  });
+  const child = {id: 'D1', guard: guardRecord(seed, 1, 0)};
+  assert.deepEqual(guardRecord(child, 1, 1), {
+    seedM: 12,
+    deltaD: 2,
+    deltaV: 1,
+    MGuard: 15,
+    definition: 'conservative seed-relative guard: MGuard = seedM + deltaD + deltaV',
+  });
+});
+
+test('explicit additive memory audit counts two shengjie moves and one rhyme move as M15', () => {
+  const base = {inheritedSeedMemory: {
+    M: 12,
+    globalMigrations: 4,
+    shengjieExceptions: 4,
+    rhymeFamilyDeviations: 2,
+    uniformRules: 2,
+  }};
+  assert.deepEqual(explicitMemoryAudit(base, [
+    {kind: 'first-family', family: 'f'},
+    {kind: 'first-family', family: 'gu'},
+    {kind: 'second-family-shift', family: 'ou'},
+  ]), {
+    globalMigrations: 4,
+    shengjieExceptions: 6,
+    rhymeFamilyDeviations: 3,
+    uniformRules: 2,
+    status: 'exact count for this explicit additive encoding; not a proof of globally minimal M',
+    M: 15,
+  });
+});
+
+test('constrained champion is selected by CKT while bucket occupancy remains diagnostic', () => {
+  const result = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-constrained-champion-ckt.json', import.meta.url), 'utf8'));
+  const champion = result.results[0];
+  assert.equal(champion.id,
+    'HIST-qaopl_nasal_minimal-D1-f-K-D1-gu-E-V1-ou-5');
+  assert.equal(champion.shapeKeysByMeaning, 'QOLAP');
+  assert.equal(champion.toneKeysByTone, 'AOLQP');
+  assert.deepEqual(champion.policy, {word2: '21', word3: '213', word4: '24'});
+  assert.ok(champion.score < 9.62);
+  const search = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-constrained-round3-search.json', import.meta.url), 'utf8'));
+  assert.equal(search.objective,
+    'minimize shape-only CKT v5.1; occupied buckets are audit-only');
+  assert.equal(search.finalists[0].occupiedBucketsAuditOnly, 428);
+  assert.equal(search.finalists[0].guard.MGuard, 15);
 });

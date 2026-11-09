@@ -1,0 +1,189 @@
+{
+  "version": "shape-only-ckt-v5.1-toned-2121-MDV-constrained-search-1",
+  "objective": "minimize shape-only CKT v5.1; occupied buckets are audit-only",
+  "baseId": "HIST-qaopl_nasal_minimal",
+  "policy": {
+    "word2": "12",
+    "word3": "213",
+    "word4": "24"
+  },
+  "guards": {
+    "maxM": 15,
+    "maxDeltaD": 2,
+    "maxDeltaV": 2
+  },
+  "guardSemantics": {
+    "deltaD": "number of shengjie first-component families moved relative to the audited base seed",
+    "deltaV": "number of rhyme-body families shifted relative to the audited base seed",
+    "MGuard": "conservative upper guard seedM + deltaD + deltaV; not a replacement for final rule-level M audit"
+  },
+  "search": {
+    "neighborhood": "all legal single first-family reassignments and single rhyme-family cyclic shifts",
+    "candidates": 1197,
+    "sampleRowsPerTrack": 160,
+    "preselected": 49,
+    "resampleRowsPerTrack": 1200,
+    "baseRank": {
+      "firstSample": 554,
+      "resample": 28
+    },
+    "finalists": 6,
+    "auxiliaryOrdersPerFinalist": 120
+  },
+  "finalists": [
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-f-K",
+      "parentId": "HIST-qaopl_nasal_minimal",
+      "move": {
+        "kind": "first-family",
+        "family": "f",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaD": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "conservative seed-relative guard: MGuard = seedM + deltaD + deltaV"
+      },
+      "occupiedBucketsAuditOnly": 437,
+      "sampleScore": 8.024698713458706,
+      "firstSampleScore": 7.346185723175608,
+      "fixedPolicyCktV51": 9.694942664622362,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "shapeKeysByMeaning": "QOLAP"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-b-K",
+      "parentId": "HIST-qaopl_nasal_minimal",
+      "move": {
+        "kind": "first-family",
+        "family": "b",
+        "key": "K"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaD": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "conservative seed-relative guard: MGuard = seedM + deltaD + deltaV"
+      },
+      "occupiedBucketsAuditOnly": 432,
+      "sampleScore": 8.018703979191633,
+      "firstSampleScore": 7.288506384161668,
+      "fixedPolicyCktV51": 9.711731560587596,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "shapeKeysByMeaning": "QOLAP"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-BASE",
+      "parentId": "HIST-qaopl_nasal_minimal",
+      "move": {
+        "kind": "base"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaD": 0,
+        "deltaV": 0,
+        "MGuard": 12,
+        "definition": "conservative seed-relative guard: MGuard = seedM + deltaD + deltaV"
+      },
+      "occupiedBucketsAuditOnly": 437,
+      "sampleScore": 8.09250700622123,
+      "firstSampleScore": 7.517734348598814,
+      "fixedPolicyCktV51": 9.74594565887161,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "shapeKeysByMeaning": "QOLAP"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-f-I",
+      "parentId": "HIST-qaopl_nasal_minimal",
+      "move": {
+        "kind": "first-family",
+        "family": "f",
+        "key": "I"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaD": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "conservative seed-relative guard: MGuard = seedM + deltaD + deltaV"
+      },
+      "occupiedBucketsAuditOnly": 437,
+      "sampleScore": 8.015058778423821,
+      "firstSampleScore": 7.299281107142922,
+      "fixedPolicyCktV51": 9.757458228025724,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "shapeKeysByMeaning": "QOAPL"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-gu-I",
+      "parentId": "HIST-qaopl_nasal_minimal",
+      "move": {
+        "kind": "first-family",
+        "family": "gu",
+        "key": "I"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaD": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "conservative seed-relative guard: MGuard = seedM + deltaD + deltaV"
+      },
+      "occupiedBucketsAuditOnly": 434,
+      "sampleScore": 8.023861281500418,
+      "firstSampleScore": 7.436192094701548,
+      "fixedPolicyCktV51": 9.757771057513482,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "shapeKeysByMeaning": "QOLAP"
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-xi-I",
+      "parentId": "HIST-qaopl_nasal_minimal",
+      "move": {
+        "kind": "first-family",
+        "family": "xi",
+        "key": "I"
+      },
+      "guard": {
+        "seedM": 12,
+        "deltaD": 1,
+        "deltaV": 0,
+        "MGuard": 13,
+        "definition": "conservative seed-relative guard: MGuard = seedM + deltaD + deltaV"
+      },
+      "occupiedBucketsAuditOnly": 433,
+      "sampleScore": 7.9971537985813965,
+      "firstSampleScore": 7.42067109836757,
+      "fixedPolicyCktV51": 9.773637130480141,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "shapeKeysByMeaning": "QAPLO"
+    }
+  ]
+}

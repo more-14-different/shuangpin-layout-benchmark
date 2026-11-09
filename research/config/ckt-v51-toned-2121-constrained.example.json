@@ -1,0 +1,30 @@
+{
+  "version": "ckt-v5.1-toned-2121-MDV-guarded-search-1",
+  "objective": "minimize shape-only CKT v5.1 only",
+  "occupiedBuckets": "diagnostic-only",
+  "base": "HIST-qaopl_nasal_minimal",
+  "guards": {
+    "maxMGuard": 15,
+    "maxDeltaD": 2,
+    "maxDeltaV": 1
+  },
+  "guardSemantics": {
+    "seedM": "the audited rule-level M of the historical QAOPL base seed",
+    "deltaD": "number of shengjie first-component families moved relative to that seed",
+    "deltaV": "number of rhyme-body families shifted relative to that seed",
+    "MGuard": "seedM + deltaD + deltaV; a conservative search guard, not a final exact M audit"
+  },
+  "stages": [
+    {"maxDeltaD": 1, "maxDeltaV": 0},
+    {"maxDeltaD": 2, "maxDeltaV": 0},
+    {"maxDeltaD": 2, "maxDeltaV": 1}
+  ],
+  "screening": {
+    "firstSampleRowsPerTrack": 160,
+    "preselect": 48,
+    "secondSampleRowsPerTrack": 1200,
+    "fullCorpusFinalists": 6,
+    "auxiliaryMeaningOrdersPerFinalist": 120,
+    "wordPoliciesForChampion": 144
+  }
+}

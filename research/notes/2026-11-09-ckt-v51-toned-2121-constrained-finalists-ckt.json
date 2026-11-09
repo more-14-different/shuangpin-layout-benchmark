@@ -1,0 +1,228 @@
+{
+  "version": "shape-only-ckt-v5.1-toned-2121-search-1",
+  "normalization": "S005 keytao-only; track weights character/word2/word3/word4 = 1/3/1/1",
+  "reference": {
+    "id": "S005",
+    "policy": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "tracks": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 112.42254451086282,
+        "firstAuxRate": 0.22060613808019708,
+        "secondAuxRate": 0.04566821511806128,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.004804384379755336,
+        "meanRejectedCandidates": 0.0059137069818788034,
+        "meanPageActions": 0.000004005724736186477,
+        "meanKeys": 2.2662743531982583,
+        "effectiveMs": 195.4843681647083
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 414.4344264362817,
+        "firstAuxRate": 0.1892694210310565,
+        "secondAuxRate": 0.034756806080910474,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003775437554998475,
+        "meanRejectedCandidates": 0.004530663854527311,
+        "meanPageActions": 0,
+        "meanKeys": 4.224026227111967,
+        "effectiveMs": 484.1340902955972
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 344.2651202341585,
+        "firstAuxRate": 0.5172872168968791,
+        "secondAuxRate": 0.20701254452783532,
+        "thirdAuxRate": 0.052980406019336686,
+        "selectionRate": 0.007349652222944726,
+        "meanRejectedCandidates": 0.00913989969982548,
+        "meanPageActions": 0.00000668463499215639,
+        "meanKeys": 3.7772801674440513,
+        "effectiveMs": 582.3179621766296
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 448.8043124204852,
+        "firstAuxRate": 0.27835105638906893,
+        "secondAuxRate": 0.04469433486596384,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003829566677066131,
+        "meanRejectedCandidates": 0.004522254400754552,
+        "meanPageActions": 0,
+        "meanKeys": 4.323045391255032,
+        "effectiveMs": 548.2417825232724
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-f-K",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "seed-relative-MDV-constrained-search",
+      "declaredMemory": {
+        "M": 12,
+        "globalMigrations": 4,
+        "shengjieExceptions": 4,
+        "rhymeFamilyDeviations": 2,
+        "uniformRules": 2
+      },
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policySpace": {
+        "word2": 2,
+        "word3": 6,
+        "word4": 12,
+        "combinations": 144
+      },
+      "score": 9.687912238675567,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "23"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 119.58042215377309,
+          "firstAuxRate": 0.1982086691368441,
+          "secondAuxRate": 0.03450987414071357,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028658767572412687,
+          "meanRejectedCandidates": 0.003256157149785919,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.232718543277558,
+          "effectiveMs": 191.27863482863467
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 424.34321336136696,
+          "firstAuxRate": 0.14276072537907442,
+          "secondAuxRate": 0.018145746422074935,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011491909411066672,
+          "meanRejectedCandidates": 0.00130180560460805,
+          "meanPageActions": 2.774660718531406e-10,
+          "meanKeys": 4.160906471801149,
+          "effectiveMs": 473.3697598298459
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 339.22442298639317,
+          "firstAuxRate": 0.48442392074380086,
+          "secondAuxRate": 0.17422722428333265,
+          "thirdAuxRate": 0.038436360687012845,
+          "selectionRate": 0.004428502138239788,
+          "meanRejectedCandidates": 0.005251320514099653,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6970875057141463,
+          "effectiveMs": 551.2708695716103
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.2477422482258,
+          "firstAuxRate": 0.23286422250553648,
+          "secondAuxRate": 0.026564393183814792,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001796470497845841,
+          "meanRejectedCandidates": 0.0021465729768102245,
+          "meanPageActions": 0,
+          "meanKeys": 4.259428615689352,
+          "effectiveMs": 522.2615379025792
+        }
+      }
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal-D1-b-K",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "seed-relative-MDV-constrained-search",
+      "declaredMemory": {
+        "M": 12,
+        "globalMigrations": 4,
+        "shengjieExceptions": 4,
+        "rhymeFamilyDeviations": 2,
+        "uniformRules": 2
+      },
+      "shapeKeysByMeaning": "QOLAP",
+      "toneKeysByTone": "AOLQP",
+      "policySpace": {
+        "word2": 2,
+        "word3": 6,
+        "word4": 12,
+        "combinations": 144
+      },
+      "score": 9.70587495650005,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 119.71292110597824,
+          "firstAuxRate": 0.20048570435786595,
+          "secondAuxRate": 0.035851148672268913,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003074174443522965,
+          "meanRejectedCandidates": 0.003469747070938052,
+          "meanPageActions": 0.0000010525992007497313,
+          "meanKeys": 2.236336853030135,
+          "effectiveMs": 192.6322848144396
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 425.1384294895497,
+          "firstAuxRate": 0.1446755201282633,
+          "secondAuxRate": 0.018630588416302538,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011938446659142806,
+          "meanRejectedCandidates": 0.001351442620066146,
+          "meanPageActions": 2.774660718531406e-10,
+          "meanKeys": 4.163306108544566,
+          "effectiveMs": 474.9141410667112
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 337.28942101857564,
+          "firstAuxRate": 0.47954618625849416,
+          "secondAuxRate": 0.17164459744213853,
+          "thirdAuxRate": 0.03732144836522925,
+          "selectionRate": 0.004340185608645603,
+          "meanRejectedCandidates": 0.005201875277704459,
+          "meanPageActions": 0.000003574277870992762,
+          "meanKeys": 3.688512232065862,
+          "effectiveMs": 546.7083680507682
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 443.09551380097906,
+          "firstAuxRate": 0.23395359614079994,
+          "secondAuxRate": 0.027301466028960542,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0019267382398791626,
+          "meanRejectedCandidates": 0.0029675401841741944,
+          "meanPageActions": 0.00007026266010773352,
+          "meanKeys": 4.26125506216976,
+          "effectiveMs": 522.7975312030758
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "version": "ckt-v5.1-toned-2121-MDV-constrained-champion-1",
+  "layoutId": "HIST-qaopl_nasal_minimal-D1-f-K-D1-gu-E-V1-ou-5",
+  "factorization": "shengjie-rhyme-body",
+  "parentSeed": "HIST-qaopl_nasal_minimal",
+  "objective": {
+    "name": "shape-only CKT v5.1",
+    "score": 9.618389567910233,
+    "direction": "minimize"
+  },
+  "soundLayoutMoves": [
+    {"kind": "first-family", "family": "f", "key": "K"},
+    {"kind": "first-family", "family": "gu", "key": "E"},
+    {"kind": "second-family-shift", "family": "ou", "delta": 5}
+  ],
+  "guards": {
+    "seedM": 12,
+    "deltaD": 2,
+    "deltaV": 1,
+    "MGuard": 15
+  },
+  "explicitMemoryAudit": {
+    "globalMigrations": 4,
+    "shengjieExceptions": 6,
+    "rhymeFamilyDeviations": 3,
+    "uniformRules": 2,
+    "M": 15,
+    "status": "exact count for this explicit additive encoding; not a proof of globally minimal M"
+  },
+  "auxiliarySemantics": {
+    "auxiliaryKeySet": "ALOPQ",
+    "shapeKeysByMeaning": "QOLAP",
+    "toneKeysByTone": "AOLQP",
+    "toneDigitsByShapeMeaning": "42310"
+  },
+  "wordPolicy": {"word2": "21", "word3": "213", "word4": "24"},
+  "occupiedBucketsAuditOnly": 428,
+  "fullLayoutSource": "research/config/ckt-v51-toned-2121-constrained-round3-finalists.json",
+  "cktResultSource": "research/notes/2026-11-09-ckt-v51-toned-2121-constrained-champion-ckt.json"
+}

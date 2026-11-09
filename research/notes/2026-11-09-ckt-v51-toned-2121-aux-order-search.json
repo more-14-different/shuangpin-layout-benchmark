@@ -1,0 +1,534 @@
+{
+  "version": "shape-only-ckt-v5.1-toned-2121-aux-order-search-1",
+  "objective": "shape-only CKT v5.1 only; occupied buckets are not an objective",
+  "invariant": "Auxiliary meaning orders are bijective renamings, so candidate competition and M/D/V sound-layout guards remain unchanged; only motor time changes.",
+  "orderCount": 120,
+  "results": [
+    {
+      "id": "SEARCH-shengjie-rhyme-body",
+      "factorization": "shengjie-rhyme-body",
+      "declaredMemory": null,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "current": {
+        "shapeKeysByMeaning": "QAOPL",
+        "toneKeysByTone": "PAOQL",
+        "score": 9.24327792315956
+      },
+      "best": {
+        "shapeKeysByMeaning": "QOAPL",
+        "toneKeysByTone": "POAQL",
+        "score": 9.236571195860414,
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 100.64323106380078,
+            "firstAuxRate": 0.16872361119184287,
+            "secondAuxRate": 0.03273782338625139,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0026900049741160007,
+            "meanRejectedCandidates": 0.00310443667054452,
+            "meanPageActions": 9.356437339997612e-7,
+            "meanKeys": 2.201461434578094,
+            "effectiveMs": 162.85116694834608
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 411.0500530414484,
+            "firstAuxRate": 0.1364729629524995,
+            "secondAuxRate": 0.016566389840995756,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0010480639917626404,
+            "meanRejectedCandidates": 0.0011480158722923693,
+            "meanPageActions": 0,
+            "meanKeys": 4.1530393527934955,
+            "effectiveMs": 457.64809806816913
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 334.8514430883976,
+            "firstAuxRate": 0.46655738848475015,
+            "secondAuxRate": 0.16076259634215428,
+            "thirdAuxRate": 0.03351945168046322,
+            "selectionRate": 0.003959017063017889,
+            "meanRejectedCandidates": 0.004961034134150305,
+            "meanPageActions": 0.000018708444015125182,
+            "meanKeys": 3.6608394365073678,
+            "effectiveMs": 535.7323485183306
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 441.55840178892345,
+            "firstAuxRate": 0.21784689385008052,
+            "secondAuxRate": 0.021615344096924675,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0011804266933296257,
+            "meanRejectedCandidates": 0.0013254621126493054,
+            "meanPageActions": 0,
+            "meanKeys": 4.239462237947005,
+            "effectiveMs": 514.1716022946553
+          }
+        }
+      },
+      "improvement": 0.006706727299146564,
+      "top10": [
+        {
+          "shapeKeysByMeaning": "QOAPL",
+          "toneKeysByTone": "POAQL",
+          "score": 9.236571195860414
+        },
+        {
+          "shapeKeysByMeaning": "QOALP",
+          "toneKeysByTone": "LOAQP",
+          "score": 9.236948803739688
+        },
+        {
+          "shapeKeysByMeaning": "AOQPL",
+          "toneKeysByTone": "POQAL",
+          "score": 9.237680165345246
+        },
+        {
+          "shapeKeysByMeaning": "AOQLP",
+          "toneKeysByTone": "LOQAP",
+          "score": 9.238736967458514
+        },
+        {
+          "shapeKeysByMeaning": "QAPLO",
+          "toneKeysByTone": "LAPQO",
+          "score": 9.239275056895673
+        },
+        {
+          "shapeKeysByMeaning": "QLAPO",
+          "toneKeysByTone": "PLAQO",
+          "score": 9.239476580665333
+        },
+        {
+          "shapeKeysByMeaning": "QPALO",
+          "toneKeysByTone": "LPAQO",
+          "score": 9.240267258577981
+        },
+        {
+          "shapeKeysByMeaning": "QAPOL",
+          "toneKeysByTone": "OAPQL",
+          "score": 9.24035059433802
+        },
+        {
+          "shapeKeysByMeaning": "ALQPO",
+          "toneKeysByTone": "PLQAO",
+          "score": 9.240532764611709
+        },
+        {
+          "shapeKeysByMeaning": "PAQLO",
+          "toneKeysByTone": "LAQPO",
+          "score": 9.240754345145218
+        }
+      ]
+    },
+    {
+      "id": "HIST-qaopl_quality_original",
+      "factorization": "shengjie-rhyme-body",
+      "declaredMemory": {
+        "M": 21,
+        "globalMigrations": 4,
+        "shengjieExceptions": 8,
+        "rhymeFamilyDeviations": 9,
+        "uniformRules": 0
+      },
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      },
+      "current": {
+        "shapeKeysByMeaning": "QAOPL",
+        "toneKeysByTone": "PAOQL",
+        "score": 9.53609707737462
+      },
+      "best": {
+        "shapeKeysByMeaning": "POQAL",
+        "toneKeysByTone": "AOQPL",
+        "score": 9.525976674419146,
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 114.00839229095759,
+            "firstAuxRate": 0.18835549269069268,
+            "secondAuxRate": 0.031828494632270374,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0022374457955269913,
+            "meanRejectedCandidates": 0.002527612308533667,
+            "meanPageActions": 0.000001257271267562179,
+            "meanKeys": 2.220183987322963,
+            "effectiveMs": 181.53281376196963
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 425.56797472844227,
+            "firstAuxRate": 0.1284231597282052,
+            "secondAuxRate": 0.015200101398755108,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0009238324426154027,
+            "meanRejectedCandidates": 0.001044529906405447,
+            "meanPageActions": 0,
+            "meanKeys": 4.14362326112696,
+            "effectiveMs": 469.26147902741985
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 336.87783623388873,
+            "firstAuxRate": 0.4687747662526223,
+            "secondAuxRate": 0.16223046247558676,
+            "thirdAuxRate": 0.03402639994500351,
+            "selectionRate": 0.003913442977458843,
+            "meanRejectedCandidates": 0.004567417804959172,
+            "meanPageActions": 0.0000024439817192564173,
+            "meanKeys": 3.6650316286732125,
+            "effectiveMs": 538.9644947070915
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 445.68825067601546,
+            "firstAuxRate": 0.22288378363590505,
+            "secondAuxRate": 0.024427098746007507,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0015419601488512336,
+            "meanRejectedCandidates": 0.0023737583543851706,
+            "meanPageActions": 0.00005799388676830263,
+            "meanKeys": 4.247310882381912,
+            "effectiveMs": 520.9427775636498
+          }
+        }
+      },
+      "improvement": 0.010120402955474006,
+      "top10": [
+        {
+          "shapeKeysByMeaning": "POQAL",
+          "toneKeysByTone": "AOQPL",
+          "score": 9.525976674419146
+        },
+        {
+          "shapeKeysByMeaning": "LOQAP",
+          "toneKeysByTone": "AOQLP",
+          "score": 9.52656475983763
+        },
+        {
+          "shapeKeysByMeaning": "QOPAL",
+          "toneKeysByTone": "AOPQL",
+          "score": 9.527100751059756
+        },
+        {
+          "shapeKeysByMeaning": "QOALP",
+          "toneKeysByTone": "LOAQP",
+          "score": 9.52730725669171
+        },
+        {
+          "shapeKeysByMeaning": "QOAPL",
+          "toneKeysByTone": "POAQL",
+          "score": 9.527557924839066
+        },
+        {
+          "shapeKeysByMeaning": "LPQAO",
+          "toneKeysByTone": "APQLO",
+          "score": 9.527732885567291
+        },
+        {
+          "shapeKeysByMeaning": "POAQL",
+          "toneKeysByTone": "QOAPL",
+          "score": 9.527975612168497
+        },
+        {
+          "shapeKeysByMeaning": "PLQAO",
+          "toneKeysByTone": "ALQPO",
+          "score": 9.528008656690954
+        },
+        {
+          "shapeKeysByMeaning": "QOLAP",
+          "toneKeysByTone": "AOLQP",
+          "score": 9.528150967516178
+        },
+        {
+          "shapeKeysByMeaning": "AOQLP",
+          "toneKeysByTone": "LOQAP",
+          "score": 9.528527393390553
+        }
+      ]
+    },
+    {
+      "id": "HIST-qaopl_nasal_precision",
+      "factorization": "shengjie-rhyme-body",
+      "declaredMemory": {
+        "M": 15,
+        "globalMigrations": 4,
+        "shengjieExceptions": 8,
+        "rhymeFamilyDeviations": 1,
+        "uniformRules": 2
+      },
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "current": {
+        "shapeKeysByMeaning": "QAOPL",
+        "toneKeysByTone": "PAOQL",
+        "score": 9.653136649143283
+      },
+      "best": {
+        "shapeKeysByMeaning": "QOLAP",
+        "toneKeysByTone": "AOLQP",
+        "score": 9.648108848470102,
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 121.60802074882622,
+            "firstAuxRate": 0.18361280231964794,
+            "secondAuxRate": 0.03301614815824964,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0030146441109472305,
+            "meanRejectedCandidates": 0.0034293097183092495,
+            "meanPageActions": 0.0000010525992007497313,
+            "meanKeys": 2.2166289504778978,
+            "effectiveMs": 188.5772736244395
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 429.3048530398378,
+            "firstAuxRate": 0.13604186807865237,
+            "secondAuxRate": 0.016893913844337995,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0012367586784513746,
+            "meanRejectedCandidates": 0.0014740235235519293,
+            "meanPageActions": 5.385616454669459e-7,
+            "meanKeys": 4.152935781922991,
+            "effectiveMs": 476.001505568477
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 336.6043390198808,
+            "firstAuxRate": 0.469027418763995,
+            "secondAuxRate": 0.16113941347456492,
+            "thirdAuxRate": 0.03247090998556222,
+            "selectionRate": 0.003496194833946667,
+            "meanRejectedCandidates": 0.004077685448792675,
+            "meanPageActions": 0.00000435504469066606,
+            "meanKeys": 3.6626377422241223,
+            "effectiveMs": 537.6985693733322
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 446.4590121637683,
+            "firstAuxRate": 0.21599115707669342,
+            "secondAuxRate": 0.02245234291994816,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0014046013141685155,
+            "meanRejectedCandidates": 0.0016475346154090009,
+            "meanPageActions": 0,
+            "meanKeys": 4.238443499996642,
+            "effectiveMs": 518.9171996820323
+          }
+        }
+      },
+      "improvement": 0.005027800673181204,
+      "top10": [
+        {
+          "shapeKeysByMeaning": "QOLAP",
+          "toneKeysByTone": "AOLQP",
+          "score": 9.648108848470102
+        },
+        {
+          "shapeKeysByMeaning": "QOPAL",
+          "toneKeysByTone": "AOPQL",
+          "score": 9.648242285250394
+        },
+        {
+          "shapeKeysByMeaning": "QAPLO",
+          "toneKeysByTone": "LAPQO",
+          "score": 9.648777697268766
+        },
+        {
+          "shapeKeysByMeaning": "QPLAO",
+          "toneKeysByTone": "APLQO",
+          "score": 9.649294645052302
+        },
+        {
+          "shapeKeysByMeaning": "QALPO",
+          "toneKeysByTone": "PALQO",
+          "score": 9.6493409431927
+        },
+        {
+          "shapeKeysByMeaning": "QLPAO",
+          "toneKeysByTone": "ALPQO",
+          "score": 9.649676244305741
+        },
+        {
+          "shapeKeysByMeaning": "AOPQL",
+          "toneKeysByTone": "QOPAL",
+          "score": 9.650258565703783
+        },
+        {
+          "shapeKeysByMeaning": "QOALP",
+          "toneKeysByTone": "LOAQP",
+          "score": 9.650738241963639
+        },
+        {
+          "shapeKeysByMeaning": "QAPOL",
+          "toneKeysByTone": "OAPQL",
+          "score": 9.65075340410242
+        },
+        {
+          "shapeKeysByMeaning": "QOAPL",
+          "toneKeysByTone": "POAQL",
+          "score": 9.650848313937416
+        }
+      ]
+    },
+    {
+      "id": "HIST-qaopl_nasal_minimal",
+      "factorization": "shengjie-rhyme-body",
+      "declaredMemory": {
+        "M": 12,
+        "globalMigrations": 4,
+        "shengjieExceptions": 4,
+        "rhymeFamilyDeviations": 2,
+        "uniformRules": 2
+      },
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "current": {
+        "shapeKeysByMeaning": "QAOPL",
+        "toneKeysByTone": "PAOQL",
+        "score": 9.750364906984236
+      },
+      "best": {
+        "shapeKeysByMeaning": "QOLAP",
+        "toneKeysByTone": "AOLQP",
+        "score": 9.74594565887161,
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 120.04893052927122,
+            "firstAuxRate": 0.19857412573157107,
+            "secondAuxRate": 0.03457697733976136,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0028796482634510776,
+            "meanRejectedCandidates": 0.0032658936923928537,
+            "meanPageActions": 0.0000010525992007497313,
+            "meanKeys": 2.2331511030713322,
+            "effectiveMs": 191.88566087312148
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 428.40330387911166,
+            "firstAuxRate": 0.1420659320223934,
+            "secondAuxRate": 0.01853816474523433,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0013205487152278016,
+            "meanRejectedCandidates": 0.0015636664296480264,
+            "meanPageActions": 2.774660718531406e-10,
+            "meanKeys": 4.160604096767628,
+            "effectiveMs": 477.45504554325885
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 340.52572403041984,
+            "firstAuxRate": 0.48237695895234833,
+            "secondAuxRate": 0.17379438259226848,
+            "thirdAuxRate": 0.03829732245806014,
+            "selectionRate": 0.0044568739334509624,
+            "meanRejectedCandidates": 0.005292165513189306,
+            "meanPageActions": 0.000001758541081054859,
+            "meanKeys": 3.694468664002677,
+            "effectiveMs": 551.8055834292772
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 446.5239723862706,
+            "firstAuxRate": 0.23091872920685566,
+            "secondAuxRate": 0.026751982402230697,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0017075010669354094,
+            "meanRejectedCandidates": 0.0019976141575738715,
+            "meanPageActions": 0,
+            "meanKeys": 4.257670711609086,
+            "effectiveMs": 524.9495672170365
+          }
+        }
+      },
+      "improvement": 0.004419248112625951,
+      "top10": [
+        {
+          "shapeKeysByMeaning": "QOLAP",
+          "toneKeysByTone": "AOLQP",
+          "score": 9.74594565887161
+        },
+        {
+          "shapeKeysByMeaning": "QOPAL",
+          "toneKeysByTone": "AOPQL",
+          "score": 9.746217271696946
+        },
+        {
+          "shapeKeysByMeaning": "QOAPL",
+          "toneKeysByTone": "POAQL",
+          "score": 9.746238296569446
+        },
+        {
+          "shapeKeysByMeaning": "QOALP",
+          "toneKeysByTone": "LOAQP",
+          "score": 9.74661161687402
+        },
+        {
+          "shapeKeysByMeaning": "QALPO",
+          "toneKeysByTone": "PALQO",
+          "score": 9.746817143833148
+        },
+        {
+          "shapeKeysByMeaning": "QAPLO",
+          "toneKeysByTone": "LAPQO",
+          "score": 9.74716361452767
+        },
+        {
+          "shapeKeysByMeaning": "QLAPO",
+          "toneKeysByTone": "PLAQO",
+          "score": 9.747706471914492
+        },
+        {
+          "shapeKeysByMeaning": "QPLAO",
+          "toneKeysByTone": "APLQO",
+          "score": 9.747861788974992
+        },
+        {
+          "shapeKeysByMeaning": "AOQPL",
+          "toneKeysByTone": "POQAL",
+          "score": 9.747907894018294
+        },
+        {
+          "shapeKeysByMeaning": "QLPAO",
+          "toneKeysByTone": "ALPQO",
+          "score": 9.748068524142452
+        }
+      ]
+    }
+  ]
+}

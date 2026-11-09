@@ -346,10 +346,14 @@
   },
   "optimizationBoundary": {
     "primary": "CKT v5.1",
-    "secondary": [
-      "minimize explicit memory M under a separately frozen definition",
-      "maximize used toned-syllable buckets out of 441"
+    "hardGuards": [
+      "bounded explicit memory M under a separately frozen definition",
+      "bounded seed-relative shengjie displacement deltaD",
+      "bounded seed-relative rhyme-family displacement deltaV"
     ],
-    "warning": "441 is the code-bucket capacity, not the number of distinct toned syllables; bucket utilization must not be reported as syllable uniqueness."
+    "diagnosticsOnly": [
+      "used toned-syllable buckets out of 441"
+    ],
+    "warning": "441 is capacity, not an optimization target or the number of distinct toned syllables; a lower-bucket layout is allowed to win whenever its full CKT v5.1 is lower."
   }
 }

@@ -19,6 +19,12 @@ toned-2121-factorization-search steps="30000" restarts="4":
 toned-2121-ckt-v51:
     node tools/score_toned_2121_ckt_v51.js
 
+toned-2121-aux-order:
+    node tools/optimize_toned_2121_aux_order.js
+
+toned-2121-constrained-search:
+    node tools/search_toned_2121_constrained_ckt.js --sample 160 --resample 1200 --preselect 48 --finalists 5 --max-m 15 --max-d 2 --max-v 1
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 
