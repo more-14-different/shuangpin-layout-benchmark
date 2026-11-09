@@ -33,6 +33,8 @@ const TONE_PROFILES = Object.freeze({
     neutralToneRule: 1,
   }),
 });
+const TRADITIONAL_INITIALS = Object.freeze(
+  ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'r', 'z', 'c', 's']);
 
 function parseArgs(argv) {
   const args = {};
@@ -90,8 +92,31 @@ function buildDecomposition(seedInventory) {
     return {
       sourceKey: imageFirstKey(row.shengjie),
       rhyme: rhymeIndex.get(normalizeRhymeBody(row.rhymeBody)),
+      initial: row.initial,
+      shengjie: row.shengjie,
     };
   };
+}
+
+function firstDiagnostics(layoutTokens, decomposition, firstProjection) {
+  const incidences = new Map(TRADITIONAL_INITIALS.map(initial => [initial, new Set()]));
+  const atoms = new Map();
+  for (const token of layoutTokens) {
+    const split = decomposition(token.pinyin);
+    const initial = split.initial[0];
+    if (!incidences.has(initial)) continue;
+    const forbidden = FORBIDDEN_SOURCE_KEYS.indexOf(split.sourceKey);
+    const key = forbidden < 0 ? split.sourceKey : firstProjection[split.sourceKey];
+    const previous = atoms.get(split.shengjie);
+    if (previous && previous !== key) throw new Error(`${split.shengjie} flies across first keys`);
+    atoms.set(split.shengjie, key);
+    incidences.get(initial).add(key);
+  }
+  const traditionalOnsetD = [...incidences].filter(([initial, keys]) =>
+    [...keys].some(key => key !== imageFirstKey(initial))).length;
+  const onsetKeyIncidences = [...incidences.values()].reduce((sum, keys) => sum + keys.size, 0);
+  return {traditionalOnsetD, onsetKeyIncidences,
+    onsetFragmentation: onsetKeyIncidences - incidences.size};
 }
 
 function initialState(contract, random, run) {
@@ -273,6 +298,7 @@ function makeLayout({candidate, layoutTokens, decomposition, contract, tables, o
   toneProfile}) {
   const firstProjection = destinationRecord(candidate.state, tables);
   const secondMap = rhymeMapRecord(candidate.state, contract);
+  const diagnostics = firstDiagnostics(layoutTokens, decomposition, firstProjection);
   const idStem = toneProfile.id === 'primary'
     ? 'UNEVEN786-pindu11-D8'
     : `UNEVEN786-${toneProfile.label}-pindu11-D8`;
@@ -295,9 +321,8 @@ function makeLayout({candidate, layoutTokens, decomposition, contract, tables, o
       normalizedRhymeRules: 3,
       toneRegionMergeLower: toneRegionMemoryLower(candidate.state),
       neutralToneRule: toneProfile.neutralToneRule,
-      traditionalOnsetD: 8,
-      onsetKeyIncidences: 26,
-      onsetFragmentation: 8,
+      ...diagnostics,
+      idAudit: 'legacy D8 id retained; actual D/F are derived from the emitted codes',
       comparability: 'rule-count lower/guard; not QZ M-R2',
     },
     tonedCodes: layoutTokens.map(token => {
@@ -364,7 +389,7 @@ function main() {
     decomposition, contract, tables, ordinal: index, toneProfile}));
   const result = {
     version: 'ckt-v5.1-toned-2121-pindu11-uneven786-layouts-1',
-    purpose: `AVUIO 7/8/6 ${toneProfile.label} tone-specific Pindu11 rhyme-region candidates under D8/F8 first grammar`,
+    purpose: `AVUIO 7/8/6 ${toneProfile.label} tone-specific Pindu11 rhyme-region candidates under low-D/F first grammar`,
     contract,
     toneProfile,
     tokenKeys: seedInventory.layoutTokenKeys,
@@ -374,8 +399,12 @@ function main() {
     version: 'ckt-v5.1-toned-2121-pindu11-uneven786-search-1',
     search: {algorithm: 'deterministic multi-profile coordinate ascent', starts, seed,
       uniqueLocalOptima: unique.size, retained: layouts.length, profiles: PROFILE_GRID},
-    firstConstraint: {traditionalOnsetD: 8, onsetKeyIncidences: 26,
-      onsetFragmentation: 8, forbiddenSourceKeys: FORBIDDEN_SOURCE_KEYS},
+    firstConstraint: {
+      traditionalOnsetD: layouts[0]?.memoryAudit.traditionalOnsetD,
+      onsetKeyIncidences: layouts[0]?.memoryAudit.onsetKeyIncidences,
+      onsetFragmentation: layouts[0]?.memoryAudit.onsetFragmentation,
+      forbiddenSourceKeys: FORBIDDEN_SOURCE_KEYS,
+    },
     toneRegions: Object.fromEntries(['upper', 'home', 'lower'].map(row => [row,
       {tones: toneProfile.regions[row], keys: contract.soundKeysByRow[row]}])),
     memoryAudit: {lowerM: 29 + toneProfile.neutralToneRule,

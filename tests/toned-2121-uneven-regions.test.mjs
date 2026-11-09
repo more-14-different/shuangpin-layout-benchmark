@@ -54,9 +54,10 @@ test('tracked 7/8/6 finalists preserve the full-score champion and audit', () =>
     firstRuleLower: 14,
     normalizedRhymeRules: 3,
     toneRegionMergeLower: 12,
-    traditionalOnsetD: 8,
-    onsetKeyIncidences: 26,
-    onsetFragmentation: 8,
+    traditionalOnsetD: 9,
+    onsetKeyIncidences: 27,
+    onsetFragmentation: 9,
     comparability: 'rule-count lower/guard; not QZ M-R2',
+    idAudit: 'legacy D8 id retained; recomputed from emitted codes as D9/F9',
   });
 });
