@@ -40,6 +40,18 @@ pindu11-2121-screen runs="8":
     node tools/screen_toned_2121_pindu11.js --runs "{{runs}}"
     node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-screen-layouts.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-screen-ckt-fixed-policy.json
 
+pindu11-2121-lowmd retain="256" sample_retain="512":
+    node tools/search_toned_2121_pindu11_lowmd.js --retain "{{retain}}" --sample-retain "{{sample_retain}}"
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-layouts.json --policy 12/213/24 --shape QAOPL --sample 160 --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-sample-ckt.json
+
+pindu11-2121-lowmd-columns bases="8" sample="120":
+    node tools/optimize_toned_2121_pindu11_lowmd_columns.js --bases "{{bases}}" --sample "{{sample}}"
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-column-finalists.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-column-full.json
+
+pindu11-2121-lowmd-coordinate starts="32" sample="160":
+    node tools/optimize_toned_2121_pindu11_lowmd_first.js --starts "{{starts}}" --sample "{{sample}}"
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-coordinate-layouts.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-coordinate-full.json
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 

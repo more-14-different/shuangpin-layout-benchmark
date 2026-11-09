@@ -1,0 +1,3719 @@
+{
+  "version": "ckt-v5.1-toned-2121-pindu11-lowmd-exhaustive-1",
+  "factorization": "shengjie-pindu11-rhyme",
+  "frozenRhymeColumns": {
+    "a": 0,
+    "ou": 0,
+    "ai": 1,
+    "ang": 1,
+    "ao": 2,
+    "ei": 2,
+    "en": 3,
+    "e": 4,
+    "an": 5,
+    "ong": 5,
+    "_": 6
+  },
+  "firstProjection": {
+    "sourceBuckets": 26,
+    "fixedBuckets": 21,
+    "forbiddenSourceKeys": [
+      "Q",
+      "A",
+      "O",
+      "P",
+      "L"
+    ],
+    "destinationKeys": [
+      "W",
+      "E",
+      "R",
+      "T",
+      "Y",
+      "U",
+      "I",
+      "S",
+      "D",
+      "F",
+      "G",
+      "H",
+      "J",
+      "K",
+      "Z",
+      "X",
+      "C",
+      "V",
+      "B",
+      "N",
+      "M"
+    ],
+    "freedom": "each of five forbidden source buckets independently merges into one of 21 sound-key buckets",
+    "exactSearchSpace": 4084101
+  },
+  "memoryAndDisorderAudit": {
+    "lowerM": {
+      "zeroInitialGlobalRules": 4,
+      "upstreamVisibleFirstExceptions": 10,
+      "forcedOrdinaryBucketMigrations": 3,
+      "rhymeNormalizationRules": 3,
+      "rhymePairMerges": 4,
+      "total": 24,
+      "assumption": "A projection is absorbed by its existing bi/hu exceptions and O projection by the zero-initial rule"
+    },
+    "conservativeMGuard": {
+      "replacesForcedOrdinaryBucketMigrationsWithAllForbiddenBucketProjections": 5,
+      "total": 26
+    },
+    "ordinaryFamilyDMinimum": 3,
+    "forcedOrdinaryFamilies": [
+      "q",
+      "p",
+      "l"
+    ],
+    "forcedOrdinaryShengjieAtoms": [
+      "qi",
+      "qv",
+      "p",
+      "pi",
+      "pu",
+      "l",
+      "lu",
+      "lv"
+    ],
+    "forcedOrdinaryShengjieAtomCount": 8,
+    "upstreamExceptionRuleCount": 10,
+    "totalRuleLevelFirstIrregularity": 13,
+    "totalAtomicFirstIrregularity": 18
+  },
+  "enumeration": {
+    "evaluatedAssignments": 4084101,
+    "maximumOccupied": 437,
+    "maximumTop1": 0.93607344362099,
+    "maximumTop1AtCapacity": 0,
+    "occupiedHistogram": {
+      "408": 371293,
+      "409": 390184,
+      "410": 260971,
+      "411": 395082,
+      "412": 245820,
+      "413": 119606,
+      "414": 129154,
+      "415": 345538,
+      "416": 249828,
+      "417": 339891,
+      "418": 340558,
+      "419": 176256,
+      "420": 160398,
+      "421": 96512,
+      "422": 75046,
+      "423": 59058,
+      "424": 124188,
+      "425": 73600,
+      "426": 41618,
+      "427": 44278,
+      "428": 14472,
+      "429": 5220,
+      "430": 7000,
+      "431": 9842,
+      "432": 3552,
+      "433": 2568,
+      "434": 2040,
+      "435": 372,
+      "436": 120,
+      "437": 36
+    },
+    "candidatePoolCounts": {
+      "topWeighted": 256,
+      "topCapacity": 256,
+      "conditional": 105,
+      "uniform": 512
+    },
+    "retainedUniqueCandidates": 1043,
+    "best": [
+      {
+        "ordinal": 2166293,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68375978,
+        "tonedSyllableTop1": 0.93607344362099,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 934838,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68364116,
+        "tonedSyllableTop1": 0.9359110517472206,
+        "assignment": "Q>Y,A>C,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 2555255,
+        "destinations": [
+          "K",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68349620,
+        "tonedSyllableTop1": 0.9357126001705758,
+        "assignment": "Q>K,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 545618,
+        "destinations": [
+          "R",
+          "C",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68348852,
+        "tonedSyllableTop1": 0.9357020861797601,
+        "assignment": "Q>R,A>C,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 795923,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68348014,
+        "tonedSyllableTop1": 0.93569061388249,
+        "assignment": "Q>Y,A>E,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 805195,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68345011,
+        "tonedSyllableTop1": 0.9356495025355899,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>K"
+      },
+      {
+        "ordinal": 804842,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68344396,
+        "tonedSyllableTop1": 0.9356410831288821,
+        "assignment": "Q>Y,A>R,O>N,P>W,L>V"
+      },
+      {
+        "ordinal": 3916622,
+        "destinations": [
+          "M",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68342307,
+        "tonedSyllableTop1": 0.9356124845262599,
+        "assignment": "Q>M,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 934538,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68341301,
+        "tonedSyllableTop1": 0.9355987122934988,
+        "assignment": "Q>Y,A>C,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 2295932,
+        "destinations": [
+          "H",
+          "C",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68340221,
+        "tonedSyllableTop1": 0.9355839269939143,
+        "assignment": "Q>H,A>C,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 805073,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68339747,
+        "tonedSyllableTop1": 0.9355774378902079,
+        "assignment": "Q>Y,A>R,O>N,P>H,L>V"
+      },
+      {
+        "ordinal": 2305193,
+        "destinations": [
+          "H",
+          "V",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68337739,
+        "tonedSyllableTop1": 0.9355499481850545,
+        "assignment": "Q>H,A>V,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 2295947,
+        "destinations": [
+          "H",
+          "C",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68336706,
+        "tonedSyllableTop1": 0.9355358063198038,
+        "assignment": "Q>H,A>C,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 2159993,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 437,
+        "topWeight": 68335076,
+        "tonedSyllableTop1": 0.935513491469505,
+        "assignment": "Q>H,A>R,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 406703,
+        "destinations": [
+          "R",
+          "E",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68332750,
+        "tonedSyllableTop1": 0.9354816483150296,
+        "assignment": "Q>R,A>E,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 805220,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68332659,
+        "tonedSyllableTop1": 0.9354804025166387,
+        "assignment": "Q>Y,A>R,O>N,P>B,L>V"
+      },
+      {
+        "ordinal": 801713,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68327512,
+        "tonedSyllableTop1": 0.935409939612045,
+        "assignment": "Q>Y,A>R,O>H,P>N,L>V"
+      },
+      {
+        "ordinal": 2289590,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68327083,
+        "tonedSyllableTop1": 0.9354040665624878,
+        "assignment": "Q>H,A>C,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 795623,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68325199,
+        "tonedSyllableTop1": 0.9353782744287682,
+        "assignment": "Q>Y,A>E,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 2157017,
+        "destinations": [
+          "H",
+          "E",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68324119,
+        "tonedSyllableTop1": 0.9353634891291838,
+        "assignment": "Q>H,A>E,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 804947,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68322047,
+        "tonedSyllableTop1": 0.9353351232581292,
+        "assignment": "Q>Y,A>R,O>N,P>U,L>V"
+      },
+      {
+        "ordinal": 805031,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "F",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68321699,
+        "tonedSyllableTop1": 0.9353303591060408,
+        "assignment": "Q>Y,A>R,O>N,P>F,L>V"
+      },
+      {
+        "ordinal": 2166289,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68321116,
+        "tonedSyllableTop1": 0.9353223777822837,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 2157032,
+        "destinations": [
+          "H",
+          "E",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68320604,
+        "tonedSyllableTop1": 0.9353153684550732,
+        "assignment": "Q>H,A>E,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 931310,
+        "destinations": [
+          "Y",
+          "C",
+          "H",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68319519,
+        "tonedSyllableTop1": 0.9353005147050277,
+        "assignment": "Q>Y,A>C,O>H,P>V,L>R"
+      },
+      {
+        "ordinal": 814445,
+        "destinations": [
+          "Y",
+          "T",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68318898,
+        "tonedSyllableTop1": 0.9352920131577667,
+        "assignment": "Q>Y,A>T,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 804863,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "E",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68317800,
+        "tonedSyllableTop1": 0.9352769814365225,
+        "assignment": "Q>Y,A>R,O>N,P>E,L>V"
+      },
+      {
+        "ordinal": 2296205,
+        "destinations": [
+          "H",
+          "C",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68317316,
+        "tonedSyllableTop1": 0.9352703554318939,
+        "assignment": "Q>H,A>C,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 3718613,
+        "destinations": [
+          "N",
+          "R",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68315210,
+        "tonedSyllableTop1": 0.9352415240977041,
+        "assignment": "Q>N,A>R,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 805182,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "W"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68314334,
+        "tonedSyllableTop1": 0.9352295315769301,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>W"
+      },
+      {
+        "ordinal": 2684894,
+        "destinations": [
+          "K",
+          "C",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68313863,
+        "tonedSyllableTop1": 0.9352230835435003,
+        "assignment": "Q>K,A>C,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 805262,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "M",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68313649,
+        "tonedSyllableTop1": 0.9352201538637678,
+        "assignment": "Q>Y,A>R,O>N,P>M,L>V"
+      },
+      {
+        "ordinal": 805191,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "F"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68311650,
+        "tonedSyllableTop1": 0.9351927873694442,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>F"
+      },
+      {
+        "ordinal": 2694155,
+        "destinations": [
+          "K",
+          "V",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68311381,
+        "tonedSyllableTop1": 0.9351891047346403,
+        "assignment": "Q>K,A>V,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 1777331,
+        "destinations": [
+          "F",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68311319,
+        "tonedSyllableTop1": 0.9351882559489235,
+        "assignment": "Q>F,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 2150675,
+        "destinations": [
+          "H",
+          "E",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68310981,
+        "tonedSyllableTop1": 0.9351836286977572,
+        "assignment": "Q>H,A>E,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 3845438,
+        "destinations": [
+          "N",
+          "C",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68310912,
+        "tonedSyllableTop1": 0.9351826840813949,
+        "assignment": "Q>N,A>C,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 2684909,
+        "destinations": [
+          "K",
+          "C",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68310348,
+        "tonedSyllableTop1": 0.9351749628693896,
+        "assignment": "Q>K,A>C,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 804926,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68309947,
+        "tonedSyllableTop1": 0.9351694731424143,
+        "assignment": "Q>Y,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 2548955,
+        "destinations": [
+          "K",
+          "R",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68308718,
+        "tonedSyllableTop1": 0.9351526480190909,
+        "assignment": "Q>K,A>R,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 934481,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "W",
+          "R"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68308639,
+        "tonedSyllableTop1": 0.9351515665018064,
+        "assignment": "Q>Y,A>C,O>N,P>W,L>R"
+      },
+      {
+        "ordinal": 2159947,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68307978,
+        "tonedSyllableTop1": 0.9351425173508571,
+        "assignment": "Q>H,A>R,O>Y,P>V,L>K"
+      },
+      {
+        "ordinal": 539318,
+        "destinations": [
+          "R",
+          "C",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68307950,
+        "tonedSyllableTop1": 0.9351421340282753,
+        "assignment": "Q>R,A>C,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 2159594,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68307363,
+        "tonedSyllableTop1": 0.9351340979441493,
+        "assignment": "Q>H,A>R,O>Y,P>W,L>V"
+      },
+      {
+        "ordinal": 415964,
+        "destinations": [
+          "R",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68306717,
+        "tonedSyllableTop1": 0.935125254144583,
+        "assignment": "Q>R,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 4046261,
+        "destinations": [
+          "M",
+          "C",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68306550,
+        "tonedSyllableTop1": 0.9351229678991843,
+        "assignment": "Q>M,A>C,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 943742,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "W",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68306157,
+        "tonedSyllableTop1": 0.9351175876929466,
+        "assignment": "Q>Y,A>V,O>N,P>W,L>R"
+      },
+      {
+        "ordinal": 934849,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68305739,
+        "tonedSyllableTop1": 0.9351118652344037,
+        "assignment": "Q>Y,A>C,O>N,P>V,L>K"
+      },
+      {
+        "ordinal": 934496,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68305124,
+        "tonedSyllableTop1": 0.9351034458276959,
+        "assignment": "Q>Y,A>C,O>N,P>W,L>V"
+      },
+      {
+        "ordinal": 2551727,
+        "destinations": [
+          "K",
+          "R",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68305023,
+        "tonedSyllableTop1": 0.935102063128383,
+        "assignment": "Q>K,A>R,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 2289290,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68304268,
+        "tonedSyllableTop1": 0.935091727108766,
+        "assignment": "Q>H,A>C,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 542090,
+        "destinations": [
+          "R",
+          "C",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68304255,
+        "tonedSyllableTop1": 0.9350915491375673,
+        "assignment": "Q>R,A>C,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 4055522,
+        "destinations": [
+          "M",
+          "V",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68304068,
+        "tonedSyllableTop1": 0.9350889890903245,
+        "assignment": "Q>M,A>V,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 934712,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "H",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68303990,
+        "tonedSyllableTop1": 0.9350879212631322,
+        "assignment": "Q>Y,A>C,O>N,P>H,L>R"
+      },
+      {
+        "ordinal": 3462818,
+        "destinations": [
+          "V",
+          "C",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68303722,
+        "tonedSyllableTop1": 0.9350842523184205,
+        "assignment": "Q>V,A>C,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 425225,
+        "destinations": [
+          "R",
+          "T",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68303634,
+        "tonedSyllableTop1": 0.9350830475903062,
+        "assignment": "Q>R,A>T,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 792395,
+        "destinations": [
+          "Y",
+          "E",
+          "H",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68303417,
+        "tonedSyllableTop1": 0.9350800768402971,
+        "assignment": "Q>Y,A>E,O>H,P>V,L>R"
+      },
+      {
+        "ordinal": 805115,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "K",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68303139,
+        "tonedSyllableTop1": 0.9350762709946634,
+        "assignment": "Q>Y,A>R,O>N,P>K,L>V"
+      },
+      {
+        "ordinal": 4046276,
+        "destinations": [
+          "M",
+          "C",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68303035,
+        "tonedSyllableTop1": 0.9350748472250737,
+        "assignment": "Q>M,A>C,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 943973,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "H",
+          "R"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68301508,
+        "tonedSyllableTop1": 0.9350539424542724,
+        "assignment": "Q>Y,A>V,O>N,P>H,L>R"
+      },
+      {
+        "ordinal": 3910322,
+        "destinations": [
+          "M",
+          "R",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68301405,
+        "tonedSyllableTop1": 0.935052532374775,
+        "assignment": "Q>M,A>R,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 2157290,
+        "destinations": [
+          "H",
+          "E",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68301214,
+        "tonedSyllableTop1": 0.9350499175671633,
+        "assignment": "Q>H,A>E,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 2678552,
+        "destinations": [
+          "K",
+          "C",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68300725,
+        "tonedSyllableTop1": 0.9350432231120737,
+        "assignment": "Q>K,A>C,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 934727,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68300475,
+        "tonedSyllableTop1": 0.9350398005890217,
+        "assignment": "Q>Y,A>C,O>N,P>H,L>V"
+      },
+      {
+        "ordinal": 801667,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68300414,
+        "tonedSyllableTop1": 0.935038965493397,
+        "assignment": "Q>Y,A>R,O>H,P>V,L>K"
+      },
+      {
+        "ordinal": 801314,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68299799,
+        "tonedSyllableTop1": 0.9350305460866892,
+        "assignment": "Q>Y,A>R,O>H,P>W,L>V"
+      },
+      {
+        "ordinal": 2289632,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68299319,
+        "tonedSyllableTop1": 0.9350239748424294,
+        "assignment": "Q>H,A>C,O>Y,P>N,L>R"
+      },
+      {
+        "ordinal": 805183,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "E"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68298992,
+        "tonedSyllableTop1": 0.9350194981822775,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>E"
+      },
+      {
+        "ordinal": 2944217,
+        "destinations": [
+          "X",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68298313,
+        "tonedSyllableTop1": 0.9350102026096684,
+        "assignment": "Q>X,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 2166562,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68298211,
+        "tonedSyllableTop1": 0.9350088062202632,
+        "assignment": "Q>H,A>R,O>N,P>V,L>K"
+      },
+      {
+        "ordinal": 2545979,
+        "destinations": [
+          "K",
+          "E",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68297761,
+        "tonedSyllableTop1": 0.9350026456787697,
+        "assignment": "Q>K,A>E,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 3913094,
+        "destinations": [
+          "M",
+          "R",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68297710,
+        "tonedSyllableTop1": 0.9350019474840671,
+        "assignment": "Q>M,A>R,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 2166209,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68297596,
+        "tonedSyllableTop1": 0.9350003868135554,
+        "assignment": "Q>H,A>R,O>N,P>W,L>V"
+      },
+      {
+        "ordinal": 805010,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "D",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68297283,
+        "tonedSyllableTop1": 0.9349961018146943,
+        "assignment": "Q>Y,A>R,O>N,P>D,L>V"
+      },
+      {
+        "ordinal": 934859,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "B",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68296902,
+        "tonedSyllableTop1": 0.9349908858895631,
+        "assignment": "Q>Y,A>C,O>N,P>B,L>R"
+      },
+      {
+        "ordinal": 2298893,
+        "destinations": [
+          "H",
+          "V",
+          "Y",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68296837,
+        "tonedSyllableTop1": 0.9349899960335696,
+        "assignment": "Q>H,A>V,O>Y,P>N,L>R"
+      },
+      {
+        "ordinal": 931010,
+        "destinations": [
+          "Y",
+          "C",
+          "H",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68296704,
+        "tonedSyllableTop1": 0.934988175251306,
+        "assignment": "Q>Y,A>C,O>H,P>R,L>V"
+      },
+      {
+        "ordinal": 221483,
+        "destinations": [
+          "E",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68296519,
+        "tonedSyllableTop1": 0.9349856425842475,
+        "assignment": "Q>E,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 805192,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "G"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68296125,
+        "tonedSyllableTop1": 0.9349802486879176,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>G"
+      },
+      {
+        "ordinal": 805199,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68296111,
+        "tonedSyllableTop1": 0.9349800570266267,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>V"
+      },
+      {
+        "ordinal": 814145,
+        "destinations": [
+          "Y",
+          "T",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68296083,
+        "tonedSyllableTop1": 0.9349796737040449,
+        "assignment": "Q>Y,A>T,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 2289647,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68295804,
+        "tonedSyllableTop1": 0.9349758541683189,
+        "assignment": "Q>H,A>C,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 2159972,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68295626,
+        "tonedSyllableTop1": 0.9349734173319059,
+        "assignment": "Q>H,A>R,O>Y,P>B,L>V"
+      },
+      {
+        "ordinal": 2175539,
+        "destinations": [
+          "H",
+          "T",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68295003,
+        "tonedSyllableTop1": 0.9349648884044605,
+        "assignment": "Q>H,A>T,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 3706523,
+        "destinations": [
+          "N",
+          "E",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68294810,
+        "tonedSyllableTop1": 0.9349622462166643,
+        "assignment": "Q>N,A>E,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 2295905,
+        "destinations": [
+          "H",
+          "C",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68294501,
+        "tonedSyllableTop1": 0.9349580159781721,
+        "assignment": "Q>H,A>C,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 944120,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "B",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68294420,
+        "tonedSyllableTop1": 0.9349569070807032,
+        "assignment": "Q>Y,A>V,O>N,P>B,L>R"
+      },
+      {
+        "ordinal": 2545994,
+        "destinations": [
+          "K",
+          "E",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68294246,
+        "tonedSyllableTop1": 0.934954525004659,
+        "assignment": "Q>K,A>E,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 545614,
+        "destinations": [
+          "R",
+          "C",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68293990,
+        "tonedSyllableTop1": 0.9349510203410539,
+        "assignment": "Q>R,A>C,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 4039919,
+        "destinations": [
+          "M",
+          "C",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68293412,
+        "tonedSyllableTop1": 0.9349431074677578,
+        "assignment": "Q>M,A>C,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 934874,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68293387,
+        "tonedSyllableTop1": 0.9349427652154525,
+        "assignment": "Q>Y,A>C,O>N,P>B,L>V"
+      },
+      {
+        "ordinal": 2317373,
+        "destinations": [
+          "H",
+          "N",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68293363,
+        "tonedSyllableTop1": 0.9349424366532395,
+        "assignment": "Q>H,A>N,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 971882,
+        "destinations": [
+          "Y",
+          "M",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68292675,
+        "tonedSyllableTop1": 0.9349330178698005,
+        "assignment": "Q>Y,A>M,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 27002,
+        "destinations": [
+          "W",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68292593,
+        "tonedSyllableTop1": 0.9349318952822395,
+        "assignment": "Q>W,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 795566,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "W",
+          "R"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68292537,
+        "tonedSyllableTop1": 0.9349311286370758,
+        "assignment": "Q>Y,A>E,O>N,P>W,L>R"
+      },
+      {
+        "ordinal": 805178,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "C",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68292340,
+        "tonedSyllableTop1": 0.9349284316889109,
+        "assignment": "Q>Y,A>R,O>N,P>C,L>V"
+      },
+      {
+        "ordinal": 400403,
+        "destinations": [
+          "R",
+          "E",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68291848,
+        "tonedSyllableTop1": 0.9349216961635447,
+        "assignment": "Q>R,A>E,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 3715795,
+        "destinations": [
+          "N",
+          "R",
+          "Y",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68291807,
+        "tonedSyllableTop1": 0.9349211348697641,
+        "assignment": "Q>N,A>R,O>Y,P>V,L>K"
+      },
+      {
+        "ordinal": 931352,
+        "destinations": [
+          "Y",
+          "C",
+          "H",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68291755,
+        "tonedSyllableTop1": 0.9349204229849694,
+        "assignment": "Q>Y,A>C,O>H,P>N,L>R"
+      },
+      {
+        "ordinal": 554875,
+        "destinations": [
+          "R",
+          "V",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68291508,
+        "tonedSyllableTop1": 0.934917041532194,
+        "assignment": "Q>R,A>V,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 2175554,
+        "destinations": [
+          "H",
+          "T",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68291488,
+        "tonedSyllableTop1": 0.9349167677303498,
+        "assignment": "Q>H,A>T,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 3715442,
+        "destinations": [
+          "N",
+          "R",
+          "Y",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68291192,
+        "tonedSyllableTop1": 0.9349127154630563,
+        "assignment": "Q>N,A>R,O>Y,P>W,L>V"
+      },
+      {
+        "ordinal": 805200,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "B"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68291130,
+        "tonedSyllableTop1": 0.9349118666773395,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>B"
+      },
+      {
+        "ordinal": 2685167,
+        "destinations": [
+          "K",
+          "C",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68290958,
+        "tonedSyllableTop1": 0.9349095119814798,
+        "assignment": "Q>K,A>C,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 3907346,
+        "destinations": [
+          "M",
+          "E",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68290448,
+        "tonedSyllableTop1": 0.9349025300344537,
+        "assignment": "Q>M,A>E,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 2166276,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "W"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68290439,
+        "tonedSyllableTop1": 0.9349024068236238,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>W"
+      },
+      {
+        "ordinal": 2158355,
+        "destinations": [
+          "H",
+          "R",
+          "E",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68289928,
+        "tonedSyllableTop1": 0.9348954111865057,
+        "assignment": "Q>H,A>R,O>E,P>Y,L>V"
+      },
+      {
+        "ordinal": 795934,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68289637,
+        "tonedSyllableTop1": 0.9348914273696731,
+        "assignment": "Q>Y,A>E,O>N,P>V,L>K"
+      },
+      {
+        "ordinal": 804838,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "W",
+          "K"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68289534,
+        "tonedSyllableTop1": 0.9348900172901757,
+        "assignment": "Q>Y,A>R,O>N,P>W,L>K"
+      },
+      {
+        "ordinal": 999407,
+        "destinations": [
+          "U",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68289328,
+        "tonedSyllableTop1": 0.934887197131181,
+        "assignment": "Q>U,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 940613,
+        "destinations": [
+          "Y",
+          "V",
+          "H",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68289273,
+        "tonedSyllableTop1": 0.9348864441761096,
+        "assignment": "Q>Y,A>V,O>H,P>N,L>R"
+      },
+      {
+        "ordinal": 795581,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68289022,
+        "tonedSyllableTop1": 0.9348830079629653,
+        "assignment": "Q>Y,A>E,O>N,P>W,L>V"
+      },
+      {
+        "ordinal": 931367,
+        "destinations": [
+          "Y",
+          "C",
+          "H",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68288240,
+        "tonedSyllableTop1": 0.9348723023108588,
+        "assignment": "Q>Y,A>C,O>H,P>N,L>V"
+      },
+      {
+        "ordinal": 2150375,
+        "destinations": [
+          "H",
+          "E",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68288166,
+        "tonedSyllableTop1": 0.9348712892440354,
+        "assignment": "Q>H,A>E,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 403175,
+        "destinations": [
+          "R",
+          "E",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68288153,
+        "tonedSyllableTop1": 0.9348711112728367,
+        "assignment": "Q>R,A>E,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 3845138,
+        "destinations": [
+          "N",
+          "C",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68288097,
+        "tonedSyllableTop1": 0.934870344627673,
+        "assignment": "Q>N,A>C,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 801692,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68288062,
+        "tonedSyllableTop1": 0.9348698654744458,
+        "assignment": "Q>Y,A>R,O>H,P>B,L>V"
+      },
+      {
+        "ordinal": 795797,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "H",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68287888,
+        "tonedSyllableTop1": 0.9348674833984016,
+        "assignment": "Q>Y,A>E,O>N,P>H,L>R"
+      },
+      {
+        "ordinal": 2166285,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "F"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68287755,
+        "tonedSyllableTop1": 0.934865662616138,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>F"
+      },
+      {
+        "ordinal": 3323903,
+        "destinations": [
+          "V",
+          "E",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68287620,
+        "tonedSyllableTop1": 0.9348638144536899,
+        "assignment": "Q>V,A>E,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 3916618,
+        "destinations": [
+          "M",
+          "R",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68287445,
+        "tonedSyllableTop1": 0.9348614186875536,
+        "assignment": "Q>M,A>R,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 3907361,
+        "destinations": [
+          "M",
+          "E",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68286933,
+        "tonedSyllableTop1": 0.9348544093603431,
+        "assignment": "Q>M,A>E,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 3715673,
+        "destinations": [
+          "N",
+          "R",
+          "Y",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 437,
+        "topWeight": 68286543,
+        "tonedSyllableTop1": 0.9348490702243821,
+        "assignment": "Q>N,A>R,O>Y,P>H,L>V"
+      },
+      {
+        "ordinal": 934534,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "R",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68286439,
+        "tonedSyllableTop1": 0.9348476464547925,
+        "assignment": "Q>Y,A>C,O>N,P>R,L>K"
+      },
+      {
+        "ordinal": 934586,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "U",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68286290,
+        "tonedSyllableTop1": 0.9348456066310535,
+        "assignment": "Q>Y,A>C,O>N,P>U,L>R"
+      },
+      {
+        "ordinal": 797303,
+        "destinations": [
+          "Y",
+          "R",
+          "E",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68286059,
+        "tonedSyllableTop1": 0.9348424442197535,
+        "assignment": "Q>Y,A>R,O>E,P>N,L>V"
+      },
+      {
+        "ordinal": 934670,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "F",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68285942,
+        "tonedSyllableTop1": 0.9348408424789653,
+        "assignment": "Q>Y,A>C,O>N,P>F,L>R"
+      },
+      {
+        "ordinal": 2166587,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68285859,
+        "tonedSyllableTop1": 0.934839706201312,
+        "assignment": "Q>H,A>R,O>N,P>B,L>V"
+      },
+      {
+        "ordinal": 959093,
+        "destinations": [
+          "Y",
+          "N",
+          "H",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68285799,
+        "tonedSyllableTop1": 0.9348388847957795,
+        "assignment": "Q>Y,A>N,O>H,P>V,L>R"
+      },
+      {
+        "ordinal": 907055,
+        "destinations": [
+          "Y",
+          "K",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68285313,
+        "tonedSyllableTop1": 0.9348322314109665,
+        "assignment": "Q>Y,A>K,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 2159699,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68285014,
+        "tonedSyllableTop1": 0.9348281380733964,
+        "assignment": "Q>H,A>R,O>Y,P>U,L>V"
+      },
+      {
+        "ordinal": 805069,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "H",
+          "K"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68284885,
+        "tonedSyllableTop1": 0.9348263720515015,
+        "assignment": "Q>Y,A>R,O>N,P>H,L>K"
+      },
+      {
+        "ordinal": 2159783,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "F",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68284666,
+        "tonedSyllableTop1": 0.934823373921308,
+        "assignment": "Q>H,A>R,O>Y,P>F,L>V"
+      },
+      {
+        "ordinal": 2539637,
+        "destinations": [
+          "K",
+          "E",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68284623,
+        "tonedSyllableTop1": 0.9348227852473431,
+        "assignment": "Q>K,A>E,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 3333175,
+        "destinations": [
+          "V",
+          "R",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68284617,
+        "tonedSyllableTop1": 0.9348227031067898,
+        "assignment": "Q>V,A>R,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 795812,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68284373,
+        "tonedSyllableTop1": 0.9348193627242911,
+        "assignment": "Q>Y,A>E,O>N,P>H,L>V"
+      },
+      {
+        "ordinal": 805202,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "M"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68284094,
+        "tonedSyllableTop1": 0.9348155431885651,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>M"
+      },
+      {
+        "ordinal": 804905,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "T",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68284082,
+        "tonedSyllableTop1": 0.9348153789074586,
+        "assignment": "Q>Y,A>R,O>N,P>T,L>V"
+      },
+      {
+        "ordinal": 943795,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "R",
+          "K"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68283957,
+        "tonedSyllableTop1": 0.9348136676459327,
+        "assignment": "Q>Y,A>V,O>N,P>R,L>K"
+      },
+      {
+        "ordinal": 943847,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "U",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68283808,
+        "tonedSyllableTop1": 0.9348116278221937,
+        "assignment": "Q>Y,A>V,O>N,P>U,L>R"
+      },
+      {
+        "ordinal": 1193888,
+        "destinations": [
+          "I",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68283722,
+        "tonedSyllableTop1": 0.9348104504742638,
+        "assignment": "Q>I,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 4046534,
+        "destinations": [
+          "M",
+          "C",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68283645,
+        "tonedSyllableTop1": 0.9348093963371638,
+        "assignment": "Q>M,A>C,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 943931,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "F",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68283460,
+        "tonedSyllableTop1": 0.9348068636701053,
+        "assignment": "Q>Y,A>V,O>N,P>F,L>R"
+      },
+      {
+        "ordinal": 2150717,
+        "destinations": [
+          "H",
+          "E",
+          "Y",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68283217,
+        "tonedSyllableTop1": 0.9348035369776988,
+        "assignment": "Q>H,A>E,O>Y,P>N,L>R"
+      },
+      {
+        "ordinal": 934601,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68282775,
+        "tonedSyllableTop1": 0.934797485956943,
+        "assignment": "Q>Y,A>C,O>N,P>U,L>V"
+      },
+      {
+        "ordinal": 934685,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "F",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68282427,
+        "tonedSyllableTop1": 0.9347927218048546,
+        "assignment": "Q>Y,A>C,O>N,P>F,L>V"
+      },
+      {
+        "ordinal": 934502,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "E",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68282043,
+        "tonedSyllableTop1": 0.9347874648094469,
+        "assignment": "Q>Y,A>C,O>N,P>E,L>R"
+      },
+      {
+        "ordinal": 2169197,
+        "destinations": [
+          "H",
+          "T",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68281865,
+        "tonedSyllableTop1": 0.9347850279730339,
+        "assignment": "Q>H,A>T,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 2295943,
+        "destinations": [
+          "H",
+          "C",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 420,
+        "topWeight": 68281844,
+        "tonedSyllableTop1": 0.9347847404810975,
+        "assignment": "Q>H,A>C,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 2548556,
+        "destinations": [
+          "K",
+          "R",
+          "Y",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68281005,
+        "tonedSyllableTop1": 0.9347732544937352,
+        "assignment": "Q>K,A>R,O>Y,P>W,L>V"
+      },
+      {
+        "ordinal": 539272,
+        "destinations": [
+          "R",
+          "C",
+          "Y",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 431,
+        "topWeight": 68280852,
+        "tonedSyllableTop1": 0.9347711599096273,
+        "assignment": "Q>R,A>C,O>Y,P>V,L>K"
+      },
+      {
+        "ordinal": 795944,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "B",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68280800,
+        "tonedSyllableTop1": 0.9347704480248326,
+        "assignment": "Q>Y,A>E,O>N,P>B,L>R"
+      },
+      {
+        "ordinal": 2159615,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "E",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68280767,
+        "tonedSyllableTop1": 0.9347699962517897,
+        "assignment": "Q>H,A>R,O>Y,P>E,L>V"
+      },
+      {
+        "ordinal": 792095,
+        "destinations": [
+          "Y",
+          "E",
+          "H",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68280602,
+        "tonedSyllableTop1": 0.9347677373865754,
+        "assignment": "Q>Y,A>E,O>H,P>R,L>V"
+      },
+      {
+        "ordinal": 538919,
+        "destinations": [
+          "R",
+          "C",
+          "Y",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68280237,
+        "tonedSyllableTop1": 0.9347627405029195,
+        "assignment": "Q>R,A>C,O>Y,P>W,L>V"
+      },
+      {
+        "ordinal": 2159989,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "N",
+          "K"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68280214,
+        "tonedSyllableTop1": 0.9347624256307987,
+        "assignment": "Q>H,A>R,O>Y,P>N,L>K"
+      },
+      {
+        "ordinal": 2150732,
+        "destinations": [
+          "H",
+          "E",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68279702,
+        "tonedSyllableTop1": 0.9347554163035883,
+        "assignment": "Q>H,A>E,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 943763,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "E",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68279561,
+        "tonedSyllableTop1": 0.934753486000587,
+        "assignment": "Q>Y,A>V,O>N,P>E,L>R"
+      },
+      {
+        "ordinal": 3715820,
+        "destinations": [
+          "N",
+          "R",
+          "Y",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68279455,
+        "tonedSyllableTop1": 0.9347520348508129,
+        "assignment": "Q>N,A>R,O>Y,P>B,L>V"
+      },
+      {
+        "ordinal": 3848252,
+        "destinations": [
+          "N",
+          "C",
+          "H",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68279453,
+        "tonedSyllableTop1": 0.9347520074706286,
+        "assignment": "Q>N,A>C,O>H,P>Y,L>R"
+      },
+      {
+        "ordinal": 804968,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "I",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68279423,
+        "tonedSyllableTop1": 0.9347515967678623,
+        "assignment": "Q>Y,A>R,O>N,P>I,L>V"
+      },
+      {
+        "ordinal": 2305204,
+        "destinations": [
+          "H",
+          "V",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68279362,
+        "tonedSyllableTop1": 0.9347507616722377,
+        "assignment": "Q>H,A>V,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 934517,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "E",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68278528,
+        "tonedSyllableTop1": 0.9347393441353363,
+        "assignment": "Q>Y,A>C,O>N,P>E,L>V"
+      },
+      {
+        "ordinal": 2156990,
+        "destinations": [
+          "H",
+          "E",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68278399,
+        "tonedSyllableTop1": 0.9347375781134415,
+        "assignment": "Q>H,A>E,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 926900,
+        "destinations": [
+          "Y",
+          "C",
+          "E",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68278066,
+        "tonedSyllableTop1": 0.9347330193127363,
+        "assignment": "Q>Y,A>C,O>E,P>V,L>R"
+      },
+      {
+        "ordinal": 2678252,
+        "destinations": [
+          "K",
+          "C",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 431,
+        "topWeight": 68277910,
+        "tonedSyllableTop1": 0.9347308836583519,
+        "assignment": "Q>K,A>C,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 934901,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "M",
+          "R"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68277892,
+        "tonedSyllableTop1": 0.9347306372366921,
+        "assignment": "Q>Y,A>C,O>N,P>M,L>R"
+      },
+      {
+        "ordinal": 406699,
+        "destinations": [
+          "R",
+          "E",
+          "N",
+          "Y",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68277888,
+        "tonedSyllableTop1": 0.9347305824763233,
+        "assignment": "Q>R,A>E,O>N,P>Y,L>K"
+      },
+      {
+        "ordinal": 805216,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "B",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68277797,
+        "tonedSyllableTop1": 0.9347293366779323,
+        "assignment": "Q>Y,A>R,O>N,P>B,L>K"
+      },
+      {
+        "ordinal": 801419,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68277450,
+        "tonedSyllableTop1": 0.9347245862159362,
+        "assignment": "Q>Y,A>R,O>H,P>U,L>V"
+      },
+      {
+        "ordinal": 582662,
+        "destinations": [
+          "R",
+          "M",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68277411,
+        "tonedSyllableTop1": 0.9347240523023401,
+        "assignment": "Q>R,A>M,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 3901004,
+        "destinations": [
+          "M",
+          "E",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68277310,
+        "tonedSyllableTop1": 0.9347226696030272,
+        "assignment": "Q>M,A>E,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 2159934,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "V",
+          "W"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68277301,
+        "tonedSyllableTop1": 0.9347225463921973,
+        "assignment": "Q>H,A>R,O>Y,P>V,L>W"
+      },
+      {
+        "ordinal": 795959,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68277285,
+        "tonedSyllableTop1": 0.9347223273507219,
+        "assignment": "Q>Y,A>E,O>N,P>B,L>V"
+      },
+      {
+        "ordinal": 801503,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "F",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68277102,
+        "tonedSyllableTop1": 0.934719822063848,
+        "assignment": "Q>Y,A>R,O>H,P>F,L>V"
+      },
+      {
+        "ordinal": 3857513,
+        "destinations": [
+          "N",
+          "V",
+          "H",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68276971,
+        "tonedSyllableTop1": 0.9347180286617687,
+        "assignment": "Q>N,A>V,O>H,P>Y,L>R"
+      },
+      {
+        "ordinal": 2160014,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "M",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68276616,
+        "tonedSyllableTop1": 0.934713168679035,
+        "assignment": "Q>H,A>R,O>Y,P>M,L>V"
+      },
+      {
+        "ordinal": 2548787,
+        "destinations": [
+          "K",
+          "R",
+          "Y",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68276356,
+        "tonedSyllableTop1": 0.9347096092550609,
+        "assignment": "Q>K,A>R,O>Y,P>H,L>V"
+      },
+      {
+        "ordinal": 3848267,
+        "destinations": [
+          "N",
+          "C",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68275938,
+        "tonedSyllableTop1": 0.9347038867965181,
+        "assignment": "Q>N,A>C,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 610445,
+        "destinations": [
+          "T",
+          "R",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68275718,
+        "tonedSyllableTop1": 0.9347008749762323,
+        "assignment": "Q>T,A>R,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 792437,
+        "destinations": [
+          "Y",
+          "E",
+          "H",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68275653,
+        "tonedSyllableTop1": 0.9346999851202388,
+        "assignment": "Q>Y,A>E,O>H,P>N,L>R"
+      },
+      {
+        "ordinal": 539150,
+        "destinations": [
+          "R",
+          "C",
+          "Y",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68275588,
+        "tonedSyllableTop1": 0.9346990952642452,
+        "assignment": "Q>R,A>C,O>Y,P>H,L>V"
+      },
+      {
+        "ordinal": 1906970,
+        "destinations": [
+          "F",
+          "C",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68275562,
+        "tonedSyllableTop1": 0.9346987393218479,
+        "assignment": "Q>F,A>C,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 944162,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "M",
+          "R"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68275410,
+        "tonedSyllableTop1": 0.9346966584278322,
+        "assignment": "Q>Y,A>V,O>N,P>M,L>R"
+      },
+      {
+        "ordinal": 2166314,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68275247,
+        "tonedSyllableTop1": 0.9346944269428024,
+        "assignment": "Q>H,A>R,O>N,P>U,L>V"
+      },
+      {
+        "ordinal": 2166277,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "E"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68275097,
+        "tonedSyllableTop1": 0.9346923734289713,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>E"
+      },
+      {
+        "ordinal": 934836,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "V",
+          "W"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68275062,
+        "tonedSyllableTop1": 0.934691894275744,
+        "assignment": "Q>Y,A>C,O>N,P>V,L>W"
+      },
+      {
+        "ordinal": 2166398,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "F",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68274899,
+        "tonedSyllableTop1": 0.9346896627907141,
+        "assignment": "Q>H,A>R,O>N,P>F,L>V"
+      },
+      {
+        "ordinal": 2546252,
+        "destinations": [
+          "K",
+          "E",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68274856,
+        "tonedSyllableTop1": 0.9346890741167492,
+        "assignment": "Q>K,A>E,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 2159943,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "V",
+          "F"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68274617,
+        "tonedSyllableTop1": 0.9346858021847114,
+        "assignment": "Q>H,A>R,O>Y,P>V,L>F"
+      },
+      {
+        "ordinal": 805184,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68274441,
+        "tonedSyllableTop1": 0.9346833927284829,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 934916,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "M",
+          "V"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68274377,
+        "tonedSyllableTop1": 0.9346825165625816,
+        "assignment": "Q>Y,A>C,O>N,P>M,L>V"
+      },
+      {
+        "ordinal": 3910276,
+        "destinations": [
+          "M",
+          "R",
+          "Y",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68274307,
+        "tonedSyllableTop1": 0.934681558256127,
+        "assignment": "Q>M,A>R,O>Y,P>V,L>K"
+      },
+      {
+        "ordinal": 810917,
+        "destinations": [
+          "Y",
+          "T",
+          "H",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68274301,
+        "tonedSyllableTop1": 0.9346814761155738,
+        "assignment": "Q>Y,A>T,O>H,P>V,L>R"
+      },
+      {
+        "ordinal": 934565,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68274190,
+        "tonedSyllableTop1": 0.9346799565153388,
+        "assignment": "Q>Y,A>C,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 3714203,
+        "destinations": [
+          "N",
+          "R",
+          "E",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68273757,
+        "tonedSyllableTop1": 0.9346740287054127,
+        "assignment": "Q>N,A>R,O>E,P>Y,L>V"
+      },
+      {
+        "ordinal": 3909923,
+        "destinations": [
+          "M",
+          "R",
+          "Y",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68273692,
+        "tonedSyllableTop1": 0.9346731388494192,
+        "assignment": "Q>M,A>R,O>Y,P>W,L>V"
+      },
+      {
+        "ordinal": 2159678,
+        "destinations": [
+          "H",
+          "R",
+          "Y",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68273653,
+        "tonedSyllableTop1": 0.9346726049358232,
+        "assignment": "Q>H,A>R,O>Y,P>Y,L>V"
+      },
+      {
+        "ordinal": 801335,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "E",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68273203,
+        "tonedSyllableTop1": 0.9346664443943296,
+        "assignment": "Q>Y,A>R,O>H,P>E,L>V"
+      },
+      {
+        "ordinal": 1916231,
+        "destinations": [
+          "F",
+          "V",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68273080,
+        "tonedSyllableTop1": 0.934664760512988,
+        "assignment": "Q>F,A>V,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 2678594,
+        "destinations": [
+          "K",
+          "C",
+          "Y",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68272961,
+        "tonedSyllableTop1": 0.9346631313920153,
+        "assignment": "Q>K,A>C,O>Y,P>N,L>R"
+      },
+      {
+        "ordinal": 801709,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "N",
+          "K"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68272650,
+        "tonedSyllableTop1": 0.9346588737733387,
+        "assignment": "Q>Y,A>R,O>H,P>N,L>K"
+      },
+      {
+        "ordinal": 934845,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "V",
+          "F"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68272378,
+        "tonedSyllableTop1": 0.9346551500682582,
+        "assignment": "Q>Y,A>C,O>N,P>V,L>F"
+      },
+      {
+        "ordinal": 2166286,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "G"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68272230,
+        "tonedSyllableTop1": 0.9346531239346113,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>G"
+      },
+      {
+        "ordinal": 792452,
+        "destinations": [
+          "Y",
+          "E",
+          "H",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68272138,
+        "tonedSyllableTop1": 0.9346518644461282,
+        "assignment": "Q>Y,A>E,O>H,P>N,L>V"
+      },
+      {
+        "ordinal": 2175812,
+        "destinations": [
+          "H",
+          "T",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68272098,
+        "tonedSyllableTop1": 0.93465131684244,
+        "assignment": "Q>H,A>T,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 1906985,
+        "destinations": [
+          "F",
+          "C",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68272047,
+        "tonedSyllableTop1": 0.9346506186477374,
+        "assignment": "Q>F,A>C,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 3706223,
+        "destinations": [
+          "N",
+          "E",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68271995,
+        "tonedSyllableTop1": 0.9346499067629425,
+        "assignment": "Q>N,A>E,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 943826,
+        "destinations": [
+          "Y",
+          "V",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68271708,
+        "tonedSyllableTop1": 0.9346459777064788,
+        "assignment": "Q>Y,A>V,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 2289233,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "W",
+          "R"
+        ],
+        "occupiedBuckets": 425,
+        "topWeight": 68271606,
+        "tonedSyllableTop1": 0.9346445813170736,
+        "assignment": "Q>H,A>C,O>Y,P>W,L>R"
+      },
+      {
+        "ordinal": 805241,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68271308,
+        "tonedSyllableTop1": 0.9346405016695958,
+        "assignment": "Q>Y,A>R,O>N,P>N,L>V"
+      },
+      {
+        "ordinal": 2555171,
+        "destinations": [
+          "K",
+          "R",
+          "N",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68271238,
+        "tonedSyllableTop1": 0.9346395433631411,
+        "assignment": "Q>K,A>R,O>N,P>W,L>V"
+      },
+      {
+        "ordinal": 545887,
+        "destinations": [
+          "R",
+          "C",
+          "N",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68271085,
+        "tonedSyllableTop1": 0.9346374487790334,
+        "assignment": "Q>R,A>C,O>N,P>V,L>K"
+      },
+      {
+        "ordinal": 2166230,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "E",
+          "V"
+        ],
+        "occupiedBuckets": 429,
+        "topWeight": 68271000,
+        "tonedSyllableTop1": 0.9346362851211957,
+        "assignment": "Q>H,A>R,O>N,P>E,L>V"
+      },
+      {
+        "ordinal": 934580,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68270675,
+        "tonedSyllableTop1": 0.9346318358412282,
+        "assignment": "Q>Y,A>C,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 4039619,
+        "destinations": [
+          "M",
+          "C",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68270597,
+        "tonedSyllableTop1": 0.934630768014036,
+        "assignment": "Q>M,A>C,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 2317073,
+        "destinations": [
+          "H",
+          "N",
+          "Y",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 437,
+        "topWeight": 68270548,
+        "tonedSyllableTop1": 0.9346300971995177,
+        "assignment": "Q>H,A>N,O>Y,P>R,L>V"
+      },
+      {
+        "ordinal": 569873,
+        "destinations": [
+          "R",
+          "N",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68270535,
+        "tonedSyllableTop1": 0.9346299192283191,
+        "assignment": "Q>R,A>N,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 2687855,
+        "destinations": [
+          "K",
+          "V",
+          "Y",
+          "N",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68270479,
+        "tonedSyllableTop1": 0.9346291525831555,
+        "assignment": "Q>K,A>V,O>Y,P>N,L>R"
+      },
+      {
+        "ordinal": 545534,
+        "destinations": [
+          "R",
+          "C",
+          "N",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68270470,
+        "tonedSyllableTop1": 0.9346290293723256,
+        "assignment": "Q>R,A>C,O>N,P>W,L>V"
+      },
+      {
+        "ordinal": 805187,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "U"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68270425,
+        "tonedSyllableTop1": 0.9346284133181763,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>U"
+      },
+      {
+        "ordinal": 1771031,
+        "destinations": [
+          "F",
+          "R",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68270417,
+        "tonedSyllableTop1": 0.9346283037974386,
+        "assignment": "Q>F,A>R,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 795619,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "R",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68270337,
+        "tonedSyllableTop1": 0.9346272085900619,
+        "assignment": "Q>Y,A>E,O>N,P>R,L>K"
+      },
+      {
+        "ordinal": 795671,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "U",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68270188,
+        "tonedSyllableTop1": 0.934625168766323,
+        "assignment": "Q>Y,A>E,O>N,P>U,L>R"
+      },
+      {
+        "ordinal": 517835,
+        "destinations": [
+          "R",
+          "K",
+          "N",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68270049,
+        "tonedSyllableTop1": 0.9346232658435061,
+        "assignment": "Q>R,A>K,O>N,P>Y,L>V"
+      },
+      {
+        "ordinal": 971582,
+        "destinations": [
+          "Y",
+          "M",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68269860,
+        "tonedSyllableTop1": 0.9346206784160788,
+        "assignment": "Q>Y,A>M,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 795755,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "F",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68269840,
+        "tonedSyllableTop1": 0.9346204046142347,
+        "assignment": "Q>Y,A>E,O>N,P>F,L>R"
+      },
+      {
+        "ordinal": 801654,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "V",
+          "W"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68269737,
+        "tonedSyllableTop1": 0.9346189945347372,
+        "assignment": "Q>Y,A>R,O>H,P>V,L>W"
+      },
+      {
+        "ordinal": 2678609,
+        "destinations": [
+          "K",
+          "C",
+          "Y",
+          "N",
+          "V"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68269446,
+        "tonedSyllableTop1": 0.9346150107179048,
+        "assignment": "Q>K,A>C,O>Y,P>N,L>V"
+      },
+      {
+        "ordinal": 2548934,
+        "destinations": [
+          "K",
+          "R",
+          "Y",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 431,
+        "topWeight": 68269268,
+        "tonedSyllableTop1": 0.9346125738814918,
+        "assignment": "Q>K,A>R,O>Y,P>B,L>V"
+      },
+      {
+        "ordinal": 2681366,
+        "destinations": [
+          "K",
+          "C",
+          "H",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68269266,
+        "tonedSyllableTop1": 0.9346125465013073,
+        "assignment": "Q>K,A>C,O>H,P>Y,L>R"
+      },
+      {
+        "ordinal": 2298494,
+        "destinations": [
+          "H",
+          "V",
+          "Y",
+          "W",
+          "R"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68269124,
+        "tonedSyllableTop1": 0.9346106025082138,
+        "assignment": "Q>H,A>V,O>Y,P>W,L>R"
+      },
+      {
+        "ordinal": 801734,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "M",
+          "V"
+        ],
+        "occupiedBuckets": 435,
+        "topWeight": 68269052,
+        "tonedSyllableTop1": 0.9346096168215748,
+        "assignment": "Q>Y,A>R,O>H,P>M,L>V"
+      },
+      {
+        "ordinal": 3910154,
+        "destinations": [
+          "M",
+          "R",
+          "Y",
+          "H",
+          "V"
+        ],
+        "occupiedBuckets": 436,
+        "topWeight": 68269043,
+        "tonedSyllableTop1": 0.934609493610745,
+        "assignment": "Q>M,A>R,O>Y,P>H,L>V"
+      },
+      {
+        "ordinal": 3715547,
+        "destinations": [
+          "N",
+          "R",
+          "Y",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68268843,
+        "tonedSyllableTop1": 0.9346067555923034,
+        "assignment": "Q>N,A>R,O>Y,P>U,L>V"
+      },
+      {
+        "ordinal": 2332976,
+        "destinations": [
+          "H",
+          "M",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68268780,
+        "tonedSyllableTop1": 0.9346058931164943,
+        "assignment": "Q>H,A>M,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 2289601,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "V",
+          "K"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68268706,
+        "tonedSyllableTop1": 0.9346048800496709,
+        "assignment": "Q>H,A>C,O>Y,P>V,L>K"
+      },
+      {
+        "ordinal": 2564501,
+        "destinations": [
+          "K",
+          "T",
+          "N",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68268645,
+        "tonedSyllableTop1": 0.9346040449540463,
+        "assignment": "Q>K,A>T,O>N,P>Y,L>R"
+      },
+      {
+        "ordinal": 539297,
+        "destinations": [
+          "R",
+          "C",
+          "Y",
+          "B",
+          "V"
+        ],
+        "occupiedBuckets": 431,
+        "topWeight": 68268500,
+        "tonedSyllableTop1": 0.9346020598906761,
+        "assignment": "Q>R,A>C,O>Y,P>B,L>V"
+      },
+      {
+        "ordinal": 3715631,
+        "destinations": [
+          "N",
+          "R",
+          "Y",
+          "F",
+          "V"
+        ],
+        "occupiedBuckets": 434,
+        "topWeight": 68268495,
+        "tonedSyllableTop1": 0.934601991440215,
+        "assignment": "Q>N,A>R,O>Y,P>F,L>V"
+      },
+      {
+        "ordinal": 2684867,
+        "destinations": [
+          "K",
+          "C",
+          "N",
+          "R",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68268143,
+        "tonedSyllableTop1": 0.934597172527758,
+        "assignment": "Q>K,A>C,O>N,P>R,L>V"
+      },
+      {
+        "ordinal": 2289248,
+        "destinations": [
+          "H",
+          "C",
+          "Y",
+          "W",
+          "V"
+        ],
+        "occupiedBuckets": 428,
+        "topWeight": 68268091,
+        "tonedSyllableTop1": 0.9345964606429631,
+        "assignment": "Q>H,A>C,O>Y,P>W,L>V"
+      },
+      {
+        "ordinal": 805094,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "J",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68267779,
+        "tonedSyllableTop1": 0.9345921893341943,
+        "assignment": "Q>Y,A>R,O>N,P>J,L>V"
+      },
+      {
+        "ordinal": 3907619,
+        "destinations": [
+          "M",
+          "E",
+          "N",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68267543,
+        "tonedSyllableTop1": 0.9345889584724332,
+        "assignment": "Q>M,A>E,O>N,P>V,L>R"
+      },
+      {
+        "ordinal": 2166549,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "V",
+          "W"
+        ],
+        "occupiedBuckets": 430,
+        "topWeight": 68267534,
+        "tonedSyllableTop1": 0.9345888352616033,
+        "assignment": "Q>H,A>R,O>N,P>V,L>W"
+      },
+      {
+        "ordinal": 805185,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "V",
+          "T"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68267427,
+        "tonedSyllableTop1": 0.9345873704217371,
+        "assignment": "Q>Y,A>R,O>N,P>V,L>T"
+      },
+      {
+        "ordinal": 934754,
+        "destinations": [
+          "Y",
+          "C",
+          "N",
+          "K",
+          "R"
+        ],
+        "occupiedBuckets": 423,
+        "topWeight": 68267382,
+        "tonedSyllableTop1": 0.9345867543675878,
+        "assignment": "Q>Y,A>C,O>N,P>K,L>R"
+      },
+      {
+        "ordinal": 2166294,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "Y",
+          "B"
+        ],
+        "occupiedBuckets": 427,
+        "topWeight": 68267235,
+        "tonedSyllableTop1": 0.9345847419240332,
+        "assignment": "Q>H,A>R,O>N,P>Y,L>B"
+      },
+      {
+        "ordinal": 804943,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "U",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68267185,
+        "tonedSyllableTop1": 0.9345840574194229,
+        "assignment": "Q>Y,A>R,O>N,P>U,L>K"
+      },
+      {
+        "ordinal": 801663,
+        "destinations": [
+          "Y",
+          "R",
+          "H",
+          "V",
+          "F"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68267053,
+        "tonedSyllableTop1": 0.9345822503272514,
+        "assignment": "Q>Y,A>R,O>H,P>V,L>F"
+      },
+      {
+        "ordinal": 2706335,
+        "destinations": [
+          "K",
+          "N",
+          "Y",
+          "V",
+          "R"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68267005,
+        "tonedSyllableTop1": 0.9345815932028254,
+        "assignment": "Q>K,A>N,O>Y,P>V,L>R"
+      },
+      {
+        "ordinal": 2166629,
+        "destinations": [
+          "H",
+          "R",
+          "N",
+          "M",
+          "V"
+        ],
+        "occupiedBuckets": 431,
+        "topWeight": 68266849,
+        "tonedSyllableTop1": 0.934579457548441,
+        "assignment": "Q>H,A>R,O>N,P>M,L>V"
+      },
+      {
+        "ordinal": 805027,
+        "destinations": [
+          "Y",
+          "R",
+          "N",
+          "F",
+          "K"
+        ],
+        "occupiedBuckets": 424,
+        "topWeight": 68266837,
+        "tonedSyllableTop1": 0.9345792932673345,
+        "assignment": "Q>Y,A>R,O>N,P>F,L>K"
+      },
+      {
+        "ordinal": 2690627,
+        "destinations": [
+          "K",
+          "V",
+          "H",
+          "Y",
+          "R"
+        ],
+        "occupiedBuckets": 432,
+        "topWeight": 68266784,
+        "tonedSyllableTop1": 0.9345785676924475,
+        "assignment": "Q>K,A>V,O>H,P>Y,L>R"
+      },
+      {
+        "ordinal": 1773803,
+        "destinations": [
+          "F",
+          "R",
+          "H",
+          "Y",
+          "V"
+        ],
+        "occupiedBuckets": 433,
+        "topWeight": 68266722,
+        "tonedSyllableTop1": 0.9345777189067306,
+        "assignment": "Q>F,A>R,O>H,P>Y,L>V"
+      },
+      {
+        "ordinal": 795686,
+        "destinations": [
+          "Y",
+          "E",
+          "N",
+          "U",
+          "V"
+        ],
+        "occupiedBuckets": 426,
+        "topWeight": 68266673,
+        "tonedSyllableTop1": 0.9345770480922124,
+        "assignment": "Q>Y,A>E,O>N,P>U,L>V"
+      }
+    ]
+  }
+}

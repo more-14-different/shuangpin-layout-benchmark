@@ -30,6 +30,19 @@ function parsePolicy(value) {
   return {word2, word3, word4};
 }
 
+function sampleCorpus(data, words, count) {
+  if (!(count > 0)) return {data, words};
+  return {
+    data: {
+      ...data,
+      characters: [...data.characters].filter(row => row[4] && row[3] > 0)
+        .sort((left, right) => right[3] - left[3]).slice(0, count),
+    },
+    words: Object.fromEntries(Object.entries(words).map(([kind, rows]) => [kind,
+      [...rows].sort((left, right) => right.weight - left.weight).slice(0, count)])),
+  };
+}
+
 function orderedPairs(length) {
   const result = [];
   for (let first = 1; first <= length; first++) for (let second = 1; second <= length; second++) {
@@ -259,8 +272,11 @@ function main() {
   const output = path.resolve(args.output || path.join(root, 'research/notes/2026-11-09-ckt-v51-toned-2121-ckt-search.json'));
   const forcedShapeKeysByMeaning = args.shape ? String(args.shape).toUpperCase() : null;
   const forcedPolicy = parsePolicy(args.policy);
-  const data = scorer.loadPayload(html);
-  const words = scorer.multiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), data, 0.99);
+  const fullData = scorer.loadPayload(html);
+  const fullWords = scorer.multiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), fullData, 0.99);
+  const sampled = sampleCorpus(fullData, fullWords, Number(args.sample || 0));
+  const data = sampled.data;
+  const words = sampled.words;
   const strokes = scorer.strokeOptions(path.join(snow, 'rime-stroke/stroke.dict.yaml'));
   const motor = projectedMotor(data);
   const layouts = JSON.parse(fs.readFileSync(layoutsFile, 'utf8'));
@@ -280,6 +296,7 @@ function main() {
       kind: 'fixed-policy',
       policy: forcedPolicy,
       shapeKeysByMeaning: forcedShapeKeysByMeaning || 'layout recommendation or QAOPL fallback',
+      sampleRowsPerTrack: Number(args.sample || 0) || null,
     } : {kind: 'exhaustive-word-auxiliary-policy', combinationsPerLayout: 144},
     reference: {id: 'S005', policy: REFERENCE_POLICY, tracks: reference.tracks},
     results,
@@ -303,4 +320,5 @@ module.exports = {
   projectedMotor,
   scoreFixedPolicy,
   scoreLayout,
+  sampleCorpus,
 };

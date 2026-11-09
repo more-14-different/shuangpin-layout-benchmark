@@ -107,6 +107,38 @@ test('Pindu11 fixed-policy screen is complete and reaches the high-performance r
   assert.ok(score.results[0].score < 9.21);
 });
 
+test('Pindu11 low-MD projection exhausts 21^5 and freezes auditable M/D bounds', () => {
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-exhaustive.json',
+    import.meta.url), 'utf8'));
+  assert.equal(report.firstProjection.exactSearchSpace, 21 ** 5);
+  assert.equal(report.enumeration.evaluatedAssignments, 21 ** 5);
+  assert.equal(report.enumeration.maximumOccupied, 437);
+  assert.equal(report.memoryAndDisorderAudit.lowerM.total, 24);
+  assert.equal(report.memoryAndDisorderAudit.conservativeMGuard.total, 26);
+  assert.equal(report.memoryAndDisorderAudit.ordinaryFamilyDMinimum, 3);
+  assert.deepEqual(report.memoryAndDisorderAudit.forcedOrdinaryFamilies, ['q', 'p', 'l']);
+});
+
+test('Pindu11 low-MD CKT champion retains the upstream first grammar', () => {
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu11-lowmd-column-finalists.json',
+    import.meta.url), 'utf8'));
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-column-full.json',
+    import.meta.url), 'utf8'));
+  const champion = layouts.layouts.find(value =>
+    value.id === 'LOWMD-pindu11-570133-C0412356');
+  assert.ok(champion);
+  assert.deepEqual(champion.forbiddenSourceProjection,
+    {Q: 'R', A: 'N', O: 'H', P: 'V', L: 'Y'});
+  assert.deepEqual(champion.columnOrder, [0, 4, 1, 2, 3, 5, 6]);
+  assert.equal(champion.tonedCodes.length, 1407);
+  assert.ok(champion.tonedCodes.every(Boolean));
+  assert.equal(report.results[0].id, champion.id);
+  assert.ok(report.results[0].score < 9.542);
+});
+
 test('auxiliary-order refinement renames only the frozen QAOPL auxiliary domain', () => {
   assert.equal(remapAuxiliaryKeys('WZQAOPL', 'QOLAP'), 'WZQOLAP');
   assert.equal(remapAuxiliaryKeys('WSDF', 'QOLAP'), 'WSDF');
