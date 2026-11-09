@@ -15,6 +15,16 @@ const {
   guardRecord,
 } = require('../tools/search_toned_2121_constrained_ckt.js');
 const {traditionalOnsetD} = require('../tools/search_toned_2121_pindu11_lowmd.js');
+const {reorderColumns} = require('../tools/optimize_toned_2121_pindu11_lowmd_columns.js');
+const {buildToned2121Contract} = require('../tools/toned_2121_contract.js');
+const {
+  partitionGroups,
+  setPartitions,
+} = require('../tools/search_toned_2121_pindu11_rhyme_partitions.js');
+const {
+  currentRawAssignment,
+  rawRhymeInventory,
+} = require('../tools/search_toned_2121_pindu16_rhyme.js');
 
 const seeds = JSON.parse(fs.readFileSync(new URL(
   '../research/config/ckt-v51-toned-2121-seeds.json', import.meta.url), 'utf8'));
@@ -120,6 +130,63 @@ test('Pindu11 low-MD projection exhausts 21^5 and freezes auditable M/D bounds',
   assert.equal(report.memoryAndDisorderAudit.traditionalOnsetDMinimum, 11);
   assert.equal(report.enumeration.minimumDExactSearchSpace, 2 * 21 ** 4);
   assert.deepEqual(report.memoryAndDisorderAudit.forcedOccupiedKeyFamilies, ['q', 'p', 'l']);
+});
+
+test('Pindu11 exhaustive rhyme partitions cover S(11, 7)', () => {
+  let first;
+  let last;
+  const count = setPartitions(11, 7, (labels, ordinal) => {
+    if (ordinal === 0) first = [...labels];
+    last = [...labels];
+  });
+  assert.equal(count, 63987);
+  assert.equal(partitionGroups(first).length, 7);
+  assert.equal(partitionGroups(last).length, 7);
+  assert.equal(new Set(first).size, 7);
+  assert.equal(new Set(last).size, 7);
+});
+
+test('raw-rhyme search removes all three Pindu11 normalizations', () => {
+  const raw = rawRhymeInventory(seeds);
+  assert.equal(raw.rhymes.length, 16);
+  const assignment = currentRawAssignment(raw.rhymes);
+  assert.equal(assignment.length, 16);
+  assert.equal(new Set(assignment).size, 7);
+  assert.equal(assignment[raw.rhymes.indexOf('_')], assignment[raw.rhymes.indexOf('er')]);
+  assert.equal(assignment[raw.rhymes.indexOf('e')], assignment[raw.rhymes.indexOf('o')]);
+});
+
+test('column refinement records the effective logical-to-physical composition', () => {
+  const layout = {id: 'base', columnOrder: [4, 0, 6, 5, 2, 1, 3], tonedCodes: ['Y']};
+  const refined = reorderColumns(layout, [0, 2, 3, 4, 6, 5, 1], buildToned2121Contract());
+  assert.deepEqual(refined.columnRemap, [0, 2, 3, 4, 6, 5, 1]);
+  assert.deepEqual(refined.effectiveColumnOrder, [6, 0, 1, 5, 3, 2, 4]);
+});
+
+test('low-fragment rhyme search keeps the exact 11-rhyme audit and raw-16 frontier', () => {
+  const exhaustive = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-10-ckt-v51-toned-2121-pindu11-dmin-rhyme-partitions.json',
+    import.meta.url), 'utf8'));
+  assert.equal(exhaustive.exactUnlabelledPartitionCount, 63987);
+  assert.equal(exhaustive.exactEvaluatedBasePartitionPairs, 8 * 63987);
+  assert.deepEqual(exhaustive.firstConstraint,
+    {traditionalOnsetD: 11, onsetKeyIncidences: 27, onsetFragmentation: 9});
+
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu16-dmin-rhyme-column-finalists.json',
+    import.meta.url), 'utf8'));
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-10-ckt-v51-toned-2121-pindu16-dmin-rhyme-column-full.json',
+    import.meta.url), 'utf8'));
+  const champion = layouts.layouts.find(value => value.id === report.results[0].id);
+  assert.equal(report.results[0].score, 9.557279201128114);
+  assert.equal(champion.memoryAudit.traditionalOnsetD, 11);
+  assert.equal(champion.memoryAudit.onsetFragmentation, 9);
+  assert.deepEqual(champion.effectiveColumnOrder, [6, 0, 1, 5, 3, 2, 4]);
+  assert.deepEqual(champion.rawRhymeGroups, [
+    ['_'], ['a', 'er', 'ou'], ['ai', 'ei', 'n'], ['an', 'ong'],
+    ['ang', 'o'], ['ao', 'en'], ['e', 'eng', 'ng'],
+  ]);
 });
 
 test('Pindu11 low-MD CKT champion retains the upstream first grammar', () => {

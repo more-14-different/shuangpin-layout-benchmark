@@ -40,11 +40,17 @@ function reorderColumns(layout, order, contract) {
   for (const row of rows) for (let column = 0; column < 7; column++) {
     replacement.set(row[column], row[order[column]]);
   }
+  const sourceColumnOrder = layout.effectiveColumnOrder || layout.columnOrder;
+  const effectiveColumnOrder = Array.isArray(sourceColumnOrder)
+    ? sourceColumnOrder.map(column => order[column])
+    : [...order];
   return {
     ...layout,
     id: `${layout.id}-C${order.join('')}`,
     parentId: layout.id,
     columnOrder: order,
+    columnRemap: order,
+    effectiveColumnOrder,
     tonedCodes: layout.tonedCodes.map(code => code[0] + replacement.get(code[1])),
   };
 }
@@ -67,12 +73,40 @@ function main() {
   const baseCount = Number(args.bases || 8);
   const retainPerBase = Number(args.retain || 4);
   const sampleCount = Number(args.sample || 120);
+  const dedupeLogical = Boolean(args['dedupe-logical']);
+  const includedPartition = args['include-partition'] === undefined
+    ? null
+    : Number(args['include-partition']);
 
   const layouts = JSON.parse(fs.readFileSync(layoutsFile, 'utf8'));
   const byId = new Map(layouts.layouts.map(value => [value.id, value]));
   const ranking = reports.flatMap(file => JSON.parse(fs.readFileSync(file, 'utf8')).results)
     .sort((left, right) => left.score - right.score);
-  const bases = ranking.slice(0, baseCount).map(value => byId.get(value.id));
+  const bases = [];
+  const logicalKeys = new Set();
+  for (const value of ranking) {
+    const layout = byId.get(value.id);
+    if (!layout) continue;
+    const key = dedupeLogical
+      ? `${layout.assignment || ''}\0${layout.rhymePartitionSignature || layout.id}`
+      : layout.id;
+    if (logicalKeys.has(key)) continue;
+    logicalKeys.add(key);
+    bases.push(layout);
+    if (bases.length === baseCount) break;
+  }
+  if (includedPartition !== null) {
+    const includedAssignments = new Set();
+    for (const layout of layouts.layouts) {
+      if (layout.rhymePartitionOrdinal !== includedPartition ||
+        includedAssignments.has(layout.assignment)) continue;
+      includedAssignments.add(layout.assignment);
+      const key = `${layout.assignment || ''}\0${layout.rhymePartitionSignature || layout.id}`;
+      if (logicalKeys.has(key)) continue;
+      logicalKeys.add(key);
+      bases.push(layout);
+    }
+  }
   if (bases.some(value => !value)) throw new Error('ranked base layout missing');
 
   const fullData = scorer.loadPayload(html);
@@ -126,9 +160,12 @@ function main() {
     fixedPolicy: FIXED_POLICY,
     fixedShapeKeysByMeaning: FIXED_SHAPE_KEYS_BY_MEANING,
     sampleRowsPerTrack: sampleCount,
-    baseCount,
+    baseCount: bases.length,
+    rankedBaseCount: baseCount,
+    dedupeLogical,
+    includedPartition,
     columnOrdersPerBase: orders.length,
-    evaluatedLayouts: baseCount * orders.length,
+    evaluatedLayouts: bases.length * orders.length,
     retainedPerBase: retainPerBase,
     baseAudit,
   };

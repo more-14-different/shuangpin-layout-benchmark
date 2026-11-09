@@ -1,0 +1,3768 @@
+{
+  "version": "ckt-v5.1-toned-2121-pindu16-dmin-rhyme-search-1",
+  "rawRhymes": [
+    "_",
+    "a",
+    "ai",
+    "an",
+    "ang",
+    "ao",
+    "e",
+    "ei",
+    "en",
+    "eng",
+    "er",
+    "n",
+    "ng",
+    "o",
+    "ong",
+    "ou"
+  ],
+  "rawRhymeCount": 16,
+  "normalizedRhymeCount": 11,
+  "normalizationRemoved": {
+    "_": [
+      "_",
+      "er"
+    ],
+    "e": [
+      "e",
+      "o"
+    ],
+    "en": [
+      "en",
+      "eng",
+      "n",
+      "ng"
+    ]
+  },
+  "targetBuckets": 7,
+  "exactUnlabelledSearchSpace": "3281882604",
+  "exactLabelledSearchSpace": "16540688324160",
+  "search": {
+    "algorithm": "deterministic random-restart coordinate ascent",
+    "startsPerBase": 512,
+    "retainedPerBase": 128,
+    "exactMotorOrdersRetainedPerCandidate": 2
+  },
+  "firstConstraint": {
+    "traditionalOnsetD": 11,
+    "onsetKeyIncidences": 27,
+    "onsetFragmentation": 9
+  },
+  "generatedLayouts": 2048,
+  "baseReports": [
+    {
+      "id": "LOWMD-pindu11-499309-C0412356",
+      "assignment": "Q>R,A>H,O>N,P>Y,L>K",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9373293726801368,
+          "start": 240,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9366479757206763,
+          "start": 150,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en",
+              "er",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9362773986147023,
+          "start": 1,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9330639917212179,
+          "start": 33,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "n",
+              "ng",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9352828681761718,
+          "start": 134,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 426,
+          "tonedSyllableTop1": 0.9375283307901934,
+          "start": 7,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "en",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang",
+              "n"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9350477408425022,
+          "start": 49,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "en",
+              "n",
+              "ng"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "eng"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9348619389110575,
+          "start": 175,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ang"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9341908779712138,
+          "start": 417,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "n",
+              "ng",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9316988841767135,
+          "start": 305,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "n",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "o"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9337944950414281,
+          "start": 65,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ng",
+              "o"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "en",
+              "er",
+              "n"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 426,
+          "tonedSyllableTop1": 0.935956927246209,
+          "start": 413,
+          "passes": 3
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-499573-C0412356",
+      "assignment": "Q>R,A>H,O>N,P>V,L>Y",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.937489574139153,
+          "start": 110,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "eng"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 437,
+          "tonedSyllableTop1": 0.9348482898891263,
+          "start": 138,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en",
+              "er",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9366284947194645,
+          "start": 40,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "eng"
+            ],
+            [
+              "en",
+              "n",
+              "ng",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 437,
+          "tonedSyllableTop1": 0.9335214324622506,
+          "start": 81,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "eng"
+            ],
+            [
+              "en",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.935720321382581,
+          "start": 13,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 437,
+          "tonedSyllableTop1": 0.9331688988978065,
+          "start": 450,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "en",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang",
+              "n"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9351281838243155,
+          "start": 76,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "en",
+              "n",
+              "ng"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "eng"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9350356935613593,
+          "start": 46,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "e",
+              "n"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 438,
+          "tonedSyllableTop1": 0.9304518399874095,
+          "start": 10,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "e"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 437,
+          "tonedSyllableTop1": 0.9325787737830956,
+          "start": 242,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang",
+              "n"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "e",
+              "ei",
+              "eng"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 437,
+          "tonedSyllableTop1": 0.9325471770502799,
+          "start": 55,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ang"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9344852834041433,
+          "start": 310,
+          "passes": 4
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-493009-C0412356",
+      "assignment": "Q>R,A>H,O>Y,P>N,L>K",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9354050385590346,
+          "start": 78,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9367143452876998,
+          "start": 8,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "er",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9340193958762184,
+          "start": 53,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9357288640001187,
+          "start": 104,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "ei",
+              "n"
+            ],
+            [
+              "ao",
+              "en",
+              "er"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9328913185882005,
+          "start": 43,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9370897413061309,
+          "start": 423,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "ou"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9345055721207953,
+          "start": 34,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "o"
+            ],
+            [
+              "ao",
+              "ei"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9321964505780074,
+          "start": 22,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en",
+              "er",
+              "n"
+            ],
+            [
+              "ao",
+              "ei"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9320570306789627,
+          "start": 165,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "o"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "ei",
+              "er",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9316593745706017,
+          "start": 71,
+          "passes": 2
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "ei",
+              "er",
+              "ng",
+              "ong"
+            ],
+            [
+              "en",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9361334746753214,
+          "start": 141,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ang",
+              "er"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.933804899511506,
+          "start": 506,
+          "passes": 4
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-103114-C0412356",
+      "assignment": "Q>W,A>H,O>R,P>V,L>Y",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_",
+              "en"
+            ],
+            [
+              "a",
+              "er",
+              "n"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9314390462266088,
+          "start": 62,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9335776850511326,
+          "start": 296,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "en"
+            ],
+            [
+              "a",
+              "er",
+              "n"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9312303544609926,
+          "start": 99,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ang",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9332607046561523,
+          "start": 14,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "n",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9330093408731243,
+          "start": 86,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "eng"
+            ],
+            [
+              "a",
+              "er",
+              "n"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.930296224709283,
+          "start": 49,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "eng",
+              "er"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "n",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9323541604402416,
+          "start": 85,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "eng"
+            ],
+            [
+              "a",
+              "er"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "en",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 436,
+          "tonedSyllableTop1": 0.9297868985187827,
+          "start": 366,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9343003439485076,
+          "start": 283,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ang",
+              "ao"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "n",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9319248802188804,
+          "start": 138,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ong"
+            ],
+            [
+              "ai",
+              "en",
+              "n"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ang",
+              "eng"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9317040179612914,
+          "start": 251,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9339067401074401,
+          "start": 90,
+          "passes": 4
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-499316-C0412356",
+      "assignment": "Q>R,A>H,O>N,P>Y,L>M",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9364929080462381,
+          "start": 349,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9359748612670014,
+          "start": 154,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en",
+              "er",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.935798176936967,
+          "start": 3,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "n",
+              "ng",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9346200486718372,
+          "start": 6,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9367025307381245,
+          "start": 47,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "en",
+              "n",
+              "ng"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "eng"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9339822957263352,
+          "start": 233,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang",
+              "n"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "en",
+              "eng"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9339533822515922,
+          "start": 68,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "en",
+              "n",
+              "ng"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "er"
+            ],
+            [
+              "ao",
+              "eng",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9338583456314854,
+          "start": 137,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ei"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "e"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 430,
+          "tonedSyllableTop1": 0.9291968692347171,
+          "start": 186,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ang"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9336899848775134,
+          "start": 274,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "en",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "e"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 429,
+          "tonedSyllableTop1": 0.9309478183380072,
+          "start": 30,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "n",
+              "ng",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "o"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 428,
+          "tonedSyllableTop1": 0.9331896256974093,
+          "start": 163,
+          "passes": 3
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-492610-C0412356",
+      "assignment": "Q>R,A>H,O>Y,P>W,L>K",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9352921363685965,
+          "start": 33,
+          "passes": 2
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang",
+              "n"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9345959677996436,
+          "start": 30,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "n"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "en"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9338722958354452,
+          "start": 25,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 426,
+          "tonedSyllableTop1": 0.9359924256553039,
+          "start": 35,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "n",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9336067354267976,
+          "start": 75,
+          "passes": 6
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "ou"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9335634884255131,
+          "start": 152,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "en"
+            ],
+            [
+              "a",
+              "er",
+              "n"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.93334222915525,
+          "start": 91,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ang",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9332327494878639,
+          "start": 229,
+          "passes": 2
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "n"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "eng",
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.933037980546023,
+          "start": 78,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9329904348557853,
+          "start": 328,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er"
+            ],
+            [
+              "ai",
+              "en",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "eng",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 427,
+          "tonedSyllableTop1": 0.9329341822669032,
+          "start": 65,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 426,
+          "tonedSyllableTop1": 0.9351917469224365,
+          "start": 262,
+          "passes": 5
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-498607-C0412356",
+      "assignment": "Q>R,A>H,O>V,P>K,L>Y",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9358400959993074,
+          "start": 43,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "en",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9349761827305318,
+          "start": 69,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "n",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "en",
+              "er"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9347859725893962,
+          "start": 248,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "ei",
+              "er"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "en",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9343213582400467,
+          "start": 2,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "en",
+              "n",
+              "ng"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "eng",
+              "er"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9338382622662165,
+          "start": 55,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "en",
+              "ng"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "ei",
+              "er"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "eng",
+              "n"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9313270612723487,
+          "start": 304,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ng"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 433,
+          "tonedSyllableTop1": 0.935805487446206,
+          "start": 26,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ei",
+              "n"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ang",
+              "en",
+              "er"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "eng",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9332748328313109,
+          "start": 157,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "en",
+              "er"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9331311416234973,
+          "start": 5,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "ou"
+            ],
+            [
+              "en",
+              "eng",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9330303688547554,
+          "start": 58,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "er",
+              "ng"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "e"
+            ],
+            [
+              "ang",
+              "en"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "ei",
+              "n",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 434,
+          "tonedSyllableTop1": 0.9330099021669047,
+          "start": 21,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "e",
+              "n"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ang",
+              "ei"
+            ],
+            [
+              "ao",
+              "en"
+            ],
+            [
+              "er",
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 435,
+          "tonedSyllableTop1": 0.9305707795085112,
+          "start": 8,
+          "passes": 2
+        }
+      ]
+    },
+    {
+      "id": "LOWMD-pindu11-2638587-C0312546",
+      "assignment": "Q>K,A>H,O>N,P>Y,L>W",
+      "starts": 512,
+      "uniqueLocalMinimaRetained": 128,
+      "best": [
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "n",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 423,
+          "tonedSyllableTop1": 0.9343967632679274,
+          "start": 47,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "eng"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 423,
+          "tonedSyllableTop1": 0.933741459624215,
+          "start": 234,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "o"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 423,
+          "tonedSyllableTop1": 0.9336588946781095,
+          "start": 423,
+          "passes": 2
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "eng",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.9358953218312738,
+          "start": 25,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "en"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "n",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 423,
+          "tonedSyllableTop1": 0.9334282166244074,
+          "start": 27,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "n",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "o",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.9355457316366544,
+          "start": 10,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "ang"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.9353491145323656,
+          "start": 2,
+          "passes": 5
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "en",
+              "n"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ou"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei"
+            ],
+            [
+              "ng",
+              "o",
+              "ong"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.9350231945071736,
+          "start": 278,
+          "passes": 4
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "er"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "eng",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.9348796402002822,
+          "start": 13,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "eng",
+              "ou"
+            ],
+            [
+              "an",
+              "en"
+            ],
+            [
+              "ang",
+              "er",
+              "n"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.934299645753805,
+          "start": 128,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_"
+            ],
+            [
+              "a",
+              "ou"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an",
+              "ong"
+            ],
+            [
+              "ao",
+              "o"
+            ],
+            [
+              "e",
+              "ei",
+              "eng"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ng"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.933780722808667,
+          "start": 309,
+          "passes": 3
+        },
+        {
+          "groups": [
+            [
+              "_",
+              "o"
+            ],
+            [
+              "a",
+              "ong"
+            ],
+            [
+              "ai",
+              "ang"
+            ],
+            [
+              "an"
+            ],
+            [
+              "ao",
+              "eng"
+            ],
+            [
+              "e",
+              "ei",
+              "ng"
+            ],
+            [
+              "en",
+              "er",
+              "n",
+              "ou"
+            ]
+          ],
+          "occupiedBuckets": 422,
+          "tonedSyllableTop1": 0.9337627614076903,
+          "start": 207,
+          "passes": 3
+        }
+      ]
+    }
+  ]
+}

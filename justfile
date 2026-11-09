@@ -59,6 +59,13 @@ pindu11-2121-lowmd-coordinate starts="32" sample="160":
     node tools/optimize_toned_2121_pindu11_lowmd_first.js --starts "{{starts}}" --sample "{{sample}}"
     node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-lowmd-coordinate-layouts.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-coordinate-full.json
 
+pindu11-2121-dmin-rhyme-partitions bases="8" retain="256" uniform="256" orders="2":
+    node tools/search_toned_2121_pindu11_rhyme_partitions.js --bases "{{bases}}" --retain "{{retain}}" --uniform "{{uniform}}" --orders "{{orders}}"
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-dmin-rhyme-partition-layouts.json --policy 12/213/24 --shape QAOPL --sample 80 --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-rhyme-partition-sample.json
+
+pindu16-2121-dmin-rhyme-search bases="8" starts="256" retain="64" orders="2":
+    node tools/search_toned_2121_pindu16_rhyme.js --bases "{{bases}}" --starts "{{starts}}" --retain "{{retain}}" --orders "{{orders}}"
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 
