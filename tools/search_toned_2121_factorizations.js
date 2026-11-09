@@ -6,6 +6,7 @@ const path = require('node:path');
 const {loadPayload} = require('./score_completion_ckt_v4.js');
 const {splitPinyin, HEADS, FINALS} = require('./ckt_v4_scheme_fixture.js');
 const {rowForTone} = require('./toned_2121_contract.js');
+const {normalizeRhymeBody} = require('./audit_pindu_nextgen_image.js');
 
 const ROW_INDEX = Object.freeze({upper: 0, home: 1, lower: 2});
 
@@ -48,6 +49,13 @@ function buildFactorizations(seedInventory) {
       split(pinyin) {
         const row = decomposition.get(pinyin);
         return [row.shengjie, row.rhymeBody];
+      },
+    },
+    {
+      id: 'shengjie-pindu11-rhyme',
+      split(pinyin) {
+        const row = decomposition.get(pinyin);
+        return [row.shengjie, normalizeRhymeBody(row.rhymeBody)];
       },
     },
     {
@@ -263,7 +271,7 @@ function buildReport({html, seeds, steps, restarts, seed}) {
   const factorizations = buildFactorizations(seedInventory).map(definition =>
     indexedFactorization(definition, pinyin));
   return {
-    version: 'ckt-v5.1-toned-2121-factorization-search-1',
+    version: 'ckt-v5.1-toned-2121-factorization-search-2',
     search: {algorithm: 'deterministic-simulated-annealing', steps, restarts, seed,
       objective: 'occupiedBuckets + 441 * tonedSyllableTop1'},
     strictBoundDefinition: 'Maximum occupied buckets is bounded by 441 and by distinct (tone-row, first-component, second-component) signatures. Search results are feasible witnesses, not lower-bound proofs.',
@@ -322,5 +330,6 @@ module.exports = {
   buildReport,
   buildTokenInventory,
   indexedFactorization,
+  searchOne,
   strictBounds,
 };

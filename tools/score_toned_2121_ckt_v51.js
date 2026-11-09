@@ -21,6 +21,15 @@ function parseArgs(argv) {
   return args;
 }
 
+function parsePolicy(value) {
+  if (!value) return null;
+  const [word2, word3, word4, extra] = String(value).split('/');
+  if (!word2 || !word3 || !word4 || extra) {
+    throw new Error(`invalid policy ${value}; expected word2/word3/word4`);
+  }
+  return {word2, word3, word4};
+}
+
 function orderedPairs(length) {
   const result = [];
   for (let first = 1; first <= length; first++) for (let second = 1; second <= length; second++) {
@@ -223,6 +232,24 @@ function scoreLayout({layout, layouts, data, words, motor, reference, shapeKeysB
   };
 }
 
+function scoreFixedPolicy({layout, layouts, data, words, motor, reference,
+  shapeKeysByMeaning, policy}) {
+  const result = evaluateLayoutPolicy({layout, layouts, data, words, motor, reference,
+    shapeKeysByMeaning, policy});
+  return {
+    id: layout.id,
+    factorization: layout.factorization,
+    origin: layout.origin,
+    declaredMemory: layout.declaredMemory || null,
+    shapeKeysByMeaning: result.shapeKeysByMeaning,
+    toneKeysByTone: result.toneKeysByTone,
+    policySpace: {word2: 1, word3: 1, word4: 1, combinations: 1},
+    score: result.score,
+    policy: result.policy,
+    tracks: result.tracks,
+  };
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const root = path.resolve(__dirname, '..');
@@ -231,6 +258,7 @@ function main() {
   const layoutsFile = path.resolve(args.layouts || path.join(root, 'research/config/ckt-v51-toned-2121-layouts.json'));
   const output = path.resolve(args.output || path.join(root, 'research/notes/2026-11-09-ckt-v51-toned-2121-ckt-search.json'));
   const forcedShapeKeysByMeaning = args.shape ? String(args.shape).toUpperCase() : null;
+  const forcedPolicy = parsePolicy(args.policy);
   const data = scorer.loadPayload(html);
   const words = scorer.multiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), data, 0.99);
   const strokes = scorer.strokeOptions(path.join(snow, 'rime-stroke/stroke.dict.yaml'));
@@ -240,13 +268,19 @@ function main() {
   const selected = args.ids
     ? layouts.layouts.filter(value => String(args.ids).split(',').includes(value.id))
     : layouts.layouts;
-  const results = selected.map(layout => scoreLayout({
+  const results = selected.map(layout => (forcedPolicy ? scoreFixedPolicy : scoreLayout)({
     layout, layouts, data, words, motor, reference,
     shapeKeysByMeaning: forcedShapeKeysByMeaning || layout.recommendedShapeKeysByMeaning || 'QAOPL',
+    ...(forcedPolicy ? {policy: forcedPolicy} : {}),
   })).sort((left, right) => left.score - right.score);
   const report = {
     version: 'shape-only-ckt-v5.1-toned-2121-search-1',
     normalization: 'S005 keytao-only; track weights character/word2/word3/word4 = 1/3/1/1',
+    screeningMode: forcedPolicy ? {
+      kind: 'fixed-policy',
+      policy: forcedPolicy,
+      shapeKeysByMeaning: forcedShapeKeysByMeaning || 'layout recommendation or QAOPL fallback',
+    } : {kind: 'exhaustive-word-auxiliary-policy', combinationsPerLayout: 144},
     reference: {id: 'S005', policy: REFERENCE_POLICY, tracks: reference.tracks},
     results,
   };
@@ -267,5 +301,6 @@ module.exports = {
   evaluateLayoutPolicy,
   normalizedScore,
   projectedMotor,
+  scoreFixedPolicy,
   scoreLayout,
 };

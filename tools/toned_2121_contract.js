@@ -30,6 +30,12 @@ const SECOND_CODE_FACTORIZATIONS = Object.freeze([
     priorTemplate: 'shengjie',
   }),
   Object.freeze({
+    id: 'shengjie-pindu11-rhyme',
+    firstComponent: '声母+介音',
+    secondComponent: '旧拼读规则归并后的11类韵身',
+    priorTemplate: 'pindu11',
+  }),
+  Object.freeze({
     id: 'restored-onset-full-final',
     firstComponent: '统一还原声类',
     secondComponent: '完整还原韵母',

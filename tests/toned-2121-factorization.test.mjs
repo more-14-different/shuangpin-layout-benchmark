@@ -18,7 +18,7 @@ const {
 const seeds = JSON.parse(fs.readFileSync(new URL(
   '../research/config/ckt-v51-toned-2121-seeds.json', import.meta.url), 'utf8'));
 
-test('three toned 21x21 factorizations cover Common399 with audited component counts', () => {
+test('four toned 21x21 factorizations cover Common399 with audited component counts', () => {
   const pinyin = seeds.decomposition.map(row => row.pinyin);
   const factorizations = buildFactorizations(seeds).map(definition =>
     indexedFactorization(definition, pinyin));
@@ -29,9 +29,20 @@ test('three toned 21x21 factorizations cover Common399 with audited component co
     second: value.secondComponents.length,
   })), [
     {id: 'shengjie-rhyme-body', pinyin: 399, first: 55, second: 16},
+    {id: 'shengjie-pindu11-rhyme', pinyin: 399, first: 55, second: 11},
     {id: 'restored-onset-full-final', pinyin: 399, first: 22, second: 37},
     {id: 'written-onset-written-final', pinyin: 399, first: 27, second: 35},
   ]);
+});
+
+test('Pindu11 factorization applies only the three published rhyme merges', () => {
+  const pindu11 = buildFactorizations(seeds)
+    .find(value => value.id === 'shengjie-pindu11-rhyme');
+  assert.deepEqual(pindu11.split('er'), ['_', '_']);
+  assert.deepEqual(pindu11.split('bo'), ['b', 'e']);
+  assert.deepEqual(pindu11.split('ben'), ['b', 'en']);
+  assert.deepEqual(pindu11.split('beng'), ['b', 'en']);
+  assert.deepEqual(pindu11.split('bang'), ['b', 'ang']);
 });
 
 test('strict collision bounds distinguish tone-row signatures from the 441 capacity bound', () => {
@@ -74,6 +85,26 @@ test('first structural search reaches the rigorous 441-bucket capacity ceiling f
     assert.equal(factorization.heuristicSearch.champion.occupiedBuckets, 441);
     assert.equal(factorization.heuristicSearch.champion.collisionExcess, 796);
   }
+});
+
+test('Pindu11 fixed-policy screen is complete and reaches the high-performance region', () => {
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu11-screen-layouts.json', import.meta.url), 'utf8'));
+  const score = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-screen-ckt-fixed-policy.json',
+    import.meta.url), 'utf8'));
+  assert.equal(layouts.layouts.length, 8);
+  assert.ok(layouts.layouts.every(value => value.factorization === 'shengjie-pindu11-rhyme'));
+  assert.ok(layouts.layouts.every(value => value.tonedCodes.length === 1407 &&
+    value.tonedCodes.every(Boolean)));
+  assert.deepEqual(score.screeningMode, {
+    kind: 'fixed-policy',
+    policy: {word2: '12', word3: '213', word4: '24'},
+    shapeKeysByMeaning: 'QAOPL',
+  });
+  assert.equal(score.results.length, 8);
+  assert.equal(score.results[0].id, 'SCREEN-shengjie-pindu11-rhyme-01');
+  assert.ok(score.results[0].score < 9.21);
 });
 
 test('auxiliary-order refinement renames only the frozen QAOPL auxiliary domain', () => {

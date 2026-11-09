@@ -31,6 +31,15 @@ toned-2121-written-lowm steps="10000" restarts="8":
 pindu-nextgen-image-audit:
     node tools/audit_pindu_nextgen_image.js
 
+pindu11-2121-comparison steps="30000" restarts="6":
+    node tools/search_toned_2121_factorizations.js --steps "{{steps}}" --restarts "{{restarts}}" --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-factorization-search.json
+    node tools/optimize_toned_2121_physical.js --search research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-factorization-search.json --output research/config/ckt-v51-toned-2121-pindu11-layouts.json --steps 10000 --restarts 4
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-layouts.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-ckt-fixed-policy.json
+
+pindu11-2121-screen runs="8":
+    node tools/screen_toned_2121_pindu11.js --runs "{{runs}}"
+    node tools/score_toned_2121_ckt_v51.js --layouts research/config/ckt-v51-toned-2121-pindu11-screen-layouts.json --policy 12/213/24 --shape QAOPL --output research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-screen-ckt-fixed-policy.json
+
 ckt-v4-rust-fmt:
     cargo fmt --manifest-path research/ckt-v4-core/Cargo.toml --check
 

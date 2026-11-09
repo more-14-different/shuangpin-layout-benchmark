@@ -214,4 +214,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = {codeFor, optimizeLayout};
+module.exports = {codeFor, optimizeLayout, projectedMotor};
