@@ -38,8 +38,8 @@ try {
     };
   });
   assert.deepEqual(bPathCoverage, {
-    count: 303,
-    complete: 303,
+    count: 309,
+    complete: 309,
     missing: [],
     selected: 19,
   });
