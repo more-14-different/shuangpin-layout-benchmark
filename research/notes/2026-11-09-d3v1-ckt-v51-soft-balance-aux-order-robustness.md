@@ -4,6 +4,8 @@
 
 `SNOW-SHENYUN-21X26-D3V1-BALANCED` 在 21×26 原生四码封顶合同、跨词长联合候选池和 `soft-page-fill-v2` 柔性词长平衡下的方案专属稳健辅序为：
 
+布局的附加位移诊断为 `A/I/D/V = 8/5/3/1`：D 只统计 18 个传统单字母声母，明确排除 A/E/O/W/Y；I 在 D 外加入 W/Y，A 再加入 A/E/O，V 仍是五个基础韵母。A/I 只是诊断量，M-R2 `40` 已经计入相关映射与路由成本，D、M 及历史 D+V 排名均不修正。
+
 - 形笔辅（`shapeKeysByMeaning=AEUIO`）：`12/12/24`；
 - 调笔辅（`toneKeysByTone=IEUAO`）：`12/21/13`。
 
