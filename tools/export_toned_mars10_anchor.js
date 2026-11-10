@@ -6,12 +6,23 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 
 function parseArgs(argv) {
-  const args = {};
+  const args = {
+    firstMoves: [],
+    rhymeMoves: [],
+  };
   for (let index = 0; index < argv.length; index++) {
     if (!argv[index].startsWith('--')) continue;
-    args[argv[index].slice(2)] = argv[index + 1] && !argv[index + 1].startsWith('--')
+    const flag = argv[index].slice(2);
+    const value = argv[index + 1] && !argv[index + 1].startsWith('--')
       ? argv[++index]
       : true;
+    if (flag === 'first-move') {
+      args.firstMoves.push(value);
+    } else if (flag === 'rhyme-move') {
+      args.rhymeMoves.push(value);
+    } else {
+      args[flag] = value;
+    }
   }
   return args;
 }
@@ -27,49 +38,73 @@ function main() {
     'research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json'));
   const outputPath = path.resolve(args.output || path.join(root,
     'research/.cache/ckt-v51-toned-mars10-anchor-sh-p-u-k.json'));
-  const firstAtomName = String(args['first-atom'] || 'sh');
-  const firstKey = String(args['first-key'] || 'P').toUpperCase();
-  const rhymeRegionName = String(args['rhyme-region'] || 'home');
-  const rhymeName = String(args['rhyme-name'] || 'u');
-  const rhymeKey = String(args['rhyme-key'] || 'K').toUpperCase();
   const expectedScore = Number(args['expected-score'] || 9.451430242464836);
+  const layoutIdOverride = args['layout-id'];
 
   const fixture = JSON.parse(fs.readFileSync(baseFixturePath, 'utf8'));
-
-  const firstAtom = fixture.atoms.find(value => value.name === firstAtomName);
-  if (!firstAtom) throw new Error(`first atom not found: ${firstAtomName}`);
-  const rhymeAtom = fixture.rhymeAtoms.find(value => value.name === rhymeName);
-  if (!rhymeAtom) throw new Error(`rhyme atom not found: ${rhymeName}`);
-  const region = fixture.toneRegions.find(value => value.name === rhymeRegionName);
-  if (!region) throw new Error(`tone region not found: ${rhymeRegionName}`);
-
   const tonedCodes = fixture.tonedCodes.map(tones => [...tones]);
 
-  // Update first atom pinyins
-  for (const py of firstAtom.pinyin) {
-    for (let tone = 0; tone < 5; tone++) {
-      const code = tonedCodes[py][tone];
-      if (code) {
-        tonedCodes[py][tone] = firstKey + code[1];
-      }
-    }
+  // Backward compatibility with single flags
+  if (args.firstMoves.length === 0 && (args['first-atom'] || args['first-key'])) {
+    const atom = String(args['first-atom'] || 'sh');
+    const key = String(args['first-key'] || 'P').toUpperCase();
+    args.firstMoves.push(`${atom}:${key}`);
+  }
+  if (args.rhymeMoves.length === 0 && (args['rhyme-region'] || args['rhyme-name'] || args['rhyme-key'])) {
+    const region = String(args['rhyme-region'] || 'home');
+    const rhyme = String(args['rhyme-name'] || 'u');
+    const key = String(args['rhyme-key'] || 'K').toUpperCase();
+    args.rhymeMoves.push(`${region}:${rhyme}:${key}`);
   }
 
-  // Update rhyme atom pinyins in specified region
-  for (const py of rhymeAtom.pinyin) {
-    for (const tone of region.tones) {
-      const code = tonedCodes[py][tone - 1];
-      if (code) {
-        tonedCodes[py][tone - 1] = code[0] + rhymeKey;
+  const appliedFirstMoves = [];
+  for (const moveStr of args.firstMoves) {
+    const match = String(moveStr).match(/^([^:]+):([A-Z])$/i);
+    if (!match) throw new Error(`invalid first-move: ${moveStr}; expected ATOM:KEY`);
+    const [, atomName, key] = match;
+    const upperKey = key.toUpperCase();
+    const atom = fixture.atoms.find(value => value.name === atomName);
+    if (!atom) throw new Error(`first atom not found: ${atomName}`);
+
+    for (const py of atom.pinyin) {
+      for (let tone = 0; tone < 5; tone++) {
+        const code = tonedCodes[py][tone];
+        if (code) {
+          tonedCodes[py][tone] = upperKey + code[1];
+        }
       }
     }
+    atom.baselineKey = upperKey;
+    appliedFirstMoves.push({atomName, key: upperKey});
   }
 
-  // Update atom baseline keys
-  firstAtom.baselineKey = firstKey;
-  rhymeAtom.baselineKeys[rhymeRegionName] = rhymeKey;
+  const appliedRhymeMoves = [];
+  for (const moveStr of args.rhymeMoves) {
+    const match = String(moveStr).match(/^([^:]+):([^:]+):([A-Z])$/i);
+    if (!match) throw new Error(`invalid rhyme-move: ${moveStr}; expected REGION:RHYME:KEY`);
+    const [, regionName, rhymeName, key] = match;
+    const upperKey = key.toUpperCase();
+    const region = fixture.toneRegions.find(value => value.name === regionName);
+    if (!region) throw new Error(`tone region not found: ${regionName}`);
+    const rhymeAtom = fixture.rhymeAtoms.find(value => value.name === rhymeName);
+    if (!rhymeAtom) throw new Error(`rhyme atom not found: ${rhymeName}`);
 
-  const anchorLayoutId = `UNEVEN786-marsfirst-anchor-${firstAtomName}-${firstKey.toLowerCase()}-${rhymeName}-${rhymeKey.toLowerCase()}`;
+    for (const py of rhymeAtom.pinyin) {
+      for (const tone of region.tones) {
+        const code = tonedCodes[py][tone - 1];
+        if (code) {
+          tonedCodes[py][tone - 1] = code[0] + upperKey;
+        }
+      }
+    }
+    rhymeAtom.baselineKeys[regionName] = upperKey;
+    appliedRhymeMoves.push({regionName, rhymeName, key: upperKey});
+  }
+
+  const firstTags = appliedFirstMoves.map(m => `${m.atomName}-${m.key.toLowerCase()}`).join('-');
+  const rhymeTags = appliedRhymeMoves.map(m => `${m.regionName}-${m.rhymeName}-${m.key.toLowerCase()}`).join('-');
+  const anchorLayoutId = layoutIdOverride || `UNEVEN786-marsfirst-anchor-${firstTags}_${rhymeTags}`;
+
   fixture.layoutId = anchorLayoutId;
   fixture.tonedCodes = tonedCodes;
   fixture.expected = {
@@ -86,11 +121,8 @@ function main() {
     ...fixture.sourceHashes,
     anchor: hashJson({
       layoutId: anchorLayoutId,
-      firstAtomName,
-      firstKey,
-      rhymeRegionName,
-      rhymeName,
-      rhymeKey,
+      appliedFirstMoves,
+      appliedRhymeMoves,
       expectedScore,
     }),
   };
