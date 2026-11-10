@@ -1,0 +1,1450 @@
+{
+  "version": "pindu-nextgen-image-factorization-audit-1",
+  "source": {
+    "imageId": "we-cut-v4.3.1-v411we43-round1-r16",
+    "reportedMemory": 36.1221,
+    "publicPinduRepository": {
+      "path": "D:/C2D/Desktop/Code/Lua/inputMethod/rime-pindu-double-pinyin",
+      "upstream": "https://github.com/zhanghaozhecn/rime-pindu-double-pinyin",
+      "auditedCommit": "25393c170457329861c54537a3592acda5bb3f5d",
+      "nextGenerationSourceAvailability": "not present in the sole public upstream branch"
+    }
+  },
+  "inferenceBoundary": {
+    "directFromImage": [
+      "ten bold first-component exceptions and their physical keys",
+      "all 44 normalized-rhyme x lexical-tone second-key placements",
+      "four disjoint tone regions"
+    ],
+    "inferredFromPublicPinduRules": [
+      "all non-exception medial variants follow their bare initial",
+      "zh/ch/sh merge to z/c/s respectively",
+      "zero families _, _i, _u, _v use O, I, U, V",
+      "neutral tone follows tone 1",
+      "rhyme merges er/empty, n/en/ng/eng, and o/e"
+    ],
+    "unresolved": [
+      "the exact formula that turns the displayed grouping into memory 36.1221",
+      "whether the unpublished optimizer has additional hidden fixed rules"
+    ]
+  },
+  "first": {
+    "rawShengjieCount": 55,
+    "visibleExceptionCount": 10,
+    "visibleExceptions": {
+      "ni": "W",
+      "su": "W",
+      "gu": "E",
+      "jv": "E",
+      "mi": "E",
+      "du": "Y",
+      "bi": "A",
+      "hu": "A",
+      "zu": "F",
+      "li": "G"
+    },
+    "defaults": {
+      "ordinary": "same bare initial key",
+      "retroflex": "zh/ch/sh -> Z/C/S",
+      "zeroFamilies": {
+        "_": "O",
+        "_i": "I",
+        "_u": "U",
+        "_v": "V"
+      }
+    },
+    "shengjieToKey": {
+      "_": "O",
+      "_i": "I",
+      "_u": "U",
+      "_v": "V",
+      "b": "B",
+      "bi": "A",
+      "bu": "B",
+      "c": "C",
+      "ch": "C",
+      "chu": "C",
+      "cu": "C",
+      "d": "D",
+      "di": "D",
+      "du": "Y",
+      "f": "F",
+      "fu": "F",
+      "g": "G",
+      "gu": "E",
+      "h": "H",
+      "hu": "A",
+      "ji": "J",
+      "jv": "E",
+      "k": "K",
+      "ku": "K",
+      "l": "L",
+      "li": "G",
+      "lu": "L",
+      "lv": "L",
+      "m": "M",
+      "mi": "E",
+      "mu": "M",
+      "n": "N",
+      "ni": "W",
+      "nu": "N",
+      "nv": "N",
+      "p": "P",
+      "pi": "P",
+      "pu": "P",
+      "qi": "Q",
+      "qv": "Q",
+      "r": "R",
+      "ru": "R",
+      "s": "S",
+      "sh": "S",
+      "shu": "S",
+      "su": "W",
+      "t": "T",
+      "ti": "T",
+      "tu": "T",
+      "xi": "X",
+      "xv": "X",
+      "z": "Z",
+      "zh": "Z",
+      "zhu": "Z",
+      "zu": "F"
+    },
+    "keyToShengjie": {
+      "Q": [
+        "qi",
+        "qv"
+      ],
+      "W": [
+        "ni",
+        "su"
+      ],
+      "E": [
+        "gu",
+        "jv",
+        "mi"
+      ],
+      "R": [
+        "r",
+        "ru"
+      ],
+      "T": [
+        "t",
+        "ti",
+        "tu"
+      ],
+      "Y": [
+        "du"
+      ],
+      "U": [
+        "_u"
+      ],
+      "I": [
+        "_i"
+      ],
+      "O": [
+        "_"
+      ],
+      "P": [
+        "p",
+        "pi",
+        "pu"
+      ],
+      "A": [
+        "bi",
+        "hu"
+      ],
+      "S": [
+        "s",
+        "sh",
+        "shu"
+      ],
+      "D": [
+        "d",
+        "di"
+      ],
+      "F": [
+        "f",
+        "fu",
+        "zu"
+      ],
+      "G": [
+        "g",
+        "li"
+      ],
+      "H": [
+        "h"
+      ],
+      "J": [
+        "ji"
+      ],
+      "K": [
+        "k",
+        "ku"
+      ],
+      "L": [
+        "l",
+        "lu",
+        "lv"
+      ],
+      "Z": [
+        "z",
+        "zh",
+        "zhu"
+      ],
+      "X": [
+        "xi",
+        "xv"
+      ],
+      "C": [
+        "c",
+        "ch",
+        "chu",
+        "cu"
+      ],
+      "V": [
+        "_v"
+      ],
+      "B": [
+        "b",
+        "bu"
+      ],
+      "N": [
+        "n",
+        "nu",
+        "nv"
+      ],
+      "M": [
+        "m",
+        "mu"
+      ]
+    }
+  },
+  "second": {
+    "rawRhymeBodyCount": 16,
+    "normalizedRhymeCount": 11,
+    "rhymeNormalization": {
+      "_": [
+        "_",
+        "er"
+      ],
+      "a": [
+        "a"
+      ],
+      "ai": [
+        "ai"
+      ],
+      "an": [
+        "an"
+      ],
+      "ang": [
+        "ang"
+      ],
+      "ao": [
+        "ao"
+      ],
+      "e": [
+        "e",
+        "o"
+      ],
+      "ei": [
+        "ei"
+      ],
+      "en": [
+        "en",
+        "eng",
+        "n",
+        "ng"
+      ],
+      "ong": [
+        "ong"
+      ],
+      "ou": [
+        "ou"
+      ]
+    },
+    "normalizedRhymeToneAssociationCount": 44,
+    "normalizedRhymeToneKeys": {
+      "1": {
+        "_": "J",
+        "a": "W",
+        "ai": "J",
+        "an": "H",
+        "ang": "K",
+        "ao": "K",
+        "e": "L",
+        "ei": "K",
+        "en": "L",
+        "ong": "H",
+        "ou": "H"
+      },
+      "2": {
+        "_": "O",
+        "a": "O",
+        "ai": "V",
+        "an": "P",
+        "ang": "P",
+        "ao": "P",
+        "e": "P",
+        "ei": "B",
+        "en": "O",
+        "ong": "P",
+        "ou": "O"
+      },
+      "3": {
+        "_": "N",
+        "a": "A",
+        "ai": "S",
+        "an": "M",
+        "ang": "G",
+        "ao": "D",
+        "e": "F",
+        "ei": "D",
+        "en": "S",
+        "ong": "M",
+        "ou": "F"
+      },
+      "4": {
+        "_": "I",
+        "a": "R",
+        "ai": "T",
+        "an": "Y",
+        "ang": "Y",
+        "ao": "U",
+        "e": "U",
+        "ei": "E",
+        "en": "I",
+        "ong": "R",
+        "ou": "E"
+      }
+    },
+    "toneRegions": {
+      "1": [
+        "J",
+        "W",
+        "H",
+        "K",
+        "L"
+      ],
+      "2": [
+        "O",
+        "V",
+        "P",
+        "B"
+      ],
+      "3": [
+        "N",
+        "A",
+        "S",
+        "M",
+        "G",
+        "D",
+        "F"
+      ],
+      "4": [
+        "I",
+        "R",
+        "T",
+        "Y",
+        "U",
+        "E"
+      ]
+    },
+    "toneRegionsDisjoint": true,
+    "occupiedSecondKeyChunkCount": 22,
+    "keyToRhymeTones": {
+      "Q": [],
+      "W": [
+        "a1"
+      ],
+      "E": [
+        "ei4",
+        "ou4"
+      ],
+      "R": [
+        "a4",
+        "ong4"
+      ],
+      "T": [
+        "ai4"
+      ],
+      "Y": [
+        "an4",
+        "ang4"
+      ],
+      "U": [
+        "ao4",
+        "e4"
+      ],
+      "I": [
+        "_4",
+        "en4"
+      ],
+      "O": [
+        "_2",
+        "a2",
+        "en2",
+        "ou2"
+      ],
+      "P": [
+        "an2",
+        "ang2",
+        "ao2",
+        "e2",
+        "ong2"
+      ],
+      "A": [
+        "a3"
+      ],
+      "S": [
+        "ai3",
+        "en3"
+      ],
+      "D": [
+        "ao3",
+        "ei3"
+      ],
+      "F": [
+        "e3",
+        "ou3"
+      ],
+      "G": [
+        "ang3"
+      ],
+      "H": [
+        "an1",
+        "ong1",
+        "ou1"
+      ],
+      "J": [
+        "_1",
+        "ai1"
+      ],
+      "K": [
+        "ang1",
+        "ao1",
+        "ei1"
+      ],
+      "L": [
+        "e1",
+        "en1"
+      ],
+      "Z": [],
+      "X": [],
+      "C": [],
+      "V": [
+        "ai2"
+      ],
+      "B": [
+        "ei2"
+      ],
+      "N": [
+        "_3"
+      ],
+      "M": [
+        "an3",
+        "ong3"
+      ]
+    }
+  },
+  "factorization": {
+    "commonPinyinCount": 399,
+    "rawFactorProduct": 880,
+    "normalizedFactorProduct": 605,
+    "distinctNormalizedFactorSignatures": 370,
+    "normalizedFactorCollisionPairCount": 29,
+    "normalizedFactorCollisions": [
+      {
+        "signature": "b|en",
+        "pinyin": [
+          "ben",
+          "beng"
+        ]
+      },
+      {
+        "signature": "bi|en",
+        "pinyin": [
+          "bin",
+          "bing"
+        ]
+      },
+      {
+        "signature": "c|en",
+        "pinyin": [
+          "cen",
+          "ceng"
+        ]
+      },
+      {
+        "signature": "ch|en",
+        "pinyin": [
+          "chen",
+          "cheng"
+        ]
+      },
+      {
+        "signature": "_|e",
+        "pinyin": [
+          "e",
+          "o"
+        ]
+      },
+      {
+        "signature": "_|en",
+        "pinyin": [
+          "en",
+          "eng"
+        ]
+      },
+      {
+        "signature": "f|en",
+        "pinyin": [
+          "fen",
+          "feng"
+        ]
+      },
+      {
+        "signature": "g|en",
+        "pinyin": [
+          "gen",
+          "geng"
+        ]
+      },
+      {
+        "signature": "h|en",
+        "pinyin": [
+          "hen",
+          "heng"
+        ]
+      },
+      {
+        "signature": "ji|en",
+        "pinyin": [
+          "jin",
+          "jing"
+        ]
+      },
+      {
+        "signature": "k|en",
+        "pinyin": [
+          "ken",
+          "keng"
+        ]
+      },
+      {
+        "signature": "li|en",
+        "pinyin": [
+          "lin",
+          "ling"
+        ]
+      },
+      {
+        "signature": "m|e",
+        "pinyin": [
+          "me",
+          "mo"
+        ]
+      },
+      {
+        "signature": "m|en",
+        "pinyin": [
+          "men",
+          "meng"
+        ]
+      },
+      {
+        "signature": "mi|en",
+        "pinyin": [
+          "min",
+          "ming"
+        ]
+      },
+      {
+        "signature": "n|en",
+        "pinyin": [
+          "nen",
+          "neng"
+        ]
+      },
+      {
+        "signature": "ni|en",
+        "pinyin": [
+          "nin",
+          "ning"
+        ]
+      },
+      {
+        "signature": "p|en",
+        "pinyin": [
+          "pen",
+          "peng"
+        ]
+      },
+      {
+        "signature": "pi|en",
+        "pinyin": [
+          "pin",
+          "ping"
+        ]
+      },
+      {
+        "signature": "qi|en",
+        "pinyin": [
+          "qin",
+          "qing"
+        ]
+      },
+      {
+        "signature": "r|en",
+        "pinyin": [
+          "ren",
+          "reng"
+        ]
+      },
+      {
+        "signature": "s|en",
+        "pinyin": [
+          "sen",
+          "seng"
+        ]
+      },
+      {
+        "signature": "sh|en",
+        "pinyin": [
+          "shen",
+          "sheng"
+        ]
+      },
+      {
+        "signature": "_u|en",
+        "pinyin": [
+          "wen",
+          "weng"
+        ]
+      },
+      {
+        "signature": "xi|en",
+        "pinyin": [
+          "xin",
+          "xing"
+        ]
+      },
+      {
+        "signature": "_i|e",
+        "pinyin": [
+          "ye",
+          "yo"
+        ]
+      },
+      {
+        "signature": "_i|en",
+        "pinyin": [
+          "yin",
+          "ying"
+        ]
+      },
+      {
+        "signature": "z|en",
+        "pinyin": [
+          "zen",
+          "zeng"
+        ]
+      },
+      {
+        "signature": "zh|en",
+        "pinyin": [
+          "zhen",
+          "zheng"
+        ]
+      }
+    ]
+  },
+  "memoryAudit": {
+    "oldPublicPindu": {
+      "visibleFirstExceptions": 12,
+      "perRhymeDistinctToneKeyAssociations": 33,
+      "total": 45,
+      "matchesPublished45": true
+    },
+    "imageUnderOldCountingRule": {
+      "visibleFirstExceptions": 10,
+      "perRhymeDistinctToneKeyAssociations": 44,
+      "total": 54,
+      "conclusion": "does not reproduce 36.1221; the image uses a different grouped/weighted memory model"
+    },
+    "imageChunkLowerDescription": {
+      "visibleFirstExceptions": 10,
+      "occupiedRhymeToneKeyChunks": 22,
+      "baseChunks": 32,
+      "residualToReportedMemory": 4.122100000000003,
+      "status": "algebraic decomposition and strong inference, not the unpublished formula"
+    }
+  },
+  "tokenAudits": {
+    "commonCharacterToned": {
+      "tokenCount": 1237,
+      "encodedTokenCount": 1237,
+      "occupiedBuckets": 496,
+      "collisionExcess": 741,
+      "collisionBucketCount": 326,
+      "missing": [],
+      "largestCollisionBuckets": [
+        {
+          "code": "CO",
+          "tokens": [
+            "cen2",
+            "ceng2",
+            "cha2",
+            "chen2",
+            "cheng2",
+            "chi2",
+            "chou2",
+            "chu2",
+            "chun2",
+            "ci2",
+            "cu2",
+            "cun2"
+          ]
+        },
+        {
+          "code": "CP",
+          "tokens": [
+            "can2",
+            "cang2",
+            "cao2",
+            "chan2",
+            "chang2",
+            "chao2",
+            "chong2",
+            "chuan2",
+            "chuang2",
+            "cong2",
+            "cuo2"
+          ]
+        },
+        {
+          "code": "CI",
+          "tokens": [
+            "ceng4",
+            "chen4",
+            "cheng4",
+            "chi4",
+            "chu4",
+            "ci4",
+            "cu4",
+            "cun4"
+          ]
+        },
+        {
+          "code": "CL",
+          "tokens": [
+            "ceng1",
+            "che1",
+            "chen1",
+            "cheng1",
+            "chun1",
+            "chuo1",
+            "cun1",
+            "cuo1"
+          ]
+        },
+        {
+          "code": "PO",
+          "tokens": [
+            "pa2",
+            "pen2",
+            "peng2",
+            "pi2",
+            "pin2",
+            "ping2",
+            "pou2",
+            "pu2"
+          ]
+        },
+        {
+          "code": "TP",
+          "tokens": [
+            "tan2",
+            "tang2",
+            "tao2",
+            "tian2",
+            "tiao2",
+            "tong2",
+            "tuan2",
+            "tuo2"
+          ]
+        },
+        {
+          "code": "CH",
+          "tokens": [
+            "can1",
+            "chan1",
+            "chong1",
+            "chou1",
+            "chuan1",
+            "cong1",
+            "cuan1"
+          ]
+        },
+        {
+          "code": "CJ",
+          "tokens": [
+            "cai1",
+            "chai1",
+            "chi1",
+            "chu1",
+            "chuai1",
+            "ci1",
+            "cu1"
+          ]
+        },
+        {
+          "code": "CK",
+          "tokens": [
+            "cang1",
+            "cao1",
+            "chang1",
+            "chao1",
+            "chuang1",
+            "chui1",
+            "cui1"
+          ]
+        },
+        {
+          "code": "CS",
+          "tokens": [
+            "cai3",
+            "chai3",
+            "chen3",
+            "cheng3",
+            "chuai3",
+            "chun3",
+            "cun3"
+          ]
+        },
+        {
+          "code": "PL",
+          "tokens": [
+            "pen1",
+            "peng1",
+            "pie1",
+            "pin1",
+            "ping1",
+            "po1",
+            "po5"
+          ]
+        },
+        {
+          "code": "QO",
+          "tokens": [
+            "qi2",
+            "qia2",
+            "qin2",
+            "qing2",
+            "qiu2",
+            "qu2",
+            "qun2"
+          ]
+        },
+        {
+          "code": "QP",
+          "tokens": [
+            "qian2",
+            "qiang2",
+            "qiao2",
+            "qie2",
+            "qiong2",
+            "quan2",
+            "que2"
+          ]
+        },
+        {
+          "code": "XP",
+          "tokens": [
+            "xian2",
+            "xiang2",
+            "xiao2",
+            "xie2",
+            "xiong2",
+            "xuan2",
+            "xue2"
+          ]
+        },
+        {
+          "code": "ZH",
+          "tokens": [
+            "zan1",
+            "zhan1",
+            "zhong1",
+            "zhou1",
+            "zhuan1",
+            "zong1",
+            "zou1"
+          ]
+        },
+        {
+          "code": "ZI",
+          "tokens": [
+            "zen4",
+            "zeng4",
+            "zhen4",
+            "zheng4",
+            "zhi4",
+            "zhu4",
+            "zi4"
+          ]
+        },
+        {
+          "code": "ZL",
+          "tokens": [
+            "zeng1",
+            "zhe1",
+            "zhe5",
+            "zhen1",
+            "zheng1",
+            "zhun1",
+            "zhuo1"
+          ]
+        },
+        {
+          "code": "CY",
+          "tokens": [
+            "can4",
+            "chan4",
+            "chang4",
+            "chuan4",
+            "chuang4",
+            "cuan4"
+          ]
+        },
+        {
+          "code": "EI",
+          "tokens": [
+            "gu4",
+            "gun4",
+            "ju4",
+            "jun4",
+            "mi4",
+            "ming4"
+          ]
+        },
+        {
+          "code": "GO",
+          "tokens": [
+            "ga2",
+            "gen2",
+            "li2",
+            "lin2",
+            "ling2",
+            "liu2"
+          ]
+        },
+        {
+          "code": "LO",
+          "tokens": [
+            "la2",
+            "leng2",
+            "lou2",
+            "lu2",
+            "lun2",
+            "lv2"
+          ]
+        },
+        {
+          "code": "LP",
+          "tokens": [
+            "lan2",
+            "lang2",
+            "lao2",
+            "long2",
+            "luan2",
+            "luo2"
+          ]
+        },
+        {
+          "code": "PP",
+          "tokens": [
+            "pan2",
+            "pang2",
+            "pao2",
+            "pian2",
+            "piao2",
+            "po2"
+          ]
+        },
+        {
+          "code": "SH",
+          "tokens": [
+            "san1",
+            "shan1",
+            "shou1",
+            "shuan1",
+            "song1",
+            "sou1"
+          ]
+        },
+        {
+          "code": "SI",
+          "tokens": [
+            "shen4",
+            "sheng4",
+            "shi4",
+            "shu4",
+            "shun4",
+            "si4"
+          ]
+        },
+        {
+          "code": "SJ",
+          "tokens": [
+            "sai1",
+            "shai1",
+            "shi1",
+            "shu1",
+            "shuai1",
+            "si1"
+          ]
+        },
+        {
+          "code": "SK",
+          "tokens": [
+            "sang1",
+            "sao1",
+            "shang1",
+            "shang5",
+            "shao1",
+            "shuang1"
+          ]
+        },
+        {
+          "code": "SL",
+          "tokens": [
+            "sen1",
+            "seng1",
+            "she1",
+            "shen1",
+            "sheng1",
+            "shuo1"
+          ]
+        },
+        {
+          "code": "SO",
+          "tokens": [
+            "sha2",
+            "shen2",
+            "sheng2",
+            "shi2",
+            "shou2",
+            "shu2"
+          ]
+        },
+        {
+          "code": "TO",
+          "tokens": [
+            "teng2",
+            "ti2",
+            "ting2",
+            "tou2",
+            "tu2",
+            "tun2"
+          ]
+        }
+      ]
+    },
+    "extendedLayoutToned": {
+      "tokenCount": 1407,
+      "encodedTokenCount": 1407,
+      "occupiedBuckets": 513,
+      "collisionExcess": 894,
+      "collisionBucketCount": 352,
+      "missing": [],
+      "largestCollisionBuckets": [
+        {
+          "code": "CO",
+          "tokens": [
+            "cen2",
+            "ceng2",
+            "cha2",
+            "chen2",
+            "cheng2",
+            "chi2",
+            "chou2",
+            "chu2",
+            "chun2",
+            "ci2",
+            "cou2",
+            "cu2",
+            "cun2"
+          ]
+        },
+        {
+          "code": "CP",
+          "tokens": [
+            "can2",
+            "cang2",
+            "cao2",
+            "chan2",
+            "chang2",
+            "chao2",
+            "che2",
+            "chong2",
+            "chuan2",
+            "chuang2",
+            "cong2",
+            "cuan2",
+            "cuo2"
+          ]
+        },
+        {
+          "code": "CL",
+          "tokens": [
+            "cen1",
+            "ceng1",
+            "che1",
+            "chen1",
+            "chen5",
+            "cheng1",
+            "chun1",
+            "chuo1",
+            "cun1",
+            "cuo1"
+          ]
+        },
+        {
+          "code": "CJ",
+          "tokens": [
+            "cai1",
+            "chai1",
+            "chi1",
+            "chi5",
+            "chu1",
+            "chu5",
+            "chuai1",
+            "ci1",
+            "cu1"
+          ]
+        },
+        {
+          "code": "TP",
+          "tokens": [
+            "tan2",
+            "tang2",
+            "tao2",
+            "tian2",
+            "tiao2",
+            "tie2",
+            "tong2",
+            "tuan2",
+            "tuo2"
+          ]
+        },
+        {
+          "code": "CH",
+          "tokens": [
+            "can1",
+            "chan1",
+            "chong1",
+            "chou1",
+            "chuan1",
+            "cong1",
+            "cou1",
+            "cuan1"
+          ]
+        },
+        {
+          "code": "CI",
+          "tokens": [
+            "ceng4",
+            "chen4",
+            "cheng4",
+            "chi4",
+            "chu4",
+            "ci4",
+            "cu4",
+            "cun4"
+          ]
+        },
+        {
+          "code": "PO",
+          "tokens": [
+            "pa2",
+            "pen2",
+            "peng2",
+            "pi2",
+            "pin2",
+            "ping2",
+            "pou2",
+            "pu2"
+          ]
+        },
+        {
+          "code": "ZI",
+          "tokens": [
+            "zen4",
+            "zeng4",
+            "zhen4",
+            "zheng4",
+            "zhi4",
+            "zhu4",
+            "zhun4",
+            "zi4"
+          ]
+        },
+        {
+          "code": "ZL",
+          "tokens": [
+            "zen1",
+            "zeng1",
+            "zhe1",
+            "zhe5",
+            "zhen1",
+            "zheng1",
+            "zhun1",
+            "zhuo1"
+          ]
+        },
+        {
+          "code": "ZS",
+          "tokens": [
+            "zai3",
+            "zen3",
+            "zeng3",
+            "zhai3",
+            "zhen3",
+            "zheng3",
+            "zhuai3",
+            "zhun3"
+          ]
+        },
+        {
+          "code": "CK",
+          "tokens": [
+            "cang1",
+            "cao1",
+            "chang1",
+            "chao1",
+            "chuang1",
+            "chui1",
+            "cui1"
+          ]
+        },
+        {
+          "code": "CS",
+          "tokens": [
+            "cai3",
+            "chai3",
+            "chen3",
+            "cheng3",
+            "chuai3",
+            "chun3",
+            "cun3"
+          ]
+        },
+        {
+          "code": "CY",
+          "tokens": [
+            "can4",
+            "cang4",
+            "chan4",
+            "chang4",
+            "chuan4",
+            "chuang4",
+            "cuan4"
+          ]
+        },
+        {
+          "code": "NP",
+          "tokens": [
+            "nan2",
+            "nang2",
+            "nao2",
+            "ne2",
+            "nong2",
+            "nuan2",
+            "nuo2"
+          ]
+        },
+        {
+          "code": "PL",
+          "tokens": [
+            "pen1",
+            "peng1",
+            "pie1",
+            "pin1",
+            "ping1",
+            "po1",
+            "po5"
+          ]
+        },
+        {
+          "code": "QO",
+          "tokens": [
+            "qi2",
+            "qia2",
+            "qin2",
+            "qing2",
+            "qiu2",
+            "qu2",
+            "qun2"
+          ]
+        },
+        {
+          "code": "QP",
+          "tokens": [
+            "qian2",
+            "qiang2",
+            "qiao2",
+            "qie2",
+            "qiong2",
+            "quan2",
+            "que2"
+          ]
+        },
+        {
+          "code": "RP",
+          "tokens": [
+            "ran2",
+            "rang2",
+            "rao2",
+            "re2",
+            "rong2",
+            "ruan2",
+            "ruo2"
+          ]
+        },
+        {
+          "code": "SH",
+          "tokens": [
+            "san1",
+            "san5",
+            "shan1",
+            "shou1",
+            "shuan1",
+            "song1",
+            "sou1"
+          ]
+        },
+        {
+          "code": "SI",
+          "tokens": [
+            "seng4",
+            "shen4",
+            "sheng4",
+            "shi4",
+            "shu4",
+            "shun4",
+            "si4"
+          ]
+        },
+        {
+          "code": "SJ",
+          "tokens": [
+            "sai1",
+            "shai1",
+            "shi1",
+            "shi5",
+            "shu1",
+            "shuai1",
+            "si1"
+          ]
+        },
+        {
+          "code": "SL",
+          "tokens": [
+            "se1",
+            "sen1",
+            "seng1",
+            "she1",
+            "shen1",
+            "sheng1",
+            "shuo1"
+          ]
+        },
+        {
+          "code": "SO",
+          "tokens": [
+            "sha2",
+            "shen2",
+            "sheng2",
+            "shi2",
+            "shou2",
+            "shu2",
+            "si2"
+          ]
+        },
+        {
+          "code": "SS",
+          "tokens": [
+            "sai3",
+            "sen3",
+            "shai3",
+            "shen3",
+            "sheng3",
+            "shuai3",
+            "shun3"
+          ]
+        },
+        {
+          "code": "TO",
+          "tokens": [
+            "ta2",
+            "teng2",
+            "ti2",
+            "ting2",
+            "tou2",
+            "tu2",
+            "tun2"
+          ]
+        },
+        {
+          "code": "XO",
+          "tokens": [
+            "xi2",
+            "xia2",
+            "xin2",
+            "xing2",
+            "xiu2",
+            "xu2",
+            "xun2"
+          ]
+        },
+        {
+          "code": "XP",
+          "tokens": [
+            "xian2",
+            "xiang2",
+            "xiao2",
+            "xie2",
+            "xiong2",
+            "xuan2",
+            "xue2"
+          ]
+        },
+        {
+          "code": "ZH",
+          "tokens": [
+            "zan1",
+            "zhan1",
+            "zhong1",
+            "zhou1",
+            "zhuan1",
+            "zong1",
+            "zou1"
+          ]
+        },
+        {
+          "code": "ZO",
+          "tokens": [
+            "za2",
+            "zha2",
+            "zhen2",
+            "zhi2",
+            "zhou2",
+            "zhu2",
+            "zi2"
+          ]
+        }
+      ]
+    }
+  }
+}

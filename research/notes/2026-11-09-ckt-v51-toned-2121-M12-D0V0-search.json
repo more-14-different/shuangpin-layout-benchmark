@@ -1,0 +1,250 @@
+{
+  "version": "ckt-v5.1-toned-2121-M12-D0V0-physical-search-1",
+  "objective": "minimize full shape-only CKT v5.1 under fixed M12 component partitions",
+  "memory": {
+    "soundRuleM": 12,
+    "toneMergeM": 0,
+    "toneMergeConvention": "shared 5-tone-to-3-row contract; optionally report separately as T=3"
+  },
+  "guard": {
+    "deltaD": 0,
+    "deltaV": 0,
+    "semantics": "M12 first-key placement frozen; rhyme-family membership frozen; whole rhyme-column permutations and the i/u nasal-rule mirror are allowed"
+  },
+  "search": {
+    "orientations": [
+      "nasal an/ang: i -1, u +1 (seed); umlaut +2",
+      "nasal an/ang: i +1, u -1 (mirror of seed); umlaut +2 unchanged"
+    ],
+    "rhymeColumnPermutationsPerOrientation": 5040,
+    "rhymeColumnCoverage": "exhaustive with seed first-group placement in phase 1",
+    "firstGroupPermutationCoverage": "frozen at the audited M12 placement to enforce deltaD=0",
+    "sampleRowsPerTrack": 300,
+    "resampleRowsPerTrack": 2000,
+    "preselectedPerOrientation": 12,
+    "fullFinalists": 1,
+    "coordinatePasses": 2,
+    "finalCoordinateAudit": "complete 144-policy and 120-order coordinate passes, alternated to stability or three passes",
+    "pendingFinalCertification": "17,280 Cartesian auxiliary-order x word-policy combinations for the final winner only",
+    "globalOptimality": "rhyme columns are exhaustive; i/u orientation is exhaustive over the two admitted rules; final auxiliary/policy Cartesian certification remains pending"
+  },
+  "historicalBaseline": {
+    "id": "HIST-qaopl_nasal_minimal",
+    "score": 9.74594565887161,
+    "provenance": "prior complete 144-policy search followed by complete 120-order search"
+  },
+  "phase1": [
+    {
+      "orientation": "nasal an/ang: i -1, u +1 (seed); umlaut +2",
+      "columnExhaustive": {
+        "count": 5040,
+        "bestWithSeedFirstPlacement": {
+          "first": [
+            "W",
+            "E",
+            "R",
+            "T",
+            "Y",
+            "U",
+            "I",
+            "S",
+            "D",
+            "F",
+            "G",
+            "H",
+            "J",
+            "K",
+            "Z",
+            "X",
+            "C",
+            "V",
+            "B",
+            "N",
+            "M"
+          ],
+          "columns": [
+            0,
+            1,
+            4,
+            2,
+            6,
+            3,
+            5
+          ],
+          "score": 7.285717143874322
+        }
+      },
+      "annealedCandidates": 32,
+      "bestSampleScore": 7.285717143874322
+    },
+    {
+      "orientation": "nasal an/ang: i +1, u -1 (mirror of seed); umlaut +2 unchanged",
+      "columnExhaustive": {
+        "count": 5040,
+        "bestWithSeedFirstPlacement": {
+          "first": [
+            "W",
+            "E",
+            "R",
+            "T",
+            "Y",
+            "U",
+            "I",
+            "S",
+            "D",
+            "F",
+            "G",
+            "H",
+            "J",
+            "K",
+            "Z",
+            "X",
+            "C",
+            "V",
+            "B",
+            "N",
+            "M"
+          ],
+          "columns": [
+            0,
+            1,
+            4,
+            2,
+            6,
+            3,
+            5
+          ],
+          "score": 7.287130570436596
+        }
+      },
+      "annealedCandidates": 32,
+      "bestSampleScore": 7.287130570436596
+    }
+  ],
+  "finalists": [
+    {
+      "id": "HIST-qaopl_nasal_minimal-D0V0-C1",
+      "orientation": "nasal an/ang: i -1, u +1 (seed); umlaut +2",
+      "sampleScore": 7.291482110579003,
+      "resampleScore": 8.10877126420821,
+      "physicalPermutation": {
+        "firstKeysFrom": "WERTYUISDFGHJKZXCVBNM",
+        "firstKeysTo": "WERTYUISDFGHJKZXCVBNM",
+        "columnsFrom": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "columnsTo": [
+          0,
+          1,
+          4,
+          2,
+          5,
+          3,
+          6
+        ]
+      },
+      "result": {
+        "shapeKeysByMeaning": "QOLAP",
+        "toneKeysByTone": "AOLQP",
+        "score": 9.659329215730638,
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 118.12186389122198,
+            "firstAuxRate": 0.19857412573157107,
+            "secondAuxRate": 0.03457697733976136,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0028796482634510776,
+            "meanRejectedCandidates": 0.0032658936923928537,
+            "meanPageActions": 0.0000010525992007497313,
+            "meanKeys": 2.2331511030713322,
+            "effectiveMs": 189.9585942350722
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 420.83850678207443,
+            "firstAuxRate": 0.1425095575415115,
+            "secondAuxRate": 0.018420476678459603,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0011592513059399184,
+            "meanRejectedCandidates": 0.0012996760525065773,
+            "meanPageActions": 0,
+            "meanKeys": 4.160930034219971,
+            "effectiveMs": 469.878051634255
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 340.52572403041984,
+            "firstAuxRate": 0.48237695895234833,
+            "secondAuxRate": 0.17379438259226848,
+            "thirdAuxRate": 0.03829732245806014,
+            "selectionRate": 0.0044568739334509624,
+            "meanRejectedCandidates": 0.005292165513189306,
+            "meanPageActions": 0.000001758541081054859,
+            "meanKeys": 3.694468664002677,
+            "effectiveMs": 551.8055834292772
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 447.79041199044906,
+            "firstAuxRate": 0.23742520508866852,
+            "secondAuxRate": 0.027779734514802888,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.00169154550487428,
+            "meanRejectedCandidates": 0.001980631268334561,
+            "meanPageActions": 0,
+            "meanKeys": 4.265204939603471,
+            "effectiveMs": 528.4658527378318
+          }
+        },
+        "policy": {
+          "word2": "21",
+          "word3": "213",
+          "word4": "23"
+        },
+        "exhaustive": {
+          "auxiliaryOrders": 120,
+          "wordPoliciesPerPass": 144,
+          "coordinatePasses": 2,
+          "passes": [
+            {
+              "inputShapeKeysByMeaning": "QAOPL",
+              "policy": {
+                "word2": "12",
+                "word3": "213",
+                "word4": "24"
+              },
+              "policyStageScore": 9.668840861359671,
+              "outputShapeKeysByMeaning": "QOPAL",
+              "score": 9.664047437595212
+            },
+            {
+              "inputShapeKeysByMeaning": "QOPAL",
+              "policy": {
+                "word2": "21",
+                "word3": "213",
+                "word4": "23"
+              },
+              "policyStageScore": 9.659567728815578,
+              "outputShapeKeysByMeaning": "QOLAP",
+              "score": 9.659329215730638
+            }
+          ],
+          "cartesianCombinationCount": 17280,
+          "cartesianExhaustive": false,
+          "status": "complete 144-policy and 120-order coordinate passes; final winner still needs a separate 17,280 Cartesian certification"
+        }
+      }
+    }
+  ]
+}

@@ -931,6 +931,9 @@ fn run_cuda_batch_broker(
             }
             let plan_slot = match mode {
                 InputMode::Keytao => &mut keytao_plan,
+                InputMode::KeytaoV51 => {
+                    return Err("CUDA batch does not support keytao-v51".to_owned());
+                }
                 InputMode::Sanpin => &mut sanpin_plan,
             };
             let plan = match plan_slot {
@@ -950,6 +953,7 @@ fn run_cuda_batch_broker(
                     total_stats.observe(lane_count, Some(&timings));
                     match mode {
                         InputMode::Keytao => keytao_stats.observe(lane_count, Some(&timings)),
+                        InputMode::KeytaoV51 => unreachable!(),
                         InputMode::Sanpin => sanpin_stats.observe(lane_count, Some(&timings)),
                     }
                     for (request, lane_outcomes) in matching.into_iter().zip(outcomes) {
@@ -960,6 +964,7 @@ fn run_cuda_batch_broker(
                     total_stats.observe(lane_count, None);
                     match mode {
                         InputMode::Keytao => keytao_stats.observe(lane_count, None),
+                        InputMode::KeytaoV51 => unreachable!(),
                         InputMode::Sanpin => sanpin_stats.observe(lane_count, None),
                     }
                     for request in matching {

@@ -1,0 +1,291 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import test from 'node:test';
+import {createRequire} from 'node:module';
+
+const require = createRequire(import.meta.url);
+const {
+  buildFactorizations,
+  indexedFactorization,
+  strictBounds,
+} = require('../tools/search_toned_2121_factorizations.js');
+const {remapAuxiliaryKeys} = require('../tools/optimize_toned_2121_aux_order.js');
+const {
+  explicitMemoryAudit,
+  guardRecord,
+} = require('../tools/search_toned_2121_constrained_ckt.js');
+const {traditionalOnsetD} = require('../tools/search_toned_2121_pindu11_lowmd.js');
+const {reorderColumns} = require('../tools/optimize_toned_2121_pindu11_lowmd_columns.js');
+const {buildToned2121Contract} = require('../tools/toned_2121_contract.js');
+const {
+  partitionGroups,
+  setPartitions,
+} = require('../tools/search_toned_2121_pindu11_rhyme_partitions.js');
+const {
+  currentRawAssignment,
+  rawRhymeInventory,
+} = require('../tools/search_toned_2121_pindu16_rhyme.js');
+
+const seeds = JSON.parse(fs.readFileSync(new URL(
+  '../research/config/ckt-v51-toned-2121-seeds.json', import.meta.url), 'utf8'));
+
+test('four toned 21x21 factorizations cover Common399 with audited component counts', () => {
+  const pinyin = seeds.decomposition.map(row => row.pinyin);
+  const factorizations = buildFactorizations(seeds).map(definition =>
+    indexedFactorization(definition, pinyin));
+  assert.deepEqual(factorizations.map(value => ({
+    id: value.id,
+    pinyin: value.pairByPinyin.size,
+    first: value.firstComponents.length,
+    second: value.secondComponents.length,
+  })), [
+    {id: 'shengjie-rhyme-body', pinyin: 399, first: 55, second: 16},
+    {id: 'shengjie-pindu11-rhyme', pinyin: 399, first: 55, second: 11},
+    {id: 'restored-onset-full-final', pinyin: 399, first: 22, second: 37},
+    {id: 'written-onset-written-final', pinyin: 399, first: 27, second: 35},
+  ]);
+});
+
+test('Pindu11 factorization applies only the three published rhyme merges', () => {
+  const pindu11 = buildFactorizations(seeds)
+    .find(value => value.id === 'shengjie-pindu11-rhyme');
+  assert.deepEqual(pindu11.split('er'), ['_', '_']);
+  assert.deepEqual(pindu11.split('bo'), ['b', 'e']);
+  assert.deepEqual(pindu11.split('ben'), ['b', 'en']);
+  assert.deepEqual(pindu11.split('beng'), ['b', 'en']);
+  assert.deepEqual(pindu11.split('bang'), ['b', 'ang']);
+});
+
+test('strict collision bounds distinguish tone-row signatures from the 441 capacity bound', () => {
+  const factorization = {
+    pairByPinyin: new Map([
+      ['a', [0, 0]],
+      ['ba', [1, 0]],
+    ]),
+  };
+  const tokens = [
+    {pinyin: 'a', row: 0},
+    {pinyin: 'a', row: 0},
+    {pinyin: 'a', row: 1},
+    {pinyin: 'ba', row: 0},
+  ];
+  const bounds = strictBounds(tokens, factorization);
+  assert.equal(bounds.distinctTonedSyllables, 4);
+  assert.equal(bounds.toneRowMergeCollisionExcessLowerBound, 1);
+  assert.equal(bounds.identicalFactorSignatureCollisionExcessLowerBound, 1);
+  assert.equal(bounds.combinedStrictCollisionExcessLowerBound, 1);
+  assert.equal(bounds.occupiedBucketUpperBound, 3);
+});
+
+test('seed inventory separates Common1237 audit tokens from Common399 CKT code coverage', () => {
+  assert.equal(seeds.auditTokenKeys.length, 1237);
+  assert.equal(seeds.layoutTokenKeys.length, 1407);
+  assert.equal(seeds.qaoplTonedShengjieSeeds.length, 7);
+  for (const candidate of seeds.qaoplTonedShengjieSeeds) {
+    assert.equal(candidate.tonedCodes.length, seeds.layoutTokenKeys.length);
+    assert.ok(candidate.tonedCodes.every(Boolean));
+  }
+});
+
+test('first structural search reaches the rigorous 441-bucket capacity ceiling for all splits', () => {
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-factorization-search.json', import.meta.url), 'utf8'));
+  for (const factorization of report.factorizations) {
+    assert.equal(factorization.strictBounds.combinedStrictCollisionExcessLowerBound, 796);
+    assert.equal(factorization.strictBounds.occupiedBucketUpperBound, 441);
+    assert.equal(factorization.heuristicSearch.champion.occupiedBuckets, 441);
+    assert.equal(factorization.heuristicSearch.champion.collisionExcess, 796);
+  }
+});
+
+test('Pindu11 fixed-policy screen is complete and reaches the high-performance region', () => {
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu11-screen-layouts.json', import.meta.url), 'utf8'));
+  const score = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-screen-ckt-fixed-policy.json',
+    import.meta.url), 'utf8'));
+  assert.equal(layouts.layouts.length, 8);
+  assert.ok(layouts.layouts.every(value => value.factorization === 'shengjie-pindu11-rhyme'));
+  assert.ok(layouts.layouts.every(value => value.tonedCodes.length === 1407 &&
+    value.tonedCodes.every(Boolean)));
+  assert.deepEqual(score.screeningMode, {
+    kind: 'fixed-policy',
+    policy: {word2: '12', word3: '213', word4: '24'},
+    shapeKeysByMeaning: 'QAOPL',
+  });
+  assert.equal(score.results.length, 8);
+  assert.equal(score.results[0].id, 'SCREEN-shengjie-pindu11-rhyme-01');
+  assert.ok(score.results[0].score < 9.21);
+});
+
+test('Pindu11 low-MD projection exhausts 21^5 and freezes auditable M/D bounds', () => {
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-exhaustive.json',
+    import.meta.url), 'utf8'));
+  assert.equal(report.firstProjection.exactSearchSpace, 21 ** 5);
+  assert.equal(report.enumeration.evaluatedAssignments, 21 ** 5);
+  assert.equal(report.enumeration.maximumOccupied, 437);
+  assert.equal(report.memoryAndDisorderAudit.lowerM.total, 24);
+  assert.equal(report.memoryAndDisorderAudit.conservativeMGuard.total, 26);
+  assert.equal(report.memoryAndDisorderAudit.traditionalOnsetDMinimum, 11);
+  assert.equal(report.enumeration.minimumDExactSearchSpace, 2 * 21 ** 4);
+  assert.deepEqual(report.memoryAndDisorderAudit.forcedOccupiedKeyFamilies, ['q', 'p', 'l']);
+});
+
+test('Pindu11 exhaustive rhyme partitions cover S(11, 7)', () => {
+  let first;
+  let last;
+  const count = setPartitions(11, 7, (labels, ordinal) => {
+    if (ordinal === 0) first = [...labels];
+    last = [...labels];
+  });
+  assert.equal(count, 63987);
+  assert.equal(partitionGroups(first).length, 7);
+  assert.equal(partitionGroups(last).length, 7);
+  assert.equal(new Set(first).size, 7);
+  assert.equal(new Set(last).size, 7);
+});
+
+test('raw-rhyme search removes all three Pindu11 normalizations', () => {
+  const raw = rawRhymeInventory(seeds);
+  assert.equal(raw.rhymes.length, 16);
+  const assignment = currentRawAssignment(raw.rhymes);
+  assert.equal(assignment.length, 16);
+  assert.equal(new Set(assignment).size, 7);
+  assert.equal(assignment[raw.rhymes.indexOf('_')], assignment[raw.rhymes.indexOf('er')]);
+  assert.equal(assignment[raw.rhymes.indexOf('e')], assignment[raw.rhymes.indexOf('o')]);
+});
+
+test('column refinement records the effective logical-to-physical composition', () => {
+  const layout = {id: 'base', columnOrder: [4, 0, 6, 5, 2, 1, 3], tonedCodes: ['Y']};
+  const refined = reorderColumns(layout, [0, 2, 3, 4, 6, 5, 1], buildToned2121Contract());
+  assert.deepEqual(refined.columnRemap, [0, 2, 3, 4, 6, 5, 1]);
+  assert.deepEqual(refined.effectiveColumnOrder, [6, 0, 1, 5, 3, 2, 4]);
+});
+
+test('low-fragment rhyme search keeps the exact 11-rhyme audit and raw-16 frontier', () => {
+  const exhaustive = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-10-ckt-v51-toned-2121-pindu11-dmin-rhyme-partitions.json',
+    import.meta.url), 'utf8'));
+  assert.equal(exhaustive.exactUnlabelledPartitionCount, 63987);
+  assert.equal(exhaustive.exactEvaluatedBasePartitionPairs, 8 * 63987);
+  assert.deepEqual(exhaustive.firstConstraint,
+    {traditionalOnsetD: 11, onsetKeyIncidences: 27, onsetFragmentation: 9});
+
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu16-dmin-rhyme-column-finalists.json',
+    import.meta.url), 'utf8'));
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-10-ckt-v51-toned-2121-pindu16-dmin-rhyme-column-full.json',
+    import.meta.url), 'utf8'));
+  const champion = layouts.layouts.find(value => value.id === report.results[0].id);
+  assert.equal(report.results[0].score, 9.557279201128114);
+  assert.equal(champion.memoryAudit.traditionalOnsetD, 11);
+  assert.equal(champion.memoryAudit.onsetFragmentation, 9);
+  assert.deepEqual(champion.effectiveColumnOrder, [6, 0, 1, 5, 3, 2, 4]);
+  assert.deepEqual(champion.rawRhymeGroups, [
+    ['_'], ['a', 'er', 'ou'], ['ai', 'ei', 'n'], ['an', 'ong'],
+    ['ang', 'o'], ['ao', 'en'], ['e', 'eng', 'ng'],
+  ]);
+});
+
+test('Pindu11 low-MD CKT champion retains the upstream first grammar', () => {
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu11-lowmd-column-finalists.json',
+    import.meta.url), 'utf8'));
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd-column-full.json',
+    import.meta.url), 'utf8'));
+  const champion = layouts.layouts.find(value =>
+    value.id === 'LOWMD-pindu11-570133-C0412356');
+  assert.ok(champion);
+  assert.deepEqual(champion.forbiddenSourceProjection,
+    {Q: 'R', A: 'N', O: 'H', P: 'V', L: 'Y'});
+  assert.deepEqual(champion.columnOrder, [0, 4, 1, 2, 3, 5, 6]);
+  assert.equal(champion.tonedCodes.length, 1407);
+  assert.ok(champion.tonedCodes.every(Boolean));
+  assert.equal(report.results[0].id, champion.id);
+  assert.equal(traditionalOnsetD(['R', 'N', 'H', 'V', 'Y']), 12);
+  assert.ok(report.results[0].score < 9.542);
+});
+
+test('Pindu11 minimum-D champion reaches D11 without reopening the first grammar', () => {
+  const layouts = JSON.parse(fs.readFileSync(new URL(
+    '../research/config/ckt-v51-toned-2121-pindu11-dmin-column-finalists.json',
+    import.meta.url), 'utf8'));
+  const report = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-dmin-column-full.json',
+    import.meta.url), 'utf8'));
+  const champion = layouts.layouts.find(value =>
+    value.id === 'LOWMD-pindu11-499309-C0412356');
+  assert.ok(champion);
+  assert.deepEqual(champion.forbiddenSourceProjection,
+    {Q: 'R', A: 'H', O: 'N', P: 'Y', L: 'K'});
+  assert.equal(champion.memoryAudit.traditionalOnsetD, 11);
+  assert.equal(report.results[0].id, champion.id);
+  assert.ok(report.results[0].score < 9.56);
+});
+
+test('auxiliary-order refinement renames only the frozen QAOPL auxiliary domain', () => {
+  assert.equal(remapAuxiliaryKeys('WZQAOPL', 'QOLAP'), 'WZQOLAP');
+  assert.equal(remapAuxiliaryKeys('WSDF', 'QOLAP'), 'WSDF');
+});
+
+test('seed-relative MDV guard accumulates without claiming an exact new M', () => {
+  const seed = {id: 'M12', declaredMemory: {M: 12}};
+  assert.deepEqual(guardRecord(seed, 1, 0), {
+    seedM: 12,
+    deltaD: 1,
+    deltaV: 0,
+    MGuard: 13,
+    definition: 'conservative seed-relative guard: MGuard = seedM + deltaD + deltaV',
+  });
+  const child = {id: 'D1', guard: guardRecord(seed, 1, 0)};
+  assert.deepEqual(guardRecord(child, 1, 1), {
+    seedM: 12,
+    deltaD: 2,
+    deltaV: 1,
+    MGuard: 15,
+    definition: 'conservative seed-relative guard: MGuard = seedM + deltaD + deltaV',
+  });
+});
+
+test('explicit additive memory audit counts two shengjie moves and one rhyme move as M15', () => {
+  const base = {inheritedSeedMemory: {
+    M: 12,
+    globalMigrations: 4,
+    shengjieExceptions: 4,
+    rhymeFamilyDeviations: 2,
+    uniformRules: 2,
+  }};
+  assert.deepEqual(explicitMemoryAudit(base, [
+    {kind: 'first-family', family: 'f'},
+    {kind: 'first-family', family: 'gu'},
+    {kind: 'second-family-shift', family: 'ou'},
+  ]), {
+    globalMigrations: 4,
+    shengjieExceptions: 6,
+    rhymeFamilyDeviations: 3,
+    uniformRules: 2,
+    status: 'exact count for this explicit additive encoding; not a proof of globally minimal M',
+    M: 15,
+  });
+});
+
+test('constrained champion is selected by CKT while bucket occupancy remains diagnostic', () => {
+  const result = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-constrained-champion-ckt.json', import.meta.url), 'utf8'));
+  const champion = result.results[0];
+  assert.equal(champion.id,
+    'HIST-qaopl_nasal_minimal-D1-f-K-D1-gu-E-V1-ou-5');
+  assert.equal(champion.shapeKeysByMeaning, 'QOLAP');
+  assert.equal(champion.toneKeysByTone, 'AOLQP');
+  assert.deepEqual(champion.policy, {word2: '21', word3: '213', word4: '24'});
+  assert.ok(champion.score < 9.62);
+  const search = JSON.parse(fs.readFileSync(new URL(
+    '../research/notes/2026-11-09-ckt-v51-toned-2121-constrained-round3-search.json', import.meta.url), 'utf8'));
+  assert.equal(search.objective,
+    'minimize shape-only CKT v5.1; occupied buckets are audit-only');
+  assert.equal(search.finalists[0].occupiedBucketsAuditOnly, 428);
+  assert.equal(search.finalists[0].guard.MGuard, 15);
+});

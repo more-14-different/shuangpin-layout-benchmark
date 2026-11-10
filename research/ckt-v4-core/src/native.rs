@@ -6,7 +6,7 @@ use std::io::{BufReader, Read};
 use std::path::Path;
 
 const MAGIC: &[u8; 8] = b"CKTV4COR";
-const FORMAT_VERSION: u16 = 1;
+const FORMAT_VERSION: u16 = 2;
 const FILE_END: u32 = 0xc4c0_ca5e;
 const MAX_HEADER_BYTES: usize = 1 << 20;
 const MAX_ITEMS: usize = 5_000_000;
@@ -47,7 +47,7 @@ struct WordTemplate<const N: usize> {
     py: [u16; N],
     tones: [u8; N],
     weight: f64,
-    shape: [u8; 2],
+    shape: [u8; N],
 }
 
 #[derive(Clone, Debug)]
@@ -63,6 +63,7 @@ pub struct NativeCorpus {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum InputMode {
     Keytao,
+    KeytaoV51,
     Sanpin,
 }
 
@@ -70,6 +71,7 @@ impl InputMode {
     pub fn parse(value: &str) -> Result<Self, String> {
         match value {
             "keytao" => Ok(Self::Keytao),
+            "keytao-v51" => Ok(Self::KeytaoV51),
             "sanpin" => Ok(Self::Sanpin),
             _ => Err(format!("unknown input mode {value:?}")),
         }
@@ -104,6 +106,7 @@ pub struct SchemeState {
     pub capacity: [u8; 2],
     pub contract: Contract,
     codes: Vec<Option<[u8; 2]>>,
+    toned_codes: Option<Vec<[Option<[u8; 2]>; 5]>>,
     tone: [u8; 5],
 }
 
@@ -504,6 +507,7 @@ impl RegularLayout {
                 Contract::FourCodeTop
             },
             codes,
+            toned_codes: None,
             tone: self.tone,
         })
     }
@@ -556,7 +560,46 @@ impl SchemeState {
             capacity: input.capacity,
             contract,
             codes,
+            toned_codes: None,
             tone,
+        })
+    }
+
+    /// Build a direct code table whose two-key base code may differ by lexical
+    /// tone. This is the state boundary needed by toned 21x21 research; the
+    /// historical regular-layout compiler continues to use one code per
+    /// untoned pinyin and leaves `toned_codes` absent.
+    pub fn from_toned_codes(
+        id: impl Into<String>,
+        capacity: [u8; 2],
+        toned_codes: Vec<[Option<[u8; 2]>; 5]>,
+        tone_keys_by_tone: [u8; 5],
+    ) -> Result<Self, String> {
+        if toned_codes.is_empty() {
+            return Err("toned code table must not be empty".to_owned());
+        }
+        if toned_codes
+            .iter()
+            .flatten()
+            .flatten()
+            .flatten()
+            .any(|&key| key >= 34)
+            || tone_keys_by_tone.iter().any(|&key| key >= 34)
+        {
+            return Err("toned code table contains a key outside the 34-key domain".to_owned());
+        }
+        let contract = if capacity == [21, 21] {
+            Contract::Traditional21x21
+        } else {
+            Contract::FourCodeTop
+        };
+        Ok(Self {
+            id: id.into(),
+            capacity,
+            contract,
+            codes: vec![None; toned_codes.len()],
+            toned_codes: Some(toned_codes),
+            tone: tone_keys_by_tone,
         })
     }
 
@@ -564,7 +607,42 @@ impl SchemeState {
         self.codes.get(index).copied().flatten()
     }
 
+    pub fn code_at_tone(&self, index: usize, tone: u8) -> Option<[u8; 2]> {
+        self.code(index, tone).copied()
+    }
+
+    pub fn assign_toned_code(
+        &mut self,
+        pinyin: usize,
+        tone: u8,
+        code: Option<[u8; 2]>,
+    ) -> Result<(), String> {
+        let tone_index = tone
+            .checked_sub(1)
+            .filter(|&index| index < 5)
+            .ok_or_else(|| "toned code assignment needs a tone in 1..=5".to_owned())?;
+        if code.is_some_and(|pair| pair.into_iter().any(|key| key >= 34)) {
+            return Err(
+                "toned code assignment contains a key outside the 34-key domain".to_owned(),
+            );
+        }
+        let table = self
+            .toned_codes
+            .as_mut()
+            .ok_or_else(|| "scheme state does not use a direct toned code table".to_owned())?;
+        let row = table
+            .get_mut(pinyin)
+            .ok_or_else(|| "toned code pinyin index is outside the scheme".to_owned())?;
+        row[usize::from(tone_index)] = code;
+        Ok(())
+    }
+
     pub fn swap_pinyin_codes(&mut self, left: usize, right: usize) -> Result<(), String> {
+        if self.toned_codes.is_some() {
+            return Err(
+                "untoned pinyin swap is unavailable for a direct toned code table".to_owned(),
+            );
+        }
         if left >= self.codes.len() || right >= self.codes.len() {
             return Err("pinyin swap index is outside the scheme".to_owned());
         }
@@ -590,6 +668,7 @@ impl DependencyIndex {
         if old.codes.len() != new.codes.len()
             || old.capacity != new.capacity
             || old.contract != new.contract
+            || old.toned_codes.is_some() != new.toned_codes.is_some()
         {
             return Err(
                 "incremental updates require an unchanged scheme topology and capacity".to_owned(),
@@ -607,6 +686,16 @@ impl DependencyIndex {
         for (index, (left, right)) in old.codes.iter().zip(&new.codes).enumerate() {
             if left != right {
                 affected.extend(&self.by_pinyin[index]);
+            }
+        }
+        if let (Some(old_codes), Some(new_codes)) = (&old.toned_codes, &new.toned_codes) {
+            if old_codes.len() != new_codes.len() || old_codes.len() != old.codes.len() {
+                return Err("incremental toned code table length changed".to_owned());
+            }
+            for (index, (left, right)) in old_codes.iter().zip(new_codes).enumerate() {
+                if left != right {
+                    affected.extend(&self.by_pinyin[index]);
+                }
             }
         }
         for slot in 0..5 {
@@ -708,9 +797,7 @@ impl NativeCorpus {
         match source {
             RowSource::Character(index) => self.generate_character(index, scheme, mode),
             RowSource::Word2(index) => self.generate_word2(index, scheme, mode),
-            RowSource::Word3(index) => {
-                self.generate_long_word(&self.word3[index], index, Kind::Word3, scheme, mode)
-            }
+            RowSource::Word3(index) => self.generate_word3(index, scheme, mode),
             RowSource::Word4(index) => {
                 self.generate_long_word(&self.word4[index], index, Kind::Word4, scheme, mode)
             }
@@ -724,12 +811,12 @@ impl NativeCorpus {
         mode: InputMode,
     ) -> Result<Option<GeneratedTemplate>, String> {
         let item = &self.characters[index];
-        let Some(base) = scheme.code(usize::from(item.py)) else {
+        let Some(base) = scheme.code(usize::from(item.py), item.tone) else {
             return Ok(None);
         };
         let mut tone_slots = Vec::new();
         let stages = match mode {
-            InputMode::Keytao => {
+            InputMode::Keytao | InputMode::KeytaoV51 => {
                 if item.shape.contains(&u8::MAX) {
                     return Ok(None);
                 }
@@ -794,10 +881,11 @@ impl NativeCorpus {
         mode: InputMode,
     ) -> Result<Option<GeneratedTemplate>, String> {
         let item = &self.word2[index];
-        let Some(base) = scheme.word_base(&item.py) else {
+        let Some(base) = scheme.word_base(&item.py, &item.tones) else {
             return Ok(None);
         };
         let slots = match mode {
+            InputMode::KeytaoV51 => [item.shape[0], item.shape[1]],
             InputMode::Keytao if scheme.contract == Contract::Traditional21x21 => item.shape,
             InputMode::Keytao => [item.shape[1], item.shape[0]],
             InputMode::Sanpin => [item.tones[1] - 1, item.tones[0] - 1],
@@ -831,6 +919,58 @@ impl NativeCorpus {
         }))
     }
 
+    fn generate_word3(
+        &self,
+        index: usize,
+        scheme: &SchemeState,
+        mode: InputMode,
+    ) -> Result<Option<GeneratedTemplate>, String> {
+        let item = &self.word3[index];
+        if mode != InputMode::KeytaoV51 {
+            return self.generate_long_word(item, index, Kind::Word3, scheme, mode);
+        }
+        let Some(codes) = scheme.word_codes(&item.py, &item.tones) else {
+            return Ok(None);
+        };
+        let stem: Vec<u8> = codes.iter().map(|code| code[0]).collect();
+        let slots = [item.shape[1], item.shape[0], item.shape[2]];
+        if slots.contains(&u8::MAX) {
+            return Ok(None);
+        }
+        let first = scheme.tone[usize::from(slots[0])];
+        let second = scheme.tone[usize::from(slots[1])];
+        let third = scheme.tone[usize::from(slots[2])];
+        let paths = vec![
+            stem.clone(),
+            append(&stem, &[first]),
+            append(&stem, &[first, second]),
+            append(&stem, &[first, second, third]),
+        ];
+        let pools = [
+            crate::Pool::Word3Three,
+            crate::Pool::Word3FourB,
+            crate::Pool::Word3FiveBb,
+            crate::Pool::Word3SixBbb,
+        ];
+        let stages = make_stages_with_pools(
+            &self.alphabet,
+            paths.into_iter().map(|path| vec![path]).collect(),
+            &pools,
+        )?;
+        Ok(Some(GeneratedTemplate {
+            row: Row {
+                id: format!("word3:{index}"),
+                text: String::new(),
+                kind: Kind::Word3,
+                weight: item.weight,
+                base_length: 3,
+                stages,
+            },
+            pinyin: item.py.to_vec(),
+            tone_slots: slots.to_vec(),
+        }))
+    }
+
     fn generate_long_word<const N: usize>(
         &self,
         item: &WordTemplate<N>,
@@ -839,12 +979,14 @@ impl NativeCorpus {
         scheme: &SchemeState,
         mode: InputMode,
     ) -> Result<Option<GeneratedTemplate>, String> {
-        let Some(codes) = scheme.word_codes(&item.py) else {
+        let Some(codes) = scheme.word_codes(&item.py, &item.tones) else {
             return Ok(None);
         };
         let mut stem: Vec<u8> = codes.iter().map(|code| code[0]).collect();
         let slots = match mode {
-            InputMode::Keytao => item.shape,
+            InputMode::KeytaoV51 if kind == Kind::Word4 => [item.shape[1], item.shape[3]],
+            InputMode::KeytaoV51 => [item.shape[0], item.shape[1]],
+            InputMode::Keytao => [item.shape[0], item.shape[1]],
             InputMode::Sanpin if scheme.contract == Contract::Traditional21x21 => {
                 [item.tones[N - 1] - 1, item.tones[0] - 1]
             }
@@ -904,7 +1046,8 @@ impl NativeCorpus {
         if &magic != MAGIC {
             return Err("not a CKT v4 native corpus".to_owned());
         }
-        if read_u16(&mut reader)? != FORMAT_VERSION {
+        let format_version = read_u16(&mut reader)?;
+        if !(1..=FORMAT_VERSION).contains(&format_version) {
             return Err("unsupported native corpus format version".to_owned());
         }
         if read_u16(&mut reader)? != 0 {
@@ -920,7 +1063,10 @@ impl NativeCorpus {
             .map_err(|error| error.to_string())?;
         let header: NativeCorpusHeader =
             serde_json::from_slice(&bytes).map_err(|error| error.to_string())?;
-        if header.version != "ckt-v4-native-corpus-1" {
+        if !matches!(
+            header.version.as_str(),
+            "ckt-v4-native-corpus-1" | "ckt-v4-native-corpus-2"
+        ) {
             return Err(format!(
                 "unsupported native corpus metadata {}",
                 header.version
@@ -946,9 +1092,9 @@ impl NativeCorpus {
                 stroke_mask: read_u8(&mut reader)?,
             });
         }
-        let word2 = read_words(&mut reader, counts.word2)?;
-        let word3 = read_words(&mut reader, counts.word3)?;
-        let word4 = read_words(&mut reader, counts.word4)?;
+        let word2 = read_words(&mut reader, counts.word2, format_version)?;
+        let word3 = read_words(&mut reader, counts.word3, format_version)?;
+        let word4 = read_words(&mut reader, counts.word4, format_version)?;
         if read_u32(&mut reader)? != FILE_END {
             return Err("invalid native corpus end marker".to_owned());
         }
@@ -971,7 +1117,7 @@ impl NativeCorpus {
                 &[item.py],
                 &[item.tone],
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
             if item.stroke_mask & !0x1f != 0 {
@@ -983,7 +1129,7 @@ impl NativeCorpus {
                 &item.py,
                 &item.tones,
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
         }
@@ -992,7 +1138,7 @@ impl NativeCorpus {
                 &item.py,
                 &item.tones,
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
         }
@@ -1001,7 +1147,7 @@ impl NativeCorpus {
                 &item.py,
                 &item.tones,
                 item.weight,
-                item.shape,
+                &item.shape,
                 header.pinyin_count,
             )?;
         }
@@ -1018,20 +1164,33 @@ impl NativeCorpus {
 }
 
 impl SchemeState {
-    fn code(&self, py: usize) -> Option<&[u8; 2]> {
+    fn code(&self, py: usize, tone: u8) -> Option<&[u8; 2]> {
+        if let Some(toned) = &self.toned_codes {
+            let tone_index = usize::from(tone.checked_sub(1)?);
+            return toned.get(py)?.get(tone_index)?.as_ref();
+        }
         self.codes.get(py).and_then(Option::as_ref)
     }
 
-    fn word_codes<const N: usize>(&self, pinyin: &[u16; N]) -> Option<[[u8; 2]; N]> {
+    fn word_codes<const N: usize>(
+        &self,
+        pinyin: &[u16; N],
+        tones: &[u8; N],
+    ) -> Option<[[u8; 2]; N]> {
         let mut result = [[0_u8; 2]; N];
-        for (target, &py) in result.iter_mut().zip(pinyin) {
-            *target = *self.code(usize::from(py))?;
+        for ((target, &py), &tone) in result.iter_mut().zip(pinyin).zip(tones) {
+            *target = *self.code(usize::from(py), tone)?;
         }
         Some(result)
     }
 
-    fn word_base<const N: usize>(&self, pinyin: &[u16; N]) -> Option<Vec<u8>> {
-        Some(self.word_codes(pinyin)?.into_iter().flatten().collect())
+    fn word_base<const N: usize>(&self, pinyin: &[u16; N], tones: &[u8; N]) -> Option<Vec<u8>> {
+        Some(
+            self.word_codes(pinyin, tones)?
+                .into_iter()
+                .flatten()
+                .collect(),
+        )
     }
 }
 
@@ -1158,8 +1317,16 @@ fn make_stages_multi(
     paths: Vec<Vec<Vec<u8>>>,
 ) -> Result<Vec<Stage>, String> {
     let pools = stage_pools(contract, kind);
+    make_stages_with_pools(alphabet, paths, pools)
+}
+
+fn make_stages_with_pools(
+    alphabet: &KeyAlphabet,
+    paths: Vec<Vec<Vec<u8>>>,
+    pools: &[crate::Pool],
+) -> Result<Vec<Stage>, String> {
     if paths.len() != pools.len() {
-        return Err(format!("{contract:?}/{kind:?} stage count mismatch"));
+        return Err("native stage count/pool count mismatch".to_owned());
     }
     paths
         .into_iter()
@@ -1187,6 +1354,7 @@ fn make_stages_multi(
 fn read_words<const N: usize, R: Read>(
     reader: &mut R,
     count: usize,
+    format_version: u16,
 ) -> Result<Vec<WordTemplate<N>>, String> {
     let mut result = Vec::with_capacity(count);
     for _ in 0..count {
@@ -1198,11 +1366,17 @@ fn read_words<const N: usize, R: Read>(
         for value in &mut tones {
             *value = read_u8(reader)?;
         }
+        let weight = read_f64(reader)?;
+        let mut shape = [u8::MAX; N];
+        let shape_count = if format_version >= 2 { N } else { N.min(2) };
+        for slot in shape.iter_mut().take(shape_count) {
+            *slot = read_u8(reader)?;
+        }
         result.push(WordTemplate {
             py,
             tones,
-            weight: read_f64(reader)?,
-            shape: [read_u8(reader)?, read_u8(reader)?],
+            weight,
+            shape,
         });
     }
     Ok(result)
@@ -1212,7 +1386,7 @@ fn validate_template_fields(
     pinyin: &[u16],
     tones: &[u8],
     weight: f64,
-    shape: [u8; 2],
+    shape: &[u8],
     pinyin_count: usize,
 ) -> Result<(), String> {
     if pinyin
@@ -1272,8 +1446,8 @@ fn read_string_u16<R: Read>(reader: &mut R) -> Result<String, String> {
 
 #[cfg(test)]
 mod tests {
-    use super::RegularLayout;
-    use crate::KeyAlphabet;
+    use super::{DependencyIndex, RegularLayout, RowSource, SchemeState};
+    use crate::{Contract, KeyAlphabet};
 
     fn colliding_layout(capacity: [u8; 2]) -> (RegularLayout, Vec<[u8; 2]>, Vec<u16>) {
         let head_capacity = usize::from(capacity[0]);
@@ -1375,5 +1549,52 @@ mod tests {
         assert_eq!(diagnostics.memory, 35);
         assert_eq!(diagnostics.displaced_initials, 0);
         assert_eq!(diagnostics.displaced_vowels, 0);
+    }
+
+    #[test]
+    fn direct_toned_state_selects_and_mutates_codes_by_lexical_tone() {
+        let mut state = SchemeState::from_toned_codes(
+            "toned",
+            [21, 21],
+            vec![[Some([1, 2]), Some([1, 3]), None, Some([1, 4]), Some([1, 5])]],
+            [15, 0, 14, 16, 11],
+        )
+        .unwrap();
+        assert_eq!(state.contract, Contract::Traditional21x21);
+        assert_eq!(state.code_at(0), None);
+        assert_eq!(state.code_at_tone(0, 1), Some([1, 2]));
+        assert_eq!(state.code_at_tone(0, 2), Some([1, 3]));
+        assert_eq!(state.code_at_tone(0, 3), None);
+        assert_eq!(state.code_at_tone(0, 5), Some([1, 5]));
+
+        state.assign_toned_code(0, 2, Some([6, 7])).unwrap();
+        assert_eq!(state.code_at_tone(0, 2), Some([6, 7]));
+        assert!(state.assign_toned_code(0, 0, Some([1, 2])).is_err());
+        assert!(state.assign_toned_code(1, 1, Some([1, 2])).is_err());
+        assert!(state.swap_pinyin_codes(0, 0).is_err());
+    }
+
+    #[test]
+    fn toned_code_change_reuses_the_existing_pinyin_dependency_index() {
+        let old = SchemeState::from_toned_codes(
+            "toned",
+            [21, 21],
+            vec![[Some([1, 2]); 5], [Some([3, 4]); 5]],
+            [15, 0, 14, 16, 11],
+        )
+        .unwrap();
+        let mut new = old.clone();
+        new.assign_toned_code(1, 4, Some([8, 9])).unwrap();
+        let dependencies = DependencyIndex {
+            by_pinyin: vec![vec![0], vec![1, 2]],
+            by_tone_slot: std::array::from_fn(|_| Vec::new()),
+            row_count: 3,
+            sources: vec![
+                RowSource::Character(0),
+                RowSource::Character(1),
+                RowSource::Character(2),
+            ],
+        };
+        assert_eq!(dependencies.affected_rows(&old, &new).unwrap(), vec![1, 2]);
     }
 }

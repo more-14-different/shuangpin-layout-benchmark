@@ -17,6 +17,14 @@ reference fixtures.
   format, retaining explicit keyboard contract and source provenance.
 - generate the same rows natively from a phase-3 shared corpus plus a small
   scheme state, with inverted pinyin/auxiliary dependencies for exact updates.
+- accept a direct `pinyin × lexical tone` two-key table while preserving the
+  historical untoned regular-layout path; a changed toned code reuses the
+  existing pinyin dependency index for exact incremental updates.
+
+The direct toned state is the first boundary needed by the CKT v5.1 toned
+21×21 search. Its specialized corpus adapter and search runner are still
+separate work: v5.1 word-three rows have three auxiliary stages, while the
+historical native corpus stores two auxiliary positions for that track.
 
 The incremental resolver is correctness-first. It finds the transitive component
 of rows sharing any old or new stage bucket and recomputes only that component.
@@ -36,7 +44,19 @@ just ckt-v4-native-corpus "S005,L600"
 just ckt-v4-native-verify
 just ckt-v4-native-incremental-smoke
 cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml
+just ckt-v51-toned-rust-trial 120 0 5
+just ckt-v51-toned-rust-trial-resume 120 0 5
+just ckt-v51-toned-avuio786-rust-trial joint 120 8 5
+just ckt-v51-toned-avuio786-rust-resume joint 120 8 5
 ```
+
+The `avuio786` runner fixes the AVUIO five-finger auxiliary set, the physical
+7:8:6 sound-key rows, and the Pindu11 rhyme normalization. Its proposal space
+can be `first`, `rhyme`, or `joint`. One-hop candidates move one shengjie atom
+or one normalized rhyme within its tone region; a nonzero beam extends the best
+one-hop candidates with compatible second moves. Checkpoints include the
+fixture source hashes and semantic contract fingerprint, so a changed auxiliary
+mapping or tone-region contract cannot be resumed accidentally.
 
 `Cargo.lock` is committed. `target/`, restored corpora and annealing checkpoints
 are ignored. The old `rime-snow-pinyin` research scripts remain historical input;

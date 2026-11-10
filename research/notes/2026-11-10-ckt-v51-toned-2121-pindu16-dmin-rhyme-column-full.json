@@ -1,0 +1,2447 @@
+{
+  "version": "shape-only-ckt-v5.1-toned-2121-search-1",
+  "normalization": "S005 keytao-only; track weights character/word2/word3/word4 = 1/3/1/1",
+  "screeningMode": {
+    "kind": "fixed-policy",
+    "policy": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "shapeKeysByMeaning": "QAOPL",
+    "sampleRowsPerTrack": null,
+    "maximumTraditionalOnsetD": null
+  },
+  "reference": {
+    "id": "S005",
+    "policy": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "tracks": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 112.42254451086282,
+        "firstAuxRate": 0.22060613808019708,
+        "secondAuxRate": 0.04566821511806128,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.004804384379755336,
+        "meanRejectedCandidates": 0.0059137069818788034,
+        "meanPageActions": 0.000004005724736186477,
+        "meanKeys": 2.2662743531982583,
+        "effectiveMs": 195.4843681647083
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 414.4344264362817,
+        "firstAuxRate": 0.1892694210310565,
+        "secondAuxRate": 0.034756806080910474,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003775437554998475,
+        "meanRejectedCandidates": 0.004530663854527311,
+        "meanPageActions": 0,
+        "meanKeys": 4.224026227111967,
+        "effectiveMs": 484.1340902955972
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 344.2651202341585,
+        "firstAuxRate": 0.5172872168968791,
+        "secondAuxRate": 0.20701254452783532,
+        "thirdAuxRate": 0.052980406019336686,
+        "selectionRate": 0.007349652222944726,
+        "meanRejectedCandidates": 0.00913989969982548,
+        "meanPageActions": 0.00000668463499215639,
+        "meanKeys": 3.7772801674440513,
+        "effectiveMs": 582.3179621766296
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 448.8043124204852,
+        "firstAuxRate": 0.27835105638906893,
+        "secondAuxRate": 0.04469433486596384,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003829566677066131,
+        "meanRejectedCandidates": 0.004522254400754552,
+        "meanPageActions": 0,
+        "meanKeys": 4.323045391255032,
+        "effectiveMs": 548.2417825232724
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S043-C4065213-C0234651",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.557279201128114,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.93414630689446,
+          "firstAuxRate": 0.1964069994104275,
+          "secondAuxRate": 0.03456341050561836,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002759242610431983,
+          "meanRejectedCandidates": 0.0032086439914187433,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2309704099160457,
+          "effectiveMs": 179.04163300057863
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 409.77150893275257,
+          "firstAuxRate": 0.1524843407395603,
+          "secondAuxRate": 0.020419033440351654,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014844903761804453,
+          "meanRejectedCandidates": 0.0017050811751590574,
+          "meanPageActions": 0,
+          "meanKeys": 4.172903374179912,
+          "effectiveMs": 462.6184694711923
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 454.0391672957881,
+          "firstAuxRate": 0.24696329691489471,
+          "secondAuxRate": 0.030087108942597945,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002242914777964079,
+          "meanRejectedCandidates": 0.002517054198541796,
+          "meanPageActions": 0,
+          "meanKeys": 4.2770504058574925,
+          "effectiveMs": 538.6258906297414
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S024-C5064123-C0324561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.573791051684328,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.79091470745037,
+          "firstAuxRate": 0.1935262400700423,
+          "secondAuxRate": 0.034463267387213704,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003234812777104049,
+          "meanRejectedCandidates": 0.0037223416402513,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.227989507457256,
+          "effectiveMs": 179.31517518926245
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.40339423520004,
+          "firstAuxRate": 0.1538847514043853,
+          "secondAuxRate": 0.02094500756000291,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015392796591267822,
+          "meanRejectedCandidates": 0.0017800802543809612,
+          "meanPageActions": 0,
+          "meanKeys": 4.174829758964388,
+          "effectiveMs": 464.8648937327116
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.55476746678767,
+          "firstAuxRate": 0.24751630556554968,
+          "secondAuxRate": 0.030655259502531337,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002344850743799122,
+          "meanRejectedCandidates": 0.0026539494684343595,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.278171565068081,
+          "effectiveMs": 536.5470364132876
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S007-C5064123-C0324561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.57452464949793,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 109.60488012203564,
+          "firstAuxRate": 0.1913219803882056,
+          "secondAuxRate": 0.035034419409087185,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030161937708816674,
+          "meanRejectedCandidates": 0.003497436277691107,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2263563997972926,
+          "effectiveMs": 179.4967828623373
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 410.99380020508,
+          "firstAuxRate": 0.1534739581680835,
+          "secondAuxRate": 0.020867951347324287,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015663908690075525,
+          "meanRejectedCandidates": 0.0018023613348829121,
+          "meanPageActions": 0,
+          "meanKeys": 4.174341909515408,
+          "effectiveMs": 464.326325647851
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 453.61711021414163,
+          "firstAuxRate": 0.24451174297256179,
+          "secondAuxRate": 0.03009691744238963,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002212529554609412,
+          "meanRejectedCandidates": 0.002498340184539252,
+          "meanPageActions": 6.579239860267472e-7,
+          "meanKeys": 4.274608660414952,
+          "effectiveMs": 537.4523404578154
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S125-C5064231-C0234561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.574997211362783,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.46858909229127,
+          "firstAuxRate": 0.19527370093762028,
+          "secondAuxRate": 0.03621534799572832,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0026057970380560223,
+          "meanRejectedCandidates": 0.0029763996733199903,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2314890489333488,
+          "effectiveMs": 178.62798793183572
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.3868045534452,
+          "firstAuxRate": 0.15230183077161316,
+          "secondAuxRate": 0.021083073290026674,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015387175128652075,
+          "meanRejectedCandidates": 0.0017618748730084612,
+          "meanPageActions": 0,
+          "meanKeys": 4.17338490406164,
+          "effectiveMs": 465.4136000233066
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.7442351381356,
+          "firstAuxRate": 0.24697944562895174,
+          "secondAuxRate": 0.031200386344553716,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002448220863203706,
+          "meanRejectedCandidates": 0.0027537571407146044,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.278179831973506,
+          "effectiveMs": 536.8059966115198
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S043-C4065213-C0324651",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.57550342675124,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.50614521702435,
+          "firstAuxRate": 0.1964069994104275,
+          "secondAuxRate": 0.03456341050561836,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002759242610431983,
+          "meanRejectedCandidates": 0.0032086439914187433,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2309704099160457,
+          "effectiveMs": 179.6136319107085
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.0993862695662,
+          "firstAuxRate": 0.1528518051515476,
+          "secondAuxRate": 0.020332314749186817,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001484151035174569,
+          "meanRejectedCandidates": 0.0017080808608618617,
+          "meanPageActions": 0,
+          "meanKeys": 4.173184119900735,
+          "effectiveMs": 464.0305169039343
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 453.96840899598254,
+          "firstAuxRate": 0.246245197631746,
+          "secondAuxRate": 0.030487408003696235,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0021821612320543867,
+          "meanRejectedCandidates": 0.002452581269511098,
+          "meanPageActions": 6.579239860267472e-7,
+          "meanKeys": 4.276732605635442,
+          "effectiveMs": 538.4203138665192
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S076-C4065213-C0234651",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.5760299423048,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.39878480748305,
+          "firstAuxRate": 0.19841673291219228,
+          "secondAuxRate": 0.034214035287569514,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002956604960572558,
+          "meanRejectedCandidates": 0.0034225847789711265,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.232630768199762,
+          "effectiveMs": 180.13350220740395
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.11470214203314,
+          "firstAuxRate": 0.15335959275751923,
+          "secondAuxRate": 0.020536406583134825,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0014703126923069655,
+          "meanRejectedCandidates": 0.001697065457809292,
+          "meanPageActions": 0,
+          "meanKeys": 4.173895999340654,
+          "effectiveMs": 464.250542832504
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.831089272823,
+          "firstAuxRate": 0.2490773032579966,
+          "secondAuxRate": 0.03063339469659571,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002367570247316596,
+          "meanRejectedCandidates": 0.002673459027220008,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.2797106979545925,
+          "effectiveMs": 537.2997052653263
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S043-C4065213-C1234650",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.576108716992305,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 109.1786992654459,
+          "firstAuxRate": 0.1964069994104275,
+          "secondAuxRate": 0.03456341050561836,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002759242610431983,
+          "meanRejectedCandidates": 0.0032086439914187433,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2309704099160457,
+          "effectiveMs": 180.28618595913005
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.3491098088053,
+          "firstAuxRate": 0.1521064172439945,
+          "secondAuxRate": 0.02034820856071471,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001478277078433438,
+          "meanRejectedCandidates": 0.0016935521824074874,
+          "meanPageActions": 0,
+          "meanKeys": 4.1724546258047095,
+          "effectiveMs": 464.05714140639844
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 453.45130621602203,
+          "firstAuxRate": 0.24454152218152933,
+          "secondAuxRate": 0.02919134121042262,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0021177365910226634,
+          "meanRejectedCandidates": 0.00239511734353154,
+          "meanPageActions": 0,
+          "meanKeys": 4.273732863391952,
+          "effectiveMs": 536.9615630553976
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S058-C5064123-C0324561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.576848274585787,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.63506364976895,
+          "firstAuxRate": 0.19442206046761368,
+          "secondAuxRate": 0.03497447973237782,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0032186729226925536,
+          "meanRejectedCandidates": 0.003714914968112677,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2293965401999913,
+          "effectiveMs": 179.57136993648783
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.47562775765124,
+          "firstAuxRate": 0.15460221040954383,
+          "secondAuxRate": 0.02093143170003928,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015543105511712104,
+          "meanRejectedCandidates": 0.0017954454930419726,
+          "meanPageActions": 0,
+          "meanKeys": 4.175533642109583,
+          "effectiveMs": 465.158078995881
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.48524163714103,
+          "firstAuxRate": 0.2456652297912636,
+          "secondAuxRate": 0.030783097151016268,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024467891240341137,
+          "meanRejectedCandidates": 0.0027647136876819047,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.27644832694228,
+          "effectiveMs": 536.0272403850043
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S045-C6045231-C0124356",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.578878918319372,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.67155866462089,
+          "firstAuxRate": 0.1932780020918655,
+          "secondAuxRate": 0.034569024368022366,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003090635925468024,
+          "meanRejectedCandidates": 0.0035740713472790253,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2278470264598877,
+          "effectiveMs": 179.05914644993229
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 410.66090091400696,
+          "firstAuxRate": 0.1572781448151849,
+          "secondAuxRate": 0.022200110352862713,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016737161329307066,
+          "meanRejectedCandidates": 0.001916178749955286,
+          "meanPageActions": 0,
+          "meanKeys": 4.179478255168048,
+          "effectiveMs": 465.60441608167736
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.6196358012537,
+          "firstAuxRate": 0.24644515461389924,
+          "secondAuxRate": 0.030864204088493687,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024160767494863958,
+          "meanRejectedCandidates": 0.0027352700803072397,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.277309358702393,
+          "effectiveMs": 536.4000444720534
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S024-C5064123-C0234561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.579550112109445,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.62093195932331,
+          "firstAuxRate": 0.1935262400700423,
+          "secondAuxRate": 0.034463267387213704,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003234812777104049,
+          "meanRejectedCandidates": 0.0037223416402513,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.227989507457256,
+          "effectiveMs": 178.1451924411354
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.2961300311212,
+          "firstAuxRate": 0.15430755420467512,
+          "secondAuxRate": 0.020943772835983164,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015380502069624008,
+          "meanRejectedCandidates": 0.0017787461975074914,
+          "meanPageActions": 0,
+          "meanKeys": 4.175251327040658,
+          "effectiveMs": 465.8832955773715
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.0118602169695,
+          "firstAuxRate": 0.24925476648302758,
+          "secondAuxRate": 0.031319943808414505,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002330806179297406,
+          "meanRejectedCandidates": 0.0026289592217651125,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.280574710291442,
+          "effectiveMs": 537.7153964794434
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S026-C6045231-C0124356",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.579639394483232,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 109.00442275277535,
+          "firstAuxRate": 0.19294310011282695,
+          "secondAuxRate": 0.034053630864921934,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031173602496203916,
+          "meanRejectedCandidates": 0.003592638027625583,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.2269967309777488,
+          "effectiveMs": 179.15389359361382
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 410.7628928490001,
+          "firstAuxRate": 0.1569546335261738,
+          "secondAuxRate": 0.022124259175334147,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016599640820114494,
+          "meanRejectedCandidates": 0.0019022910181268925,
+          "meanPageActions": 0,
+          "meanKeys": 4.179078892701508,
+          "effectiveMs": 465.57765365956567
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.5448132476968,
+          "firstAuxRate": 0.24727048584917052,
+          "secondAuxRate": 0.030654855090539924,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00229337332249242,
+          "meanRejectedCandidates": 0.0025946904360929267,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.27792534093971,
+          "effectiveMs": 536.4293655512847
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S007-C5064123-C0234561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.581541893655828,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.39007634084766,
+          "firstAuxRate": 0.1913219803882056,
+          "secondAuxRate": 0.035034419409087185,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030161937708816674,
+          "meanRejectedCandidates": 0.003497436277691107,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2263563997972926,
+          "effectiveMs": 178.28197908114933
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.9659058127764,
+          "firstAuxRate": 0.15403707278624873,
+          "secondAuxRate": 0.02093970823549659,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001568419145992799,
+          "meanRejectedCandidates": 0.0018029784194267136,
+          "meanPageActions": 0,
+          "meanKeys": 4.174976781021745,
+          "effectiveMs": 465.490140527867
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 454.0824318612676,
+          "firstAuxRate": 0.24663678674502926,
+          "secondAuxRate": 0.030465453864962504,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0021993421020894926,
+          "meanRejectedCandidates": 0.002468545281972048,
+          "meanPageActions": 0,
+          "meanKeys": 4.277102240609992,
+          "effectiveMs": 538.6561365696175
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S058-C5064123-C0234561",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.584043618419205,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.45286981578755,
+          "firstAuxRate": 0.19442206046761368,
+          "secondAuxRate": 0.03497447973237782,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0032186729226925536,
+          "meanRejectedCandidates": 0.003714914968112677,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2293965401999913,
+          "effectiveMs": 178.3891761025064
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.3704065545088,
+          "firstAuxRate": 0.15525631086959293,
+          "secondAuxRate": 0.02097191954924409,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015589708713140559,
+          "meanRejectedCandidates": 0.0018006460396267161,
+          "meanPageActions": 0,
+          "meanKeys": 4.176228230418837,
+          "effectiveMs": 466.2642905049297
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.9964040742311,
+          "firstAuxRate": 0.2479910876578661,
+          "secondAuxRate": 0.03131311588535952,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024430262817140306,
+          "meanRejectedCandidates": 0.002753943049510656,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.279304203543226,
+          "effectiveMs": 537.3923695650773
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S043-C4065213-C0235641",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.584572282349088,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.15763134863556,
+          "firstAuxRate": 0.1964069994104275,
+          "secondAuxRate": 0.03456341050561836,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002759242610431983,
+          "meanRejectedCandidates": 0.0032086439914187433,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2309704099160457,
+          "effectiveMs": 179.2651180423197
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.90815215915933,
+          "firstAuxRate": 0.15273708735907204,
+          "secondAuxRate": 0.02050264922843496,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015039238223869674,
+          "meanRejectedCandidates": 0.0017326649097601937,
+          "meanPageActions": 0,
+          "meanKeys": 4.173239736587507,
+          "effectiveMs": 464.8690606743316
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 454.22443867774246,
+          "firstAuxRate": 0.2482748605342392,
+          "secondAuxRate": 0.030571156294717555,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022106475298493836,
+          "meanRejectedCandidates": 0.0025026619604474644,
+          "meanPageActions": 0,
+          "meanKeys": 4.278846016828957,
+          "effectiveMs": 539.3297653423616
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S032-C4065123-C0234651",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.58928767039674,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 106.34124639947073,
+          "firstAuxRate": 0.19283199241941446,
+          "secondAuxRate": 0.03531432307988655,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029375119806256253,
+          "meanRejectedCandidates": 0.0033663584383310783,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.228146315499301,
+          "effectiveMs": 176.71636965591327
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 413.48441057617055,
+          "firstAuxRate": 0.15568796372771057,
+          "secondAuxRate": 0.021265922876445752,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015581046222377304,
+          "meanRejectedCandidates": 0.0017923356533086426,
+          "meanPageActions": 0,
+          "meanKeys": 4.1769538866041565,
+          "effectiveMs": 467.59505611342547
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.1891882224255,
+          "firstAuxRate": 0.25038593458860336,
+          "secondAuxRate": 0.03164214910317138,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002373277888795375,
+          "meanRejectedCandidates": 0.0026710253120716962,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.282028083691775,
+          "effectiveMs": 538.3563228352134
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S035-C6045231-C0124356",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.59056696576894,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.0425901093542,
+          "firstAuxRate": 0.1922488524621991,
+          "secondAuxRate": 0.03490468655759478,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028200594531419677,
+          "meanRejectedCandidates": 0.0032366548257053616,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.227153539019794,
+          "effectiveMs": 177.0429237248231
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.361948853968,
+          "firstAuxRate": 0.15835672202833528,
+          "secondAuxRate": 0.022232478989872958,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016620905819861318,
+          "meanRejectedCandidates": 0.0018943016600539533,
+          "meanPageActions": 0,
+          "meanKeys": 4.180589201018209,
+          "effectiveMs": 467.63067859162487
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.00596569536907,
+          "firstAuxRate": 0.2500104615949778,
+          "secondAuxRate": 0.031183131835320173,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002362199414630664,
+          "meanRejectedCandidates": 0.0026704325768842846,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.281193593430298,
+          "effectiveMs": 537.9160765084557
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S045-C6045231-C0134256",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.591508517444234,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.69339516370621,
+          "firstAuxRate": 0.1932780020918655,
+          "secondAuxRate": 0.034569024368022366,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003090635925468024,
+          "meanRejectedCandidates": 0.0035740713472790253,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2278470264598877,
+          "effectiveMs": 178.08098294901762
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.7833786461443,
+          "firstAuxRate": 0.15813325501605585,
+          "secondAuxRate": 0.02228070370302532,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016871016511690456,
+          "meanRejectedCandidates": 0.0019341973966614289,
+          "meanPageActions": 0,
+          "meanKeys": 4.180413958719082,
+          "effectiveMs": 467.0165371224031
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.14289266577094,
+          "firstAuxRate": 0.24988352331047378,
+          "secondAuxRate": 0.030972372827796357,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002366476524139825,
+          "meanRejectedCandidates": 0.002689377166081932,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.28085589613827,
+          "effectiveMs": 537.9552077864146
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S026-C6045231-C0134256",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.591582215751156,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.98840744311362,
+          "firstAuxRate": 0.19294310011282695,
+          "secondAuxRate": 0.034053630864921934,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031173602496203916,
+          "meanRejectedCandidates": 0.003592638027625583,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.2269967309777488,
+          "effectiveMs": 178.13787828395206
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.86354367040707,
+          "firstAuxRate": 0.15767434666570007,
+          "secondAuxRate": 0.022189883785852422,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016663607848319516,
+          "meanRejectedCandidates": 0.0019105228815466315,
+          "meanPageActions": 0,
+          "meanKeys": 4.179864230451552,
+          "effectiveMs": 466.91815542084936
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.1150815880219,
+          "firstAuxRate": 0.25066808015941106,
+          "secondAuxRate": 0.03092961621910444,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022822622539284015,
+          "meanRejectedCandidates": 0.0025923991705415895,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.281597696378515,
+          "effectiveMs": 538.0945593188353
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S064-C6045231-C0124356",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.591623807842725,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 106.88646834003147,
+          "firstAuxRate": 0.19370684854957093,
+          "secondAuxRate": 0.03530446958181287,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028059078416652213,
+          "meanRejectedCandidates": 0.0032267428498983014,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2290113181313838,
+          "effectiveMs": 177.43513157998092
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.2632353944497,
+          "firstAuxRate": 0.15837977862650807,
+          "secondAuxRate": 0.022256630191699198,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016729678069349187,
+          "meanRejectedCandidates": 0.0019059039038484924,
+          "meanPageActions": 0,
+          "meanKeys": 4.1806364088182075,
+          "effectiveMs": 467.55323391926527
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.0085830650396,
+          "firstAuxRate": 0.24884521181972585,
+          "secondAuxRate": 0.03135666321003464,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024771441673894215,
+          "meanRejectedCandidates": 0.002800314014925811,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.280201875029761,
+          "effectiveMs": 537.6966392815224
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S045-C6045231-C0125346",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.594258361295218,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.80132225417738,
+          "firstAuxRate": 0.1932780020918655,
+          "secondAuxRate": 0.034569024368022366,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003090635925468024,
+          "meanRejectedCandidates": 0.0035740713472790253,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2278470264598877,
+          "effectiveMs": 179.18891003948877
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.77819463073814,
+          "firstAuxRate": 0.1574058635579232,
+          "secondAuxRate": 0.022239699766926864,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016976978029870453,
+          "meanRejectedCandidates": 0.0019460238330420254,
+          "meanPageActions": 0,
+          "meanKeys": 4.17964556332485,
+          "effectiveMs": 466.78778350163753
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.8800272492622,
+          "firstAuxRate": 0.2471173766764223,
+          "secondAuxRate": 0.031537375010196614,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0023599262570789424,
+          "meanRejectedCandidates": 0.00266994124649472,
+          "meanPageActions": 8.329679823090928e-7,
+          "meanKeys": 4.278654751686619,
+          "effectiveMs": 537.0261554622147
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S026-C6045231-C0125346",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.594546832257413,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 109.14391840870523,
+          "firstAuxRate": 0.19294310011282695,
+          "secondAuxRate": 0.034053630864921934,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031173602496203916,
+          "meanRejectedCandidates": 0.003592638027625583,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.2269967309777488,
+          "effectiveMs": 179.2933892495437
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.94516084118567,
+          "firstAuxRate": 0.1571858018867436,
+          "secondAuxRate": 0.0221891781896317,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016917861108601423,
+          "meanRejectedCandidates": 0.0019396165865107925,
+          "meanPageActions": 0,
+          "meanKeys": 4.179374980076375,
+          "effectiveMs": 466.8697073599399
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.6186637160813,
+          "firstAuxRate": 0.24667502721861712,
+          "secondAuxRate": 0.031397144246774894,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022764930452509303,
+          "meanRejectedCandidates": 0.0025810297611830574,
+          "meanPageActions": 8.329679823090928e-7,
+          "meanKeys": 4.278072171465392,
+          "effectiveMs": 536.5355123613033
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S035-C6045231-C0123456",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.59935164707503,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.52713430835901,
+          "firstAuxRate": 0.1922488524621991,
+          "secondAuxRate": 0.03490468655759478,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028200594531419677,
+          "meanRejectedCandidates": 0.0032366548257053616,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.227153539019794,
+          "effectiveMs": 177.5274679238279
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.30678183019904,
+          "firstAuxRate": 0.1592057307502862,
+          "secondAuxRate": 0.022391880750957938,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001684009846730386,
+          "meanRejectedCandidates": 0.0019191454171955398,
+          "meanPageActions": 2.774660718531406e-10,
+          "meanKeys": 4.181597611501244,
+          "effectiveMs": 467.89242854271015
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.2300598190786,
+          "firstAuxRate": 0.25192895586623204,
+          "secondAuxRate": 0.03127708217332482,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022901380265611324,
+          "meanRejectedCandidates": 0.002567278546275111,
+          "meanPageActions": 8.329679823090928e-7,
+          "meanKeys": 4.283206038039557,
+          "effectiveMs": 538.6945678645909
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S035-C6045231-C0134256",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.600315368361393,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 106.70872188326102,
+          "firstAuxRate": 0.1922488524621991,
+          "secondAuxRate": 0.03490468655759478,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028200594531419677,
+          "meanRejectedCandidates": 0.0032366548257053616,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.227153539019794,
+          "effectiveMs": 176.70905549872992
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 413.03644418738463,
+          "firstAuxRate": 0.15897546498684814,
+          "secondAuxRate": 0.02230225865481723,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016846643891938876,
+          "meanRejectedCandidates": 0.0019211090445860445,
+          "meanPageActions": 0,
+          "meanKeys": 4.181277723641665,
+          "effectiveMs": 468.5266153656298
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.2899893386317,
+          "firstAuxRate": 0.2519112836658074,
+          "secondAuxRate": 0.03113671741070594,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0023304271185054567,
+          "meanRejectedCandidates": 0.0026338990840601975,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.283048001076513,
+          "effectiveMs": 538.7355323932667
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S064-C6045231-C0123456",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.600635913144732,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.31469709818212,
+          "firstAuxRate": 0.19370684854957093,
+          "secondAuxRate": 0.03530446958181287,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028059078416652213,
+          "meanRejectedCandidates": 0.0032267428498983014,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2290113181313838,
+          "effectiveMs": 177.8633603381316
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.1655419281558,
+          "firstAuxRate": 0.15920941133772934,
+          "secondAuxRate": 0.02237521031189493,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016956090383981348,
+          "meanRejectedCandidates": 0.0019321810507172722,
+          "meanPageActions": 2.774660718531406e-10,
+          "meanKeys": 4.181584621649624,
+          "effectiveMs": 467.75490298185764
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.34027309959316,
+          "firstAuxRate": 0.2516629722886811,
+          "secondAuxRate": 0.03143272525881921,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024243255469112044,
+          "meanRejectedCandidates": 0.0027167866414997987,
+          "meanPageActions": 8.329679823090928e-7,
+          "meanKeys": 4.2830956975475,
+          "effectiveMs": 538.8596669144596
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S064-C6045231-C0134256",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.600695524222786,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 106.56721455470418,
+          "firstAuxRate": 0.19370684854957093,
+          "secondAuxRate": 0.03530446958181287,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0028059078416652213,
+          "meanRejectedCandidates": 0.0032267428498983014,
+          "meanPageActions": 0.0000012865101342496716,
+          "meanKeys": 2.2290113181313838,
+          "effectiveMs": 177.1158777946536
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 412.9457202559211,
+          "firstAuxRate": 0.1590225631877488,
+          "secondAuxRate": 0.022337596178796302,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0017020545752472833,
+          "meanRejectedCandidates": 0.0019417575147212115,
+          "meanPageActions": 0,
+          "meanKeys": 4.1813601593665455,
+          "effectiveMs": 468.4720886867691
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.1917044816882,
+          "firstAuxRate": 0.2502253661272136,
+          "secondAuxRate": 0.03119600300144681,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024224073061519446,
+          "meanRejectedCandidates": 0.0027386429970356046,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.28142136912866,
+          "effectiveMs": 538.2096832602039
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OV-PK-LY-S007-C5064123-C1234560",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.600860081396858,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 109.53975105103527,
+          "firstAuxRate": 0.1913219803882056,
+          "secondAuxRate": 0.035034419409087185,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030161937708816674,
+          "meanRejectedCandidates": 0.003497436277691107,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2263563997972926,
+          "effectiveMs": 179.4316537913369
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 413.5094236141129,
+          "firstAuxRate": 0.15351538884700047,
+          "secondAuxRate": 0.02095004717626598,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015690806251080968,
+          "meanRejectedCandidates": 0.0017996393927180328,
+          "meanPageActions": 0,
+          "meanKeys": 4.174465436023266,
+          "effectiveMs": 466.8804847657936
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 346.54641472436765,
+          "firstAuxRate": 0.4889412060559899,
+          "secondAuxRate": 0.18008090912241542,
+          "thirdAuxRate": 0.04000245545717577,
+          "selectionRate": 0.00461470413031113,
+          "meanRejectedCandidates": 0.005535653093114793,
+          "meanPageActions": 0.0000025075325069042438,
+          "meanKeys": 3.709024570635581,
+          "effectiveMs": 562.3001433076365
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 453.62733371992044,
+          "firstAuxRate": 0.24549743744522723,
+          "secondAuxRate": 0.0294548790008255,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002133853917880357,
+          "meanRejectedCandidates": 0.0024075889264666634,
+          "meanPageActions": 0,
+          "meanKeys": 4.274952316446052,
+          "effectiveMs": 537.5137204507878
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-OY-PN-LK-S045-C6045231-C0324156",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.603803545036563,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.90873892823544,
+          "firstAuxRate": 0.1932780020918655,
+          "secondAuxRate": 0.034569024368022366,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.003090635925468024,
+          "meanRejectedCandidates": 0.0035740713472790253,
+          "meanPageActions": 0.000001315749000937164,
+          "meanKeys": 2.2278470264598877,
+          "effectiveMs": 178.29632671354685
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 413.7364518449978,
+          "firstAuxRate": 0.15736421395827552,
+          "secondAuxRate": 0.02218371654747334,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0016662689435621681,
+          "meanRejectedCandidates": 0.0019074793562044745,
+          "meanPageActions": 0,
+          "meanKeys": 4.179547930505749,
+          "effectiveMs": 468.69596633067
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.81668223709124,
+          "firstAuxRate": 0.48868404870164134,
+          "secondAuxRate": 0.18001489347207525,
+          "thirdAuxRate": 0.04014204567011261,
+          "selectionRate": 0.004630533723645808,
+          "meanRejectedCandidates": 0.005594847020335164,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.7088409878438293,
+          "effectiveMs": 561.5279895347697
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.23334354971473,
+          "firstAuxRate": 0.2455608480382805,
+          "secondAuxRate": 0.031059799457139554,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0023928538435796128,
+          "meanRejectedCandidates": 0.0027222950949828077,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.27662064749542,
+          "effectiveMs": 535.7925563656123
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S026-C6045231-C0324156",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.60543361222559,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.2231468373504,
+          "firstAuxRate": 0.19294310011282695,
+          "secondAuxRate": 0.034053630864921934,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031173602496203916,
+          "meanRejectedCandidates": 0.003592638027625583,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.2269967309777488,
+          "effectiveMs": 178.37261767818885
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 413.86582949837646,
+          "firstAuxRate": 0.15702513266064239,
+          "secondAuxRate": 0.022159176893146507,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001657659726284709,
+          "meanRejectedCandidates": 0.0018989586506039365,
+          "meanPageActions": 0,
+          "meanKeys": 4.179184309553789,
+          "effectiveMs": 468.71066613281414
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.22319012411356,
+          "firstAuxRate": 0.2469121261223815,
+          "secondAuxRate": 0.030706283016647677,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022762467764561607,
+          "meanRejectedCandidates": 0.0025867410242617593,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.277618409139029,
+          "effectiveMs": 536.0049894892838
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S032-C4065123-C1234650",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.60805997366368,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.43791710874497,
+          "firstAuxRate": 0.19283199241941446,
+          "secondAuxRate": 0.03531432307988655,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029375119806256253,
+          "meanRejectedCandidates": 0.0033663584383310783,
+          "meanPageActions": 0.0000013449878676246567,
+          "meanKeys": 2.228146315499301,
+          "effectiveMs": 177.8130403651875
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 415.0494443400131,
+          "firstAuxRate": 0.1554151255124699,
+          "secondAuxRate": 0.021247874818335993,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0015681230896941315,
+          "meanRejectedCandidates": 0.0017985569975717338,
+          "meanPageActions": 0,
+          "meanKeys": 4.176663000330806,
+          "effectiveMs": 469.0791461429499
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.61172190750267,
+          "firstAuxRate": 0.2489858276799394,
+          "secondAuxRate": 0.03023710957541217,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022768057100442897,
+          "meanRejectedCandidates": 0.002588819822617609,
+          "meanPageActions": 0.000003971687915647703,
+          "meanKeys": 4.279222937255351,
+          "effectiveMs": 536.8753190076403
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QK-AH-ON-PY-LW-S021-C5240613-C1203456",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.617458763438801,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 109.15778813465467,
+          "firstAuxRate": 0.19226060648660748,
+          "secondAuxRate": 0.03743221114952838,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0032963313526145335,
+          "meanRejectedCandidates": 0.0039053184679816283,
+          "meanPageActions": 0.000001140315800812209,
+          "meanKeys": 2.2296928176361357,
+          "effectiveMs": 180.2390402552035
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 414.0122891619633,
+          "firstAuxRate": 0.15268188992353401,
+          "secondAuxRate": 0.021644071951927954,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.001657856449729653,
+          "meanRejectedCandidates": 0.0019185078001624212,
+          "meanPageActions": 2.774660718531406e-10,
+          "meanKeys": 4.174325961875462,
+          "effectiveMs": 467.40071706768754
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 348.8912337391335,
+          "firstAuxRate": 0.4854981714559106,
+          "secondAuxRate": 0.18029895822991387,
+          "thirdAuxRate": 0.04058272952837252,
+          "selectionRate": 0.004711297696062247,
+          "meanRejectedCandidates": 0.005672766641070165,
+          "meanPageActions": 0.000003192973145105802,
+          "meanKeys": 3.706379859214197,
+          "effectiveMs": 563.9165663450271
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 451.75511973640937,
+          "firstAuxRate": 0.2493342388717397,
+          "secondAuxRate": 0.032159220617789606,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002187221814346908,
+          "meanRejectedCandidates": 0.0024588973397769547,
+          "meanPageActions": 7.122479848729924e-7,
+          "meanKeys": 4.281493459489529,
+          "effectiveMs": 537.6386492132607
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S058-C6054132-C0125436",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.631133608434432,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 108.36428731450779,
+          "firstAuxRate": 0.20036129298011068,
+          "secondAuxRate": 0.03424140286678901,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029337401668229385,
+          "meanRejectedCandidates": 0.003391094519548697,
+          "meanPageActions": 0.0000014034656009996417,
+          "meanKeys": 2.2346026958469,
+          "effectiveMs": 180.6753159343292
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 411.96948776204914,
+          "firstAuxRate": 0.16053544611212983,
+          "secondAuxRate": 0.024217033703915012,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0021437802841714113,
+          "meanRejectedCandidates": 0.00252280476511031,
+          "meanPageActions": 0,
+          "meanKeys": 4.184752479816045,
+          "effectiveMs": 468.807640115621
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.1997555700438,
+          "firstAuxRate": 0.24974168214228626,
+          "secondAuxRate": 0.03211720160828203,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0024507765055494283,
+          "meanRejectedCandidates": 0.0027609568813616934,
+          "meanPageActions": 8.329679823090928e-7,
+          "meanKeys": 4.2818588837505684,
+          "effectiveMs": 538.3661843330067
+        }
+      }
+    },
+    {
+      "id": "RHYME16-D11-QR-AH-ON-PY-LK-S058-C6054132-C0135426",
+      "factorization": "shengjie-rhyme-body",
+      "origin": "pindu16-raw-rhyme-multistart-local-search",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "QAOPL",
+      "toneKeysByTone": "PAOQL",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.646563466660599,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 107.4193158870372,
+          "firstAuxRate": 0.20036129298011068,
+          "secondAuxRate": 0.03424140286678901,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0029337401668229385,
+          "meanRejectedCandidates": 0.003391094519548697,
+          "meanPageActions": 0.0000014034656009996417,
+          "meanKeys": 2.2346026958469,
+          "effectiveMs": 179.73034450685861
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 413.92914755043086,
+          "firstAuxRate": 0.1607720602992919,
+          "secondAuxRate": 0.024221886862977795,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0021289746945773276,
+          "meanRejectedCandidates": 0.0025074761519707834,
+          "meanPageActions": 0,
+          "meanKeys": 4.18499394716227,
+          "effectiveMs": 470.83009032345666
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 345.86411643312505,
+          "firstAuxRate": 0.48854911948504426,
+          "secondAuxRate": 0.18011185381665795,
+          "thirdAuxRate": 0.04023042665836284,
+          "selectionRate": 0.004659960461931937,
+          "meanRejectedCandidates": 0.005622974598948093,
+          "meanPageActions": 0.0000031611977512818887,
+          "meanKeys": 3.708891399960065,
+          "effectiveMs": 561.6096097875766
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 452.33868666759554,
+          "firstAuxRate": 0.2508592837345502,
+          "secondAuxRate": 0.031875802658208954,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0023858581197281907,
+          "meanRejectedCandidates": 0.0027191141230503667,
+          "meanPageActions": 0.00000149089196833584,
+          "meanKeys": 4.282735086392759,
+          "effectiveMs": 538.7271304310033
+        }
+      }
+    }
+  ]
+}
