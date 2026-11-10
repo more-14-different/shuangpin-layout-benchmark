@@ -280,6 +280,8 @@ fn main() -> Result<(), String> {
     };
     let run_started = Instant::now();
     let mut invocation_evaluated = 0_usize;
+    let mut evaluated_set: BTreeSet<Vec<TrialMove>> =
+        checkpoint.results.iter().map(|r| r.moves.clone()).collect();
 
     loop {
         let queue = if checkpoint.phase == "one-hop" {
@@ -296,6 +298,10 @@ fn main() -> Result<(), String> {
         };
         while checkpoint.next_index < queue.len() && invocation_evaluated < args.max_evaluations {
             let moves = &queue[checkpoint.next_index];
+            if evaluated_set.contains(moves) {
+                checkpoint.next_index += 1;
+                continue;
+            }
             let started = Instant::now();
             let candidate = apply_moves(&baseline, &fixture, moves, &alphabet)?;
             let direct = generated
@@ -347,6 +353,7 @@ fn main() -> Result<(), String> {
             checkpoint.max_direct_rows = checkpoint.max_direct_rows.max(result.direct_rows);
             checkpoint.max_component_rows =
                 checkpoint.max_component_rows.max(result.component_rows);
+            evaluated_set.insert(moves.clone());
             checkpoint.results.push(result);
             checkpoint.next_index += 1;
             checkpoint.evaluated += 1;
