@@ -70,7 +70,7 @@ struct ToneRegion {
     tones: Vec<u8>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(tag = "kind")]
 enum TrialMove {
@@ -232,17 +232,32 @@ fn main() -> Result<(), String> {
 
     let one_hop = candidate_one_hop(&fixture, &args.proposal_space);
     let mut checkpoint = if args.resume {
-        let value: Checkpoint = serde_json::from_str(
+        let mut value: Checkpoint = serde_json::from_str(
             &fs::read_to_string(&args.checkpoint).map_err(|error| error.to_string())?,
         )
         .map_err(|error| error.to_string())?;
         if value.version != CHECKPOINT_VERSION
             || value.layout_id != fixture.layout_id
             || value.source_hashes != fixture.source_hashes
-            || value.beam != args.beam
             || value.proposal_space != args.proposal_space
         {
             return Err("checkpoint contract differs".to_owned());
+        }
+        if value.phase == "two-hop" && value.beam != args.beam {
+            return Err("checkpoint contract differs: two-hop beam changed".to_owned());
+        }
+        if value.phase == "one-hop" && value.next_index < one_hop.len() && value.beam != args.beam {
+            return Err(
+                "checkpoint contract differs: one-hop beam changed before completion".to_owned(),
+            );
+        }
+        if (value.phase == "complete"
+            || (value.phase == "one-hop" && value.next_index >= one_hop.len()))
+            && args.beam > 0
+        {
+            value.beam = args.beam;
+            value.phase = "two-hop".to_owned();
+            value.next_index = 0;
         }
         value
     } else {
@@ -581,14 +596,35 @@ fn candidate_two_hop(
     beam: usize,
     proposal_space: &str,
 ) -> Vec<Vec<TrialMove>> {
-    let mut leaders = results
+    let mut one_hop_results = results
         .iter()
         .filter(|value| value.moves.len() == 1)
         .collect::<Vec<_>>();
-    leaders.sort_by(|left, right| left.score.total_cmp(&right.score));
+    one_hop_results.sort_by(|left, right| left.score.total_cmp(&right.score));
+
+    let pareto = compute_pareto(one_hop_results.iter().copied());
+    let mut seeds = Vec::new();
+    let mut seen = HashSet::new();
+    for candidate in pareto {
+        if seeds.len() >= beam {
+            break;
+        }
+        seeds.push(candidate);
+        seen.insert(&candidate.moves);
+    }
+    for candidate in &one_hop_results {
+        if seeds.len() >= beam {
+            break;
+        }
+        if !seen.contains(&candidate.moves) {
+            seeds.push(candidate);
+            seen.insert(&candidate.moves);
+        }
+    }
+
     let mut unique = BTreeSet::new();
     let one_hop = candidate_one_hop(fixture, proposal_space);
-    for leader in leaders.into_iter().take(beam) {
+    for leader in seeds {
         let first = &leader.moves[0];
         for second in &one_hop {
             let second = &second[0];
@@ -798,17 +834,13 @@ fn write_json(path: &Path, value: &impl Serialize) -> Result<(), String> {
     .map_err(|error| error.to_string())
 }
 
-fn write_report(
-    path: &Path,
-    fixture: &TrialFixture,
-    baseline_score: f64,
-    row_count: usize,
-    checkpoint: &Checkpoint,
-) -> Result<(), String> {
-    let mut pareto = Vec::<&CandidateResult>::new();
-    let mut ranked = checkpoint.results.iter().collect::<Vec<_>>();
+fn compute_pareto<'a>(
+    candidates: impl IntoIterator<Item = &'a CandidateResult>,
+) -> Vec<&'a CandidateResult> {
+    let mut ranked = candidates.into_iter().collect::<Vec<_>>();
     ranked.sort_by(|left, right| left.score.total_cmp(&right.score));
-    for candidate in &ranked {
+    let mut pareto = Vec::<&CandidateResult>::new();
+    for candidate in ranked {
         if pareto.iter().any(|other| {
             other.score <= candidate.score
                 && other.memory_guard <= candidate.memory_guard
@@ -829,6 +861,19 @@ fn write_report(
         });
         pareto.push(candidate);
     }
+    pareto
+}
+
+fn write_report(
+    path: &Path,
+    fixture: &TrialFixture,
+    baseline_score: f64,
+    row_count: usize,
+    checkpoint: &Checkpoint,
+) -> Result<(), String> {
+    let pareto = compute_pareto(&checkpoint.results);
+    let mut ranked = checkpoint.results.iter().collect::<Vec<_>>();
+    ranked.sort_by(|left, right| left.score.total_cmp(&right.score));
     let elapsed_seconds = checkpoint.elapsed_ms / 1_000.0;
     let report = serde_json::json!({
         "version": "ckt-v51-toned-2121-rust-trial-result-3",
@@ -848,4 +893,171 @@ fn write_report(
         "pareto": pareto,
     });
     write_json(path, &report)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn dummy_result(
+        score: f64,
+        moves: Vec<TrialMove>,
+        first_group_moves: usize,
+        rhyme_group_moves: usize,
+    ) -> CandidateResult {
+        CandidateResult {
+            moves,
+            score,
+            memory_lower: 20,
+            memory_guard: 22,
+            tone_region_merge_lower: 9,
+            traditional_onset_d: 0,
+            onset_fragmentation: 0,
+            first_group_moves,
+            rhyme_group_moves,
+            rhyme_internal_splits: 0,
+            direct_rows: 100,
+            component_rows: 200,
+            elapsed_ms: 10.0,
+        }
+    }
+
+    #[test]
+    fn compute_pareto_selects_non_dominated_front() {
+        let a = dummy_result(
+            9.48,
+            vec![TrialMove::First {
+                atom: 0,
+                atom_name: "sh".to_owned(),
+                key: 'P',
+            }],
+            1,
+            0,
+        );
+        let b = dummy_result(
+            9.50,
+            vec![TrialMove::First {
+                atom: 0,
+                atom_name: "sh".to_owned(),
+                key: 'K',
+            }],
+            1,
+            0,
+        );
+        let c = dummy_result(
+            9.52,
+            vec![TrialMove::Rhyme {
+                region: 0,
+                region_name: "upper".to_owned(),
+                rhyme: 6,
+                rhyme_name: "u".to_owned(),
+                key: 'P',
+            }],
+            0,
+            1,
+        );
+        let d = dummy_result(
+            9.55,
+            vec![TrialMove::Rhyme {
+                region: 0,
+                region_name: "upper".to_owned(),
+                rhyme: 6,
+                rhyme_name: "u".to_owned(),
+                key: 'K',
+            }],
+            0,
+            1,
+        );
+
+        let candidates = vec![a.clone(), b.clone(), c.clone(), d.clone()];
+        let pareto = compute_pareto(&candidates);
+        assert_eq!(pareto.len(), 2);
+        assert_eq!(pareto[0].score, 9.48);
+        assert_eq!(pareto[1].score, 9.52);
+    }
+
+    #[test]
+    fn candidate_two_hop_seeds_from_pareto_front() {
+        let fixture = TrialFixture {
+            version: "ckt-v51-toned-2121-rust-trial-3".to_owned(),
+            layout_id: "test".to_owned(),
+            key_alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".to_owned(),
+            tone_keys_by_tone: "QWERT".to_owned(),
+            sound_keys: "QWERTYUIOPASDFGHJKLZXCVBNM".to_owned(),
+            baseline_memory_lower: 20,
+            baseline_memory_guard: 22,
+            baseline_tone_region_merge_lower: 9,
+            expected: Expected {
+                score: 9.55,
+                traditional_onset_d: 0,
+                onset_fragmentation: 0,
+            },
+            reference_effective_ms: [100.0, 100.0, 100.0, 100.0],
+            pinyin: vec!["sha".to_owned()],
+            toned_codes: vec![[Some("SP".to_owned()), None, None, None, None]],
+            atoms: vec![Atom {
+                name: "sh".to_owned(),
+                initial: "sh".to_owned(),
+                baseline_key: 'S',
+                move_memory_delta: 0,
+                pinyin: vec![0],
+            }],
+            searchable_first_atoms: vec!["sh".to_owned()],
+            first_diagnostics_mode: "ordinary-only".to_owned(),
+            rhyme_atoms: vec![RhymeAtom {
+                name: "u".to_owned(),
+                pinyin: vec![0],
+                baseline_keys: [("upper".to_owned(), 'Y')].into_iter().collect(),
+            }],
+            tone_regions: vec![ToneRegion {
+                name: "upper".to_owned(),
+                keys: "YP".to_owned(),
+                tones: vec![4],
+            }],
+            canonical_initial_keys: BTreeMap::new(),
+            source_hashes: BTreeMap::new(),
+        };
+
+        let a = dummy_result(
+            9.48,
+            vec![TrialMove::First {
+                atom: 0,
+                atom_name: "sh".to_owned(),
+                key: 'P',
+            }],
+            1,
+            0,
+        );
+        let b = dummy_result(
+            9.50,
+            vec![TrialMove::First {
+                atom: 0,
+                atom_name: "sh".to_owned(),
+                key: 'K',
+            }],
+            1,
+            0,
+        );
+        let c = dummy_result(
+            9.52,
+            vec![TrialMove::Rhyme {
+                region: 0,
+                region_name: "upper".to_owned(),
+                rhyme: 0,
+                rhyme_name: "u".to_owned(),
+                key: 'P',
+            }],
+            0,
+            1,
+        );
+
+        let results = vec![a, b, c];
+        // Beam 2 should pick the 2 Pareto members (first and rhyme)
+        let queue = candidate_two_hop(&fixture, &results, 2, "joint");
+        assert!(!queue.is_empty());
+        for candidate in &queue {
+            assert_eq!(candidate.len(), 2);
+            assert!(candidate[0] < candidate[1]);
+        }
+    }
 }
