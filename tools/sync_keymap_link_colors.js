@@ -25,15 +25,16 @@ const RUNTIME_START = '/* KEYMAP_LINK_RUNTIME_START */';
 const RUNTIME_END = '/* KEYMAP_LINK_RUNTIME_END */';
 
 function generatedSourceBlock(newline = '\n') {
+  const normalize = fn => fn.toString().replace(/\r?\n/gu, newline);
   const lines = [
     START,
     `const KEYMAP_LINK_COLOR_CONTRACT=Object.freeze({traditionalInitials:new Set([...${JSON.stringify(TRADITIONAL_INITIALS)}]),minimumDistance:${MINIMUM_OKLAB_DISTANCE},defaultKeycapInk:${JSON.stringify(DEFAULT_KEYCAP_INK)},defaultInitialInk:${JSON.stringify(DEFAULT_INITIAL_INK)},defaultZeroInitialInk:${JSON.stringify(DEFAULT_ZERO_INITIAL_INK)},initialLinkInk:Object.freeze(${JSON.stringify(INITIAL_LINK_INK)}),zeroLinkStyle:Object.freeze(${JSON.stringify(ZERO_LINK_STYLE)}),ordinaryCandidates:Object.freeze(${JSON.stringify(ORDINARY_LINK_CANDIDATES)}),zeroCandidates:Object.freeze(${JSON.stringify(ZERO_LINK_CANDIDATES)})});`,
     'const ordinaryHomeInitials=KEYMAP_LINK_COLOR_CONTRACT.traditionalInitials;',
-    keymapLinkOklab.toString(),
-    keymapLinkColorDistance.toString(),
-    resolveKeymapLinkColors.toString(),
-    validateKeymapLinkContrast.toString(),
-    keymapLinkLegendHtml.toString(),
+    normalize(keymapLinkOklab),
+    normalize(keymapLinkColorDistance),
+    normalize(resolveKeymapLinkColors),
+    normalize(validateKeymapLinkContrast),
+    normalize(keymapLinkLegendHtml),
     END,
   ];
   return lines.join(newline);

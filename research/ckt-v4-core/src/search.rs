@@ -58,6 +58,8 @@ impl ProposalKind {
         Self::FinalCycleRegroup,
     ];
 
+    pub const STRICT_2126_KINDS: [Self; 10] = Self::STRICT_2121_KINDS;
+
     pub const fn index(self) -> usize {
         self as usize
     }
@@ -238,6 +240,10 @@ pub fn validate_proposal(
         candidate
             .validate_strict_2121()
             .map_err(ProposalError::StructuralRejected)?;
+    } else if candidate.capacity == [21, 26] {
+        candidate
+            .validate_strict_2126()
+            .map_err(ProposalError::StructuralRejected)?;
     }
     candidate
         .validate_common399(context.pinyin_map, context.common_pinyin)
@@ -256,6 +262,8 @@ pub fn propose_valid(
         let kind = context.only_kind.unwrap_or_else(|| {
             if current.capacity == [21, 21] {
                 ProposalKind::STRICT_2121_KINDS[rng.index(ProposalKind::STRICT_2121_KINDS.len())]
+            } else if current.capacity == [21, 26] {
+                ProposalKind::STRICT_2126_KINDS[rng.index(ProposalKind::STRICT_2126_KINDS.len())]
             } else {
                 ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]
             }
@@ -302,6 +310,9 @@ fn mutate(
                         .to_owned(),
                 );
             }
+            if layout.capacity == [21, 26] {
+                return Err("tone-slot-swap is disabled for fixed aeuio 21x26 layouts".to_owned());
+            }
             let (left, right) = distinct_pair(5, rng)?;
             layout.swap_tone_slots(left, right)
         }
@@ -310,6 +321,9 @@ fn mutate(
                 return Err(
                     "tone-key-replacement is disabled for strict 21x21 AVUIO layouts".to_owned(),
                 );
+            }
+            if layout.capacity == [21, 26] {
+                return Err("tone-key-replacement is disabled for fixed aeuio 21x26 layouts".to_owned());
             }
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| {
@@ -332,6 +346,9 @@ fn mutate(
             if layout.capacity == [21, 21] {
                 return Err("head-key-replacement is disabled for strict 21x21 layouts (all 21 consonants active)".to_owned());
             }
+            if layout.capacity == [21, 26] {
+                return Err("head-key-replacement is disabled for strict 21x26 layouts (all 21 consonants active)".to_owned());
+            }
             let keys = layout.distinct_head_keys();
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| !keys.contains(key) && !layout.tone.contains(key))
@@ -352,6 +369,9 @@ fn mutate(
         ProposalKind::FinalKeyReplacement => {
             if layout.capacity == [21, 21] {
                 return Err("final-key-replacement is disabled for strict 21x21 layouts (all 21 consonants active)".to_owned());
+            }
+            if layout.capacity == [21, 26] {
+                return Err("final-key-replacement is disabled for strict 21x26 layouts (all 26 letters active)".to_owned());
             }
             let keys = layout.distinct_final_keys();
             let candidates: Vec<_> = (0_u8..34)

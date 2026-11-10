@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 function parseArgs(values) {
   const result = {};
@@ -65,6 +66,54 @@ const archived = plan.seeds.map(seed => {
     coverageCount: seed.coverageCount,
   };
 });
+
+// Patch audit gap: also archive the global bestCktV4 layout from database
+let globalBest = null;
+const dbCandidate = args.db ?? path.join(planDirectory, '../exploration.sqlite3');
+if (fs.existsSync(dbCandidate)) {
+  try {
+    const stdout = execFileSync('sqlite3', [
+      dbCandidate,
+      'SELECT hex(state_key), layout_id, ckt_v4, memory, displaced_initials, displaced_vowels, ergonomics_json FROM states ORDER BY ckt_v4 ASC LIMIT 1;'
+    ], { encoding: 'utf8' }).trim();
+    if (stdout) {
+      const [hexKey, layoutId, cktStr, memStr, dStr, vStr, ergoStr] = stdout.split('|');
+      const buf = Buffer.from(hexKey, 'hex');
+      if (buf.length === 69) {
+        const cap = [buf[0], buf[1]];
+        const headKeys = Array.from(buf.slice(2, 29));
+        const finalKeys = Array.from(buf.slice(29, 64));
+        const tone = Array.from(buf.slice(64, 69));
+        const globalBestLayout = {
+          id: `${layoutId}-global-best`,
+          capacity: cap,
+          headKeys,
+          finalKeys,
+          tone,
+        };
+        const bestFilename = 'best-global-ckt-v4.json';
+        fs.writeFileSync(path.join(args.output, bestFilename), `${JSON.stringify(globalBestLayout, null, 2)}\n`);
+        let ergo = null;
+        try { if (ergoStr) ergo = JSON.parse(ergoStr); } catch (_) {}
+        globalBest = {
+          stateKey: hexKey,
+          filename: bestFilename,
+          originId: layoutId,
+          metrics: {
+            cktV4: parseFloat(cktStr),
+            memory: parseInt(memStr, 10),
+            displacedInitials: parseInt(dStr, 10),
+            displacedVowels: parseInt(vStr, 10),
+            ergonomics: ergo,
+          },
+        };
+      }
+    }
+  } catch (err) {
+    console.warn(`[archive] warning: unable to extract global best layout: ${err.message}`);
+  }
+}
+
 const manifest = {
   version: 'ckt-v4-seed-archive-1',
   capacity,
@@ -77,7 +126,8 @@ const manifest = {
     initialRanking: portable(args.ranking),
     initialRankingSha256: sha256(args.ranking),
   },
+  globalBest,
   seeds: archived,
 };
 fs.writeFileSync(path.join(args.output, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
-console.error(`archived ${archived.length} ${capacity.join('x')} seeds at ${portable(args.output)}`);
+console.error(`archived ${archived.length} ${capacity.join('x')} seeds (with globalBest: ${globalBest ? 'yes' : 'none'}) at ${portable(args.output)}`);

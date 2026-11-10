@@ -1,0 +1,290 @@
+{
+  "version": "ckt-v4-seed-archive-1",
+  "capacity": [
+    21,
+    26
+  ],
+  "generation": 400,
+  "bestCktV4": 9.040617014584631,
+  "totalStates": 128008,
+  "sources": {
+    "plan": "D:/CtoD/Default/桌面/Code/Lua/inputMethod/shuangpin-layout-benchmark-prod-2126/research/exploration/production-ckt-v4-2126-m40-d3-v2-20261108/generation-0400-plan/plan.json",
+    "planSha256": "8c96d0a76831bedbc5b09efdad7afd367ad221b76460569d8fcc9b6992556e84",
+    "initialRanking": "research/config/ckt-v4-ranked-seeds-21x26.json",
+    "initialRankingSha256": "89a9cb28c4f988e17fb841b847387f27af62e557a8f6069f920a6e854034b6bd"
+  },
+  "globalBest": {
+    "stateKey": "151A01170C0F03130D0B060A0709100F05151611190212090909101818000B0E0C0A040309180308191213170206110D10070D0F141102191213160705150116080414000E",
+    "filename": "best-global-ckt-v4.json",
+    "originId": "SY26-V3-R2-M37-D3-V0-SPEED-01-global-best",
+    "metrics": {
+      "cktV4": 9.04061701458463,
+      "memory": 39,
+      "displacedInitials": 3,
+      "displacedVowels": 1,
+      "ergonomics": {
+        "loads": {
+          "rp_s2": 0.05608259655598832,
+          "rp_max": 0.0741728276866313,
+          "home_s2": 0.3752545657759007,
+          "home_c4": 0.26946408837986013,
+          "home_wx": 0.29040528916586245,
+          "home_floor": 0.26946408837986013,
+          "w_max": 0.054941138049159545,
+          "y_max": 0.07302318874640176
+        },
+        "mxScore": 123.58453450804244
+      }
+    }
+  },
+  "seeds": [
+    {
+      "rank": 1,
+      "reason": "best-new-ckt-v4",
+      "stateKey": "151a01150c0f03130d0b060a0709100f05171611190212090909101818000b0e0d190a0409070408171105060102120c10180c0f141112030205171813161503080414000e",
+      "filename": "seed-01-best-new-ckt-v4.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-SPEED-01-global-best",
+      "iteration": 1,
+      "metrics": {
+        "cktV4": 9.096573972580089,
+        "memory": 40,
+        "displacedInitials": 3,
+        "displacedVowels": 2,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.05608259655598832,
+            "rp_max": 0.0741728276866313,
+            "home_s2": 0.3979024516754437,
+            "home_c4": 0.28978695672756694,
+            "home_wx": 0.29122404542973307,
+            "home_floor": 0.28978695672756694,
+            "w_max": 0.058717958146605215,
+            "y_max": 0.10093990423260278
+          },
+          "mxScore": 127.06831185122344
+        }
+      },
+      "nearestPriorDistance": 3,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c181-m40-d3-v2-rp29-h28-mx127",
+      "coverageCount": 23
+    },
+    {
+      "rank": 2,
+      "reason": "metric-extreme:memory",
+      "stateKey": "151a010f0c0503130d0b060a07090518101517111902121818180916160012130c0f0402091502080116030619100a18170e1811141701070a0b0d0e0b0d0507080414000e",
+      "filename": "seed-02-metric-extreme-memory.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-ULP-01",
+      "iteration": 11,
+      "metrics": {
+        "cktV4": 9.290300615771525,
+        "memory": 38,
+        "displacedInitials": 2,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.02267450844657153,
+            "rp_max": 0.028361729508467708,
+            "home_s2": 0.3541921205619277,
+            "home_c4": 0.24897450698380685,
+            "home_wx": 0.2873421488029707,
+            "home_floor": 0.24897450698380685,
+            "w_max": 0.07903257700546229,
+            "y_max": 0.0644954941418626
+          },
+          "mxScore": 133.41857458640908
+        }
+      },
+      "nearestPriorDistance": 7,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c185-m38-d2-v0-rp11-h24-mx133",
+      "coverageCount": 2
+    },
+    {
+      "rank": 3,
+      "reason": "metric-extreme:displaced-initials",
+      "stateKey": "151a010f0c1703130d0b060a0709101705151611190212090909101818000b0e07190a0409180408010611120302130c170d0c10140615160211010d0f051516080414000e",
+      "filename": "seed-03-metric-extreme-displaced-initials.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-SPEED-01-global-best",
+      "iteration": 15,
+      "metrics": {
+        "cktV4": 9.319307351307648,
+        "memory": 38,
+        "displacedInitials": 1,
+        "displacedVowels": 2,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.01681495489391385,
+            "rp_max": 0.02076187796527871,
+            "home_s2": 0.3873165082608678,
+            "home_c4": 0.28595479227724174,
+            "home_wx": 0.2846376505102731,
+            "home_floor": 0.2846376505102731,
+            "w_max": 0.05658516011264354,
+            "y_max": 0.07302318874640176
+          },
+          "mxScore": 134.44720442718815
+        }
+      },
+      "nearestPriorDistance": 9,
+      "nearestPriorDistanceExact": false,
+      "coverageCell": "c186-m38-d1-v2-rp8-h28-mx134",
+      "coverageCount": 1
+    },
+    {
+      "rank": 4,
+      "reason": "metric-extreme:displaced-vowels",
+      "stateKey": "151a010f0c0503130d0b060a070905181610151119021718181809121200110f18100402090c02080316120119130a07170e070d141703060a0b050e0b051506080414000e",
+      "filename": "seed-04-metric-extreme-displaced-vowels.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-ULP-01",
+      "iteration": 1,
+      "metrics": {
+        "cktV4": 9.164443309699124,
+        "memory": 39,
+        "displacedInitials": 3,
+        "displacedVowels": 0,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.02542454539132587,
+            "rp_max": 0.033759385949270665,
+            "home_s2": 0.3935474614002271,
+            "home_c4": 0.25619157992474056,
+            "home_wx": 0.31207897790232725,
+            "home_floor": 0.25619157992474056,
+            "w_max": 0.06831483627395694,
+            "y_max": 0.061328227062765014
+          },
+          "mxScore": 126.132177756135
+        }
+      },
+      "nearestPriorDistance": 2,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c183-m39-d3-v0-rp13-h25-mx126",
+      "coverageCount": 4
+    },
+    {
+      "rank": 5,
+      "reason": "metric-extreme:right-pinky",
+      "stateKey": "151a010f0c0503170d0b060a070905181315101119021209090918161600130c030b071916181908120406110117050f020e120a14111709100d150e0d091015080414000e",
+      "filename": "seed-05-metric-extreme-right-pinky.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-ULP-01",
+      "iteration": 13,
+      "metrics": {
+        "cktV4": 9.323531296963342,
+        "memory": 40,
+        "displacedInitials": 3,
+        "displacedVowels": 1,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.005954323693986385,
+            "rp_max": 0.008942814300431883,
+            "home_s2": 0.3985963796814417,
+            "home_c4": 0.2897480575886521,
+            "home_wx": 0.30243247081470664,
+            "home_floor": 0.2897480575886521,
+            "w_max": 0.0679982984455534,
+            "y_max": 0.07639580723402817
+          },
+          "mxScore": 132.25975483240202
+        }
+      },
+      "nearestPriorDistance": 9,
+      "nearestPriorDistanceExact": false,
+      "coverageCell": "c186-m40-d3-v1-rp3-h28-mx132",
+      "coverageCount": 4
+    },
+    {
+      "rank": 6,
+      "reason": "metric-extreme:home-row",
+      "stateKey": "151a010f0c0503130d0b060a070905181617151119021018181809121200030d081007060905060a171216190211040b130e0b181417020e13160c0f150c010f080414000e",
+      "filename": "seed-06-metric-extreme-home-row.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-ULP-01",
+      "iteration": 18,
+      "metrics": {
+        "cktV4": 9.353280303640524,
+        "memory": 40,
+        "displacedInitials": 3,
+        "displacedVowels": 2,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.024755560448354218,
+            "rp_max": 0.024755560448354218,
+            "home_s2": 0.5316225863550048,
+            "home_c4": 0.3679429266833652,
+            "home_wx": 0.3704089496306746,
+            "home_floor": 0.3679429266833652,
+            "w_max": 0.06532173085011159,
+            "y_max": 0.06265999190823264
+          },
+          "mxScore": 146.6198425476432
+        }
+      },
+      "nearestPriorDistance": 8,
+      "nearestPriorDistanceExact": true,
+      "coverageCell": "c187-m40-d3-v2-rp9-h36-mx146",
+      "coverageCount": 6
+    },
+    {
+      "rank": 7,
+      "reason": "metric-extreme:moving-hand",
+      "stateKey": "151a010f0c0503130d0b060a0709051816171511190210181818091212000302180807040b13040a1712160605111909100e090d1417050e10160c0f150c010f080414000e",
+      "filename": "seed-07-metric-extreme-moving-hand.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-ULP-01",
+      "iteration": 37,
+      "metrics": {
+        "cktV4": 9.333439168074891,
+        "memory": 40,
+        "displacedInitials": 3,
+        "displacedVowels": 2,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.024755560448354218,
+            "rp_max": 0.024755560448354218,
+            "home_s2": 0.5159274760909097,
+            "home_c4": 0.3620672438600137,
+            "home_wx": 0.3617873075830517,
+            "home_floor": 0.3617873075830517,
+            "w_max": 0.06532173085011159,
+            "y_max": 0.061328227062765014
+          },
+          "mxScore": 150.34167387500617
+        }
+      },
+      "nearestPriorDistance": 9,
+      "nearestPriorDistanceExact": false,
+      "coverageCell": "c186-m40-d3-v2-rp9-h36-mx150",
+      "coverageCount": 2
+    },
+    {
+      "rank": 8,
+      "reason": "novel-sparse-coverage",
+      "stateKey": "151a010f0c090313150b060a07091017120d0511190216171717101818000716120204190c100a0811140e170903050d060b0d130a15090b050e110f1501180f080414000e",
+      "filename": "seed-08-novel-sparse-coverage.json",
+      "originId": "SY26-V3-R2-M37-D3-V0-SPEED-01-global-best",
+      "iteration": 40,
+      "metrics": {
+        "cktV4": 9.359340612329138,
+        "memory": 39,
+        "displacedInitials": 3,
+        "displacedVowels": 2,
+        "ergonomics": {
+          "loads": {
+            "rp_s2": 0.024755560448354218,
+            "rp_max": 0.024755560448354218,
+            "home_s2": 0.39955005143971367,
+            "home_c4": 0.2782809952980189,
+            "home_wx": 0.31874427543438794,
+            "home_floor": 0.2782809952980189,
+            "w_max": 0.0376576541040589,
+            "y_max": 0.0595834334948803
+          },
+          "mxScore": 125.648070844625
+        }
+      },
+      "nearestPriorDistance": 9,
+      "nearestPriorDistanceExact": false,
+      "coverageCell": "c187-m39-d3-v2-rp9-h27-mx125",
+      "coverageCount": 2
+    }
+  ]
+}
