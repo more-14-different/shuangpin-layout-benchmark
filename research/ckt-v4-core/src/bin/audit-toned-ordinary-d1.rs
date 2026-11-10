@@ -82,7 +82,8 @@ struct AnnealState {
 #[serde(rename_all = "camelCase")]
 struct AnnealCheckpoint {
     version: String,
-    layout_id: String,
+    #[serde(default)]
+    layout_id: Option<String>,
     best_score: f64,
     best_state: AnnealState,
 }
