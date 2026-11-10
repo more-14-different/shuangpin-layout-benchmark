@@ -18,21 +18,22 @@ PR1–NF3 建立了历史方案、五类键域和单首键前沿；R11 页面保
 | R4 | 将全 20 合同[^contracts]右小指负担纳入约束，探明 21×21 的 D≤1 / D≤2 取舍 | +17 / 401 | `R4-21X21-M41-07` |
 | R5 | 把含[形辅](https://input.tansongchen.com/snow-jiandao/)[^aux]主行率、角色键频与空格敏感性纳入复核，推进低偏移 21×26 前沿 | +11 / 412 | `R5-21X26-M39-09` |
 | R6 | 固定五辅映射，围绕 D=1 与含辅主行率做 21×26 有界搜索 | +19 / 431 | `R6-21X26-M42-16` |
-| R7 | 转向固定 [AVUIO](https://github.com/ChenZhu-Xie/rime-snow-pinyin#%E6%97%A0%E9%A3%9E%E9%94%AE%E9%81%93%E7%A5%9E%E9%9F%B5-%E5%8F%8C%E6%8B%BC%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88)[^aux] 的 21×21 补全约束邻域，分别核验系综、主行与记忆 | +14 / 445 | `R7-21X21-M40-01` |
+| R7 | 转向固定 [AVUIO](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md#qz-e8f37a-2121-双拼)[^aux] 的 21×21 补全约束邻域，分别核验系综、主行与记忆 | +14 / 445 | `R7-21X21-M40-01` |
 | R8 | 补全例外键口径并加入 v6 情景指标；闭合固定五辅的 21×21 / 21×26 局部邻域 | +10 / 455 | `R8-21X21-M40-01` |
 | R9 | 新增完整 [moving-hand](https://github.com/macroxue/shuangpin)[^mx34] 文稿评测与 34 键扩展；21×26 放宽 D/HF[^hf] 寻找低记忆取舍 | +21 / 476 | `R9-21X26-M37-05` |
 | R10 | 修正跨键域比较资格，将日常纯汉字 [MX34](https://macroxue.github.io/shuangpin/eval.html)[^mx34] 纳入目标；限定 21×26、D≤5、V≤1、Common399 无重无飞、固定五辅 | +8 / 484 | `R10-21X26-M39-08` |
 | R11 | 在 R10 约束内加入复合操作、定向韵键与有限两层搜索；同时整合文稿热图、检索和说明卡片 | +8 / 492 | `R11-21X26-M39-05` |
 
-### R11 之后：CKT v4 多级探索
+### R11 之后：CKT v4 多级探索与次世代前沿
 
-R11 冻结后没有直接顺延为 R12，而是先重建 CKT v4 精确评分、代际避重与 CUDA 后端，再分成两条生产路线。21×21 从 M/D 逐级收紧进入固定 IVUAO 与 ProdGate，形成 U357 及其严格不退化的 M40 下界；21×26 先画出 M≤46/D≤10/V≤1 宽域，再证明固定拓扑下 D≥1，分别压实 D≤1 与 D≤3 的经验前沿。
+R11 冻结后没有直接顺延为 R12，而是先重建 CKT v4 精确评分、代际避重与 CUDA 后端，再深入多条生产与前沿探索路线。21×21 无调路线经 ProdGate 产出 U357 并证明 M40 下界，随后定向退火收敛至次世代现行旗舰 QZ-e8f37a；21×26 路线探明 D≥1 结构下界，从 D≤1（初代 Overall-17）放宽至 D≤3/V≤2 获得 9.040617 极速饱和，并由 D3/V1 确立为次世代现行旗舰；同时拓展了 21×21 带调拼读与火星声韵因子化探索。
 
 | 路线 | 已探索区域 | 当前结论 |
 |---|---|---|
-| 方法层 | CKT v4 CPU/JS 精确回归、SQLite 避重、多目标选种、CUDA finalists | 后续轮次共享同一状态与评分合同；CUDA 不改变分数 |
-| 21×21 | 分级下降 → 严格 IVUAO → ProdGate → 23 盆地 / 3 baseSeed 复核 | ProdGate 前沿 9.705581；U357 的 M<40 在严格不退化合同下不可行 |
-| 21×26 | 宽域低 V → M≤40/D≤1/V≤1 → M≤40/D≤3/V≤1 | D=0 结构不可行；D≤1 前沿 9.167862，D≤3 前沿 9.050693，后二者尚未加入完整 ProdGate |
+| 方法层 | CKT v4 CPU/JS 精确回归、SQLite 避重、CUDA finalists；次世代 CKT v5.1 联合候选池与柔性词长平衡（`soft-page-fill-v2`）、`11⁶` 辅序稳健扰动审计 | 探索轮次共享同一评分真值；CUDA 与 CPU 浮点严格等价；辅序选择在宽扰动网格中达到 80%–99% Top-1 稳健领先 |
+| 21×21 无调 | 分级下降 → 严格 IVUAO → ProdGate（产出 U357）→ 定向退火收敛至 QZ-e8f37a（M42/D2/V5） | U357 确认严格不退化 M40 下界；QZ-e8f37a（CKT v4 9.560735，CKT v5.1 9.567898）在三字词第三辅与四字两辅下确立为现行旗舰 |
+| 21×26 生产 | 宽域低 V → M≤40/D≤1/V≤1（Overall-17 初代）→ M≤40/D≤3/V≤1（P8 前沿 9.050693）→ M≤40/D≤3/V≤2 极速饱和（P8-v2 前沿 9.040617）→ 综合旗舰 D3/V1（M40/D3/V1） | D=0 结构不可行；P8-v2 在 400 代 12.8 万状态下确认 9.040617 坚固经验上限；D3/V1 经柔性词长平衡与稳健辅序评测（CKT v4 9.083575，CKT v5.1 9.1029998）确立为现行旗舰 |
+| 21×21 带调研究 | 上游拼读声介规则约束下 11 韵（D11/F9，M24–26）与火星 10 韵（D1/F1，M20–22）× 7:8:6 / 3×7 调区探索 | 探明 21 键带调双拼在上游声介规则与调区分割下的结构下界；拼读 11 韵全量 CKT v5.1 达 9.559142，火星 10 韵初筛达 9.589470 |
 
 完整的时间线、状态规模、负结果、证据分支和可复用方法见 [`docs/POST_R11_EXPLORATION.md`](docs/POST_R11_EXPLORATION.md)。后续 CKT v4 约 9.x 的归一化分数与本页 R11“补全 CKT ms”不是同一数值轴，不能直接横向比较。
 
@@ -56,14 +57,18 @@ R11 冻结后没有直接顺延为 R12，而是先重建 CKT v4 精确评分、�
 | `R10-21X26-M39-08` | R10 | 21×26 | 39/5/0 | 399 | 9.237569 | 9.9167 / 10.5691 / 9.0195 | 67.324 |
 | `R11-21X26-M39-05` | R11 冻结 | 21×26 | 39/5/0 | 399 | 9.234330 | 9.9158 / 10.5724 / 9.0241 | 67.215 |
 | [`P3-Finetune-best`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/97b58a868caab6734afd150b687ecc2e0a8333bf/research/milestones/finetune/finetune-batch-04-gen-0100.json) | P3 · 21×21 低温微调 | 21×21 | 40/0/5 | — | 9.420200 | — | — |
-| [`U357-21X21-M40-D0`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/11713b652cd6a2350d8bf6d0a16d3383d8f0038f/research/notes/2026-10-29-prodgate-directed-repair-final-report.md) | P4 · ProdGate／实战 | 21×21 | 40/0/5 | 357 | 9.716421 | 10.4733 / 10.8046 / 9.5129 | 89.917 |
+| [`U357-21X21-M40-D0`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/11713b652cd6a2350d8bf6d0a16d3383d8f0038f/research/notes/2026-10-29-prodgate-directed-repair-final-report.md) | P4 · ProdGate／初代 | 21×21 | 40/0/5 | 357 | 9.716421 | 10.4733 / 10.8046 / 9.5129 | 89.917 |
 | [`P5-Wide-best`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/dc3b0ca4852d923f2384385910e3907eeb766d6e/research/seeds/ckt-v4/low-disp-20261026-gen0400/manifest.json) | P5 · 21×26 宽域速度极值 | 21×26 | ≤46/≤10/≤1 | — | 8.949768 | — | — |
 | [`P6-D1-Speed`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7a7e154f3f7d0c86653ee15e755ccd72e866e5e2/research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md) | P6 · D≤1 速度极值 | 21×26 | 37/1/1 | — | 9.167862 | — | — |
-| [`Overall-17`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7a7e154f3f7d0c86653ee15e755ccd72e866e5e2/research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md) | P6 · 低记忆均衡／实战 | 21×26 | 36/1/1 | 399 | 9.185254 | 10.8219 / 10.6847 / 9.5341 | 75.672 |
+| [`Overall-17`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7a7e154f3f7d0c86653ee15e755ccd72e866e5e2/research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md) | P6 · 低记忆均衡／初代 | 21×26 | 36/1/1 | 399 | 9.185254 | 10.8219 / 10.6847 / 9.5341 | 75.672 |
 | [`P8-D3-Speed`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/70545d9f182a97700f7b404e18487fb12738ce01/research/milestones/m40-d3/2026-10-31-m40-d3-production-final-report.md) | P8 · D≤3 速度极值 | 21×26 | 38/3/1 | — | 9.050693 | — | — |
 | [`P8-D3-V0`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/70545d9f182a97700f7b404e18487fb12738ce01/research/milestones/m40-d3/2026-10-31-m40-d3-production-final-report.md) | P8 · 基础元音原位极值 | 21×26 | 38/3/0 | — | 9.073755 | — | — |
+| [`P8-v2-D3-Speed`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7ab6982/research/milestones/m40-d3-v2/2026-11-08-m40-d3-v2-production-final-report.md) | P8-v2 · 21×26 极速饱和 | 21×26 | 39/3/1 | 399 | 9.040617 | — | — |
+| [`D3/V1 旗舰`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/ea30b89/research/notes/2026-11-09-d3v1-ckt-v51-soft-balance-aux-order-robustness.md) | 次世代 · 21×26 现行旗舰 | 21×26 | 40/3/1 | 399 | 9.083575 | — | — |
+| [`QZ-e8f37a`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/ee5d9ba/research/notes/2026-11-09-e8f37a-ckt-v51-aux-order-robustness.md) | 次世代 · 21×21 现行旗舰 | 21×21 | 42/2/5 | 345 | 9.560735 | — | — |
+| [`Pindu11-D11`](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/ec47304/research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd.md) | 探索 · 21×21 拼读声介前沿 | 21×21 | 24/11/— | 437 | 9.559142 | — | — |
 
-P3/P5/P6/P8 的“速度极值”用于标记已探索地形，不等于可直接采用的生产方案；可投产性还需看人体工学门禁、重码和记忆成本。完整层级、状态规模与负结果见 [R11 后探索总览](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/main/docs/POST_R11_EXPLORATION.md)。
+P3/P5/P6/P8/P8-v2 的“速度极值”用于标记已探索地形，不等于可直接采用的生产方案；可投产性还需看人体工学门禁、重码和记忆成本。完整层级、状态规模与负结果见 [R11 后探索总览](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/main/docs/POST_R11_EXPLORATION.md)。
 
 <!-- README_REPRESENTATIVES:END -->
 
@@ -71,11 +76,19 @@ P3/P5/P6/P8 的“速度极值”用于标记已探索地形，不等于可直�
 
 <!-- README_ADOPTION:START（由 tools/update_readme_representatives.mjs 生成，请勿手改） -->
 
-截至 2026-11-01，[rime-snow-pinyin](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README.md) 的当前实装分为两条：
+截至目前，[rime-snow-pinyin](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md) 共实装采用了本项目的 **4 个双拼方案**（2 个现行旗舰方案 + 2 个冻结初代方案，详细对比见 [现行双拼与原键道 S005、首道 B04 benchmark](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md#现行双拼与原键道-s005首道-b04-benchmark)）：
 
-- [冰雪键道](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_jiandao.schema.yaml)与[冰雪三拼](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_sanpin.schema.yaml)共用 [无飞键道(U357) 21×21 双拼](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/11713b652cd6a2350d8bf6d0a16d3383d8f0038f/research/notes/2026-10-29-prodgate-directed-repair-final-report.md)；运行仓库以 [U357 映射夹具](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/docs/shenyun-u357-mapping.json) 固化 `U357-21X21-M40-D0`。
+### 现行旗舰方案
 
-- [冰雪神韵·形](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_shape.schema.yaml)与[冰雪神韵·调](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_tone.schema.yaml)共用 [神韵(Overall-17) 21×26 双拼](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7a7e154f3f7d0c86653ee15e755ccd72e866e5e2/research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md)；运行仓库以 [21×26 映射配置](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/config/shenyun-21x26-mapping.json) 和[公共拼写代数](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_common.yaml)固化 `SNOW-SHENYUN-21X26-PRODUCTION`。
+- **D3/V1 21×26 双拼**（`SNOW-SHENYUN-21X26-D3V1-BALANCED`）：由 [冰雪简道](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_shape.schema.yaml)（形码辅助）与 [冰雪散拼](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_tone.schema.yaml)（音调辅助）采用。运行仓库以 [21×26 映射配置](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/config/shenyun-21x26-mapping.json) 和 [公共拼写代数](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_common.yaml) 固化；对应本项目的 [D3/V1 辅序稳健性报告](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/ea30b89/research/notes/2026-11-09-d3v1-ckt-v51-soft-balance-aux-order-robustness.md) 与 [21×26 生产结题报告](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7ab6982/research/milestones/m40-d3-v2/2026-11-08-m40-d3-v2-production-final-report.md)。运行仓库说明详见 [D3/V1 21×26 双拼](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md#d3v1-2126-双拼)。
+
+- **QZ-e8f37a 21×21 双拼**（`QZ-e8f37a0998f9`）：由 [冰雪键道](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_jiandao.schema.yaml) 与 [冰雪三拼](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_sanpin.schema.yaml) 采用。运行仓库以 [QZ 映射夹具](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/docs/shenyun-u357-mapping.json) 和 [键道公共拼写代数](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_jiandao_common.yaml) 固化；对应本项目的 [QZ-e8f37a 辅序稳健性报告](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/ee5d9ba/research/notes/2026-11-09-e8f37a-ckt-v51-aux-order-robustness.md)。运行仓库说明详见 [QZ-e8f37a 21×21 双拼](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md#qz-e8f37a-2121-双拼)。
+
+### 冻结初代方案（历史兼容）
+
+- **神韵(Overall-17) 21×26 双拼**（`SNOW-SHENYUN-21X26-PRODUCTION`）：由 [冰雪简道·初代](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_shape_first.schema.yaml) 与 [冰雪散拼·初代](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_shenyun_tone_first.schema.yaml) 固化保留；方案源自 [2026-10-30-strict-d0-production-closure-report.md](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/7a7e154f3f7d0c86653ee15e755ccd72e866e5e2/research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md)。运行仓库说明详见 [初代兼容方案与完整报告](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md#初代兼容方案与完整报告)。
+
+- **无飞键道(U357) 21×21 双拼**（`U357-21X21-M40-D0`）：由 [冰雪键道·初代](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_jiandao_first.schema.yaml) 与 [冰雪三拼·初代](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/snow_sanpin_first.schema.yaml) 固化保留；方案源自 [2026-10-29-prodgate-directed-repair-final-report.md](https://gitee.com/xie-chenzhu/shuangpin-layout-benchmark/blob/11713b652cd6a2350d8bf6d0a16d3383d8f0038f/research/notes/2026-10-29-prodgate-directed-repair-final-report.md)。运行仓库说明详见 [初代兼容方案与完整报告](https://gitee.com/xie-chenzhu/rime-snow-pinyin/blob/main/README_CN.md#初代兼容方案与完整报告)。
 
 以上实装文件链接跟随运行仓库的 `main`，用于查看当前采用状态；方案来源链接固定到定稿提交，便于长期复核其搜索合同和映射。
 

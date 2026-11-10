@@ -41,7 +41,7 @@ const postR11 = [
   },
   {
     label: 'U357-21X21-M40-D0',
-    stage: 'P4 · ProdGate／实战',
+    stage: 'P4 · ProdGate／初代',
     domain: '21×21', mdv: '40/0/5', unique: '357', cktV4: 9.716420811869073,
     ensemble: '10.4733 / 10.8046 / 9.5129', completion: '89.917',
     evidence: ['11713b652cd6a2350d8bf6d0a16d3383d8f0038f', 'research/notes/2026-10-29-prodgate-directed-repair-final-report.md'],
@@ -60,7 +60,7 @@ const postR11 = [
   },
   {
     label: 'Overall-17',
-    stage: 'P6 · 低记忆均衡／实战',
+    stage: 'P6 · 低记忆均衡／初代',
     domain: '21×26', mdv: '36/1/1', unique: '399', cktV4: 9.185254321702468,
     ensemble: '10.8219 / 10.6847 / 9.5341', completion: '75.672',
     evidence: ['7a7e154f3f7d0c86653ee15e755ccd72e866e5e2', 'research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md'],
@@ -76,6 +76,30 @@ const postR11 = [
     stage: 'P8 · 基础元音原位极值',
     domain: '21×26', mdv: '38/3/0', unique: '—', cktV4: 9.073755,
     evidence: ['70545d9f182a97700f7b404e18487fb12738ce01', 'research/milestones/m40-d3/2026-10-31-m40-d3-production-final-report.md'],
+  },
+  {
+    label: 'P8-v2-D3-Speed',
+    stage: 'P8-v2 · 21×26 极速饱和',
+    domain: '21×26', mdv: '39/3/1', unique: '399', cktV4: 9.040617,
+    evidence: ['7ab6982', 'research/milestones/m40-d3-v2/2026-11-08-m40-d3-v2-production-final-report.md'],
+  },
+  {
+    label: 'D3/V1 旗舰',
+    stage: '次世代 · 21×26 现行旗舰',
+    domain: '21×26', mdv: '40/3/1', unique: '399', cktV4: 9.083575,
+    evidence: ['ea30b89', 'research/notes/2026-11-09-d3v1-ckt-v51-soft-balance-aux-order-robustness.md'],
+  },
+  {
+    label: 'QZ-e8f37a',
+    stage: '次世代 · 21×21 现行旗舰',
+    domain: '21×21', mdv: '42/2/5', unique: '345', cktV4: 9.560735,
+    evidence: ['ee5d9ba', 'research/notes/2026-11-09-e8f37a-ckt-v51-aux-order-robustness.md'],
+  },
+  {
+    label: 'Pindu11-D11',
+    stage: '探索 · 21×21 拼读声介前沿',
+    domain: '21×21', mdv: '24/11/—', unique: '437', cktV4: 9.559142,
+    evidence: ['ec47304', 'research/notes/2026-11-09-ckt-v51-toned-2121-pindu11-lowmd.md'],
   },
 ];
 
@@ -120,23 +144,34 @@ function representativeSection(forge) {
     '|---|---|---:|---:|---:|---:|---:|---:|',
     ...rows,
     '',
-    `P3/P5/P6/P8 的“速度极值”用于标记已探索地形，不等于可直接采用的生产方案；可投产性还需看人体工学门禁、重码和记忆成本。完整层级、状态规模与负结果见 ${markdownLink('R11 后探索总览', repoUrl(forge, 'benchmark', 'main', 'docs/POST_R11_EXPLORATION.md'))}。`,
+    `P3/P5/P6/P8/P8-v2 的“速度极值”用于标记已探索地形，不等于可直接采用的生产方案；可投产性还需看人体工学门禁、重码和记忆成本。完整层级、状态规模与负结果见 ${markdownLink('R11 后探索总览', repoUrl(forge, 'benchmark', 'main', 'docs/POST_R11_EXPLORATION.md'))}。`,
     '',
     generated.representatives.end,
   ].join('\n');
 }
 
 function adoptionSection(forge) {
+  const rimeReadme = (anchor = '') =>
+    repoUrl(forge, 'rime', 'main', (forge === 'gitee' ? 'README_CN.md' : 'README.md') + (anchor ? `#${anchor}` : ''));
   const link = (label, file) => markdownLink(label, repoUrl(forge, 'rime', 'main', file));
+  const linkSection = (label, anchor) => markdownLink(label, rimeReadme(anchor));
   const evidence = (label, ref, file) => markdownLink(label, repoUrl(forge, 'benchmark', ref, file));
   return [
     generated.adoption.start,
     '',
-    `截至 2026-11-01，${markdownLink('rime-snow-pinyin', repoUrl(forge, 'rime', 'main', 'README.md'))} 的当前实装分为两条：`,
+    `截至目前，${markdownLink('rime-snow-pinyin', rimeReadme())} 共实装采用了本项目的 **4 个双拼方案**（2 个现行旗舰方案 + 2 个冻结初代方案，详细对比见 ${linkSection('现行双拼与原键道 S005、首道 B04 benchmark', '现行双拼与原键道-s005首道-b04-benchmark')}）：`,
     '',
-    `- ${link('冰雪键道', 'snow_jiandao.schema.yaml')}与${link('冰雪三拼', 'snow_sanpin.schema.yaml')}共用 ${evidence('无飞键道(U357) 21×21 双拼', '11713b652cd6a2350d8bf6d0a16d3383d8f0038f', 'research/notes/2026-10-29-prodgate-directed-repair-final-report.md')}；运行仓库以 ${link('U357 映射夹具', 'docs/shenyun-u357-mapping.json')} 固化 \`U357-21X21-M40-D0\`。`,
+    '### 现行旗舰方案',
     '',
-    `- ${link('冰雪神韵·形', 'snow_shenyun_shape.schema.yaml')}与${link('冰雪神韵·调', 'snow_shenyun_tone.schema.yaml')}共用 ${evidence('神韵(Overall-17) 21×26 双拼', '7a7e154f3f7d0c86653ee15e755ccd72e866e5e2', 'research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md')}；运行仓库以 ${link('21×26 映射配置', 'config/shenyun-21x26-mapping.json')} 和${link('公共拼写代数', 'snow_shenyun_common.yaml')}固化 \`SNOW-SHENYUN-21X26-PRODUCTION\`。`,
+    `- **D3/V1 21×26 双拼**（\`SNOW-SHENYUN-21X26-D3V1-BALANCED\`）：由 ${link('冰雪简道', 'snow_shenyun_shape.schema.yaml')}（形码辅助）与 ${link('冰雪散拼', 'snow_shenyun_tone.schema.yaml')}（音调辅助）采用。运行仓库以 ${link('21×26 映射配置', 'config/shenyun-21x26-mapping.json')} 和 ${link('公共拼写代数', 'snow_shenyun_common.yaml')} 固化；对应本项目的 ${evidence('D3/V1 辅序稳健性报告', 'ea30b89', 'research/notes/2026-11-09-d3v1-ckt-v51-soft-balance-aux-order-robustness.md')} 与 ${evidence('21×26 生产结题报告', '7ab6982', 'research/milestones/m40-d3-v2/2026-11-08-m40-d3-v2-production-final-report.md')}。运行仓库说明详见 ${linkSection('D3/V1 21×26 双拼', 'd3v1-2126-双拼')}。`,
+    '',
+    `- **QZ-e8f37a 21×21 双拼**（\`QZ-e8f37a0998f9\`）：由 ${link('冰雪键道', 'snow_jiandao.schema.yaml')} 与 ${link('冰雪三拼', 'snow_sanpin.schema.yaml')} 采用。运行仓库以 ${link('QZ 映射夹具', 'docs/shenyun-u357-mapping.json')} 和 ${link('键道公共拼写代数', 'snow_jiandao_common.yaml')} 固化；对应本项目的 ${evidence('QZ-e8f37a 辅序稳健性报告', 'ee5d9ba', 'research/notes/2026-11-09-e8f37a-ckt-v51-aux-order-robustness.md')}。运行仓库说明详见 ${linkSection('QZ-e8f37a 21×21 双拼', 'qz-e8f37a-2121-双拼')}。`,
+    '',
+    '### 冻结初代方案（历史兼容）',
+    '',
+    `- **神韵(Overall-17) 21×26 双拼**（\`SNOW-SHENYUN-21X26-PRODUCTION\`）：由 ${link('冰雪简道·初代', 'snow_shenyun_shape_first.schema.yaml')} 与 ${link('冰雪散拼·初代', 'snow_shenyun_tone_first.schema.yaml')} 固化保留；方案源自 ${evidence('2026-10-30-strict-d0-production-closure-report.md', '7a7e154f3f7d0c86653ee15e755ccd72e866e5e2', 'research/milestones/strict-d0/2026-10-30-strict-d0-production-closure-report.md')}。运行仓库说明详见 ${linkSection('初代兼容方案与完整报告', '初代兼容方案与完整报告')}。`,
+    '',
+    `- **无飞键道(U357) 21×21 双拼**（\`U357-21X21-M40-D0\`）：由 ${link('冰雪键道·初代', 'snow_jiandao_first.schema.yaml')} 与 ${link('冰雪三拼·初代', 'snow_sanpin_first.schema.yaml')} 固化保留；方案源自 ${evidence('2026-10-29-prodgate-directed-repair-final-report.md', '11713b652cd6a2350d8bf6d0a16d3383d8f0038f', 'research/notes/2026-10-29-prodgate-directed-repair-final-report.md')}。运行仓库说明详见 ${linkSection('初代兼容方案与完整报告', '初代兼容方案与完整报告')}。`,
     '',
     '以上实装文件链接跟随运行仓库的 `main`，用于查看当前采用状态；方案来源链接固定到定稿提交，便于长期复核其搜索合同和映射。',
     '',
