@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $true)]
-    [string]$Config
+    [string]$Config,
+    [Parameter(Mandatory = $false)]
+    [int64]$StopAtGeneration = 0
 )
 
 $ErrorActionPreference = 'Stop'
@@ -75,6 +77,9 @@ function Start-CudaBatchSession([string]$File) {
     $info.RedirectStandardInput = $true
     $info.RedirectStandardOutput = $true
     $info.RedirectStandardError = $true
+    $info.StandardInputEncoding = [Text.UTF8Encoding]::new($false)
+    $info.StandardOutputEncoding = [Text.UTF8Encoding]::new($false)
+    $info.StandardErrorEncoding = [Text.UTF8Encoding]::new($false)
     $null = $info.ArgumentList.Add('--batch-session')
     $process = [Diagnostics.Process]::new()
     $process.StartInfo = $info
@@ -212,6 +217,12 @@ try {
     throw "another explorer process is using output root: $root"
 }
 
+$telemetryFile = Join-Path $root 'telemetry.csv'
+$monitorScript = Join-Path $repo 'tools/monitor_production.ps1'
+if (Test-Path -LiteralPath $monitorScript) {
+    $null = Start-Process -FilePath "pwsh" -ArgumentList "-NoLogo", "-NoProfile", "-File", "`"$monitorScript`"", "-TargetPid", "$PID", "-OutputFile", "`"$telemetryFile`"", "-IntervalSec", "15" -WindowStyle Hidden
+}
+
 $contract = [ordered]@{
     version = 'ckt-v4-explorer-contract-1'
     initialSchemes = $initialSchemeIds
@@ -265,7 +276,7 @@ try {
     $batchSession = Start-CudaBatchSession $annealer
   }
   $generation = 1
-  while ($settings.generations -eq 0 -or $generation -le $settings.generations) {
+  while (($settings.generations -eq 0 -or $generation -le $settings.generations) -and ($StopAtGeneration -eq 0 -or $generation -le $StopAtGeneration)) {
     $generationName = 'generation-{0:d4}' -f $generation
     $generationDir = Join-Path $root $generationName
     $planDir = Join-Path $root "$generationName-plan"
@@ -332,7 +343,10 @@ try {
             '--mx-variant', [string]$settings.mxVariant
         )) { $arguments.Add($value) }
         if ($item.Kind -eq 'layout' -and -not $resume) { Add-Optional $arguments '--initial-layout' $item.Value }
-        if ($generation -gt 1) {
+        if ($generation -gt 1 -or (Test-Path -LiteralPath $database)) {
+            Add-Optional $arguments '--exploration-database' $database
+            Add-Optional $arguments '--avoid-generation' ([Math]::Max(0, ($generation - 1)))
+        } elseif ($false) {
             if (-not (Test-Path -LiteralPath $database)) {
                 throw "exploration database is missing before generation ${generation}: $database"
             }
@@ -390,6 +404,12 @@ try {
         $plannerArguments = $arguments.ToArray()
         & $planner @plannerArguments
         if ($LASTEXITCODE -ne 0) { throw "generation $generation planning failed" }
+
+        $enhanceScript = Join-Path $repo 'tools/enhance_exploration_seeds.py'
+        if (Test-Path -LiteralPath $enhanceScript) {
+            & python $enhanceScript $planDir
+            if ($LASTEXITCODE -ne 0) { throw "generation $generation seed enhancement failed" }
+        }
     }
 
     $databaseState = Join-Path $planDir 'database-state.json'

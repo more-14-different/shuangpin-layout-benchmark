@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 
 pub const PROPOSAL_KIND_COUNT: usize = 14;
-pub const DEFAULT_MAX_PROPOSAL_ATTEMPTS: usize = 256;
+pub const DEFAULT_MAX_PROPOSAL_ATTEMPTS: usize = 4096;
 pub const NATIVE_ANNEAL_CHECKPOINT_VERSION: &str = "ckt-v4-native-anneal-11";
 pub const NATIVE_PROPOSAL_POLICY: &str = "regular-compound-v1";
 
@@ -35,6 +35,19 @@ impl ProposalKind {
         Self::HeadKeyReplacement,
         Self::FinalKeySwap,
         Self::FinalKeyReplacement,
+        Self::HeadGroupMove,
+        Self::HeadGroupSwap,
+        Self::FinalTokenMove,
+        Self::FinalTokenSwap,
+        Self::HeadPairRegroup,
+        Self::HeadCycleRegroup,
+        Self::FinalPairRegroup,
+        Self::FinalCycleRegroup,
+    ];
+
+    pub const STRICT_2121_KINDS: [Self; 10] = [
+        Self::HeadKeySwap,
+        Self::FinalKeySwap,
         Self::HeadGroupMove,
         Self::HeadGroupSwap,
         Self::FinalTokenMove,
@@ -221,6 +234,11 @@ pub fn validate_proposal(
     candidate
         .validate_structure()
         .map_err(ProposalError::StructuralRejected)?;
+    if candidate.capacity == [21, 21] {
+        candidate
+            .validate_strict_2121()
+            .map_err(ProposalError::StructuralRejected)?;
+    }
     candidate
         .validate_common399(context.pinyin_map, context.common_pinyin)
         .map_err(ProposalError::UniquenessRejected)
@@ -235,9 +253,13 @@ pub fn propose_valid(
     let mut structural_rejected = 0;
     let mut uniqueness_rejected = 0;
     for _ in 0..attempts {
-        let kind = context
-            .only_kind
-            .unwrap_or_else(|| ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]);
+        let kind = context.only_kind.unwrap_or_else(|| {
+            if current.capacity == [21, 21] {
+                ProposalKind::STRICT_2121_KINDS[rng.index(ProposalKind::STRICT_2121_KINDS.len())]
+            } else {
+                ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]
+            }
+        });
         let candidate = match propose(current, kind, rng) {
             Ok(candidate) => candidate,
             Err(ProposalError::MutationRejected(_)) => {
@@ -274,10 +296,21 @@ fn mutate(
 ) -> Result<(), String> {
     match kind {
         ProposalKind::ToneSlotSwap => {
+            if layout.capacity == [21, 21] {
+                return Err(
+                    "tone-slot-swap is disabled for strict 21x21 production IVUAO layouts"
+                        .to_owned(),
+                );
+            }
             let (left, right) = distinct_pair(5, rng)?;
             layout.swap_tone_slots(left, right)
         }
         ProposalKind::ToneKeyReplacement => {
+            if layout.capacity == [21, 21] {
+                return Err(
+                    "tone-key-replacement is disabled for strict 21x21 AVUIO layouts".to_owned(),
+                );
+            }
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| {
                     !layout.tone.contains(key)
@@ -296,6 +329,9 @@ fn mutate(
             layout.swap_head_keys(keys[left], keys[right])
         }
         ProposalKind::HeadKeyReplacement => {
+            if layout.capacity == [21, 21] {
+                return Err("head-key-replacement is disabled for strict 21x21 layouts (all 21 consonants active)".to_owned());
+            }
             let keys = layout.distinct_head_keys();
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| !keys.contains(key) && !layout.tone.contains(key))
@@ -314,6 +350,9 @@ fn mutate(
             layout.swap_final_keys(keys[left], keys[right])
         }
         ProposalKind::FinalKeyReplacement => {
+            if layout.capacity == [21, 21] {
+                return Err("final-key-replacement is disabled for strict 21x21 layouts (all 21 consonants active)".to_owned());
+            }
             let keys = layout.distinct_final_keys();
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| {

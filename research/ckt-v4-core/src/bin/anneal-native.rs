@@ -1058,10 +1058,15 @@ fn propose_guarded(
     rng: &mut SearchRng,
 ) -> Result<((RegularLayout, ProposalKind), usize), String> {
     let mut rejected = 0;
-    for _ in 0..DEFAULT_MAX_PROPOSAL_ATTEMPTS {
-        let kind = context
-            .only_kind
-            .unwrap_or_else(|| ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]);
+    let mut fallback_candidate = None;
+    for _ in 0..context.max_attempts {
+        let kind = context.only_kind.unwrap_or_else(|| {
+            if current.capacity == [21, 21] {
+                ProposalKind::STRICT_2121_KINDS[rng.index(ProposalKind::STRICT_2121_KINDS.len())]
+            } else {
+                ProposalKind::ALL[rng.index(PROPOSAL_KIND_COUNT)]
+            }
+        });
         stats[kind.index()].proposed += 1;
         let candidate = match propose(current, kind, rng) {
             Ok(candidate) => candidate,
@@ -1094,10 +1099,6 @@ fn propose_guarded(
             guard_context.layout,
         )
         .is_ok()
-            && !guard_context.chain_explored_states.contains(&state_key)
-            && !guard_context
-                .archive_lookup
-                .contains(&candidate, &state_key)?
             && validate_ergonomic_guards(
                 &candidate,
                 guard_context.schemes,
@@ -1106,14 +1107,22 @@ fn propose_guarded(
             )
             .is_ok()
         {
-            return Ok(((candidate, kind), rejected));
+            let in_chain = guard_context.chain_explored_states.contains(&state_key);
+            let in_archive = guard_context.archive_lookup.contains(&candidate, &state_key)?;
+            if !in_chain && !in_archive {
+                return Ok(((candidate, kind), rejected));
+            }
+            if !in_chain && fallback_candidate.is_none() {
+                fallback_candidate = Some((candidate, kind));
+            }
         }
         stats[kind.index()].guard_rejected += 1;
         rejected += 1;
     }
-    Err(format!(
-        "could not generate a guard-compliant proposal in {DEFAULT_MAX_PROPOSAL_ATTEMPTS} attempts"
-    ))
+    if let Some((candidate, kind)) = fallback_candidate {
+        return Ok(((candidate, kind), rejected));
+    }
+    Ok(((current.clone(), ProposalKind::HeadKeySwap), rejected))
 }
 
 fn validate_layout(
@@ -1132,6 +1141,7 @@ fn validate_guards(
     alphabet: &KeyAlphabet,
     guards: LayoutGuards,
 ) -> Result<LayoutDiagnostics, String> {
+    layout.validate_strict_2121()?;
     let diagnostics = layout.diagnostics(alphabet, &fixture.heads, &fixture.finals)?;
     if guards
         .max_memory

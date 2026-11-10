@@ -1,0 +1,60 @@
+{
+  "version": "ckt-v4-a7-closure-milestone-1",
+  "timestamp": "2026-10-29T01:20:00+08:00",
+  "status": "OFFICIALLY_CLOSED",
+  "topology": {
+    "capacity": [
+      21,
+      21
+    ],
+    "toneSlots": [
+      8,
+      21,
+      20,
+      0,
+      14
+    ],
+    "toneKeys": "IVUAO",
+    "consonantKeySet": "BCDEFGHJKLMNPQRSTWXYZ"
+  },
+  "targetRegion": {
+    "maxMemory": 40,
+    "maxD": 0
+  },
+  "plateauVerification": {
+    "unconstrainedTheoreticalTarget": "9.635 +/- 0.002",
+    "unconstrainedAchievedBest": 9.635205,
+    "prodGateTheoreticalTarget": "9.705 +/- 0.002",
+    "prodGateAchievedBest": 9.705581,
+    "totalStatesInUnifiedArchive": 11280
+  },
+  "a7CandidateClustering": {
+    "totalA7Candidates": 43,
+    "basinRadius": 5,
+    "deduplicatedBasinsCount": 23,
+    "seedsManifest": "research/seeds/ckt-v4/a7-closure-multi-seed-20261029/manifest.json"
+  },
+  "independentRuns": [
+    {
+      "name": "Run-A",
+      "baseSeed": 29001001,
+      "statesArchived": 9440,
+      "bestCkt": 9.635205,
+      "bestProdGate": 9.705581
+    },
+    {
+      "name": "Run-B",
+      "baseSeed": 29002002,
+      "statesArchived": 10360,
+      "bestCkt": 9.635205,
+      "bestProdGate": 9.705581
+    },
+    {
+      "name": "Run-C",
+      "baseSeed": 29003003,
+      "statesArchived": 11280,
+      "bestCkt": 9.635205,
+      "bestProdGate": 9.705581
+    }
+  ]
+}

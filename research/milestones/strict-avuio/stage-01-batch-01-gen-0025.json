@@ -1,0 +1,109 @@
+{
+  "version": "ckt-v4-descent-milestone-1",
+  "stage": 1,
+  "batch": 1,
+  "generation": 25,
+  "timestamp": "2026-10-24T15:42:16.272627",
+  "statesInDb": 8008,
+  "bestCktDb": 9.573196727408035,
+  "frontier": {
+    "stage_1": {
+      "target": {
+        "maxMemory": 43,
+        "maxD": 3
+      },
+      "count": 8008,
+      "bestCkt": 9.573196727408035
+    },
+    "stage_2": {
+      "target": {
+        "maxMemory": 42,
+        "maxD": 2
+      },
+      "count": 425,
+      "bestCkt": 9.585734963222894
+    },
+    "stage_3": {
+      "target": {
+        "maxMemory": 41,
+        "maxD": 1
+      },
+      "count": 33,
+      "bestCkt": 9.739026309789192
+    },
+    "stage_4": {
+      "target": {
+        "maxMemory": 40,
+        "maxD": 0
+      },
+      "count": 12,
+      "bestCkt": 9.92396265203463
+    }
+  },
+  "topStates": [
+    {
+      "cktV4": 9.573196727408035,
+      "memory": 43,
+      "displacedInitials": 1,
+      "displacedVowels": 5,
+      "rpMax": 0.08783231175811765,
+      "homeFloor": 0.3214882198575073,
+      "mxScore": 129.63039173769516,
+      "gen": 25,
+      "key": "1515010A0C050313"
+    },
+    {
+      "cktV4": 9.573305389483304,
+      "memory": 43,
+      "displacedInitials": 1,
+      "displacedVowels": 5,
+      "rpMax": 0.06328406511520945,
+      "homeFloor": 0.31651818199129433,
+      "mxScore": 127.4320226823105,
+      "gen": 23,
+      "key": "1515010F0C050313"
+    },
+    {
+      "cktV4": 9.573520662660531,
+      "memory": 43,
+      "displacedInitials": 1,
+      "displacedVowels": 5,
+      "rpMax": 0.06328406511520945,
+      "homeFloor": 0.31894482333604013,
+      "mxScore": 127.51550564991769,
+      "gen": 25,
+      "key": "1515010F0C050313"
+    },
+    {
+      "cktV4": 9.573721631738366,
+      "memory": 43,
+      "displacedInitials": 1,
+      "displacedVowels": 5,
+      "rpMax": 0.08783231175811765,
+      "homeFloor": 0.3102224539839674,
+      "mxScore": 134.53660690727716,
+      "gen": 24,
+      "key": "1515010A0C050313"
+    },
+    {
+      "cktV4": 9.574715467895626,
+      "memory": 43,
+      "displacedInitials": 1,
+      "displacedVowels": 5,
+      "rpMax": 0.08783231175811765,
+      "homeFloor": 0.30930915519264746,
+      "mxScore": 129.63274268667507,
+      "gen": 23,
+      "key": "1515010A0C050313"
+    }
+  ],
+  "telemetry": {
+    "samples": 151,
+    "meanWorkingSetMB": 186.71066225165563,
+    "meanVramUsedMB": 3618.344370860927,
+    "meanGpuTempC": 37.27814569536424,
+    "meanGpuPowerW": 49.33748344370861,
+    "startTime": "2026-10-24 15:04:25",
+    "endTime": "2026-10-24 15:42:04"
+  }
+}

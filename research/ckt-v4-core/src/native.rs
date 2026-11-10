@@ -322,6 +322,35 @@ impl RegularLayout {
         Ok(())
     }
 
+    pub fn validate_strict_2121(&self) -> Result<(), String> {
+        if self.capacity != [21, 21] {
+            return Ok(());
+        }
+        // AVUIO is the auxiliary-key class. The production ordered mapping is
+        // IVUAO (折、横、撇、竖、点), matching R9-21X21-M40-02.
+        const PRODUCTION_IVUAO: [u8; 5] = [8, 21, 20, 0, 14];
+        if self.tone != PRODUCTION_IVUAO {
+            return Err(format!(
+                "{} has invalid 21x21 auxiliary mapping: tone must be production IVUAO (8, 21, 20, 0, 14)",
+                self.id
+            ));
+        }
+        let is_consonant = |k: u8| matches!(k, 1..=7 | 9..=13 | 15..=19 | 22..=25);
+        if !self.head_keys.iter().copied().all(is_consonant) {
+            return Err(format!(
+                "{} has invalid 21x21 head keys: must strictly be the 21 consonants",
+                self.id
+            ));
+        }
+        if !self.final_keys.iter().copied().all(is_consonant) {
+            return Err(format!(
+                "{} has invalid 21x21 final keys: must strictly be the 21 consonants",
+                self.id
+            ));
+        }
+        Ok(())
+    }
+
     pub fn validate_common399(
         &self,
         pinyin_map: &[[u8; 2]],
