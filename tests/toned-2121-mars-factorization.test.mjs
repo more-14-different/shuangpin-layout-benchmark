@@ -9,7 +9,10 @@ const require = createRequire(import.meta.url);
 const {
   MARS_RHYME_GROUPS,
   MARS_RHYME_ORDER,
+  MARS_SEARCHABLE_FIRST_ATOMS,
   marsAudit,
+  marsFirstAtom,
+  marsFirstMoveMemoryDelta,
   marsFirstGroup,
   marsRhymeIndex,
 } = require('../tools/mars_toned_factorization.js');
@@ -26,6 +29,23 @@ test('Mars transcription covers all 37 full finals in exactly ten source columns
   assert.deepEqual(audit.missingFinals, []);
   assert.deepEqual(audit.unusedDeclaredFinals, []);
   assert.equal(audit.firstGroups.length, 23);
+});
+
+test('Mars first search only exposes whole exceptional onset and zero-onset families', () => {
+  assert.deepEqual(MARS_SEARCHABLE_FIRST_ATOMS, [
+    'zh', 'ch', 'sh', 'zero-Y', 'zero-W', 'zero-A', 'zero-E', 'zero-O',
+  ]);
+  assert.deepEqual(Object.fromEntries([
+    'zhi', 'zhu', 'chi', 'chu', 'shi', 'shu',
+    'ya', 'yu', 'wa', 'a', 'e', 'er', 'o', 'bai',
+  ].map(pinyin => [pinyin, marsFirstAtom(pinyin)])), {
+    zhi: 'zh', zhu: 'zh', chi: 'ch', chu: 'ch', shi: 'sh', shu: 'sh',
+    ya: 'zero-Y', yu: 'zero-Y', wa: 'zero-W', a: 'zero-A', e: 'zero-E',
+    er: 'zero-E', o: 'zero-O', bai: 'b',
+  });
+  assert.equal(marsFirstMoveMemoryDelta('zh'), 0);
+  assert.equal(marsFirstMoveMemoryDelta('zero-Y'), 1);
+  assert.equal(marsFirstMoveMemoryDelta('zero-A'), 1);
 });
 
 test('Mars ignores compound-final heads for iu, ui, and un', () => {

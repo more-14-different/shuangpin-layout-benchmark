@@ -110,9 +110,24 @@ Rust fixture 已从固定 Pindu11 泛化为可读取 Mars10。JS/Rust 对冠军�
 
 ```powershell
 just ckt-v51-toned-mars10-search
-just ckt-v51-toned-mars10-rust-trial 30 0 5
-just ckt-v51-toned-mars10-rust-resume 30 0 5
+just ckt-v51-toned-mars10-rust-trial 30 0 5 joint
+just ckt-v51-toned-mars10-rust-resume 30 0 5 joint
 ```
 
 下一步最值得做的是跑完 Mars10 的 180 个韵一跳，再仅对低 M/D/F Pareto 开一个
 很小的二跳 beam；不应重新开放 55 声介任意乱序，否则会丢掉这条路线的主要价值。
+
+## Rust v3 的受控邻域
+
+后续长期搜索不再把 55 个声介当作可独立移动原子。第一码先合并为完整声母／零声母
+族，只开放 `zh/ch/sh、Y/W、A/E/O` 八类；普通单字母声母冻结。`zhi…zhu…`、
+所有 y 开头、所有 w 开头以及 A/E/O 各族都必须整体移动，禁止族内飞键。
+
+韵侧只开放十个 Mars 韵组在三个调区内的整组换键，暂不拆开任何组内完整韵母。
+结果另外记录 `firstGroupMoves`、`rhymeGroupMoves` 和恒为零的
+`rhymeInternalSplits`。旧报告把 `zh→E` 折入 z 的 D/F，得到 1/1；v3 按生产
+21×21 的分层视角把卷舌与零声母视为特殊族，普通单字母声母 D/F 基线为 0/0。
+两种口径必须并列说明，不能把历史 1/1 静默改写成同一指标下的 0/0。
+
+`proposal_space` 可取 `first`、`rhyme` 或 `joint`。v3 checkpoint 与 v2 不兼容，
+文件名已隔离；换到长期机时必须从 v3 新任务开始，不能续跑旧 checkpoint。

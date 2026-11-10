@@ -13,24 +13,35 @@ const {
   normalizeRhymeBody,
   RHYME_ORDER,
 } = require('./audit_pindu_nextgen_image.js');
-const {MARS_RHYME_ORDER, marsRhymeIndex} = require('./mars_toned_factorization.js');
+const {
+  MARS_RHYME_ORDER,
+  MARS_SEARCHABLE_FIRST_ATOMS,
+  marsFirstAtom,
+  marsFirstAtomInitial,
+  marsFirstMoveMemoryDelta,
+  marsRhymeIndex,
+} = require('./mars_toned_factorization.js');
 
 const TRADITIONAL_INITIALS = Object.freeze(
   ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'r', 'z', 'c', 's']);
 
-function onsetDiagnostics(atoms, canonicalInitialKeys) {
+function onsetDiagnostics(atoms, canonicalInitialKeys, mode = 'legacy-folded') {
   const incidences = new Map(TRADITIONAL_INITIALS.map(initial => [initial, new Set()]));
   for (const atom of atoms) {
-    const initial = atom.initial[0];
+    const initial = mode === 'ordinary-only'
+      ? (atom.initial.length === 1 ? atom.initial : null)
+      : atom.initial[0];
     if (!incidences.has(initial)) continue;
     incidences.get(initial).add(atom.baselineKey);
   }
   const traditionalOnsetD = [...incidences].filter(([initial, keys]) =>
     [...keys].some(key => key !== canonicalInitialKeys[initial])).length;
+  const onsetKeyIncidences = [...incidences.values()]
+    .reduce((sum, keys) => sum + keys.size, 0);
   const onsetFragmentation = [...incidences.values()]
-    .reduce((sum, keys) => sum + keys.size, 0) - incidences.size;
+    .reduce((sum, keys) => sum + Math.max(0, keys.size - 1), 0);
   return {traditionalOnsetD, onsetFragmentation,
-    onsetKeyIncidences: onsetFragmentation + incidences.size};
+    onsetKeyIncidences};
 }
 
 function toneRegions(contract) {
@@ -71,10 +82,15 @@ function main() {
   if (!layout) throw new Error(`layout not found: ${requestedId}`);
   if (!scored) throw new Error(`score not found: ${requestedId}`);
   const rhymeMode = layouts.factorization?.rhymeMode || 'pindu11';
+  const marsFirstMode = String(layouts.factorization?.firstMode || '').startsWith('mars-');
+  const firstDiagnosticsMode = marsFirstMode ? 'ordinary-only' : 'legacy-folded';
   const rhymeOrder = rhymeMode === 'mars10' ? MARS_RHYME_ORDER : RHYME_ORDER;
   const rhymeNameFor = split => rhymeMode === 'mars10'
     ? MARS_RHYME_ORDER[marsRhymeIndex(split.fullFinal)]
     : normalizeRhymeBody(split.rhymeBody);
+  const firstAtomNameFor = (split, pinyin) => marsFirstMode
+    ? marsFirstAtom(pinyin)
+    : split.shengjie;
 
   const decomposition = new Map(seeds.decomposition.map(value => [value.pinyin, value]));
   const pinyinIndex = new Map(data.pinyin.map((value, index) => [value, index]));
@@ -96,17 +112,20 @@ function main() {
     if (!split) throw new Error(`missing decomposition for ${data.pinyin[py]}`);
     const keys = new Set(active.map(code => code[0]));
     if (keys.size !== 1) throw new Error(`${data.pinyin[py]} flies across first keys`);
-    const existing = atoms.get(split.shengjie) || {
-      name: split.shengjie,
-      initial: split.initial,
+    const atomName = firstAtomNameFor(split, data.pinyin[py]);
+    const existing = atoms.get(atomName) || {
+      name: atomName,
+      initial: marsFirstMode ? marsFirstAtomInitial(atomName) : split.initial,
       baselineKey: [...keys][0],
+      moveMemoryDelta: marsFirstMode ? marsFirstMoveMemoryDelta(atomName) : 1,
       pinyin: [],
     };
-    if (existing.initial !== split.initial || existing.baselineKey !== [...keys][0]) {
-      throw new Error(`non-atomic shengjie ${split.shengjie}`);
+    const expectedInitial = marsFirstMode ? marsFirstAtomInitial(atomName) : split.initial;
+    if (existing.initial !== expectedInitial || existing.baselineKey !== [...keys][0]) {
+      throw new Error(`non-atomic first group ${atomName}`);
     }
     existing.pinyin.push(py);
-    atoms.set(split.shengjie, existing);
+    atoms.set(atomName, existing);
     const rhymeName = rhymeNameFor(split);
     const rhyme = rhymeAtoms.get(rhymeName) || {name: rhymeName, pinyin: []};
     rhyme.pinyin.push(py);
@@ -144,7 +163,8 @@ function main() {
 
   const canonicalInitialKeys = Object.fromEntries(
     TRADITIONAL_INITIALS.map(initial => [initial, imageFirstKey(initial)]));
-  const computedDiagnostics = onsetDiagnostics(orderedAtoms, canonicalInitialKeys);
+  const computedDiagnostics = onsetDiagnostics(
+    orderedAtoms, canonicalInitialKeys, firstDiagnosticsMode);
   const declaredDiagnostics = {
     traditionalOnsetD: Number(layout.memoryAudit?.traditionalOnsetD),
     onsetFragmentation: Number(layout.memoryAudit?.onsetFragmentation),
@@ -162,7 +182,7 @@ function main() {
 
   const trackNames = ['character', 'word2', 'word3', 'word4'];
   const fixture = {
-    version: 'ckt-v51-toned-2121-rust-trial-2',
+    version: 'ckt-v51-toned-2121-rust-trial-3',
     layoutId: requestedId,
     keyAlphabet: ALPHABET,
     shapeKeysByMeaning,
@@ -184,6 +204,10 @@ function main() {
     pinyin: data.pinyin,
     tonedCodes,
     atoms: orderedAtoms,
+    searchableFirstAtoms: marsFirstMode
+      ? MARS_SEARCHABLE_FIRST_ATOMS
+      : orderedAtoms.map(value => value.name),
+    firstDiagnosticsMode,
     rhymeAtoms: orderedRhymes,
     toneRegions: regions,
     canonicalInitialKeys,
@@ -193,12 +217,15 @@ function main() {
       scores: hashFile(scoresFile),
       seeds: hashFile(seedsFile),
       contract: hashJson({
-        version: 'ckt-v51-toned-2121-rust-trial-2',
+        version: 'ckt-v51-toned-2121-rust-trial-3',
         shapeKeysByMeaning,
         soundKeys: layouts.contract.soundKeys,
         toneRegions: regions,
         rhymeMode,
         rhymeOrder,
+        marsFirstMode,
+        firstDiagnosticsMode,
+        searchableFirstAtoms: marsFirstMode ? MARS_SEARCHABLE_FIRST_ATOMS : null,
       }),
     },
   };
@@ -218,12 +245,13 @@ function main() {
       if (![...layouts.contract.soundKeys].includes(destination)) {
         throw new Error(`candidate destination is not a sound key: ${destination}`);
       }
-      if (!atoms.has(atom)) throw new Error(`unknown shengjie atom: ${atom}`);
+      if (!atoms.has(atom)) throw new Error(`unknown first atom: ${atom}`);
       suffixes.push(`${atom}>${destination}`);
       trial.trialShengjieException = {atom, destination};
       candidateCodes = candidateCodes.map((code, index) => {
         const token = layouts.tokenKeys[index].match(/^([a-z]+)([1-5])$/u);
-        return decomposition.get(token[1]).shengjie === atom ? destination + code[1] : code;
+        const split = decomposition.get(token[1]);
+        return firstAtomNameFor(split, token[1]) === atom ? destination + code[1] : code;
       });
     }
     if (args['candidate-rhyme']) {

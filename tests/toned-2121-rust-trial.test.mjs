@@ -50,6 +50,26 @@ test('AVUIO fixture exposes four/home23/lower1-neutral legal rhyme regions', () 
   ]);
 });
 
+test('ordinary D can exclude atomic retroflex and zero-onset first families', () => {
+  const atoms = [
+    {initial: 'z', baselineKey: 'Z'},
+    {initial: 'zh', baselineKey: 'E'},
+    {initial: '_', baselineKey: 'Y'},
+  ];
+  const canonical = Object.fromEntries(
+    [...'bpmfdtnlgkhjqxrzcs'].map(initial => [initial, initial.toUpperCase()]));
+  assert.deepEqual(onsetDiagnostics(atoms, canonical, 'ordinary-only'), {
+    traditionalOnsetD: 0,
+    onsetFragmentation: 0,
+    onsetKeyIncidences: 1,
+  });
+  assert.deepEqual(onsetDiagnostics(atoms, canonical, 'legacy-folded'), {
+    traditionalOnsetD: 1,
+    onsetFragmentation: 1,
+    onsetKeyIncidences: 2,
+  });
+});
+
 test('tracked AVUIO _v to M finalist preserves its audited Pareto coordinates', () => {
   const layouts = JSON.parse(fs.readFileSync(path.join(root,
     'research/config/ckt-v51-toned-2121-pindu11-avuio786-rust-trial-finalists.json')));

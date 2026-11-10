@@ -19,6 +19,9 @@ const MARS_RHYME_GROUPS = Object.freeze([
 ]);
 
 const MARS_RHYME_ORDER = Object.freeze(MARS_RHYME_GROUPS.map(value => value.id));
+const MARS_SEARCHABLE_FIRST_ATOMS = Object.freeze([
+  'zh', 'ch', 'sh', 'zero-Y', 'zero-W', 'zero-A', 'zero-E', 'zero-O',
+]);
 const FINAL_TO_RHYME = new Map(MARS_RHYME_GROUPS.flatMap((group, index) =>
   group.finals.map(value => [value, index])));
 const SINGLE_WRITTEN_INITIALS = new Set([...'bpmfdtnlgkhjqxzcsryw']);
@@ -40,6 +43,33 @@ function marsWrittenOnset(pinyin) {
 function marsFirstGroup(pinyin) {
   const onset = marsWrittenOnset(pinyin);
   return onset === '_' || onset === 'r' ? 'r/_' : onset;
+}
+
+// Production 21x21 layouts first perturb the mnemonic exceptional families,
+// not ordinary written initials.  Keep each of those families atomic: zh also
+// contains zhu, Y contains every y-leading zero-onset syllable, and so on.
+function marsFirstAtom(pinyin) {
+  if (pinyin.startsWith('y')) return 'zero-Y';
+  if (pinyin.startsWith('w')) return 'zero-W';
+  const onset = marsWrittenOnset(pinyin);
+  if (onset !== '_') return onset;
+  const carrier = pinyin[0]?.toUpperCase();
+  if (!'AEOWY'.includes(carrier)) {
+    throw new Error(`Mars zero-onset atom has no A/E/O/W/Y carrier: ${pinyin}`);
+  }
+  return `zero-${carrier}`;
+}
+
+function marsFirstAtomInitial(atom) {
+  return atom.startsWith('zero-') ? '_' : atom;
+}
+
+// zh/ch/sh already consume one remembered special-family rule in the Mars
+// baseline, so relocating the whole family replaces that rule. Y/W are direct
+// written carriers, while splitting A/E/O away from the shared zero/r carrier
+// creates one additional rule.
+function marsFirstMoveMemoryDelta(atom) {
+  return ['zh', 'ch', 'sh'].includes(atom) ? 0 : 1;
 }
 
 // Low-D AVUIO adaptation: keep every traditional initial on its canonical
@@ -64,9 +94,13 @@ function marsAudit(decomposition) {
 module.exports = {
   MARS_RHYME_GROUPS,
   MARS_RHYME_ORDER,
+  MARS_SEARCHABLE_FIRST_ATOMS,
   lowDFirstKey,
   marsAudit,
+  marsFirstAtom,
+  marsFirstAtomInitial,
   marsFirstGroup,
+  marsFirstMoveMemoryDelta,
   marsRhymeIndex,
   marsWrittenOnset,
 };

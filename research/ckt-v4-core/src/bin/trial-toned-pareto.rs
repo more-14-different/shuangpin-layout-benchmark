@@ -10,7 +10,7 @@ use std::path::{Path, PathBuf};
 use std::thread;
 use std::time::{Duration, Instant};
 
-const CHECKPOINT_VERSION: &str = "ckt-v51-toned-2121-rust-trial-checkpoint-2";
+const CHECKPOINT_VERSION: &str = "ckt-v51-toned-2121-rust-trial-checkpoint-3";
 
 #[derive(Clone, Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -28,6 +28,8 @@ struct TrialFixture {
     pinyin: Vec<String>,
     toned_codes: Vec<[Option<String>; 5]>,
     atoms: Vec<Atom>,
+    searchable_first_atoms: Vec<String>,
+    first_diagnostics_mode: String,
     rhyme_atoms: Vec<RhymeAtom>,
     tone_regions: Vec<ToneRegion>,
     canonical_initial_keys: BTreeMap<char, char>,
@@ -48,6 +50,7 @@ struct Atom {
     name: String,
     initial: String,
     baseline_key: char,
+    move_memory_delta: usize,
     pinyin: Vec<usize>,
 }
 
@@ -95,6 +98,9 @@ struct CandidateResult {
     tone_region_merge_lower: usize,
     traditional_onset_d: usize,
     onset_fragmentation: usize,
+    first_group_moves: usize,
+    rhyme_group_moves: usize,
+    rhyme_internal_splits: usize,
     direct_rows: usize,
     component_rows: usize,
     elapsed_ms: f64,
@@ -140,7 +146,7 @@ fn main() -> Result<(), String> {
         &fs::read_to_string(&args.fixture).map_err(|error| error.to_string())?,
     )
     .map_err(|error| error.to_string())?;
-    if fixture.version != "ckt-v51-toned-2121-rust-trial-2" {
+    if fixture.version != "ckt-v51-toned-2121-rust-trial-3" {
         return Err(format!("unsupported trial fixture {}", fixture.version));
     }
     let corpus = NativeCorpus::open(&args.corpus)?;
@@ -293,6 +299,14 @@ fn main() -> Result<(), String> {
             }
             let score = normalized_score(&summary.summary(), &fixture.reference_effective_ms)?;
             let (d, f) = diagnostics(&fixture, moves)?;
+            let first_group_moves = moves
+                .iter()
+                .filter(|movement| matches!(movement, TrialMove::First { .. }))
+                .count();
+            let rhyme_group_moves = moves
+                .iter()
+                .filter(|movement| matches!(movement, TrialMove::Rhyme { .. }))
+                .count();
             let (memory_lower, memory_guard, tone_region_merge_lower) =
                 memory_diagnostics(&fixture, moves)?;
             let component_rows = receipt.affected_rows;
@@ -306,6 +320,9 @@ fn main() -> Result<(), String> {
                 tone_region_merge_lower,
                 traditional_onset_d: d,
                 onset_fragmentation: f,
+                first_group_moves,
+                rhyme_group_moves,
+                rhyme_internal_splits: 0,
                 direct_rows: direct.len(),
                 component_rows,
                 elapsed_ms: started.elapsed().as_secs_f64() * 1_000.0,
@@ -513,19 +530,31 @@ fn normalized_score(summary: &Summary, reference: &[f64; 4]) -> Result<f64, Stri
 fn candidate_one_hop(fixture: &TrialFixture, proposal_space: &str) -> Vec<Vec<TrialMove>> {
     let mut result = Vec::new();
     if proposal_space != "rhyme" {
-        result.extend(fixture.atoms.iter().enumerate().flat_map(|(atom, value)| {
+        let searchable = fixture
+            .searchable_first_atoms
+            .iter()
+            .map(String::as_str)
+            .collect::<HashSet<_>>();
+        result.extend(
             fixture
-                .sound_keys
-                .chars()
-                .filter(move |&key| key != value.baseline_key)
-                .map(move |key| {
-                    vec![TrialMove::First {
-                        atom,
-                        atom_name: value.name.clone(),
-                        key,
-                    }]
-                })
-        }));
+                .atoms
+                .iter()
+                .enumerate()
+                .filter(|(_, value)| searchable.contains(value.name.as_str()))
+                .flat_map(|(atom, value)| {
+                    fixture
+                        .sound_keys
+                        .chars()
+                        .filter(move |&key| key != value.baseline_key)
+                        .map(move |key| {
+                            vec![TrialMove::First {
+                                atom,
+                                atom_name: value.name.clone(),
+                                key,
+                            }]
+                        })
+                }),
+        );
     }
     if proposal_space != "first" {
         for (region, tone_region) in fixture.tone_regions.iter().enumerate() {
@@ -666,7 +695,16 @@ fn diagnostics(fixture: &TrialFixture, moves: &[TrialMove]) -> Result<(usize, us
         .map(|key| (key, HashSet::new()))
         .collect();
     for (index, atom) in fixture.atoms.iter().enumerate() {
-        let Some(initial) = atom.initial.chars().next().filter(|value| *value != '_') else {
+        let initial = if fixture.first_diagnostics_mode == "ordinary-only" {
+            let mut values = atom.initial.chars();
+            match (values.next(), values.next()) {
+                (Some(value), None) if value != '_' => Some(value),
+                _ => None,
+            }
+        } else {
+            atom.initial.chars().next().filter(|value| *value != '_')
+        };
+        let Some(initial) = initial else {
             continue;
         };
         let keys = incidences
@@ -693,10 +731,14 @@ fn memory_diagnostics(
     fixture: &TrialFixture,
     moves: &[TrialMove],
 ) -> Result<(usize, usize, usize), String> {
-    let first_exceptions = moves
+    let first_memory_delta = moves
         .iter()
-        .filter(|movement| matches!(movement, TrialMove::First { .. }))
-        .count();
+        .filter_map(|movement| match movement {
+            TrialMove::First { atom, .. } => fixture.atoms.get(*atom),
+            TrialMove::Rhyme { .. } => None,
+        })
+        .map(|atom| atom.move_memory_delta)
+        .sum::<usize>();
     let rhyme_changes = moves
         .iter()
         .filter_map(|movement| match movement {
@@ -727,9 +769,9 @@ fn memory_diagnostics(
     let merge_delta = merge_lower as isize - fixture.baseline_tone_region_merge_lower as isize;
     let adjust = |baseline: usize| -> usize {
         if merge_delta >= 0 {
-            baseline + first_exceptions + merge_delta as usize
+            baseline + first_memory_delta + merge_delta as usize
         } else {
-            baseline + first_exceptions - (-merge_delta) as usize
+            baseline + first_memory_delta - (-merge_delta) as usize
         }
     };
     Ok((
@@ -772,6 +814,8 @@ fn write_report(
                 && other.memory_guard <= candidate.memory_guard
                 && other.traditional_onset_d <= candidate.traditional_onset_d
                 && other.onset_fragmentation <= candidate.onset_fragmentation
+                && other.first_group_moves <= candidate.first_group_moves
+                && other.rhyme_group_moves <= candidate.rhyme_group_moves
         }) {
             continue;
         }
@@ -779,13 +823,15 @@ fn write_report(
             !(candidate.score <= other.score
                 && candidate.memory_guard <= other.memory_guard
                 && candidate.traditional_onset_d <= other.traditional_onset_d
-                && candidate.onset_fragmentation <= other.onset_fragmentation)
+                && candidate.onset_fragmentation <= other.onset_fragmentation
+                && candidate.first_group_moves <= other.first_group_moves
+                && candidate.rhyme_group_moves <= other.rhyme_group_moves)
         });
         pareto.push(candidate);
     }
     let elapsed_seconds = checkpoint.elapsed_ms / 1_000.0;
     let report = serde_json::json!({
-        "version": "ckt-v51-toned-2121-rust-trial-result-2",
+        "version": "ckt-v51-toned-2121-rust-trial-result-3",
         "layoutId": fixture.layout_id,
         "status": checkpoint.phase,
         "baselineScore": baseline_score,
