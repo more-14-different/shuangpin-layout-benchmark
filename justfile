@@ -182,6 +182,15 @@ ckt-v51-toned-mars10-rust-twohop max_evaluations="700" beam="2" duty_ms="5" chec
 ckt-v51-toned-mars10-rust-threehop max_evaluations="400" beam="3" duty_ms="5" checkpoint_every="25":
     $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json tools/ckt_v4_upstream_role_tables.json --proposal-space joint --beam "{{beam}}" --max-evaluations "{{max_evaluations}}" --duty-ms "{{duty_ms}}" --checkpoint-every "{{checkpoint_every}}" --resume --checkpoint research/.cache/ckt-v51-toned-marsfirst-zh-e-mars10-v3-threehop-checkpoint.json --output research/.cache/ckt-v51-toned-marsfirst-zh-e-mars10-v3-threehop-result.json
 
+ckt-v51-toned-mars10-anchor-prepare:
+    node tools/export_toned_mars10_anchor.js
+
+ckt-v51-toned-mars10-anchor-trial max_evaluations="340" duty_ms="5" checkpoint_every="25" proposal_space="joint": ckt-v51-toned-mars10-anchor-prepare
+    $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-mars10-anchor-sh-p-u-k.json tools/ckt_v4_upstream_role_tables.json --proposal-space "{{proposal_space}}" --max-evaluations "{{max_evaluations}}" --duty-ms "{{duty_ms}}" --checkpoint-every "{{checkpoint_every}}" --checkpoint research/.cache/ckt-v51-toned-mars10-anchor-{{proposal_space}}-checkpoint.json --output research/.cache/ckt-v51-toned-mars10-anchor-{{proposal_space}}-result.json
+
+ckt-v51-toned-mars10-anchor-resume max_evaluations="340" duty_ms="5" checkpoint_every="25" proposal_space="joint":
+    $env:CARGO_BUILD_JOBS = '1'; cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin trial-toned-pareto -- research/.cache/ckt-v51-toned-native-corpus.bin research/.cache/ckt-v51-toned-mars10-anchor-sh-p-u-k.json tools/ckt_v4_upstream_role_tables.json --proposal-space "{{proposal_space}}" --max-evaluations "{{max_evaluations}}" --duty-ms "{{duty_ms}}" --checkpoint-every "{{checkpoint_every}}" --resume --checkpoint research/.cache/ckt-v51-toned-mars10-anchor-{{proposal_space}}-checkpoint.json --output research/.cache/ckt-v51-toned-mars10-anchor-{{proposal_space}}-result.json
+
 ckt-v4-rank-stats:
     $parts = 'research/.cache/ckt-v4-rank-stats-parts'; $total = (Get-Content -Raw research/.cache/ckt-v4-all-schemes.json | ConvertFrom-Json).schemes.Count; New-Item -ItemType Directory -Force -Path $parts | Out-Null; for ($offset = 0; $offset -lt $total; $offset += 50) { $name = 'part-{0:d3}.json' -f $offset; cargo run --quiet --release --manifest-path research/ckt-v4-core/Cargo.toml --bin export-rank-stats -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-all-schemes.json (Join-Path $parts $name) $offset 50; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }
 
