@@ -14,6 +14,7 @@ pub mod motor;
 pub mod moving_hand;
 pub mod native;
 pub mod search;
+pub mod toned_bucket;
 
 pub use binary::{BinaryCase, BinaryCorpus, BinaryExtension, BinaryFixture, BinaryHeader};
 pub use capability::{

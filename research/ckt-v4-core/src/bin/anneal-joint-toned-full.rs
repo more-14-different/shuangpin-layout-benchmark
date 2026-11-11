@@ -1,141 +1,15 @@
+use ckt_v4_core::toned_bucket::*;
 use ckt_v4_core::{
     CognitiveParameters, IncrementalResolver, IncrementalSummary, InputMode, KeyAlphabet, Kind,
-    NativeCorpus, ProjectedMotor, Projection, RoleTables, SchemeState, Summary,
+    NativeCorpus, ProjectedMotor, Projection, RoleTables, Summary,
 };
-use serde::{Deserialize, Serialize};
-use std::collections::{BTreeMap, BTreeSet, HashMap};
+use serde::Deserialize;
+use std::collections::{BTreeSet, HashMap};
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::thread;
 use std::time::{Duration, Instant};
-
-const JOINT_ANNEAL_VERSION: &str = "ckt-v51-toned-2121-joint-anneal-v1";
-
-#[allow(dead_code)]
-#[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct TrialFixture {
-    version: String,
-    layout_id: String,
-    key_alphabet: String,
-    tone_keys_by_tone: String,
-    sound_keys: String,
-    baseline_memory_lower: usize,
-    baseline_memory_guard: usize,
-    baseline_tone_region_merge_lower: usize,
-    expected: Expected,
-    reference_effective_ms: [f64; 4],
-    pinyin: Vec<String>,
-    toned_codes: Vec<[Option<String>; 5]>,
-    atoms: Vec<Atom>,
-    searchable_first_atoms: Vec<String>,
-    rhyme_atoms: Vec<RhymeAtom>,
-    tone_regions: Vec<ToneRegion>,
-}
-
-#[allow(dead_code)]
-#[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct Expected {
-    score: f64,
-}
-
-#[allow(dead_code)]
-#[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct Atom {
-    name: String,
-    initial: String,
-    baseline_key: char,
-    move_memory_delta: usize,
-    pinyin: Vec<usize>,
-}
-
-#[allow(dead_code)]
-#[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct RhymeAtom {
-    name: String,
-    pinyin: Vec<usize>,
-    baseline_keys: BTreeMap<String, char>,
-}
-
-#[allow(dead_code)]
-#[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct ToneRegion {
-    name: String,
-    keys: String,
-    tones: Vec<u8>,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-struct AnnealState {
-    first_keys: Vec<char>,
-    rhyme_keys: Vec<Vec<char>>,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-struct HistoryEntry {
-    step: usize,
-    score: f64,
-    #[serde(default)]
-    d: usize,
-    #[serde(default)]
-    m_lower: usize,
-    description: String,
-}
-
-#[allow(dead_code)]
-#[derive(Clone, Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-struct AnchorCheckpoint {
-    #[serde(default)]
-    version: Option<String>,
-    #[serde(default)]
-    best_score: Option<f64>,
-    #[serde(default)]
-    current_score: Option<f64>,
-    #[serde(default)]
-    best_state: Option<AnnealState>,
-    #[serde(default)]
-    current_state: Option<AnnealState>,
-}
-
-#[derive(Clone, Debug, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
-struct AnnealCheckpoint {
-    version: String,
-    #[serde(default)]
-    layout_id: Option<String>,
-    #[serde(default)]
-    step: usize,
-    #[serde(default)]
-    total_steps: usize,
-    #[serde(default)]
-    max_d: usize,
-    #[serde(default)]
-    temperature: f64,
-    #[serde(default)]
-    current_score: f64,
-    #[serde(default)]
-    best_score: f64,
-    #[serde(default)]
-    base_score: f64,
-    #[serde(default)]
-    accepted: usize,
-    #[serde(default)]
-    evaluated: usize,
-    #[serde(default)]
-    elapsed_ms: f64,
-    current_state: AnnealState,
-    best_state: AnnealState,
-    #[serde(default)]
-    history: Vec<HistoryEntry>,
-}
 
 struct SimpleRng {
     state: u64,
@@ -227,205 +101,136 @@ fn normalized_score(summary: &Summary, reference: &[f64; 4]) -> Result<f64, Stri
     Ok(10.0 * (weighted / total).powf(0.25))
 }
 
-fn build_scheme_state(
-    state: &AnnealState,
-    fixture: &TrialFixture,
-    alphabet: &KeyAlphabet,
-    tone_keys_by_tone: [u8; 5],
-) -> Result<SchemeState, String> {
-    let mut toned_codes = vec![[None; 5]; fixture.pinyin.len()];
-
-    // 1. Assign first keys
-    for (atom_idx, &key_char) in state.first_keys.iter().enumerate() {
-        let key_u8 = alphabet.index_of(key_char).ok_or("invalid first key")? as u8;
-        let atom = &fixture.atoms[atom_idx];
-        for &py in &atom.pinyin {
-            for t in 0..5 {
-                if fixture.toned_codes[py][t].is_some() {
-                    let mut pair = toned_codes[py][t].unwrap_or([0, 0]);
-                    pair[0] = key_u8;
-                    toned_codes[py][t] = Some(pair);
-                }
-            }
-        }
-    }
-
-    // 2. Assign second keys from rhyme groups across tone regions
-    for (region_idx, region) in fixture.tone_regions.iter().enumerate() {
-        for (rhyme_idx, &key_char) in state.rhyme_keys[region_idx].iter().enumerate() {
-            let key_u8 = alphabet.index_of(key_char).ok_or("invalid rhyme key")? as u8;
-            let rhyme_atom = &fixture.rhyme_atoms[rhyme_idx];
-            for &py in &rhyme_atom.pinyin {
-                for &tone in &region.tones {
-                    let t_idx = (tone - 1) as usize;
-                    if fixture.toned_codes[py][t_idx].is_some() {
-                        let mut pair = toned_codes[py][t_idx].unwrap_or([0, 0]);
-                        pair[1] = key_u8;
-                        toned_codes[py][t_idx] = Some(pair);
-                    }
-                }
-            }
-        }
-    }
-
-    SchemeState::from_toned_codes(&fixture.layout_id, [21, 21], toned_codes, tone_keys_by_tone)
-}
-
-fn calc_ordinary_d(state: &AnnealState, fixture: &TrialFixture) -> usize {
-    fixture
-        .atoms
-        .iter()
-        .enumerate()
-        .filter(|(_, a)| a.initial.len() == 1 && a.initial != "_")
-        .filter(|(i, a)| state.first_keys[*i] != a.baseline_key)
-        .count()
-}
-
-fn calc_memory_metrics(state: &AnnealState, fixture: &TrialFixture) -> (usize, usize, usize) {
-    let mut first_memory_delta = 0;
-    for (i, atom) in fixture.atoms.iter().enumerate() {
-        if state.first_keys[i] != atom.baseline_key {
-            first_memory_delta += atom.move_memory_delta;
-        }
-    }
-    let mut merge_lower = 0;
-    for (region_idx, _region) in fixture.tone_regions.iter().enumerate() {
-        let keys: BTreeSet<char> = state.rhyme_keys[region_idx].iter().copied().collect();
-        merge_lower += fixture.rhyme_atoms.len().saturating_sub(keys.len());
-    }
-    let merge_delta = merge_lower as isize - fixture.baseline_tone_region_merge_lower as isize;
-    let adjust = |baseline: usize| -> usize {
-        if merge_delta >= 0 {
-            baseline + first_memory_delta + merge_delta as usize
-        } else {
-            baseline + first_memory_delta - (-merge_delta) as usize
-        }
-    };
-    (
-        adjust(fixture.baseline_memory_lower),
-        adjust(fixture.baseline_memory_guard),
-        merge_lower,
-    )
-}
-
 fn mutate_joint_state(
     current: &AnnealState,
     fixture: &TrialFixture,
     rng: &mut SimpleRng,
     max_d: usize,
+    rhyme_only: bool,
 ) -> (AnnealState, String) {
     let mut next = current.clone();
     let roll = rng.next_f64();
 
-    if roll < 0.40 {
-        // Operator 1: Rhyme swap within a tone region (40%)
-        let region_idx = rng.gen_range(0, fixture.tone_regions.len());
-        let rhyme_a = rng.gen_range(0, fixture.rhyme_atoms.len());
-        let mut rhyme_b = rng.gen_range(0, fixture.rhyme_atoms.len());
-        while rhyme_a == rhyme_b {
-            rhyme_b = rng.gen_range(0, fixture.rhyme_atoms.len());
+    let op = if rhyme_only {
+        if roll < 0.60 { 1 } else { 2 }
+    } else if max_d == 0 {
+        if roll < 0.45 {
+            1
+        } else if roll < 0.75 {
+            2
+        } else {
+            3
         }
-        let key_a = next.rhyme_keys[region_idx][rhyme_a];
-        let key_b = next.rhyme_keys[region_idx][rhyme_b];
-        next.rhyme_keys[region_idx][rhyme_a] = key_b;
-        next.rhyme_keys[region_idx][rhyme_b] = key_a;
-        (
-            next,
-            format!(
-                "rhyme_swap {}:{}({}) <-> {}({})",
-                fixture.tone_regions[region_idx].name,
-                fixture.rhyme_atoms[rhyme_a].name,
-                key_a,
-                fixture.rhyme_atoms[rhyme_b].name,
-                key_b
-            ),
-        )
-    } else if roll < 0.65 {
-        // Operator 2: Rhyme move within a tone region preserving exact capacity (25%)
-        let region_idx = rng.gen_range(0, fixture.tone_regions.len());
-        let rhyme_idx = rng.gen_range(0, fixture.rhyme_atoms.len());
-        let region_keys: Vec<char> = fixture.tone_regions[region_idx].keys.chars().collect();
-        let target_key = region_keys[rng.gen_range(0, region_keys.len())];
-        let old_key = next.rhyme_keys[region_idx][rhyme_idx];
-        next.rhyme_keys[region_idx][rhyme_idx] = target_key;
+    } else {
+        if roll < 0.40 {
+            1
+        } else if roll < 0.65 {
+            2
+        } else if roll < 0.85 {
+            3
+        } else {
+            4
+        }
+    };
 
-        let used_keys: BTreeSet<char> = next.rhyme_keys[region_idx].iter().copied().collect();
-        if used_keys.len() < region_keys.len() {
-            // fallback to swap
-            next.rhyme_keys[region_idx][rhyme_idx] = old_key;
-            let mut other = rng.gen_range(0, fixture.rhyme_atoms.len());
-            while other == rhyme_idx {
-                other = rng.gen_range(0, fixture.rhyme_atoms.len());
+    match op {
+        1 => {
+            // Operator 1: Rhyme swap within a tone region (avoid same-key no-op)
+            let region_idx = rng.gen_range(0, fixture.tone_regions.len());
+            let rhyme_a = rng.gen_range(0, fixture.rhyme_atoms.len());
+            let key_a = next.rhyme_keys[region_idx][rhyme_a];
+            let mut rhyme_b = rng.gen_range(0, fixture.rhyme_atoms.len());
+            for _ in 0..32 {
+                if rhyme_b != rhyme_a && next.rhyme_keys[region_idx][rhyme_b] != key_a {
+                    break;
+                }
+                rhyme_b = rng.gen_range(0, fixture.rhyme_atoms.len());
             }
-            let key_other = next.rhyme_keys[region_idx][other];
-            next.rhyme_keys[region_idx][rhyme_idx] = key_other;
-            next.rhyme_keys[region_idx][other] = old_key;
+            let key_b = next.rhyme_keys[region_idx][rhyme_b];
+            next.rhyme_keys[region_idx][rhyme_a] = key_b;
+            next.rhyme_keys[region_idx][rhyme_b] = key_a;
             (
                 next,
                 format!(
                     "rhyme_swap {}:{}({}) <-> {}({})",
                     fixture.tone_regions[region_idx].name,
-                    fixture.rhyme_atoms[rhyme_idx].name,
-                    old_key,
-                    fixture.rhyme_atoms[other].name,
-                    key_other
-                ),
-            )
-        } else {
-            (
-                next,
-                format!(
-                    "rhyme_move {}:{}: {} -> {}",
-                    fixture.tone_regions[region_idx].name,
-                    fixture.rhyme_atoms[rhyme_idx].name,
-                    old_key,
-                    target_key
+                    fixture.rhyme_atoms[rhyme_a].name,
+                    key_a,
+                    fixture.rhyme_atoms[rhyme_b].name,
+                    key_b
                 ),
             )
         }
-    } else if roll < 0.85 {
-        // Operator 3: Special onset & zero-onset perturbation (20%)
-        let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
-        let zh_idx = fixture
-            .atoms
-            .iter()
-            .position(|a| a.name == "zh")
-            .unwrap_or(25);
-        let ch_idx = fixture
-            .atoms
-            .iter()
-            .position(|a| a.name == "ch")
-            .unwrap_or(2);
-        let sh_idx = fixture
-            .atoms
-            .iter()
-            .position(|a| a.name == "sh")
-            .unwrap_or(16);
-        let zero_w_idx = fixture
-            .atoms
-            .iter()
-            .position(|a| a.name == "zero-W")
-            .unwrap_or(23);
-        let zero_y_idx = fixture
-            .atoms
-            .iter()
-            .position(|a| a.name == "zero-Y")
-            .unwrap_or(24);
-        let zero_aeo_indices: Vec<usize> = fixture
-            .atoms
-            .iter()
-            .enumerate()
-            .filter(|(_, a)| a.name == "zero-A" || a.name == "zero-E" || a.name == "zero-O")
-            .map(|(i, _)| i)
-            .collect();
+        2 => {
+            // Operator 2: Rhyme move within a tone region preserving exact capacity
+            let region_idx = rng.gen_range(0, fixture.tone_regions.len());
+            let rhyme_idx = rng.gen_range(0, fixture.rhyme_atoms.len());
+            let region_keys: Vec<char> = fixture.tone_regions[region_idx].keys.chars().collect();
+            let old_key = next.rhyme_keys[region_idx][rhyme_idx];
+            let mut target_key = region_keys[rng.gen_range(0, region_keys.len())];
+            if region_keys.len() > 1 {
+                for _ in 0..16 {
+                    if target_key != old_key {
+                        break;
+                    }
+                    target_key = region_keys[rng.gen_range(0, region_keys.len())];
+                }
+            }
+            next.rhyme_keys[region_idx][rhyme_idx] = target_key;
 
-        let special_roll = rng.next_f64();
-        if special_roll < 0.40 {
-            // Move zh, ch, or sh
-            let retroflex = [zh_idx, ch_idx, sh_idx];
-            let pick = retroflex[rng.gen_range(0, retroflex.len())];
+            let used_keys: BTreeSet<char> = next.rhyme_keys[region_idx].iter().copied().collect();
+            if used_keys.len() < region_keys.len() {
+                // fallback to swap
+                next.rhyme_keys[region_idx][rhyme_idx] = old_key;
+                let mut other = rng.gen_range(0, fixture.rhyme_atoms.len());
+                for _ in 0..32 {
+                    if other != rhyme_idx && next.rhyme_keys[region_idx][other] != old_key {
+                        break;
+                    }
+                    other = rng.gen_range(0, fixture.rhyme_atoms.len());
+                }
+                let key_other = next.rhyme_keys[region_idx][other];
+                next.rhyme_keys[region_idx][rhyme_idx] = key_other;
+                next.rhyme_keys[region_idx][other] = old_key;
+                (
+                    next,
+                    format!(
+                        "rhyme_swap {}:{}({}) <-> {}({})",
+                        fixture.tone_regions[region_idx].name,
+                        fixture.rhyme_atoms[rhyme_idx].name,
+                        old_key,
+                        fixture.rhyme_atoms[other].name,
+                        key_other
+                    ),
+                )
+            } else {
+                (
+                    next,
+                    format!(
+                        "rhyme_move {}:{}: {} -> {}",
+                        fixture.tone_regions[region_idx].name,
+                        fixture.rhyme_atoms[rhyme_idx].name,
+                        old_key,
+                        target_key
+                    ),
+                )
+            }
+        }
+        3 => {
+            // Operator 3: Special onset & zero-onset perturbation (independent 8 families)
+            let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
+            let pick_atom_name = &fixture.searchable_first_atoms
+                [rng.gen_range(0, fixture.searchable_first_atoms.len())];
+            let pick = fixture
+                .atoms
+                .iter()
+                .position(|a| &a.name == pick_atom_name)
+                .expect("searchable atom found");
             let old_key = next.first_keys[pick];
-            let target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+            let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+            while target_key == old_key {
+                target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+            }
             next.first_keys[pick] = target_key;
             (
                 next,
@@ -434,164 +239,147 @@ fn mutate_joint_state(
                     fixture.atoms[pick].name, old_key, target_key
                 ),
             )
-        } else if special_roll < 0.70 {
-            // Move zero-W or zero-Y
-            let zero_wy = [zero_w_idx, zero_y_idx];
-            let pick = zero_wy[rng.gen_range(0, zero_wy.len())];
-            let old_key = next.first_keys[pick];
-            let target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-            next.first_keys[pick] = target_key;
-            (
-                next,
-                format!(
-                    "zero_first {}: {} -> {}",
-                    fixture.atoms[pick].name, old_key, target_key
-                ),
-            )
-        } else {
-            // Move zero-A/E/O together
-            let old_key = next.first_keys[zero_aeo_indices[0]];
-            let target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-            for &idx in &zero_aeo_indices {
-                next.first_keys[idx] = target_key;
-            }
-            (
-                next,
-                format!("zero_first zero-A/E/O: {} -> {}", old_key, target_key),
-            )
         }
-    } else {
-        // Operator 4: Ordinary onset perturbation under D <= max_d (15%)
-        let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
-        let ordinary_indices: Vec<usize> = fixture
-            .atoms
-            .iter()
-            .enumerate()
-            .filter(|(_, a)| a.initial.len() == 1 && a.initial != "_")
-            .map(|(i, _)| i)
-            .collect();
+        _ => {
+            // Operator 4: Ordinary onset perturbation under D <= max_d
+            let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
+            let ordinary_indices: Vec<usize> = fixture
+                .atoms
+                .iter()
+                .enumerate()
+                .filter(|(_, a)| a.initial.len() == 1 && a.initial != "_")
+                .map(|(i, _)| i)
+                .collect();
 
-        let displaced: Vec<usize> = ordinary_indices
-            .iter()
-            .copied()
-            .filter(|&i| next.first_keys[i] != fixture.atoms[i].baseline_key)
-            .collect();
+            let displaced: Vec<usize> = ordinary_indices
+                .iter()
+                .copied()
+                .filter(|&i| next.first_keys[i] != fixture.atoms[i].baseline_key)
+                .collect();
 
-        if displaced.is_empty() {
-            if max_d > 0 {
-                let pick = ordinary_indices[rng.gen_range(0, ordinary_indices.len())];
-                let old_key = next.first_keys[pick];
-                let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                while target_key == old_key {
-                    target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+            if displaced.is_empty() {
+                if max_d > 0 {
+                    let pick = ordinary_indices[rng.gen_range(0, ordinary_indices.len())];
+                    let old_key = next.first_keys[pick];
+                    let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    while target_key == old_key {
+                        target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    }
+                    next.first_keys[pick] = target_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_displace {}: {} -> {}",
+                            fixture.atoms[pick].name, old_key, target_key
+                        ),
+                    )
+                } else {
+                    (next, "noop".to_owned())
                 }
-                next.first_keys[pick] = target_key;
-                (
-                    next,
-                    format!(
-                        "ordinary_displace {}: {} -> {}",
-                        fixture.atoms[pick].name, old_key, target_key
-                    ),
-                )
+            } else if displaced.len() < max_d {
+                let sub_roll = rng.next_f64();
+                if sub_roll < 0.50 {
+                    let available: Vec<usize> = ordinary_indices
+                        .iter()
+                        .copied()
+                        .filter(|&i| next.first_keys[i] == fixture.atoms[i].baseline_key)
+                        .collect();
+                    let pick = available[rng.gen_range(0, available.len())];
+                    let old_key = next.first_keys[pick];
+                    let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    while target_key == old_key {
+                        target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    }
+                    next.first_keys[pick] = target_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_displace {}: {} -> {}",
+                            fixture.atoms[pick].name, old_key, target_key
+                        ),
+                    )
+                } else {
+                    let pick = displaced[rng.gen_range(0, displaced.len())];
+                    let old_key = next.first_keys[pick];
+                    let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    while target_key == old_key {
+                        target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    }
+                    next.first_keys[pick] = target_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_mutate {}: {} -> {}",
+                            fixture.atoms[pick].name, old_key, target_key
+                        ),
+                    )
+                }
             } else {
-                (next, "noop".to_owned())
-            }
-        } else if displaced.len() < max_d {
-            let sub_roll = rng.next_f64();
-            if sub_roll < 0.50 {
-                let available: Vec<usize> = ordinary_indices
-                    .iter()
-                    .copied()
-                    .filter(|&i| next.first_keys[i] == fixture.atoms[i].baseline_key)
-                    .collect();
-                let pick = available[rng.gen_range(0, available.len())];
-                let old_key = next.first_keys[pick];
-                let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                while target_key == old_key {
-                    target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                // displaced.len() == max_d
+                let sub_roll = rng.next_f64();
+                if sub_roll < 0.35 {
+                    let pick = displaced[rng.gen_range(0, displaced.len())];
+                    let old_key = next.first_keys[pick];
+                    next.first_keys[pick] = fixture.atoms[pick].baseline_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_reset {}: {} -> {}",
+                            fixture.atoms[pick].name, old_key, fixture.atoms[pick].baseline_key
+                        ),
+                    )
+                } else if sub_roll < 0.70 {
+                    let pick = displaced[rng.gen_range(0, displaced.len())];
+                    let old_key = next.first_keys[pick];
+                    let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    while target_key == old_key {
+                        target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    }
+                    next.first_keys[pick] = target_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_mutate {}: {} -> {}",
+                            fixture.atoms[pick].name, old_key, target_key
+                        ),
+                    )
+                } else {
+                    let reset_pick = displaced[rng.gen_range(0, displaced.len())];
+                    next.first_keys[reset_pick] = fixture.atoms[reset_pick].baseline_key;
+                    let available: Vec<usize> = ordinary_indices
+                        .iter()
+                        .copied()
+                        .filter(|&i| {
+                            i != reset_pick && next.first_keys[i] == fixture.atoms[i].baseline_key
+                        })
+                        .collect();
+                    let new_pick = available[rng.gen_range(0, available.len())];
+                    let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    while target_key == fixture.atoms[new_pick].baseline_key {
+                        target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                    }
+                    next.first_keys[new_pick] = target_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_shift_ticket: {} reset to {}, {} -> {}",
+                            fixture.atoms[reset_pick].name,
+                            fixture.atoms[reset_pick].baseline_key,
+                            fixture.atoms[new_pick].name,
+                            target_key
+                        ),
+                    )
                 }
-                next.first_keys[pick] = target_key;
-                (
-                    next,
-                    format!(
-                        "ordinary_displace {}: {} -> {}",
-                        fixture.atoms[pick].name, old_key, target_key
-                    ),
-                )
-            } else {
-                let pick = displaced[rng.gen_range(0, displaced.len())];
-                let old_key = next.first_keys[pick];
-                let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                while target_key == old_key {
-                    target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                }
-                next.first_keys[pick] = target_key;
-                (
-                    next,
-                    format!(
-                        "ordinary_mutate {}: {} -> {}",
-                        fixture.atoms[pick].name, old_key, target_key
-                    ),
-                )
-            }
-        } else {
-            // displaced.len() == max_d
-            let sub_roll = rng.next_f64();
-            if sub_roll < 0.35 {
-                let pick = displaced[rng.gen_range(0, displaced.len())];
-                let old_key = next.first_keys[pick];
-                next.first_keys[pick] = fixture.atoms[pick].baseline_key;
-                (
-                    next,
-                    format!(
-                        "ordinary_reset {}: {} -> {}",
-                        fixture.atoms[pick].name, old_key, fixture.atoms[pick].baseline_key
-                    ),
-                )
-            } else if sub_roll < 0.70 {
-                let pick = displaced[rng.gen_range(0, displaced.len())];
-                let old_key = next.first_keys[pick];
-                let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                while target_key == old_key {
-                    target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                }
-                next.first_keys[pick] = target_key;
-                (
-                    next,
-                    format!(
-                        "ordinary_mutate {}: {} -> {}",
-                        fixture.atoms[pick].name, old_key, target_key
-                    ),
-                )
-            } else {
-                let reset_pick = displaced[rng.gen_range(0, displaced.len())];
-                next.first_keys[reset_pick] = fixture.atoms[reset_pick].baseline_key;
-                let available: Vec<usize> = ordinary_indices
-                    .iter()
-                    .copied()
-                    .filter(|&i| {
-                        i != reset_pick && next.first_keys[i] == fixture.atoms[i].baseline_key
-                    })
-                    .collect();
-                let new_pick = available[rng.gen_range(0, available.len())];
-                let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                while target_key == fixture.atoms[new_pick].baseline_key {
-                    target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
-                }
-                next.first_keys[new_pick] = target_key;
-                (
-                    next,
-                    format!(
-                        "ordinary_shift_ticket: {} reset to {}, {} -> {}",
-                        fixture.atoms[reset_pick].name,
-                        fixture.atoms[reset_pick].baseline_key,
-                        fixture.atoms[new_pick].name,
-                        target_key
-                    ),
-                )
             }
         }
     }
+}
+
+#[derive(Clone, Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct SeedsInventory {
+    #[serde(default)]
+    audit_token_keys: Vec<String>,
 }
 
 struct Args {
@@ -601,6 +389,7 @@ struct Args {
     anchor_checkpoint: PathBuf,
     output: PathBuf,
     checkpoint: PathBuf,
+    seeds_json: PathBuf,
     steps: usize,
     duration_secs: u64,
     max_d: usize,
@@ -611,6 +400,8 @@ struct Args {
     duty_ms: u64,
     resume: bool,
     seed: u64,
+    require_empty_buckets: Vec<String>,
+    rhyme_only: bool,
 }
 
 fn parse_args() -> Result<Args, String> {
@@ -627,6 +418,7 @@ fn parse_args() -> Result<Args, String> {
         ),
         output: PathBuf::from("research/.cache/ckt-v51-toned-joint-stage1-result.json"),
         checkpoint: PathBuf::from("research/.cache/ckt-v51-toned-joint-stage1-checkpoint.json"),
+        seeds_json: PathBuf::from("research/config/ckt-v51-toned-2121-seeds.json"),
         steps: 5000,
         duration_secs: 0,
         max_d: 1,
@@ -637,6 +429,8 @@ fn parse_args() -> Result<Args, String> {
         duty_ms: 5,
         resume: false,
         seed: 1410786,
+        require_empty_buckets: Vec::new(),
+        rhyme_only: false,
     };
     let mut index = 3;
     while index < values.len() {
@@ -652,6 +446,7 @@ fn parse_args() -> Result<Args, String> {
             "--anchor" => args.anchor_checkpoint = PathBuf::from(next(&mut index)?),
             "--output" => args.output = PathBuf::from(next(&mut index)?),
             "--checkpoint" => args.checkpoint = PathBuf::from(next(&mut index)?),
+            "--seeds-json" => args.seeds_json = PathBuf::from(next(&mut index)?),
             "--steps" => args.steps = next(&mut index)?.parse().map_err(|_| "invalid steps")?,
             "--duration-secs" => {
                 args.duration_secs = next(&mut index)?
@@ -684,6 +479,15 @@ fn parse_args() -> Result<Args, String> {
             }
             "--seed" => args.seed = next(&mut index)?.parse().map_err(|_| "invalid seed")?,
             "--resume" => args.resume = true,
+            "--rhyme-only" => args.rhyme_only = true,
+            "--require-empty-buckets" => {
+                let raw = next(&mut index)?;
+                args.require_empty_buckets = raw
+                    .split(',')
+                    .map(|s| s.trim().to_ascii_uppercase())
+                    .filter(|s| !s.is_empty())
+                    .collect();
+            }
             _ => return Err(format!("unknown option {value}")),
         }
         index += 1;
@@ -701,12 +505,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     eprintln!(" Snapshot: {:?}", args.snapshot);
     eprintln!(" Anchor Checkpoint: {:?}", args.anchor_checkpoint);
     eprintln!(
-        " Target Steps: {}, Duration: {}s, Max D: {}, Duty ms: {}",
-        args.steps, args.duration_secs, args.max_d, args.duty_ms
+        " Target Steps: {}, Duration: {}s, Max D: {}, Duty ms: {}, Rhyme Only: {}",
+        args.steps, args.duration_secs, args.max_d, args.duty_ms, args.rhyme_only
     );
     eprintln!(
-        " Temp: {} -> {}, Seed: {}",
-        args.initial_temp, args.final_temp, args.seed
+        " Temp: {} -> {}, Seed: {}, Require Empty Buckets: {:?}",
+        args.initial_temp, args.final_temp, args.seed, args.require_empty_buckets
     );
     eprintln!("=========================================================================");
 
@@ -719,9 +523,45 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let tone_keys_by_tone = parse_five_keys(&fixture.tone_keys_by_tone, &alphabet)
         .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
+    let forbidden_pairs = parse_forbidden_buckets(&args.require_empty_buckets, &fixture.sound_keys)
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+
+    let audit_tokens: Option<BTreeSet<String>> = if args.seeds_json.exists() {
+        let content = fs::read_to_string(&args.seeds_json)?;
+        let inventory: SeedsInventory = serde_json::from_str(&content)?;
+        Some(inventory.audit_token_keys.into_iter().collect())
+    } else {
+        None
+    };
+
+    let validator = BucketValidator::from_fixture(&fixture, audit_tokens.as_ref())
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+
     // Load initial state
     let (mut checkpoint, mut current_state) = if args.resume && args.checkpoint.exists() {
         let cp: AnnealCheckpoint = serde_json::from_str(&fs::read_to_string(&args.checkpoint)?)?;
+        cp.validate_resume_contract(
+            &fixture.layout_id,
+            &fixture.source_hashes,
+            &args.require_empty_buckets,
+            args.max_d,
+        )
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+
+        let violations = validator.find_forbidden_violations(&cp.current_state, &forbidden_pairs);
+        if !violations.is_empty() {
+            let details = violations
+                .iter()
+                .map(|(b, s)| format!("{b}={s}"))
+                .collect::<Vec<_>>()
+                .join(", ");
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                format!("resume checkpoint violates forbidden empty buckets: {details}"),
+            )
+            .into());
+        }
+
         eprintln!(
             "Resuming from step {}/{} (elapsed {:.1}s) with curr={:.6}, best={:.6}",
             cp.step,
@@ -743,6 +583,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .best_score
             .or(anchor.current_score)
             .unwrap_or(9.999999);
+
+        let violations = validator.find_forbidden_violations(&state, &forbidden_pairs);
+        if !violations.is_empty() {
+            let details = violations
+                .iter()
+                .map(|(b, s)| format!("{b}={s}"))
+                .collect::<Vec<_>>()
+                .join(", ");
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                format!("initial/anchor state violates required empty buckets: {details}"),
+            )
+            .into());
+        }
+
         let cur_d = calc_ordinary_d(&state, &fixture);
         let (cur_m_lower, _cur_m_guard, _merge_lower) = calc_memory_metrics(&state, &fixture);
         eprintln!(
@@ -751,16 +606,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         );
         let cp = AnnealCheckpoint {
             version: JOINT_ANNEAL_VERSION.to_owned(),
+            fixture_id: Some(fixture.layout_id.clone()),
             layout_id: Some(fixture.layout_id.clone()),
+            source_hashes: fixture.source_hashes.clone(),
+            require_empty_buckets: args.require_empty_buckets.clone(),
+            max_d: args.max_d,
+            rhyme_only: args.rhyme_only,
             step: 0,
             total_steps: args.steps,
-            max_d: args.max_d,
             temperature: args.initial_temp,
             current_score: anchor_score,
             best_score: anchor_score,
             base_score: anchor_score,
             accepted: 0,
             evaluated: 0,
+            rejected_forbidden: 0,
             elapsed_ms: 0.0,
             current_state: state.clone(),
             best_state: state.clone(),
@@ -771,6 +631,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 m_lower: cur_m_lower,
                 description: format!("Anchor baseline (D={cur_d}, M={cur_m_lower})"),
             }],
+            diagnostics: None,
+            pareto_frontier: Vec::new(),
         };
         (cp, state)
     };
@@ -806,6 +668,29 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if verified_initial_score < checkpoint.best_score {
         checkpoint.best_score = verified_initial_score;
     }
+    {
+        let init_d = calc_ordinary_d(&current_state, &fixture);
+        let (init_m_lower, init_m_guard, init_merge_lower) =
+            calc_memory_metrics(&current_state, &fixture);
+        let (init_first_moves, _, init_rhyme_moves) = calc_move_metrics(&current_state, &fixture);
+        update_pareto_frontier(
+            &mut checkpoint.pareto_frontier,
+            ParetoEntry {
+                score: verified_initial_score,
+                ordinary_d: init_d,
+                memory_lower: init_m_lower,
+                memory_guard: init_m_guard,
+                merge_lower: init_merge_lower,
+                first_group_moves: init_first_moves,
+                rhyme_group_moves: init_rhyme_moves,
+                rhyme_internal_splits: 0,
+                step: checkpoint.step,
+                description: "Initial state".to_owned(),
+                state: current_state.clone(),
+                diagnostics: None,
+            },
+        );
+    }
 
     let mars0_score = 9.556530457331402_f64;
     let mut rng = SimpleRng::new(args.seed + checkpoint.step as u64);
@@ -822,8 +707,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             break;
         }
 
-        let (candidate_state, desc) =
-            mutate_joint_state(&current_state, &fixture, &mut rng, args.max_d);
+        let (candidate_state, desc) = mutate_joint_state(
+            &current_state,
+            &fixture,
+            &mut rng,
+            args.max_d,
+            args.rhyme_only,
+        );
+
+        // Pre-scoring rejection of proposals violating empty bucket constraints
+        if !validator.is_valid_forbidden(&candidate_state, &forbidden_pairs) {
+            checkpoint.rejected_forbidden += 1;
+            continue;
+        }
 
         let cand_scheme =
             build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)
@@ -851,6 +747,42 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let score = normalized_score(&summary.summary(), &fixture.reference_effective_ms)
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
+        checkpoint.evaluated += 1;
+
+        let cand_d = calc_ordinary_d(&candidate_state, &fixture);
+        let (cand_m_lower, cand_m_guard, cand_merge_lower) =
+            calc_memory_metrics(&candidate_state, &fixture);
+        let (cand_first_moves, _, cand_rhyme_moves) = calc_move_metrics(&candidate_state, &fixture);
+        if update_pareto_frontier(
+            &mut checkpoint.pareto_frontier,
+            ParetoEntry {
+                score,
+                ordinary_d: cand_d,
+                memory_lower: cand_m_lower,
+                memory_guard: cand_m_guard,
+                merge_lower: cand_merge_lower,
+                first_group_moves: cand_first_moves,
+                rhyme_group_moves: cand_rhyme_moves,
+                rhyme_internal_splits: 0,
+                step: checkpoint.step,
+                description: desc.clone(),
+                state: candidate_state.clone(),
+                diagnostics: None,
+            },
+        ) {
+            eprintln!(
+                "  [◆ PARETO] Step {:>5}/{} | CKT: {:.12} | D={} M={}/{} (size={}) | {}",
+                checkpoint.step,
+                args.steps,
+                score,
+                cand_d,
+                cand_m_lower,
+                cand_m_guard,
+                checkpoint.pareto_frontier.len(),
+                desc
+            );
+        }
+
         let delta = score - checkpoint.current_score;
         let accept = if delta <= 0.0 {
             true
@@ -859,22 +791,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             rng.next_f64() < p
         };
 
-        checkpoint.evaluated += 1;
-
         if accept {
             checkpoint.accepted += 1;
             checkpoint.current_score = score;
             current_state = candidate_state;
             current_scheme = cand_scheme;
 
-            if score < checkpoint.best_score {
+            if score < checkpoint.best_score - 1e-12 {
                 let drop = checkpoint.best_score - score;
                 checkpoint.best_score = score;
                 checkpoint.best_state = current_state.clone();
                 let cur_d = calc_ordinary_d(&current_state, &fixture);
                 let (cur_m, _, _) = calc_memory_metrics(&current_state, &fixture);
                 eprintln!(
-                    "  [★ NEW BEST] Step {:>5}/{} | CKT: {:.12} (drop: {:.6}, ΔMars0: {:+.6}) | D={}/{} M={} | T: {:.6} | {}",
+                    "  [★ NEW BEST] Step {:>5}/{} | CKT: {:.12} (drop: {:.6}, ΔMars0: {:+.6}) | D={}/{} M={} | T: {:.6} | rej_forbid: {} | {}",
                     checkpoint.step,
                     args.steps,
                     score,
@@ -884,6 +814,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     args.max_d,
                     cur_m,
                     checkpoint.temperature,
+                    checkpoint.rejected_forbidden,
                     desc
                 );
                 checkpoint.history.push(HistoryEntry {
@@ -924,6 +855,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         if args.checkpoint_every > 0 && checkpoint.step % args.checkpoint_every == 0 {
             let mut cp_save = checkpoint.clone();
             cp_save.elapsed_ms = current_elapsed_ms;
+            cp_save.diagnostics =
+                Some(validator.compute_diagnostics(&checkpoint.best_state, &fixture));
             if let Some(parent) = args.checkpoint.parent() {
                 fs::create_dir_all(parent)?;
             }
@@ -934,15 +867,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let cur_d = calc_ordinary_d(&checkpoint.best_state, &fixture);
             let (cur_m, _, _) = calc_memory_metrics(&checkpoint.best_state, &fixture);
             eprintln!(
-                "  [Checkpoint] Step {:>5}/{} | Cur: {:.6} | Best: {:.12} (D={} M={}) | Acc: {:.1}% | T: {:.6}",
+                "  [Checkpoint] Step {:>5}/{} | Cur: {:.6} | Best: {:.12} (D={} M={}) | Acc: {:.1}% | T: {:.6} | Rej: {}",
                 checkpoint.step,
                 args.steps,
                 checkpoint.current_score,
                 checkpoint.best_score,
                 cur_d,
                 cur_m,
-                (checkpoint.accepted as f64 / checkpoint.evaluated as f64) * 100.0,
-                checkpoint.temperature
+                (checkpoint.accepted as f64 / checkpoint.evaluated.max(1) as f64) * 100.0,
+                checkpoint.temperature,
+                checkpoint.rejected_forbidden
             );
         }
 
@@ -952,6 +886,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     checkpoint.elapsed_ms = base_elapsed_ms + start_time.elapsed().as_secs_f64() * 1000.0;
+    checkpoint.diagnostics = Some(validator.compute_diagnostics(&checkpoint.best_state, &fixture));
+    for entry in &mut checkpoint.pareto_frontier {
+        entry.diagnostics = Some(validator.compute_diagnostics(&entry.state, &fixture));
+    }
     if let Some(parent) = args.output.parent() {
         fs::create_dir_all(parent)?;
     }
@@ -962,6 +900,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let final_d = calc_ordinary_d(&checkpoint.best_state, &fixture);
     let (final_m, _, _) = calc_memory_metrics(&checkpoint.best_state, &fixture);
+    let diag = checkpoint.diagnostics.as_ref().unwrap();
     eprintln!(
         "\nJoint Annealing completed in {:.2}s. Final Best CKT = {:.12} (D={} M={}, ΔBase: {:+.6}, ΔMars0: {:+.6})",
         checkpoint.elapsed_ms / 1000.0,
@@ -970,6 +909,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         final_m,
         checkpoint.best_score - checkpoint.base_score,
         checkpoint.best_score - mars0_score
+    );
+    eprintln!(
+        "Occupied Buckets: 1407 -> {}/441 (empty: {}), Common1237 -> {}/441 (empty: {}), QZ empty: {}",
+        diag.layout1407_occupied_buckets,
+        diag.layout1407_empty_buckets_count,
+        diag.common1237_occupied_buckets,
+        diag.common1237_empty_buckets_count,
+        diag.qz_empty
+    );
+    eprintln!(
+        "Rejected forbidden proposals: {}",
+        checkpoint.rejected_forbidden
     );
     eprintln!("Wrote final results to {:?}", args.output);
 
