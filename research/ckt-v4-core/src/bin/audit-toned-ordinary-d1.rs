@@ -391,7 +391,9 @@ fn parse_args() -> Result<Args, String> {
         anneal_checkpoint: PathBuf::from(
             "research/.cache/ckt-v51-toned-ordinary-d1-anneal-checkpoint.json",
         ),
-        anneal_output: PathBuf::from("research/.cache/ckt-v51-toned-ordinary-d1-anneal-result.json"),
+        anneal_output: PathBuf::from(
+            "research/.cache/ckt-v51-toned-ordinary-d1-anneal-result.json",
+        ),
         start_d1: None,
     };
     let mut index = 3;
@@ -449,9 +451,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let anchor_checkpoint: AnnealCheckpoint =
         serde_json::from_str(&fs::read_to_string(&args.anchor_checkpoint)?)?;
     let anchor_state = anchor_checkpoint.best_state;
-    let anchor_scheme =
-        build_scheme_state(&anchor_state, &fixture, &alphabet, tone_keys_by_tone)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+    let anchor_scheme = build_scheme_state(&anchor_state, &fixture, &alphabet, tone_keys_by_tone)
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
     let generated = corpus
         .generate(&anchor_scheme, InputMode::KeytaoV51)
@@ -517,12 +518,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         let mut candidate_state = anchor_state.clone();
         candidate_state.first_keys[*atom_idx] = target_char;
-        let cand_scheme = build_scheme_state(
-            &candidate_state,
-            &fixture,
-            &alphabet,
-            tone_keys_by_tone,
-        )?;
+        let cand_scheme =
+            build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)?;
         let d1_gen = corpus.generate(&cand_scheme, InputMode::KeytaoV51)?;
         let motor_eval = motor.clone();
         let d1_res = IncrementalResolver::new(d1_gen.rows, move |code| {
@@ -533,7 +530,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         eprintln!(
             "Using explicit D=1 starting initial: {} -> {} | CKT: {:.12} (ΔAnchor: {:+.6}, ΔMars0: {:+.6})",
-            init_name, target_char, score, score - anchor_score, score - mars0_score
+            init_name,
+            target_char,
+            score,
+            score - anchor_score,
+            score - mars0_score
         );
 
         let cand = CandidateResult {
@@ -574,13 +575,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let mut candidate_state = anchor_state.clone();
                 candidate_state.first_keys[atom_idx] = to_key;
 
-                let cand_scheme = build_scheme_state(
-                    &candidate_state,
-                    &fixture,
-                    &alphabet,
-                    tone_keys_by_tone,
-                )
-                .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+                let cand_scheme =
+                    build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)
+                        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
                 let direct = generated
                     .dependencies
@@ -706,13 +703,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut current_state = anchor_state.clone();
         current_state.first_keys[best_atom_idx] = best_1hop.to_key;
 
-        let mut current_scheme = build_scheme_state(
-            &current_state,
-            &fixture,
-            &alphabet,
-            tone_keys_by_tone,
-        )
-        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+        let mut current_scheme =
+            build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)
+                .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
         // Re-generate resolver base for current_scheme to establish clean baseline
         let d1_generated = corpus
@@ -728,11 +721,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             IncrementalSummary::new(d1_resolver.rows(), d1_resolver.outcomes(), parameters)
                 .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
-        let base_d1_score = normalized_score(
-            &d1_summary.summary(),
-            &fixture.reference_effective_ms,
-        )
-        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+        let base_d1_score =
+            normalized_score(&d1_summary.summary(), &fixture.reference_effective_ms)
+                .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
         eprintln!("Verified D=1 starting state CKT: {:.12}", base_d1_score);
 
@@ -753,13 +744,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         for step in 1..=args.anneal_steps {
             let (candidate_anneal, desc) = mutate_rhyme_state(&current_state, &fixture, &mut rng);
 
-            let cand_scheme = build_scheme_state(
-                &candidate_anneal,
-                &fixture,
-                &alphabet,
-                tone_keys_by_tone,
-            )
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+            let cand_scheme =
+                build_scheme_state(&candidate_anneal, &fixture, &alphabet, tone_keys_by_tone)
+                    .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
             let direct = d1_generated
                 .dependencies
@@ -803,7 +790,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     best_state = current_state.clone();
                     eprintln!(
                         "  [Step {:04}/{:04}] ** NEW BEST **: CKT = {:.12} (ΔD1: {:+.6}, drop: {:.6}, ΔMars0: {:+.6}) | {}",
-                        step, args.anneal_steps, score, score - base_d1_score, drop, score - mars0_score, desc
+                        step,
+                        args.anneal_steps,
+                        score,
+                        score - base_d1_score,
+                        drop,
+                        score - mars0_score,
+                        desc
                     );
                     history.push(serde_json::json!({
                         "step": step,
@@ -825,8 +818,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if step % 50 == 0 || step == args.anneal_steps {
                 eprintln!(
                     "  [Step {:04}/{:04}] T={:.6}, curr={:.6}, best={:.6}, acc={}/{} ({:.1}%)",
-                    step, args.anneal_steps, temp, current_score, best_score,
-                    accepted, step, (accepted as f64 / step as f64) * 100.0
+                    step,
+                    args.anneal_steps,
+                    temp,
+                    current_score,
+                    best_score,
+                    accepted,
+                    step,
+                    (accepted as f64 / step as f64) * 100.0
                 );
 
                 if let Some(parent) = args.anneal_checkpoint.parent() {
@@ -859,7 +858,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let anneal_elapsed = anneal_start.elapsed().as_secs_f64();
         eprintln!(
             "\nAnnealing complete in {:.2}s. Final Best CKT = {:.12} (Net drop: {:+.6} vs base, {:+.6} vs Mars0)",
-            anneal_elapsed, best_score, best_score - anchor_score, best_score - mars0_score
+            anneal_elapsed,
+            best_score,
+            best_score - anchor_score,
+            best_score - mars0_score
         );
 
         if let Some(parent) = args.anneal_output.parent() {

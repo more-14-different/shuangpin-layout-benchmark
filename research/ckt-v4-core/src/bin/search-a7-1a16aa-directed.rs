@@ -1,9 +1,8 @@
 use ckt_v4_core::{
-    CognitiveParameters, ErgonomicFixture,
-    IncrementalResolver, IncrementalSummary, InputMode, KeyAlphabet,
-    NativeCorpus, ProjectedMotor, Projection, ProposalKind, RegularLayout,
-    RoleTables, SchemeFixture, SchemeState, SearchRng, Summary,
-    composite_score, layout_state_key, propose, resolve, summarize,
+    CognitiveParameters, ErgonomicFixture, IncrementalResolver, IncrementalSummary, InputMode,
+    KeyAlphabet, NativeCorpus, ProjectedMotor, Projection, ProposalKind, RegularLayout, RoleTables,
+    SchemeFixture, SchemeState, SearchRng, Summary, composite_score, layout_state_key, propose,
+    resolve, summarize,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -14,8 +13,8 @@ use std::thread;
 use std::time::{Duration, Instant};
 
 const ALPHABET_CHARS: [char; 34] = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-    'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', '\\', ';', '\'', ',', '.', '/',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+    'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', ']', '\\', ';', '\'', ',', '.', '/',
 ];
 
 const ALLOWED_PROPOSALS: [ProposalKind; 6] = [
@@ -206,7 +205,14 @@ fn compute_loads_diagnostics(
     }
 
     let home_floor = c4_home.min(wx_home);
-    (qaz_peak, p_peak, max_finger_peak, s2_home, home_floor, tyb_peak)
+    (
+        qaz_peak,
+        p_peak,
+        max_finger_peak,
+        s2_home,
+        home_floor,
+        tyb_peak,
+    )
 }
 
 #[cfg(windows)]
@@ -235,14 +241,8 @@ fn main() -> Result<(), String> {
     // Default to gentle, long-term friendly parameters:
     // arg 1: steps_per_chain (default 400)
     // arg 2: duty_ms (default 30ms sleep per proposal to keep CPU cool and quiet)
-    let steps_per_chain: usize = args
-        .get(1)
-        .and_then(|s| s.parse().ok())
-        .unwrap_or(400);
-    let duty_ms: u64 = args
-        .get(2)
-        .and_then(|s| s.parse().ok())
-        .unwrap_or(30);
+    let steps_per_chain: usize = args.get(1).and_then(|s| s.parse().ok()).unwrap_or(400);
+    let duty_ms: u64 = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(30);
 
     println!("========================================================");
     println!(" Directed Annealing: A7-1a16aa Pareto Basin Search      ");
@@ -298,12 +298,7 @@ fn main() -> Result<(), String> {
         .ok_or("S005 missing from schemes")?;
     let parameters = CognitiveParameters::default();
     let s005_state = SchemeState::compile(s005_entry, &alphabet, corpus.header().pinyin_count)?;
-    let ref_summaries = score_full_modes(
-        &corpus,
-        &s005_state,
-        &motor,
-        parameters,
-    )?;
+    let ref_summaries = score_full_modes(&corpus, &s005_state, &motor, parameters)?;
     let s005_score = composite_score(&ref_summaries, &ref_summaries)?;
     println!("S005 reference score: {s005_score:.9} (strictly 10.000000000)");
 
@@ -312,7 +307,8 @@ fn main() -> Result<(), String> {
 
     // Target heads: K=zh, L=sh, S=s+ch, P=p+k, l->E, k->P
     let target_head_keys: Vec<u8> = vec![
-        1, 15, 12, 5, 3, 19, 13, 4, 6, 15, 7, 9, 16, 23, 10, 18, 11, 17, 25, 2, 18, 17, 2, 17, 22, 24, 24,
+        1, 15, 12, 5, 3, 19, 13, 4, 6, 15, 7, 9, 16, 23, 10, 18, 11, 17, 25, 2, 18, 17, 2, 17, 22,
+        24, 24,
     ];
     let tone_keys: [u8; 5] = [8, 21, 20, 0, 14]; // IVUAO
 
@@ -345,7 +341,10 @@ fn main() -> Result<(), String> {
         .map_err(|e| e.to_string())?
         .filter_map(|r| r.ok())
         .map(|e| e.path())
-        .filter(|p| p.extension().is_some_and(|ext| ext == "json") && p.file_name().unwrap() != "manifest.json")
+        .filter(|p| {
+            p.extension().is_some_and(|ext| ext == "json")
+                && p.file_name().unwrap() != "manifest.json"
+        })
         .collect();
     paths.sort();
 
@@ -397,7 +396,10 @@ fn main() -> Result<(), String> {
                 for c in existing {
                     candidates_map.insert(c.state_key.clone(), c);
                 }
-                println!("Loaded {} existing Stage 1 candidates from disk.", candidates_map.len());
+                println!(
+                    "Loaded {} existing Stage 1 candidates from disk.",
+                    candidates_map.len()
+                );
             }
         }
     }
@@ -427,7 +429,10 @@ fn main() -> Result<(), String> {
         let mut current_scheme = match fixture.scheme_state(&current_layout) {
             Ok(s) => s,
             Err(e) => {
-                eprintln!("Warning: skipping invalid initial state for {}: {e}", seed.id);
+                eprintln!(
+                    "Warning: skipping invalid initial state for {}: {e}",
+                    seed.id
+                );
                 continue;
             }
         };
@@ -436,20 +441,15 @@ fn main() -> Result<(), String> {
             .into_iter()
             .map(|mode| {
                 let generated = corpus.generate(&current_scheme, mode)?;
-                let outcomes = resolve(&generated.rows, |code| {
-                    motor.cost(code).map(|v| v.upper_ms)
-                })?;
+                let outcomes =
+                    resolve(&generated.rows, |code| motor.cost(code).map(|v| v.upper_ms))?;
                 let inc_motor = motor.clone();
-                let resolver = IncrementalResolver::from_precomputed(
-                    generated.rows,
-                    outcomes,
-                    move |code| inc_motor.cost(code).map(|v| v.upper_ms),
-                )?;
-                let summary = IncrementalSummary::new(
-                    resolver.rows(),
-                    resolver.outcomes(),
-                    parameters,
-                )?;
+                let resolver =
+                    IncrementalResolver::from_precomputed(generated.rows, outcomes, move |code| {
+                        inc_motor.cost(code).map(|v| v.upper_ms)
+                    })?;
+                let summary =
+                    IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)?;
                 Ok(ModeWorker {
                     mode,
                     dependencies: generated.dependencies,
@@ -495,11 +495,15 @@ fn main() -> Result<(), String> {
             mutated_candidate.capacity = [21, 21];
 
             // Fast QZ and ZQ hard constraint check (0 chords in Common399)
-            let zq_violation = forbidden_on_q.iter().any(|&f| mutated_candidate.final_keys[f] == idx_q);
+            let zq_violation = forbidden_on_q
+                .iter()
+                .any(|&f| mutated_candidate.final_keys[f] == idx_q);
             if zq_violation {
                 continue;
             }
-            let qz_violation = forbidden_on_z.iter().any(|&f| mutated_candidate.final_keys[f] == idx_z);
+            let qz_violation = forbidden_on_z
+                .iter()
+                .any(|&f| mutated_candidate.final_keys[f] == idx_z);
             if qz_violation {
                 continue;
             }
@@ -516,14 +520,11 @@ fn main() -> Result<(), String> {
             if mutated_candidate.validate_structure().is_err() {
                 continue;
             }
-            let diagnostics = match mutated_candidate.diagnostics(
-                &alphabet,
-                &fixture.heads,
-                &fixture.finals,
-            ) {
-                Ok(d) => d,
-                Err(_) => continue,
-            };
+            let diagnostics =
+                match mutated_candidate.diagnostics(&alphabet, &fixture.heads, &fixture.finals) {
+                    Ok(d) => d,
+                    Err(_) => continue,
+                };
             if diagnostics.memory > 42 || diagnostics.displaced_vowels > 5 {
                 continue;
             }
@@ -607,13 +608,8 @@ fn main() -> Result<(), String> {
             // Stage 1 criteria screening:
             // CKT <= 9.6200
             if candidate_ckt <= 9.6200 {
-                let (qaz, p, max_f, s2_home, home_floor, tyb) = compute_loads_diagnostics(
-                    &mutated_candidate,
-                    &masses,
-                    s2_idx,
-                    c4_idx,
-                    wx_idx,
-                );
+                let (qaz, p, max_f, s2_home, home_floor, tyb) =
+                    compute_loads_diagnostics(&mutated_candidate, &masses, s2_idx, c4_idx, wx_idx);
 
                 // Stage 1 ergonomic filter:
                 // QAZ <= 16.90%
@@ -647,7 +643,9 @@ fn main() -> Result<(), String> {
                         temperature: temp,
                         iteration_found: step,
                     };
-                    if !candidates_map.contains_key(&state_key) || candidates_map[&state_key].ckt_v4 > candidate_ckt {
+                    if !candidates_map.contains_key(&state_key)
+                        || candidates_map[&state_key].ckt_v4 > candidate_ckt
+                    {
                         println!(
                             "  [NEW CANDIDATE] Key: {} | CKT: {:.4} | P: {:.3}% | HF: {:.3}% | S2Home: {:.3}% | TYB: {:.3}%",
                             &state_key[..14],
@@ -729,9 +727,15 @@ fn main() -> Result<(), String> {
     println!("Wrote Stage 1 candidates to {}", stage1_json_path.display());
 
     println!("\nTop 15 Stage 1 Candidates by CKT:");
-    println!("-----------------------------------------------------------------------------------------------------");
-    println!("StateKey       | CKT     | QAZ    | P区    | MaxF   | S2Home | HomeFloor | TYB    | M/D/V");
-    println!("-----------------------------------------------------------------------------------------------------");
+    println!(
+        "-----------------------------------------------------------------------------------------------------"
+    );
+    println!(
+        "StateKey       | CKT     | QAZ    | P区    | MaxF   | S2Home | HomeFloor | TYB    | M/D/V"
+    );
+    println!(
+        "-----------------------------------------------------------------------------------------------------"
+    );
     for cand in candidate_list.iter().take(15) {
         println!(
             "{:14} | {:.4}  | {:.3}% | {:.3}% | {:.3}% | {:.3}% | {:.3}%   | {:.3}% | {}/{}/{}",
@@ -748,7 +752,9 @@ fn main() -> Result<(), String> {
             cand.displaced_vowels
         );
     }
-    println!("-----------------------------------------------------------------------------------------------------");
+    println!(
+        "-----------------------------------------------------------------------------------------------------"
+    );
 
     Ok(())
 }

@@ -1,24 +1,13 @@
 use ckt_v4_core::{
     CognitiveParameters, ErgonomicFixture, KeyAlphabet, Kind, NativeCorpus, ProjectedMotor,
-    Projection, RegularLayout, RoleTables, SchemeFixture, SchemeState, Summary,
-    composite_score, layout_distance, layout_state_key, resolve, summarize,
+    Projection, RegularLayout, RoleTables, SchemeFixture, SchemeState, Summary, composite_score,
+    layout_distance, layout_state_key, resolve, summarize,
 };
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
-use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::time::Instant;
-
-const HEADS: [&str; 27] = [
-    "b", "p", "m", "f", "d", "t", "n", "l", "g", "k", "h", "j", "q", "x", "zh", "ch", "sh", "r",
-    "z", "c", "s", "A", "E", "O", "W", "Y", "YU",
-];
-const FINALS: [&str; 35] = [
-    "a", "ai", "an", "ang", "ao", "e", "ei", "en", "eng", "er", "i", "ia", "ian", "iang", "iao",
-    "ie", "in", "ing", "iong", "iu", "o", "ong", "ou", "u", "ua", "uai", "uan", "uang", "ui", "un",
-    "uo", "v", "van", "ve", "vn",
-];
 
 const PRODGATE_MAX_RP_S2: f64 = 0.0418079455791114;
 const PRODGATE_MAX_RP: f64 = 0.05104491472386687;
@@ -120,16 +109,19 @@ fn score_modes(
     motor: &ProjectedMotor,
     parameters: CognitiveParameters,
 ) -> Result<Vec<Summary>, String> {
-    [ckt_v4_core::InputMode::Keytao, ckt_v4_core::InputMode::Sanpin]
-        .into_iter()
-        .map(|mode| {
-            let generated = corpus.generate(scheme, mode)?;
-            let outcomes = resolve(&generated.rows, |code| {
-                motor.cost(code).map(|value| value.upper_ms)
-            })?;
-            summarize(&generated.rows, &outcomes, parameters)
-        })
-        .collect()
+    [
+        ckt_v4_core::InputMode::Keytao,
+        ckt_v4_core::InputMode::Sanpin,
+    ]
+    .into_iter()
+    .map(|mode| {
+        let generated = corpus.generate(scheme, mode)?;
+        let outcomes = resolve(&generated.rows, |code| {
+            motor.cost(code).map(|value| value.upper_ms)
+        })?;
+        summarize(&generated.rows, &outcomes, parameters)
+    })
+    .collect()
 }
 
 fn layout_from_hex(hex_str: &str, id: &str) -> Result<RegularLayout, String> {
@@ -144,7 +136,9 @@ fn layout_from_hex(hex_str: &str, id: &str) -> Result<RegularLayout, String> {
     let capacity = [raw[0], raw[1]];
     let head_keys = raw[2..29].to_vec();
     let final_keys = raw[29..64].to_vec();
-    let tone: [u8; 5] = raw[64..69].try_into().map_err(|_| "tone length must be 5")?;
+    let tone: [u8; 5] = raw[64..69]
+        .try_into()
+        .map_err(|_| "tone length must be 5")?;
     Ok(RegularLayout {
         id: id.to_owned(),
         capacity,
@@ -154,7 +148,11 @@ fn layout_from_hex(hex_str: &str, id: &str) -> Result<RegularLayout, String> {
     })
 }
 
-fn compute_u_and_collisions(pinyin_map: &[[u8; 2]], common_pinyin: &[u16], layout: &RegularLayout) -> (usize, usize, usize) {
+fn compute_u_and_collisions(
+    pinyin_map: &[[u8; 2]],
+    common_pinyin: &[u16],
+    layout: &RegularLayout,
+) -> (usize, usize, usize) {
     let mut code_map: BTreeMap<(u8, u8), usize> = BTreeMap::new();
     for &p_idx in common_pinyin {
         let [h, f] = pinyin_map[usize::from(p_idx)];
@@ -192,12 +190,22 @@ fn evaluate_candidate(
     tier: &str,
 ) -> Result<ParetoCandidate, String> {
     let layout_state = ctx.schemes.scheme_state(layout)?;
-    let candidate_summaries = score_modes(ctx.corpus, &layout_state, ctx.motor, CognitiveParameters::default())?;
+    let candidate_summaries = score_modes(
+        ctx.corpus,
+        &layout_state,
+        ctx.motor,
+        CognitiveParameters::default(),
+    )?;
     let ckt_score = composite_score(&candidate_summaries, ctx.reference_summaries)?;
     let loads = ctx.ergo_fixture.load_model.diagnose(layout)?;
-    let mx_score = ctx.ergo_fixture.moving_hand.evaluate(&layout_state, ctx.ergo_corpus)?.score;
+    let mx_score = ctx
+        .ergo_fixture
+        .moving_hand
+        .evaluate(&layout_state, ctx.ergo_corpus)?
+        .score;
     let diag = layout.diagnostics(ctx.alphabet, &ctx.schemes.heads, &ctx.schemes.finals)?;
-    let (u, buckets, affected) = compute_u_and_collisions(&ctx.schemes.pinyin_map, &ctx.schemes.common_pinyin, layout);
+    let (u, buckets, affected) =
+        compute_u_and_collisions(&ctx.schemes.pinyin_map, &ctx.schemes.common_pinyin, layout);
     let hamming = layout_distance(layout, ctx.bcw_layout)?;
 
     let passes_rp_s2 = loads.rp_s2 <= PRODGATE_MAX_RP_S2 + EPS;
@@ -206,20 +214,45 @@ fn evaluate_candidate(
     let passes_w = loads.w_max <= PRODGATE_MAX_W + EPS;
     let passes_y = loads.y_max <= PRODGATE_MAX_Y + EPS;
     let passes_mx = mx_score >= PRODGATE_MIN_MX - EPS;
-    let passes_all = passes_rp_s2 && passes_rp_max && passes_home && passes_w && passes_y && passes_mx;
+    let passes_all =
+        passes_rp_s2 && passes_rp_max && passes_home && passes_w && passes_y && passes_mx;
 
     let kt = &candidate_summaries[0];
     let sp = &candidate_summaries[1];
 
-    let kt_char = kt.track(Kind::Character).map(|t| t.selection_rate).unwrap_or(0.0);
-    let kt_w2 = kt.track(Kind::Word2).map(|t| t.selection_rate).unwrap_or(0.0);
-    let kt_w3 = kt.track(Kind::Word3).map(|t| t.selection_rate).unwrap_or(0.0);
-    let kt_w4 = kt.track(Kind::Word4).map(|t| t.selection_rate).unwrap_or(0.0);
+    let kt_char = kt
+        .track(Kind::Character)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let kt_w2 = kt
+        .track(Kind::Word2)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let kt_w3 = kt
+        .track(Kind::Word3)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let kt_w4 = kt
+        .track(Kind::Word4)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
 
-    let sp_char = sp.track(Kind::Character).map(|t| t.selection_rate).unwrap_or(0.0);
-    let sp_w2 = sp.track(Kind::Word2).map(|t| t.selection_rate).unwrap_or(0.0);
-    let sp_w3 = sp.track(Kind::Word3).map(|t| t.selection_rate).unwrap_or(0.0);
-    let sp_w4 = sp.track(Kind::Word4).map(|t| t.selection_rate).unwrap_or(0.0);
+    let sp_char = sp
+        .track(Kind::Character)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let sp_w2 = sp
+        .track(Kind::Word2)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let sp_w3 = sp
+        .track(Kind::Word3)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let sp_w4 = sp
+        .track(Kind::Word4)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
 
     Ok(ParetoCandidate {
         id: layout.id.clone(),
@@ -265,7 +298,9 @@ fn evaluate_candidate(
 
 fn main() -> Result<(), String> {
     let t_start = Instant::now();
-    let base_dir = PathBuf::from("D:/CtoD/Default/桌面/Code/Lua/inputMethod/shuangpin-layout-benchmark-prod-2121");
+    let base_dir = PathBuf::from(
+        "D:/CtoD/Default/桌面/Code/Lua/inputMethod/shuangpin-layout-benchmark-prod-2121",
+    );
     let corpus_path = base_dir.join("research/.cache/ckt-v4-native-corpus.bin");
     let schemes_path = base_dir.join("research/.cache/ckt-v4-all-schemes.json");
     let snapshot_path = base_dir.join("tools/ckt_v4_upstream_role_tables.json");
@@ -277,18 +312,27 @@ fn main() -> Result<(), String> {
     let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
     let motor = load_motor(&corpus, &alphabet, &snapshot_path)?;
     let ergo_fixture = ErgonomicFixture::open(&ergo_path)?;
-    let ergo_corpus = ergo_fixture.moving_hand.corpus("daily", "native-punctuation")?;
+    let ergo_corpus = ergo_fixture
+        .moving_hand
+        .corpus("daily", "native-punctuation")?;
 
     let reference_input = schemes
         .schemes
         .iter()
         .find(|scheme| scheme.id == "S005")
         .ok_or_else(|| "reference scheme S005 is absent")?;
-    let reference_state = SchemeState::compile(reference_input, &alphabet, corpus.header().pinyin_count)?;
-    let reference_summaries = score_modes(&corpus, &reference_state, &motor, CognitiveParameters::default())?;
+    let reference_state =
+        SchemeState::compile(reference_input, &alphabet, corpus.header().pinyin_count)?;
+    let reference_summaries = score_modes(
+        &corpus,
+        &reference_state,
+        &motor,
+        CognitiveParameters::default(),
+    )?;
 
     // Load original BCW layout
-    let bcw_seed_path = base_dir.join("research/seeds/ckt-v4/a7-closure-multi-seed-20261029/seed-01-BCW-3c47744cf2f7.json");
+    let bcw_seed_path = base_dir
+        .join("research/seeds/ckt-v4/a7-closure-multi-seed-20261029/seed-01-BCW-3c47744cf2f7.json");
     let bcw_json = fs::read_to_string(&bcw_seed_path).map_err(|e| e.to_string())?;
     let bcw_layout: RegularLayout = serde_json::from_str(&bcw_json).map_err(|e| e.to_string())?;
 
@@ -305,9 +349,18 @@ fn main() -> Result<(), String> {
 
     println!("Loading 11 seeds (8 Basin 01 + 3 Production Top-3)...");
     let prod_seeds = [
-        ("gen0107-p5", "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1012040c11040b050f09021901130d03030f05070217031306011806110a04081514000e"),
-        ("gen0076-p8", "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1005040c11040b050f09021901130d12030f12070217031306011806110a03081514000e"),
-        ("gen0170-p7", "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1012040c11040b030f09021901130d050303050702170f1306011806110a04081514000e"),
+        (
+            "gen0107-p5",
+            "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1012040c11040b050f09021901130d03030f05070217031306011806110a04081514000e",
+        ),
+        (
+            "gen0076-p8",
+            "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1005040c11040b050f09021901130d12030f12070217031306011806110a03081514000e",
+        ),
+        (
+            "gen0170-p7",
+            "1515010f0c0503130d0b060a070910170a160411190212111111121818160a090d1012040c11040b030f09021901130d050303050702170f1306011806110a04081514000e",
+        ),
     ];
 
     let mut all_seeds: Vec<RegularLayout> = Vec::new();
@@ -317,15 +370,23 @@ fn main() -> Result<(), String> {
 
     let a7_path = base_dir.join("research/.cache/a7-43-candidates.json");
     let a7_content = fs::read_to_string(a7_path).map_err(|e| e.to_string())?;
-    let a7_data: serde_json::Value = serde_json::from_str(&a7_content).map_err(|e| e.to_string())?;
+    let a7_data: serde_json::Value =
+        serde_json::from_str(&a7_content).map_err(|e| e.to_string())?;
     let basin01_ids = [
-        "BCW-3c47744cf2f7", "BCW-1a11061c8293", "BCW-4119add30591", "BCW-9d3ffcc750b2",
-        "BCW-106d38018322", "BCW-511d69ea162d", "BCW-6a2c3cb77e53", "BCW-2662bd325b7d"
+        "BCW-3c47744cf2f7",
+        "BCW-1a11061c8293",
+        "BCW-4119add30591",
+        "BCW-9d3ffcc750b2",
+        "BCW-106d38018322",
+        "BCW-511d69ea162d",
+        "BCW-6a2c3cb77e53",
+        "BCW-2662bd325b7d",
     ];
     for input in a7_data["schemes"].as_array().unwrap() {
         let id = input["id"].as_str().unwrap();
         if basin01_ids.contains(&id) {
-            let scheme_input: ckt_v4_core::SchemeInput = serde_json::from_value(input.clone()).map_err(|e| e.to_string())?;
+            let scheme_input: ckt_v4_core::SchemeInput =
+                serde_json::from_value(input.clone()).map_err(|e| e.to_string())?;
             if let Ok(layout) = schemes.compile_layout(&scheme_input, &alphabet) {
                 all_seeds.push(layout);
             }
@@ -338,7 +399,11 @@ fn main() -> Result<(), String> {
     let mut pareto_candidates: Vec<ParetoCandidate> = Vec::new();
 
     // Fast check closure
-    let check_candidate = |layout: &RegularLayout, seed_name: &str, candidates: &mut Vec<ParetoCandidate>, seen: &mut BTreeSet<String>| -> Result<bool, String> {
+    let check_candidate = |layout: &RegularLayout,
+                           seed_name: &str,
+                           candidates: &mut Vec<ParetoCandidate>,
+                           seen: &mut BTreeSet<String>|
+     -> Result<bool, String> {
         let sk = layout_state_key(layout);
         if seen.contains(&sk) {
             return Ok(false);
@@ -374,7 +439,11 @@ fn main() -> Result<(), String> {
         let Ok(layout_state) = schemes.scheme_state(layout) else {
             return Ok(false);
         };
-        let Ok(mx_score) = ergo_fixture.moving_hand.evaluate(&layout_state, &ergo_corpus).map(|r| r.score) else {
+        let Ok(mx_score) = ergo_fixture
+            .moving_hand
+            .evaluate(&layout_state, &ergo_corpus)
+            .map(|r| r.score)
+        else {
             return Ok(false);
         };
         if mx_score < PRODGATE_MIN_MX - EPS {
@@ -382,7 +451,8 @@ fn main() -> Result<(), String> {
         }
 
         // 5. Compute U
-        let (u, _, _) = compute_u_and_collisions(&schemes.pinyin_map, &schemes.common_pinyin, layout);
+        let (u, _, _) =
+            compute_u_and_collisions(&schemes.pinyin_map, &schemes.common_pinyin, layout);
 
         // Found a fully ProdGate-compliant layout!
         let tier = if u >= 360 && true {
@@ -396,11 +466,22 @@ fn main() -> Result<(), String> {
         };
 
         if u > 352 {
-            println!(">>> FOUND PRODGATE COMPLIANT: {} from {} with U={}! Evaluating CKT...", layout.id, seed_name, u);
+            println!(
+                ">>> FOUND PRODGATE COMPLIANT: {} from {} with U={}! Evaluating CKT...",
+                layout.id, seed_name, u
+            );
             let candidate = evaluate_candidate(&ctx, layout, seed_name, tier)?;
-            println!("    CKT: {:.6}, U: {}, M/D/V: {}/{}/{}, MX: {:.2}, rp_max: {:.4}, w_max: {:.4}",
-                     candidate.ckt_v4, candidate.u, candidate.memory, candidate.displaced_initials, candidate.displaced_vowels,
-                     candidate.ergonomics.mx_score, candidate.ergonomics.rp_max, candidate.ergonomics.w_max);
+            println!(
+                "    CKT: {:.6}, U: {}, M/D/V: {}/{}/{}, MX: {:.2}, rp_max: {:.4}, w_max: {:.4}",
+                candidate.ckt_v4,
+                candidate.u,
+                candidate.memory,
+                candidate.displaced_initials,
+                candidate.displaced_vowels,
+                candidate.ergonomics.mx_score,
+                candidate.ergonomics.rp_max,
+                candidate.ergonomics.w_max
+            );
             candidates.push(candidate);
             return Ok(true);
         }
@@ -408,41 +489,58 @@ fn main() -> Result<(), String> {
         Ok(false)
     };
 
-    println!("\n=== EXPLORATION PHASE 1: Exhaustive 1-hop and 2-hop neighborhood of Production Top-3 ===");
+    println!(
+        "\n=== EXPLORATION PHASE 1: Exhaustive 1-hop and 2-hop neighborhood of Production Top-3 ==="
+    );
     for seed in &all_seeds[..3] {
         let seed_id = seed.id.clone();
         println!("Expanding from production seed {}...", seed_id);
 
         // 1-hop final key swaps
         for i in 0..35 {
-            for j in (i+1)..35 {
+            for j in (i + 1)..35 {
                 if seed.final_keys[i] != seed.final_keys[j] {
                     let mut mut_l = seed.clone();
                     mut_l.final_keys.swap(i, j);
                     mut_l.id = format!("{}-f1h-{}_{}", seed_id, i, j);
-                    check_candidate(&mut_l, &seed_id, &mut pareto_candidates, &mut evaluated_states)?;
+                    check_candidate(
+                        &mut_l,
+                        &seed_id,
+                        &mut pareto_candidates,
+                        &mut evaluated_states,
+                    )?;
                 }
             }
         }
 
         // 1-hop head key swaps
         for i in 0..27 {
-            for j in (i+1)..27 {
+            for j in (i + 1)..27 {
                 if seed.head_keys[i] != seed.head_keys[j] {
                     let mut mut_l = seed.clone();
                     mut_l.head_keys.swap(i, j);
                     mut_l.id = format!("{}-h1h-{}_{}", seed_id, i, j);
-                    check_candidate(&mut_l, &seed_id, &mut pareto_candidates, &mut evaluated_states)?;
+                    check_candidate(
+                        &mut_l,
+                        &seed_id,
+                        &mut pareto_candidates,
+                        &mut evaluated_states,
+                    )?;
                 }
             }
         }
     }
 
-    println!("\n=== EXPLORATION PHASE 2: Multi-Hop Local Beam Search (Targeting High U & Low CKT) ===");
+    println!(
+        "\n=== EXPLORATION PHASE 2: Multi-Hop Local Beam Search (Targeting High U & Low CKT) ==="
+    );
     // If we have Tier-B or Tier-A candidates, expand from them!
     let mut current_pool = pareto_candidates.clone();
     for depth in 2..=4 {
-        println!("Search depth {depth}: expanding from {} discovered compliant candidates...", current_pool.len());
+        println!(
+            "Search depth {depth}: expanding from {} discovered compliant candidates...",
+            current_pool.len()
+        );
         let mut next_pool = Vec::new();
         for base in &current_pool {
             let base_layout = RegularLayout {
@@ -455,12 +553,17 @@ fn main() -> Result<(), String> {
 
             // Explore final swaps
             for i in 0..35 {
-                for j in (i+1)..35 {
+                for j in (i + 1)..35 {
                     if base_layout.final_keys[i] != base_layout.final_keys[j] {
                         let mut mut_l = base_layout.clone();
                         mut_l.final_keys.swap(i, j);
                         mut_l.id = format!("{}-d{}-f{}_{}", base.id, depth, i, j);
-                        if check_candidate(&mut_l, &base.seed_source, &mut pareto_candidates, &mut evaluated_states)? {
+                        if check_candidate(
+                            &mut_l,
+                            &base.seed_source,
+                            &mut pareto_candidates,
+                            &mut evaluated_states,
+                        )? {
                             next_pool.push(pareto_candidates.last().unwrap().clone());
                         }
                     }
@@ -469,12 +572,17 @@ fn main() -> Result<(), String> {
 
             // Explore head swaps
             for i in 0..27 {
-                for j in (i+1)..27 {
+                for j in (i + 1)..27 {
                     if base_layout.head_keys[i] != base_layout.head_keys[j] {
                         let mut mut_l = base_layout.clone();
                         mut_l.head_keys.swap(i, j);
                         mut_l.id = format!("{}-d{}-h{}_{}", base.id, depth, i, j);
-                        if check_candidate(&mut_l, &base.seed_source, &mut pareto_candidates, &mut evaluated_states)? {
+                        if check_candidate(
+                            &mut_l,
+                            &base.seed_source,
+                            &mut pareto_candidates,
+                            &mut evaluated_states,
+                        )? {
                             next_pool.push(pareto_candidates.last().unwrap().clone());
                         }
                     }
@@ -496,22 +604,30 @@ fn main() -> Result<(), String> {
     let i_idx = 10; // 'i'
     let mut bcw_surgeries = Vec::new();
 
-    for seed in &all_seeds[3..] { // Basin 01 members
+    for seed in &all_seeds[3..] {
+        // Basin 01 members
         let seed_id = seed.id.clone();
         for target_e in 0..35 {
-            if target_e == e_idx { continue; }
+            if target_e == e_idx {
+                continue;
+            }
             let mut l_e = seed.clone();
             l_e.final_keys.swap(e_idx, target_e);
             for target_i in 0..35 {
-                if target_i == i_idx || target_i == target_e { continue; }
+                if target_i == i_idx || target_i == target_e {
+                    continue;
+                }
                 let mut l_ei = l_e.clone();
                 l_ei.final_keys.swap(i_idx, target_i);
                 l_ei.id = format!("{}-surg-e{}_i{}", seed_id, target_e, target_i);
-                
-                let (u, _, _) = compute_u_and_collisions(&schemes.pinyin_map, &schemes.common_pinyin, &l_ei);
+
+                let (u, _, _) =
+                    compute_u_and_collisions(&schemes.pinyin_map, &schemes.common_pinyin, &l_ei);
                 if u >= 353 {
                     if let Ok(loads) = ergo_fixture.load_model.diagnose(&l_ei) {
-                        if loads.w_max <= PRODGATE_MAX_W * 1.5 && loads.rp_max <= PRODGATE_MAX_RP * 1.5 {
+                        if loads.w_max <= PRODGATE_MAX_W * 1.5
+                            && loads.rp_max <= PRODGATE_MAX_RP * 1.5
+                        {
                             bcw_surgeries.push((l_ei, u));
                         }
                     }
@@ -519,22 +635,38 @@ fn main() -> Result<(), String> {
             }
         }
     }
-    println!("Generated {} viable BCW surgery candidates with U >= 353 and reduced W/P loads.", bcw_surgeries.len());
-    for (layout, u) in bcw_surgeries.iter().take(200) {
-        check_candidate(layout, "bcw-surgery", &mut pareto_candidates, &mut evaluated_states)?;
+    println!(
+        "Generated {} viable BCW surgery candidates with U >= 353 and reduced W/P loads.",
+        bcw_surgeries.len()
+    );
+    for (layout, _u) in bcw_surgeries.iter().take(200) {
+        check_candidate(
+            layout,
+            "bcw-surgery",
+            &mut pareto_candidates,
+            &mut evaluated_states,
+        )?;
     }
 
     println!("\n=== RESULTS SUMMARY ===");
     println!("Total states evaluated: {}", evaluated_states.len());
-    println!("Total ProdGate-compliant candidates with U > 352: {}", pareto_candidates.len());
+    println!(
+        "Total ProdGate-compliant candidates with U > 352: {}",
+        pareto_candidates.len()
+    );
 
     // Sort pareto candidates by CKT
     pareto_candidates.sort_by(|a, b| a.ckt_v4.partial_cmp(&b.ckt_v4).unwrap());
 
     // Save full JSON results
-    let out_json_path = base_dir.join("research/exploration/prodgate-directed-repair-pareto-20261029.json");
+    let out_json_path =
+        base_dir.join("research/exploration/prodgate-directed-repair-pareto-20261029.json");
     fs::create_dir_all(out_json_path.parent().unwrap()).map_err(|e| e.to_string())?;
-    fs::write(&out_json_path, serde_json::to_string_pretty(&pareto_candidates).unwrap()).map_err(|e| e.to_string())?;
+    fs::write(
+        &out_json_path,
+        serde_json::to_string_pretty(&pareto_candidates).unwrap(),
+    )
+    .map_err(|e| e.to_string())?;
     println!("Saved Pareto results to: {:?}", out_json_path);
     println!("Elapsed time: {:.2}s", t_start.elapsed().as_secs_f64());
 

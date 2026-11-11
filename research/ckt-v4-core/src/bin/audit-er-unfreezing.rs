@@ -69,8 +69,12 @@ fn parse_pair(value: &str, alphabet: &KeyAlphabet) -> Result<[u8; 2], String> {
         return Err("pair exceeds two keys".to_owned());
     }
     Ok([
-        alphabet.index_of(first).ok_or("first key outside alphabet")? as u8,
-        alphabet.index_of(second).ok_or("second key outside alphabet")? as u8,
+        alphabet
+            .index_of(first)
+            .ok_or("first key outside alphabet")? as u8,
+        alphabet
+            .index_of(second)
+            .ok_or("second key outside alphabet")? as u8,
     ])
 }
 
@@ -140,12 +144,13 @@ fn normalized_score(summary: &Summary, reference: &[f64; 4]) -> Result<f64, Stri
 
 fn main() -> Result<(), String> {
     let corpus_path = PathBuf::from("research/.cache/ckt-v51-toned-native-corpus.bin");
-    let fixture_path = PathBuf::from("research/.cache/ckt-v51-toned-mars10-anchor-sh-p-ch-s-u-k.json");
+    let fixture_path =
+        PathBuf::from("research/.cache/ckt-v51-toned-mars10-anchor-sh-p-ch-s-u-k.json");
     let snapshot_path = PathBuf::from("tools/ckt_v4_upstream_role_tables.json");
 
-    let fixture: TrialFixture = serde_json::from_str(
-        &fs::read_to_string(&fixture_path).map_err(|e| e.to_string())?,
-    ).map_err(|e| e.to_string())?;
+    let fixture: TrialFixture =
+        serde_json::from_str(&fs::read_to_string(&fixture_path).map_err(|e| e.to_string())?)
+            .map_err(|e| e.to_string())?;
 
     let corpus = NativeCorpus::open(&corpus_path)?;
     let alphabet = KeyAlphabet::new(&fixture.key_alphabet)?;
@@ -168,7 +173,11 @@ fn main() -> Result<(), String> {
 
     // Apply the 4th move: upper: i-er -> R
     let upper_r_idx = alphabet.index_of('R').ok_or("R not in alphabet")? as u8;
-    let i_er_atom = fixture.rhyme_atoms.iter().find(|r| r.name == "i-er").ok_or("i-er not found")?;
+    let i_er_atom = fixture
+        .rhyme_atoms
+        .iter()
+        .find(|r| r.name == "i-er")
+        .ok_or("i-er not found")?;
     for &py in &i_er_atom.pinyin {
         // tone 4 is index 3
         if let Some(ref mut code) = toned_codes[py][3] {
@@ -202,18 +211,33 @@ fn main() -> Result<(), String> {
     println!(" 4-Hop Champion Baseline CKT: {:.12}", baseline_score);
     println!("=========================================================================");
 
-    let er_py_idx = fixture.pinyin.iter().position(|p| p == "er").ok_or("er not in pinyin")?;
+    let er_py_idx = fixture
+        .pinyin
+        .iter()
+        .position(|p| p == "er")
+        .ok_or("er not in pinyin")?;
     println!("'er' pinyin index: {}", er_py_idx);
 
-    let home_region = fixture.tone_regions.iter().find(|r| r.name == "home").ok_or("home region not found")?;
-    let upper_region = fixture.tone_regions.iter().find(|r| r.name == "upper").ok_or("upper region not found")?;
+    let home_region = fixture
+        .tone_regions
+        .iter()
+        .find(|r| r.name == "home")
+        .ok_or("home region not found")?;
+    let upper_region = fixture
+        .tone_regions
+        .iter()
+        .find(|r| r.name == "upper")
+        .ok_or("upper region not found")?;
 
     let home_keys: Vec<char> = home_region.keys.chars().collect();
     let upper_keys: Vec<char> = upper_region.keys.chars().collect();
 
     println!("Home keys ({}): {:?}", home_keys.len(), home_keys);
     println!("Upper keys ({}): {:?}", upper_keys.len(), upper_keys);
-    println!("Total combinations to evaluate: {}", home_keys.len() * upper_keys.len());
+    println!(
+        "Total combinations to evaluate: {}",
+        home_keys.len() * upper_keys.len()
+    );
 
     struct CandidateEval {
         home_key: char,
@@ -245,7 +269,9 @@ fn main() -> Result<(), String> {
                 candidate.assign_toned_code(er_py_idx, 4, Some(code))?;
             }
 
-            let direct = generated.dependencies.affected_rows(&baseline, &candidate)?;
+            let direct = generated
+                .dependencies
+                .affected_rows(&baseline, &candidate)?;
             let updates = corpus.generate_updates(
                 &candidate,
                 InputMode::KeytaoV51,
@@ -289,12 +315,20 @@ fn main() -> Result<(), String> {
     }
     println!("-------------------------------------------------------------------------");
 
-    let baseline_pos = evals.iter().position(|e| e.home_key == 'L' && e.upper_key == 'R').unwrap();
-    println!("Baseline placement (home: L, upper: R) rank: #{} of 56", baseline_pos + 1);
+    let baseline_pos = evals
+        .iter()
+        .position(|e| e.home_key == 'L' && e.upper_key == 'R')
+        .unwrap();
+    println!(
+        "Baseline placement (home: L, upper: R) rank: #{} of 56",
+        baseline_pos + 1
+    );
 
     let best = &evals[0];
-    println!("\nBest 'er' Placement: home={}, upper={} with CKT={:.12} (Δ={:+.6})",
-        best.home_key, best.upper_key, best.score, best.delta);
+    println!(
+        "\nBest 'er' Placement: home={}, upper={} with CKT={:.12} (Δ={:+.6})",
+        best.home_key, best.upper_key, best.score, best.delta
+    );
 
     Ok(())
 }

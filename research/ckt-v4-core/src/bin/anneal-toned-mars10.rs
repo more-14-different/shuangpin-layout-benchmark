@@ -139,8 +139,12 @@ fn parse_pair(value: &str, alphabet: &KeyAlphabet) -> Result<[u8; 2], String> {
         return Err("pair exceeds two keys".to_owned());
     }
     Ok([
-        alphabet.index_of(first).ok_or("first key outside alphabet")? as u8,
-        alphabet.index_of(second).ok_or("second key outside alphabet")? as u8,
+        alphabet
+            .index_of(first)
+            .ok_or("first key outside alphabet")? as u8,
+        alphabet
+            .index_of(second)
+            .ok_or("second key outside alphabet")? as u8,
     ])
 }
 
@@ -422,10 +426,14 @@ fn parse_args() -> Result<Args, String> {
             "--checkpoint" => args.checkpoint = PathBuf::from(next(&mut index)?),
             "--steps" => args.steps = next(&mut index)?.parse().map_err(|_| "invalid steps")?,
             "--initial-temp" => {
-                args.initial_temp = next(&mut index)?.parse().map_err(|_| "invalid initial-temp")?
+                args.initial_temp = next(&mut index)?
+                    .parse()
+                    .map_err(|_| "invalid initial-temp")?
             }
             "--final-temp" => {
-                args.final_temp = next(&mut index)?.parse().map_err(|_| "invalid final-temp")?
+                args.final_temp = next(&mut index)?
+                    .parse()
+                    .map_err(|_| "invalid final-temp")?
             }
             "--checkpoint-every" => {
                 args.checkpoint_every = next(&mut index)?
@@ -451,10 +459,9 @@ fn parse_args() -> Result<Args, String> {
 
 fn main() -> Result<(), String> {
     let args = parse_args()?;
-    let fixture: TrialFixture = serde_json::from_str(
-        &fs::read_to_string(&args.fixture).map_err(|e| e.to_string())?,
-    )
-    .map_err(|e| e.to_string())?;
+    let fixture: TrialFixture =
+        serde_json::from_str(&fs::read_to_string(&args.fixture).map_err(|e| e.to_string())?)
+            .map_err(|e| e.to_string())?;
 
     let corpus = NativeCorpus::open(&args.corpus)?;
     let alphabet = KeyAlphabet::new(&fixture.key_alphabet)?;
@@ -474,8 +481,16 @@ fn main() -> Result<(), String> {
     }
 
     // Apply the 4th hop champion move: upper: i-er -> R (if not already in fixture)
-    let upper_reg_idx = fixture.tone_regions.iter().position(|r| r.name == "upper").unwrap();
-    let i_er_idx = fixture.rhyme_atoms.iter().position(|r| r.name == "i-er").unwrap();
+    let upper_reg_idx = fixture
+        .tone_regions
+        .iter()
+        .position(|r| r.name == "upper")
+        .unwrap();
+    let i_er_idx = fixture
+        .rhyme_atoms
+        .iter()
+        .position(|r| r.name == "i-er")
+        .unwrap();
     rhyme_keys[upper_reg_idx][i_er_idx] = 'R';
 
     let initial_anneal_state = AnnealState {
@@ -485,7 +500,8 @@ fn main() -> Result<(), String> {
 
     let mut current_state = initial_anneal_state.clone();
 
-    let initial_scheme = build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)?;
+    let initial_scheme =
+        build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)?;
 
     let motor = projected_motor(&corpus, &alphabet, &args.snapshot)?;
     let generated = corpus.generate(&initial_scheme, InputMode::KeytaoV51)?;
@@ -513,10 +529,9 @@ fn main() -> Result<(), String> {
     let mut rng = SimpleRng::new(args.seed);
 
     let mut checkpoint = if args.resume && args.checkpoint.exists() {
-        let cp: AnnealCheckpoint = serde_json::from_str(
-            &fs::read_to_string(&args.checkpoint).map_err(|e| e.to_string())?,
-        )
-        .map_err(|e| e.to_string())?;
+        let cp: AnnealCheckpoint =
+            serde_json::from_str(&fs::read_to_string(&args.checkpoint).map_err(|e| e.to_string())?)
+                .map_err(|e| e.to_string())?;
         eprintln!(
             "Resuming from step {}/{} with current_score={:.6}, best_score={:.6}",
             cp.step, cp.total_steps, cp.current_score, cp.best_score
@@ -546,13 +561,15 @@ fn main() -> Result<(), String> {
     };
 
     let start_time = Instant::now();
-    let mut current_scheme = build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)?;
+    let mut current_scheme =
+        build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)?;
 
     let cooling_factor = (args.final_temp / args.initial_temp).powf(1.0 / args.steps as f64);
 
     while checkpoint.step < args.steps {
         let (candidate_state, desc) = mutate_state(&current_state, &fixture, &mut rng);
-        let candidate_scheme = build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)?;
+        let candidate_scheme =
+            build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)?;
 
         let direct = generated
             .dependencies

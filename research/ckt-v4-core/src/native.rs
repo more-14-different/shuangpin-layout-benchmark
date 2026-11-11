@@ -1571,7 +1571,9 @@ mod tests {
         let (mut layout, _, _) = colliding_layout([21, 26]);
         assert!(layout.validate_strict_2126().is_err());
 
-        const CONSONANTS: [u8; 21] = [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25];
+        const CONSONANTS: [u8; 21] = [
+            1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25,
+        ];
         layout.head_keys = (0..27).map(|i| CONSONANTS[i % 21]).collect();
         layout.final_keys = (0..35).map(|i| (i % 26) as u8).collect();
         layout.tone = [0, 4, 8, 14, 20];

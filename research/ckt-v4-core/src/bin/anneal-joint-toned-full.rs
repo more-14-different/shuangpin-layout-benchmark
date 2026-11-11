@@ -386,11 +386,31 @@ fn mutate_joint_state(
     } else if roll < 0.85 {
         // Operator 3: Special onset & zero-onset perturbation (20%)
         let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
-        let zh_idx = fixture.atoms.iter().position(|a| a.name == "zh").unwrap_or(25);
-        let ch_idx = fixture.atoms.iter().position(|a| a.name == "ch").unwrap_or(2);
-        let sh_idx = fixture.atoms.iter().position(|a| a.name == "sh").unwrap_or(16);
-        let zero_w_idx = fixture.atoms.iter().position(|a| a.name == "zero-W").unwrap_or(23);
-        let zero_y_idx = fixture.atoms.iter().position(|a| a.name == "zero-Y").unwrap_or(24);
+        let zh_idx = fixture
+            .atoms
+            .iter()
+            .position(|a| a.name == "zh")
+            .unwrap_or(25);
+        let ch_idx = fixture
+            .atoms
+            .iter()
+            .position(|a| a.name == "ch")
+            .unwrap_or(2);
+        let sh_idx = fixture
+            .atoms
+            .iter()
+            .position(|a| a.name == "sh")
+            .unwrap_or(16);
+        let zero_w_idx = fixture
+            .atoms
+            .iter()
+            .position(|a| a.name == "zero-W")
+            .unwrap_or(23);
+        let zero_y_idx = fixture
+            .atoms
+            .iter()
+            .position(|a| a.name == "zero-Y")
+            .unwrap_or(24);
         let zero_aeo_indices: Vec<usize> = fixture
             .atoms
             .iter()
@@ -409,7 +429,10 @@ fn mutate_joint_state(
             next.first_keys[pick] = target_key;
             (
                 next,
-                format!("special_first {}: {} -> {}", fixture.atoms[pick].name, old_key, target_key),
+                format!(
+                    "special_first {}: {} -> {}",
+                    fixture.atoms[pick].name, old_key, target_key
+                ),
             )
         } else if special_roll < 0.70 {
             // Move zero-W or zero-Y
@@ -420,7 +443,10 @@ fn mutate_joint_state(
             next.first_keys[pick] = target_key;
             (
                 next,
-                format!("zero_first {}: {} -> {}", fixture.atoms[pick].name, old_key, target_key),
+                format!(
+                    "zero_first {}: {} -> {}",
+                    fixture.atoms[pick].name, old_key, target_key
+                ),
             )
         } else {
             // Move zero-A/E/O together
@@ -462,7 +488,10 @@ fn mutate_joint_state(
                 next.first_keys[pick] = target_key;
                 (
                     next,
-                    format!("ordinary_displace {}: {} -> {}", fixture.atoms[pick].name, old_key, target_key),
+                    format!(
+                        "ordinary_displace {}: {} -> {}",
+                        fixture.atoms[pick].name, old_key, target_key
+                    ),
                 )
             } else {
                 (next, "noop".to_owned())
@@ -484,7 +513,10 @@ fn mutate_joint_state(
                 next.first_keys[pick] = target_key;
                 (
                     next,
-                    format!("ordinary_displace {}: {} -> {}", fixture.atoms[pick].name, old_key, target_key),
+                    format!(
+                        "ordinary_displace {}: {} -> {}",
+                        fixture.atoms[pick].name, old_key, target_key
+                    ),
                 )
             } else {
                 let pick = displaced[rng.gen_range(0, displaced.len())];
@@ -496,7 +528,10 @@ fn mutate_joint_state(
                 next.first_keys[pick] = target_key;
                 (
                     next,
-                    format!("ordinary_mutate {}: {} -> {}", fixture.atoms[pick].name, old_key, target_key),
+                    format!(
+                        "ordinary_mutate {}: {} -> {}",
+                        fixture.atoms[pick].name, old_key, target_key
+                    ),
                 )
             }
         } else {
@@ -508,7 +543,10 @@ fn mutate_joint_state(
                 next.first_keys[pick] = fixture.atoms[pick].baseline_key;
                 (
                     next,
-                    format!("ordinary_reset {}: {} -> {}", fixture.atoms[pick].name, old_key, fixture.atoms[pick].baseline_key),
+                    format!(
+                        "ordinary_reset {}: {} -> {}",
+                        fixture.atoms[pick].name, old_key, fixture.atoms[pick].baseline_key
+                    ),
                 )
             } else if sub_roll < 0.70 {
                 let pick = displaced[rng.gen_range(0, displaced.len())];
@@ -520,7 +558,10 @@ fn mutate_joint_state(
                 next.first_keys[pick] = target_key;
                 (
                     next,
-                    format!("ordinary_mutate {}: {} -> {}", fixture.atoms[pick].name, old_key, target_key),
+                    format!(
+                        "ordinary_mutate {}: {} -> {}",
+                        fixture.atoms[pick].name, old_key, target_key
+                    ),
                 )
             } else {
                 let reset_pick = displaced[rng.gen_range(0, displaced.len())];
@@ -528,7 +569,9 @@ fn mutate_joint_state(
                 let available: Vec<usize> = ordinary_indices
                     .iter()
                     .copied()
-                    .filter(|&i| i != reset_pick && next.first_keys[i] == fixture.atoms[i].baseline_key)
+                    .filter(|&i| {
+                        i != reset_pick && next.first_keys[i] == fixture.atoms[i].baseline_key
+                    })
                     .collect();
                 let new_pick = available[rng.gen_range(0, available.len())];
                 let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
@@ -579,7 +622,9 @@ fn parse_args() -> Result<Args, String> {
         corpus: PathBuf::from(&values[0]),
         fixture: PathBuf::from(&values[1]),
         snapshot: PathBuf::from(&values[2]),
-        anchor_checkpoint: PathBuf::from("research/.cache/ckt-v51-toned-ordinary-d1-anneal-checkpoint.json"),
+        anchor_checkpoint: PathBuf::from(
+            "research/.cache/ckt-v51-toned-ordinary-d1-anneal-checkpoint.json",
+        ),
         output: PathBuf::from("research/.cache/ckt-v51-toned-joint-stage1-result.json"),
         checkpoint: PathBuf::from("research/.cache/ckt-v51-toned-joint-stage1-checkpoint.json"),
         steps: 5000,
@@ -609,14 +654,20 @@ fn parse_args() -> Result<Args, String> {
             "--checkpoint" => args.checkpoint = PathBuf::from(next(&mut index)?),
             "--steps" => args.steps = next(&mut index)?.parse().map_err(|_| "invalid steps")?,
             "--duration-secs" => {
-                args.duration_secs = next(&mut index)?.parse().map_err(|_| "invalid duration-secs")?
+                args.duration_secs = next(&mut index)?
+                    .parse()
+                    .map_err(|_| "invalid duration-secs")?
             }
             "--max-d" => args.max_d = next(&mut index)?.parse().map_err(|_| "invalid max-d")?,
             "--initial-temp" => {
-                args.initial_temp = next(&mut index)?.parse().map_err(|_| "invalid initial-temp")?
+                args.initial_temp = next(&mut index)?
+                    .parse()
+                    .map_err(|_| "invalid initial-temp")?
             }
             "--final-temp" => {
-                args.final_temp = next(&mut index)?.parse().map_err(|_| "invalid final-temp")?
+                args.final_temp = next(&mut index)?
+                    .parse()
+                    .map_err(|_| "invalid final-temp")?
             }
             "--checkpoint-every" => {
                 args.checkpoint_every = next(&mut index)?
@@ -649,8 +700,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     eprintln!(" Fixture: {:?}", args.fixture);
     eprintln!(" Snapshot: {:?}", args.snapshot);
     eprintln!(" Anchor Checkpoint: {:?}", args.anchor_checkpoint);
-    eprintln!(" Target Steps: {}, Duration: {}s, Max D: {}, Duty ms: {}", args.steps, args.duration_secs, args.max_d, args.duty_ms);
-    eprintln!(" Temp: {} -> {}, Seed: {}", args.initial_temp, args.final_temp, args.seed);
+    eprintln!(
+        " Target Steps: {}, Duration: {}s, Max D: {}, Duty ms: {}",
+        args.steps, args.duration_secs, args.max_d, args.duty_ms
+    );
+    eprintln!(
+        " Temp: {} -> {}, Seed: {}",
+        args.initial_temp, args.final_temp, args.seed
+    );
     eprintln!("=========================================================================");
 
     let corpus = NativeCorpus::open(&args.corpus)
@@ -667,7 +724,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let cp: AnnealCheckpoint = serde_json::from_str(&fs::read_to_string(&args.checkpoint)?)?;
         eprintln!(
             "Resuming from step {}/{} (elapsed {:.1}s) with curr={:.6}, best={:.6}",
-            cp.step, cp.total_steps, cp.elapsed_ms / 1000.0, cp.current_score, cp.best_score
+            cp.step,
+            cp.total_steps,
+            cp.elapsed_ms / 1000.0,
+            cp.current_score,
+            cp.best_score
         );
         let state = cp.current_state.clone();
         (cp, state)
@@ -714,8 +775,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         (cp, state)
     };
 
-    let mut current_scheme = build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)
-        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+    let mut current_scheme =
+        build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
     let generated = corpus
         .generate(&current_scheme, InputMode::KeytaoV51)
@@ -735,8 +797,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut summary = IncrementalSummary::new(resolver.rows(), resolver.outcomes(), parameters)
         .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
-    let verified_initial_score = normalized_score(&summary.summary(), &fixture.reference_effective_ms)
-        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+    let verified_initial_score =
+        normalized_score(&summary.summary(), &fixture.reference_effective_ms)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
     eprintln!("Verified initial state CKT: {:.12}", verified_initial_score);
     checkpoint.current_score = verified_initial_score;
@@ -752,14 +815,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     while checkpoint.step < args.steps {
         let current_elapsed_ms = base_elapsed_ms + start_time.elapsed().as_secs_f64() * 1000.0;
         if args.duration_secs > 0 && current_elapsed_ms >= (args.duration_secs as f64 * 1000.0) {
-            eprintln!("Target duration of {}s reached at step {}", args.duration_secs, checkpoint.step);
+            eprintln!(
+                "Target duration of {}s reached at step {}",
+                args.duration_secs, checkpoint.step
+            );
             break;
         }
 
-        let (candidate_state, desc) = mutate_joint_state(&current_state, &fixture, &mut rng, args.max_d);
+        let (candidate_state, desc) =
+            mutate_joint_state(&current_state, &fixture, &mut rng, args.max_d);
 
-        let cand_scheme = build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)
-            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+        let cand_scheme =
+            build_scheme_state(&candidate_state, &fixture, &alphabet, tone_keys_by_tone)
+                .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
 
         let direct = generated
             .dependencies
@@ -846,7 +914,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         } else {
             (checkpoint.step as f64 / args.steps as f64).min(1.0)
         };
-        checkpoint.temperature = args.initial_temp * (args.final_temp / args.initial_temp).powf(progress);
+        checkpoint.temperature =
+            args.initial_temp * (args.final_temp / args.initial_temp).powf(progress);
 
         if args.verify_every > 0 && checkpoint.evaluated % args.verify_every == 0 {
             resolver.verify_against_full_recompute()?;

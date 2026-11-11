@@ -1108,7 +1108,9 @@ fn propose_guarded(
             .is_ok()
         {
             let in_chain = guard_context.chain_explored_states.contains(&state_key);
-            let in_archive = guard_context.archive_lookup.contains(&candidate, &state_key)?;
+            let in_archive = guard_context
+                .archive_lookup
+                .contains(&candidate, &state_key)?;
             if !in_chain && !in_archive {
                 return Ok(((candidate, kind), rejected));
             }

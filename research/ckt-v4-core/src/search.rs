@@ -323,7 +323,9 @@ fn mutate(
                 );
             }
             if layout.capacity == [21, 26] {
-                return Err("tone-key-replacement is disabled for fixed aeuio 21x26 layouts".to_owned());
+                return Err(
+                    "tone-key-replacement is disabled for fixed aeuio 21x26 layouts".to_owned(),
+                );
             }
             let candidates: Vec<_> = (0_u8..34)
                 .filter(|key| {

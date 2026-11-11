@@ -1,7 +1,7 @@
 use ckt_v4_core::{
     CognitiveParameters, ErgonomicFixture, KeyAlphabet, Kind, NativeCorpus, ProjectedMotor,
-    Projection, RegularLayout, RoleTables, SchemeFixture, SchemeState, Summary,
-    composite_score, layout_state_key, resolve, summarize,
+    Projection, RegularLayout, RoleTables, SchemeFixture, SchemeState, Summary, composite_score,
+    layout_state_key, resolve, summarize,
 };
 use serde::Serialize;
 use std::collections::{BTreeMap, HashMap};
@@ -144,16 +144,19 @@ fn score_modes(
     motor: &ProjectedMotor,
     parameters: CognitiveParameters,
 ) -> Result<Vec<Summary>, String> {
-    [ckt_v4_core::InputMode::Keytao, ckt_v4_core::InputMode::Sanpin]
-        .into_iter()
-        .map(|mode| {
-            let generated = corpus.generate(scheme, mode)?;
-            let outcomes = resolve(&generated.rows, |code| {
-                motor.cost(code).map(|value| value.upper_ms)
-            })?;
-            summarize(&generated.rows, &outcomes, parameters)
-        })
-        .collect()
+    [
+        ckt_v4_core::InputMode::Keytao,
+        ckt_v4_core::InputMode::Sanpin,
+    ]
+    .into_iter()
+    .map(|mode| {
+        let generated = corpus.generate(scheme, mode)?;
+        let outcomes = resolve(&generated.rows, |code| {
+            motor.cost(code).map(|value| value.upper_ms)
+        })?;
+        summarize(&generated.rows, &outcomes, parameters)
+    })
+    .collect()
 }
 
 fn layout_from_hex(hex_str: &str, id: &str) -> Result<RegularLayout, String> {
@@ -168,7 +171,9 @@ fn layout_from_hex(hex_str: &str, id: &str) -> Result<RegularLayout, String> {
     let capacity = [raw[0], raw[1]];
     let head_keys = raw[2..29].to_vec();
     let final_keys = raw[29..64].to_vec();
-    let tone: [u8; 5] = raw[64..69].try_into().map_err(|_| "tone length must be 5")?;
+    let tone: [u8; 5] = raw[64..69]
+        .try_into()
+        .map_err(|_| "tone length must be 5")?;
     Ok(RegularLayout {
         id: id.to_owned(),
         capacity,
@@ -178,7 +183,11 @@ fn layout_from_hex(hex_str: &str, id: &str) -> Result<RegularLayout, String> {
     })
 }
 
-fn parse_layout_arg(arg: &str, schemes: &SchemeFixture, alphabet: &KeyAlphabet) -> Result<RegularLayout, String> {
+fn parse_layout_arg(
+    arg: &str,
+    schemes: &SchemeFixture,
+    alphabet: &KeyAlphabet,
+) -> Result<RegularLayout, String> {
     if arg.len() == 138 && arg.chars().all(|c| c.is_ascii_hexdigit()) {
         return layout_from_hex(arg, "custom-layout");
     }
@@ -195,7 +204,10 @@ fn parse_layout_arg(arg: &str, schemes: &SchemeFixture, alphabet: &KeyAlphabet) 
                 }
             }
             if let Some(sk) = val.get("stateKey").and_then(|s| s.as_str()) {
-                let id = val.get("layoutId").and_then(|s| s.as_str()).unwrap_or("custom-layout");
+                let id = val
+                    .get("layoutId")
+                    .and_then(|s| s.as_str())
+                    .unwrap_or("custom-layout");
                 return layout_from_hex(sk, id);
             }
         }
@@ -219,9 +231,15 @@ fn main() -> Result<(), String> {
     while let Some(arg) = args.next() {
         match arg.as_str() {
             "--corpus" => corpus_path = PathBuf::from(args.next().ok_or("missing --corpus value")?),
-            "--schemes" => schemes_path = PathBuf::from(args.next().ok_or("missing --schemes value")?),
-            "--snapshot" => snapshot_path = PathBuf::from(args.next().ok_or("missing --snapshot value")?),
-            "--ergonomics" => ergo_path = PathBuf::from(args.next().ok_or("missing --ergonomics value")?),
+            "--schemes" => {
+                schemes_path = PathBuf::from(args.next().ok_or("missing --schemes value")?)
+            }
+            "--snapshot" => {
+                snapshot_path = PathBuf::from(args.next().ok_or("missing --snapshot value")?)
+            }
+            "--ergonomics" => {
+                ergo_path = PathBuf::from(args.next().ok_or("missing --ergonomics value")?)
+            }
             "--reference" => ref_id = args.next().ok_or("missing --reference value")?,
             "--layout" => layout_arg = Some(args.next().ok_or("missing --layout value")?),
             other => {
@@ -234,21 +252,25 @@ fn main() -> Result<(), String> {
         }
     }
 
-    let layout_arg = layout_arg.ok_or("missing layout argument (specify path, scheme id, or stateKey hex)")?;
+    let layout_arg =
+        layout_arg.ok_or("missing layout argument (specify path, scheme id, or stateKey hex)")?;
 
     let corpus = NativeCorpus::open(&corpus_path)?;
     let schemes = SchemeFixture::open(&schemes_path)?;
     let alphabet = KeyAlphabet::new(&corpus.header().key_alphabet)?;
     let motor = load_motor(&corpus, &alphabet, &snapshot_path)?;
     let ergo_fixture = ErgonomicFixture::open(&ergo_path)?;
-    let ergo_corpus = ergo_fixture.moving_hand.corpus("daily", "native-punctuation")?;
+    let ergo_corpus = ergo_fixture
+        .moving_hand
+        .corpus("daily", "native-punctuation")?;
 
     let reference_input = schemes
         .schemes
         .iter()
         .find(|scheme| scheme.id == ref_id)
         .ok_or_else(|| format!("reference scheme {ref_id} is absent"))?;
-    let reference_state = SchemeState::compile(reference_input, &alphabet, corpus.header().pinyin_count)?;
+    let reference_state =
+        SchemeState::compile(reference_input, &alphabet, corpus.header().pinyin_count)?;
     let parameters = CognitiveParameters::default();
     let reference_summaries = score_modes(&corpus, &reference_state, &motor, parameters)?;
 
@@ -258,7 +280,10 @@ fn main() -> Result<(), String> {
     let ckt_score = composite_score(&candidate_summaries, &reference_summaries)?;
 
     let loads = ergo_fixture.load_model.diagnose(&layout)?;
-    let mx_score = ergo_fixture.moving_hand.evaluate(&layout_state, &ergo_corpus)?.score;
+    let mx_score = ergo_fixture
+        .moving_hand
+        .evaluate(&layout_state, &ergo_corpus)?
+        .score;
     let diag = layout.diagnostics(&alphabet, &schemes.heads, &schemes.finals)?;
 
     // Common399 collision audit
@@ -267,7 +292,10 @@ fn main() -> Result<(), String> {
         let [h_idx, f_idx] = schemes.pinyin_map[usize::from(p_idx)];
         let hk = layout.head_keys[h_idx as usize];
         let fk = layout.final_keys[f_idx as usize];
-        code_map.entry((hk, fk)).or_default().push(usize::from(p_idx));
+        code_map
+            .entry((hk, fk))
+            .or_default()
+            .push(usize::from(p_idx));
     }
     let u = code_map.len();
     let mut collision_buckets = 0;
@@ -301,15 +329,39 @@ fn main() -> Result<(), String> {
     let kt = &candidate_summaries[0];
     let sp = &candidate_summaries[1];
 
-    let kt_char = kt.track(Kind::Character).map(|t| t.selection_rate).unwrap_or(0.0);
-    let kt_w2 = kt.track(Kind::Word2).map(|t| t.selection_rate).unwrap_or(0.0);
-    let kt_w3 = kt.track(Kind::Word3).map(|t| t.selection_rate).unwrap_or(0.0);
-    let kt_w4 = kt.track(Kind::Word4).map(|t| t.selection_rate).unwrap_or(0.0);
+    let kt_char = kt
+        .track(Kind::Character)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let kt_w2 = kt
+        .track(Kind::Word2)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let kt_w3 = kt
+        .track(Kind::Word3)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let kt_w4 = kt
+        .track(Kind::Word4)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
 
-    let sp_char = sp.track(Kind::Character).map(|t| t.selection_rate).unwrap_or(0.0);
-    let sp_w2 = sp.track(Kind::Word2).map(|t| t.selection_rate).unwrap_or(0.0);
-    let sp_w3 = sp.track(Kind::Word3).map(|t| t.selection_rate).unwrap_or(0.0);
-    let sp_w4 = sp.track(Kind::Word4).map(|t| t.selection_rate).unwrap_or(0.0);
+    let sp_char = sp
+        .track(Kind::Character)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let sp_w2 = sp
+        .track(Kind::Word2)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let sp_w3 = sp
+        .track(Kind::Word3)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
+    let sp_w4 = sp
+        .track(Kind::Word4)
+        .map(|t| t.selection_rate)
+        .unwrap_or(0.0);
 
     const EPS: f64 = 1e-12;
     let passes_rp_s2 = loads.rp_s2 <= PRODGATE_MAX_RP_S2 + EPS;
@@ -318,7 +370,8 @@ fn main() -> Result<(), String> {
     let passes_w = loads.w_max <= PRODGATE_MAX_W + EPS;
     let passes_y = loads.y_max <= PRODGATE_MAX_Y + EPS;
     let passes_mx = mx_score >= PRODGATE_MIN_MX - EPS;
-    let passes_all = passes_rp_s2 && passes_rp_max && passes_home && passes_w && passes_y && passes_mx;
+    let passes_all =
+        passes_rp_s2 && passes_rp_max && passes_home && passes_w && passes_y && passes_mx;
 
     let mut initial_map = BTreeMap::new();
     for (i, &h) in HEADS.iter().enumerate() {
@@ -383,6 +436,9 @@ fn main() -> Result<(), String> {
         final_map,
     };
 
-    println!("{}", serde_json::to_string_pretty(&report).map_err(|e| e.to_string())?);
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&report).map_err(|e| e.to_string())?
+    );
     Ok(())
 }
