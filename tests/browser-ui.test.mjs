@@ -106,12 +106,36 @@ try {
   });
   assert.deepEqual(ribbonBorders, ['0px', '0px']);
 
+  await page.locator('#nf6SelectionHost').selectOption('21x21');
+  await page.waitForSelector('.snow-jiandao-contract-card');
+  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\/ 851 个候选（含1个带调合同）/);
+  assert.match(await page.locator('.snow-jiandao-contract-card').innerText(), /冰雪剑道/);
+  await page.locator('[data-snow-jiandao-open]').click();
+  await page.waitForSelector('#snowJiandaoTonedDetail');
+  assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
+  assert.match(await page.locator('#snowJiandaoTonedDetail h2').innerText(), /SNOW-JIANDAO-TONED/);
+  assert.equal(await page.locator('#nf6SchemePicker').isVisible(), true);
+  await page.locator('#nf6SchemeQuery').fill('冰雪剑道');
+  await page.locator('#nf6SchemeHost').selectOption('21x21');
+  await page.locator('#nf6SchemeAux').selectOption('AVUIO');
+  await page.locator('#nf6SchemeLogic').selectOption('toneInMain');
+  assert.deepEqual(await page.locator('#nf6SchemeList option').evaluateAll(options =>
+    options.map(option => option.value)), ['SNOW-JIANDAO-TONED']);
+  await page.locator('#nf6SchemeHost').selectOption('all');
+  await page.locator('#nf6SchemeAux').selectOption('all');
+  await page.locator('#nf6SchemeLogic').selectOption('all');
+  await page.locator('#nf6SchemeQuery').fill('S005');
+  await page.locator('#nf6SchemeList').selectOption('S005');
+  await page.waitForFunction(() => window.App7.current().id === 'S005');
+  await page.locator('#tabs [data-action="nav:selection"]').click();
+  await page.waitForFunction(() => window.App7.UX.view === 'selection');
+
   await page.locator('#nf6SelectionHost').selectOption('21x26');
   await page.locator('#nf6SelectionMemory').fill('36');
   await page.waitForTimeout(250);
   assert.equal(
     await page.locator('#nf6SelectionCount').innerText(),
-    `61 / ${await page.evaluate(() => window.App7.data.entries.length)}`,
+    `61 / 851 个候选（含1个带调合同）`,
   );
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
