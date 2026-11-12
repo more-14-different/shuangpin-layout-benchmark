@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+toned-representative-benchmark:
+    node tools/benchmark_toned_representatives.js
+    python tools/report_toned_representatives.py
+
 readme-representatives:
     node tools/update_readme_representatives.mjs
 

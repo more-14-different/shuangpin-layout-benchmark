@@ -330,4 +330,5 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = {fixtureAdapter, keyboardSemantics, loadMetric, loadSummary};
+module.exports = {fixtureAdapter, keyboardSemantics, loadMetric, loadSummary,
+  evaluateV5, v5Reference, weightedAggregate};
