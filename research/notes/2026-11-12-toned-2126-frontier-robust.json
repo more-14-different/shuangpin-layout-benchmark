@@ -1,0 +1,224 @@
+{
+  "version": "toned-2126-shape-only-robustness-1",
+  "input": "research\\notes\\2026-11-12-toned-2126-frontier-policies.json",
+  "layoutId": "T2126-ff91c618796d",
+  "costs": {
+    "firstAuxMs": 300,
+    "secondAuxMs": 300,
+    "thirdAuxMs": 300,
+    "selectionDecisionMs": 600,
+    "scanPerCandidateMs": 50,
+    "pageActionMs": 300
+  },
+  "grid": {
+    "minimum": 0,
+    "maximum": 5,
+    "step": 0.5,
+    "combinations": 1771561
+  },
+  "policies": {
+    "points": 1771561,
+    "winner": {
+      "policy": "21/12/24",
+      "top1Rate": 0.5472190909598935,
+      "top3Rate": 0.8372960344012992,
+      "meanRank": 2.4317350630319816,
+      "worstRank": 19
+    },
+    "top10": [
+      {
+        "policy": "21/12/24",
+        "top1Rate": 0.5472190909598935,
+        "top3Rate": 0.8372960344012992,
+        "meanRank": 2.4317350630319816,
+        "worstRank": 19
+      },
+      {
+        "policy": "21/12/23",
+        "top1Rate": 0.17329970573974027,
+        "top3Rate": 0.7805308425733012,
+        "meanRank": 3.3620722063761845,
+        "worstRank": 23
+      },
+      {
+        "policy": "21/21/14",
+        "top1Rate": 0.27766021040201266,
+        "top3Rate": 0.4417121397456819,
+        "meanRank": 3.7640335274935497,
+        "worstRank": 37
+      },
+      {
+        "policy": "12/12/24",
+        "top1Rate": 0.0005797147261652295,
+        "top3Rate": 0.45137141763676214,
+        "meanRank": 4.595536365950707,
+        "worstRank": 39
+      },
+      {
+        "policy": "12/12/23",
+        "top1Rate": 0.0,
+        "top3Rate": 0.00022183825451113452,
+        "meanRank": 6.596906908652877,
+        "worstRank": 51
+      },
+      {
+        "policy": "21/21/13",
+        "top1Rate": 0.0,
+        "top3Rate": 0.17280522657701317,
+        "meanRank": 6.832899346960111,
+        "worstRank": 41
+      },
+      {
+        "policy": "12/21/14",
+        "top1Rate": 0.000672288450694049,
+        "top3Rate": 0.18096074591843014,
+        "meanRank": 6.979990528127454,
+        "worstRank": 53
+      },
+      {
+        "policy": "12/21/13",
+        "top1Rate": 0.0,
+        "top3Rate": 0.0005322989160407121,
+        "meanRank": 11.290708589769135,
+        "worstRank": 57
+      },
+      {
+        "policy": "21/13/24",
+        "top1Rate": 0.0,
+        "top3Rate": 0.0027935814798361446,
+        "meanRank": 11.451893556022062,
+        "worstRank": 49
+      },
+      {
+        "policy": "21/12/21",
+        "top1Rate": 0.0,
+        "top3Rate": 7.168818911682974e-05,
+        "meanRank": 11.81545710252145,
+        "worstRank": 41
+      }
+    ],
+    "baselineTop10": [
+      {
+        "policy": "21/12/24",
+        "score": 8.910659903691045,
+        "rank": 1
+      },
+      {
+        "policy": "21/12/23",
+        "score": 8.910950377541818,
+        "rank": 2
+      },
+      {
+        "policy": "12/12/24",
+        "score": 8.912242782951509,
+        "rank": 3
+      },
+      {
+        "policy": "12/12/23",
+        "score": 8.91275952014181,
+        "rank": 4
+      },
+      {
+        "policy": "21/12/42",
+        "score": 8.913103470166345,
+        "rank": 5
+      },
+      {
+        "policy": "21/21/14",
+        "score": 8.913169472812111,
+        "rank": 6
+      },
+      {
+        "policy": "21/12/21",
+        "score": 8.913267481234492,
+        "rank": 7
+      },
+      {
+        "policy": "21/12/41",
+        "score": 8.913638255311394,
+        "rank": 8
+      },
+      {
+        "policy": "21/21/13",
+        "score": 8.9139273835997,
+        "rank": 9
+      },
+      {
+        "policy": "12/21/14",
+        "score": 8.91463640516277,
+        "rank": 10
+      }
+    ]
+  },
+  "selectedPolicy": {
+    "id": "T2126-ff91c618796d",
+    "policy": {
+      "word2": "21",
+      "word3": "12",
+      "word4": "24"
+    },
+    "tracks": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 97.73969151793771,
+        "firstAuxRate": 0.17520899649519553,
+        "secondAuxRate": 0.0312816401086142,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.002700706399323623,
+        "meanRejectedCandidates": 0.003041485390566349,
+        "meanPageActions": 6.140162004373433e-07,
+        "meanKeys": 2.2064906366038097,
+        "effectiveMs": 161.45956481306325
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 393.87047455389694,
+        "firstAuxRate": 0.13204059506098512,
+        "secondAuxRate": 0.017326824178693277,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.001083520271220466,
+        "meanRejectedCandidates": 0.0012012138873166282,
+        "meanPageActions": 2.2474751820104387e-07,
+        "meanKeys": 4.149367419239678,
+        "effectiveMs": 439.39094060715405
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 353.7989825365985,
+        "firstAuxRate": 0.23336856685839824,
+        "secondAuxRate": 0.05006136491291326,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.005737279769216658,
+        "meanRejectedCandidates": 0.006861968925745675,
+        "meanPageActions": 6.157163454679429e-06,
+        "meanKeys": 3.806074603537004,
+        "effectiveMs": 442.61527552484563
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 445.7760775742081,
+        "firstAuxRate": 0.2630334814063897,
+        "secondAuxRate": 0.04519864748405304,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.00413060492747256,
+        "meanRejectedCandidates": 0.004881414501126566,
+        "meanPageActions": 0,
+        "meanKeys": 4.308232128890443,
+        "effectiveMs": 540.9681499228808
+      }
+    },
+    "score": 8.910659903691045,
+    "policyKey": "21/12/24"
+  },
+  "comparison": {
+    "reference": "D3/V1 fixed deployed shape policy 12/12/24",
+    "winRate": 0.9846519538418378,
+    "bestDelta": -0.8817846325503389,
+    "worstDelta": 0.1709132032114269,
+    "caveat": "fixed layouts and baseline policy; no baseline reoptimization per grid point"
+  }
+}
