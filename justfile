@@ -282,3 +282,18 @@ ckt-v4-ergonomic-smoke: ckt-v4-ergonomic-fixture ckt-v4-all-scheme-fixture ckt-v
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin merge-frontier -- research/checkpoints/ckt-v4-ergonomic-smoke.jsonl research/checkpoints/ckt-v4-ergonomic-smoke-frontier.json
     $frontier = Get-Content -Raw 'research/checkpoints/ckt-v4-ergonomic-smoke-frontier.json' | ConvertFrom-Json; if ($frontier.provenance.ergonomicSchema.loads -ne 'exact' -or $frontier.provenance.ergonomicSchema.movingHand -ne 'exact' -or $frontier.members.Count -lt 1) { throw 'exact ergonomic frontier schema missing' }
     $output = & cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin anneal-native -- research/.cache/ckt-v4-native-corpus.bin research/.cache/ckt-v4-schemes.json tools/ckt_v4_upstream_role_tables.json SNF4-M36-AE-07 --steps 1 --checkpoint research/checkpoints/ckt-v4-ergonomic-smoke-reject.json --checkpoint-every 0 --verify-every 1 --duty-ms 0 --ergonomic-fixture research/.cache/ckt-v4-ergonomics.json --max-rp 0.000001 2>&1; if ($LASTEXITCODE -eq 0 -or ($output -join "`n") -notmatch 'right-pinky') { throw 'impossible exact ergonomic guard was not reported' }; $global:LASTEXITCODE = 0
+ckt-v51-toned-rhyme-neighbors-prepare:
+    python tools/prepare_toned_rhyme_neighbors.py
+
+ckt-v51-toned-rhyme-neighbors: ckt-v51-toned-rhyme-neighbors-prepare
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-rhyme-neighbors-job.json research/.cache/toned-rhyme-neighbors-results.json
+
+ckt-v51-toned-rhyme-neighbors-export:
+    python tools/export_toned_rhyme_neighbors.py
+    node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-rhyme-neighbors-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-rhyme-neighbors-js-verify.json
+
+ckt-v51-toned-rhyme-refine:
+    python tools/refine_toned_rhyme_neighbors.py
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-rhyme-refine-job.json research/.cache/toned-rhyme-refine-results.json
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-rhyme-refine-job.json --results research/.cache/toned-rhyme-refine-results.json --prefix research/notes/2026-11-12-toned-rhyme-refine
+    node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-rhyme-refine-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-rhyme-refine-js-verify.json
