@@ -114,22 +114,26 @@ fn mutate_joint_state(
     let op = if rhyme_only {
         if roll < 0.60 { 1 } else { 2 }
     } else if max_d == 0 {
-        if roll < 0.45 {
+        if roll < 0.42 {
             1
-        } else if roll < 0.75 {
+        } else if roll < 0.70 {
             2
-        } else {
+        } else if roll < 0.90 {
             3
+        } else {
+            5
         }
     } else {
-        if roll < 0.40 {
+        if roll < 0.36 {
             1
-        } else if roll < 0.65 {
+        } else if roll < 0.60 {
             2
-        } else if roll < 0.85 {
+        } else if roll < 0.76 {
             3
-        } else {
+        } else if roll < 0.90 {
             4
+        } else {
+            5
         }
     };
 
@@ -240,7 +244,7 @@ fn mutate_joint_state(
                 ),
             )
         }
-        _ => {
+        4 => {
             // Operator 4: Ordinary onset perturbation under D <= max_d
             let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
             let ordinary_indices: Vec<usize> = fixture
@@ -278,7 +282,7 @@ fn mutate_joint_state(
                 }
             } else if displaced.len() < max_d {
                 let sub_roll = rng.next_f64();
-                if sub_roll < 0.50 {
+                if sub_roll < 0.40 {
                     let available: Vec<usize> = ordinary_indices
                         .iter()
                         .copied()
@@ -298,7 +302,7 @@ fn mutate_joint_state(
                             fixture.atoms[pick].name, old_key, target_key
                         ),
                     )
-                } else {
+                } else if sub_roll < 0.80 {
                     let pick = displaced[rng.gen_range(0, displaced.len())];
                     let old_key = next.first_keys[pick];
                     let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
@@ -311,6 +315,17 @@ fn mutate_joint_state(
                         format!(
                             "ordinary_mutate {}: {} -> {}",
                             fixture.atoms[pick].name, old_key, target_key
+                        ),
+                    )
+                } else {
+                    let pick = displaced[rng.gen_range(0, displaced.len())];
+                    let old_key = next.first_keys[pick];
+                    next.first_keys[pick] = fixture.atoms[pick].baseline_key;
+                    (
+                        next,
+                        format!(
+                            "ordinary_reset {}: {} -> {}",
+                            fixture.atoms[pick].name, old_key, fixture.atoms[pick].baseline_key
                         ),
                     )
                 }
@@ -372,6 +387,71 @@ fn mutate_joint_state(
                 }
             }
         }
+        _ => {
+            // Operator 5: Simultaneous First-Key Swap respecting ordinary D <= max_d
+            let movable: Vec<usize> = fixture
+                .atoms
+                .iter()
+                .enumerate()
+                .filter(|(_, a)| {
+                    if max_d == 0 {
+                        fixture.searchable_first_atoms.contains(&a.name)
+                    } else {
+                        fixture.searchable_first_atoms.contains(&a.name)
+                            || (a.initial.len() == 1 && a.initial != "_")
+                    }
+                })
+                .map(|(i, _)| i)
+                .collect();
+
+            let mut swapped = None;
+            for _ in 0..24 {
+                let a = movable[rng.gen_range(0, movable.len())];
+                let b = movable[rng.gen_range(0, movable.len())];
+                if a == b || next.first_keys[a] == next.first_keys[b] {
+                    continue;
+                }
+                next.first_keys.swap(a, b);
+                if calc_ordinary_d(&next, fixture) <= max_d {
+                    swapped = Some((a, b));
+                    break;
+                }
+                next.first_keys.swap(a, b);
+            }
+            if let Some((a, b)) = swapped {
+                let ka = next.first_keys[b];
+                let kb = next.first_keys[a];
+                (
+                    next,
+                    format!(
+                        "first_swap {}({}) <-> {}({})",
+                        fixture.atoms[a].name, ka, fixture.atoms[b].name, kb
+                    ),
+                )
+            } else {
+                let sound_keys: Vec<char> = fixture.sound_keys.chars().collect();
+                let pick_atom_name = &fixture.searchable_first_atoms
+                    [rng.gen_range(0, fixture.searchable_first_atoms.len())];
+                let pick = fixture
+                    .atoms
+                    .iter()
+                    .position(|a| &a.name == pick_atom_name)
+                    .expect("searchable atom found");
+                let old_key = next.first_keys[pick];
+                let mut target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                while target_key == old_key {
+                    target_key = sound_keys[rng.gen_range(0, sound_keys.len())];
+                }
+                next.first_keys[pick] = target_key;
+                (
+                    next,
+                    format!(
+                        "special_first {}: {} -> {}",
+                        fixture.atoms[pick].name, old_key, target_key
+                    ),
+                )
+            }
+        }
     }
 }
 
@@ -391,6 +471,7 @@ struct Args {
     checkpoint: PathBuf,
     seeds_json: PathBuf,
     steps: usize,
+    stages: usize,
     duration_secs: u64,
     max_d: usize,
     initial_temp: f64,
@@ -420,6 +501,7 @@ fn parse_args() -> Result<Args, String> {
         checkpoint: PathBuf::from("research/.cache/ckt-v51-toned-joint-stage1-checkpoint.json"),
         seeds_json: PathBuf::from("research/config/ckt-v51-toned-2121-seeds.json"),
         steps: 5000,
+        stages: 1,
         duration_secs: 0,
         max_d: 1,
         initial_temp: 0.020,
@@ -448,6 +530,12 @@ fn parse_args() -> Result<Args, String> {
             "--checkpoint" => args.checkpoint = PathBuf::from(next(&mut index)?),
             "--seeds-json" => args.seeds_json = PathBuf::from(next(&mut index)?),
             "--steps" => args.steps = next(&mut index)?.parse().map_err(|_| "invalid steps")?,
+            "--stages" => {
+                args.stages = next(&mut index)?
+                    .parse::<usize>()
+                    .map_err(|_| "invalid stages")?
+                    .max(1)
+            }
             "--duration-secs" => {
                 args.duration_secs = next(&mut index)?
                     .parse()
@@ -505,8 +593,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     eprintln!(" Snapshot: {:?}", args.snapshot);
     eprintln!(" Anchor Checkpoint: {:?}", args.anchor_checkpoint);
     eprintln!(
-        " Target Steps: {}, Duration: {}s, Max D: {}, Duty ms: {}, Rhyme Only: {}",
-        args.steps, args.duration_secs, args.max_d, args.duty_ms, args.rhyme_only
+        " Target Steps: {}, Stages: {}, Duration: {}s, Max D: {}, Duty ms: {}, Rhyme Only: {}",
+        args.steps, args.stages, args.duration_secs, args.max_d, args.duty_ms, args.rhyme_only
     );
     eprintln!(
         " Temp: {} -> {}, Seed: {}, Require Empty Buckets: {:?}",
@@ -612,6 +700,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             require_empty_buckets: args.require_empty_buckets.clone(),
             max_d: args.max_d,
             rhyme_only: args.rhyme_only,
+            stages: args.stages,
             step: 0,
             total_steps: args.steps,
             temperature: args.initial_temp,
@@ -636,6 +725,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         };
         (cp, state)
     };
+
+    let active_stages = if args.stages > 1 {
+        args.stages
+    } else {
+        checkpoint.stages.max(1)
+    };
+    checkpoint.stages = active_stages;
 
     let mut current_scheme =
         build_scheme_state(&current_state, &fixture, &alphabet, tone_keys_by_tone)
@@ -696,6 +792,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut rng = SimpleRng::new(args.seed + checkpoint.step as u64);
     let start_time = Instant::now();
     let base_elapsed_ms = checkpoint.elapsed_ms;
+    let init_progress = if args.duration_secs > 0 {
+        let time_prog = base_elapsed_ms / (args.duration_secs as f64 * 1000.0);
+        let step_prog = checkpoint.step as f64 / args.steps.max(1) as f64;
+        time_prog.max(step_prog).min(1.0)
+    } else {
+        (checkpoint.step as f64 / args.steps.max(1) as f64).min(1.0)
+    };
+    let init_eff_step = (init_progress * args.steps as f64).round() as usize;
+    let (mut last_stage, _) = stage_temperature(
+        init_eff_step,
+        args.steps,
+        active_stages,
+        args.initial_temp,
+        args.final_temp,
+    );
 
     while checkpoint.step < args.steps {
         let current_elapsed_ms = base_elapsed_ms + start_time.elapsed().as_secs_f64() * 1000.0;
@@ -837,16 +948,68 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         checkpoint.step += 1;
         checkpoint.current_state = current_state.clone();
 
-        // Update temperature
+        // Update temperature (with optional multi-stage sawtooth reheat & snap-to-best)
         let progress = if args.duration_secs > 0 {
             let time_prog = current_elapsed_ms / (args.duration_secs as f64 * 1000.0);
-            let step_prog = checkpoint.step as f64 / args.steps as f64;
+            let step_prog = checkpoint.step as f64 / args.steps.max(1) as f64;
             time_prog.max(step_prog).min(1.0)
         } else {
-            (checkpoint.step as f64 / args.steps as f64).min(1.0)
+            (checkpoint.step as f64 / args.steps.max(1) as f64).min(1.0)
         };
-        checkpoint.temperature =
-            args.initial_temp * (args.final_temp / args.initial_temp).powf(progress);
+        let eff_step = (progress * args.steps as f64).round() as usize;
+        let (new_stage, new_temp) = stage_temperature(
+            eff_step,
+            args.steps,
+            active_stages,
+            args.initial_temp,
+            args.final_temp,
+        );
+        checkpoint.temperature = new_temp;
+        if active_stages > 1 && new_stage != last_stage {
+            last_stage = new_stage;
+            if current_state.first_keys != checkpoint.best_state.first_keys
+                || current_state.rhyme_keys != checkpoint.best_state.rhyme_keys
+            {
+                let best_scheme = build_scheme_state(
+                    &checkpoint.best_state,
+                    &fixture,
+                    &alphabet,
+                    tone_keys_by_tone,
+                )
+                .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+                let direct = generated
+                    .dependencies
+                    .affected_rows(&current_scheme, &best_scheme)
+                    .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+                let updates = corpus
+                    .generate_updates(
+                        &best_scheme,
+                        InputMode::KeytaoV51,
+                        &generated.dependencies,
+                        &direct,
+                    )
+                    .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+                let receipt = resolver
+                    .apply_updates(updates)
+                    .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+                summary
+                    .apply_changes(resolver.rows(), receipt.outcome_changes())
+                    .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+                current_state = checkpoint.best_state.clone();
+                current_scheme = best_scheme;
+                checkpoint.current_state = current_state.clone();
+                checkpoint.current_score =
+                    normalized_score(&summary.summary(), &fixture.reference_effective_ms)
+                        .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+            }
+            eprintln!(
+                "  [↻ STAGE {}/{}] Reheated T -> {:.6} (snapped to Best CKT: {:.12})",
+                new_stage + 1,
+                active_stages,
+                new_temp,
+                checkpoint.best_score
+            );
+        }
 
         if args.verify_every > 0 && checkpoint.evaluated % args.verify_every == 0 {
             resolver.verify_against_full_recompute()?;

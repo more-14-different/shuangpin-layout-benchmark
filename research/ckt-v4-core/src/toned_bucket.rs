@@ -171,6 +171,40 @@ pub fn update_pareto_frontier(frontier: &mut Vec<ParetoEntry>, cand: ParetoEntry
     true
 }
 
+fn default_one() -> usize {
+    1
+}
+
+pub fn stage_temperature(
+    step: usize,
+    total_steps: usize,
+    stages: usize,
+    initial_temp: f64,
+    final_temp: f64,
+) -> (usize, f64) {
+    let total_steps = total_steps.max(1);
+    let stages = stages.max(1);
+    if stages == 1 {
+        let progress = (step as f64 / total_steps as f64).min(1.0);
+        let temp = initial_temp * (final_temp / initial_temp).powf(progress);
+        return (0, temp);
+    }
+    let stage_idx = ((step * stages) / total_steps).min(stages - 1);
+    let stage_start = (stage_idx * total_steps) / stages;
+    let stage_end = (((stage_idx + 1) * total_steps) / stages).max(stage_start + 1);
+    let stage_len = (stage_end - stage_start) as f64;
+    let local_prog = ((step.saturating_sub(stage_start)) as f64 / stage_len).min(1.0);
+
+    let stage_top = (initial_temp * 0.5_f64.powi(stage_idx as i32)).max(final_temp * 2.0);
+    let stage_bot = if stage_idx + 1 == stages {
+        final_temp
+    } else {
+        (stage_top * 0.03).max(final_temp)
+    };
+    let temp = stage_top * (stage_bot / stage_top).powf(local_prog);
+    (stage_idx, temp)
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AnnealCheckpoint {
@@ -187,6 +221,8 @@ pub struct AnnealCheckpoint {
     pub max_d: usize,
     #[serde(default)]
     pub rhyme_only: bool,
+    #[serde(default = "default_one")]
+    pub stages: usize,
     #[serde(default)]
     pub step: usize,
     #[serde(default)]

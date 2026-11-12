@@ -166,6 +166,7 @@ fn test_resume_contract_validation_and_mismatch_errors() {
         require_empty_buckets: vec!["QZ".to_owned()],
         max_d: 1,
         rhyme_only: false,
+        stages: 1,
         step: 100,
         total_steps: 1000,
         temperature: 0.01,
@@ -384,4 +385,91 @@ fn test_pareto_frontier_preserves_non_dominated_tiers() {
     // Note: (D=1, M=21, 9.23) ALSO dominates (D=2, M=23, 9.26)!
     assert_eq!(frontier.len(), 1);
     assert_eq!(frontier[0].score, 9.23);
+}
+
+#[test]
+fn test_stage_temperature_multistage_sawtooth_and_final_cool() {
+    let (s0, t0) = stage_temperature(0, 4000, 4, 0.008, 0.00001);
+    assert_eq!(s0, 0);
+    assert!((t0 - 0.008).abs() < 1e-12);
+
+    let (s0_end, t0_end) = stage_temperature(999, 4000, 4, 0.008, 0.00001);
+    assert_eq!(s0_end, 0);
+    assert!(t0_end < 0.0003 && t0_end >= 0.00023);
+
+    // Stage 1 reheats back up to 0.5 * 0.008 = 0.004
+    let (s1, t1) = stage_temperature(1000, 4000, 4, 0.008, 0.00001);
+    assert_eq!(s1, 1);
+    assert!((t1 - 0.004).abs() < 1e-12);
+
+    // Stage 2 reheats to 0.25 * 0.008 = 0.002
+    let (s2, t2) = stage_temperature(2000, 4000, 4, 0.008, 0.00001);
+    assert_eq!(s2, 2);
+    assert!((t2 - 0.002).abs() < 1e-12);
+
+    // Stage 3 reheats to 0.125 * 0.008 = 0.001 and reaches final_temp at total_steps
+    let (s3, t3) = stage_temperature(3000, 4000, 4, 0.008, 0.00001);
+    assert_eq!(s3, 3);
+    assert!((t3 - 0.001).abs() < 1e-12);
+
+    let (s3_end, t3_end) = stage_temperature(4000, 4000, 4, 0.008, 0.00001);
+    assert_eq!(s3_end, 3);
+    assert!((t3_end - 0.00001).abs() < 1e-12);
+}
+
+#[test]
+fn test_dual_qz_and_zq_empty_seeds_pass_both_forbidden_buckets() {
+    let (fixture, validator) = load_fixture_and_validator();
+    let dual_forbidden = [('Q', 'Z'), ('Z', 'Q')];
+
+    // QZ-only seed1 still fails dual QZ+ZQ because ZQ holds zan4 / zuan4
+    assert!(!validator.is_valid_forbidden(&seed1_state(), &dual_forbidden));
+
+    let dual_seeds = [
+        (
+            1_usize,
+            "BCSDFGHJKLMNPQRSPTXLRCZWYE",
+            vec![
+                vec!['E', 'T', 'W', 'P', 'Q', 'Y', 'E', 'R', 'Y', 'T'],
+                vec!['S', 'L', 'D', 'G', 'K', 'J', 'H', 'F', 'L', 'H'],
+                vec!['X', 'N', 'B', 'C', 'M', 'M', 'Z', 'B', 'N', 'C'],
+            ],
+        ),
+        (
+            2_usize,
+            "BCSDFGHJKLMNKQRSPTXLRCZWYE",
+            vec![
+                vec!['E', 'T', 'W', 'P', 'Q', 'Y', 'E', 'R', 'Y', 'T'],
+                vec!['S', 'L', 'D', 'G', 'K', 'J', 'H', 'F', 'L', 'H'],
+                vec!['X', 'N', 'B', 'C', 'M', 'M', 'Z', 'B', 'N', 'C'],
+            ],
+        ),
+        (
+            3_usize,
+            "BCSDFGHJKLMNPRQSPTXKNQZWYE",
+            vec![
+                vec!['E', 'T', 'W', 'P', 'Q', 'Y', 'E', 'R', 'Y', 'T'],
+                vec!['S', 'G', 'D', 'F', 'L', 'J', 'H', 'K', 'K', 'H'],
+                vec!['Z', 'N', 'M', 'C', 'M', 'X', 'N', 'B', 'N', 'C'],
+            ],
+        ),
+    ];
+
+    for (expected_d, first_str, rhyme_keys) in dual_seeds {
+        let state = AnnealState {
+            first_keys: first_str.chars().collect(),
+            rhyme_keys,
+        };
+        assert_eq!(calc_ordinary_d(&state, &fixture), expected_d);
+        assert!(
+            validator.is_valid_forbidden(&state, &dual_forbidden),
+            "D={expected_d} dual seed must have both QZ and ZQ empty"
+        );
+        let diag = validator.compute_diagnostics(&state, &fixture);
+        assert!(diag.qz_empty);
+        assert!(diag.layout1407_empty_buckets.contains(&"QZ".to_owned()));
+        assert!(diag.layout1407_empty_buckets.contains(&"ZQ".to_owned()));
+        assert!(diag.common1237_empty_buckets.contains(&"QZ".to_owned()));
+        assert!(diag.common1237_empty_buckets.contains(&"ZQ".to_owned()));
+    }
 }

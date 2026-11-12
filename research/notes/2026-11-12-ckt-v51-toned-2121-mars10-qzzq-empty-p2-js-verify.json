@@ -1,0 +1,375 @@
+{
+  "version": "shape-only-ckt-v5.1-toned-2121-search-1",
+  "normalization": "S005 keytao-only; track weights character/word2/word3/word4 = 1/3/1/1",
+  "screeningMode": {
+    "kind": "fixed-policy",
+    "policy": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "shapeKeysByMeaning": "AVUIO",
+    "sampleRowsPerTrack": null,
+    "maximumTraditionalOnsetD": null
+  },
+  "reference": {
+    "id": "S005",
+    "policy": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "tracks": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 112.42254451086282,
+        "firstAuxRate": 0.22060613808019708,
+        "secondAuxRate": 0.04566821511806128,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.004804384379755336,
+        "meanRejectedCandidates": 0.0059137069818788034,
+        "meanPageActions": 0.000004005724736186477,
+        "meanKeys": 2.2662743531982583,
+        "effectiveMs": 195.4843681647083
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 414.4344264362817,
+        "firstAuxRate": 0.1892694210310565,
+        "secondAuxRate": 0.034756806080910474,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003775437554998475,
+        "meanRejectedCandidates": 0.004530663854527311,
+        "meanPageActions": 0,
+        "meanKeys": 4.224026227111967,
+        "effectiveMs": 484.1340902955972
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 344.2651202341585,
+        "firstAuxRate": 0.5172872168968791,
+        "secondAuxRate": 0.20701254452783532,
+        "thirdAuxRate": 0.052980406019336686,
+        "selectionRate": 0.007349652222944726,
+        "meanRejectedCandidates": 0.00913989969982548,
+        "meanPageActions": 0.00000668463499215639,
+        "meanKeys": 3.7772801674440513,
+        "effectiveMs": 582.3179621766296
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 448.8043124204852,
+        "firstAuxRate": 0.27835105638906893,
+        "secondAuxRate": 0.04469433486596384,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003829566677066131,
+        "meanRejectedCandidates": 0.004522254400754552,
+        "meanPageActions": 0,
+        "meanKeys": 4.323045391255032,
+        "effectiveMs": 548.2417825232724
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "MARS10-QZZQEMPTY-P2-D2-M24-04",
+      "factorization": "mars10-avuio786-qzzq-empty",
+      "origin": "p2-qzzq-lowd-d2-res:best",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "AVUIO",
+      "toneKeysByTone": "IVUAO",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.276547216603824,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 101.49617609564989,
+          "firstAuxRate": 0.1890078995230907,
+          "secondAuxRate": 0.034402362827903654,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0027081330714622464,
+          "meanRejectedCandidates": 0.0031114539985495184,
+          "meanPageActions": 3.5086640024991044e-7,
+          "meanKeys": 2.223410262350994,
+          "effectiveMs": 170.29981260367308
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 403.1228118148877,
+          "firstAuxRate": 0.13951875241780293,
+          "secondAuxRate": 0.01622787929107242,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010052576360614254,
+          "meanRejectedCandidates": 0.001118313961698706,
+          "meanPageActions": 0,
+          "meanKeys": 4.155746631708875,
+          "effectiveMs": 450.5058716072721
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 333.0126386040493,
+          "firstAuxRate": 0.4974025013666279,
+          "secondAuxRate": 0.1868318266782201,
+          "thirdAuxRate": 0.04497436494682941,
+          "selectionRate": 0.0061418649643558065,
+          "meanRejectedCandidates": 0.007499127306965994,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.7292086929916772,
+          "effectiveMs": 555.8358494078387
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 431.69420553687166,
+          "firstAuxRate": 0.24815219935924432,
+          "secondAuxRate": 0.030004185169159113,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0020596690650559247,
+          "meanRejectedCandidates": 0.002372131048819732,
+          "meanPageActions": 0,
+          "meanKeys": 4.278156384528404,
+          "effectiveMs": 516.4955288868672
+        }
+      }
+    },
+    {
+      "id": "MARS10-QZZQEMPTY-P2-D2-M23-03",
+      "factorization": "mars10-avuio786-qzzq-empty",
+      "origin": "p2-qzzq-lowd-d2-res:pareto(step=4475)",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "AVUIO",
+      "toneKeysByTone": "IVUAO",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.278460940055302,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 101.75657446234904,
+          "firstAuxRate": 0.18825575891642163,
+          "secondAuxRate": 0.03403386539104119,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002698747395255561,
+          "meanRejectedCandidates": 0.0031020390834761457,
+          "meanPageActions": 3.5086640024991044e-7,
+          "meanKeys": 2.222289624307463,
+          "effectiveMs": 170.2179174058351
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 403.1888790778082,
+          "firstAuxRate": 0.1392278628148596,
+          "secondAuxRate": 0.01618440285480768,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010021849767817238,
+          "meanRejectedCandidates": 0.001112664752475776,
+          "meanPageActions": 0,
+          "meanKeys": 4.155412265669668,
+          "effectiveMs": 450.46950300240127
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 332.94196123147117,
+          "firstAuxRate": 0.49771758798752264,
+          "secondAuxRate": 0.18645293506652696,
+          "thirdAuxRate": 0.04479323975482273,
+          "selectionRate": 0.006114471851274408,
+          "meanRejectedCandidates": 0.007470998820484671,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.7289637628088723,
+          "effectiveMs": 555.673850688246
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 432.3609169417634,
+          "firstAuxRate": 0.24927966377529878,
+          "secondAuxRate": 0.030163720267370842,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00206527892333678,
+          "meanRejectedCandidates": 0.002389303468455017,
+          "meanPageActions": 0,
+          "meanKeys": 4.279443384042669,
+          "effectiveMs": 517.5525646819891
+        }
+      }
+    },
+    {
+      "id": "MARS10-QZZQEMPTY-P2-D1-M23-02",
+      "factorization": "mars10-avuio786-qzzq-empty",
+      "origin": "p2-qzzq-lowd-d2-res:pareto(step=4467)",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "AVUIO",
+      "toneKeysByTone": "IVUAO",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.344047161744427,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 101.61432510343917,
+          "firstAuxRate": 0.19118651671884246,
+          "secondAuxRate": 0.03487071099450391,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002872806368646204,
+          "meanRejectedCandidates": 0.003373405005202764,
+          "meanPageActions": 7.309716671873134e-7,
+          "meanKeys": 2.2260572277133464,
+          "effectiveMs": 171.3240667803911
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 403.097936151177,
+          "firstAuxRate": 0.14186637592632198,
+          "secondAuxRate": 0.017016528598684542,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00108512596737828,
+          "meanRejectedCandidates": 0.001207432179452929,
+          "meanPageActions": 0,
+          "meanKeys": 4.158882904525006,
+          "effectiveMs": 451.4742546980786
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.4333828547091,
+          "firstAuxRate": 0.5056211016664492,
+          "secondAuxRate": 0.19613866794211765,
+          "thirdAuxRate": 0.04874606878686051,
+          "selectionRate": 0.006866175080019566,
+          "meanRejectedCandidates": 0.008600255462908777,
+          "meanPageActions": 0.000007037795797799312,
+          "meanKeys": 3.7505058383954273,
+          "effectiveMs": 565.1369635332338
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 432.11613604467806,
+          "firstAuxRate": 0.2626940433319988,
+          "secondAuxRate": 0.03468910252325896,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0025257581103569388,
+          "meanRejectedCandidates": 0.0028932768633514287,
+          "meanPageActions": 0,
+          "meanKeys": 4.297383145855258,
+          "effectiveMs": 522.9911985106372
+        }
+      }
+    },
+    {
+      "id": "MARS10-QZZQEMPTY-P2-D1-M22-01",
+      "factorization": "mars10-avuio786-qzzq-empty",
+      "origin": "p2-qzzq-lowd-d2-res:pareto(step=924)",
+      "declaredMemory": null,
+      "shapeKeysByMeaning": "AVUIO",
+      "toneKeysByTone": "IVUAO",
+      "policySpace": {
+        "word2": 1,
+        "word3": 1,
+        "word4": 1,
+        "combinations": 1
+      },
+      "score": 9.346899160686663,
+      "policy": {
+        "word2": "12",
+        "word3": "213",
+        "word4": "24"
+      },
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 102.36346000621833,
+          "firstAuxRate": 0.19148384675418756,
+          "secondAuxRate": 0.03517517531332077,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0030355206617621003,
+          "meanRejectedCandidates": 0.0035832815902855854,
+          "meanPageActions": 7.309716671873134e-7,
+          "meanKeys": 2.2266590220675084,
+          "effectiveMs": 172.3618623945425
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 402.2968136604569,
+          "firstAuxRate": 0.1415565864444283,
+          "secondAuxRate": 0.017481188820709835,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0011317155729692128,
+          "meanRejectedCandidates": 0.0012487926594537172,
+          "meanPageActions": 0,
+          "meanKeys": 4.159037775265138,
+          "effectiveMs": 450.7496152167526
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 335.3543411788646,
+          "firstAuxRate": 0.5060279056919458,
+          "secondAuxRate": 0.1957923170573054,
+          "thirdAuxRate": 0.04859875079814569,
+          "selectionRate": 0.006843146090312783,
+          "meanRejectedCandidates": 0.00857649109980207,
+          "meanPageActions": 0.000007037795797799312,
+          "meanKeys": 3.7504189735473967,
+          "effectiveMs": 565.0168567910008
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 432.69378145395643,
+          "firstAuxRate": 0.26395927944512726,
+          "secondAuxRate": 0.03485384065336019,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002537515030907241,
+          "meanRejectedCandidates": 0.002916351283661365,
+          "meanPageActions": 0,
+          "meanKeys": 4.298813120098488,
+          "effectiveMs": 524.0060440662301
+        }
+      }
+    }
+  ]
+}

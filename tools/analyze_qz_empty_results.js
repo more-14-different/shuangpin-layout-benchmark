@@ -147,8 +147,10 @@ function buildStateDetails(state, fixture, auditSet) {
     tokenKeys,
     tonedCodes,
     qzEmpty: qzSyllables1407.length === 0,
+    zqEmpty: zqSyllables1407.length === 0,
     qzSyllables1407,
     zqSyllables1407,
+    occupied1407Set: occupied1407,
     occupiedBuckets1407: occupied1407.size,
     emptyBuckets1407Count: empty1407.length,
     emptyBuckets1407: empty1407,
@@ -205,6 +207,17 @@ function main() {
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
+  const requireEmpty = String(args['require-empty'] || 'QZ')
+    .split(',')
+    .map((s) => s.trim().toUpperCase())
+    .filter(Boolean);
+  const idPrefix = String(
+    args['id-prefix'] || (requireEmpty.includes('ZQ') ? 'MARS10-QZZQEMPTY' : 'MARS10-QZEMPTY')
+  );
+  const factorizationLabel = String(
+    args.factorization ||
+      (requireEmpty.includes('ZQ') ? 'mars10-avuio786-qzzq-empty' : 'mars10-avuio786-qz-empty')
+  );
 
   if (resultFiles.length === 0) {
     throw new Error('pass --results file1.json,file2.json,...');
@@ -221,8 +234,10 @@ function main() {
   const registerCandidate = (score, state, sourceTag) => {
     const key = stateKey(state);
     const details = buildStateDetails(state, fixture, auditSet);
-    if (!details.qzEmpty) {
-      throw new Error(`Candidate from ${sourceTag} violates QZ=empty: ${details.qzSyllables1407.join(',')}`);
+    for (const bucket of requireEmpty) {
+      if (details.occupied1407Set.has(bucket)) {
+        throw new Error(`Candidate from ${sourceTag} violates ${bucket}=empty!`);
+      }
     }
     const prev = allCandidates.get(key);
     if (!prev || score < prev.score) {
@@ -275,6 +290,7 @@ function main() {
       occupiedBuckets1237: bestDetails.occupiedBuckets1237,
       emptyBuckets1237Count: bestDetails.emptyBuckets1237Count,
       qzEmpty: bestDetails.qzEmpty,
+      zqEmpty: bestDetails.zqEmpty,
       ordinaryMoved: bestDetails.ordinaryMoved,
       specialMoved: bestDetails.specialMoved,
       paretoCount: (data.paretoFrontier || []).length,
@@ -319,10 +335,10 @@ function main() {
 
   const finalistLayouts = cleanPareto.map((item, idx) => {
     const d = item.details;
-    const id = `MARS10-QZEMPTY-D${d.ordinaryD}-M${d.memoryLower}-${String(idx + 1).padStart(2, '0')}`;
+    const id = `${idPrefix}-D${d.ordinaryD}-M${d.memoryLower}-${String(idx + 1).padStart(2, '0')}`;
     return {
       id,
-      factorization: 'mars10-avuio786-qz-empty',
+      factorization: factorizationLabel,
       origin: item.sourceTag,
       rustScore: item.score,
       deltaUnconstrainedChampion: item.score - UNCONSTRAINED_CHAMPION_SCORE,
@@ -345,7 +361,9 @@ function main() {
         rhymeInternalSplits: d.rhymeInternalSplits,
       },
       bucketAudit: {
+        requireEmptyBuckets: requireEmpty,
         qzEmpty: d.qzEmpty,
+        zqEmpty: d.zqEmpty,
         qzSyllables1407: d.qzSyllables1407,
         zqSyllables1407: d.zqSyllables1407,
         layout1407OccupiedBuckets: d.occupiedBuckets1407,
@@ -361,10 +379,10 @@ function main() {
 
   const finalistJson = {
     version: 'ckt-v51-toned-2121-mars10-qz-empty-finalist-1',
-    purpose: 'AVUIO 7:8:6 Mars 10 rhyme groups with QZ=empty hard constraint across 1,407 legal syllables',
+    purpose: `AVUIO 7:8:6 Mars 10 rhyme groups with ${requireEmpty.join('+')}=empty hard constraint across 1,407 legal syllables`,
     contract: {
       ...template.contract,
-      requireEmptyBuckets: ['QZ'],
+      requireEmptyBuckets: requireEmpty,
       rhymeInternalSplits: 0,
       policy: { word2: '12', word3: '213', word4: '24' },
     },
