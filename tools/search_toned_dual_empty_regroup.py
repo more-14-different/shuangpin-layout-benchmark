@@ -48,7 +48,7 @@ def build(args):
             rejected['D/M'] += 1
             return
         state = dict(firstKeys=first, rhymeKeys=[[row[partition[root]] for root in final_roots] for row in keys])
-        for code in ['QZ', 'ZQ']:
+        for code in getattr(args, 'require_empty', ['QZ', 'ZQ']):
             if any(first[a] == code[0] and state['rhymeKeys'][r][f] == code[1] for a, f, r in legal):
                 rejected[code] += 1
                 return
@@ -68,7 +68,27 @@ def build(args):
             splits=0, merge=merge, sourceRhymeColumnMergeRules=group_rules,
             sourceRhymeColumnMergeLinks=8, partition=partition, groupKeys=keys, rhymeGroups=groups))
 
-    if args.previous:
+    if getattr(args, 'production', False):
+        production = read('research/.cache/ckt-v51-toned-mars10-D1-final.json')
+        first = []
+        for atom in production['atoms']:
+            values = {code[0] for p in atom['pinyin'] for code in production['tonedCodes'][p] if code}
+            assert len(values) == 1
+            first.append(values.pop())
+        keys = []
+        for region in production['toneRegions']:
+            row = []
+            for atom in production['rhymeAtoms']:
+                values = {production['tonedCodes'][p][t-1][1] for p in atom['pinyin'] for t in region['tones']
+                          if production['tonedCodes'][p][t-1]}
+                assert len(values) == 1
+                row.append(values.pop())
+            keys.append(row)
+        seeds = [dict(id='PRODUCTION-M21', partition=job['candidates'][0]['partition'], groupKeys=keys,
+                      state=dict(firstKeys=first), score=9.203609845305458)]
+    elif getattr(args, 'seed_file', None):
+        seeds = read(args.seed_file)['seeds']
+    elif args.previous:
         previous, scores = read(args.previous + '-job.json'), read(args.previous + '-scores.json')
         assert scores['completed'] == scores['total'] == len(previous['candidates'])
         by_id = {c['id']: c for c in previous['candidates']}
@@ -141,7 +161,7 @@ def build(args):
                     changed[ri][a], changed[ri][b] = changed[ri][b], changed[ri][a]
                     add(seed, 'root-plus-key-swap', f'{desc}; {region["name"]} slots {a} <-> {b}', changed_partition, changed, first)
     job.update(candidates=candidates, rejected=dict(rejected), memoryConvention=__doc__,
-               maxD=args.max_d, maxM=args.max_m, requireEmpty=['QZ', 'ZQ'],
+               maxD=args.max_d, maxM=args.max_m, requireEmpty=getattr(args, 'require_empty', ['QZ', 'ZQ']),
                seedScores={s['id']: s['score'] for s in seeds}, sourceLayouts=SOURCE,
                searchArguments=vars(args))
     return job
@@ -152,6 +172,9 @@ def main():
     parser.add_argument('--prefix', required=True)
     parser.add_argument('--tag', required=True)
     parser.add_argument('--previous')
+    parser.add_argument('--seed-file')
+    parser.add_argument('--production', action='store_true')
+    parser.add_argument('--require-empty', nargs='*', default=['QZ', 'ZQ'])
     parser.add_argument('--leaders', type=int, default=1)
     parser.add_argument('--max-d', type=int, default=2)
     parser.add_argument('--max-m', type=int, default=23)

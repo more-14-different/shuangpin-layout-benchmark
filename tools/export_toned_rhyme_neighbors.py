@@ -17,6 +17,7 @@ def main():
     parser.add_argument("--job", default="research/.cache/toned-rhyme-neighbors-job.json")
     parser.add_argument("--results", default="research/.cache/toned-rhyme-neighbors-results.json")
     parser.add_argument("--prefix", default="research/notes/2026-11-12-toned-rhyme-neighbors")
+    parser.add_argument("--all", action="store_true", help="export every candidate from a preselected job")
     args = parser.parse_args()
     job, scores = read(args.job), read(args.results)
     assert scores["completed"] == scores["total"] == len(job["candidates"])
@@ -58,6 +59,8 @@ def main():
             if eligible:
                 selected.append(eligible[0])
     selected = list({c["id"]: c for c in selected}.values())
+    if args.all:
+        selected = ranked
     exported = dict(version="toned-rhyme-neighbor-finalists-1", contract=copy.deepcopy(source["contract"]),
                     tokenKeys=source["tokenKeys"], layouts=[])
     exported["contract"].pop("rhymeInternalSplits", None)
@@ -80,7 +83,7 @@ def main():
                 if old:
                     codes[fixture["pinyin"][p] + str(t)] = (c["state"]["firstKeys"][first_for_py[p]] +
                         c["state"]["rhymeKeys"][region_for_tone[t]][final_for_py[p]])
-        assert len(codes) == 1407 and "QZ" not in codes.values()
+        assert len(codes) == 1407
         assert all(code not in codes.values() for code in job.get("requireEmpty", ["QZ"]))
         ordinary_d = sum(c["state"]["firstKeys"][i] != a["baselineKey"]
                          for i, a in enumerate(fixture["atoms"]) if len(a["initial"]) == 1 and a["initial"] != "_")

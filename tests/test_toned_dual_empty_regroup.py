@@ -9,6 +9,17 @@ from search_toned_dual_empty_regroup import build, ROOT, read, SOURCE
 
 @unittest.skipUnless((ROOT / 'research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json').exists(), 'local fixture required')
 class DualEmptyRegroup(unittest.TestCase):
+    def test_production_seed_can_leave_qz_unconstrained(self):
+        job = build(Namespace(max_d=2,max_m=23,tag='FREE',previous=None,production=True,
+                              require_empty=[],operators='root',anchors=''))
+        c = job['candidates'][0]
+        self.assertEqual(c['kind'],'baseline')
+        self.assertEqual(c['memory'],21)
+        self.assertEqual(c['memoryGuard'],23)
+        self.assertEqual(job['requireEmpty'],[])
+        self.assertEqual(c['ordinaryD'],1)
+        self.assertEqual(c['state']['firstKeys'][13],'Q')
+
     @classmethod
     def setUpClass(cls):
         cls.job = build(Namespace(max_d=2, max_m=23, tag='TEST', previous=None,
