@@ -9,3 +9,6 @@ initial:
 
 expanded:
     node tools/explore_toned_2126.js --steps 400 --sample 1000 --output research/notes/2026-11-12-toned-2126-expanded.json
+
+round2:
+    node tools/explore_toned_2126.js --from research/notes/2026-11-12-toned-2126-expanded.json --starts 3 --steps 800 --sample 1500 --top 5 --policy-top 5 --seed 2127 --output research/notes/2026-11-12-toned-2126-round2.json

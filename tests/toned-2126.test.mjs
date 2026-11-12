@@ -4,6 +4,17 @@ import experiment from '../tools/explore_toned_2126.js';
 import semantics from '../tools/auxiliary_semantics.js';
 import model from '../tools/ckt_v4_model.js';
 
+test('21x26 auxiliary policies enumerate 144 distinct native two-auxiliary routes', () => {
+  const policies = experiment.auxiliaryPolicies();
+  assert.equal(new Set(policies.map(policy => JSON.stringify(policy))).size, 144);
+  for (const policy of policies) for (const [kind, order] of Object.entries(policy)) {
+    assert.equal(order.length, 2);
+    assert.notEqual(order[0], order[1]);
+    assert.ok([...order].every(position => Number(position) >= 1 && Number(position) <= Number(kind.slice(-1))));
+  }
+  assert.ok(policies.some(policy => JSON.stringify(policy) === JSON.stringify(experiment.POLICY)));
+});
+
 test('21x26 tone regions include all second keys and normalize neutral tone', () => {
   assert.equal(new Set(experiment.ROWS.join('')).size, 26);
   assert.deepEqual([0, 1, 2, 3, 4, 5].map(experiment.toneRow), [2, 2, 1, 1, 0, 2]);

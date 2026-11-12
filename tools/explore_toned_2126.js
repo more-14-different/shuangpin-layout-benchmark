@@ -74,6 +74,13 @@ function randomGenerator(seed) {
   return () => { state = (Math.imul(state, 1664525) + 1013904223) >>> 0; return state / 4294967296; };
 }
 
+function auxiliaryPolicies() {
+  const pairs = n => Array.from({length: n}, (_, i) => i + 1).flatMap(a =>
+    Array.from({length: n}, (_, i) => i + 1).filter(b => a !== b).map(b => `${a}${b}`));
+  return pairs(2).flatMap(word2 => pairs(3).flatMap(word3 =>
+    pairs(4).map(word4 => ({word2, word3, word4}))));
+}
+
 function main() {
   const args = {};
   for (let i = 2; i < process.argv.length; i += 2) args[process.argv[i].replace(/^--/, '')] = process.argv[i + 1];
@@ -138,31 +145,61 @@ function main() {
   const sampled = toned.sampleCorpus(data, words, sample);
   const screenContext = contextFor(sampled.data, sampled.words);
   const random = randomGenerator(seed);
-  let current = makeLayout(ROWS.map(keys => MARS_RHYME_ORDER.map((_, i) => i % keys.length)), 'T2126-INITIAL');
+  const starts = Number(args.starts || 1);
+  if (!Number.isInteger(starts) || starts < 1) throw new Error('invalid starts');
+  const anchor = args.from ? JSON.parse(fs.readFileSync(path.resolve(args.from), 'utf8')).results[0].layout : null;
+  let current = makeLayout(anchor?.regionMaps || ROWS.map(keys => MARS_RHYME_ORDER.map((_, i) => i % keys.length)), 'T2126-INITIAL');
   let currentResult = evaluate(current, tokenKeys, screenContext);
   const archive = [{layout: current, screening: currentResult}];
   const seen = new Set([JSON.stringify(current.regionMaps)]);
-  for (let step = 0; step < steps; step++) {
-    const maps = current.regionMaps.map(row => [...row]);
-    const row = Math.floor(random() * 3), left = Math.floor(random() * 10);
-    if (step % 2) {
-      const right = Math.floor(random() * 10);
-      [maps[row][left], maps[row][right]] = [maps[row][right], maps[row][left]];
-    } else maps[row][left] = Math.floor(random() * ROWS[row].length);
-    // Keep all 26 second keys reachable by the rhyme map.
-    if (maps.some((map, r) => new Set(map).size !== ROWS[r].length)) continue;
-    const signature = JSON.stringify(maps);
-    if (seen.has(signature)) continue;
-    seen.add(signature);
-    const layout = makeLayout(maps, `T2126-S${step + 1}`);
-    const result = evaluate(layout, tokenKeys, screenContext);
-    archive.push({layout, screening: result});
-    if (result.score < currentResult.score) {current = layout; currentResult = result;}
-    if (step % 10 === 0) process.stderr.write(`step ${step}/${steps}, best sampled CKT ${currentResult.score.toFixed(6)}\n`);
+  for (let start = 0; start < starts; start++) {
+    if (start > 0) {
+      const maps = (anchor?.regionMaps || current.regionMaps).map(map => [...map]);
+      for (let swap = 0; swap < 6; swap++) {
+        const row = Math.floor(random() * 3), a = Math.floor(random() * 10), b = Math.floor(random() * 10);
+        [maps[row][a], maps[row][b]] = [maps[row][b], maps[row][a]];
+      }
+      current = makeLayout(maps, `T2126-R${start}-INITIAL`);
+      currentResult = evaluate(current, tokenKeys, screenContext);
+      archive.push({layout: current, screening: currentResult});
+      seen.add(JSON.stringify(maps));
+    }
+    for (let step = 0; step < steps; step++) {
+      const maps = current.regionMaps.map(row => [...row]);
+      const row = Math.floor(random() * 3), left = Math.floor(random() * 10);
+      if (step % 2) {
+        const right = Math.floor(random() * 10);
+        [maps[row][left], maps[row][right]] = [maps[row][right], maps[row][left]];
+      } else maps[row][left] = Math.floor(random() * ROWS[row].length);
+      // Keep all 26 second keys reachable by the rhyme map.
+      if (maps.some((map, r) => new Set(map).size !== ROWS[r].length)) continue;
+      const signature = JSON.stringify(maps);
+      if (seen.has(signature)) continue;
+      seen.add(signature);
+      const layout = makeLayout(maps, starts === 1 ? `T2126-S${step + 1}` : `T2126-R${start}-S${step + 1}`);
+      const result = evaluate(layout, tokenKeys, screenContext);
+      archive.push({layout, screening: result});
+      if (result.score < currentResult.score) {current = layout; currentResult = result;}
+      if (step % 10 === 0) process.stderr.write(`step ${step}/${steps}, best sampled CKT ${currentResult.score.toFixed(6)}\n`);
+    }
   }
   archive.sort((a, b) => a.screening.score - b.screening.score);
-  const results = archive.slice(0, 3).map(({layout, screening}) => ({layout, screeningScore: screening.score,
+  const results = archive.slice(0, Number(args.top || 3)).map(({layout, screening}) => ({layout, screeningScore: screening.score,
     ...evaluate(layout, tokenKeys, context), occupiedBuckets: new Set(layout.tonedCodes).size})).sort((a, b) => a.score - b.score);
+  let policyAudit = null;
+  if (args['policy-top']) {
+    const layout = results[0].layout;
+    const screening = [];
+    for (const policy of auxiliaryPolicies()) {
+      screening.push(evaluate(layout, tokenKeys, screenContext, policy));
+    }
+    screening.sort((a, b) => a.score - b.score);
+    const policies = [POLICY, ...screening.slice(0, Number(args['policy-top'])).map(row => row.policy)];
+    const unique = [...new Map(policies.map(policy => [JSON.stringify(policy), policy])).values()];
+    const full = unique.map(policy => evaluate(layout, tokenKeys, context, policy)).sort((a, b) => a.score - b.score);
+    policyAudit = {layoutId: layout.id, screening, full,
+      scope: '144 sampled policies; selected policies plus deployed policy verified on full corpus; no robustness claim'};
+  }
   const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   const report = {version: 'toned-2126-initial-1',
     contract: {capacity: [21, 26], maximumBuckets: 546, firstKeys: 'BCDFGHJKLMNPQRSTVWXYZ',
@@ -176,9 +213,10 @@ function main() {
       snowCommit: execFileSync('git', ['-C', snow, 'rev-parse', 'HEAD'], {encoding: 'utf8'}).trim(),
       htmlSha256: hash(html), mappingSha256: hash(mappingFile),
       dictionarySha256: hash(path.join(snow, 'snow_pinyin.base.dict.yaml'))},
-    search: {seed, steps, sampleRowsPerTrack: sample, evaluated: archive.length,
-      selection: 'sample CKT hill climb; full corpus top 3; fixed deployed auxiliary policy',
-      robustPolicySearch: false}, tokenKeys, baseline: baselineResult, results};
+    search: {seed, steps, starts, anchorFile: args.from || null, sampleRowsPerTrack: sample, evaluated: archive.length,
+      fullCorpusFinalists: results.length,
+      selection: 'sample CKT hill climb; full corpus selected finalists; fixed deployed auxiliary policy',
+      robustPolicySearch: false}, tokenKeys, baseline: baselineResult, results, policyAudit};
   fs.mkdirSync(path.dirname(output), {recursive: true});
   fs.writeFileSync(output, JSON.stringify(report, null, 2) + '\n');
   process.stdout.write(JSON.stringify({baseline: baselineResult.score, evaluated: archive.length,
@@ -187,4 +225,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = {toneRow, validateLayout, adaptWords, evaluate, ROWS, POLICY, BALANCE};
+module.exports = {toneRow, validateLayout, adaptWords, evaluate, auxiliaryPolicies, ROWS, POLICY, BALANCE};
