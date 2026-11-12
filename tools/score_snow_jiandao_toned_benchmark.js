@@ -236,6 +236,21 @@ function keyboardSemantics(fixture) {
   return {firstByKey, secondByKey, shapeByKey};
 }
 
+function ordinaryOnsetDiagnostics(fixture) {
+  const byInitial = new Map();
+  for (const atom of fixture.atoms) {
+    if (!/^[bpmfdtnlgkhjqxrzcs]$/.test(atom.initial)) continue;
+    if (!byInitial.has(atom.initial)) byInitial.set(atom.initial, new Set());
+    for (const py of atom.pinyin) for (const code of fixture.tonedCodes[py]) {
+      if (code) byInitial.get(atom.initial).add(code[0]);
+    }
+  }
+  return {
+    D: [...byInitial].filter(([initial, keys]) => [...keys].some(k => k !== initial.toUpperCase())).length,
+    F: [...byInitial.values()].reduce((sum, keys) => sum + Math.max(0, keys.size - 1), 0),
+  };
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const root = path.resolve(__dirname, "..");
@@ -284,8 +299,8 @@ function main() {
       definition: "M-T1: baseline rule links plus one ordinary-initial displacement",
       lower: fixture.baselineMemoryLower + 1,
       guard: fixture.baselineMemoryGuard + 1,
-      D: fixture.expected.declaredDiagnostics.traditionalOnsetD,
-      F: fixture.expected.declaredDiagnostics.onsetFragmentation,
+      ...ordinaryOnsetDiagnostics(fixture),
+      onsetDefinition: "ordinary written initials; D counts displaced initials, F counts additional first-key incidences; derived from actual toned codes",
     },
     inventory: {
       legalTonedSyllables: fixture.tonedCodes.flat().filter(Boolean).length,
@@ -331,4 +346,4 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {fixtureAdapter, keyboardSemantics, loadMetric, loadSummary,
-  evaluateV5, v5Reference, weightedAggregate};
+  evaluateV5, v5Reference, weightedAggregate, ordinaryOnsetDiagnostics};

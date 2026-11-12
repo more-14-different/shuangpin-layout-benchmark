@@ -31,6 +31,7 @@ def main():
         codes = dict(zip(layout['tokenKeys'], layout['tonedCodes']))
         fixture = {'tonedCodes': [[codes.get(py + str(t)) for t in range(1, 6)] for py in pinyin]}
         row['macro'] = macro_replay(macro_input['data'], fixture)
+        row.pop('macroTotal', None)
     PREFIX.with_suffix('.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
     rows = report['results']
     lines = ['# 带调代表方案与 HTML 生产候选 M21：统一 benchmark', '',
@@ -43,7 +44,7 @@ def main():
         '`shapeKeysByMeaning=AVUIO`、`toneKeysByTone=IVUAO`、`toneDigitsByShapeMeaning=42310`；'
         'v5词辅12/21/24，v5.1词辅12/213/24，分别使用对应S005参考。全部由同一当前语料重算。', '',
         'M沿用各方案声明的规则口径（M_lower/M_guard），D/F则从实际音节首键统一重算普通声母位移/分裂。'
-        '**HTML生产候选原标D=1/F=1，本次实际编码为普通D=1/F=0**；保留原标签于JSON productionMetadata，未修改HTML。'
+        '**HTML生产候选已修正为普通D=1/F=0**；评分脚本从实际音节编码推导D/F，避免再次使用旧fixture中的F=1标签。'
         'fixture.expected.tracks为历史附带数据，本报告未将其当作当前分项结果；以本次重算及HTML嵌入分数校验为准。', '',
         '## 方案与桶占用', '',
         '| ID | D/F | M下界/guard | 1407占桶/441 | 占比 | 空桶 | Common1237占桶 | QZ音节 | ZQ音节 | CKT v5 | CKT v5.1 |',
@@ -75,7 +76,20 @@ def main():
         values = [e['homeS2'], e['homeFloor4NativeTracks'], e['leftPinkyQAZPeak4NativeTracks']['value'],
                   e['rightPinkyPeak4NativeTracks']['value'], e['maxFingerPeak4NativeTracks']['value'],e['s2DifferentKeySameFingerRate']]
         lines.append(f"| {r['id']} | " + ' | '.join(f'{100*v:.3f}%' for v in values) + f" | {macro['score']:.6f} | {macro['avg_time']:.6f} |")
-    lines += ['', '## 复现', '', '```powershell', 'node tools/benchmark_toned_representatives.js',
+    lines += ['', '## 日常纯双拼移动手分数（含标点）', '',
+        '沿用 `D:/C2D/Documents/rime-snow-pinyin/README.md` 的同名指标：'
+        '日常八场景冻结文稿，2149击键，`daily|native-punctuation.score`，越高越好。'
+        '只含纯双拼与文稿标点，不含形辅、空格和选重；不合并default语料。'
+        '分数为200×字符数/模型时间，不是真实打字速度。', '',
+        '| ID | 日常纯双拼移动手分数（含标点）↑ |',
+        '|---|---:|']
+    for r in rows:
+        lines.append(f"| {r['id']} | {r['macro']['daily|native-punctuation']['score']:.6f} |")
+    lines += ['', '## 新分组与QZ/ZQ双空探索状态', '',
+        '尚未做过联合搜索。新分组的765个候选只禁止QZ；既有双空方案沿用原火星分组。'
+        '因此当前双空对照不能代表新分组的双空最优值。后续应从既有双空可行解起步，'
+        '让根组迁移、成员互换和整组换键都同时检查QZ/ZQ，并保留原M预算。', '',
+        '## 复现', '', '```powershell', 'node tools/benchmark_toned_representatives.js',
               'python tools/report_toned_representatives.py', '```', '',
               '[机器可读完整数据](2026-11-12-toned-representative-benchmark.json)含空桶清单、ZQ/QZ具体音节、完整四轨负担、源文件SHA256和全部冻结移动手语料结果。']
     lines += ['', '## 解读与校验', '',
@@ -87,7 +101,7 @@ def main():
         '差值不能解释为单独清空ZQ的因果代价。',
         '- HTML生产候选的v5/v5.1分数、v5.1逐轨数据、完整人体工学数据、全部冻结语料的移动手结果均逐字段核对完全相同。'
         '各研究候选的重算CKT与已存Rust/JS分数差异均小于1e-9。',
-        '- 本报告未改动生产HTML；复用近期集成提交中的原生带调负载与移动手实现，避免套用无调20合同指标。']
+        '- 本次已更正生产HTML的普通声母F元数据，未改变布局或CKT。复用近期集成提交中的原生带调负载与移动手实现，避免套用无调20合同指标。']
     PREFIX.with_suffix('.md').write_text('\n'.join(lines) + '\n', encoding='utf8')
     print('Rendered', len(rows), 'representatives')
 

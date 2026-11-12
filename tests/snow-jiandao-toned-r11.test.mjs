@@ -3,7 +3,16 @@ import { createRequire } from 'node:module';
 import test from 'node:test';
 
 const require = createRequire(import.meta.url);
-const { fixtureAdapter, loadMetric } = require('../tools/score_snow_jiandao_toned_benchmark.js');
+const { fixtureAdapter, loadMetric, ordinaryOnsetDiagnostics } = require('../tools/score_snow_jiandao_toned_benchmark.js');
+
+test('ordinary D/F is derived from codes rather than stale declared metadata', () => {
+  const fixture = {atoms:[{initial:'p',pinyin:[0,1]},{initial:'ch',pinyin:[2]}],
+    tonedCodes:[['KA',null],['KB',null],['SA',null]],
+    expected:{declaredDiagnostics:{onsetFragmentation:1}}};
+  assert.deepEqual(ordinaryOnsetDiagnostics(fixture), {D:1,F:0});
+  fixture.tonedCodes[1][1]='PA';
+  assert.deepEqual(ordinaryOnsetDiagnostics(fixture), {D:1,F:1});
+});
 
 test('tone-in-main fixture adapter preserves only legal toned syllables', () => {
   const fixture = {
