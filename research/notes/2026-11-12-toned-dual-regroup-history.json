@@ -1,0 +1,172 @@
+[
+  {
+    "name": "dual-regroup-r0",
+    "candidates": 230,
+    "bestId": "DZ0-0150",
+    "bestScore": 9.263759507275038,
+    "memory": {
+      "memoryLower": 22,
+      "memoryGuard": 25,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 5,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "root",
+    "seedScores": {
+      "MARS10-QZZQEMPTY-P3-D2-M23-04": 9.267572618862788
+    },
+    "elapsedSeconds": 450.2641183
+  },
+  {
+    "name": "dual-regroup-low",
+    "candidates": 494,
+    "bestId": "DZL-0406",
+    "bestScore": 9.295440574968936,
+    "memory": {
+      "memoryLower": 22,
+      "memoryGuard": 24,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 6,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "root",
+    "seedScores": {
+      "MARS10-QZZQEMPTY-P3-D1-M22-01": 9.345226513799258,
+      "MARS10-QZZQEMPTY-P3-D2-M22-03": 9.310038928468456
+    },
+    "elapsedSeconds": 422.7340000000004
+  },
+  {
+    "name": "dual-regroup-coupled",
+    "candidates": 959,
+    "bestId": "DZC-0193",
+    "bestScore": 9.263583296126786,
+    "memory": {
+      "memoryLower": 23,
+      "memoryGuard": 25,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 6,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "key,first,coupled",
+    "seedScores": {
+      "MARS10-QZZQEMPTY-P3-D2-M23-04": 9.267572618862788
+    },
+    "elapsedSeconds": 1160.7659999999996
+  },
+  {
+    "name": "dual-regroup-r1",
+    "candidates": 692,
+    "bestId": "DZ1-0489",
+    "bestScore": 9.259782383663769,
+    "memory": {
+      "memoryLower": 22,
+      "memoryGuard": 25,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 5,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "root,key,first",
+    "seedScores": {
+      "DZ0-0150": 9.263759507275038
+    },
+    "elapsedSeconds": 685.375
+  },
+  {
+    "name": "dual-regroup-r2",
+    "candidates": 698,
+    "bestId": "DZ2-0233",
+    "bestScore": 9.25707087318184,
+    "memory": {
+      "memoryLower": 22,
+      "memoryGuard": 25,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 5,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "root,key,first",
+    "seedScores": {
+      "DZ1-0489": 9.259782383663769
+    },
+    "elapsedSeconds": 334.8289999999997
+  },
+  {
+    "name": "dual-regroup-r3",
+    "candidates": 688,
+    "bestId": "DZ3-0231",
+    "bestScore": 9.250964104307425,
+    "memory": {
+      "memoryLower": 22,
+      "memoryGuard": 25,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 5,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "root,key,first",
+    "seedScores": {
+      "DZ2-0233": 9.25707087318184
+    },
+    "elapsedSeconds": 268.71900000000096
+  },
+  {
+    "name": "dual-regroup-r4",
+    "candidates": 1384,
+    "bestId": "DZ4-0185",
+    "bestScore": 9.2491592055825,
+    "memory": {
+      "memoryLower": 22,
+      "memoryGuard": 25,
+      "ordinaryD": 2,
+      "ordinaryF": 0,
+      "rhymeInternalSplits": 0,
+      "toneRegionMergeLower": 9,
+      "sourceRhymeColumnMergeRules": 5,
+      "sourceRhymeColumnMergeLinks": 8,
+      "headDeletionRules": 1
+    },
+    "maxD": 2,
+    "maxM": 23,
+    "operators": "root,key,first",
+    "seedScores": {
+      "DZ3-0231": 9.250964104307425,
+      "DZ3-0182": 9.252460797570237
+    },
+    "elapsedSeconds": 530.2029999999995
+  }
+]

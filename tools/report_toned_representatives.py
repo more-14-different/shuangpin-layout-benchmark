@@ -86,9 +86,9 @@ def main():
     for r in rows:
         lines.append(f"| {r['id']} | {r['macro']['daily|native-punctuation']['score']:.6f} |")
     lines += ['', '## 新分组与QZ/ZQ双空探索状态', '',
-        '尚未做过联合搜索。新分组的765个候选只禁止QZ；既有双空方案沿用原火星分组。'
-        '因此当前双空对照不能代表新分组的双空最优值。后续应从既有双空可行解起步，'
-        '让根组迁移、成员互换和整组换键都同时检查QZ/ZQ，并保留原M预算。', '',
+        '本表对应的早期新分组765个候选只禁止QZ；表内双空对照沿用原火星分组。'
+        '随后开展的新韵组＋双空联合搜索见[独立报告](2026-11-12-toned-dual-regroup.md)，'
+        '其主预算为D≤2、M_lower≤23。本表双空对照不能代表后续新分组的最佳结果。', '',
         '## 复现', '', '```powershell', 'node tools/benchmark_toned_representatives.js',
               'python tools/report_toned_representatives.py', '```', '',
               '[机器可读完整数据](2026-11-12-toned-representative-benchmark.json)含空桶清单、ZQ/QZ具体音节、完整四轨负担、源文件SHA256和全部冻结移动手语料结果。']

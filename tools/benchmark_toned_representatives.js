@@ -10,7 +10,6 @@ const native = require('./score_snow_jiandao_toned_benchmark.js');
 const {shapeKeysFromToneKeys} = require('./auxiliary_semantics.js');
 const root = path.resolve(__dirname, '..');
 const read = p => JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
-const prefix = 'research/notes/2026-11-12-toned-representative-benchmark';
 
 function buckets(tokens, codes, common) {
   if (tokens.length !== codes.length || new Set(tokens).size !== 1407) throw new Error('inventory mismatch');
@@ -31,6 +30,11 @@ function buckets(tokens, codes, common) {
 }
 
 async function main() {
+  const option = name => {
+    const index = process.argv.indexOf(name);
+    return index < 0 ? undefined : process.argv[index + 1];
+  };
+  const prefix = option('--prefix') || 'research/notes/2026-11-12-toned-representative-benchmark';
   const html = path.join(root, 'a7_CKT_R11.html');
   const data = scorer.loadPayload(html);
   const snow = 'D:/C2D/Documents/rime-snow-pinyin';
@@ -47,7 +51,8 @@ async function main() {
     label:'HTML生产候选 M21', expected:production.ckt.v51.score,
     memory:{memoryLower:production.memory.lower, memoryGuard:production.memory.guard},
     source:fixturePath, productionMetadata:production.memory}];
-  const sources = [
+  const sources = option('--layouts') ? [[option('--layouts'),
+    option('--ids') ? option('--ids').split(',') : read(option('--layouts')).layouts.map(x => x.id)]] : [
     ['research/notes/2026-11-12-toned-regroup-combine-finalists.json', ['G2-0000','G2-0004','G2-0002','G2-0013','G2-0012']],
     ['research/notes/2026-11-12-toned-regroup-finalists.json', ['G0-0153','G0-0235','G0-0149']],
     ['research/notes/2026-11-12-toned-rhyme-refine-finalists.json', ['R0463','R0008','R0445']],
@@ -91,7 +96,7 @@ async function main() {
       sourceHashes:Object.fromEntries(['a7_CKT_R11.html',fixturePath,...sources.map(x=>x[0])].map(p=>[p,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex')])),
       htmlProduction:{id:production.id,layoutId:production.layoutId,memory:production.memory,inventory:production.inventory,cktV51:production.ckt.v51.score},results},null,2)+'\n');
   }
-  fs.writeFileSync(path.join(root,'research/.cache/toned-representative-macro-input.json'),JSON.stringify({
+  fs.writeFileSync(path.join(root,option('--macro-input') || 'research/.cache/toned-representative-macro-input.json'),JSON.stringify({
     data:{pinyin:data.pinyin,characters:data.characters,macroxue:{corpora:data.macroxue.corpora}},
     layouts:items.map(({layout,inventory})=>({id:layout.id,tokenKeys:inventory.tokenKeys,tonedCodes:layout.tonedCodes}))}));
 }

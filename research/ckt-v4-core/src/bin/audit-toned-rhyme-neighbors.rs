@@ -16,6 +16,21 @@ struct Candidate {
 struct Job {
     fixture: TrialFixture,
     candidates: Vec<Candidate>,
+    #[serde(default = "default_max_d", rename = "maxD")]
+    max_d: usize,
+    #[serde(default = "default_max_m", rename = "maxM")]
+    max_m: usize,
+    #[serde(default = "default_forbidden", rename = "requireEmpty")]
+    require_empty: Vec<String>,
+}
+fn default_max_d() -> usize {
+    2
+}
+fn default_max_m() -> usize {
+    24
+}
+fn default_forbidden() -> Vec<String> {
+    vec!["QZ".to_owned()]
 }
 fn parse_five_keys(value: &str, alphabet: &KeyAlphabet) -> Result<[u8; 5], String> {
     let chars = value.chars().collect::<Vec<_>>();
@@ -88,6 +103,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let job: Job = serde_json::from_str(&fs::read_to_string(&args[3])?)?;
     let fixture = &job.fixture;
+    let forbidden = job
+        .require_empty
+        .iter()
+        .map(|code| {
+            let chars = code.chars().collect::<Vec<_>>();
+            if chars.len() != 2 {
+                return Err("forbidden code must have two keys");
+            }
+            Ok((chars[0], chars[1]))
+        })
+        .collect::<Result<Vec<_>, _>>()?;
     let corpus = NativeCorpus::open(&args[1])?;
     let alphabet = KeyAlphabet::new(&fixture.key_alphabet)?;
     let motor = projected_motor(&corpus, &alphabet, Path::new(&args[2]))?;
@@ -112,9 +138,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut results = Vec::new();
     let mut current = base;
     for c in &job.candidates {
-        if c.memory > 24
-            || calc_ordinary_d(&c.state, fixture) > 2
-            || !validator.is_valid_forbidden(&c.state, &[('Q', 'Z')])
+        if c.memory > job.max_m
+            || calc_ordinary_d(&c.state, fixture) > job.max_d
+            || !validator.is_valid_forbidden(&c.state, &forbidden)
         {
             return Err(format!("invalid candidate {}", c.id).into());
         }

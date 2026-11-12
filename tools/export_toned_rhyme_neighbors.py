@@ -21,18 +21,22 @@ def main():
     job, scores = read(args.job), read(args.results)
     assert scores["completed"] == scores["total"] == len(job["candidates"])
     fixture = job["fixture"]
-    source = read("research/config/ckt-v51-toned-2121-mars10-qz-empty-p3-finalist.json")
+    source = read(job.get("sourceLayouts", "research/config/ckt-v51-toned-2121-mars10-qz-empty-p3-finalist.json"))
     seeds = read("research/config/ckt-v51-toned-2121-seeds.json")
     by_id = {c["id"]: c for c in job["candidates"]}
     ranked = sorted([dict(by_id[r["id"]], score=r["score"]) for r in scores["results"]], key=lambda c: c["score"])
-    baselines = {c["anchor"]: c["score"] for c in ranked if c["kind"] == "baseline"}
+    baselines = dict(job.get("seedScores", {}))
+    baselines.update({c["anchor"]: c["score"] for c in ranked if c["kind"] == "baseline"})
+    source_champion = min(x['rustScore'] for x in source['layouts']
+                          if x['memoryAudit']['ordinaryD'] <= job.get('maxD', 2)
+                          and x['memoryAudit']['memoryLower'] <= job.get('maxM', 24))
     selected = []
     summaries = {}
     for kind in sorted({c["kind"] for c in ranked}):
         members = [c for c in ranked if c["kind"] == kind]
         summaries[kind] = dict(count=len(members), best=members[0]["score"],
                                improvingAnchor=sum(c["score"] < baselines[c["anchor"]] - 1e-9 for c in members),
-                               beatingChampion=sum(c["score"] < source["layouts"][4]["rustScore"] - 1e-9 for c in members))
+                               beatingChampion=sum(c["score"] < source_champion - 1e-9 for c in members))
         selected.extend(members[:3])
     # Keep the strongest lower-memory / lower-D options as well as each
     # operator's leaders, so score-only sorting does not discard a useful tier.
@@ -60,6 +64,10 @@ def main():
     exported["contract"]["rhymeInternalSplitsPolicy"] = "per-layout memoryAudit.rhymeInternalSplits"
     exported["contract"]["secondCodeFactorizationSelectionStatus"] = "mars10-full-final-neighborhood-audit"
     exported["contract"]["memoryConvention"] = job["memoryConvention"]
+    exported["contract"]["requireEmpty"] = job.get("requireEmpty", ["QZ"])
+    exported["contract"]["requireEmptyBuckets"] = job.get("requireEmpty", ["QZ"])
+    exported["contract"]["searchMaxD"] = job.get("maxD", 2)
+    exported["contract"]["searchMaxMemoryLower"] = job.get("maxM", 24)
     if job.get("regrouping"):
         exported["contract"]["secondCodeFactorizationSelectionStatus"] = "tone-independent-root-repartition"
     first_for_py = {p: i for i, a in enumerate(fixture["atoms"]) for p in a["pinyin"]}
@@ -73,9 +81,10 @@ def main():
                     codes[fixture["pinyin"][p] + str(t)] = (c["state"]["firstKeys"][first_for_py[p]] +
                         c["state"]["rhymeKeys"][region_for_tone[t]][final_for_py[p]])
         assert len(codes) == 1407 and "QZ" not in codes.values()
+        assert all(code not in codes.values() for code in job.get("requireEmpty", ["QZ"]))
         ordinary_d = sum(c["state"]["firstKeys"][i] != a["baselineKey"]
                          for i, a in enumerate(fixture["atoms"]) if len(a["initial"]) == 1 and a["initial"] != "_")
-        assert ordinary_d <= 2 and c["memory"] <= 24
+        assert ordinary_d <= job.get("maxD", 2) and c["memory"] <= job.get("maxM", 24)
         exported["layouts"].append(dict(id=c["id"], origin=c["anchor"], description=c["description"],
             factorization="tone-independent-root-repartition" if job.get("regrouping") else "mars10-final-neighborhood", rustScore=c["score"],
             memoryAudit=dict(memoryLower=c["memory"], memoryGuard=c.get("memoryGuard", c["memory"] + 2),
@@ -84,6 +93,7 @@ def main():
             toneRegionFinalKeys={r["name"]: dict(zip([a["name"] for a in fixture["rhymeAtoms"]], c["state"]["rhymeKeys"][ri]))
                                  for ri, r in enumerate(fixture["toneRegions"])},
             bucketAudit=dict(qzSyllables1407=[t for t, code in codes.items() if code == "QZ"],
+                             zqSyllables1407=[t for t, code in codes.items() if code == "ZQ"],
                              occupied1407=len(set(codes.values())),
                              occupiedCommon1237=len({codes[t] for t in seeds["auditTokenKeys"]})),
             tonedCodes=[codes[t] for t in source["tokenKeys"]]))
@@ -103,6 +113,11 @@ def main():
         report["rootNames"] = job["rootNames"]
         report["sourceHashes"]["tools/search_toned_rhyme_regroup.py"] = hashlib.sha256(
             (ROOT / "tools/search_toned_rhyme_regroup.py").read_bytes()).hexdigest()
+    if job.get("requireEmpty") == ["QZ", "ZQ"]:
+        report.update(requireEmpty=job['requireEmpty'], maxD=job['maxD'], maxM=job['maxM'],
+                      seedScores=job['seedScores'], searchArguments=job['searchArguments'])
+        report['sourceHashes']['tools/search_toned_dual_empty_regroup.py'] = hashlib.sha256(
+            (ROOT / 'tools/search_toned_dual_empty_regroup.py').read_bytes()).hexdigest()
     for suffix, value in [("-results.json", report), ("-finalists.json", exported)]:
         (ROOT / (args.prefix + suffix)).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summaries, ensure_ascii=False, indent=2))

@@ -308,6 +308,19 @@ ckt-v51-toned-regroup:
     python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-regroup-job.json --results research/.cache/toned-regroup-results.json --prefix research/notes/2026-11-12-toned-regroup
     node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-regroup-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-regroup-js-verify.json
 
+# Exact dual-empty search, D <= 2 and M_lower <= 23 unless explicitly changed.
+ckt-v51-toned-dual-regroup tag="dual-regroup-r0":
+    python tools/search_toned_dual_empty_regroup.py --prefix research/.cache/{{tag}} --tag {{tag}}
+    cargo build --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
+    python tools/run_toned_neighbor_shards.py research/.cache/{{tag}} --workers 3
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/{{tag}}-job.json --results research/.cache/{{tag}}-scores.json --prefix research/notes/2026-11-12-{{tag}}
+
+ckt-v51-toned-dual-regroup-refine tag previous operators="root,key,first" leaders="1":
+    python tools/search_toned_dual_empty_regroup.py --prefix research/.cache/{{tag}} --tag {{tag}} --previous research/.cache/{{previous}} --operators {{operators}} --leaders {{leaders}}
+    cargo build --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
+    python tools/run_toned_neighbor_shards.py research/.cache/{{tag}} --workers 3
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/{{tag}}-job.json --results research/.cache/{{tag}}-scores.json --prefix research/notes/2026-11-12-{{tag}}
+
 ckt-v51-toned-regroup-refine:
     python tools/search_toned_rhyme_regroup.py --refine
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-regroup-refine-job.json research/.cache/toned-regroup-refine-results.json
