@@ -28,6 +28,36 @@ try {
   await page.goto(url, { waitUntil: 'load', timeout: 120_000 });
   await page.waitForFunction(() => window.App7?.ready, null, { timeout: 120_000 });
   assert.equal(await page.evaluate(() => window.App7.current().id), 'NF3-21X21-M40-44');
+  const tonedContractBridge = await page.evaluate(() => {
+    const bridge = window.App7.data.tonedContractBenchmark;
+    const ice = bridge?.schemes?.snowJiandao;
+    return {
+      version: bridge?.version,
+      catalogueCount: window.App7.data.entries.length,
+      id: ice?.id,
+      memory: ice?.memory,
+      inventory: ice?.inventory,
+      cktV5: ice?.ckt?.v5?.score,
+      cktV51: ice?.ckt?.v51?.score,
+      macroDaily: ice?.macro?.['daily|native-punctuation']?.score,
+      reportMarkup: window.r11Report(),
+    };
+  });
+  assert.equal(tonedContractBridge.version, 'snow-jiandao-toned-r11-contract-bridge-v1');
+  assert.equal(tonedContractBridge.catalogueCount, 850,
+    'the tone-in-main bridge must not masquerade as an ordinary untoned catalogue entry');
+  assert.equal(tonedContractBridge.id, 'SNOW-JIANDAO-TONED');
+  assert.deepEqual(tonedContractBridge.memory, {
+    definition: 'M-T1: baseline rule links plus one ordinary-initial displacement',
+    lower: 21, guard: 23, D: 1, F: 1,
+  });
+  assert.equal(tonedContractBridge.inventory.legalTonedSyllables, 1407);
+  assert.equal(tonedContractBridge.inventory.occupiedBuckets, 427);
+  assert.ok(Math.abs(tonedContractBridge.cktV5 - 9.199739582572558) < 1e-12);
+  assert.ok(Math.abs(tonedContractBridge.cktV51 - 9.203609845305458) < 1e-12);
+  assert.ok(Math.abs(tonedContractBridge.macroDaily - 122.77842860194683) < 1e-12);
+  assert.match(tonedContractBridge.reportMarkup, /snow-jiandao-toned-performance/);
+  assert.match(tonedContractBridge.reportMarkup, /旧 20 合同假设独立调辅/);
   const bPathCoverage = await page.evaluate(() => {
     const layouts = window.App7.data.entries.filter(entry => entry.capacity.join('x') === '21x21');
     return {
