@@ -37,11 +37,20 @@ def main():
     # Keep the strongest lower-memory / lower-D options as well as each
     # operator's leaders, so score-only sorting does not discard a useful tier.
     for max_d in [0, 1, 2]:
-        for max_m in [22, 23, 24]:
+        for max_m in [21, 22, 23, 24]:
             eligible = [c for c in ranked if c["memory"] <= max_m and
                         sum(c["state"]["firstKeys"][i] != a["baselineKey"]
                             for i, a in enumerate(fixture["atoms"])
                             if len(a["initial"]) == 1 and a["initial"] != "_") <= max_d]
+            if eligible:
+                selected.append(eligible[0])
+    if job.get("regrouping"):
+        # Include each improving root-transfer route, even if a different
+        # destination for er outranks it globally.
+        for root in job.get("rootNames", []):
+            eligible = [c for c in ranked if c["kind"] == "root-transfer" and
+                        c["description"].startswith(root + " ->") and
+                        c["score"] < baselines[c["anchor"]] - 1e-9]
             if eligible:
                 selected.append(eligible[0])
     selected = list({c["id"]: c for c in selected}.values())
@@ -51,6 +60,8 @@ def main():
     exported["contract"]["rhymeInternalSplitsPolicy"] = "per-layout memoryAudit.rhymeInternalSplits"
     exported["contract"]["secondCodeFactorizationSelectionStatus"] = "mars10-full-final-neighborhood-audit"
     exported["contract"]["memoryConvention"] = job["memoryConvention"]
+    if job.get("regrouping"):
+        exported["contract"]["secondCodeFactorizationSelectionStatus"] = "tone-independent-root-repartition"
     first_for_py = {p: i for i, a in enumerate(fixture["atoms"]) for p in a["pinyin"]}
     final_for_py = {p: i for i, a in enumerate(fixture["rhymeAtoms"]) for p in a["pinyin"]}
     region_for_tone = {t: i for i, r in enumerate(fixture["toneRegions"]) for t in r["tones"]}
@@ -66,8 +77,8 @@ def main():
                          for i, a in enumerate(fixture["atoms"]) if len(a["initial"]) == 1 and a["initial"] != "_")
         assert ordinary_d <= 2 and c["memory"] <= 24
         exported["layouts"].append(dict(id=c["id"], origin=c["anchor"], description=c["description"],
-            factorization="mars10-final-neighborhood", rustScore=c["score"],
-            memoryAudit=dict(memoryLower=c["memory"], memoryGuard=c["memory"] + 2,
+            factorization="tone-independent-root-repartition" if job.get("regrouping") else "mars10-final-neighborhood", rustScore=c["score"],
+            memoryAudit=dict(memoryLower=c["memory"], memoryGuard=c.get("memoryGuard", c["memory"] + 2),
                              ordinaryD=ordinary_d, ordinaryF=0, rhymeInternalSplits=c["splits"], toneRegionMergeLower=c["merge"]),
             firstKeys=dict(zip([a["name"] for a in fixture["atoms"]], c["state"]["firstKeys"])),
             toneRegionFinalKeys={r["name"]: dict(zip([a["name"] for a in fixture["rhymeAtoms"]], c["state"]["rhymeKeys"][ri]))
@@ -76,12 +87,22 @@ def main():
                              occupied1407=len(set(codes.values())),
                              occupiedCommon1237=len({codes[t] for t in seeds["auditTokenKeys"]})),
             tonedCodes=[codes[t] for t in source["tokenKeys"]]))
+        if job.get("regrouping"):
+            exported["layouts"][-1]["rhymeGroups"] = c["rhymeGroups"]
+            exported["layouts"][-1]["memoryAudit"].update(
+                sourceRhymeColumnMergeRules=c["sourceRhymeColumnMergeRules"],
+                sourceRhymeColumnMergeLinks=c["sourceRhymeColumnMergeLinks"],
+                headDeletionRules=1)
     report = dict(completed=scores["completed"], elapsedSeconds=scores["elapsedSeconds"],
                   rejected=job["rejected"], summary=summaries, memoryConvention=job["memoryConvention"],
                   sourceHashes={p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest()
                                 for p in [args.job, args.results, "tools/prepare_toned_rhyme_neighbors.py",
                                           "research/ckt-v4-core/src/bin/audit-toned-rhyme-neighbors.rs"]},
-                  results=[{k: v for k, v in c.items() if k != "state"} for c in ranked])
+                  results=[{k: v for k, v in c.items() if k not in ("state", "rhymeGroups")} for c in ranked])
+    if job.get("regrouping"):
+        report["rootNames"] = job["rootNames"]
+        report["sourceHashes"]["tools/search_toned_rhyme_regroup.py"] = hashlib.sha256(
+            (ROOT / "tools/search_toned_rhyme_regroup.py").read_bytes()).hexdigest()
     for suffix, value in [("-results.json", report), ("-finalists.json", exported)]:
         (ROOT / (args.prefix + suffix)).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summaries, ensure_ascii=False, indent=2))

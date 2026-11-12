@@ -297,3 +297,27 @@ ckt-v51-toned-rhyme-refine:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-rhyme-refine-job.json research/.cache/toned-rhyme-refine-results.json
     python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-rhyme-refine-job.json --results research/.cache/toned-rhyme-refine-results.json --prefix research/notes/2026-11-12-toned-rhyme-refine
     node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-rhyme-refine-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-rhyme-refine-js-verify.json
+
+ckt-v51-toned-regroup:
+    python tools/search_toned_rhyme_regroup.py
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-regroup-job.json research/.cache/toned-regroup-results.json
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-regroup-job.json --results research/.cache/toned-regroup-results.json --prefix research/notes/2026-11-12-toned-regroup
+    node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-regroup-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-regroup-js-verify.json
+
+ckt-v51-toned-regroup-refine:
+    python tools/search_toned_rhyme_regroup.py --refine
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-regroup-refine-job.json research/.cache/toned-regroup-refine-results.json
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-regroup-refine-job.json --results research/.cache/toned-regroup-refine-results.json --prefix research/notes/2026-11-12-toned-regroup-refine
+    node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-regroup-refine-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-regroup-refine-js-verify.json
+
+ckt-v51-toned-regroup-combine:
+    python tools/search_toned_rhyme_regroup.py --combine
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-regroup-combine-job.json research/.cache/toned-regroup-combine-results.json
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-regroup-combine-job.json --results research/.cache/toned-regroup-combine-results.json --prefix research/notes/2026-11-12-toned-regroup-combine
+    node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-regroup-combine-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-regroup-combine-js-verify.json
+
+ckt-v51-toned-regroup-combine-refine:
+    python tools/search_toned_rhyme_regroup.py --combine --refine
+    cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-regroup-combine-refine-job.json research/.cache/toned-regroup-combine-refine-results.json
+    python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-regroup-combine-refine-job.json --results research/.cache/toned-regroup-combine-refine-results.json --prefix research/notes/2026-11-12-toned-regroup-combine-refine
+    node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-regroup-combine-refine-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-regroup-combine-refine-js-verify.json
