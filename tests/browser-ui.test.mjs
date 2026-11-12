@@ -114,6 +114,15 @@ try {
   await page.waitForSelector('#snowJiandaoTonedDetail');
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
   assert.match(await page.locator('#snowJiandaoTonedDetail h2').innerText(), /SNOW-JIANDAO-TONED/);
+  assert.equal(await page.locator('#svgbox svg').count(), 1);
+  for (const mode of ['first', 'second', 'shape', 'daily', 'character', 'word2', 'word3', 'word4']) {
+    await page.locator('#snowJiandaoKeyboardMode').selectOption(mode);
+    assert.match(await page.locator('#svgbox svg').getAttribute('aria-label'), /.+/);
+  }
+  await page.locator('#snowJiandaoKeyboardMode').selectOption('shape');
+  assert.match(await page.locator('#svgbox').textContent(), /折/);
+  await page.locator('#snowJiandaoKeyboardMode').selectOption('second');
+  assert.match(await page.locator('#svgbox').textContent(), /a-ou·四/);
   assert.equal(await page.locator('#nf6SchemePicker').isVisible(), true);
   await page.locator('#nf6SchemeQuery').fill('冰雪剑道');
   await page.locator('#nf6SchemeHost').selectOption('21x21');
@@ -127,6 +136,19 @@ try {
   await page.locator('#nf6SchemeQuery').fill('S005');
   await page.locator('#nf6SchemeList').selectOption('S005');
   await page.waitForFunction(() => window.App7.current().id === 'S005');
+  await page.locator('#tabs [data-action="nav:selection"]').click();
+  await page.waitForFunction(() => window.App7.UX.view === 'selection');
+
+  await page.locator('#nf6SelectionMemory').fill('21');
+  await page.waitForTimeout(250);
+  await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
+  await page.waitForSelector('table[data-ux-table="benchmark"] .snow-jiandao-contract-row');
+  assert.match(await page.locator('table[data-ux-table="benchmark"] .snow-jiandao-contract-row').innerText(),
+    /SNOW-JIANDAO-TONED/);
+  await page.locator('[data-action="fair"]').click();
+  await page.waitForSelector('table[data-ux-table="fair"] .snow-jiandao-contract-row');
+  assert.match(await page.locator('table[data-ux-table="fair"] .snow-jiandao-contract-row').innerText(),
+    /带调字轨/);
   await page.locator('#tabs [data-action="nav:selection"]').click();
   await page.waitForFunction(() => window.App7.UX.view === 'selection');
 

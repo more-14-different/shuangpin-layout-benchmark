@@ -214,6 +214,28 @@ function loadSummary(outcomes) {
   };
 }
 
+function keyboardSemantics(fixture) {
+  const firstByKey = Object.fromEntries([...KEYS].map(key => [key, []]));
+  for (const atom of fixture.atoms) {
+    const keys = new Set();
+    for (const pinyin of atom.pinyin) for (const code of fixture.tonedCodes[pinyin]) {
+      if (code) keys.add(code[0]);
+    }
+    for (const key of keys) firstByKey[key].push(atom.name);
+  }
+  const secondByKey = Object.fromEntries([...KEYS].map(key => [key, []]));
+  const toneLabels = ["一", "二", "三", "四", "轻"];
+  for (const atom of fixture.rhymeAtoms) for (let tone = 1; tone <= 5; tone++) {
+    const keys = new Set(atom.pinyin.map(pinyin => fixture.tonedCodes[pinyin][tone - 1])
+      .filter(Boolean).map(code => code[1]));
+    for (const key of keys) secondByKey[key].push(`${atom.name}·${toneLabels[tone - 1]}`);
+  }
+  const shapeNames = ["折", "横", "撇", "竖", "点"];
+  const shapeByKey = Object.fromEntries([...KEYS].map(key => [key, []]));
+  [...fixture.shapeKeysByMeaning].forEach((key, index) => shapeByKey[key].push(shapeNames[index]));
+  return {firstByKey, secondByKey, shapeByKey};
+}
+
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const root = path.resolve(__dirname, "..");
@@ -273,6 +295,10 @@ function main() {
       qzEmpty: !occupied.has("QZ"),
       zqEmpty: !occupied.has("ZQ"),
     },
+    keyboards: {
+      soundKeys: fixture.soundKeys,
+      ...keyboardSemantics(fixture),
+    },
     ckt: {
       v5: {
         score: v5.score,
@@ -304,4 +330,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = {fixtureAdapter, loadMetric, loadSummary};
+module.exports = {fixtureAdapter, keyboardSemantics, loadMetric, loadSummary};
