@@ -19,6 +19,10 @@ SOURCE = 'research/config/ckt-v51-toned-2121-mars10-qzzq-empty-p3-finalist.json'
 def build(args):
     job = make_job()
     fixture, roots, final_roots = job['fixture'], job['rootNames'], job['finalRoots']
+    if getattr(args, 'swap_tone_rows', False):
+        upper = next(r for r in fixture['toneRegions'] if r['name'] == 'upper')
+        lower = next(r for r in fixture['toneRegions'] if r['name'] == 'lower')
+        upper['tones'], lower['tones'] = lower['tones'], upper['tones']
     original = read('research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json')
     first_for_py = {p: i for i, a in enumerate(fixture['atoms']) for p in a['pinyin']}
     final_for_py = {p: i for i, a in enumerate(fixture['rhymeAtoms']) for p in a['pinyin']}
@@ -195,6 +199,7 @@ def main():
     parser.add_argument('--max-d', type=int, default=2)
     parser.add_argument('--max-m', type=int, default=23)
     parser.add_argument('--max-guard', type=int, default=999)
+    parser.add_argument('--swap-tone-rows', action='store_true', help='upper tones 1/5; lower tone 4; home unchanged')
     parser.add_argument('--operators', default='root')
     parser.add_argument('--exclude', action='append', default=[], help='previously scored prefix; repeatable')
     parser.add_argument('--anchors', default='MARS10-QZZQEMPTY-P3-D2-M23-04')

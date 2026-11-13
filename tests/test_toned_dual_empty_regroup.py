@@ -9,6 +9,17 @@ from search_toned_dual_empty_regroup import build, ROOT, read, SOURCE
 
 @unittest.skipUnless((ROOT / 'research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json').exists(), 'local fixture required')
 class DualEmptyRegroup(unittest.TestCase):
+    def test_swapping_outer_tone_rows_preserves_keys_memory_and_inventory(self):
+        base = dict(max_d=2,max_m=23,tag='SWAP',previous=None,production=True,
+                    q_empty_rhyme=True,require_empty=[],operators='key',anchors='')
+        keep = build(Namespace(**base))
+        swap = build(Namespace(**base,swap_tone_rows=True))
+        self.assertEqual(keep['candidates'],swap['candidates'])
+        regions = {r['name']:r['tones'] for r in swap['fixture']['toneRegions']}
+        self.assertEqual(regions,dict(upper=[1,5],home=[3,2],lower=[4]))
+        self.assertEqual(keep['fixture']['tonedCodes'],swap['fixture']['tonedCodes'])
+        self.assertEqual(swap['fixture']['toneKeysByTone'],'IVUAO')
+
     def test_guard_budget_is_independent_of_lower_budget(self):
         job = build(Namespace(max_d=2,max_m=23,max_guard=23,tag='GUARD',previous=None,production=True,
                              require_empty=[],operators='root,erv,key',anchors=''))

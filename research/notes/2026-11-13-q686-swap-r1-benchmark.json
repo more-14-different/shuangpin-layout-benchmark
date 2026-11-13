@@ -1,0 +1,3472 @@
+{
+  "version": "toned-representative-benchmark-1",
+  "contract": {
+    "shapeKeysByMeaning": "AVUIO",
+    "toneKeysByTone": "IVUAO",
+    "toneDigitsByShapeMeaning": "42310",
+    "trackWeights": [
+      1,
+      3,
+      1,
+      1
+    ],
+    "v5Policy": "12/21/24",
+    "v51Policy": "12/213/24",
+    "reference": "S005 keytao-only",
+    "macro": "pure main code, no auxiliary or selection"
+  },
+  "sourceHashes": {
+    "a7_CKT_R11.html": "fe43166e90ef9aed3176d23462c9ea0fd4e27c5716f0490ee1ead6558d14142c",
+    "research/.cache/ckt-v51-toned-mars10-D1-final.json": "f7bc405a6dd9230ae1a07852e825b79e237166938afe5e0642450f08f5dda253",
+    "research/notes/2026-11-13-q686-swap-r1-finalists.json": "7640721b293d47214a864238eed631c87e46f32995bc675f87704258c5b8ed8e"
+  },
+  "htmlProduction": {
+    "id": "SNOW-JIANDAO-TONED",
+    "layoutId": "MARS10-AVUIO786-D1-final-9.203609845305",
+    "memory": {
+      "definition": "M-T1: baseline rule links plus one ordinary-initial displacement",
+      "lower": 21,
+      "guard": 23,
+      "D": 1,
+      "F": 0,
+      "onsetDefinition": "ordinary written initials; D counts displaced initials, F counts additional first-key incidences; derived from actual toned codes"
+    },
+    "inventory": {
+      "legalTonedSyllables": 1407,
+      "occupiedBuckets": 427,
+      "capacity": 441,
+      "emptyBuckets": 14,
+      "qzEmpty": false,
+      "zqEmpty": false
+    },
+    "cktV51": 9.203609845305458
+  },
+  "results": [
+    {
+      "id": "SNOW-JIANDAO-TONED",
+      "label": "HTML生产候选 M21",
+      "source": "research/.cache/ckt-v51-toned-mars10-D1-final.json",
+      "memory": {
+        "memoryLower": 21,
+        "memoryGuard": 23,
+        "ordinaryD": 1,
+        "ordinaryF": 0
+      },
+      "productionMetadata": {
+        "definition": "M-T1: baseline rule links plus one ordinary-initial displacement",
+        "lower": 21,
+        "guard": 23,
+        "D": 1,
+        "F": 0,
+        "onsetDefinition": "ordinary written initials; D counts displaced initials, F counts additional first-key incidences; derived from actual toned codes"
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "S"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 427,
+        "occupancyPercent": 96.82539682539682,
+        "emptyCount": 14,
+        "emptyBuckets": [
+          "WR",
+          "WF",
+          "WB",
+          "RB",
+          "FR",
+          "FF",
+          "FB",
+          "GR",
+          "GF",
+          "GB",
+          "HR",
+          "HF",
+          "HB",
+          "NN"
+        ],
+        "occupiedCommon1237": 426,
+        "commonOccupancyPercent": 96.59863945578232,
+        "qzSyllables": [
+          "qia1",
+          "qiu1"
+        ],
+        "zqSyllables": [
+          "zan4",
+          "zuan4"
+        ],
+        "singletonBuckets": 59,
+        "maxSyllablesPerBucket": 12
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.199739582572558,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 102.21807027259283,
+              "cognitiveMs": 67.58701457487331,
+              "effectiveMs": 169.80508484746613,
+              "firstAuxRate": 0.1857217140572167,
+              "secondAuxRate": 0.033514524640937945,
+              "selectionRate": 0.0027628097521678573,
+              "meanTerminalRank": 1.0031670370841224,
+              "meanRejectedCandidates": 0.003167037084122442,
+              "meanPageActions": 3.5086640024991044e-7,
+              "meanKeys": 2.2192362386981546
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 401.17266528075567,
+              "cognitiveMs": 45.74658615449568,
+              "effectiveMs": 446.91925143525134,
+              "firstAuxRate": 0.13477212090398621,
+              "secondAuxRate": 0.015621309601529984,
+              "selectionRate": 0.0009590503787175064,
+              "meanTerminalRank": 1.0010625355122063,
+              "meanRejectedCandidates": 0.0010625355122062129,
+              "meanPageActions": 0,
+              "meanKeys": 4.150393430505516
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.1298376330686,
+              "cognitiveMs": 228.6141381506278,
+              "effectiveMs": 554.7439757836963,
+              "firstAuxRate": 0.4888949338196351,
+              "secondAuxRate": 0.17899402905306327,
+              "selectionRate": 0.041409250191547065,
+              "meanTerminalRank": 1.0644867509381462,
+              "meanRejectedCandidates": 0.06448675093814626,
+              "meanPageActions": 0.0005918720899424783,
+              "meanKeys": 3.6678889628726985
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 434.296000714903,
+              "cognitiveMs": 79.47441016849069,
+              "effectiveMs": 513.7704108833937,
+              "firstAuxRate": 0.2323411318918461,
+              "secondAuxRate": 0.028262332019753287,
+              "selectionRate": 0.0019669899086242814,
+              "meanTerminalRank": 1.002263540996726,
+              "meanRejectedCandidates": 0.002263540996726011,
+              "meanPageActions": 0,
+              "meanKeys": 4.2606034639115995
+            }
+          }
+        },
+        "v51": {
+          "score": 9.203609845305458,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 102.21807027259283,
+              "firstAuxRate": 0.1857217140572167,
+              "secondAuxRate": 0.033514524640937945,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0027628097521678573,
+              "meanRejectedCandidates": 0.003167037084122442,
+              "meanPageActions": 3.5086640024991044e-7,
+              "meanKeys": 2.2192362386981546,
+              "effectiveMs": 169.80508484746616
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 401.17266528075567,
+              "firstAuxRate": 0.13477212090398621,
+              "secondAuxRate": 0.015621309601529984,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0009590503787175064,
+              "meanRejectedCandidates": 0.0010625355122062129,
+              "meanPageActions": 0,
+              "meanKeys": 4.150393430505516,
+              "effectiveMs": 446.9192514352514
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 331.9533690629345,
+              "firstAuxRate": 0.4888949338196351,
+              "secondAuxRate": 0.17899402905306327,
+              "thirdAuxRate": 0.041409250191547065,
+              "selectionRate": 0.005369009309876268,
+              "meanRejectedCandidates": 0.006527437579567515,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.7092982130642453,
+              "effectiveMs": 548.2911380094366
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 434.296000714903,
+              "firstAuxRate": 0.2323411318918461,
+              "secondAuxRate": 0.028262332019753287,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0019669899086242814,
+              "meanRejectedCandidates": 0.002263540996726011,
+              "meanPageActions": 0,
+              "meanKeys": 4.2606034639115995,
+              "effectiveMs": 513.7704108833937
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 428.77073134100846,
+          "motorUpperMs": 345.33090598211624,
+          "meanKeys": 3.773386367865091,
+          "selectionRate": 0.0021626600178034877,
+          "firstAuxRate": 0.21854569041344274,
+          "secondAuxRate": 0.047939135753057416,
+          "thirdAuxRate": 0.006901541698591178
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.03101908250219163,
+              "W": 0.04166935550405695,
+              "E": 0.06043517874666335,
+              "R": 0.03250836684070482,
+              "T": 0.023335823532724162,
+              "Y": 0.047924542083636286,
+              "U": 0.016988977132528244,
+              "I": 0.02091984878988615,
+              "O": 0.029457874782803643,
+              "P": 0.04054813336889933,
+              "A": 0.015531827090764198,
+              "S": 0.029121815124263022,
+              "D": 0.08364940841932277,
+              "F": 0.058420915651173265,
+              "G": 0.04236309531353891,
+              "H": 0.060332082858159004,
+              "J": 0.037961566221670996,
+              "K": 0.030451640096825022,
+              "L": 0.026595669414054616,
+              "Z": 0.06154023491949575,
+              "X": 0.02732940911075692,
+              "C": 0.0182099091314815,
+              "V": 0.015890521731598807,
+              "B": 0.026552375728479502,
+              "N": 0.08241870042685255,
+              "M": 0.03882364547746862
+            },
+            "home": 0.3844280201897718,
+            "leftPinkyQAZ": 0.10809114451245158,
+            "rightPinky": 0.04054813336889933,
+            "indexFingerTYB": 0.09781274134483996,
+            "maxFinger": 0.2844495142003157,
+            "finger": [
+              0.10809114451245158,
+              0.09812057973907688,
+              0.1622944962974676,
+              0.19907109879821944,
+              0,
+              0,
+              0.2844495142003157,
+              0.05137148888671117,
+              0.05605354419685826,
+              0.04054813336889933
+            ],
+            "differentKeySameFingerRate": 0.05940308824431532
+          },
+          "word2": {
+            "load": {
+              "Q": 0.04030082168234903,
+              "W": 0.04304223901243824,
+              "E": 0.06636733544602644,
+              "R": 0.04346435011798396,
+              "T": 0.03806240191963462,
+              "Y": 0.06277704293906691,
+              "U": 0.005728807478753292,
+              "I": 0.007036323353151959,
+              "O": 0.008213525633941173,
+              "P": 0.059388998676099265,
+              "A": 0.005587496974902043,
+              "S": 0.04637660342649778,
+              "D": 0.057197130766355124,
+              "F": 0.044400665886841814,
+              "G": 0.05233199476194303,
+              "H": 0.044392921306085305,
+              "J": 0.049408988088508285,
+              "K": 0.04837754497471384,
+              "L": 0.05214284662220736,
+              "Z": 0.029263859032022353,
+              "X": 0.038142974774244325,
+              "C": 0.027144224471670687,
+              "V": 0.009669792144583272,
+              "B": 0.03977568869992857,
+              "N": 0.039925386909978745,
+              "M": 0.04148003490007256
+            },
+            "home": 0.40021619280805465,
+            "leftPinkyQAZ": 0.07515217768927343,
+            "rightPinky": 0.059388998676099265,
+            "indexFingerTYB": 0.1406151335586301,
+            "maxFinger": 0.24371318162246508,
+            "finger": [
+              0.07515217768927343,
+              0.12756181721318036,
+              0.15070869068405227,
+              0.22770489353091525,
+              0,
+              0,
+              0.24371318162246508,
+              0.055413868327865795,
+              0.06035637225614854,
+              0.059388998676099265
+            ],
+            "differentKeySameFingerRate": 0.0839194090084987
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025859204653306482,
+              "W": 0.02942051613549514,
+              "E": 0.048117466888883985,
+              "R": 0.025565204745741053,
+              "T": 0.023494130838243327,
+              "Y": 0.07925296347589107,
+              "U": 0.03240963088316035,
+              "I": 0.037187115797209354,
+              "O": 0.04204870407625222,
+              "P": 0.06586151931865489,
+              "A": 0.028216402015428865,
+              "S": 0.03580254717419587,
+              "D": 0.06924469706253338,
+              "F": 0.022311018389892936,
+              "G": 0.03612319353251367,
+              "H": 0.03485281915898792,
+              "J": 0.062188409736081696,
+              "K": 0.025071447751058438,
+              "L": 0.04572356022879482,
+              "Z": 0.03553691801466903,
+              "X": 0.04690943669265313,
+              "C": 0.008690868286757183,
+              "V": 0.05135982106535558,
+              "B": 0.04318951213281569,
+              "N": 0.017429072878418016,
+              "M": 0.0281338190670059
+            },
+            "home": 0.35953409504948763,
+            "leftPinkyQAZ": 0.08961252468340437,
+            "rightPinky": 0.06586151931865489,
+            "indexFingerTYB": 0.14593660644695008,
+            "maxFinger": 0.25426671519954497,
+            "finger": [
+              0.08961252468340437,
+              0.11213250000234413,
+              0.12605303223817454,
+              0.20204288070456228,
+              0,
+              0,
+              0.25426671519954497,
+              0.062258563548267795,
+              0.08777226430504703,
+              0.06586151931865489
+            ],
+            "differentKeySameFingerRate": 0.10358541505247978
+          },
+          "word4": {
+            "load": {
+              "Q": 0.02829324910953278,
+              "W": 0.03660200089138808,
+              "E": 0.06367068537429374,
+              "R": 0.029497202724485434,
+              "T": 0.029824832609729842,
+              "Y": 0.08669363960891127,
+              "U": 0.010509025091752621,
+              "I": 0.012789646864685533,
+              "O": 0.014044018307173011,
+              "P": 0.07449457049460138,
+              "A": 0.009928004970919386,
+              "S": 0.04856072163333123,
+              "D": 0.05618539596925986,
+              "F": 0.03495647300462666,
+              "G": 0.061418262461936796,
+              "H": 0.03582664286987292,
+              "J": 0.08368745231031298,
+              "K": 0.03377125808971512,
+              "L": 0.046626054769082034,
+              "Z": 0.03185852033546339,
+              "X": 0.06579400010256913,
+              "C": 0.01223494620929146,
+              "V": 0.013895162165478007,
+              "B": 0.037785943325738876,
+              "N": 0.013968856385367523,
+              "M": 0.02708343432048093
+            },
+            "home": 0.41096026607905695,
+            "leftPinkyQAZ": 0.07007977441591556,
+            "rightPinky": 0.07449457049460138,
+            "indexFingerTYB": 0.15430441554437999,
+            "maxFinger": 0.25776905058669825,
+            "finger": [
+              0.07007977441591556,
+              0.15095672262728843,
+              0.13209102755284508,
+              0.2073778762919956,
+              0,
+              0,
+              0.25776905058669825,
+              0.046560904954400656,
+              0.06067007307625505,
+              0.07449457049460138
+            ],
+            "differentKeySameFingerRate": 0.11372323791075961
+          }
+        },
+        "homeS2": 0.3844280201897718,
+        "homeFloor4NativeTracks": 0.35953409504948763,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.10809114451245158,
+          "track": "character"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07449457049460138,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.2844495142003157,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.15430441554437999,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.05940308824431532
+      }
+    },
+    {
+      "id": "QS1-0614",
+      "label": "ai -> slot 0; upper slots 0 <-> 3",
+      "source": "research/notes/2026-11-13-q686-swap-r1-finalists.json",
+      "memory": {
+        "memoryLower": 23,
+        "memoryGuard": 25,
+        "ordinaryD": 2,
+        "ordinaryF": 0,
+        "rhymeInternalSplits": 0,
+        "toneRegionMergeLower": 10,
+        "sourceRhymeColumnMergeRules": 6,
+        "sourceRhymeColumnMergeLinks": 8,
+        "headDeletionRules": 1
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "N"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 409,
+        "occupancyPercent": 92.7437641723356,
+        "emptyCount": 32,
+        "emptyBuckets": [
+          "QQ",
+          "WQ",
+          "WR",
+          "WF",
+          "WB",
+          "EQ",
+          "RQ",
+          "RF",
+          "TQ",
+          "YQ",
+          "PQ",
+          "SQ",
+          "DQ",
+          "FQ",
+          "FR",
+          "FF",
+          "FB",
+          "GQ",
+          "GF",
+          "GB",
+          "HQ",
+          "HF",
+          "HB",
+          "JQ",
+          "KQ",
+          "LQ",
+          "ZQ",
+          "XQ",
+          "CQ",
+          "BQ",
+          "NQ",
+          "MQ"
+        ],
+        "occupiedCommon1237": 406,
+        "commonOccupancyPercent": 92.06349206349206,
+        "qzSyllables": [
+          "qia4",
+          "qiu4"
+        ],
+        "zqSyllables": [],
+        "singletonBuckets": 44,
+        "maxSyllablesPerBucket": 12
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.42860311406666,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 106.74509587766053,
+              "cognitiveMs": 72.17126537511186,
+              "effectiveMs": 178.9163612527724,
+              "firstAuxRate": 0.19727644635024677,
+              "secondAuxRate": 0.036905911549153514,
+              "selectionRate": 0.0029184190006786926,
+              "meanTerminalRank": 1.0033069743000889,
+              "meanRejectedCandidates": 0.003306974300088781,
+              "meanPageActions": 5.262996003748656e-7,
+              "meanKeys": 2.2341823578994005
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 413.7910780599787,
+              "cognitiveMs": 49.49357892830554,
+              "effectiveMs": 463.2846569882842,
+              "firstAuxRate": 0.1448067862747302,
+              "secondAuxRate": 0.01764377228524076,
+              "selectionRate": 0.0011549922017369727,
+              "meanTerminalRank": 1.0013083207854412,
+              "meanRejectedCandidates": 0.0013083207854412337,
+              "meanPageActions": 0,
+              "meanKeys": 4.162450558559971
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.37489171928627,
+              "cognitiveMs": 227.13807269457303,
+              "effectiveMs": 553.5129644138593,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "selectionRate": 0.04054622504807921,
+              "meanTerminalRank": 1.0629962797895474,
+              "meanRejectedCandidates": 0.06299627978954746,
+              "meanPageActions": 0.0005798273999464253,
+              "meanKeys": 3.6649552515208805
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.98827634047524,
+              "cognitiveMs": 77.64642088651425,
+              "effectiveMs": 510.6346972269895,
+              "firstAuxRate": 0.22684673866693822,
+              "secondAuxRate": 0.02751715524117965,
+              "selectionRate": 0.0020321340408407246,
+              "meanTerminalRank": 1.002359445791489,
+              "meanRejectedCandidates": 0.0023594457914891463,
+              "meanPageActions": 0,
+              "meanKeys": 4.254363893908118
+            }
+          }
+        },
+        "v51": {
+          "score": 9.432377682790955,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 106.74509587766053,
+              "firstAuxRate": 0.19727644635024677,
+              "secondAuxRate": 0.036905911549153514,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0029184190006786926,
+              "meanRejectedCandidates": 0.003306974300088781,
+              "meanPageActions": 5.262996003748656e-7,
+              "meanKeys": 2.2341823578994005,
+              "effectiveMs": 178.9163612527724
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 413.7910780599787,
+              "firstAuxRate": 0.1448067862747302,
+              "secondAuxRate": 0.01764377228524076,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0011549922017369727,
+              "meanRejectedCandidates": 0.0013083207854412337,
+              "meanPageActions": 0,
+              "meanKeys": 4.162450558559971,
+              "effectiveMs": 463.28465698828427
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 332.07378604813147,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "thirdAuxRate": 0.04054622504807921,
+              "selectionRate": 0.005186229981653959,
+              "meanRejectedCandidates": 0.0062503842893432355,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.70550147656896,
+              "effectiveMs": 547.1490137846033
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.98827634047524,
+              "firstAuxRate": 0.22684673866693822,
+              "secondAuxRate": 0.02751715524117965,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0020321340408407246,
+              "meanRejectedCandidates": 0.0023594457914891463,
+              "meanPageActions": 0,
+              "meanKeys": 4.254363893908118,
+              "effectiveMs": 510.63469722698954
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 437.7590072048697,
+          "motorUpperMs": 352.1967320743672,
+          "meanKeys": 3.780233234009398,
+          "selectionRate": 0.002266959938064049,
+          "firstAuxRate": 0.22440063409395186,
+          "secondAuxRate": 0.04907489574076674,
+          "thirdAuxRate": 0.0067577041746798685
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.014019952288001264,
+              "W": 0.022840574795481725,
+              "E": 0.02928092379739161,
+              "R": 0.03164711563212431,
+              "T": 0.026467926828759175,
+              "Y": 0.049154925037547086,
+              "U": 0.018031317766813996,
+              "I": 0.022357976567026587,
+              "O": 0.03139326603245665,
+              "P": 0.06936899339361553,
+              "A": 0.01513076840235867,
+              "S": 0.031515407513804196,
+              "D": 0.08308981487274927,
+              "F": 0.05466889378673365,
+              "G": 0.035359533520835054,
+              "H": 0.05992847636701059,
+              "J": 0.04106881347409647,
+              "K": 0.03024792626784801,
+              "L": 0.02641775106110821,
+              "Z": 0.05671327494683482,
+              "X": 0.0389887831770414,
+              "C": 0.02516754472733233,
+              "V": 0.01790459581632774,
+              "B": 0.0315423014111758,
+              "N": 0.0765601598096891,
+              "M": 0.06113298270583676
+            },
+            "home": 0.3774273852665441,
+            "leftPinkyQAZ": 0.08586399563719475,
+            "rightPinky": 0.06936899339361553,
+            "indexFingerTYB": 0.10716515327748206,
+            "maxFinger": 0.30587667516099404,
+            "finger": [
+              0.08586399563719475,
+              0.09334476548632732,
+              0.1375382833974732,
+              0.19759036699595572,
+              0,
+              0,
+              0.30587667516099404,
+              0.052605902834874596,
+              0.057811017093564857,
+              0.06936899339361553
+            ],
+            "differentKeySameFingerRate": 0.06487633893452871
+          },
+          "word2": {
+            "load": {
+              "Q": 0.019379704494835552,
+              "W": 0.03047441138066481,
+              "E": 0.0490362025058699,
+              "R": 0.037191329837792886,
+              "T": 0.042588494061487174,
+              "Y": 0.061098486505228713,
+              "U": 0.006272231083621338,
+              "I": 0.00788605791832226,
+              "O": 0.008766818349683195,
+              "P": 0.050789512408409086,
+              "A": 0.005970003915945683,
+              "S": 0.04571039333942962,
+              "D": 0.05703145116961394,
+              "F": 0.042897864307238916,
+              "G": 0.044142700144941975,
+              "H": 0.04426433091699394,
+              "J": 0.050640056708208786,
+              "K": 0.04823741255836099,
+              "L": 0.051991807475915315,
+              "Z": 0.04096195143060083,
+              "X": 0.05025411698233817,
+              "C": 0.034832534980348696,
+              "V": 0.0101325135112722,
+              "B": 0.05085718253767644,
+              "N": 0.057410578447573815,
+              "M": 0.051181853027625776
+            },
+            "home": 0.39088602053664917,
+            "leftPinkyQAZ": 0.06631165984138207,
+            "rightPinky": 0.050789512408409086,
+            "indexFingerTYB": 0.1545441631043923,
+            "maxFinger": 0.2708675366892524,
+            "finger": [
+              0.06631165984138207,
+              0.1264389217024326,
+              0.14090018865583254,
+              0.2278100844004096,
+              0,
+              0,
+              0.2708675366892524,
+              0.05612347047668325,
+              0.06075862582559851,
+              0.050789512408409086
+            ],
+            "differentKeySameFingerRate": 0.1045433048582609
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025885700550465636,
+              "W": 0.029450661028980706,
+              "E": 0.048166769080167114,
+              "R": 0.0255913994042728,
+              "T": 0.023518203429913474,
+              "Y": 0.07933416776650899,
+              "U": 0.032364831908623215,
+              "I": 0.03684727664282923,
+              "O": 0.04186347525891744,
+              "P": 0.06592900244762226,
+              "A": 0.02832811277036848,
+              "S": 0.024164270546977926,
+              "D": 0.06931564666816833,
+              "F": 0.02233387873910708,
+              "G": 0.03616020613339331,
+              "H": 0.03488853010696656,
+              "J": 0.06225212931798492,
+              "K": 0.025097136495555776,
+              "L": 0.04577040957183592,
+              "Z": 0.03557332990504593,
+              "X": 0.04695750111021995,
+              "C": 0.008699773137290558,
+              "V": 0.05098928559186782,
+              "B": 0.043233765035685955,
+              "N": 0.02912189176822442,
+              "M": 0.028162645583006206
+            },
+            "home": 0.3483103203503583,
+            "leftPinkyQAZ": 0.08978714322588005,
+            "rightPinky": 0.06592900244762226,
+            "indexFingerTYB": 0.14608613623210842,
+            "maxFinger": 0.2661241964513143,
+            "finger": [
+              0.08978714322588005,
+              0.10057243268617858,
+              0.12618218888562602,
+              0.20182673833424045,
+              0,
+              0,
+              0.2661241964513143,
+              0.06194441313838501,
+              0.08763388483075335,
+              0.06592900244762226
+            ],
+            "differentKeySameFingerRate": 0.1083046589440044
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028334744786171456,
+              "W": 0.036655682417586696,
+              "E": 0.06376406659613314,
+              "R": 0.029540464153431333,
+              "T": 0.029868574549900266,
+              "Y": 0.08682078694437333,
+              "U": 0.009559435605046318,
+              "I": 0.013266272991017711,
+              "O": 0.013761322820461101,
+              "P": 0.07460382633144833,
+              "A": 0.010161348963440595,
+              "S": 0.0332692991319797,
+              "D": 0.05626779905467188,
+              "F": 0.03500774115324448,
+              "G": 0.061508340216844454,
+              "H": 0.03587918723414237,
+              "J": 0.08381019068674828,
+              "K": 0.033820787968731385,
+              "L": 0.04669443785524315,
+              "Z": 0.03190524493937541,
+              "X": 0.06589049543763835,
+              "C": 0.012252890326265331,
+              "V": 0.013040556403825858,
+              "B": 0.0378413612552832,
+              "N": 0.029351986528346623,
+              "M": 0.02712315564864924
+            },
+            "home": 0.3964191322650463,
+            "leftPinkyQAZ": 0.07040133868898746,
+            "rightPinky": 0.07460382633144833,
+            "indexFingerTYB": 0.1545307227495568,
+            "maxFinger": 0.27254474264730616,
+            "finger": [
+              0.07040133868898746,
+              0.13581547698720475,
+              0.13228475597707035,
+              0.2068070377325296,
+              0,
+              0,
+              0.27254474264730616,
+              0.0470870609597491,
+              0.060455760675704254,
+              0.07460382633144833
+            ],
+            "differentKeySameFingerRate": 0.11785306288686401
+          }
+        },
+        "homeS2": 0.3774273852665441,
+        "homeFloor4NativeTracks": 0.3483103203503583,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08978714322588005,
+          "track": "word3"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07460382633144833,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.30587667516099404,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.1545441631043923,
+          "track": "word2"
+        },
+        "s2DifferentKeySameFingerRate": 0.06487633893452871
+      }
+    },
+    {
+      "id": "QS1-0170",
+      "label": "ao <-> ou",
+      "source": "research/notes/2026-11-13-q686-swap-r1-finalists.json",
+      "memory": {
+        "memoryLower": 23,
+        "memoryGuard": 25,
+        "ordinaryD": 2,
+        "ordinaryF": 0,
+        "rhymeInternalSplits": 0,
+        "toneRegionMergeLower": 10,
+        "sourceRhymeColumnMergeRules": 6,
+        "sourceRhymeColumnMergeLinks": 8,
+        "headDeletionRules": 1
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "N"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 410,
+        "occupancyPercent": 92.97052154195012,
+        "emptyCount": 31,
+        "emptyBuckets": [
+          "QQ",
+          "WQ",
+          "WR",
+          "WF",
+          "WB",
+          "EQ",
+          "RQ",
+          "RF",
+          "TQ",
+          "YQ",
+          "PQ",
+          "SQ",
+          "DQ",
+          "FQ",
+          "FF",
+          "FB",
+          "GQ",
+          "GF",
+          "GB",
+          "HQ",
+          "HF",
+          "HB",
+          "JQ",
+          "KQ",
+          "LQ",
+          "ZQ",
+          "XQ",
+          "CQ",
+          "BQ",
+          "NQ",
+          "MQ"
+        ],
+        "occupiedCommon1237": 405,
+        "commonOccupancyPercent": 91.83673469387755,
+        "qzSyllables": [
+          "qia4",
+          "qiao4"
+        ],
+        "zqSyllables": [],
+        "singletonBuckets": 41,
+        "maxSyllablesPerBucket": 12
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.433425663632105,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 104.33679984746048,
+              "cognitiveMs": 71.92522615970994,
+              "effectiveMs": 176.26202600717042,
+              "firstAuxRate": 0.19675877221554472,
+              "secondAuxRate": 0.03636551881503528,
+              "selectionRate": 0.0030298483216247268,
+              "meanTerminalRank": 1.00339761478682,
+              "meanRejectedCandidates": 0.0033976147868200078,
+              "meanPageActions": 4.970607336873731e-7,
+              "meanKeys": 2.23312429103058
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.81004249375627,
+              "cognitiveMs": 49.80119102294695,
+              "effectiveMs": 465.6112335167032,
+              "firstAuxRate": 0.14553032206432842,
+              "secondAuxRate": 0.017809702268064304,
+              "selectionRate": 0.001219083534742186,
+              "meanTerminalRank": 1.0013546720476765,
+              "meanRejectedCandidates": 0.0013546720476764447,
+              "meanPageActions": 0,
+              "meanKeys": 4.163340024332393
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.37489171928627,
+              "cognitiveMs": 227.13807269457303,
+              "effectiveMs": 553.5129644138593,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "selectionRate": 0.04054622504807921,
+              "meanTerminalRank": 1.0629962797895474,
+              "meanRejectedCandidates": 0.06299627978954746,
+              "meanPageActions": 0.0005798273999464253,
+              "meanKeys": 3.6649552515208805
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.9707794134691,
+              "cognitiveMs": 77.58187178316517,
+              "effectiveMs": 510.55265119663426,
+              "firstAuxRate": 0.22642127431517442,
+              "secondAuxRate": 0.02784294712706035,
+              "selectionRate": 0.0019778209067942486,
+              "meanTerminalRank": 1.002318256128364,
+              "meanRejectedCandidates": 0.002318256128363949,
+              "meanPageActions": 0,
+              "meanKeys": 4.254264221442234
+            }
+          }
+        },
+        "v51": {
+          "score": 9.437194451039016,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 104.33679984746048,
+              "firstAuxRate": 0.19675877221554472,
+              "secondAuxRate": 0.03636551881503528,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0030298483216247268,
+              "meanRejectedCandidates": 0.0033976147868200078,
+              "meanPageActions": 4.970607336873731e-7,
+              "meanKeys": 2.23312429103058,
+              "effectiveMs": 176.26202600717045
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.81004249375627,
+              "firstAuxRate": 0.14553032206432842,
+              "secondAuxRate": 0.017809702268064304,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.001219083534742186,
+              "meanRejectedCandidates": 0.0013546720476764447,
+              "meanPageActions": 0,
+              "meanKeys": 4.163340024332393,
+              "effectiveMs": 465.6112335167032
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 332.07378604813147,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "thirdAuxRate": 0.04054622504807921,
+              "selectionRate": 0.005186229981653959,
+              "meanRejectedCandidates": 0.0062503842893432355,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.70550147656896,
+              "effectiveMs": 547.1490137846033
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.9707794134691,
+              "firstAuxRate": 0.22642127431517442,
+              "secondAuxRate": 0.02784294712706035,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0019778209067942486,
+              "meanRejectedCandidates": 0.002318256128363949,
+              "meanPageActions": 0,
+              "meanKeys": 4.254264221442234,
+              "effectiveMs": 510.5526511966342
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 438.4662319230863,
+          "motorUpperMs": 352.80191546505495,
+          "meanKeys": 3.7804850103398255,
+          "selectionRate": 0.0023085249690499156,
+          "firstAuxRate": 0.22460521224100669,
+          "secondAuxRate": 0.04912209392413893,
+          "thirdAuxRate": 0.0067577041746798685
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.014026595020373105,
+              "W": 0.022851396788486314,
+              "E": 0.06057053860415423,
+              "R": 0.04470112025893222,
+              "T": 0.026480467481590882,
+              "Y": 0.04917821491793147,
+              "U": 0.020748240266473934,
+              "I": 0.02222666520022206,
+              "O": 0.028194479359792184,
+              "P": 0.02508710942819135,
+              "A": 0.015277053284312185,
+              "S": 0.03975070441714064,
+              "D": 0.08312918329510102,
+              "F": 0.054694796216572916,
+              "G": 0.042099634436309166,
+              "H": 0.04501315872167929,
+              "J": 0.04108827210927107,
+              "K": 0.03026225790570761,
+              "L": 0.026430267940378553,
+              "Z": 0.030998321444657428,
+              "X": 0.039007256282143944,
+              "C": 0.05092129382312583,
+              "V": 0.017947344164074203,
+              "B": 0.031557246331269835,
+              "N": 0.07659643444468885,
+              "M": 0.061161947857419685
+            },
+            "home": 0.37774532832647245,
+            "leftPinkyQAZ": 0.060301969749342724,
+            "rightPinky": 0.02508710942819135,
+            "indexFingerTYB": 0.10721592873079219,
+            "maxFinger": 0.2937862683174643,
+            "finger": [
+              0.060301969749342724,
+              0.10160935748777089,
+              0.19462101572238108,
+              0.21748060888874923,
+              0,
+              0,
+              0.2937862683174643,
+              0.052488923105929675,
+              0.05462474730017074,
+              0.02508710942819135
+            ],
+            "differentKeySameFingerRate": 0.06448521497102917
+          },
+          "word2": {
+            "load": {
+              "Q": 0.019375564169104995,
+              "W": 0.030467900755613918,
+              "E": 0.05274934149854414,
+              "R": 0.03602879487606776,
+              "T": 0.042579395355269264,
+              "Y": 0.06108543328061204,
+              "U": 0.006262507319991678,
+              "I": 0.008107009763372851,
+              "O": 0.008872259737540506,
+              "P": 0.048209635733180836,
+              "A": 0.005996579576729684,
+              "S": 0.03599983732819037,
+              "D": 0.05701926683600908,
+              "F": 0.042888699506432766,
+              "G": 0.05216925977600064,
+              "H": 0.04591967413461918,
+              "J": 0.05062923784717601,
+              "K": 0.04822710700388548,
+              "L": 0.051980699823663545,
+              "Z": 0.0366344575075607,
+              "X": 0.05024338057437778,
+              "C": 0.03914383599072572,
+              "V": 0.00999457278368645,
+              "B": 0.05084631728936987,
+              "N": 0.057398313116324,
+              "M": 0.05117091841595074
+            },
+            "home": 0.39083036183270675,
+            "leftPinkyQAZ": 0.062006601253395376,
+            "rightPinky": 0.048209635733180836,
+            "indexFingerTYB": 0.15451114592525117,
+            "maxFinger": 0.27246608411467366,
+            "finger": [
+              0.062006601253395376,
+              0.11671111865818207,
+              0.14891244432527895,
+              0.23450703958682675,
+              0,
+              0,
+              0.27246608411467366,
+              0.05633411676725833,
+              0.060852959561204054,
+              0.048209635733180836
+            ],
+            "differentKeySameFingerRate": 0.10881176758948984
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025885700550465636,
+              "W": 0.029450661028980706,
+              "E": 0.048166769080167114,
+              "R": 0.0255913994042728,
+              "T": 0.023518203429913474,
+              "Y": 0.07933416776650899,
+              "U": 0.032364831908623215,
+              "I": 0.03684727664282923,
+              "O": 0.04186347525891744,
+              "P": 0.06592900244762226,
+              "A": 0.02832811277036848,
+              "S": 0.024164270546977926,
+              "D": 0.06931564666816833,
+              "F": 0.02233387873910708,
+              "G": 0.03616020613339331,
+              "H": 0.03488853010696656,
+              "J": 0.06225212931798492,
+              "K": 0.025097136495555776,
+              "L": 0.04577040957183592,
+              "Z": 0.03557332990504593,
+              "X": 0.04695750111021995,
+              "C": 0.008699773137290558,
+              "V": 0.05098928559186782,
+              "B": 0.043233765035685955,
+              "N": 0.02912189176822442,
+              "M": 0.028162645583006206
+            },
+            "home": 0.3483103203503583,
+            "leftPinkyQAZ": 0.08978714322588005,
+            "rightPinky": 0.06592900244762226,
+            "indexFingerTYB": 0.14608613623210842,
+            "maxFinger": 0.2661241964513143,
+            "finger": [
+              0.08978714322588005,
+              0.10057243268617858,
+              0.12618218888562602,
+              0.20182673833424045,
+              0,
+              0,
+              0.2661241964513143,
+              0.06194441313838501,
+              0.08763388483075335,
+              0.06592900244762226
+            ],
+            "differentKeySameFingerRate": 0.1083046589440044
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028335408636307697,
+              "W": 0.036656541217620034,
+              "E": 0.0637655605140991,
+              "R": 0.029541156252170915,
+              "T": 0.029869274335885064,
+              "Y": 0.08682282105449772,
+              "U": 0.009471676220086305,
+              "I": 0.013211185450081429,
+              "O": 0.01341505705777518,
+              "P": 0.07460557421238559,
+              "A": 0.010151874698393442,
+              "S": 0.03327007859298872,
+              "D": 0.056269117343802424,
+              "F": 0.035008561343929434,
+              "G": 0.06150978128576323,
+              "H": 0.0358800278417961,
+              "J": 0.08381215426210163,
+              "K": 0.03382158035048284,
+              "L": 0.046695531851648125,
+              "Z": 0.03190599244218017,
+              "X": 0.06589203917536048,
+              "C": 0.012253177397243872,
+              "V": 0.013517115305072162,
+              "B": 0.037842247834393564,
+              "N": 0.02935267421127452,
+              "M": 0.027123791112660247
+            },
+            "home": 0.3964187075709059,
+            "leftPinkyQAZ": 0.07039327577688131,
+            "rightPinky": 0.07460557421238559,
+            "indexFingerTYB": 0.15453434322477633,
+            "maxFinger": 0.2724631447024165,
+            "finger": [
+              0.07039327577688131,
+              0.13581865898596923,
+              0.1322878552551454,
+              0.20728813635721438,
+              0,
+              0,
+              0.2724631447024165,
+              0.04703276580056427,
+              0.06011058890942331,
+              0.07460557421238559
+            ],
+            "differentKeySameFingerRate": 0.11795614900024842
+          }
+        },
+        "homeS2": 0.37774532832647245,
+        "homeFloor4NativeTracks": 0.3483103203503583,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08978714322588005,
+          "track": "word3"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07460557421238559,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.2937862683174643,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.15453434322477633,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.06448521497102917
+      }
+    },
+    {
+      "id": "QS1-0576",
+      "label": "a <-> ao; upper slots 0 <-> 9",
+      "source": "research/notes/2026-11-13-q686-swap-r1-finalists.json",
+      "memory": {
+        "memoryLower": 23,
+        "memoryGuard": 25,
+        "ordinaryD": 2,
+        "ordinaryF": 0,
+        "rhymeInternalSplits": 0,
+        "toneRegionMergeLower": 10,
+        "sourceRhymeColumnMergeRules": 6,
+        "sourceRhymeColumnMergeLinks": 8,
+        "headDeletionRules": 1
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "N"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 407,
+        "occupancyPercent": 92.29024943310658,
+        "emptyCount": 34,
+        "emptyBuckets": [
+          "QQ",
+          "WQ",
+          "WR",
+          "WS",
+          "WF",
+          "WZ",
+          "WB",
+          "EQ",
+          "RQ",
+          "RF",
+          "TQ",
+          "YQ",
+          "PQ",
+          "SQ",
+          "DQ",
+          "FQ",
+          "FF",
+          "FZ",
+          "FB",
+          "GQ",
+          "GF",
+          "GB",
+          "HQ",
+          "HF",
+          "HB",
+          "JQ",
+          "KQ",
+          "LQ",
+          "ZQ",
+          "XQ",
+          "CQ",
+          "BQ",
+          "NQ",
+          "MQ"
+        ],
+        "occupiedCommon1237": 403,
+        "commonOccupancyPercent": 91.38321995464852,
+        "qzSyllables": [
+          "qiao4",
+          "qiu4"
+        ],
+        "zqSyllables": [],
+        "singletonBuckets": 36,
+        "maxSyllablesPerBucket": 12
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.434782706721252,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 104.469162548324,
+              "cognitiveMs": 72.75940079270076,
+              "effectiveMs": 177.22856334102477,
+              "firstAuxRate": 0.1996512563414716,
+              "secondAuxRate": 0.036116549865191284,
+              "selectionRate": 0.003086981067132087,
+              "meanTerminalRank": 1.0035340725776505,
+              "meanRejectedCandidates": 0.0035340725776505356,
+              "meanPageActions": 5.555384670623581e-7,
+              "meanKeys": 2.235767806206663
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.27020804504235,
+              "cognitiveMs": 50.211797274862924,
+              "effectiveMs": 465.4820053199053,
+              "firstAuxRate": 0.14666372213381984,
+              "secondAuxRate": 0.017987912621761994,
+              "selectionRate": 0.001245662564697142,
+              "meanTerminalRank": 1.0013781861874018,
+              "meanRejectedCandidates": 0.001378186187401711,
+              "meanPageActions": 0,
+              "meanKeys": 4.1646516347555815
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.37489171928627,
+              "cognitiveMs": 227.13807269457303,
+              "effectiveMs": 553.5129644138593,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "selectionRate": 0.04054622504807921,
+              "meanTerminalRank": 1.0629962797895474,
+              "meanRejectedCandidates": 0.06299627978954746,
+              "meanPageActions": 0.0005798273999464253,
+              "meanKeys": 3.6649552515208805
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.48048403976077,
+              "cognitiveMs": 76.5319182973045,
+              "effectiveMs": 509.0124023370653,
+              "firstAuxRate": 0.2235934952936319,
+              "secondAuxRate": 0.027188626632957073,
+              "selectionRate": 0.0019710762805374934,
+              "meanTerminalRank": 1.0022927190201063,
+              "meanRejectedCandidates": 0.0022927190201063163,
+              "meanPageActions": 0,
+              "meanKeys": 4.250782121926589
+            }
+          }
+        },
+        "v51": {
+          "score": 9.438549869419802,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 104.469162548324,
+              "firstAuxRate": 0.1996512563414716,
+              "secondAuxRate": 0.036116549865191284,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.003086981067132087,
+              "meanRejectedCandidates": 0.0035340725776505356,
+              "meanPageActions": 5.555384670623581e-7,
+              "meanKeys": 2.235767806206663,
+              "effectiveMs": 177.22856334102477
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.27020804504235,
+              "firstAuxRate": 0.14666372213381984,
+              "secondAuxRate": 0.017987912621761994,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.001245662564697142,
+              "meanRejectedCandidates": 0.001378186187401711,
+              "meanPageActions": 0,
+              "meanKeys": 4.1646516347555815,
+              "effectiveMs": 465.4820053199053
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 332.07378604813147,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "thirdAuxRate": 0.04054622504807921,
+              "selectionRate": 0.005186229981653959,
+              "meanRejectedCandidates": 0.0062503842893432355,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.70550147656896,
+              "effectiveMs": 547.1490137846033
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.48048403976077,
+              "firstAuxRate": 0.2235934952936319,
+              "secondAuxRate": 0.027188626632957073,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0019710762805374934,
+              "meanRejectedCandidates": 0.0022927190201063163,
+              "meanPageActions": 0,
+              "meanKeys": 4.250782121926589,
+              "effectiveMs": 509.0124023370653
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 438.3059992370682,
+          "motorUpperMs": 352.4723427952238,
+          "meanKeys": 3.781001051494826,
+          "selectionRate": 0.002330212503902494,
+          "firstAuxRate": 0.22518269645981645,
+          "secondAuxRate": 0.049060650860329895,
+          "thirdAuxRate": 0.0067577041746798685
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.014010010330003117,
+              "W": 0.022824377876219416,
+              "E": 0.05559654783900177,
+              "R": 0.04955064048334094,
+              "T": 0.02644915764813545,
+              "Y": 0.04912006784330802,
+              "U": 0.019853081406751592,
+              "I": 0.02239288979198767,
+              "O": 0.03008742060532283,
+              "P": 0.02505744706597584,
+              "A": 0.015313733646880818,
+              "S": 0.03576550248189346,
+              "D": 0.08303089345614462,
+              "F": 0.0546301264760704,
+              "G": 0.04204985689580117,
+              "H": 0.0488981380139629,
+              "J": 0.04103969037793996,
+              "K": 0.030226476579125222,
+              "L": 0.02639901746158806,
+              "Z": 0.04270443873128798,
+              "X": 0.0389611350911719,
+              "C": 0.03911831686011114,
+              "V": 0.0178055989116467,
+              "B": 0.03151993384320175,
+              "N": 0.0765058687623643,
+              "M": 0.06108963152076297
+            },
+            "home": 0.37735343538940663,
+            "leftPinkyQAZ": 0.0720281827081719,
+            "rightPinky": 0.02505744706597584,
+            "indexFingerTYB": 0.10708915933464522,
+            "maxFinger": 0.2965064779250898,
+            "finger": [
+              0.0720281827081719,
+              0.09755101544928477,
+              0.1777457581552575,
+              0.22200531425819645,
+              0,
+              0,
+              0.2965064779250898,
+              0.05261936637111289,
+              0.05648643806691089,
+              0.02505744706597584
+            ],
+            "differentKeySameFingerRate": 0.06548588381106733
+          },
+          "word2": {
+            "load": {
+              "Q": 0.01936946205201379,
+              "W": 0.030458305231255946,
+              "E": 0.0472259292441714,
+              "R": 0.041524247449960035,
+              "T": 0.042565985451234314,
+              "Y": 0.06106619510704496,
+              "U": 0.0064418611005163,
+              "I": 0.00807403033470118,
+              "O": 0.008812472884562737,
+              "P": 0.048194452647950345,
+              "A": 0.0060988429085718525,
+              "S": 0.04169496731711424,
+              "D": 0.05700130925605676,
+              "F": 0.04287519219051702,
+              "G": 0.052152829651492455,
+              "H": 0.04019874451237172,
+              "J": 0.050613292735338974,
+              "K": 0.048211918416273813,
+              "L": 0.05196432908400206,
+              "Z": 0.03441705639561538,
+              "X": 0.05022755698397044,
+              "C": 0.041337371577215225,
+              "V": 0.010108304789388413,
+              "B": 0.05083030381079198,
+              "N": 0.05738023615998782,
+              "M": 0.05115480270788085
+            },
+            "home": 0.3908114260717389,
+            "leftPinkyQAZ": 0.059885361356201025,
+            "rightPinky": 0.048194452647950345,
+            "indexFingerTYB": 0.15446248436907126,
+            "maxFinger": 0.2668551323231406,
+            "finger": [
+              0.059885361356201025,
+              0.12238082953234063,
+              0.1455646100774434,
+              0.24005686334338422,
+              0,
+              0,
+              0.2668551323231406,
+              0.05628594875097499,
+              0.060776801968564796,
+              0.048194452647950345
+            ],
+            "differentKeySameFingerRate": 0.10970431670538151
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025885700550465636,
+              "W": 0.029450661028980706,
+              "E": 0.048166769080167114,
+              "R": 0.0255913994042728,
+              "T": 0.023518203429913474,
+              "Y": 0.07933416776650899,
+              "U": 0.032364831908623215,
+              "I": 0.03684727664282923,
+              "O": 0.04186347525891744,
+              "P": 0.06592900244762226,
+              "A": 0.02832811277036848,
+              "S": 0.024164270546977926,
+              "D": 0.06931564666816833,
+              "F": 0.02233387873910708,
+              "G": 0.03616020613339331,
+              "H": 0.03488853010696656,
+              "J": 0.06225212931798492,
+              "K": 0.025097136495555776,
+              "L": 0.04577040957183592,
+              "Z": 0.03557332990504593,
+              "X": 0.04695750111021995,
+              "C": 0.008699773137290558,
+              "V": 0.05098928559186782,
+              "B": 0.043233765035685955,
+              "N": 0.02912189176822442,
+              "M": 0.028162645583006206
+            },
+            "home": 0.3483103203503583,
+            "leftPinkyQAZ": 0.08978714322588005,
+            "rightPinky": 0.06592900244762226,
+            "indexFingerTYB": 0.14608613623210842,
+            "maxFinger": 0.2661241964513143,
+            "finger": [
+              0.08978714322588005,
+              0.10057243268617858,
+              0.12618218888562602,
+              0.20182673833424045,
+              0,
+              0,
+              0.2661241964513143,
+              0.06194441313838501,
+              0.08763388483075335,
+              0.06592900244762226
+            ],
+            "differentKeySameFingerRate": 0.1083046589440044
+          },
+          "word4": {
+            "load": {
+              "Q": 0.02835862006184258,
+              "W": 0.03668656903856167,
+              "E": 0.06381779514316553,
+              "R": 0.02956535538610128,
+              "T": 0.029893742253250477,
+              "Y": 0.0868939434255036,
+              "U": 0.009385327749193768,
+              "I": 0.012904659340692771,
+              "O": 0.013428810916184452,
+              "P": 0.07466668862059989,
+              "A": 0.009896857460256373,
+              "S": 0.03329733233623672,
+              "D": 0.056315211135633814,
+              "F": 0.03503723919449965,
+              "G": 0.06156016805541624,
+              "H": 0.03590941956877378,
+              "J": 0.0838808103948768,
+              "K": 0.03384928586565129,
+              "L": 0.046733783280251046,
+              "Z": 0.0319321287713644,
+              "X": 0.06594601574511076,
+              "C": 0.012263214793152727,
+              "V": 0.013381045548526482,
+              "B": 0.03787324694680993,
+              "N": 0.029376718946977808,
+              "M": 0.02714601002136617
+            },
+            "home": 0.39648010729159566,
+            "leftPinkyQAZ": 0.07018760629346335,
+            "rightPinky": 0.07466668862059989,
+            "indexFingerTYB": 0.15466093262556402,
+            "maxFinger": 0.2725922301066919,
+            "finger": [
+              0.07018760629346335,
+              0.13592991711990915,
+              0.13239622107195206,
+              0.20731079738460406,
+              0,
+              0,
+              0.2725922301066919,
+              0.04675394520634406,
+              0.0601625941964355,
+              0.07466668862059989
+            ],
+            "differentKeySameFingerRate": 0.11796747493199705
+          }
+        },
+        "homeS2": 0.37735343538940663,
+        "homeFloor4NativeTracks": 0.3483103203503583,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08978714322588005,
+          "track": "word3"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07466668862059989,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.2965064779250898,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.15466093262556402,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.06548588381106733
+      }
+    },
+    {
+      "id": "QS1-0271",
+      "label": "n <-> v",
+      "source": "research/notes/2026-11-13-q686-swap-r1-finalists.json",
+      "memory": {
+        "memoryLower": 23,
+        "memoryGuard": 25,
+        "ordinaryD": 2,
+        "ordinaryF": 0,
+        "rhymeInternalSplits": 0,
+        "toneRegionMergeLower": 10,
+        "sourceRhymeColumnMergeRules": 6,
+        "sourceRhymeColumnMergeLinks": 8,
+        "headDeletionRules": 1
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "N"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 409,
+        "occupancyPercent": 92.7437641723356,
+        "emptyCount": 32,
+        "emptyBuckets": [
+          "QQ",
+          "WQ",
+          "WR",
+          "WF",
+          "WB",
+          "EQ",
+          "RQ",
+          "RF",
+          "TQ",
+          "YQ",
+          "PQ",
+          "SQ",
+          "DQ",
+          "FQ",
+          "FR",
+          "FF",
+          "FB",
+          "GQ",
+          "GF",
+          "GB",
+          "HQ",
+          "HF",
+          "HB",
+          "JQ",
+          "KQ",
+          "LQ",
+          "ZQ",
+          "XQ",
+          "CQ",
+          "BQ",
+          "NQ",
+          "MQ"
+        ],
+        "occupiedCommon1237": 406,
+        "commonOccupancyPercent": 92.06349206349206,
+        "qzSyllables": [
+          "qia4",
+          "qiu4"
+        ],
+        "zqSyllables": [],
+        "singletonBuckets": 42,
+        "maxSyllablesPerBucket": 12
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.445992419824824,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 108.07826030037846,
+              "cognitiveMs": 70.61984087507015,
+              "effectiveMs": 178.6981011754486,
+              "firstAuxRate": 0.1937711740562834,
+              "secondAuxRate": 0.035065909668509615,
+              "selectionRate": 0.00299774404600186,
+              "meanTerminalRank": 1.00339752707022,
+              "meanRejectedCandidates": 0.0033975270702199453,
+              "meanPageActions": 6.432550671248358e-7,
+              "meanKeys": 2.228837083724793
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 414.1719138507179,
+              "cognitiveMs": 50.78835896711453,
+              "effectiveMs": 464.96027281783245,
+              "firstAuxRate": 0.1477950331612563,
+              "secondAuxRate": 0.01862210211649491,
+              "selectionRate": 0.0013160718001584513,
+              "meanTerminalRank": 1.001471506073882,
+              "meanRejectedCandidates": 0.0014715060738820058,
+              "meanPageActions": 0,
+              "meanKeys": 4.166417135277751
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.37489171928627,
+              "cognitiveMs": 227.13807269457303,
+              "effectiveMs": 553.5129644138593,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "selectionRate": 0.04054622504807921,
+              "meanTerminalRank": 1.0629962797895474,
+              "meanRejectedCandidates": 0.06299627978954746,
+              "meanPageActions": 0.0005798273999464253,
+              "meanKeys": 3.6649552515208805
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 433.0715733553602,
+              "cognitiveMs": 77.88568967187257,
+              "effectiveMs": 510.9572630272328,
+              "firstAuxRate": 0.22753804414665602,
+              "secondAuxRate": 0.02786516926418839,
+              "selectionRate": 0.0019187936568478927,
+              "meanTerminalRank": 1.0022689890902103,
+              "meanRejectedCandidates": 0.0022689890902103022,
+              "meanPageActions": 0,
+              "meanKeys": 4.255403213410845
+            }
+          }
+        },
+        "v51": {
+          "score": 9.44974619741889,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 108.07826030037846,
+              "firstAuxRate": 0.1937711740562834,
+              "secondAuxRate": 0.035065909668509615,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00299774404600186,
+              "meanRejectedCandidates": 0.0033975270702199453,
+              "meanPageActions": 6.432550671248358e-7,
+              "meanKeys": 2.228837083724793,
+              "effectiveMs": 178.6981011754486
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 414.1719138507179,
+              "firstAuxRate": 0.1477950331612563,
+              "secondAuxRate": 0.01862210211649491,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0013160718001584513,
+              "meanRejectedCandidates": 0.0014715060738820058,
+              "meanPageActions": 0,
+              "meanKeys": 4.166417135277751,
+              "effectiveMs": 464.9602728178324
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 332.07378604813147,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "thirdAuxRate": 0.04054622504807921,
+              "selectionRate": 0.005186229981653959,
+              "meanRejectedCandidates": 0.0062503842893432355,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.70550147656896,
+              "effectiveMs": 547.1490137846033
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 433.0715733553602,
+              "firstAuxRate": 0.22753804414665602,
+              "secondAuxRate": 0.02786516926418839,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0019187936568478927,
+              "meanRejectedCandidates": 0.0022689890902103022,
+              "meanPageActions": 0,
+              "meanKeys": 4.255403213410845,
+              "effectiveMs": 510.9572630272327
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 438.614199406797,
+          "motorUpperMs": 352.6232268760039,
+          "meanKeys": 3.7814988632563082,
+          "selectionRate": 0.002341830514163178,
+          "firstAuxRate": 0.22542576306817397,
+          "secondAuxRate": 0.04931539601345462,
+          "thirdAuxRate": 0.0067577041746798685
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.01405357542243379,
+              "W": 0.02289535185185744,
+              "E": 0.07375113790992782,
+              "R": 0.03172301283929321,
+              "T": 0.024130518617999055,
+              "Y": 0.049272810078708935,
+              "U": 0.017570721152027863,
+              "I": 0.023330542997308898,
+              "O": 0.028894257275418233,
+              "P": 0.02753624943234868,
+              "A": 0.01468588425497615,
+              "S": 0.024854709007867692,
+              "D": 0.08328908374029251,
+              "F": 0.05480000261844072,
+              "G": 0.04118299577771185,
+              "H": 0.06007219891155512,
+              "J": 0.04116730612286288,
+              "K": 0.03131808593609643,
+              "L": 0.02648110702531451,
+              "Z": 0.047629607338969863,
+              "X": 0.03908228742521522,
+              "C": 0.027316174474366718,
+              "V": 0.01818966229369137,
+              "B": 0.03161794724925521,
+              "N": 0.08387517630692103,
+              "M": 0.06127959393913881
+            },
+            "home": 0.37785137339511793,
+            "leftPinkyQAZ": 0.0763690670163798,
+            "rightPinky": 0.02753624943234868,
+            "indexFingerTYB": 0.1050212759459632,
+            "maxFinger": 0.31323780651121463,
+            "finger": [
+              0.0763690670163798,
+              0.08683234828494035,
+              0.18435639612458704,
+              0.20164413939639145,
+              0,
+              0,
+              0.31323780651121463,
+              0.05464862893340533,
+              0.05537536430073274,
+              0.02753624943234868
+            ],
+            "differentKeySameFingerRate": 0.09713397085685829
+          },
+          "word2": {
+            "load": {
+              "Q": 0.019361254329585464,
+              "W": 0.030445398661403673,
+              "E": 0.05155664683172253,
+              "R": 0.03715592237419814,
+              "T": 0.03829497112273844,
+              "Y": 0.061040318581520064,
+              "U": 0.006335762251795846,
+              "I": 0.00823974253608726,
+              "O": 0.009099944290330954,
+              "P": 0.05242700764900642,
+              "A": 0.006083827704201606,
+              "S": 0.03763682003162958,
+              "D": 0.05697715520762896,
+              "F": 0.04285702402066203,
+              "G": 0.052160265648355686,
+              "H": 0.044222189705794314,
+              "J": 0.050591845580181045,
+              "K": 0.048161953308818006,
+              "L": 0.05194230943326781,
+              "Z": 0.030758637148832167,
+              "X": 0.050206273282602264,
+              "C": 0.04355599290420654,
+              "V": 0.01018322774231602,
+              "B": 0.05080876469816686,
+              "N": 0.05876361886464077,
+              "M": 0.051133126090307554
+            },
+            "home": 0.39063339064053904,
+            "leftPinkyQAZ": 0.05620371918261924,
+            "rightPinky": 0.05242700764900642,
+            "indexFingerTYB": 0.15014405440242537,
+            "maxFinger": 0.27208686107423957,
+            "finger": [
+              0.05620371918261924,
+              0.11828849197563551,
+              0.152089794943558,
+              0.2314601756064372,
+              0,
+              0,
+              0.27208686107423957,
+              0.056401695844905265,
+              0.06104225372359876,
+              0.05242700764900642
+            ],
+            "differentKeySameFingerRate": 0.11006086926330544
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025885700550465636,
+              "W": 0.029450661028980706,
+              "E": 0.048166769080167114,
+              "R": 0.0255913994042728,
+              "T": 0.023518203429913474,
+              "Y": 0.07933416776650899,
+              "U": 0.032364831908623215,
+              "I": 0.03684727664282923,
+              "O": 0.04186347525891744,
+              "P": 0.06592900244762226,
+              "A": 0.02832811277036848,
+              "S": 0.024164270546977926,
+              "D": 0.06931564666816833,
+              "F": 0.02233387873910708,
+              "G": 0.03616020613339331,
+              "H": 0.03488853010696656,
+              "J": 0.06225212931798492,
+              "K": 0.025097136495555776,
+              "L": 0.04577040957183592,
+              "Z": 0.03557332990504593,
+              "X": 0.04695750111021995,
+              "C": 0.008699773137290558,
+              "V": 0.05098928559186782,
+              "B": 0.043233765035685955,
+              "N": 0.02912189176822442,
+              "M": 0.028162645583006206
+            },
+            "home": 0.3483103203503583,
+            "leftPinkyQAZ": 0.08978714322588005,
+            "rightPinky": 0.06592900244762226,
+            "indexFingerTYB": 0.14608613623210842,
+            "maxFinger": 0.2661241964513143,
+            "finger": [
+              0.08978714322588005,
+              0.10057243268617858,
+              0.12618218888562602,
+              0.20182673833424045,
+              0,
+              0,
+              0.2661241964513143,
+              0.06194441313838501,
+              0.08763388483075335,
+              0.06592900244762226
+            ],
+            "differentKeySameFingerRate": 0.1083046589440044
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028327824442461548,
+              "W": 0.03664672980752562,
+              "E": 0.06374849316286184,
+              "R": 0.029533249330540405,
+              "T": 0.029861279590881924,
+              "Y": 0.0867995822470537,
+              "U": 0.009696301509956214,
+              "I": 0.013199889982786886,
+              "O": 0.01357394921091757,
+              "P": 0.07458560544665885,
+              "A": 0.010038252261440665,
+              "S": 0.033261173596114864,
+              "D": 0.05625405647423938,
+              "F": 0.03499919102854365,
+              "G": 0.061493317711487916,
+              "H": 0.03587042427158294,
+              "J": 0.08378972128318307,
+              "K": 0.03381252773984809,
+              "L": 0.04668303342715538,
+              "Z": 0.03189745255363855,
+              "X": 0.06587440265546983,
+              "C": 0.012249897738432356,
+              "V": 0.013510176510511387,
+              "B": 0.03783211906064501,
+              "N": 0.02934481773833713,
+              "M": 0.027116531217725212
+            },
+            "home": 0.39620169779359593,
+            "leftPinkyQAZ": 0.07026352925754076,
+            "rightPinky": 0.07458560544665885,
+            "indexFingerTYB": 0.15449298089858063,
+            "maxFinger": 0.2726173782678383,
+            "finger": [
+              0.07026352925754076,
+              0.1357823060591103,
+              0.13225244737553357,
+              0.2072293332326103,
+              0,
+              0,
+              0.2726173782678383,
+              0.047012417722634973,
+              0.06025698263807295,
+              0.07458560544665885
+            ],
+            "differentKeySameFingerRate": 0.11780232756795556
+          }
+        },
+        "homeS2": 0.37785137339511793,
+        "homeFloor4NativeTracks": 0.3483103203503583,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08978714322588005,
+          "track": "word3"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07458560544665885,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.31323780651121463,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.15449298089858063,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.09713397085685829
+      }
+    },
+    {
+      "id": "QS1-0009",
+      "label": "er -> slot 0; v -> slot 8",
+      "source": "research/notes/2026-11-13-q686-swap-r1-finalists.json",
+      "memory": {
+        "memoryLower": 22,
+        "memoryGuard": 25,
+        "ordinaryD": 2,
+        "ordinaryF": 0,
+        "rhymeInternalSplits": 0,
+        "toneRegionMergeLower": 10,
+        "sourceRhymeColumnMergeRules": 5,
+        "sourceRhymeColumnMergeLinks": 8,
+        "headDeletionRules": 1
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "N"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 409,
+        "occupancyPercent": 92.7437641723356,
+        "emptyCount": 32,
+        "emptyBuckets": [
+          "QQ",
+          "WQ",
+          "WR",
+          "WF",
+          "WB",
+          "EQ",
+          "RQ",
+          "RF",
+          "TQ",
+          "YQ",
+          "PQ",
+          "SQ",
+          "DQ",
+          "FQ",
+          "FR",
+          "FF",
+          "FB",
+          "GQ",
+          "GF",
+          "GB",
+          "HQ",
+          "HF",
+          "HB",
+          "JQ",
+          "KQ",
+          "LQ",
+          "ZQ",
+          "XQ",
+          "CQ",
+          "BQ",
+          "NQ",
+          "MQ"
+        ],
+        "occupiedCommon1237": 405,
+        "commonOccupancyPercent": 91.83673469387755,
+        "qzSyllables": [
+          "qia4",
+          "qiu4"
+        ],
+        "zqSyllables": [],
+        "singletonBuckets": 46,
+        "maxSyllablesPerBucket": 14
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.460725462037482,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 108.66386659733612,
+              "cognitiveMs": 71.43682451639206,
+              "effectiveMs": 180.1006911137282,
+              "firstAuxRate": 0.1945040462498054,
+              "secondAuxRate": 0.0368161774672896,
+              "selectionRate": 0.0031060155693456446,
+              "meanTerminalRank": 1.0035387507963205,
+              "meanRejectedCandidates": 0.003538750796320534,
+              "meanPageActions": 7.017328004998209e-7,
+              "meanKeys": 2.231320223717095
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.8287122736357,
+              "cognitiveMs": 49.95609372717005,
+              "effectiveMs": 465.78480600080576,
+              "firstAuxRate": 0.14564844991482703,
+              "secondAuxRate": 0.018180096999236426,
+              "selectionRate": 0.0012304260702934704,
+              "meanTerminalRank": 1.0013854802154987,
+              "meanRejectedCandidates": 0.0013854802154985863,
+              "meanPageActions": 0,
+              "meanKeys": 4.163828546914064
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.37489171928627,
+              "cognitiveMs": 227.13807269457303,
+              "effectiveMs": 553.5129644138593,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "selectionRate": 0.04054622504807921,
+              "meanTerminalRank": 1.0629962797895474,
+              "meanRejectedCandidates": 0.06299627978954746,
+              "meanPageActions": 0.0005798273999464253,
+              "meanKeys": 3.6649552515208805
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.51685048741007,
+              "cognitiveMs": 76.65968025435104,
+              "effectiveMs": 509.1765307417611,
+              "firstAuxRate": 0.2241022298852272,
+              "secondAuxRate": 0.027098981170060998,
+              "selectionRate": 0.0019731333492938046,
+              "meanTerminalRank": 1.0023087385637661,
+              "meanRejectedCandidates": 0.002308738563766087,
+              "meanPageActions": 0,
+              "meanKeys": 4.251201211055288
+            }
+          }
+        },
+        "v51": {
+          "score": 9.464461743659133,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 108.66386659733612,
+              "firstAuxRate": 0.1945040462498054,
+              "secondAuxRate": 0.0368161774672896,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0031060155693456446,
+              "meanRejectedCandidates": 0.003538750796320534,
+              "meanPageActions": 7.017328004998209e-7,
+              "meanKeys": 2.231320223717095,
+              "effectiveMs": 180.10069111372823
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.8287122736357,
+              "firstAuxRate": 0.14564844991482703,
+              "secondAuxRate": 0.018180096999236426,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0012304260702934704,
+              "meanRejectedCandidates": 0.0013854802154985863,
+              "meanPageActions": 0,
+              "meanKeys": 4.163828546914064,
+              "effectiveMs": 465.7848060008057
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 332.07378604813147,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "thirdAuxRate": 0.04054622504807921,
+              "selectionRate": 0.005186229981653959,
+              "meanRejectedCandidates": 0.0062503842893432355,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.70550147656896,
+              "effectiveMs": 547.1490137846033
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.51685048741007,
+              "firstAuxRate": 0.2241022298852272,
+              "secondAuxRate": 0.027098981170060998,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0019731333492938046,
+              "meanRejectedCandidates": 0.002308738563766087,
+              "meanPageActions": 0,
+              "meanKeys": 4.251201211055288,
+              "effectiveMs": 509.17653074176116
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 438.9634422737517,
+          "motorUpperMs": 353.4567733256308,
+          "meanKeys": 3.779918092013922,
+          "selectionRate": 0.00232610951852897,
+          "firstAuxRate": 0.22390198110030823,
+          "secondAuxRate": 0.04925840673893415,
+          "thirdAuxRate": 0.0067577041746798685
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.01403793580477813,
+              "W": 0.022869872602748826,
+              "E": 0.0736690634510154,
+              "R": 0.03168770966719794,
+              "T": 0.026501877472555675,
+              "Y": 0.049457475406808435,
+              "U": 0.018478185622179375,
+              "I": 0.022443683259759848,
+              "O": 0.029859383069304683,
+              "P": 0.024867893948880525,
+              "A": 0.015174327152788526,
+              "S": 0.028192561318673124,
+              "D": 0.08319639491304154,
+              "F": 0.05473901806022549,
+              "G": 0.03957095454370399,
+              "H": 0.06000534715358812,
+              "J": 0.037755980760363246,
+              "K": 0.03284944384479081,
+              "L": 0.026451637344003843,
+              "Z": 0.047959169058674665,
+              "X": 0.039038794433996535,
+              "C": 0.026402340692044536,
+              "V": 0.017714087516810098,
+              "B": 0.031582761000121355,
+              "N": 0.08466527003302522,
+              "M": 0.060828831868920075
+            },
+            "home": 0.3779356650911787,
+            "leftPinkyQAZ": 0.07717143201624133,
+            "rightPinky": 0.024867893948880525,
+            "indexFingerTYB": 0.10754211387948548,
+            "maxFinger": 0.31119109084488444,
+            "finger": [
+              0.07717143201624133,
+              0.09010122835541848,
+              0.18326779905610147,
+              0.20179640826061457,
+              0,
+              0,
+              0.31119109084488444,
+              0.05529312710455066,
+              0.05631102041330853,
+              0.024867893948880525
+            ],
+            "differentKeySameFingerRate": 0.0980896930544074
+          },
+          "word2": {
+            "load": {
+              "Q": 0.01937329092453631,
+              "W": 0.030464326098932567,
+              "E": 0.05158869880854042,
+              "R": 0.037179021641426904,
+              "T": 0.04257439971341932,
+              "Y": 0.0627580520064691,
+              "U": 0.006324361403665952,
+              "I": 0.008045332282341333,
+              "O": 0.0088645897899828,
+              "P": 0.0465241939266717,
+              "A": 0.006142378013815437,
+              "S": 0.039033952245157856,
+              "D": 0.057012577031391565,
+              "F": 0.04288366757536949,
+              "G": 0.047087326177207345,
+              "H": 0.04424968196307615,
+              "J": 0.049249563775254655,
+              "K": 0.053297261565252746,
+              "L": 0.05197460117061172,
+              "Z": 0.03123772831780043,
+              "X": 0.05023748575288993,
+              "C": 0.04003475040477996,
+              "V": 0.009968990010538227,
+              "B": 0.05084035172812958,
+              "N": 0.062348471897838764,
+              "M": 0.05070494577489973
+            },
+            "home": 0.390931009517137,
+            "leftPinkyQAZ": 0.05675339725615218,
+            "rightPinky": 0.0465241939266717,
+            "indexFingerTYB": 0.156172803448018,
+            "maxFinger": 0.27563507682120436,
+            "finger": [
+              0.05675339725615218,
+              0.11973576409698035,
+              0.14863602624471195,
+              0.23053375684609087,
+              0,
+              0,
+              0.27563507682120436,
+              0.06134259384759408,
+              0.06083919096059452,
+              0.0465241939266717
+            ],
+            "differentKeySameFingerRate": 0.11434922696012309
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025885700550465636,
+              "W": 0.029450661028980706,
+              "E": 0.048166769080167114,
+              "R": 0.0255913994042728,
+              "T": 0.023518203429913474,
+              "Y": 0.07933416776650899,
+              "U": 0.032364831908623215,
+              "I": 0.03684727664282923,
+              "O": 0.04186347525891744,
+              "P": 0.06592900244762226,
+              "A": 0.02832811277036848,
+              "S": 0.024164270546977926,
+              "D": 0.06931564666816833,
+              "F": 0.02233387873910708,
+              "G": 0.03616020613339331,
+              "H": 0.03488853010696656,
+              "J": 0.06225212931798492,
+              "K": 0.025097136495555776,
+              "L": 0.04577040957183592,
+              "Z": 0.03557332990504593,
+              "X": 0.04695750111021995,
+              "C": 0.008699773137290558,
+              "V": 0.05098928559186782,
+              "B": 0.043233765035685955,
+              "N": 0.02912189176822442,
+              "M": 0.028162645583006206
+            },
+            "home": 0.3483103203503583,
+            "leftPinkyQAZ": 0.08978714322588005,
+            "rightPinky": 0.06592900244762226,
+            "indexFingerTYB": 0.14608613623210842,
+            "maxFinger": 0.2661241964513143,
+            "finger": [
+              0.08978714322588005,
+              0.10057243268617858,
+              0.12618218888562602,
+              0.20182673833424045,
+              0,
+              0,
+              0.2661241964513143,
+              0.06194441313838501,
+              0.08763388483075335,
+              0.06592900244762226
+            ],
+            "differentKeySameFingerRate": 0.1083046589440044
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028355824430964908,
+              "W": 0.0366829524272817,
+              "E": 0.06381150389915372,
+              "R": 0.029562440793633574,
+              "T": 0.02989079528796408,
+              "Y": 0.08688537730378142,
+              "U": 0.009450858995573333,
+              "I": 0.013085189822089465,
+              "O": 0.013324715244063269,
+              "P": 0.07465932787808892,
+              "A": 0.009972212088709454,
+              "S": 0.03329404984046575,
+              "D": 0.05630965950643641,
+              "F": 0.03503378517637229,
+              "G": 0.06155409937131683,
+              "H": 0.03590587956993297,
+              "J": 0.0838725413118582,
+              "K": 0.03384594895755961,
+              "L": 0.04672917620108838,
+              "Z": 0.0319289808591956,
+              "X": 0.06593951469825184,
+              "C": 0.012262005868957525,
+              "V": 0.01325649023427408,
+              "B": 0.03786951335122695,
+              "N": 0.029373822950543787,
+              "M": 0.02714333393121595
+            },
+            "home": 0.39651735202373983,
+            "leftPinkyQAZ": 0.07025701737886997,
+            "rightPinky": 0.07465932787808892,
+            "indexFingerTYB": 0.15464568594297246,
+            "maxFinger": 0.27263181406290565,
+            "finger": [
+              0.07025701737886997,
+              0.13591651696599927,
+              0.13238316927454766,
+              0.2071671242147878,
+              0,
+              0,
+              0.27263181406290565,
+              0.04693113877964907,
+              0.06005389144515165,
+              0.07465932787808892
+            ],
+            "differentKeySameFingerRate": 0.11786896431966004
+          }
+        },
+        "homeS2": 0.3779356650911787,
+        "homeFloor4NativeTracks": 0.3483103203503583,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08978714322588005,
+          "track": "word3"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07465932787808892,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.31119109084488444,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.156172803448018,
+          "track": "word2"
+        },
+        "s2DifferentKeySameFingerRate": 0.0980896930544074
+      }
+    },
+    {
+      "id": "QS1-0000",
+      "label": "unchanged seed QS0-0530",
+      "source": "research/notes/2026-11-13-q686-swap-r1-finalists.json",
+      "memory": {
+        "memoryLower": 23,
+        "memoryGuard": 25,
+        "ordinaryD": 2,
+        "ordinaryF": 0,
+        "rhymeInternalSplits": 0,
+        "toneRegionMergeLower": 10,
+        "sourceRhymeColumnMergeRules": 6,
+        "sourceRhymeColumnMergeLinks": 8,
+        "headDeletionRules": 1
+      },
+      "firstKeys": {
+        "b": [
+          "B"
+        ],
+        "c": [
+          "C"
+        ],
+        "ch": [
+          "S"
+        ],
+        "d": [
+          "D"
+        ],
+        "f": [
+          "F"
+        ],
+        "g": [
+          "G"
+        ],
+        "h": [
+          "H"
+        ],
+        "j": [
+          "J"
+        ],
+        "k": [
+          "K"
+        ],
+        "l": [
+          "L"
+        ],
+        "m": [
+          "M"
+        ],
+        "n": [
+          "N"
+        ],
+        "p": [
+          "K"
+        ],
+        "q": [
+          "Q"
+        ],
+        "r": [
+          "R"
+        ],
+        "s": [
+          "N"
+        ],
+        "sh": [
+          "P"
+        ],
+        "t": [
+          "T"
+        ],
+        "x": [
+          "X"
+        ],
+        "z": [
+          "Z"
+        ],
+        "zero-A": [
+          "R"
+        ],
+        "zero-E": [
+          "R"
+        ],
+        "zero-O": [
+          "R"
+        ],
+        "zero-W": [
+          "W"
+        ],
+        "zero-Y": [
+          "Y"
+        ],
+        "zh": [
+          "E"
+        ]
+      },
+      "inventory": {
+        "capacity": 441,
+        "legalTonedSyllables": 1407,
+        "occupied": 409,
+        "occupancyPercent": 92.7437641723356,
+        "emptyCount": 32,
+        "emptyBuckets": [
+          "QQ",
+          "WQ",
+          "WR",
+          "WF",
+          "WB",
+          "EQ",
+          "RQ",
+          "RF",
+          "TQ",
+          "YQ",
+          "PQ",
+          "SQ",
+          "DQ",
+          "FQ",
+          "FR",
+          "FF",
+          "FB",
+          "GQ",
+          "GF",
+          "GB",
+          "HQ",
+          "HF",
+          "HB",
+          "JQ",
+          "KQ",
+          "LQ",
+          "ZQ",
+          "XQ",
+          "CQ",
+          "BQ",
+          "NQ",
+          "MQ"
+        ],
+        "occupiedCommon1237": 405,
+        "commonOccupancyPercent": 91.83673469387755,
+        "qzSyllables": [
+          "qia4",
+          "qiu4"
+        ],
+        "zqSyllables": [],
+        "singletonBuckets": 41,
+        "maxSyllablesPerBucket": 12
+      },
+      "ckt": {
+        "v5": {
+          "score": 9.471882323181177,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 110.71667194822878,
+              "cognitiveMs": 71.36781201934959,
+              "effectiveMs": 182.08448396757836,
+              "firstAuxRate": 0.19471327957982112,
+              "secondAuxRate": 0.0363904888071864,
+              "selectionRate": 0.003102185277809583,
+              "meanTerminalRank": 1.0035042489336292,
+              "meanRejectedCandidates": 0.003504248933629293,
+              "meanPageActions": 5.262996003748656e-7,
+              "meanKeys": 2.2311037683870074
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.10632396105245,
+              "cognitiveMs": 50.20776846749962,
+              "effectiveMs": 465.3140924285521,
+              "firstAuxRate": 0.14657511917056107,
+              "secondAuxRate": 0.0180938050508901,
+              "selectionRate": 0.0012303486572594236,
+              "meanTerminalRank": 1.0013776401341723,
+              "meanRejectedCandidates": 0.001377640134172304,
+              "meanPageActions": 0,
+              "meanKeys": 4.164668924221451
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 326.37489171928627,
+              "cognitiveMs": 227.13807269457303,
+              "effectiveMs": 553.5129644138593,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "selectionRate": 0.04054622504807921,
+              "meanTerminalRank": 1.0629962797895474,
+              "meanRejectedCandidates": 0.06299627978954746,
+              "meanPageActions": 0.0005798273999464253,
+              "meanKeys": 3.6649552515208805
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.5586991262772,
+              "cognitiveMs": 76.75753582391275,
+              "effectiveMs": 509.31623495018994,
+              "firstAuxRate": 0.22411861279607925,
+              "secondAuxRate": 0.02738366548241476,
+              "selectionRate": 0.001985664085027672,
+              "meanTerminalRank": 1.002309077786959,
+              "meanRejectedCandidates": 0.0023090777869588823,
+              "meanPageActions": 0,
+              "meanKeys": 4.251502278278494
+            }
+          }
+        },
+        "v51": {
+          "score": 9.47560542789789,
+          "tracks": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 110.71667194822878,
+              "firstAuxRate": 0.19471327957982112,
+              "secondAuxRate": 0.0363904888071864,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.003102185277809583,
+              "meanRejectedCandidates": 0.003504248933629293,
+              "meanPageActions": 5.262996003748656e-7,
+              "meanKeys": 2.2311037683870074,
+              "effectiveMs": 182.08448396757836
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 415.10632396105245,
+              "firstAuxRate": 0.14657511917056107,
+              "secondAuxRate": 0.0180938050508901,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0012303486572594236,
+              "meanRejectedCandidates": 0.001377640134172304,
+              "meanPageActions": 0,
+              "meanKeys": 4.164668924221451,
+              "effectiveMs": 465.3140924285521
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 332.07378604813147,
+              "firstAuxRate": 0.4878602607223356,
+              "secondAuxRate": 0.17709499079854502,
+              "thirdAuxRate": 0.04054622504807921,
+              "selectionRate": 0.005186229981653959,
+              "meanRejectedCandidates": 0.0062503842893432355,
+              "meanPageActions": 0.000001758541081054859,
+              "meanKeys": 3.70550147656896,
+              "effectiveMs": 547.1490137846033
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 432.5586991262772,
+              "firstAuxRate": 0.22411861279607925,
+              "secondAuxRate": 0.02738366548241476,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.001985664085027672,
+              "meanRejectedCandidates": 0.0023090777869588823,
+              "meanPageActions": 0,
+              "meanKeys": 4.251502278278494,
+              "effectiveMs": 509.3162349501899
+            }
+          }
+        },
+        "aggregateV51": {
+          "effectiveMs": 439.0820016646713,
+          "motorUpperMs": 353.4446881676325,
+          "meanKeys": 3.7803523826498022,
+          "selectionRate": 0.0023275208860449145,
+          "firstAuxRate": 0.22440291843498653,
+          "secondAuxRate": 0.04919176004013608,
+          "thirdAuxRate": 0.0067577041746798685
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.014039297725308866,
+              "W": 0.022872091372621133,
+              "E": 0.0736762106136317,
+              "R": 0.03169078391849584,
+              "T": 0.026504448609191066,
+              "Y": 0.04922275148239794,
+              "U": 0.018489702316837175,
+              "I": 0.02209868003206454,
+              "O": 0.030014325460969722,
+              "P": 0.025109828708836053,
+              "A": 0.015183164396197126,
+              "S": 0.024829457924305288,
+              "D": 0.08320446639020819,
+              "F": 0.05474432868377908,
+              "G": 0.04213776052702264,
+              "H": 0.06001116870138396,
+              "J": 0.04112548229436348,
+              "K": 0.03028966388216218,
+              "L": 0.02645420360648512,
+              "Z": 0.047581218150644214,
+              "X": 0.03904258186659163,
+              "C": 0.03441258480842736,
+              "V": 0.017796834999919273,
+              "B": 0.03158582506959863,
+              "N": 0.07666580137974822,
+              "M": 0.06121733707880954
+            },
+            "home": 0.3779796964059071,
+            "leftPinkyQAZ": 0.0768036802721502,
+            "rightPinky": 0.025109828708836053,
+            "indexFingerTYB": 0.10731302516118764,
+            "maxFinger": 0.3067322432535403,
+            "finger": [
+              0.0768036802721502,
+              0.08674413116351806,
+              0.19129326181226725,
+              0.2044599818080065,
+              0,
+              0,
+              0.3067322432535403,
+              0.052388343914226726,
+              0.056468529067454844,
+              0.025109828708836053
+            ],
+            "differentKeySameFingerRate": 0.09841141598142018
+          },
+          "word2": {
+            "load": {
+              "Q": 0.01936938164042306,
+              "W": 0.03045817878475124,
+              "E": 0.05157828886417624,
+              "R": 0.037171519386945975,
+              "T": 0.0425658087401521,
+              "Y": 0.06106594159304054,
+              "U": 0.0062791504956714456,
+              "I": 0.008087736575436983,
+              "O": 0.00900051468931292,
+              "P": 0.048194252570498974,
+              "A": 0.006089410908429208,
+              "S": 0.03765261891170876,
+              "D": 0.05700107261727254,
+              "F": 0.0428750141957747,
+              "G": 0.05215261314098834,
+              "H": 0.0442407529391231,
+              "J": 0.05061308261616427,
+              "K": 0.048211718266313965,
+              "L": 0.05196411335605094,
+              "Z": 0.030771548760899953,
+              "X": 0.05022734846616315,
+              "C": 0.0449825647202818,
+              "V": 0.010082686680965009,
+              "B": 0.05083009279070398,
+              "N": 0.05737999794810287,
+              "M": 0.05115459034064793
+            },
+            "home": 0.3908003969518259,
+            "leftPinkyQAZ": 0.05623034130975222,
+            "rightPinky": 0.048194252570498974,
+            "indexFingerTYB": 0.1544618431238966,
+            "maxFinger": 0.27073351593275014,
+            "finger": [
+              0.05623034130975222,
+              0.11833814616262314,
+              0.1535619262017306,
+              0.23567773493553013,
+              0,
+              0,
+              0.27073351593275014,
+              0.056299454841750945,
+              0.06096462804536386,
+              0.048194252570498974
+            ],
+            "differentKeySameFingerRate": 0.1100525125676281
+          },
+          "word3": {
+            "load": {
+              "Q": 0.025885700550465636,
+              "W": 0.029450661028980706,
+              "E": 0.048166769080167114,
+              "R": 0.0255913994042728,
+              "T": 0.023518203429913474,
+              "Y": 0.07933416776650899,
+              "U": 0.032364831908623215,
+              "I": 0.03684727664282923,
+              "O": 0.04186347525891744,
+              "P": 0.06592900244762226,
+              "A": 0.02832811277036848,
+              "S": 0.024164270546977926,
+              "D": 0.06931564666816833,
+              "F": 0.02233387873910708,
+              "G": 0.03616020613339331,
+              "H": 0.03488853010696656,
+              "J": 0.06225212931798492,
+              "K": 0.025097136495555776,
+              "L": 0.04577040957183592,
+              "Z": 0.03557332990504593,
+              "X": 0.04695750111021995,
+              "C": 0.008699773137290558,
+              "V": 0.05098928559186782,
+              "B": 0.043233765035685955,
+              "N": 0.02912189176822442,
+              "M": 0.028162645583006206
+            },
+            "home": 0.3483103203503583,
+            "leftPinkyQAZ": 0.08978714322588005,
+            "rightPinky": 0.06592900244762226,
+            "indexFingerTYB": 0.14608613623210842,
+            "maxFinger": 0.2661241964513143,
+            "finger": [
+              0.08978714322588005,
+              0.10057243268617858,
+              0.12618218888562602,
+              0.20182673833424045,
+              0,
+              0,
+              0.2661241964513143,
+              0.06194441313838501,
+              0.08763388483075335,
+              0.06592900244762226
+            ],
+            "differentKeySameFingerRate": 0.1083046589440044
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028353816432670573,
+              "W": 0.03668035474911916,
+              "E": 0.06380698513119124,
+              "R": 0.02956034734962758,
+              "T": 0.029888678591759366,
+              "Y": 0.08687922457527045,
+              "U": 0.009357562923750088,
+              "I": 0.013178836757510332,
+              "O": 0.013352828211606165,
+              "P": 0.07465404092889792,
+              "A": 0.01003504125547835,
+              "S": 0.03329169214511981,
+              "D": 0.05630567197644874,
+              "F": 0.03503130428285958,
+              "G": 0.06154974045991054,
+              "H": 0.035903336919652834,
+              "J": 0.08386660193526538,
+              "K": 0.033843552179855525,
+              "L": 0.04672586710646707,
+              "Z": 0.03192671983027503,
+              "X": 0.06593484523666147,
+              "C": 0.012261137543406636,
+              "V": 0.013231827171643768,
+              "B": 0.037866831647564915,
+              "N": 0.029371742863381223,
+              "M": 0.02714141179460627
+            },
+            "home": 0.3965528082610578,
+            "leftPinkyQAZ": 0.07031557751842396,
+            "rightPinky": 0.07465404092889792,
+            "indexFingerTYB": 0.15463473481459472,
+            "maxFinger": 0.27251988101192626,
+            "finger": [
+              0.07031557751842396,
+              0.13590689213090046,
+              0.13237379465104662,
+              0.20712872950336572,
+              0,
+              0,
+              0.27251988101192626,
+              0.04702238893736586,
+              0.060078695318073236,
+              0.07465404092889792
+            ],
+            "differentKeySameFingerRate": 0.11792192600194133
+          }
+        },
+        "homeS2": 0.3779796964059071,
+        "homeFloor4NativeTracks": 0.3483103203503583,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08978714322588005,
+          "track": "word3"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.07465404092889792,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.3067322432535403,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.15463473481459472,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.09841141598142018
+      }
+    }
+  ]
+}

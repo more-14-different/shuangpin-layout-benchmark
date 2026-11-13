@@ -67,6 +67,9 @@ def main():
     exported["contract"]["rhymeInternalSplitsPolicy"] = "per-layout memoryAudit.rhymeInternalSplits"
     exported["contract"]["secondCodeFactorizationSelectionStatus"] = "mars10-full-final-neighborhood-audit"
     exported["contract"]["memoryConvention"] = job["memoryConvention"]
+    exported['contract']['primaryToneRowAssignment'] = {
+        r['name']: [t for t in r['tones'] if t != 5] for r in fixture['toneRegions']}
+    exported['contract']['neutralTonePolicy'] = 'follow-tone1'
     exported["contract"]["requireEmpty"] = job.get("requireEmpty", ["QZ"])
     exported["contract"]["requireEmptyBuckets"] = job.get("requireEmpty", ["QZ"])
     exported["contract"]["searchMaxD"] = job.get("maxD", 2)
@@ -99,6 +102,7 @@ def main():
         assert ordinary_d <= job.get("maxD", 2) and c["memory"] <= job.get("maxM", 24)
         assert c.get('memoryGuard', c['memory'] + 2) <= job.get('maxMemoryGuard', 999)
         exported["layouts"].append(dict(id=c["id"], origin=c["anchor"], description=c["description"],
+            toneRegions=copy.deepcopy(fixture['toneRegions']),
             factorization="tone-independent-root-repartition" if job.get("regrouping") else "mars10-final-neighborhood", rustScore=c["score"],
             memoryAudit=dict(memoryLower=c["memory"], memoryGuard=c.get("memoryGuard", c["memory"] + 2),
                              ordinaryD=ordinary_d, ordinaryF=0, rhymeInternalSplits=c["splits"], toneRegionMergeLower=c["merge"]),
