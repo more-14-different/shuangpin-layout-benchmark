@@ -52,8 +52,8 @@ function snowJiandaoScores(tau = bCompletionTau(), first = bCompletionFirstAuxPe
   const refs = name => D[name].schemes.S005.modes;
   const result = {
     original: score(v1, refs('completionB'), {character: 1, word: 2}),
-    fixed: score(v1, refs('completionBFixed'), {character: 1, word: 2}),
-    v2: score(v2, refs('completionBV2'), {character: 1, word: 2}, true),
+    fixed: score(columns.completion.independent.fixedV1 || v1, refs('completionBFixed'), {character: 1, word: 2}),
+    v2: score(columns.completion.independent.fixedV2 || v2, refs('completionBV2'), {character: 1, word: 2}, true),
     v3: score(v3, refs('completionBV3'), {character: 1, word2: 3, word3: 1, word4: 1}, true),
     v4: score(columns.completion.modern, refs('completionBV4'), {character: 1, word2: 3, word3: 1, word4: 1}, true, D.completionBV4.cognitiveDefaults),
     v7: score(v1, refs('completionB'), {character: 1, word: 1}),
@@ -83,7 +83,10 @@ function snowJiandaoColumn(header, tableKey, context) {
   if (label.includes('宿主键域') || label === '宿主键域') return text((native.contract.capacity||[21,21]).join('×'));
   if (label === '五辅键方向') return text(native.contract.toneKeysByTone, 'toneKeysByTone 边界映射；形辅按 ' + native.contract.shapeKeysByMeaning + '＝折横撇竖点，不追加独立调辅');
   if (label === '固定五辅') return {value: 1, html: '<span title="纯形辅；主码已含声调">是</span>'};
-  if (label.includes('声韵记忆项 M')) return native.memory.lower==null ? text('待定',native.memory.definition) : number(native.memory.lower, `M-T1 规则记忆账；守门 ${native.memory.guard}。同为声韵规则关联数，不替换成无调 M-R2。`, 'integer');
+  if (label.includes('声韵记忆项 M')) {
+    const cell = number(native.memory.lower, `M-T1 下界 ${native.memory.lower} / 保守上界 ${native.memory.guard}；排序及 M≤ 按下界。${native.memory.definition}`, 'integer');
+    cell.html = `<span data-toned-metric="${esc(label)}" title="${esc(cell.note)}">${native.memory.lower} / ${native.memory.guard}</span>`;return cell;
+  }
   if (label.includes('原键偏移 D')) return number(native.memory.D, '普通单字母声母只要实际首键离开同名键即计一次', 'integer');
   if (label.includes('韵偏移 V')) return number(c.rules.V, c.rules.definition, 'integer');
   if (/^A7E-v[1-5]$/.test(label)) return number(c.ensemble['v' + label.slice(-1)], formula20 + '；各版本保留自己的轨权重和 β=4 广义均值');
@@ -129,7 +132,7 @@ function snowJiandaoColumn(header, tableKey, context) {
     const cell = number(result.oldSelection,note);
     cell.html += `<small>τ=${result.oldSelectionTau} ms · 历史冻结档</small>`;return cell;
   }
-  if (scoreName) return number(scores()[scoreName], '保留该列的语料、成本版本、竞争池、S005 参考及广义均值权重；随当前 τ/首辅/次辅参数重算，已内嵌的调不增加辅码成本');
+  if (scoreName) return number(scores()[scoreName], '保留该列的语料、成本版本、竞争池、S005 参考及广义均值权重；三字主码按本域 AAA/AAAU，缩略词只追加原生形辅；固定 IVUAO 列独立重映射辅键；随当前 τ/首辅/次辅参数重算');
   for (const [prefix, mode, kind] of [['键道·单字','keytao','character'],['三拼·单字','sanpin','character'],['键道·二字词','keytao','word'],['三拼·二字词','sanpin','word']]) {
     if (!label.startsWith(prefix + ' ')) continue;
     const metric = c.completion.independent.v1[mode][kind];
@@ -164,7 +167,7 @@ uxKpis = function(entry, stat) {
   const metrics = [
     ['v5', 'A7E-v5', value => num(value)],
     ['v4', 'A7E-v4', value => num(value)],
-    ['memory', '声韵记忆项 M', value => typeof value === 'number' ? num(value, 0) : esc(value)],
+    ['memory', '声韵记忆项 M', () => native.memory.lower + ' / ' + native.memory.guard],
     ['fa', 'FA-1 加权', value => num(value, 2) + '%'],
     ['lu', 'LU-v1r', value => num(value, 2)],
     ['unique', '裸二键唯一', (_value, cell) => cell.html],

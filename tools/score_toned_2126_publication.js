@@ -4,7 +4,7 @@ const scorer=require('./score_completion_ckt_v4'),toned=require('./score_toned_2
 const model=require('./ckt_v4_model'),exp=require('./explore_toned_2126');
 const native=require('./score_snow_jiandao_toned_benchmark');
 const {toneKeysFromShapeKeys}=require('./auxiliary_semantics');
-const {marsWrittenOnset}=require('./mars_toned_factorization');
+const {marsFirstAtom,marsFirstAtomInitial}=require('./mars_toned_factorization');
 const [which,out]=process.argv.slice(2);
 assert.ok(['keep','26'].includes(which));
 const sourcePath=`research/notes/2026-11-13-toned-2126-regroup-${which}-refine.json`;
@@ -22,7 +22,7 @@ const id=which==='keep'?'T2126-QEMPTY-8890382':'T2126-FULL26-8871530';
 const fixture={layoutId:id,pinyin:data.pinyin,toneKeysByTone:tone,shapeKeysByMeaning:'AEUIO',
   soundKeys:'BCDFGHJKLMNPQRSTVWXYZ',tonedCodes:data.pinyin.map(p=>[1,2,3,4,5].map(t=>codes.get(p+t)||null))};
 const atoms=new Map();
-data.pinyin.forEach((p,i)=>{if(!fixture.tonedCodes[i].some(Boolean))return;const onset=marsWrittenOnset(p),name=onset==='_'?'zero-'+p[0].toUpperCase():onset;if(!atoms.has(name))atoms.set(name,{name,initial:onset,pinyin:[]});atoms.get(name).pinyin.push(i);});
+data.pinyin.forEach((p,i)=>{if(!fixture.tonedCodes[i].some(Boolean))return;const name=marsFirstAtom(p);if(!atoms.has(name))atoms.set(name,{name,initial:marsFirstAtomInitial(name),pinyin:[]});atoms.get(name).pinyin.push(i);});
 fixture.atoms=[...atoms.values()];
 fixture.rhymeAtoms=Array.from({length:10},(_,g)=>{
  const finals=Object.keys(layout.finalGroups).filter(f=>layout.finalGroups[f]===g);
@@ -49,10 +49,11 @@ for(const row of filterRows)if(row[5]==='word3'){
 const result={version:'toned-2126-r11-1',id,name:which==='keep'?'21×26 带调 · Q韵空键 9/9/7':'21×26 带调 · 全次键 10/9/7',layoutId:layout.id,
  publication:{research:true,source:sourcePath,rhymeGroups:fixture.rhymeAtoms.map(a=>({roots:a.roots,finals:a.finals})),toneRowsByTone:layout.toneRowsByTone,description:'er→en/n；上二三／中四／下一轻；形辅21/12/24',validation:{anchorsVerified:true,tolerance:1e-10}},
  contract:{main:'tone-in-main 21x26',capacity:[21,26],actual:[21,which==='keep'?25:26],rowCounts:which==='keep'?[9,9,7]:[10,9,7],completion:'shape-only AEUIO',shapeKeysByMeaning:'AEUIO',toneKeysByTone:tone,toneDigitsByShapeMeaning:'42310',wordAuxiliaryPolicy:best.policy,oldR11IndependentToneAuxiliary:false},
- memory:{definition:'未建立与 M-R2 对齐的记忆成本；不套用21×21 M-T1',lower:null,guard:null,...native.ordinaryOnsetDiagnostics(fixture)},
+ memory:null,
  inventory:{legalTonedSyllables:codes.size,occupiedBuckets:occupied.size,capacity:546,emptyBuckets:546-occupied.size,qzEmpty:!occupied.has('QZ'),zqEmpty:!occupied.has('ZQ')},
  keyboards:{soundKeys:fixture.soundKeys,...native.keyboardSemantics(fixture)},tonedCodes:fixture.tonedCodes,filterRowColumns:['text','readingWithTone0','mainCode','terminalCode','weight','kind'],filterRows,
  ckt:{v5:{score:v5,policy:best.policy,tracks:summary5,reference:'S005 v5; native21x26 routing, 21/12/24'},v51:{score,tracks,policy:best.policy,reference:'S005 shape-only v5.1; AUAU/AAAU/AAAA, joint pools, soft-page-fill-v2'},aggregateV51:native.weightedAggregate(tracks,['motorUpperMs','firstAuxRate','secondAuxRate','thirdAuxRate','selectionRate','meanRejectedCandidates','meanPageActions','meanKeys','effectiveMs'])},ergonomics:native.loadSummary(outcomes)};
+result.memory=require('./toned_memory_audit').tonedMemoryAudit(result,data.pinyin,inventory.decomposition);
 fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify({native:result,fixture}));
 fs.writeFileSync(out.replace(/\.json$/,'.native.json'),JSON.stringify(result));
 console.log(JSON.stringify({id,score,v5,occupied:occupied.size,rows:filterRows.length}));

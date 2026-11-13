@@ -20,6 +20,15 @@ unified-keyboard-filter-test: snow-jiandao-ui
 toned-detail-kpis-test: snow-jiandao-ui
     node tests/toned-detail-kpis.browser.mjs
 
+toned-contract-refresh:
+    python -X utf8 tools/refresh_toned_r11_contracts.py
+
+toned-contract-audit-test:
+    node --test tests/toned-contract-audit.test.mjs tests/toned-benchmark-columns.test.mjs tests/auxiliary-semantics.test.mjs
+    node tests/toned-contract-audit.browser.mjs
+    node tests/toned-detail-kpis.browser.mjs
+    node tools/audit_keymap_link_colors.mjs
+
 snow-jiandao-ui-test: snow-jiandao-ui
     node --test tests/snow-jiandao-toned-r11.test.mjs tests/keymap-link-colors.test.mjs tests/auxiliary-semantics.test.mjs
     node tests/snow-jiandao-toned-browser.test.mjs

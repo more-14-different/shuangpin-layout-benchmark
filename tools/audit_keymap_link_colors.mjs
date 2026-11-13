@@ -43,7 +43,7 @@ try {
     let tonedCount = 0;
     for (const native of snowJiandaoSchemes()) {
       try {
-        snowJiandaoKeyboardSVG('semantic', null, native);
+        auditTonedKeymapSVG(snowJiandaoKeyboardSVG('semantic', null, native), native);
         tonedCount++;
       } catch (error) {
         failures.push({id: native.id, error: String(error)});
@@ -54,7 +54,7 @@ try {
   if (audit.failures.length || pageErrors.length) {
     throw new Error(JSON.stringify({...audit, pageErrors}, null, 2));
   }
-  console.log(`键位图 link 配色全量审计通过：${audit.count} 个方案，0 个色差冲突。`);
+  console.log(`键位图 link 配色审计通过：${audit.count} 个方案的抽象链约束，带调方案另查最终 SVG 的源键/目标标签及 W/Y 语义，0 个已检查冲突。`);
 } finally {
   await browser.close();
 }

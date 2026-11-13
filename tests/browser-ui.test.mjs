@@ -47,12 +47,8 @@ try {
   assert.equal(tonedContractBridge.catalogueCount, 850,
     'the tone-in-main bridge must not masquerade as an ordinary untoned catalogue entry');
   assert.equal(tonedContractBridge.id, 'SNOW-JIANDAO-TONED');
-  const {onsetDefinition, ...tonedMemory} = tonedContractBridge.memory;
-  assert.match(onsetDefinition, /derived from actual toned codes/);
-  assert.deepEqual(tonedMemory, {
-    definition: 'M-T1: baseline rule links plus one ordinary-initial displacement',
-    lower: 21, guard: 23, D: 1, F: 0,
-  });
+  assert.equal(tonedContractBridge.memory.audit.version,'M-T1-derived-v1');
+  assert.deepEqual(['lower','guard','D','F'].map(key=>tonedContractBridge.memory[key]),[21,23,1,0]);
   assert.equal(tonedContractBridge.inventory.legalTonedSyllables, 1407);
   assert.equal(tonedContractBridge.inventory.occupiedBuckets, 427);
   assert.ok(Math.abs(tonedContractBridge.cktV5 - 9.199739582572558) < 1e-12);
@@ -110,7 +106,7 @@ try {
 
   await page.locator('#nf6SelectionHost').selectOption('21x21');
   await page.waitForSelector('.snow-jiandao-contract-card');
-  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\/ 855 个候选（含5个带调合同）/);
+  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\/ 857 个候选（含7个带调合同）/);
   assert.match(await page.locator('.snow-jiandao-contract-card').innerText(), /冰雪剑道/);
   await page.locator('[data-snow-jiandao-open="SNOW-JIANDAO-TONED"]').click();
   await page.waitForSelector('#snowJiandaoTonedDetail');
@@ -159,7 +155,7 @@ try {
   await page.waitForTimeout(250);
   assert.equal(
     await page.locator('#nf6SelectionCount').innerText(),
-    `61 / 855 个候选（含5个带调合同）`,
+    `63 / 857 个候选（含7个带调合同）`,
   );
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 
@@ -173,7 +169,8 @@ try {
   await page.waitForSelector('table[data-ux-table="benchmark"]');
   const benchmarkHeaders = (await page.locator('table[data-ux-table="benchmark"] th').allTextContents())
     .map(text => text.replace(/[↕↑↓]/g, '').trim());
-  for (const redundant of ['每输出字 ms', '样本数 N', '平均键数', '中央 ms/项', '外推键保护 ms', '长码压力 ms', '含外推键占比', '超四码占比']) {
+  assert.equal(benchmarkHeaders.includes('样本数 N'),true,'mixed toned/ordinary sound cohorts have different syllable counts');
+  for (const redundant of ['每输出字 ms', '平均键数', '中央 ms/项', '外推键保护 ms', '长码压力 ms', '含外推键占比', '超四码占比']) {
     assert.equal(benchmarkHeaders.includes(redundant), false, `${redundant} should be compacted in the uniform sound benchmark`);
   }
   for (const collisionHeader of ['五档跨族受影响均值', '五档首选损失均值', 'Top10k 受影响', 'Top10k 首选损失', 'Top10k 最大桶']) {
@@ -191,7 +188,7 @@ try {
     .map(text => text.replace(/[↕↑↓]/g, '').trim());
   assert.deepEqual(collisionHeaders, ['方案', '宿主键域', '零声母 scope', '词频截点', '跨族受影响', '高频首选损失', '跨族碰撞桶', '全部碰撞桶', '最大桶']);
   const collisionRows = await page.locator('table[data-ux-table="four-code-collision"] tbody tr').count();
-  assert.equal(collisionRows, 305, 'the active 21x26/M<=36 filter should retain all 61 schemes at five cuts');
+  assert.equal(collisionRows, 315, '21x26/M<=36 retains 61 ordinary and two toned schemes at five cuts');
   await page.locator('#uxSubnav [data-r9-bench="table"]').click();
   await page.waitForSelector('table[data-ux-table="benchmark"]');
   await page.locator('#uxSubnav [data-r9-bench="collision"]').click();

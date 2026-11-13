@@ -6,6 +6,7 @@ const vm = require('node:vm');
 const model = require('./ckt_v4_model.js');
 const scorer = require('./score_completion_ckt_v4.js');
 const legacy3 = require('./score_completion_ckt_v3.js');
+const {physicalShape} = require('./auxiliary_semantics.js');
 const {TONED_BENCHMARK_TRACKS, tonedSoundRows, tonedRowsFor, tonedGeneralizedScore} = require('./toned_benchmark_metrics.js');
 
 function loadEngines(html, data) {
@@ -89,9 +90,31 @@ function expandToneInventory(data, native) {
 function stripEmbeddedTone(stages, kind) {
   if (kind === 'character') return stages.map((codes, at) => at === 0 ? codes : codes.map(code => code.slice(0, 2) + code.slice(3)));
   if (kind === 'word' || kind === 'word2') return stages.map(codes => codes.map(code => code.slice(0, 4)));
-  // Initial-only three/four-character abbreviations have discarded the
-  // syllables' second keys, and consequently have not retained their tones.
+  // Only transform full-syllable paths here. Abbreviations are constructed
+  // separately by shapeWordStages; slicing a tone suffix cannot adapt them.
   return stages;
+}
+
+function shapeWordStages(base, text, native, data) {
+  const kind = 'word' + [...text].length;
+  const order = (native.contract.wordAuxiliaryPolicy?.[kind] || '12').slice(0, 2);
+  const chars = [...text], auxiliary = [...order].map(position =>
+    physicalShape(data.shapes.snowshape[chars[Number(position) - 1]], native.contract.toneKeysByTone)?.[0]);
+  const first = auxiliary[0] ? base + auxiliary[0] : base;
+  const second = auxiliary.every(Boolean) ? base + auxiliary.join('') : first;
+  return [[base], [first], [second]];
+}
+
+function pureShapeModernRows(rows, native, data) {
+  return rows.map(row => {
+    if (row.kind === 'character') return row;
+    const routed = row.kind === 'word3' && row.baseLength === 4;
+    const base = row.stages[routed ? 1 : 0].codes[0];
+    const stages = shapeWordStages(base, row.text, native, data);
+    const codes = routed ? [[row.stages[0].codes[0]], ...stages] : stages;
+    return {...row, stages:model.makeStages(model.classifyContract(native.contract.capacity || [21,21]), row.kind,
+      codes.map(choices => ({length:choices[0].length,codes:choices})))};
+  });
 }
 
 function independentCompletion(rows, cost, baseLength, lex) {
@@ -149,7 +172,7 @@ function completeColumns({data, native, snow, engines, words, motor}) {
   const stroke = {alternatives: strokes, primary: new Map([...strokes].map(([char, choices]) => [char, [...choices][0]]))};
   const {makeRows} = require(path.join(snow, 'scripts/research/score_shenyun_completion_ckt.js'));
   const initial = makeRows(expanded.data, expanded.entry, stroke, 'native');
-  const independent = {v1: {keytao: {}, sanpin: {}}, v2: {keytao: {}, sanpin: {}}, v3: {keytao: {}, sanpin: {}}};
+  const independent = Object.fromEntries(['v1','v2','fixedV1','fixedV2','v3'].map(version => [version,{keytao:{},sanpin:{}}]));
   const motor2 = v2Motor(data), costCaches = {v1: new Map(), v2: new Map()};
   const costs = {v1: code => engines.CKTEngine.codeCost(code), v2: motor2};
   const cachedCost = version => code => {
@@ -161,18 +184,36 @@ function completeColumns({data, native, snow, engines, words, motor}) {
       codes: mode === 'sanpin' ? stripEmbeddedTone(row[mode], kind) : row[mode]}));
     for (const version of ['v1', 'v2']) independent[version][mode][kind] = independentCompletion(rows, cachedCost(version), kind === 'character' ? 2 : 4, engines.Engine7.lex);
   }
+  const fixed = makeRows(expanded.data, expanded.entry, stroke, 'fixed');
+  for (const mode of ['keytao','sanpin']) for (const [kind,source] of [['character',fixed.chars],['word',fixed.words]]) {
+    const rows = source.filter(row=>row.common).map(row=>({text:row.text,weight:row.weight,
+      codes:mode==='sanpin'?stripEmbeddedTone(row[mode],kind):row[mode]}));
+    for (const version of ['v1','v2']) independent[version==='v1'?'fixedV1':'fixedV2'][mode][kind] =
+      independentCompletion(rows,cachedCost(version),kind==='character'?2:4,engines.Engine7.lex);
+  }
   const multi = legacy3.extractMultiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), new Map(data.pinyin.map((py, index) => [py, index])), data.shapes.snowshape);
   const convert = item => ({...item, py: item.py.map((py, at) => expanded.index.get(py + ':' + item.tones[at]) ?? -1)});
   const multiExpanded = {w3: multi.w3.map(convert), w4: multi.w4.map(convert)};
   const fourRows = legacy3.makeRowsForScheme(expanded.entry, expanded.data, stroke, multiExpanded);
   for (const mode of ['keytao', 'sanpin']) for (const kind of ['character', 'word2', 'word3', 'word4']) {
-    const rows = fourRows[mode][kind].map(row => ({...row, codes: mode === 'sanpin' ? stripEmbeddedTone(row.codes, kind) : row.codes}));
-    independent.v3[mode][kind] = independentCompletion(rows, cachedCost('v2'), kind === 'character' ? 2 : kind === 'word3' ? 3 : 4, engines.Engine7.lex);
+    let rows;
+    const threeBase = (native.contract.capacity?.[1] || 21) === 21 ? 3 : 4;
+    if (['word3','word4'].includes(kind)) rows = multiExpanded[kind==='word3'?'w3':'w4'].flatMap(item => {
+      const codes = item.py.map(py=>expanded.entry.codeList[py]);if(codes.some(code=>!code))return [];
+      const base = codes.map(code=>code[0]).join('') + (kind==='word3'&&threeBase===4?codes[2][1]:'');
+      return [{text:item.text,weight:item.weight,codes:shapeWordStages(base,item.text,native,data)}];
+    });
+    else rows = fourRows[mode][kind].map(row => ({...row, codes: mode === 'sanpin' ? stripEmbeddedTone(row.codes, kind) :
+      kind==='word2'?shapeWordStages(row.codes[0][0],row.text,native,data):row.codes}));
+    independent.v3[mode][kind] = independentCompletion(rows, cachedCost('v2'), kind === 'character' ? 2 : kind === 'word3' ? threeBase : 4, engines.Engine7.lex);
   }
   const modern = {keytao: {}, sanpin: {}};
   const expandedWords = Object.fromEntries(Object.entries(words).map(([kind, rows]) => [kind, rows.map(convert)]));
+  const shapeRows = pureShapeModernRows(scorer.buildRows(expanded.entry,expanded.data,strokes,expandedWords,'keytao'),native,data);
+  const shapeById = new Map(shapeRows.map(row=>[row.id,row]));
   for (const mode of ['keytao', 'sanpin']) {
-    let rows = scorer.buildRows(expanded.entry, expanded.data, strokes, expandedWords, mode);
+    let rows = mode==='keytao'?shapeRows:scorer.buildRows(expanded.entry, expanded.data, strokes, expandedWords, mode);
+    rows = rows.map(row=>mode==='keytao'||['word3','word4'].includes(row.kind)?shapeById.get(row.id):row);
     if (mode === 'sanpin') rows = rows.map(row => {
       if (!['character', 'word2'].includes(row.kind)) return row;
       const stages = stripEmbeddedTone(row.stages.map(stage => stage.codes), row.kind);
@@ -187,7 +228,9 @@ function completeColumns({data, native, snow, engines, words, motor}) {
     s1: independent.v1.sanpin.character.p1, s2: independent.v1.sanpin.character.p2,
     wj1: independent.v1.keytao.word.p1, wj2: independent.v1.keytao.word.p2,
     ws1: independent.v1.sanpin.word.p1, ws2: independent.v1.sanpin.word.p2};
-  return {independent, modern, bPaths};
+  return {independent, modern, bPaths,adaptation:{auxiliary:'shape-only; embedded tone satisfies character/word2 tone stages; abbreviated word3/word4 paths use two native shape steps',
+    word3BaseLength:(native.contract.capacity?.[1]||21)===21?3:4,wordAuxiliaryPolicy:native.contract.wordAuxiliaryPolicy,
+    fixedControl:'fixedV1/fixedV2 use IVUAO independently of the native auxiliary mapping',v4Pools:'original version-specific shared pools; four-code-top word3 is AAA -> AAAU -> AAAUX -> AAAUXX'}};
 }
 
 function soundCompletion(data, native, cost, lex) {
@@ -219,27 +262,32 @@ function buildTonedColumns({html, data, native, snow, words, motor}) {
   const completion = completeColumns({data, native, snow, engines, words, motor});
   const sound = soundCompletion(data, native, engines.CKTEngine.codeCost, engines.Engine7.lex);
   const rules = require('./toned_rule_metrics.js').toneRuleMetrics(data, tonedSoundRows(data, native));
-  return {version: 'tone-in-main-column-contracts-v2', nativeId: native.id,
+  return {version: 'tone-in-main-column-contracts-v3', nativeId: native.id,
     tonedCodesSha256: require('node:crypto').createHash('sha256').update(JSON.stringify(native.tonedCodes)).digest('hex'),
     ...twenty, completion, sound, rules,
     policy: {tracks: 'same 20 contracts; embedded tone evidence counted once',
       soundWeights: 'common399 pinyin mass times common-character conditional tone frequency; equal legal-tone fallback only when no observed tone mass',
       soundCompletion: sound.formula, completionV1V2: 'same Common8095 and Snow-common two-word cohorts as legacy columns',
-      completionV3: 'same fixed 15000 three/four-word cohorts; independent pools; native-v2 tensor',
+      completionV3: 'same fixed 15000 three/four-word cohorts; independent pools; native-v2 tensor; native AAA/AAAU routing and first two shape auxiliary positions',
       completionV4: 'same frozen 99% dictionary cohorts, routing/pools, motor tensor, rank/page cognitive formula',
-      sanpin: 'full syllables already encode tone; remove redundant tone strokes. Initial-only word3/word4 retain separate tone evidence.'}};
+      sanpin: 'full syllables already encode tone; remove redundant tone strokes. Abbreviated word3/word4 use native shape-only paths instead of independent tone auxiliaries.'}};
 }
 
 module.exports = {loadEngines, summarize20, normalizeLegacy, expandToneInventory, stripEmbeddedTone,
-  independentCompletion, v2Motor, soundCompletion, buildTonedColumns};
+  independentCompletion, v2Motor, soundCompletion, buildTonedColumns,shapeWordStages,pureShapeModernRows};
 
 if (require.main === module) {
   const option = (name, fallback) => {const at = process.argv.indexOf('--' + name);return at < 0 ? fallback : process.argv[at + 1]};
-  const html = fs.readFileSync(option('html', 'a7_CKT_R11.html'), 'utf8');
+  let html = fs.readFileSync(option('html', 'a7_CKT_R11.html'), 'utf8');
   const data = scorer.loadPayload(option('html', 'a7_CKT_R11.html'));
   const snow = option('snow', 'D:/C2D/Documents/rime-snow-pinyin');
   const nativePath = option('native', null);
   const native = nativePath ? JSON.parse(fs.readFileSync(nativePath, 'utf8')) : data.tonedContractBenchmark.schemes.snowJiandao;
+  // The engine needs its scripts and frozen reference cohorts, not seven
+  // duplicated keyboard/filter corpora or their base64 publication envelope.
+  delete data.tonedContractBenchmark;
+  const payloadAt=html.indexOf('<script id="payload"'),payloadStart=html.indexOf('>',payloadAt)+1,payloadEnd=html.indexOf('</script>',payloadStart);
+  html=html.slice(0,payloadStart)+html.slice(payloadEnd);
   const words = scorer.multiwords(path.join(snow, 'snow_pinyin.base.dict.yaml'), data, .99);
   const motor = require('./score_toned_2121_ckt_v51.js').projectedMotor(data);
   const result = buildTonedColumns({html, data, native, snow, words, motor});

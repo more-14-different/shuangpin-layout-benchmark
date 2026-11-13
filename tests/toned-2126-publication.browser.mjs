@@ -27,7 +27,7 @@ try {
   assert.deepEqual(audit.capacity,[21,26]);assert.equal(audit.shape,'AEUIO');
   assert.ok(Math.abs(audit.score-score)<1e-10);assert.equal(audit.shapes,5);assert.ok(audit.rhymes>=25);
   assert.ok(audit.main3&&audit.finite);assert.equal(audit.rows,289644);
-  assert.match(audit.detail,/待定/);assert.match(audit.detail,/21×26/);
+  assert.doesNotMatch(audit.detail,/待定/);assert.match(audit.detail,/21×26/);
   assert.ok(audit.top.filter(Boolean).every(s=>s==='2/3'));
   assert.doesNotMatch(await page.locator('#svgbox').textContent(), /阴|阳|上ˇ|去ˋ/);
   assert.deepEqual(audit.clipped,[]);
