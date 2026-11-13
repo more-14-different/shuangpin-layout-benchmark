@@ -40,7 +40,16 @@ try {
         failures.push({id: entry.id, error: String(error)});
       }
     }
-    return {count: window.App7.data.entries.length, failures};
+    let tonedCount = 0;
+    if (window.App7.data.tonedContractBenchmark?.schemes?.snowJiandao) {
+      try {
+        snowJiandaoKeyboardSVG('semantic');
+        tonedCount++;
+      } catch (error) {
+        failures.push({id: 'SNOW-JIANDAO-TONED', error: String(error)});
+      }
+    }
+    return {count: window.App7.data.entries.length + tonedCount, failures};
   });
   if (audit.failures.length || pageErrors.length) {
     throw new Error(JSON.stringify({...audit, pageErrors}, null, 2));

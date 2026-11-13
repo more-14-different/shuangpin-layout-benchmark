@@ -373,32 +373,6 @@ function snowJiandaoSelectionCard(){
  <p class="hint">该行响应上方 21×21、AVUIO、IVUAO、M≤、D≤ 与“火星十韵＋带调主码”筛选；指标采用带调原生合同。</p></section>`;
 }
 
-function snowJiandaoKeyboardSVG(mode){
- const i=D.tonedContractBenchmark.schemes.snowJiandao,rows=['QWERTYUIOP','ASDFGHJKL','ZXCVBNM'];
- let labels={},load=null,kind='semantic';
- if(mode==='first')labels=i.keyboards.firstByKey;
- else if(mode==='second')labels=i.keyboards.secondByKey;
- else if(mode==='shape')labels=i.keyboards.shapeByKey;
- else if(mode==='daily'){load=Object.fromEntries(Object.entries(i.macro['daily|native-punctuation'].heat_map).map(([key,value])=>[key.toUpperCase(),value/i.macro['daily|native-punctuation'].hits]));kind='load'}
- else {load=i.ergonomics.tracks[mode]?.load||{};kind='load'}
- const maximum=load?Math.max(...Object.values(load),1e-12):1;
- const toneFill=(row)=>row===0?'#d8e9f3':row===1?'#dcefdc':'#f5e8bd';
- let keys='';
- rows.forEach((row,rowIndex)=>[...row].forEach((key,column)=>{
-  const x=18+[0,25,72][rowIndex]+column*98,y=18+rowIndex*94,w=91,h=84,value=load?.[key]||0;
-  const fill=kind==='load'?`rgba(91,137,157,${0.10+0.78*Math.sqrt(value/maximum)})`:mode==='shape'&&labels[key]?.length?'#eadff0':mode==='second'&&labels[key]?.length?toneFill(rowIndex):labels[key]?.length?'#dce9ef':'#f3f3f1';
-  const items=kind==='load'?[`${(value*100).toFixed(2)}%`]:(labels[key]||[]);
-  const lines=items.length?items.slice(0,3):[''];
-  keys+=`<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="${fill}" stroke="#72777b"/><text x="${x+8}" y="${y+18}" font-size="14" fill="#555">${key}</text>${lines.map((line,index)=>`<text x="${x+w/2}" y="${y+43+index*15}" text-anchor="middle" font-size="${mode==='second'?10:12}" fill="#222">${esc(line)}</text>`).join('')}</g>`;
- }));
- const title=({first:'第一码 · 声母/零声母组件',second:'第二码 · 十韵组×声调',shape:'AVUIO · 形笔辅语义',daily:'日常纯双拼按键负担',character:'带调字轨终码负担',word2:'带调二字词轨终码负担',word3:'带调三字词轨终码负担',word4:'带调四字词轨终码负担'})[mode];
- return `<svg viewBox="0 0 1035 320" role="img" aria-label="${esc(title)}"><text x="18" y="310" font-size="14" fill="#444">${esc(title)}${kind==='load'?' · 每轨内按终码击键归一':' · 空白键不承担该层语义'}</text>${keys}</svg>`;
-}
-
-function snowJiandaoDrawKeyboard(){
- const mode=$('#snowJiandaoKeyboardMode')?.value||'first',box=$('#svgbox');if(box)box.innerHTML=snowJiandaoKeyboardSVG(mode);
-}
-
 function snowJiandaoRenderDetail(){
  const i=D.tonedContractBenchmark.schemes.snowJiandao,q=D.tonedContractBenchmark.schemes.qzE8f37a;
  const m=i.macro['daily|native-punctuation'],e=i.ergonomics,c=i.ckt.v51.tracks.character;
@@ -407,7 +381,7 @@ function snowJiandaoRenderDetail(){
  <div class="heading"><button data-action="nav:selection">返回方案筛选</button><button data-r11-report>打开跨合同完整表</button></div>
  <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>21×21</b>；AVUIO 五形辅；toneKeysByTone=<b>IVUAO</b>。</p><p>M-T1 下限/守门：<b>${i.memory.lower}/${i.memory.guard}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p></section>
  <section class="card"><h3>合同边界</h3><p>CKT-T v5/v5.1 使用 S005=10 的四条带调原生轨，只计形辅；不再次加入调笔辅。</p><p>旧 A7E v3/v4/v5 和旧 20 合同峰值不适用。下列人体工学峰值来自字、二字、三字、四字四条原生轨。</p></section></div>
- <section class="card snow-jiandao-keyboards"><div class="heading"><h3>冰雪剑道键盘图</h3><label class="control"><span>图层</span><select id="snowJiandaoKeyboardMode"><option value="first">第一码 · 声母/零声母</option><option value="second">第二码 · 十韵组×声调</option><option value="shape">AVUIO 形笔辅</option><option value="daily">日常纯双拼负担</option><option value="character">带调字轨负担</option><option value="word2">带调二字词轨负担</option><option value="word3">带调三字词轨负担</option><option value="word4">带调四字词轨负担</option></select></label><button data-action="svg-export">导出当前 SVG</button></div><div id="svgbox"></div><p class="hint">第二码图以蓝/绿/黄分别表示上排四声、中排二三声、下排一声与轻声区域；负担图分别在自身语料轨内归一。</p></section>
+ ${snowJiandaoKeyboardPanel()}
  ${uxTable(['指标','冰雪剑道','QZ-e8f37a','口径'],[
   ['CKT v5',num(i.ckt.v5.score,9),num(q.ckt.v5,9),'各自生产合同；S005=10'],
   ['CKT v5.1',num(i.ckt.v51.score,9),num(q.ckt.v51,9),'各自生产合同；S005=10'],
@@ -423,7 +397,7 @@ function snowJiandaoRenderDetail(){
   ['主键区下限',pct(e.homeFloor4NativeTracks),pct(q.ergonomics.homeFloor20Contracts),'4原生轨 / 旧20合同']
  ],[],'snow-jiandao-selectable-detail')}
  <details class="card" open><summary>四条带调原生轨</summary><pre>${esc(JSON.stringify(i.ckt.v51.tracks,null,2))}</pre></details></section>`;
- $('#snowJiandaoKeyboardMode').onchange=snowJiandaoDrawKeyboard;snowJiandaoDrawKeyboard();$('#uxEnvironment').hidden=true;uxFinishSoon();
+ snowJiandaoWireKeyboard();$('#uxEnvironment').hidden=true;uxFinishSoon();
 }
 
 const SNOW_JIANDAO_UX_RENDER_BASE=uxRender;
@@ -446,6 +420,9 @@ document.addEventListener('click',event=>{
 /* SNOW_JIANDAO_SELECTABLE_V1_END */
 
 '''
+    scripts = "\n".join((ROOT / "tools" / name).read_text(encoding="utf-8")
+                        for name in ("snow_jiandao_toned_view.js", "snow_jiandao_toned_ui.js"))
+    source = source.replace("function snowJiandaoRenderDetail(){", scripts + "\nfunction snowJiandaoRenderDetail(){", 1)
     if SELECTABLE_MARKER in html:
         start = html.index(SELECTABLE_MARKER)
         end = html.index(SELECTABLE_END, start) + len(SELECTABLE_END)
@@ -460,6 +437,12 @@ def main() -> None:
         environment = os.environ.copy()
         environment["PYTHONUTF8"] = "1"
         raise SystemExit(subprocess.call([sys.executable, *sys.argv], env=environment))
+
+    if "--ui-only" in sys.argv:
+        html = HTML.read_text(encoding="utf-8")
+        HTML.write_text(patch_selectable_ui(html), encoding="utf-8", newline="\n")
+        print(f"Updated Snow Jiandao UI: {HTML}")
+        return
 
     sys.path.insert(0, str(ROOT / "tools"))
     sys.path.insert(0, str(SNOW / "scripts" / "research"))

@@ -12,7 +12,7 @@ const path = require("node:path");
 const model = require("./ckt_v4_model.js");
 const scorer = require("./score_completion_ckt_v4.js");
 const toned = require("./score_toned_2121_ckt_v51.js");
-const {physicalShape, toneKeysFromShapeKeys} = require("./auxiliary_semantics.js");
+const {physicalShape, toneKeysFromShapeKeys, shapeKeysFromToneKeys} = require("./auxiliary_semantics.js");
 
 const TRACK_WEIGHTS = Object.freeze({character: 1, word2: 3, word3: 1, word4: 1});
 const V5_POLICY = Object.freeze({word2: "12", word3: "21", word4: "24"});
@@ -232,8 +232,28 @@ function keyboardSemantics(fixture) {
   }
   const shapeNames = ["折", "横", "撇", "竖", "点"];
   const shapeByKey = Object.fromEntries([...KEYS].map(key => [key, []]));
-  [...fixture.shapeKeysByMeaning].forEach((key, index) => shapeByKey[key].push(shapeNames[index]));
+  const shapeKeysByMeaning = shapeKeysFromToneKeys(fixture.toneKeysByTone);
+  if (shapeKeysByMeaning !== fixture.shapeKeysByMeaning) throw new Error('fixture auxiliary semantic round trip mismatch');
+  [...shapeKeysByMeaning].forEach((key, index) => shapeByKey[key].push(shapeNames[index]));
   return {firstByKey, secondByKey, shapeByKey};
+}
+
+function filterRows(outcomes, fixture, data, words) {
+  const readings = new Map(data.characters.map(row => [`c:${row[0]}:${row[1]}`, row]));
+  return outcomes.map(outcome => {
+    let indices, tones;
+    if (outcome.kind === 'character') {
+      const row = readings.get(outcome.id);
+      indices = [row[1]]; tones = [row[2]];
+    } else {
+      const item = words[outcome.kind][Number(outcome.id.split(':')[1])];
+      indices = item.py; tones = item.tones;
+    }
+    const codes = indices.map((py, index) => fixture.tonedCodes[py][tones[index] - 1]);
+    const main = codes.map(code => outcome.kind === 'word3' || outcome.kind === 'word4' ? code[0] : code).join('');
+    const reading = indices.map((py, index) => data.pinyin[py] + (tones[index] === 5 ? 0 : tones[index])).join(' ');
+    return [outcome.text, reading, main, outcome.code, outcome.weight, outcome.kind];
+  });
 }
 
 function ordinaryOnsetDiagnostics(fixture) {
@@ -314,6 +334,9 @@ function main() {
       soundKeys: fixture.soundKeys,
       ...keyboardSemantics(fixture),
     },
+    tonedCodes: fixture.tonedCodes,
+    filterRowColumns: ['text', 'readingWithTone0', 'mainCode', 'terminalCode', 'weight', 'kind'],
+    filterRows: filterRows(v51.outcomes, fixture, data, words),
     ckt: {
       v5: {
         score: v5.score,
@@ -346,4 +369,4 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {fixtureAdapter, keyboardSemantics, loadMetric, loadSummary,
-  evaluateV5, v5Reference, weightedAggregate, ordinaryOnsetDiagnostics};
+  evaluateV5, v5Reference, weightedAggregate, ordinaryOnsetDiagnostics, filterRows};

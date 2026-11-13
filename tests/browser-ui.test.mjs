@@ -47,9 +47,11 @@ try {
   assert.equal(tonedContractBridge.catalogueCount, 850,
     'the tone-in-main bridge must not masquerade as an ordinary untoned catalogue entry');
   assert.equal(tonedContractBridge.id, 'SNOW-JIANDAO-TONED');
-  assert.deepEqual(tonedContractBridge.memory, {
+  const {onsetDefinition, ...tonedMemory} = tonedContractBridge.memory;
+  assert.match(onsetDefinition, /derived from actual toned codes/);
+  assert.deepEqual(tonedMemory, {
     definition: 'M-T1: baseline rule links plus one ordinary-initial displacement',
-    lower: 21, guard: 23, D: 1, F: 1,
+    lower: 21, guard: 23, D: 1, F: 0,
   });
   assert.equal(tonedContractBridge.inventory.legalTonedSyllables, 1407);
   assert.equal(tonedContractBridge.inventory.occupiedBuckets, 427);
@@ -115,14 +117,14 @@ try {
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
   assert.match(await page.locator('#snowJiandaoTonedDetail h2').innerText(), /SNOW-JIANDAO-TONED/);
   assert.equal(await page.locator('#svgbox svg').count(), 1);
-  for (const mode of ['first', 'second', 'shape', 'daily', 'character', 'word2', 'word3', 'word4']) {
+  for (const mode of ['semantic', 'overall', 'daily', 'character', 'word2', 'word3', 'word4']) {
     await page.locator('#snowJiandaoKeyboardMode').selectOption(mode);
     assert.match(await page.locator('#svgbox svg').getAttribute('aria-label'), /.+/);
   }
-  await page.locator('#snowJiandaoKeyboardMode').selectOption('shape');
+  await page.locator('#snowJiandaoKeyboardMode').selectOption('semantic');
   assert.match(await page.locator('#svgbox').textContent(), /折/);
-  await page.locator('#snowJiandaoKeyboardMode').selectOption('second');
-  assert.match(await page.locator('#svgbox').textContent(), /a-ou·四/);
+  assert.match(await page.locator('#svgbox').textContent(), /a-ou/);
+  assert.match(await page.locator('#svgbox g[data-key="R"]').textContent(), /Ø A\/E\/O/);
   assert.equal(await page.locator('#nf6SchemePicker').isVisible(), true);
   await page.locator('#nf6SchemeQuery').fill('冰雪剑道');
   await page.locator('#nf6SchemeHost').selectOption('21x21');

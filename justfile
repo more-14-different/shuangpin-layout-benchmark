@@ -1,5 +1,13 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+snow-jiandao-ui:
+    python -X utf8 tools/integrate_snow_jiandao_toned_r11.py --ui-only
+    node tools/sync_keymap_link_colors.js
+
+snow-jiandao-ui-test: snow-jiandao-ui
+    node --test tests/snow-jiandao-toned-r11.test.mjs tests/keymap-link-colors.test.mjs tests/auxiliary-semantics.test.mjs
+    node tests/snow-jiandao-toned-browser.test.mjs
+
 toned-representative-benchmark:
     node tools/benchmark_toned_representatives.js
     python tools/report_toned_representatives.py
