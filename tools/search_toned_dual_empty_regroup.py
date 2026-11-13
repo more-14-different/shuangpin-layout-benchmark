@@ -48,7 +48,7 @@ def build(args):
         merge = sum(10 - len(set(row)) for row in keys)
         group_rules = sum(n > 1 for n in sizes)
         memory, guard = 5 + first_cost + group_rules + merge, 5 + first_cost + 8 + merge
-        if d > args.max_d or memory > args.max_m:
+        if d > args.max_d or memory > args.max_m or guard > getattr(args, 'max_guard', 999):
             rejected['D/M'] += 1
             return
         state = dict(firstKeys=first, rhymeKeys=[[row[partition[root]] for root in final_roots] for row in keys])
@@ -113,6 +113,13 @@ def build(args):
     for seed in seeds:
         partition, keys, first = seed['partition'], seed['groupKeys'], seed['state']['firstKeys']
         add(seed, 'baseline', 'unchanged seed ' + seed['id'], partition, keys, first)
+        if 'erv' in args.operators:
+            er, v = roots.index('er'), roots.index('v')
+            for er_target in range(10):
+                for v_target in range(10):
+                    changed = partition.copy()
+                    changed[er], changed[v] = er_target, v_target
+                    add(seed, 'er-v-combination', f'er -> slot {er_target}; v -> slot {v_target}', changed, keys, first)
         root_neighbors = []
         for a in range(18):
             for target in range(10):
@@ -168,6 +175,7 @@ def build(args):
                maxD=args.max_d, maxM=args.max_m, requireEmpty=getattr(args, 'require_empty', ['QZ', 'ZQ']),
                seedScores={s['id']: s['score'] for s in seeds}, sourceLayouts=SOURCE,
                searchArguments=vars(args))
+    job['maxMemoryGuard'] = getattr(args, 'max_guard', 999)
     if getattr(args, 'q_empty_rhyme', False):
         job['forbiddenRhymeKeys'] = ['Q']
         job['preserveQInitial'] = True
@@ -186,6 +194,7 @@ def main():
     parser.add_argument('--leaders', type=int, default=1)
     parser.add_argument('--max-d', type=int, default=2)
     parser.add_argument('--max-m', type=int, default=23)
+    parser.add_argument('--max-guard', type=int, default=999)
     parser.add_argument('--operators', default='root')
     parser.add_argument('--exclude', action='append', default=[], help='previously scored prefix; repeatable')
     parser.add_argument('--anchors', default='MARS10-QZZQEMPTY-P3-D2-M23-04')

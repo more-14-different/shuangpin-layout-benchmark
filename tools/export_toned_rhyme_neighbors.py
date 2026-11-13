@@ -71,6 +71,8 @@ def main():
     exported["contract"]["requireEmptyBuckets"] = job.get("requireEmpty", ["QZ"])
     exported["contract"]["searchMaxD"] = job.get("maxD", 2)
     exported["contract"]["searchMaxMemoryLower"] = job.get("maxM", 24)
+    if 'maxMemoryGuard' in job:
+        exported['contract']['searchMaxMemoryGuard'] = job['maxMemoryGuard']
     if job.get('forbiddenRhymeKeys'):
         exported['contract']['forbiddenRhymeKeys'] = job['forbiddenRhymeKeys']
         exported['contract']['secondKeyCount'] = 20
@@ -95,6 +97,7 @@ def main():
         ordinary_d = sum(c["state"]["firstKeys"][i] != a["baselineKey"]
                          for i, a in enumerate(fixture["atoms"]) if len(a["initial"]) == 1 and a["initial"] != "_")
         assert ordinary_d <= job.get("maxD", 2) and c["memory"] <= job.get("maxM", 24)
+        assert c.get('memoryGuard', c['memory'] + 2) <= job.get('maxMemoryGuard', 999)
         exported["layouts"].append(dict(id=c["id"], origin=c["anchor"], description=c["description"],
             factorization="tone-independent-root-repartition" if job.get("regrouping") else "mars10-final-neighborhood", rustScore=c["score"],
             memoryAudit=dict(memoryLower=c["memory"], memoryGuard=c.get("memoryGuard", c["memory"] + 2),

@@ -9,6 +9,13 @@ from search_toned_dual_empty_regroup import build, ROOT, read, SOURCE
 
 @unittest.skipUnless((ROOT / 'research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json').exists(), 'local fixture required')
 class DualEmptyRegroup(unittest.TestCase):
+    def test_guard_budget_is_independent_of_lower_budget(self):
+        job = build(Namespace(max_d=2,max_m=23,max_guard=23,tag='GUARD',previous=None,production=True,
+                             require_empty=[],operators='root,erv,key',anchors=''))
+        self.assertTrue(job['candidates'])
+        self.assertTrue(all(c['memoryGuard']<=23 for c in job['candidates']))
+        self.assertTrue(any(c['kind']=='er-v-combination' for c in job['candidates']))
+
     def test_q_empty_rhyme_preserves_q_initial_and_charges_merge(self):
         job = build(Namespace(max_d=2,max_m=23,tag='QR',previous=None,production=True,
                              q_empty_rhyme=True,require_empty=[],operators='key,first',anchors=''))
