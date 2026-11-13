@@ -328,7 +328,10 @@ def main():
             rest=(time.monotonic()-tick)*(1/args.duty-1)
             until=time.monotonic()+rest
             while time.monotonic()<until and not stop and not (args.out/'STOP').exists():
-                time.sleep(min(1,until-time.monotonic()))
+                remaining=until-time.monotonic()
+                if remaining<=0:
+                    break
+                time.sleep(min(1.0,remaining))
         save()
         print(json.dumps(dict(stopped=True,iteration=checkpoint['iteration'],best={r:b['score'] for r,b in checkpoint['best'].items()})),flush=True)
     finally:
