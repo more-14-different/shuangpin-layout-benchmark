@@ -79,3 +79,6 @@ regroup-refine mode:
 
 regroup-test:
     node --test tests/regroup-2126.test.mjs tests/toned-2126.test.mjs tests/ckt-v4-model.test.mjs
+
+coupled mode source:
+    node tools/coupled_regroup_2126.js research/notes/2026-11-13-toned-2126-{{source}}.json research/notes/2026-11-13-toned-2126-coupled-{{mode}}.json
