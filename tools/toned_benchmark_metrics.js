@@ -72,7 +72,9 @@ function tonedRowsFor(data, native, options, shapeMap) {
       if (needShape) {
         if (contract === 'XF') auxiliary = shapes.join('');
         else if (words) {
-          const order = options.order === '21' ? [1, 0] : [0, 1];
+          const requestedOrder = options.order === 'native' ? native.contract.wordAuxiliaryPolicy?.word2 ||
+            ((native.contract.capacity?.[1] || 21) === 21 ? '12' : '21') : options.order;
+          const order = requestedOrder === '21' ? [1, 0] : [0, 1];
           auxiliary = order.map(at => shapes[at][0]).join('');
           if (contract === 'T1') auxiliary = shapes.map(shape => shape[0]).join('');
         } else auxiliary = shapes[0].slice(0, contract === 'T1' ? 1 : 2);

@@ -18,7 +18,7 @@ try {
     throw error;
   }
   const frozen = await page.evaluate(()=>snowJiandaoSchemes().map(native=>({id:native.id,capacity:native.contract.capacity || [21,21],
-    v5:native.columns.ensemble.v5,v4:native.columns.ensemble.v4,M:native.memory.lower,
+    v5:native.columns.ensemble.v5,v4:native.columns.ensemble.v4,M:native.memory.lower,upper:native.memory.guard,
     fa:native.columns.rules.fa.score,lu:native.columns.rules.lu.score,
     unique:native.columns.sound.uniqueCodes,syllables:native.columns.sound.syllables})));
   assert.equal(frozen.length,7,'all five 21x21 and two 21x26 toned schemes');
@@ -43,8 +43,8 @@ try {
     assert.equal(cards['FA-1 加权'].text,expected.fa.toFixed(2)+'%');
     assert.equal(cards['LU-v1r'].text,expected.lu.toFixed(2));
     assert.equal(cards['裸二键唯一'].text,expected.unique+'/'+expected.syllables);
-    assert.equal(cards['声韵记忆项 M'].raw,expected.M ?? '待定');
-    assert.equal(cards['声韵记忆项 M'].text,expected.M == null?'待定':String(expected.M));
+    assert.equal(cards['声韵记忆项 M'].raw,expected.M);
+    assert.equal(cards['声韵记忆项 M'].text,expected.M + ' / ' + expected.upper);
     assert.ok(cards['声韵记忆项 M'].title.length);
     assert.doesNotMatch(await page.locator('#kpis').innerText(),/NaN|undefined|360\/399/);
     const aligned = await page.evaluate(()=>[...document.querySelectorAll('#kpis [data-toned-kpi]')].every(node=>
@@ -53,7 +53,7 @@ try {
   };
   for(const expected of frozen) {await select(expected.id);await validate(expected);console.log('KPI values verified:',expected.id)}
   // Reverse navigation catches stale values between the two domain sizes,
-  // between scored/unknown memory, and on returning to an ordinary scheme.
+  // between different memory intervals, and on returning to an ordinary scheme.
   await select('BCW-b6d79577771b');
   assert.equal(await page.locator('#kpis').innerText(),ordinary);
   assert.equal(await page.locator('#kpis [data-toned-kpi]').count(),0);

@@ -221,7 +221,8 @@ function keyboardSemantics(fixture) {
     for (const pinyin of atom.pinyin) for (const code of fixture.tonedCodes[pinyin]) {
       if (code) keys.add(code[0]);
     }
-    for (const key of keys) firstByKey[key].push(atom.name);
+    const name = /^[wy]$/i.test(atom.name) ? 'zero-' + atom.name.toUpperCase() : atom.name;
+    for (const key of keys) firstByKey[key].push(name);
   }
   const secondByKey = Object.fromEntries([...KEYS].map(key => [key, []]));
   const toneLabels = ["一", "二", "三", "四", "轻"];
@@ -361,6 +362,10 @@ function main() {
     ergonomics: loadSummary(v51.outcomes),
   };
   fs.mkdirSync(path.dirname(output), {recursive: true});
+  const memory = require('./toned_memory_audit').tonedMemoryAudit(outputData,data.pinyin,
+    JSON.parse(fs.readFileSync(path.join(__dirname,'../research/config/ckt-v51-toned-2121-seeds.json'),'utf8')).decomposition);
+  if (memory.lower !== outputData.memory.lower || memory.guard !== outputData.memory.guard) throw new Error('Derived memory disagrees with fixture audit');
+  outputData.memory = memory;
   fs.writeFileSync(output, `${JSON.stringify(outputData, null, 2)}\n`, "utf8");
   process.stdout.write(`${JSON.stringify({
     output, cktV5: outputData.ckt.v5.score, cktV51: outputData.ckt.v51.score,

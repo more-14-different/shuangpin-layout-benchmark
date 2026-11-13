@@ -157,7 +157,7 @@ def bridge(data: dict, native: dict, fixture: dict) -> dict:
                 "A7E v1-v6 and public-pair sensitivity: original frozen references/weights",
                 "same 20 contract key loads, complete shapes, datasets and peak definitions",
                 "completion v1-v4: original cohorts, motor versions, pools and cognitive formulas",
-                "sanpin: remove only tone strokes already present in the actual main code",
+                "sanpin: embedded tone stages require no extra stroke; abbreviated words use native shape-only completion",
             ],
         },
     }
@@ -349,7 +349,7 @@ function snowJiandaoSelectionCard(){
  const ids=new Set(chosen().map(entry=>entry.id)),natives=snowJiandaoSchemes().filter(i=>ids.has(i.id));if(!natives.length)return '';
  return `<section class="dv-cohort snow-jiandao-contract-card"><div class="dv-cohort-head"><h3>带调主码合同 · 21×21 / 21×26</h3><span>${natives.length} 个带调方案 · 20 合同适配与原生 CKT-T</span></div>
  <div class="scroll"><table><thead><tr><th>方案</th><th>M-T1</th><th>D / F</th><th>带调音节 / 占桶</th><th>CKT-T v5.1 ↓</th><th>日常移动手 ↑</th></tr></thead><tbody>${natives.map(i=>`<tr><td class="first"><button type="button" class="link" data-snow-jiandao-open="${i.id}">${esc(i.name)}</button><small>${esc(i.id)} · ${i.contract.shapeKeysByMeaning} 纯形辅</small></td><td>${i.memory.lower??'待定'} / ${i.memory.guard??'待定'}<small>下限 / 守门</small></td><td>${i.memory.D} / ${i.memory.F}</td><td>${i.inventory.legalTonedSyllables} / ${i.inventory.occupiedBuckets}</td><td>${num(i.ckt.v51.score,9)}</td><td>${num(i.macro['daily|native-punctuation'].score,6)}</td></tr>`).join('')}</tbody></table></div>
- <p class="hint">按各方案的宿主键域、形辅键集、映射及 D 等条件筛选；M 待定方案不进入有 M 上限的选择。</p></section>`;
+ <p class="hint">按各方案的宿主键域、形辅键集、映射及 D 等条件筛选；M 显示规则下界 / 保守关联上界，M≤ 按下界筛选。</p></section>`;
 }
 
 function snowJiandaoRenderDetail(){
@@ -360,7 +360,7 @@ function snowJiandaoRenderDetail(){
  VIEW='keyboard';UX.view='scheme';uxSyncNav();snowJiandaoInstallFilterOptions();uxKpis(snowJiandaoTonedFacade(i),{});
  $('#view').innerHTML=`<section class="panel" id="snowJiandaoTonedDetail"><div class="r2-hero"><div><small>TONE-IN-MAIN ${(i.contract.capacity||[21,21]).join('×')} · SHAPE-ONLY ${i.contract.shapeKeysByMeaning}</small><h2>${esc(title)}</h2><p>火星十韵声韵拆分；声调已进入前两码，后续只使用键道形笔辅。作为独立合同进入筛选与详情，不冒充旧无调 codeList 条目。</p></div><strong>${num(i.ckt.v51.score,6)}<small>CKT-T v5.1 ↓</small></strong></div>
  <div class="heading"><button data-action="nav:selection">返回方案筛选</button><button data-r11-report>打开跨合同完整表</button></div>
- <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>${(i.contract.capacity||[21,21]).join('×')}</b>；${i.contract.shapeKeysByMeaning} 五形辅；toneKeysByTone=<b>${i.contract.toneKeysByTone}</b>。</p><p>M-T1 下限/守门：<b>${i.memory.lower??'待定'}/${i.memory.guard??'待定'}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p></section>
+ <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>${(i.contract.capacity||[21,21]).join('×')}</b>；${i.contract.shapeKeysByMeaning} 五形辅；toneKeysByTone=<b>${i.contract.toneKeysByTone}</b>。</p><p>M-T1 规则下界/保守上界：<b>${i.memory.lower}/${i.memory.guard}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p><details><summary>M 规则记账依据</summary><p>下界把多根韵组视为压缩规则，上界逐根计关联边；两者均计入声母、零声母载体、去韵头与调区合并规则，不是人体学习时间的置信区间。</p><pre>${esc(JSON.stringify(i.memory.audit,null,2))}</pre></details></section>
  <section class="card"><h3>合同边界</h3><p>CKT-T v5/v5.1 使用 S005=10 的四条带调原生轨，只计形辅；不再次加入调笔辅。</p><p>通用 benchmark 列按带调版本的相应合同重算，保留各代公式、样本、权重和基线；原生四轨 CKT-T 作为另一项明确命名的生产指标。</p></section></div>
  ${snowJiandaoKeyboardPanel()}
  ${uxTable(['指标',i.name,'QZ-e8f37a','口径'],[
@@ -403,7 +403,7 @@ document.addEventListener('click',event=>{
 
 '''
     scripts = "\n".join((ROOT / "tools" / name).read_text(encoding="utf-8")
-                        for name in ("unified_keyboard_query.js", "unified_keyboard_filter_ui.js", "toned_benchmark_metrics.js", "snow_jiandao_toned_view.js", "snow_jiandao_toned_ui.js", "snow_jiandao_toned_benchmark_ui.js"))
+                        for name in ("unified_keyboard_query.js", "unified_keyboard_filter_ui.js", "toned_benchmark_metrics.js", "snow_jiandao_toned_view.js", "toned_keymap_render_audit.js", "snow_jiandao_toned_ui.js", "snow_jiandao_toned_benchmark_ui.js"))
     source = source.replace("function snowJiandaoRenderDetail(){", scripts + "\nfunction snowJiandaoRenderDetail(){", 1)
     if SELECTABLE_MARKER in html:
         start = html.index(SELECTABLE_MARKER)

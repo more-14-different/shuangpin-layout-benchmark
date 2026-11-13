@@ -97,7 +97,8 @@ def main():
     data = load_payload_module()
     # Rebuild rather than retaining two copies of the four large filter corpora
     # during a repeat publication.
-    data['tonedContractBenchmark']['schemes'].pop('research', None)
+    for ident in LABELS:
+        data['tonedContractBenchmark']['schemes'].get('research', {}).pop(ident, None)
     corpus = read_word_corpus([SNOW / name for name in ('snow_pinyin.base.dict.yaml', 'snow_pinyin.ext.dict.yaml', 'snow_pinyin.tencent.dict.yaml')],
         allowed_pinyin={data['pinyin'][py] for py, _ in data['base']}, preserve_tones=True)
     research = {}
@@ -108,7 +109,8 @@ def main():
             raise ValueError(f'{ident}: stale score cache')
         native['columns'] = read(DESTINATION / (ident + '.columns.json'))
         codes_hash = hashlib.sha256(json.dumps(native['tonedCodes'], ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
-        if native['columns'].get('nativeId') != ident or native['columns'].get('tonedCodesSha256') != codes_hash:
+        if (native['columns'].get('version') != 'tone-in-main-column-contracts-v3'
+                or native['columns'].get('nativeId') != ident or native['columns'].get('tonedCodesSha256') != codes_hash):
             raise ValueError(f'{ident}: column cache provenance mismatch; recompute without --reuse-scores')
         native['columns']['collision'] = evaluate_toned_layout(fixture, corpus)
         native['macro'] = macro_replay(data, fixture)
@@ -131,8 +133,8 @@ def main():
                      if name not in {'filterRows', 'tonedCodes', 'keyboards'}}
              for ident, native in research.items()}
     write(ROOT / 'research/notes/2026-11-13-cr-frontier-r11-columns.json',
-          {'version': 'cr-frontier-r11-v1', 'schemes': audit})
-    data['tonedContractBenchmark']['schemes']['research'] = research
+          {'version': 'cr-frontier-r11-v2', 'schemes': audit})
+    data['tonedContractBenchmark']['schemes'].setdefault('research', {}).update(research)
     html = patch_selectable_ui(patch_report(HTML.read_text(encoding='utf-8')))
     payload_path = DESTINATION / 'payload-output.json'
     with payload_path.open('w', encoding='utf-8', newline='\n') as stream:

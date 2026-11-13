@@ -18,7 +18,7 @@ function snowNormalizeQuery(value) {
 
 function snowKeyboardEntry(native) {
   const roles = Object.fromEntries(Object.entries(native.keyboards.firstByKey).map(([key, names]) =>
-    [key, names.map(name => name.replace(/^zero-/, 'Ø'))]));
+    [key, names.map(name => /^[wy]$/i.test(name) ? 'Ø' + name.toUpperCase() : name.replace(/^zero-/, 'Ø'))]));
   const rhymes = {}, rhymeTonesByKey = {};
   const toneDigits = {'一': '1', '二': '2', '三': '3', '四': '4', '轻': '0'};
   for (const [key, names] of Object.entries(native.keyboards.secondByKey)) {

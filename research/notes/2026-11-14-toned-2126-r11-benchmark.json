@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "schemes": {
     "T2126-QEMPTY-8890382": {
       "version": "toned-2126-r11-1",
@@ -166,11 +166,204 @@
         "oldR11IndependentToneAuxiliary": false
       },
       "memory": {
-        "definition": "未建立与 M-R2 对齐的记忆成本；不套用21×21 M-T1",
-        "lower": null,
-        "guard": null,
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 20,
+        "guard": 23,
+        "upper": 23,
         "D": 3,
-        "F": 0
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "q",
+              "key": "F"
+            },
+            {
+              "name": "s",
+              "key": "Q"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "J"
+            },
+            {
+              "name": "zero-Y",
+              "key": "W"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 5,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "U",
+                "O",
+                "P",
+                "T",
+                "W",
+                "E",
+                "R",
+                "I",
+                "Y"
+              ],
+              "links": 1
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "K",
+                "S",
+                "D",
+                "G",
+                "L",
+                "A",
+                "H",
+                "J"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "Z",
+                "X",
+                "M",
+                "V",
+                "C",
+                "B",
+                "N"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "ou"
+              ],
+              "keys": [
+                "U",
+                "F",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "eng",
+                "ng",
+                "v"
+              ],
+              "keys": [
+                "O",
+                "K",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "P",
+                "S",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ang"
+              ],
+              "keys": [
+                "T",
+                "D",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "W",
+                "G",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "e",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "L",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en",
+                "er",
+                "n"
+              ],
+              "keys": [
+                "R",
+                "A",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "i"
+              ],
+              "keys": [
+                "I",
+                "H",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "o",
+                "ong"
+              ],
+              "keys": [
+                "I",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "u"
+              ],
+              "keys": [
+                "Y",
+                "A",
+                "M"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
       },
       "inventory": {
         "legalTonedSyllables": 1407,
@@ -208,7 +401,7 @@
               "selectionRate": 0.0027729264000417296,
               "meanTerminalRank": 1.0032356314653712,
               "meanRejectedCandidates": 0.0032356314653712993,
-              "meanPageActions": 6.432550671248358e-07,
+              "meanPageActions": 6.432550671248358e-7,
               "meanKeys": 2.2101584769965554
             },
             "word2": {
@@ -236,7 +429,7 @@
               "selectionRate": 0.005815012369062295,
               "meanTerminalRank": 1.0069610264463207,
               "meanRejectedCandidates": 0.006961026446320737,
-              "meanPageActions": 4.532079027685005e-06,
+              "meanPageActions": 0.000004532079027685005,
               "meanKeys": 3.8072252332171823
             },
             "word4": {
@@ -268,7 +461,7 @@
               "thirdAuxRate": 0,
               "selectionRate": 0.0027729264000417296,
               "meanRejectedCandidates": 0.0032356314653712993,
-              "meanPageActions": 6.432550671248358e-07,
+              "meanPageActions": 6.432550671248358e-7,
               "meanKeys": 2.2101584769965554,
               "effectiveMs": 161.35585651293377
             },
@@ -294,7 +487,7 @@
               "thirdAuxRate": 0,
               "selectionRate": 0.005815012369062295,
               "meanRejectedCandidates": 0.006961026446320737,
-              "meanPageActions": 4.532079027685005e-06,
+              "meanPageActions": 0.000004532079027685005,
               "meanKeys": 3.8072252332171823,
               "effectiveMs": 443.2462511995692
             },
@@ -326,7 +519,7 @@
           "thirdAuxRate": 0,
           "selectionRate": 0.0025912257586643305,
           "meanRejectedCandidates": 0.0030311925032537198,
-          "meanPageActions": 8.625556824683068e-07,
+          "meanPageActions": 8.625556824683068e-7,
           "meanKeys": 3.795795580062554,
           "effectiveMs": 409.760697911696
         }
@@ -548,7 +741,7 @@
         "s2DifferentKeySameFingerRate": 0.047401158572463256
       },
       "columns": {
-        "version": "tone-in-main-column-contracts-v2",
+        "version": "tone-in-main-column-contracts-v3",
         "nativeId": "T2126-QEMPTY-8890382",
         "tonedCodesSha256": "dd523e2957a6921e18976e49284239344b69010915f1c48f383071551fd9f537",
         "tracks": {
@@ -2448,6 +2641,146 @@
                 }
               }
             },
+            "fixedV1": {
+              "keytao": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 89.67384562564746,
+                  "meanKeys": 2.1360094232737894,
+                  "p0": 0.09921760164725761,
+                  "p1": 0.036899357300824186,
+                  "p2": 0.00815845986024579,
+                  "firstAuxRate": 0.09921760164725761,
+                  "secondAuxRate": 0.03679182162653163,
+                  "stageWeight": [
+                    0.9007823983527424,
+                    0.062318244346433425,
+                    0.036899357300824186
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 407.80174891666263,
+                  "meanKeys": 4.157698233460975,
+                  "p0": 0.10757844941529769,
+                  "p1": 0.05011978404567751,
+                  "p2": 0.01797141179572248,
+                  "firstAuxRate": 0.10757844941529769,
+                  "secondAuxRate": 0.05011978404567751,
+                  "stageWeight": [
+                    0.8924215505847023,
+                    0.05745866536962019,
+                    0.05011978404567751
+                  ]
+                }
+              },
+              "sanpin": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 84.52491858079948,
+                  "meanKeys": 2.0992176016472577,
+                  "p0": 0.09921760164725761,
+                  "p1": 0.09921760164725761,
+                  "p2": 0.03980898104821668,
+                  "firstAuxRate": 0.09921760164725761,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.9007823983527424,
+                    0,
+                    0.09921760164725761
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 382.3298628542534,
+                  "meanKeys": 4,
+                  "p0": 0.10757844941529769,
+                  "p1": 0.10757844941529769,
+                  "p2": 0.10757844941529769,
+                  "firstAuxRate": 0,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.8924215505847023,
+                    0,
+                    0.10757844941529769
+                  ]
+                }
+              }
+            },
+            "fixedV2": {
+              "keytao": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 89.7547589870761,
+                  "meanKeys": 2.1360094232737894,
+                  "p0": 0.09921760164725761,
+                  "p1": 0.036899357300824186,
+                  "p2": 0.00815845986024579,
+                  "firstAuxRate": 0.09921760164725761,
+                  "secondAuxRate": 0.03679182162653163,
+                  "stageWeight": [
+                    0.9007823983527424,
+                    0.062318244346433425,
+                    0.036899357300824186
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 408.56616164233105,
+                  "meanKeys": 4.157698233460975,
+                  "p0": 0.10757844941529769,
+                  "p1": 0.05011978404567751,
+                  "p2": 0.01797141179572248,
+                  "firstAuxRate": 0.10757844941529769,
+                  "secondAuxRate": 0.05011978404567751,
+                  "stageWeight": [
+                    0.8924215505847023,
+                    0.05745866536962019,
+                    0.05011978404567751
+                  ]
+                }
+              },
+              "sanpin": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 84.43666565018765,
+                  "meanKeys": 2.0992176016472577,
+                  "p0": 0.09921760164725761,
+                  "p1": 0.09921760164725761,
+                  "p2": 0.03980898104821668,
+                  "firstAuxRate": 0.09921760164725761,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.9007823983527424,
+                    0,
+                    0.09921760164725761
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 383.47479636067004,
+                  "meanKeys": 4,
+                  "p0": 0.10757844941529769,
+                  "p1": 0.10757844941529769,
+                  "p2": 0.10757844941529769,
+                  "firstAuxRate": 0,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.8924215505847023,
+                    0,
+                    0.10757844941529769
+                  ]
+                }
+              }
+            },
             "v3": {
               "keytao": {
                 "character": {
@@ -2485,33 +2818,33 @@
                 "word3": {
                   "count": 14989,
                   "totalWeight": 872896539,
-                  "completionUpperMs": 335.0852952763652,
-                  "meanKeys": 3.637488443518734,
-                  "p0": 0.4204145847804765,
-                  "p1": 0.21707385873825763,
-                  "p2": 0.10074194027707102,
-                  "firstAuxRate": 0.4204145847804765,
-                  "secondAuxRate": 0.21707385873825763,
+                  "completionUpperMs": 437.3450421754984,
+                  "meanKeys": 4.229990910755576,
+                  "p0": 0.16165553842343738,
+                  "p1": 0.06833537233213843,
+                  "p2": 0.030215065384742005,
+                  "firstAuxRate": 0.16165553842343738,
+                  "secondAuxRate": 0.06833537233213843,
                   "stageWeight": [
-                    0.5795854152195236,
-                    0.20334072604221884,
-                    0.21707385873825763
+                    0.8383444615765626,
+                    0.09332016609129894,
+                    0.06833537233213843
                   ]
                 },
                 "word4": {
                   "count": 15000,
                   "totalWeight": 596763943,
-                  "completionUpperMs": 439.90089919301676,
-                  "meanKeys": 4.1484328770848675,
+                  "completionUpperMs": 440.1374866086747,
+                  "meanKeys": 4.14870044519429,
                   "p0": 0.10469679298301707,
-                  "p1": 0.04373608410185064,
-                  "p2": 0.024631206647818534,
+                  "p1": 0.044003652211273094,
+                  "p2": 0.02120829542142763,
                   "firstAuxRate": 0.10469679298301707,
-                  "secondAuxRate": 0.04373608410185064,
+                  "secondAuxRate": 0.044003652211273094,
                   "stageWeight": [
                     0.895303207016983,
-                    0.060960708881166434,
-                    0.04373608410185064
+                    0.06069314077174398,
+                    0.044003652211273094
                   ]
                 }
               },
@@ -2551,33 +2884,33 @@
                 "word3": {
                   "count": 14989,
                   "totalWeight": 872896539,
-                  "completionUpperMs": 344.7047946911214,
-                  "meanKeys": 3.6659058307939976,
-                  "p0": 0.4204145847804765,
-                  "p1": 0.24549124601352096,
-                  "p2": 0.1309384387420512,
-                  "firstAuxRate": 0.4204145847804765,
-                  "secondAuxRate": 0.24549124601352096,
+                  "completionUpperMs": 437.3450421754984,
+                  "meanKeys": 4.229990910755576,
+                  "p0": 0.16165553842343738,
+                  "p1": 0.06833537233213843,
+                  "p2": 0.030215065384742005,
+                  "firstAuxRate": 0.16165553842343738,
+                  "secondAuxRate": 0.06833537233213843,
                   "stageWeight": [
-                    0.5795854152195236,
-                    0.1749233387669555,
-                    0.24549124601352096
+                    0.8383444615765626,
+                    0.09332016609129894,
+                    0.06833537233213843
                   ]
                 },
                 "word4": {
                   "count": 15000,
                   "totalWeight": 596763943,
-                  "completionUpperMs": 442.30195531330065,
-                  "meanKeys": 4.154065618538887,
+                  "completionUpperMs": 440.1374866086747,
+                  "meanKeys": 4.14870044519429,
                   "p0": 0.10469679298301707,
-                  "p1": 0.04936882555586975,
-                  "p2": 0.029501390300988743,
+                  "p1": 0.044003652211273094,
+                  "p2": 0.02120829542142763,
                   "firstAuxRate": 0.10469679298301707,
-                  "secondAuxRate": 0.04936882555586975,
+                  "secondAuxRate": 0.044003652211273094,
                   "stageWeight": [
                     0.895303207016983,
-                    0.05532796742714732,
-                    0.04936882555586975
+                    0.06069314077174398,
+                    0.044003652211273094
                   ]
                 }
               }
@@ -2602,44 +2935,44 @@
               "word2": {
                 "count": 132814,
                 "totalWeight": 3604044247,
-                "motorUpperMs": 392.5539538674614,
-                "cognitiveMs": 46.416627456571845,
-                "effectiveMs": 438.9705813240333,
+                "motorUpperMs": 392.5649448051972,
+                "cognitiveMs": 46.44595617529887,
+                "effectiveMs": 439.01090098049605,
                 "firstAuxRate": 0.13507646344942334,
-                "secondAuxRate": 0.01721971173124723,
-                "selectionRate": 0.0011103398642597186,
-                "meanTerminalRank": 1.0012314196762968,
-                "meanRejectedCandidates": 0.0012314196762967767,
+                "secondAuxRate": 0.017311719758139808,
+                "selectionRate": 0.0011124813474022812,
+                "meanTerminalRank": 1.001240248091771,
+                "meanRejectedCandidates": 0.0012402480917709999,
                 "meanPageActions": 0,
-                "meanKeys": 4.152296175180671
+                "meanKeys": 4.152388183207563
               },
               "word3": {
                 "count": 72923,
                 "totalWeight": 1101481234,
-                "motorUpperMs": 354.13467755032207,
-                "cognitiveMs": 89.64204532239901,
-                "effectiveMs": 443.7767228727211,
+                "motorUpperMs": 354.0336643966605,
+                "cognitiveMs": 89.2112271792004,
+                "effectiveMs": 443.2448915758609,
                 "firstAuxRate": 0.23384799218467667,
-                "secondAuxRate": 0.051526982256331386,
-                "selectionRate": 0.006086329746767161,
-                "meanTerminalRank": 1.007539605527224,
-                "meanRejectedCandidates": 0.00753960552722408,
-                "meanPageActions": 2.582885583686667e-06,
-                "meanKeys": 3.8080196462067004
+                "secondAuxRate": 0.05073256926681331,
+                "selectionRate": 0.005815012369062295,
+                "meanTerminalRank": 1.0069610264463207,
+                "meanRejectedCandidates": 0.006961026446320737,
+                "meanPageActions": 0,
+                "meanKeys": 3.8072252332171823
               },
               "word4": {
                 "count": 77674,
                 "totalWeight": 828363172,
-                "motorUpperMs": 444.57489782979644,
-                "cognitiveMs": 94.01948183181663,
-                "effectiveMs": 538.5943796616131,
+                "motorUpperMs": 444.47513996848534,
+                "cognitiveMs": 92.45423684769993,
+                "effectiveMs": 536.9293768161853,
                 "firstAuxRate": 0.2581111054029331,
-                "secondAuxRate": 0.0438110025007244,
-                "selectionRate": 0.005161278463982704,
-                "meanTerminalRank": 1.0068806149194667,
-                "meanRejectedCandidates": 0.006880614919466748,
-                "meanPageActions": 6.838787854755088e-06,
-                "meanKeys": 4.301922107903658
+                "secondAuxRate": 0.042114115135963574,
+                "selectionRate": 0.0036219717406751153,
+                "meanTerminalRank": 1.0042697528325173,
+                "meanRejectedCandidates": 0.004269752832517282,
+                "meanPageActions": 0,
+                "meanKeys": 4.300225220538897
               }
             },
             "sanpin": {
@@ -2654,7 +2987,7 @@
                 "selectionRate": 0.033184966803190635,
                 "meanTerminalRank": 1.0480708374390961,
                 "meanRejectedCandidates": 0.04807083743909611,
-                "meanPageActions": 4.171149680277002e-05,
+                "meanPageActions": 0.00004171149680277002,
                 "meanKeys": 2.1798889097413965
               },
               "word2": {
@@ -2674,30 +3007,30 @@
               "word3": {
                 "count": 72923,
                 "totalWeight": 1101481234,
-                "motorUpperMs": 355.53539403259884,
-                "cognitiveMs": 91.04693176279751,
-                "effectiveMs": 446.58232579539634,
+                "motorUpperMs": 352.8431144195313,
+                "cognitiveMs": 85.77364786951968,
+                "effectiveMs": 438.61676228905094,
                 "firstAuxRate": 0.23384799218467667,
-                "secondAuxRate": 0.05171604312597849,
-                "selectionRate": 0.00805657121163446,
-                "meanTerminalRank": 1.0108664720110883,
-                "meanRejectedCandidates": 0.010866472011088297,
-                "meanPageActions": 1.516140219598149e-06,
-                "meanKeys": 3.8082087070763477
+                "secondAuxRate": 0.04207579718058092,
+                "selectionRate": 0.004539908484723218,
+                "meanTerminalRank": 1.0054513193821693,
+                "meanRejectedCandidates": 0.005451319382169338,
+                "meanPageActions": 0,
+                "meanKeys": 3.7985684611309503
               },
               "word4": {
                 "count": 77674,
                 "totalWeight": 828363172,
-                "motorUpperMs": 447.47027038691067,
-                "cognitiveMs": 95.01989889284938,
-                "effectiveMs": 542.49016927976,
+                "motorUpperMs": 443.85834283182584,
+                "cognitiveMs": 90.7152986637122,
+                "effectiveMs": 534.573641495538,
                 "firstAuxRate": 0.2581111054029331,
-                "secondAuxRate": 0.04507668889944325,
-                "selectionRate": 0.006111856696593943,
-                "meanTerminalRank": 1.0079235354997167,
-                "meanRejectedCandidates": 0.007923535499716784,
-                "meanPageActions": 8.99363980898948e-07,
-                "meanKeys": 4.303187794302376
+                "secondAuxRate": 0.03756684272294037,
+                "selectionRate": 0.003054184547934007,
+                "meanTerminalRank": 1.0035880699437951,
+                "meanRejectedCandidates": 0.0035880699437951355,
+                "meanPageActions": 0,
+                "meanKeys": 4.295677948125873
               }
             }
           },
@@ -2710,6 +3043,17 @@
             "wj2": 0.01797141179572248,
             "ws1": 0.10757844941529769,
             "ws2": 0.10757844941529769
+          },
+          "adaptation": {
+            "auxiliary": "shape-only; embedded tone satisfies character/word2 tone stages; abbreviated word3/word4 paths use two native shape steps",
+            "word3BaseLength": 4,
+            "wordAuxiliaryPolicy": {
+              "word2": "21",
+              "word3": "12",
+              "word4": "24"
+            },
+            "fixedControl": "fixedV1/fixedV2 use IVUAO independently of the native auxiliary mapping",
+            "v4Pools": "original version-specific shared pools; four-code-top word3 is AAA -> AAAU -> AAAUX -> AAAUXX"
           }
         },
         "sound": {
@@ -2832,9 +3176,9 @@
           "soundWeights": "common399 pinyin mass times common-character conditional tone frequency; equal legal-tone fallback only when no observed tone mass",
           "soundCompletion": "collision buckets: fixed-width base5 suffix for every member; own ordered five-key enumeration alphabet (not tone evidence)",
           "completionV1V2": "same Common8095 and Snow-common two-word cohorts as legacy columns",
-          "completionV3": "same fixed 15000 three/four-word cohorts; independent pools; native-v2 tensor",
+          "completionV3": "same fixed 15000 three/four-word cohorts; independent pools; native-v2 tensor; native AAA/AAAU routing and first two shape auxiliary positions",
           "completionV4": "same frozen 99% dictionary cohorts, routing/pools, motor tensor, rank/page cognitive formula",
-          "sanpin": "full syllables already encode tone; remove redundant tone strokes. Initial-only word3/word4 retain separate tone evidence."
+          "sanpin": "full syllables already encode tone; remove redundant tone strokes. Abbreviated word3/word4 use native shape-only paths instead of independent tone auxiliaries."
         },
         "collision": {
           "families": [
@@ -2849,9 +3193,9 @@
                 "triple": 500,
                 "quadruple": 500
               },
-              "totalWeight": 693412984.0,
-              "crossAffectedWeight": 6975795.0,
-              "crossFirstChoiceLossWeight": 3230513.0,
+              "totalWeight": 693412984,
+              "crossAffectedWeight": 6975795,
+              "crossFirstChoiceLossWeight": 3230513,
               "crossAffectedRate": 0.010060087077919498,
               "crossFirstChoiceLossRate": 0.004658858536747561,
               "crossBuckets": 8,
@@ -2864,9 +3208,9 @@
                 "triple": 1000,
                 "quadruple": 1000
               },
-              "totalWeight": 1108732771.0,
-              "crossAffectedWeight": 18353155.0,
-              "crossFirstChoiceLossWeight": 7205134.0,
+              "totalWeight": 1108732771,
+              "crossAffectedWeight": 18353155,
+              "crossFirstChoiceLossWeight": 7205134,
               "crossAffectedRate": 0.016553271879432885,
               "crossFirstChoiceLossRate": 0.006498530744700068,
               "crossBuckets": 25,
@@ -2879,9 +3223,9 @@
                 "triple": 2000,
                 "quadruple": 2000
               },
-              "totalWeight": 1809953579.0,
-              "crossAffectedWeight": 65850019.0,
-              "crossFirstChoiceLossWeight": 21265665.0,
+              "totalWeight": 1809953579,
+              "crossAffectedWeight": 65850019,
+              "crossFirstChoiceLossWeight": 21265665,
               "crossAffectedRate": 0.036382159058677165,
               "crossFirstChoiceLossRate": 0.011749287521367972,
               "crossBuckets": 107,
@@ -2894,9 +3238,9 @@
                 "triple": 5000,
                 "quadruple": 5000
               },
-              "totalWeight": 2997732330.0,
-              "crossAffectedWeight": 205103867.0,
-              "crossFirstChoiceLossWeight": 63160297.0,
+              "totalWeight": 2997732330,
+              "crossAffectedWeight": 205103867,
+              "crossFirstChoiceLossWeight": 63160297,
               "crossAffectedRate": 0.06841967341360328,
               "crossFirstChoiceLossRate": 0.02106935845069263,
               "crossBuckets": 452,
@@ -2909,9 +3253,9 @@
                 "triple": 9995,
                 "quadruple": 10000
               },
-              "totalWeight": 3836820840.0,
-              "crossAffectedWeight": 476461012.0,
-              "crossFirstChoiceLossWeight": 136923081.0,
+              "totalWeight": 3836820840,
+              "crossAffectedWeight": 476461012,
+              "crossFirstChoiceLossWeight": 136923081,
               "crossAffectedRate": 0.12418119893239529,
               "crossFirstChoiceLossRate": 0.0356865975008622,
               "crossBuckets": 1503,
@@ -3035,7 +3379,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "e20dea8bcf00d58c6b4af872648ff79a353210295e48e60697482970f400c8dd",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -3150,7 +3494,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "82e680b1190ed4ba0a1c74775a6c9b2683fbfcf6349b57b31b8fb93f77a806e5",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -3265,7 +3609,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "89115ff5112dcc871163ad6f1a3f25aa4903983b0ea72d2cd4fa2dc933a8bc6e",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -3380,7 +3724,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "83c49625ee066ef4507abc37921763ae3bcb39be69c508406bb5b7cebf04ca77",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -3552,11 +3896,205 @@
         "oldR11IndependentToneAuxiliary": false
       },
       "memory": {
-        "definition": "未建立与 M-R2 对齐的记忆成本；不套用21×21 M-T1",
-        "lower": null,
-        "guard": null,
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 19,
+        "guard": 22,
+        "upper": 22,
         "D": 3,
-        "F": 0
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "q",
+              "key": "F"
+            },
+            {
+              "name": "s",
+              "key": "Q"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "J"
+            },
+            {
+              "name": "zero-Y",
+              "key": "W"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 4,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "U",
+                "I",
+                "P",
+                "R",
+                "W",
+                "E",
+                "Q",
+                "O",
+                "T",
+                "Y"
+              ],
+              "links": 0
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "K",
+                "S",
+                "D",
+                "G",
+                "L",
+                "A",
+                "H",
+                "J"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "Z",
+                "X",
+                "M",
+                "V",
+                "C",
+                "B",
+                "N"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "ou"
+              ],
+              "keys": [
+                "U",
+                "F",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "eng",
+                "ng",
+                "v"
+              ],
+              "keys": [
+                "I",
+                "K",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "P",
+                "S",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ang"
+              ],
+              "keys": [
+                "R",
+                "D",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "W",
+                "G",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "e",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "L",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en",
+                "er",
+                "n"
+              ],
+              "keys": [
+                "Q",
+                "A",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "i"
+              ],
+              "keys": [
+                "O",
+                "H",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "o",
+                "ong"
+              ],
+              "keys": [
+                "T",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "u"
+              ],
+              "keys": [
+                "Y",
+                "A",
+                "M"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
       },
       "inventory": {
         "legalTonedSyllables": 1407,
@@ -3594,7 +4132,7 @@
               "selectionRate": 0.0023503662986740876,
               "meanTerminalRank": 1.0026961451361203,
               "meanRejectedCandidates": 0.002696145136120374,
-              "meanPageActions": 6.140162004373433e-07,
+              "meanPageActions": 6.140162004373433e-7,
               "meanKeys": 2.2050898609785454
             },
             "word2": {
@@ -3622,7 +4160,7 @@
               "selectionRate": 0.005771222244899362,
               "meanTerminalRank": 1.0069197819851372,
               "meanRejectedCandidates": 0.006919781985137297,
-              "meanPageActions": 4.532079027685005e-06,
+              "meanPageActions": 0.000004532079027685005,
               "meanKeys": 3.8057931570716166
             },
             "word4": {
@@ -3654,7 +4192,7 @@
               "thirdAuxRate": 0,
               "selectionRate": 0.0023503662986740876,
               "meanRejectedCandidates": 0.002696145136120374,
-              "meanPageActions": 6.140162004373433e-07,
+              "meanPageActions": 6.140162004373433e-7,
               "meanKeys": 2.2050898609785454,
               "effectiveMs": 159.85550790863917
             },
@@ -3680,7 +4218,7 @@
               "thirdAuxRate": 0,
               "selectionRate": 0.005771222244899362,
               "meanRejectedCandidates": 0.006919781985137297,
-              "meanPageActions": 4.532079027685005e-06,
+              "meanPageActions": 0.000004532079027685005,
               "meanKeys": 3.8057931570716166,
               "effectiveMs": 442.8850340925588
             },
@@ -3712,7 +4250,7 @@
           "thirdAuxRate": 0,
           "selectionRate": 0.0024435683509598624,
           "meanRejectedCandidates": 0.002855748264156362,
-          "meanPageActions": 8.576825380203914e-07,
+          "meanPageActions": 8.576825380203914e-7,
           "meanKeys": 3.7912906865521614,
           "effectiveMs": 409.0505149491921
         }
@@ -3934,7 +4472,7 @@
         "s2DifferentKeySameFingerRate": 0.05411053131890865
       },
       "columns": {
-        "version": "tone-in-main-column-contracts-v2",
+        "version": "tone-in-main-column-contracts-v3",
         "nativeId": "T2126-FULL26-8871530",
         "tonedCodesSha256": "604f9781ec77e3ae6baa9492b95f1f5bce3f4a1219feaf9b200a63353913ab97",
         "tracks": {
@@ -5834,6 +6372,146 @@
                 }
               }
             },
+            "fixedV1": {
+              "keytao": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 89.08066964955744,
+                  "meanKeys": 2.1329281120800183,
+                  "p0": 0.09745617962342855,
+                  "p1": 0.035579468130882266,
+                  "p2": 0.00787081733286694,
+                  "firstAuxRate": 0.09745617962342855,
+                  "secondAuxRate": 0.03547193245658971,
+                  "stageWeight": [
+                    0.9025438203765714,
+                    0.06187671149254628,
+                    0.035579468130882266
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 408.0242572526819,
+                  "meanKeys": 4.14865557203404,
+                  "p0": 0.10139487720194551,
+                  "p1": 0.047260694832095065,
+                  "p2": 0.016442828432816258,
+                  "firstAuxRate": 0.10139487720194551,
+                  "secondAuxRate": 0.047260694832095065,
+                  "stageWeight": [
+                    0.8986051227980545,
+                    0.054134182369850445,
+                    0.047260694832095065
+                  ]
+                }
+              },
+              "sanpin": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 83.97379971981364,
+                  "meanKeys": 2.0974561796234283,
+                  "p0": 0.09745617962342855,
+                  "p1": 0.09745617962342855,
+                  "p2": 0.03877574871901465,
+                  "firstAuxRate": 0.09745617962342855,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.9025438203765714,
+                    0,
+                    0.09745617962342855
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 384.0495764761486,
+                  "meanKeys": 4,
+                  "p0": 0.10139487720194551,
+                  "p1": 0.10139487720194551,
+                  "p2": 0.10139487720194551,
+                  "firstAuxRate": 0,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.8986051227980545,
+                    0,
+                    0.10139487720194551
+                  ]
+                }
+              }
+            },
+            "fixedV2": {
+              "keytao": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 89.06397772545418,
+                  "meanKeys": 2.1329281120800183,
+                  "p0": 0.09745617962342855,
+                  "p1": 0.035579468130882266,
+                  "p2": 0.00787081733286694,
+                  "firstAuxRate": 0.09745617962342855,
+                  "secondAuxRate": 0.03547193245658971,
+                  "stageWeight": [
+                    0.9025438203765714,
+                    0.06187671149254628,
+                    0.035579468130882266
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 408.7835942482796,
+                  "meanKeys": 4.14865557203404,
+                  "p0": 0.10139487720194551,
+                  "p1": 0.047260694832095065,
+                  "p2": 0.016442828432816258,
+                  "firstAuxRate": 0.10139487720194551,
+                  "secondAuxRate": 0.047260694832095065,
+                  "stageWeight": [
+                    0.8986051227980545,
+                    0.054134182369850445,
+                    0.047260694832095065
+                  ]
+                }
+              },
+              "sanpin": {
+                "character": {
+                  "count": 6263,
+                  "totalWeight": 73045527,
+                  "completionUpperMs": 83.83152498221,
+                  "meanKeys": 2.0974561796234283,
+                  "p0": 0.09745617962342855,
+                  "p1": 0.09745617962342855,
+                  "p2": 0.03877574871901465,
+                  "firstAuxRate": 0.09745617962342855,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.9025438203765714,
+                    0,
+                    0.09745617962342855
+                  ]
+                },
+                "word": {
+                  "count": 59884,
+                  "totalWeight": 3502416767,
+                  "completionUpperMs": 385.22142700550984,
+                  "meanKeys": 4,
+                  "p0": 0.10139487720194551,
+                  "p1": 0.10139487720194551,
+                  "p2": 0.10139487720194551,
+                  "firstAuxRate": 0,
+                  "secondAuxRate": 0,
+                  "stageWeight": [
+                    0.8986051227980545,
+                    0,
+                    0.10139487720194551
+                  ]
+                }
+              }
+            },
             "v3": {
               "keytao": {
                 "character": {
@@ -5871,33 +6549,33 @@
                 "word3": {
                   "count": 14989,
                   "totalWeight": 872896539,
-                  "completionUpperMs": 335.0852952763652,
-                  "meanKeys": 3.637488443518734,
-                  "p0": 0.4204145847804765,
-                  "p1": 0.21707385873825763,
-                  "p2": 0.10074194027707102,
-                  "firstAuxRate": 0.4204145847804765,
-                  "secondAuxRate": 0.21707385873825763,
+                  "completionUpperMs": 438.17135538518977,
+                  "meanKeys": 4.229012369815342,
+                  "p0": 0.16096046979514947,
+                  "p1": 0.06805190002019243,
+                  "p2": 0.030141528605602593,
+                  "firstAuxRate": 0.16096046979514947,
+                  "secondAuxRate": 0.06805190002019243,
                   "stageWeight": [
-                    0.5795854152195236,
-                    0.20334072604221884,
-                    0.21707385873825763
+                    0.8390395302048506,
+                    0.09290856977495703,
+                    0.06805190002019243
                   ]
                 },
                 "word4": {
                   "count": 15000,
                   "totalWeight": 596763943,
-                  "completionUpperMs": 439.90089919301676,
-                  "meanKeys": 4.1484328770848675,
+                  "completionUpperMs": 440.1374866086747,
+                  "meanKeys": 4.14870044519429,
                   "p0": 0.10469679298301707,
-                  "p1": 0.04373608410185064,
-                  "p2": 0.024631206647818534,
+                  "p1": 0.044003652211273094,
+                  "p2": 0.02120829542142763,
                   "firstAuxRate": 0.10469679298301707,
-                  "secondAuxRate": 0.04373608410185064,
+                  "secondAuxRate": 0.044003652211273094,
                   "stageWeight": [
                     0.895303207016983,
-                    0.060960708881166434,
-                    0.04373608410185064
+                    0.06069314077174398,
+                    0.044003652211273094
                   ]
                 }
               },
@@ -5937,33 +6615,33 @@
                 "word3": {
                   "count": 14989,
                   "totalWeight": 872896539,
-                  "completionUpperMs": 344.7047946911214,
-                  "meanKeys": 3.6659058307939976,
-                  "p0": 0.4204145847804765,
-                  "p1": 0.24549124601352096,
-                  "p2": 0.1309384387420512,
-                  "firstAuxRate": 0.4204145847804765,
-                  "secondAuxRate": 0.24549124601352096,
+                  "completionUpperMs": 438.17135538518977,
+                  "meanKeys": 4.229012369815342,
+                  "p0": 0.16096046979514947,
+                  "p1": 0.06805190002019243,
+                  "p2": 0.030141528605602593,
+                  "firstAuxRate": 0.16096046979514947,
+                  "secondAuxRate": 0.06805190002019243,
                   "stageWeight": [
-                    0.5795854152195236,
-                    0.1749233387669555,
-                    0.24549124601352096
+                    0.8390395302048506,
+                    0.09290856977495703,
+                    0.06805190002019243
                   ]
                 },
                 "word4": {
                   "count": 15000,
                   "totalWeight": 596763943,
-                  "completionUpperMs": 442.30195531330065,
-                  "meanKeys": 4.154065618538887,
+                  "completionUpperMs": 440.1374866086747,
+                  "meanKeys": 4.14870044519429,
                   "p0": 0.10469679298301707,
-                  "p1": 0.04936882555586975,
-                  "p2": 0.029501390300988743,
+                  "p1": 0.044003652211273094,
+                  "p2": 0.02120829542142763,
                   "firstAuxRate": 0.10469679298301707,
-                  "secondAuxRate": 0.04936882555586975,
+                  "secondAuxRate": 0.044003652211273094,
                   "stageWeight": [
                     0.895303207016983,
-                    0.05532796742714732,
-                    0.04936882555586975
+                    0.06069314077174398,
+                    0.044003652211273094
                   ]
                 }
               }
@@ -5988,44 +6666,44 @@
               "word2": {
                 "count": 132814,
                 "totalWeight": 3604044247,
-                "motorUpperMs": 393.7413775798477,
-                "cognitiveMs": 43.9346285722779,
-                "effectiveMs": 437.6760061521256,
+                "motorUpperMs": 393.74634950100926,
+                "cognitiveMs": 43.95659545020009,
+                "effectiveMs": 437.70294495120936,
                 "firstAuxRate": 0.12846186791002515,
-                "secondAuxRate": 0.01588780632969848,
-                "selectionRate": 0.0009606408142413686,
-                "meanTerminalRank": 1.00106683623632,
-                "meanRejectedCandidates": 0.0010668362363199365,
+                "secondAuxRate": 0.01594859692631293,
+                "selectionRate": 0.0009658627257136446,
+                "meanTerminalRank": 1.0010787672774095,
+                "meanRejectedCandidates": 0.0010787672774096218,
                 "meanPageActions": 0,
-                "meanKeys": 4.144349674239724
+                "meanKeys": 4.144410464836338
               },
               "word3": {
                 "count": 72923,
                 "totalWeight": 1101481234,
-                "motorUpperMs": 354.22444553196675,
-                "cognitiveMs": 89.19602083751887,
-                "effectiveMs": 443.42046636948567,
+                "motorUpperMs": 354.1304064308768,
+                "cognitiveMs": 88.75326803797367,
+                "effectiveMs": 442.88367446885053,
                 "firstAuxRate": 0.2330172499334655,
-                "secondAuxRate": 0.05090496167272878,
-                "selectionRate": 0.00607043024756607,
-                "meanTerminalRank": 1.0075264868289169,
-                "meanRejectedCandidates": 0.007526486828916779,
-                "meanPageActions": 2.582885583686667e-06,
-                "meanKeys": 3.806566883371887
+                "secondAuxRate": 0.05013123537245846,
+                "selectionRate": 0.005771222244899362,
+                "meanTerminalRank": 1.0069197819851372,
+                "meanRejectedCandidates": 0.006919781985137297,
+                "meanPageActions": 0,
+                "meanKeys": 3.8057931570716166
               },
               "word4": {
                 "count": 77674,
                 "totalWeight": 828363172,
-                "motorUpperMs": 444.98576915569146,
-                "cognitiveMs": 94.8460945702207,
-                "effectiveMs": 539.8318637259122,
+                "motorUpperMs": 444.96534775159006,
+                "cognitiveMs": 93.48836508873671,
+                "effectiveMs": 538.4537128403267,
                 "firstAuxRate": 0.2608287213908153,
-                "secondAuxRate": 0.04396053232554863,
-                "selectionRate": 0.005110950297051593,
-                "meanTerminalRank": 1.006813932814483,
-                "meanRejectedCandidates": 0.006813932814482969,
-                "meanPageActions": 6.838787854755088e-06,
-                "meanKeys": 4.304789253716364
+                "secondAuxRate": 0.04280098536297555,
+                "selectionRate": 0.0036422333850447907,
+                "meanTerminalRank": 1.0042822606314517,
+                "meanRejectedCandidates": 0.004282260631451636,
+                "meanPageActions": 0,
+                "meanKeys": 4.3036297067537905
               }
             },
             "sanpin": {
@@ -6040,7 +6718,7 @@
                 "selectionRate": 0.032015586448768917,
                 "meanTerminalRank": 1.0456310357338017,
                 "meanRejectedCandidates": 0.04563103573380178,
-                "meanPageActions": 3.4010912777643245e-05,
+                "meanPageActions": 0.000034010912777643245,
                 "meanKeys": 2.176505494804235
               },
               "word2": {
@@ -6060,30 +6738,30 @@
               "word3": {
                 "count": 72923,
                 "totalWeight": 1101481234,
-                "motorUpperMs": 355.92094033075415,
-                "cognitiveMs": 90.57444323195796,
-                "effectiveMs": 446.4953835627121,
+                "motorUpperMs": 352.9619249180887,
+                "cognitiveMs": 85.37858925520287,
+                "effectiveMs": 438.3405141732916,
                 "firstAuxRate": 0.2330172499334655,
-                "secondAuxRate": 0.0511267348563834,
-                "selectionRate": 0.007986944968687501,
-                "meanTerminalRank": 1.010772519434498,
-                "meanRejectedCandidates": 0.010772519434498145,
-                "meanPageActions": 1.516140219598149e-06,
-                "meanKeys": 3.8067886565555416
+                "secondAuxRate": 0.04165978101448072,
+                "selectionRate": 0.0045071308041912585,
+                "meanTerminalRank": 1.005424029766085,
+                "meanRejectedCandidates": 0.005424029766084967,
+                "meanPageActions": 0,
+                "meanKeys": 3.797321702713639
               },
               "word4": {
                 "count": 77674,
                 "totalWeight": 828363172,
-                "motorUpperMs": 447.93561364217874,
-                "cognitiveMs": 95.89499640382371,
-                "effectiveMs": 543.8306100460024,
+                "motorUpperMs": 444.3178763239451,
+                "cognitiveMs": 91.6754130518009,
+                "effectiveMs": 535.993289375746,
                 "firstAuxRate": 0.2608287213908153,
-                "secondAuxRate": 0.04527328141526794,
-                "selectionRate": 0.006113695262154895,
-                "meanTerminalRank": 1.0079181719102306,
-                "meanRejectedCandidates": 0.007918171910230698,
-                "meanPageActions": 8.99363980898948e-07,
-                "meanKeys": 4.3061020028060835
+                "secondAuxRate": 0.03799292153949114,
+                "selectionRate": 0.0030805860113732823,
+                "meanTerminalRank": 1.0036113713177002,
+                "meanRejectedCandidates": 0.0036113713177002515,
+                "meanPageActions": 0,
+                "meanKeys": 4.2988216429303066
               }
             }
           },
@@ -6096,6 +6774,17 @@
             "wj2": 0.016442828432816258,
             "ws1": 0.10139487720194551,
             "ws2": 0.10139487720194551
+          },
+          "adaptation": {
+            "auxiliary": "shape-only; embedded tone satisfies character/word2 tone stages; abbreviated word3/word4 paths use two native shape steps",
+            "word3BaseLength": 4,
+            "wordAuxiliaryPolicy": {
+              "word2": "21",
+              "word3": "12",
+              "word4": "24"
+            },
+            "fixedControl": "fixedV1/fixedV2 use IVUAO independently of the native auxiliary mapping",
+            "v4Pools": "original version-specific shared pools; four-code-top word3 is AAA -> AAAU -> AAAUX -> AAAUXX"
           }
         },
         "sound": {
@@ -6218,9 +6907,9 @@
           "soundWeights": "common399 pinyin mass times common-character conditional tone frequency; equal legal-tone fallback only when no observed tone mass",
           "soundCompletion": "collision buckets: fixed-width base5 suffix for every member; own ordered five-key enumeration alphabet (not tone evidence)",
           "completionV1V2": "same Common8095 and Snow-common two-word cohorts as legacy columns",
-          "completionV3": "same fixed 15000 three/four-word cohorts; independent pools; native-v2 tensor",
+          "completionV3": "same fixed 15000 three/four-word cohorts; independent pools; native-v2 tensor; native AAA/AAAU routing and first two shape auxiliary positions",
           "completionV4": "same frozen 99% dictionary cohorts, routing/pools, motor tensor, rank/page cognitive formula",
-          "sanpin": "full syllables already encode tone; remove redundant tone strokes. Initial-only word3/word4 retain separate tone evidence."
+          "sanpin": "full syllables already encode tone; remove redundant tone strokes. Abbreviated word3/word4 use native shape-only paths instead of independent tone auxiliaries."
         },
         "collision": {
           "families": [
@@ -6235,9 +6924,9 @@
                 "triple": 500,
                 "quadruple": 500
               },
-              "totalWeight": 693412984.0,
-              "crossAffectedWeight": 6975795.0,
-              "crossFirstChoiceLossWeight": 3230513.0,
+              "totalWeight": 693412984,
+              "crossAffectedWeight": 6975795,
+              "crossFirstChoiceLossWeight": 3230513,
               "crossAffectedRate": 0.010060087077919498,
               "crossFirstChoiceLossRate": 0.004658858536747561,
               "crossBuckets": 8,
@@ -6250,9 +6939,9 @@
                 "triple": 1000,
                 "quadruple": 1000
               },
-              "totalWeight": 1108732771.0,
-              "crossAffectedWeight": 20172714.0,
-              "crossFirstChoiceLossWeight": 7787114.0,
+              "totalWeight": 1108732771,
+              "crossAffectedWeight": 20172714,
+              "crossFirstChoiceLossWeight": 7787114,
               "crossAffectedRate": 0.018194387798067528,
               "crossFirstChoiceLossRate": 0.007023436308260794,
               "crossBuckets": 27,
@@ -6265,9 +6954,9 @@
                 "triple": 2000,
                 "quadruple": 2000
               },
-              "totalWeight": 1809953579.0,
-              "crossAffectedWeight": 67436296.0,
-              "crossFirstChoiceLossWeight": 22204002.0,
+              "totalWeight": 1809953579,
+              "crossAffectedWeight": 67436296,
+              "crossFirstChoiceLossWeight": 22204002,
               "crossAffectedRate": 0.037258577668748044,
               "crossFirstChoiceLossRate": 0.012267719049605526,
               "crossBuckets": 107,
@@ -6280,9 +6969,9 @@
                 "triple": 5000,
                 "quadruple": 5000
               },
-              "totalWeight": 2997732330.0,
-              "crossAffectedWeight": 211371152.0,
-              "crossFirstChoiceLossWeight": 64904639.0,
+              "totalWeight": 2997732330,
+              "crossAffectedWeight": 211371152,
+              "crossFirstChoiceLossWeight": 64904639,
               "crossAffectedRate": 0.07051034873417134,
               "crossFirstChoiceLossRate": 0.02165124562672345,
               "crossBuckets": 467,
@@ -6295,9 +6984,9 @@
                 "triple": 9995,
                 "quadruple": 10000
               },
-              "totalWeight": 3836820840.0,
-              "crossAffectedWeight": 480472813.0,
-              "crossFirstChoiceLossWeight": 138237479.0,
+              "totalWeight": 3836820840,
+              "crossAffectedWeight": 480472813,
+              "crossFirstChoiceLossWeight": 138237479,
               "crossAffectedRate": 0.12522680443947964,
               "crossFirstChoiceLossRate": 0.03602917226648508,
               "crossBuckets": 1512,
@@ -6421,7 +7110,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "38291daf152267edf04c38ccdddb1971da687a538b66107bf9c3d20cad0efdc7",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -6536,7 +7225,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "d426402c287f8c3d01152eebafaa8960868c97c44120686674358081a4bf566c",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -6651,7 +7340,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "65992fcb92c95f0a89cddea2be08ec187bc8eb4029969cccfa54fc25b9ce56f8",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"
@@ -6766,7 +7455,7 @@
           "spaceIncluded": false,
           "unit": "relative hand-model cost; not ms",
           "strokeSha256": "7bcbe8a00e1501ca1f5b2907b439a961b22973372d5549ff9e33b5501846bed0",
-          "coverage": 1.0,
+          "coverage": 1,
           "pureDoublePinyin": true,
           "selectionIncluded": false,
           "toneSource": "highest-weight matching R11 character reading for each frozen corpus char+pinyin token"

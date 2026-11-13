@@ -19,6 +19,9 @@ def main():
         raw=json.loads((DEST/(which+'.json')).read_text(encoding='utf8'))
         native,fixture=raw['native'],raw['fixture']
         native['columns']=json.loads((DEST/(which+'.columns.json')).read_text(encoding='utf8'))
+        if (native['columns'].get('version') != 'tone-in-main-column-contracts-v3'
+                or native['memory'].get('audit', {}).get('version') != 'M-T1-derived-v1'):
+            raise ValueError('stale native/column semantics; rerun score_toned_2126_publication.js and score_toned_benchmark_columns.js')
         code_hash=hashlib.sha256(json.dumps(native['tonedCodes'],separators=(',',':')).encode()).hexdigest()
         if native['columns']['tonedCodesSha256']!=code_hash:raise ValueError('stale benchmark columns')
         native['columns']['collision']=evaluate_toned_layout(fixture,corpus)
@@ -26,7 +29,7 @@ def main():
         data['tonedContractBenchmark']['schemes'].setdefault('research',{})[native['id']]=native
         audit[native['id']]={k:v for k,v in native.items() if k not in ['tonedCodes','filterRows','keyboards']}
         print(native['id'],native['ckt']['v51']['score'],native['macro']['daily|native-punctuation']['score'],flush=True)
-    (ROOT/'research/notes/2026-11-14-toned-2126-r11-benchmark.json').write_text(json.dumps({'version':1,'schemes':audit},ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+    (ROOT/'research/notes/2026-11-14-toned-2126-r11-benchmark.json').write_text(json.dumps({'version':2,'schemes':audit},ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     ui=patch_selectable_ui(patch_report(HTML.read_text(encoding='utf8')))
     (DEST/'ui.html').write_text(ui,encoding='utf8')
     with dest_payload.open('w',encoding='utf8') as f:json.dump(data,f,ensure_ascii=False,separators=(',',':'))

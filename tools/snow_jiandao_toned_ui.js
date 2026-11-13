@@ -70,7 +70,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
   captions[1].textContent = '声母 / 零声母 / 十韵组 / 纯形辅 · 声调 01234（0＝轻声）';
   const toneRows = native.publication?.toneRowsByTone || {1:2,2:1,3:1,4:0,5:2};
   captions[2].textContent = ['上排','中排','下排'].map((name,r)=>name+' '+[1,2,3,4,5].filter(t=>toneRows[t]===r).map(t=>t===5?0:t).join('/')+' 声').join(' · ')+'；同韵组同文字色。';
-  captions[3].textContent = '形辅 '+native.contract.shapeKeysByMeaning+'（折横撇竖点）；与声韵共键时保留全部角色；声母位移 link 使用统一配色。';
+  captions[3].textContent = '形辅 '+native.contract.shapeKeysByMeaning+'（折横撇竖点）；W/Y 源键与迁入的 ØW/ØY 各自同色，并遵循移位链约束。';
   add(svg, 'style', {}, '.nf5-dim{opacity:.16}');
   return new XMLSerializer().serializeToString(svg);
 }
