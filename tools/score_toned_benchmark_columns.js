@@ -83,7 +83,7 @@ function expandToneInventory(data, native) {
   const expanded = {...data, pinyin, base: sound.map(row => [index.get(row.py + ':' + row.tone), row.w]),
     characters: data.characters.map(row => [row[0], index.get(row[1] + ':' + row[2]) ?? -1, ...row.slice(2)]),
     words: data.words.map(row => [row[0], index.get(row[1] + ':' + row[3]) ?? -1, index.get(row[2] + ':' + row[4]) ?? -1, ...row.slice(3)])};
-  return {data: expanded, entry: {id: native.id, tone: native.contract.toneKeysByTone, capacity: [21, 21], codeList}, index};
+  return {data: expanded, entry: {id: native.id, tone: native.contract.toneKeysByTone, capacity: native.contract.capacity || [21, 21], codeList}, index};
 }
 
 function stripEmbeddedTone(stages, kind) {
