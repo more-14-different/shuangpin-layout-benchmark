@@ -9,6 +9,18 @@ from search_toned_dual_empty_regroup import build, ROOT, read, SOURCE
 
 @unittest.skipUnless((ROOT / 'research/.cache/ckt-v51-toned-2121-marsfirst-zh-e-mars10-rust.json').exists(), 'local fixture required')
 class DualEmptyRegroup(unittest.TestCase):
+    def test_q_empty_rhyme_preserves_q_initial_and_charges_merge(self):
+        job = build(Namespace(max_d=2,max_m=23,tag='QR',previous=None,production=True,
+                             q_empty_rhyme=True,require_empty=[],operators='key,first',anchors=''))
+        self.assertEqual(len(job['candidates']),6)
+        for c in job['candidates']:
+            self.assertTrue(all('Q' not in row for row in c['state']['rhymeKeys']))
+            for i,a in enumerate(job['fixture']['atoms']):
+                if a['initial']=='q':
+                    self.assertEqual(c['state']['firstKeys'][i],'Q')
+            self.assertEqual(c['memory'],22)
+            self.assertEqual(c['memoryGuard'],24)
+
     def test_production_seed_can_leave_qz_unconstrained(self):
         job = build(Namespace(max_d=2,max_m=23,tag='FREE',previous=None,production=True,
                               require_empty=[],operators='root',anchors=''))

@@ -35,6 +35,10 @@ def build(args):
     ordinary = [i for i, a in enumerate(fixture['atoms']) if len(a['initial']) == 1 and a['initial'] != '_']
 
     def add(seed, kind, description, partition, keys, first):
+        if getattr(args, 'q_empty_rhyme', False):
+            if any('Q' in row for row in keys) or any(first[i] != 'Q' for i,a in enumerate(fixture['atoms']) if a['initial'] == 'q'):
+                rejected['Q-rhyme-or-q-initial'] += 1
+                return
         sizes = [partition.count(g) for g in range(10)]
         if 0 in sizes:
             rejected['empty-group'] += 1
@@ -164,6 +168,9 @@ def build(args):
                maxD=args.max_d, maxM=args.max_m, requireEmpty=getattr(args, 'require_empty', ['QZ', 'ZQ']),
                seedScores={s['id']: s['score'] for s in seeds}, sourceLayouts=SOURCE,
                searchArguments=vars(args))
+    if getattr(args, 'q_empty_rhyme', False):
+        job['forbiddenRhymeKeys'] = ['Q']
+        job['preserveQInitial'] = True
     return job
 
 
@@ -174,6 +181,7 @@ def main():
     parser.add_argument('--previous')
     parser.add_argument('--seed-file')
     parser.add_argument('--production', action='store_true')
+    parser.add_argument('--q-empty-rhyme', action='store_true')
     parser.add_argument('--require-empty', nargs='*', default=['QZ', 'ZQ'])
     parser.add_argument('--leaders', type=int, default=1)
     parser.add_argument('--max-d', type=int, default=2)

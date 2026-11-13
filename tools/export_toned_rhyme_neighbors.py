@@ -71,6 +71,12 @@ def main():
     exported["contract"]["requireEmptyBuckets"] = job.get("requireEmpty", ["QZ"])
     exported["contract"]["searchMaxD"] = job.get("maxD", 2)
     exported["contract"]["searchMaxMemoryLower"] = job.get("maxM", 24)
+    if job.get('forbiddenRhymeKeys'):
+        exported['contract']['forbiddenRhymeKeys'] = job['forbiddenRhymeKeys']
+        exported['contract']['secondKeyCount'] = 20
+        exported['contract']['secondSoundKeysByRow'] = dict(upper='WERTYP',home='SDFGHJKL',lower='ZXCBNM')
+        exported['contract']['secondSoundKeyCountByRow'] = [6,8,6]
+        exported['contract']['tonedSyllableBuckets'] = 420
     if job.get("regrouping"):
         exported["contract"]["secondCodeFactorizationSelectionStatus"] = "tone-independent-root-repartition"
     first_for_py = {p: i for i, a in enumerate(fixture["atoms"]) for p in a["pinyin"]}
@@ -84,6 +90,7 @@ def main():
                     codes[fixture["pinyin"][p] + str(t)] = (c["state"]["firstKeys"][first_for_py[p]] +
                         c["state"]["rhymeKeys"][region_for_tone[t]][final_for_py[p]])
         assert len(codes) == 1407
+        assert all(code[1] not in job.get('forbiddenRhymeKeys', []) for code in codes.values())
         assert all(code not in codes.values() for code in job.get("requireEmpty", ["QZ"]))
         ordinary_d = sum(c["state"]["firstKeys"][i] != a["baselineKey"]
                          for i, a in enumerate(fixture["atoms"]) if len(a["initial"]) == 1 and a["initial"] != "_")

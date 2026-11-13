@@ -22,6 +22,10 @@ struct Job {
     max_m: usize,
     #[serde(default = "default_forbidden", rename = "requireEmpty")]
     require_empty: Vec<String>,
+    #[serde(default, rename = "forbiddenRhymeKeys")]
+    forbidden_rhyme_keys: Vec<char>,
+    #[serde(default, rename = "preserveQInitial")]
+    preserve_q_initial: bool,
 }
 fn default_max_d() -> usize {
     2
@@ -139,6 +143,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut current = base;
     for c in &job.candidates {
         if c.memory > job.max_m
+            || c.state
+                .rhyme_keys
+                .iter()
+                .flatten()
+                .any(|key| job.forbidden_rhyme_keys.contains(key))
+            || (job.preserve_q_initial
+                && fixture
+                    .atoms
+                    .iter()
+                    .enumerate()
+                    .any(|(i, a)| a.initial == "q" && c.state.first_keys[i] != 'Q'))
             || calc_ordinary_d(&c.state, fixture) > job.max_d
             || !validator.is_valid_forbidden(&c.state, &forbidden)
         {
