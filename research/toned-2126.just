@@ -67,3 +67,15 @@ qempty mode:
 
 qempty-check mode:
     node tools/verify_qempty_2126.js research/notes/2026-11-13-toned-2126-qempty-{{mode}}.json
+
+regroup mode:
+    node tools/regroup_2126.js research/notes/2026-11-13-toned-2126-qempty-{{mode}}.json research/notes/2026-11-13-toned-2126-regroup-{{mode}}.json
+
+regroup-26:
+    node tools/regroup_2126.js research/notes/2026-11-13-toned-2126-alternative-policy-full.json research/notes/2026-11-13-toned-2126-regroup-26.json
+
+regroup-refine mode:
+    node tools/refine_regroup_2126.js research/notes/2026-11-13-toned-2126-regroup-{{mode}}.json research/notes/2026-11-13-toned-2126-regroup-{{mode}}-refine.json
+
+regroup-test:
+    node --test tests/regroup-2126.test.mjs tests/toned-2126.test.mjs tests/ckt-v4-model.test.mjs
