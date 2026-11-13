@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-v51-neighbors:
+    python -X utf8 tools/explore_untoned_2121_v51.py
+    python -X utf8 tools/audit_untoned_2121_neighbors.py
+
 cr-frontier-benchmark:
     python -X utf8 tools/integrate_cr_frontier_r11.py
     node tools/sync_keymap_link_colors.js
