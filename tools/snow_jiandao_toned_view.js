@@ -8,6 +8,7 @@ const SNOW_RHYME_COLORS = Object.freeze({
   u: '#438098', 'i-er': '#a54f7a', 'o-ong': '#778132', ao: '#6853a0',
 });
 const SNOW_TONE_FILLS = Object.freeze({'4': '#d8e9f3', '23': '#dcefdc', '01': '#f5e8bd'});
+const SNOW_SHAPE_PALETTE = Object.freeze({keyFill: '#e8d8f5', badgeFill: '#f4eafb', stroke: '#a080b7', ink: '#684780'});
 
 function snowNormalizeQuery(value) {
   return String(value || '').toLowerCase().replace(/u:|ü/g, 'v')
