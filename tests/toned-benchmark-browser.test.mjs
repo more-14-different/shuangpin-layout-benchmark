@@ -20,7 +20,7 @@ try {
   await page.waitForSelector('table[data-ux-table="benchmark"] .snow-jiandao-contract-row');
   const read = key => page.locator(`table[data-ux-table="${key}"]`).evaluate(table=>{
     const heads=[...table.querySelectorAll('th')].map(th=>th.textContent.replace(/[↕↑↓]/g,'').trim());
-    const row=table.querySelector('.snow-jiandao-contract-row');
+    const row=table.querySelector('[data-dv-scheme="SNOW-JIANDAO-TONED"]');
     return {length:row.cells.length,headers:heads,cells:Object.fromEntries([...row.cells].map((td,index)=>[heads[index],{
       text:td.textContent,raw:td.hasAttribute('data-ux-value')?JSON.parse(td.dataset.uxValue):null,
       metric:td.querySelector('[data-toned-metric]')?.dataset.tonedMetric,

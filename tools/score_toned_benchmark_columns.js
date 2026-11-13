@@ -34,7 +34,7 @@ function summarize20(data, native, engines) {
   const {Engine7: engine, CKTEngine: ckt} = engines;
   const original = engine.rowsFor;
   engine.rowsFor = (entry, opt) => entry.tonedContract ? tonedRowsFor(data, native, opt, engine.shapeMap(entry, opt.shape || 'snowshape')) : original(entry, opt);
-  const entry = {id: 'SNOW-JIANDAO-TONED-ADAPTED20', tone: native.contract.toneKeysByTone, tonedContract: true};
+  const entry = {id: native.id + '-ADAPTED20', tone: native.contract.toneKeysByTone, tonedContract: true};
   const tracks = {}, quick = {};
   const keys = data.reference.keys + '_', chen = (data.r11PairMetrics || data.r9PairMetrics).models.chen;
   const chenCosts = Float64Array.from([...keys].flatMap(a => [...keys].map(b =>
@@ -219,7 +219,9 @@ function buildTonedColumns({html, data, native, snow, words, motor}) {
   const completion = completeColumns({data, native, snow, engines, words, motor});
   const sound = soundCompletion(data, native, engines.CKTEngine.codeCost, engines.Engine7.lex);
   const rules = require('./toned_rule_metrics.js').toneRuleMetrics(data, tonedSoundRows(data, native));
-  return {version: 'tone-in-main-column-contracts-v2', ...twenty, completion, sound, rules,
+  return {version: 'tone-in-main-column-contracts-v2', nativeId: native.id,
+    tonedCodesSha256: require('node:crypto').createHash('sha256').update(JSON.stringify(native.tonedCodes)).digest('hex'),
+    ...twenty, completion, sound, rules,
     policy: {tracks: 'same 20 contracts; embedded tone evidence counted once',
       soundWeights: 'common399 pinyin mass times common-character conditional tone frequency; equal legal-tone fallback only when no observed tone mass',
       soundCompletion: sound.formula, completionV1V2: 'same Common8095 and Snow-common two-word cohorts as legacy columns',

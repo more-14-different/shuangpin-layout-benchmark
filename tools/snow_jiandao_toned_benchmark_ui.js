@@ -3,13 +3,13 @@
 // data, rather than appending an unsortable row to rendered HTML.
 const SNOW_TONED_ROWS_BASE = Engine7.rowsFor;
 Engine7.rowsFor = function(entry, options) {
-  return entry?.tonedContract ? tonedRowsFor(D, D.tonedContractBenchmark.schemes.snowJiandao,
+  return entry?.tonedContract ? tonedRowsFor(D, snowJiandaoNative(entry.id),
     options, Engine7.shapeMap(entry, options.shape || 'snowshape')) : SNOW_TONED_ROWS_BASE(entry, options);
 };
 
-function snowJiandaoMetricFilterPass(state) {
+function snowJiandaoMetricFilterPass(state, native = snowJiandaoNative(SNOW_JIANDAO_TONED_ID)) {
   if (!state) return true;
-  const native = D.tonedContractBenchmark.schemes.snowJiandao, c = native.columns;
+  const c = native.columns;
   if (!c) return false;
   const atMost = (name, value) => state[name] === '' || state[name] == null || value <= Number(state[name]) + 1e-12;
   const atLeast = (name, value) => state[name] === '' || state[name] == null || value >= Number(state[name]) - 1e-12;
@@ -21,19 +21,20 @@ function snowJiandaoMetricFilterPass(state) {
     (!state.weighted || c.tracks.S2.miss <= D.ckt.tracks.S005.S2.miss + 1e-12);
 }
 
-let SNOW_CURRENT_STAT_CACHE = null;
-function snowJiandaoCurrentStat() {
-  const options = UX.applied || lastOptions || opt(), key = JSON.stringify(options);
-  if (SNOW_CURRENT_STAT_CACHE?.key === key) return SNOW_CURRENT_STAT_CACHE.value;
-  const entry = snowJiandaoTonedFacade();
+const SNOW_CURRENT_STAT_CACHE = new Map();
+function snowJiandaoCurrentStat(native = snowJiandaoNative(SNOW_JIANDAO_TONED_ID)) {
+  const options = UX.applied || lastOptions || opt(), key = native.id + JSON.stringify(options);
+  if (SNOW_CURRENT_STAT_CACHE.has(key)) return SNOW_CURRENT_STAT_CACHE.get(key);
+  const entry = snowJiandaoTonedFacade(native);
   const value = ckModel(options) ? CKTEngine.evaluate(entry, options) : Engine7.project(
     Engine7.aggregate(Engine7.rowsFor(entry, options), options), Engine7.costs(options.model, options.scenario, options.confirmCost));
   if (!Number.isFinite(value.eq)) throw new Error('带调当前环境无法计算：' + key);
-  SNOW_CURRENT_STAT_CACHE = {key, value};return value;
+  if (SNOW_CURRENT_STAT_CACHE.size >= 32) SNOW_CURRENT_STAT_CACHE.clear();
+  SNOW_CURRENT_STAT_CACHE.set(key, value);return value;
 }
 
-function snowJiandaoScores(tau = bCompletionTau(), first = bCompletionFirstAuxPenalty(), second = bCompletionSecondAuxPenalty()) {
-  const native = D.tonedContractBenchmark.schemes.snowJiandao, columns = native.columns;
+function snowJiandaoScores(tau = bCompletionTau(), first = bCompletionFirstAuxPenalty(), second = bCompletionSecondAuxPenalty(), native = snowJiandaoNative(SNOW_JIANDAO_TONED_ID)) {
+  const columns = native.columns;
   const score = (candidate, reference, kinds, penalties = false, cognitive = null) => tonedGeneralizedScore(
     ['keytao', 'sanpin'].flatMap(mode => Object.entries(kinds).map(([kind, weight]) => {
       const r = candidate[mode][kind], b = reference[mode][kind];
@@ -67,10 +68,10 @@ function snowJiandaoScores(tau = bCompletionTau(), first = bCompletionFirstAuxPe
 }
 
 function snowJiandaoColumn(header, tableKey, context) {
-  const native = D.tonedContractBenchmark.schemes.snowJiandao, c = native.columns;
+  const native = context.native || snowJiandaoNative(SNOW_JIANDAO_TONED_ID), c = native.columns;
   const label = String(typeof header === 'object' ? header.label : header).replace(/[↕↑↓]/g, '').trim();
-  const current = () => context.current ||= snowJiandaoCurrentStat();
-  const scores = () => context.scores ||= snowJiandaoScores();
+  const current = () => context.current ||= snowJiandaoCurrentStat(native);
+  const scores = () => context.scores ||= snowJiandaoScores(bCompletionTau(), bCompletionFirstAuxPenalty(), bCompletionSecondAuxPenalty(), native);
   const number = (value, note, unit = 'number') => {
     if (!Number.isFinite(value)) throw new Error(`带调列缺少有效数值：${tableKey} / ${label}`);
     return {value, note, html: `<span data-toned-metric="${esc(label)}" title="${esc(note)}">${unit === 'percent' ? pct(value) : unit === 'integer' ? value.toLocaleString('en-US') : unit === 'pp' ? (value * 100).toFixed(3) + ' pp' : num(value, 6)}</span>`};
@@ -78,7 +79,7 @@ function snowJiandaoColumn(header, tableKey, context) {
   const percentage = (value, note) => number(value, note, 'percent');
   const text = (value, note = '') => ({value, note, html: `<span title="${esc(note)}">${esc(value)}</span>`});
   const formula20 = '同一20合同、语料/形源/词库/顺序及原冻结基线；带调主码已含的调信息不重复追加';
-  if (label.startsWith('方案')) return {value: native.id, html: `<button type="button" class="link" data-snow-jiandao-open>${esc(native.id)}</button><small>${esc(native.name)} · 带调主码 · 同列公式适配</small>`};
+  if (label.startsWith('方案')) return {value: native.id, html: `<button type="button" class="link" data-snow-jiandao-open="${native.id}">${esc(native.id)}</button><small>${esc(native.name)} · 带调主码 · 同列公式适配</small>`};
   if (label.includes('宿主键域') || label === '宿主键域') return text('21×21');
   if (label === '五辅键方向') return text(native.contract.toneKeysByTone, 'toneKeysByTone 边界映射；形辅按 ' + native.contract.shapeKeysByMeaning + '＝折横撇竖点，不追加独立调辅');
   if (label === '固定五辅') return {value: 1, html: '<span title="shapeKeysByMeaning=AVUIO，toneKeysByTone=IVUAO">是</span>'};
@@ -151,7 +152,8 @@ function snowJiandaoColumn(header, tableKey, context) {
 }
 
 function snowJiandaoTableRows(headers, rows, ids, key, raws) {
-  if (!['benchmark','fair','four-code-collision','r9-macro'].includes(key) || !snowJiandaoBenchmarkVisible() || ids.includes(SNOW_JIANDAO_TONED_ID)) return {headers,rows,ids,raws};
+  const natives = snowJiandaoSchemes().filter(native => !ids.includes(native.id) && snowJiandaoBenchmarkVisible(native));
+  if (!['benchmark','fair','four-code-collision','r9-macro'].includes(key) || !natives.length) return {headers,rows,ids,raws};
   if (!rows.length && ['benchmark','fair'].includes(key)) {
     // The inherited wrappers skip their supplemental columns for an empty
     // ordinary cohort. Keep those metrics when the toned scheme stands alone.
@@ -161,40 +163,44 @@ function snowJiandaoTableRows(headers, rows, ids, key, raws) {
     const position = headers.findIndex(header => (header.label || header) === '声韵记忆项 M') + 1;
     headers = [...headers.slice(0,position), ...additional.filter(label => !existing.has(label)), ...headers.slice(position)];
   }
-  const context = {}, dataRows = [];
+  const dataRows = [];
+  for (const native of natives) {
+  const context = {native}, start = dataRows.length;
   if (key === 'r9-macro') {
-    const native = D.tonedContractBenchmark.schemes.snowJiandao, z = native.macro[r9MacroKey()], n = z.hits;
+    const z = native.macro[r9MacroKey()], n = z.hits;
     const extendedKeyHits = Object.entries(z.heat_map).reduce((sum,[key,value])=>sum+(/^[a-z]$/i.test(key)?0:value),0);
     const raw = [native.id,native.name,z.score,z.chars,n,z.time,z.avg_time,z.total_distance,z.avg_distance,z.effective_distance,z.overlap_distance,z.same_hand_rate,
       ...z.same_finger_hits.slice(0,3).map(v=>v/n),...z.diff_finger_hits.slice(0,3).map(v=>v/n),...z.row_load.map(v=>v/n),z.left_load/n,z.right_load/n,z.finger_load[0]/n,z.finger_load[9]/n,extendedKeyHits,''];
-    dataRows.push({raw,row:raw.map((v,at)=>at===0?`<button class="link" data-snow-jiandao-open>${esc(v)}</button>`:at===1?esc(v):at===26?'<button data-snow-macro-heat>查看</button>':at>=11&&at<=24?pct(v):at===3||at===4||at===25?v:num(v,5))});
+    dataRows.push({raw,row:raw.map((v,at)=>at===0?`<button class="link" data-snow-jiandao-open="${native.id}">${esc(v)}</button>`:at===1?esc(v):at===26?`<button data-snow-macro-heat="${native.id}">查看</button>`:at>=11&&at<=24?pct(v):at===3||at===4||at===25?v:num(v,5))});
   } else if (key === 'four-code-collision') {
-    const native = D.tonedContractBenchmark.schemes.snowJiandao;
     for (const [cut, metric] of Object.entries(native.columns.collision.cuts)) dataRows.push({
-      row: [`<button class="link" data-snow-jiandao-open>${esc(native.id)}</button>`,'21×21','纯 ØY · 带调',Number(cut).toLocaleString(),pct(metric.crossAffectedRate),pct(metric.crossFirstChoiceLossRate),metric.crossBuckets,metric.collisionBuckets,metric.maxBucket],
+      row: [`<button class="link" data-snow-jiandao-open="${native.id}">${esc(native.id)}</button>`,'21×21','纯 ØY · 带调',Number(cut).toLocaleString(),pct(metric.crossAffectedRate),pct(metric.crossFirstChoiceLossRate),metric.crossBuckets,metric.collisionBuckets,metric.maxBucket],
       raw: [native.id,'21×21','纯 ØY · 带调',Number(cut),metric.crossAffectedRate,metric.crossFirstChoiceLossRate,metric.crossBuckets,metric.collisionBuckets,metric.maxBucket]});
   } else {
     const cells = headers.map(header => snowJiandaoColumn(header, key, context));
     dataRows.push({row: cells.map(cell => cell.html), raw: cells.map(cell => cell.value)});
   }
-  return {headers, rows: [...rows,...dataRows.map(item => item.row)], ids: [...ids,...dataRows.map(() => SNOW_JIANDAO_TONED_ID)], raws: [...raws,...dataRows.map(item => item.raw)]};
+  for (let at = start; at < dataRows.length; at++) dataRows[at].id = native.id;
+  }
+  return {headers, rows: [...rows,...dataRows.map(item => item.row)], ids: [...ids,...dataRows.map(item => item.id)], raws: [...raws,...dataRows.map(item => item.raw)]};
 }
 
 const SNOW_COMPACT_BASE = uxCompactColumns;
 uxCompactColumns = function(headers, rows, raws = []) {
   const labels = headers.map(h => h.label || h);
-  if (snowJiandaoBenchmarkVisible() && (labels.includes('当前 CKT ms/项') || labels.includes('当前键对当量 ×10') || labels.includes('S2规则补全 CKT ms'))) {
-    const context = {}, cells = headers.map(header => snowJiandaoColumn(header, labels.includes('S2规则补全 CKT ms') ? 'fair' : 'benchmark', context));
-    const compact = SNOW_COMPACT_BASE(headers, [...rows,cells.map(cell => cell.html)], [...raws,cells.map(cell => cell.value)]);
-    compact.rows.pop();compact.raws.pop();return compact;
+  const natives = snowJiandaoSchemes().filter(snowJiandaoBenchmarkVisible);
+  if (natives.length && (labels.includes('当前 CKT ms/项') || labels.includes('当前键对当量 ×10') || labels.includes('S2规则补全 CKT ms'))) {
+    const extra = natives.map(native => {const context = {native};return headers.map(header => snowJiandaoColumn(header, labels.includes('S2规则补全 CKT ms') ? 'fair' : 'benchmark', context))});
+    const compact = SNOW_COMPACT_BASE(headers, [...rows,...extra.map(cells=>cells.map(cell=>cell.html))], [...raws,...extra.map(cells=>cells.map(cell=>cell.value))]);
+    compact.rows.splice(-extra.length);compact.raws.splice(-extra.length);return compact;
   }
   return SNOW_COMPACT_BASE(headers, rows, raws);
 };
 
 document.addEventListener('click', event => {
-  if (!event.target.closest('[data-snow-macro-heat]')) return;
+  const button = event.target.closest('[data-snow-macro-heat]');if (!button) return;
   event.preventDefault();
-  const native = D.tonedContractBenchmark.schemes.snowJiandao;
+  const native = snowJiandaoNative(button.dataset.snowMacroHeat || SNOW_JIANDAO_TONED_ID);
   const key = r9MacroKey(), z = native.macro[key];
   // Reuse the ordinary article replay renderer with the native results; keep
   // the temporary boundary registration scoped to this synchronous render.

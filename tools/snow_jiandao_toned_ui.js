@@ -1,7 +1,8 @@
 // Injected after the selectable contract bridge by its Python integrator.
-function snowJiandaoKeyboardSVG(mode = 'semantic', load = null) {
-  const native = D.tonedContractBenchmark.schemes.snowJiandao;
+function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJiandaoNative() || snowJiandaoNative(SNOW_JIANDAO_TONED_ID)) {
   const entry = snowKeyboardEntry(native), heat = mode !== 'semantic';
+  const rhymeNames = native.publication?.rhymeGroups?.map(group => group.roots.join('-'));
+  const rhymeColors = rhymeNames ? Object.fromEntries(rhymeNames.map((name, index) => [name, Object.values(SNOW_RHYME_COLORS)[index]])) : SNOW_RHYME_COLORS;
   if (heat && !load) {
     if (mode === 'daily') {
       const macro = native.macro['daily|native-punctuation'];
@@ -11,7 +12,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null) {
   const loads = heat ? [...D.reference.keys].map(key => load?.[key] || 0) : null;
   const doc = new DOMParser().parseFromString(keyboardSVG(entry, loads, nf4ReadFonts(heat ? 'load' : 'semantic')), 'image/svg+xml');
   const svg = doc.documentElement;
-  svg.setAttribute('aria-label', mode === 'semantic' ? '冰雪剑道 · 声韵形辅合并键盘图' : '冰雪剑道 · ' + ({overall: '总热力图', daily: '日常热力图', character: '单字热力图', word2: '二字词热力图', word3: '三字词热力图', word4: '四字词热力图'})[mode]);
+  svg.setAttribute('aria-label', native.name + ' · ' + (mode === 'semantic' ? '声韵形辅合并键盘图' : ({overall: '总热力图', daily: '日常热力图', character: '单字热力图', word2: '二字词热力图', word3: '三字词热力图', word4: '四字词热力图'})[mode]));
   function add(parent, tag, attrs, content) {
     const element = doc.createElementNS('http://www.w3.org/2000/svg', tag);
     for (const [name, value] of Object.entries(attrs)) element.setAttribute(name, value);
@@ -41,7 +42,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null) {
       const text = [...content.querySelectorAll('text')].find(node => node.textContent === label(rhyme));
       if (!text) continue;
       text.setAttribute('data-rhyme', rhyme);
-      text.setAttribute('fill', SNOW_RHYME_COLORS[rhyme]);
+      text.setAttribute('fill', rhymeColors[rhyme]);
       // A pale backing preserves rhyme identity over dark heat cells.
       if (heat) {
         const fz = Number(text.getAttribute('font-size')), baseline = Number(text.getAttribute('y'));
@@ -62,7 +63,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null) {
 }
 
 function snowJiandaoFilterState() {
-  const native = D.tonedContractBenchmark.schemes.snowJiandao;
+  const native = snowJiandaoNative();
   const mode = $('#snowJiandaoKeyboardMode')?.value || 'semantic', query = $('#nf5Query')?.value || '';
   const kind = ['semantic', 'overall', 'daily'].includes(mode) ? 'all' : mode;
   const rows = snowFilteredRows(native, query, kind);
@@ -103,7 +104,7 @@ function snowJiandaoKeyboardPanel() {
   .snow-jiandao-keyboards .nf5-shared-tools{grid-template-columns:minmax(200px,auto) minmax(220px,1fr) auto auto}
   @media(max-width:1050px){.snow-jiandao-keyboards .nf5-shared-tools{grid-template-columns:1fr 1fr}}
   @media(max-width:650px){.snow-jiandao-keyboards .nf5-shared-tools{grid-template-columns:1fr}}
-  </style><div class="heading"><h3>冰雪剑道键盘图</h3></div>
+  </style><div class="heading"><h3>${esc(snowJiandaoNative().name)}键盘图</h3></div>
   ${nf4TypeTools('keyboard').replaceAll('data-nf4-action', 'data-snow-export')}
   <div class="nf5-shared-tools"><label class="control"><span>键盘图</span><select id="snowJiandaoKeyboardMode"><option value="semantic">声韵形辅合并键盘图</option><option value="overall">总热力图 · 字词 1:3:1:1</option><option value="daily">日常文章热力图</option><option value="character">单字热力图</option><option value="word2">二字词热力图</option><option value="word3">三字词热力图</option><option value="word4">四字词热力图</option></select></label><label class="control nf5-query"><span>统一筛选</span><input id="nf5Query" placeholder="全拼、汉字、词语；如 jian4dao1 / jiandao" autocomplete="off"></label><button id="nf5Reset" type="button">清空筛选</button><button id="snowJiandaoExportRows" type="button">导出筛选 TSV</button></div>
   <p id="nf5FilterSummary" class="nf5-filter-summary" aria-live="polite"></p><div id="svgbox"></div>
@@ -117,10 +118,10 @@ function snowJiandaoWireKeyboard() {
   $('#nf5Reset').onclick = () => {$('#nf5Query').value = '';snowJiandaoDrawKeyboard()};
   $('#snowJiandaoExportRows').onclick = () => {
     const rows = snowJiandaoFilterState().rows;
-    download(SNOW_JIANDAO_TONED_ID + '_filtered.tsv', ['字词\t全拼声调\t主码\t终码\t频率\t轨', ...rows.map(row => row.join('\t'))].join('\n'), 'text/tab-separated-values;charset=utf-8');
+    download(snowJiandaoNative().id + '_filtered.tsv', ['字词\t全拼声调\t主码\t终码\t频率\t轨', ...rows.map(row => row.join('\t'))].join('\n'), 'text/tab-separated-values;charset=utf-8');
   };
   for (const button of document.querySelectorAll('[data-snow-export]')) button.onclick = () => {
-    const mode = $('#snowJiandaoKeyboardMode').value, name = SNOW_JIANDAO_TONED_ID + '_' + mode;
+    const mode = $('#snowJiandaoKeyboardMode').value, name = snowJiandaoNative().id + '_' + mode;
     const svg = $('#svgbox').innerHTML;
     if (button.dataset.snowExport === 'svg') {download(name + '.svg', svg, 'image/svg+xml');return}
     const css = [...document.querySelectorAll('head style')].map(style => style.textContent).join('\n');

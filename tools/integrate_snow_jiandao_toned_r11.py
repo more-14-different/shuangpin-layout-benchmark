@@ -207,6 +207,13 @@ function r11TonedContractTable(){
   ['冰雪剑道','带调 S2-5SUF / 原生四轨',num(a.sound.meanKeys,6),pct(a.tracks.S2.miss),num(a.sound.upperMs,4),num(score.v3,9),num(score.v4,9),num(i.ckt.v5.score,9),num(i.ckt.v51.score,9),pct(i.ckt.aggregateV51.firstAuxRate),pct(i.ckt.aggregateV51.secondAuxRate),pct(i.ckt.aggregateV51.thirdAuxRate),num(i.ckt.aggregateV51.effectiveMs,4)],
   [esc(q.name),'旧 S2 / 形辅调辅系综',num(q.completion.meanKeys,6),pct(q.completion.missOrSelectionRate),num(q.completion.centerOrEffectiveMs,4),num(q.ckt.v3,9),num(q.ckt.v4,9),num(q.ckt.v5,9),num(q.ckt.v51,9),pct(q.ckt.aggregateV51.firstAuxRate),pct(q.ckt.aggregateV51.secondAuxRate),pct(q.ckt.aggregateV51.thirdAuxRate),num(q.ckt.aggregateV51.effectiveMs,4)]
  ];
+ for(const native of Object.values(b.schemes.research||{})){
+  const c=native.columns,m=macro(native,'daily|native-punctuation'),s=snowJiandaoScores(600,300,300,native);
+  performance.push([esc(native.name),'带调 21×21＋纯形辅',native.memory.lower+' / '+native.memory.guard+'（M-T1 下限/守门）',native.memory.D+' / '+c.rules.V,native.inventory.legalTonedSyllables+' / '+native.inventory.occupiedBuckets+' / '+native.inventory.capacity,num(native.ckt.v5.score,9),num(native.ckt.v51.score,9),num(c.ensemble.v3,9),num(c.ensemble.v4,9),num(c.ensemble.v5,9)]);
+  ergonomics.push([esc(native.name),'20 合同带调适配',num(m.avg_effective_distance,6),pct(m.left_load/m.hits),pct(m.same_hand_rate),num(m.score,6),pct(c.load.homeS2),pct(c.load.leftPinkyMax20),pct(c.load.rightPinkyMax20),pct(c.load.maxFinger20),pct(c.load.indexFingerTYBMax20),pct(c.load.homeFloor),pct(c.tracks.S2.sfb)]);
+  const aggregate=native.ckt.aggregateV51;
+  completion.push([esc(native.name),'带调 S2-5SUF / 原生四轨',num(c.sound.meanKeys,6),pct(c.tracks.S2.miss),num(c.sound.upperMs,4),num(s.v3,9),num(s.v4,9),num(native.ckt.v5.score,9),num(native.ckt.v51.score,9),pct(aggregate.firstAuxRate),pct(aggregate.secondAuxRate),pct(aggregate.thirdAuxRate),num(aggregate.effectiveMs,4)]);
+ }
  return `<h3>${esc(b.title)}</h3><p>冰雪剑道不是普通 R11 无调条目：调已进入前两码，后续只使用形辅。下表在同一页面并列展示，但保留合同列；CKT 均以 S005=10 归一，任务合同仍不同。日常移动手使用同一冻结语料与几何，可直接比较。</p>
  ${uxTable(['方案','合同','M','D / V','有效音节 / 占桶 / 容量','CKT-T v5','CKT-T v5.1','A7E-v3','A7E-v4','A7E-v5'],performance,[],'snow-jiandao-toned-performance')}
  ${uxTable(['方案','负载合同','日常平均有效距离 ↓','日常左手占比','日常同手率 ↓','日常纯双拼移动手 ↑','S2/字轨主行','QAZ 左小指峰值 ↓','P 区右小指峰值 ↓','最大单指峰值 ↓','TYB 双食指峰值 ↓','主键区下限','S2 异键同指 ↓'],ergonomics,[],'snow-jiandao-toned-ergonomics')}
@@ -237,22 +244,28 @@ def patch_selectable_ui(html: str) -> str:
     source = r'''/* SNOW_JIANDAO_SELECTABLE_V1 */
 const SNOW_JIANDAO_TONED_ID='SNOW-JIANDAO-TONED';
 
-function snowJiandaoTonedFacade(){
- const i=D.tonedContractBenchmark?.schemes?.snowJiandao;
+function snowJiandaoSchemes(){
+ const schemes=D.tonedContractBenchmark?.schemes;
+ return schemes?[schemes.snowJiandao,...Object.values(schemes.research||{})].filter(Boolean):[];
+}
+function snowJiandaoNative(id=CURRENT){
+ return snowJiandaoSchemes().find(native=>native.id===id)||null;
+}
+function snowJiandaoTonedFacade(i=snowJiandaoNative()||snowJiandaoNative(SNOW_JIANDAO_TONED_ID)){
  return i?{
   id:i.id,name:i.name,family:'Snow Jiandao toned',subfamily:'火星十韵 · 带调前两码 · AVUIO 纯形辅',
   capacity:[21,21],actual:[21,21],reservedKeys:'AVUIO',auxiliaryClass:'AVUIO',tone:'IVUAO',
   new:true,nextgen:false,nf5Provenance:{kind:'tone-in-main contract bridge'},
   searchMemoryNoTone:i.memory.lower,
   memory:{firstLinks:i.memory.lower,nontrivialFinals:0,commonNontrivial:i.memory.lower,toneLinks:0},
-  memoryAuditR2:{M:i.memory.lower,ordinaryDisplacedCount:i.memory.D,ordinaryDisplaced:['p→K'],scope:'M-T1 contract facade'},
+  memoryAuditR2:{M:i.memory.lower,ordinaryDisplacedCount:i.memory.D,ordinaryDisplaced:Object.entries(i.keyboards.firstByKey).flatMap(([key,names])=>names.filter(name=>/^[bpmfdtnlgkhjqxrzcs]$/.test(name)&&name.toUpperCase()!==key).map(name=>name+'→'+key)),scope:'M-T1 contract facade'},
   logicUniformity:{...i.columns?.rules?.lu,template:'toneInMain'},
   tonedContract:true
  }:null;
 }
 
-function snowJiandaoStateMatch(s,kind){
- const i=D.tonedContractBenchmark?.schemes?.snowJiandao;if(!i)return false;
+function snowJiandaoStateMatch(s,kind,i){
+ if(!i)return false;
  if(s.hostDomain!=='all'&&s.hostDomain!=='21x21')return false;
  if(s.auxSet!=='all'&&s.auxSet!=='AVUIO')return false;
  if(s.auxMap&&s.auxMap!=='IVUAO')return false;
@@ -265,7 +278,7 @@ function snowJiandaoStateMatch(s,kind){
   if(!words.every(word=>hay.includes(word)))return false;
  }
  const r=R2_STATE?.[kind];
- if(!snowJiandaoMetricFilterPass(r))return false;
+ if(!snowJiandaoMetricFilterPass(r,i))return false;
  if(r?.d!==''&&i.memory.D>Number(r.d))return false;
  if(r?.fresh===true)return true;
  return true;
@@ -277,22 +290,22 @@ function snowJiandaoInstallFilterOptions(){
   const option=document.createElement('option');option.value='toneInMain';option.textContent='火星十韵＋带调主码';select.appendChild(option);
  }
  const legacy=$('#scheme');
- if(legacy&&![...legacy.options].some(option=>option.value===SNOW_JIANDAO_TONED_ID)){
-  const option=document.createElement('option');option.value=SNOW_JIANDAO_TONED_ID;option.textContent='SNOW-JIANDAO-TONED / 冰雪剑道';legacy.appendChild(option);
+ for(const i of snowJiandaoSchemes())if(legacy&&![...legacy.options].some(option=>option.value===i.id)){
+  const option=document.createElement('option');option.value=i.id;option.textContent=i.id+' / '+i.name;legacy.appendChild(option);
  }
 }
 
 const SNOW_JIANDAO_SELECTION_BASE=nf6SelectionEntries;
 nf6SelectionEntries=function(){
- const rows=SNOW_JIANDAO_SELECTION_BASE(),facade=snowJiandaoTonedFacade();
- if(facade&&snowJiandaoStateMatch(NF6_STATE.selection,'selection'))rows.push(facade);
+ const rows=SNOW_JIANDAO_SELECTION_BASE();
+ for(const i of snowJiandaoSchemes())if(snowJiandaoStateMatch(NF6_STATE.selection,'selection',i))rows.push(snowJiandaoTonedFacade(i));
  return rows;
 };
 
 const SNOW_JIANDAO_SCHEME_BASE=nf6SchemeEntries;
 nf6SchemeEntries=function(){
- const rows=SNOW_JIANDAO_SCHEME_BASE(),facade=snowJiandaoTonedFacade();
- if(facade&&snowJiandaoStateMatch(NF6_STATE.scheme,'scheme'))rows.push(facade);
+ const rows=SNOW_JIANDAO_SCHEME_BASE();
+ for(const i of snowJiandaoSchemes())if(snowJiandaoStateMatch(NF6_STATE.scheme,'scheme',i))rows.push(snowJiandaoTonedFacade(i));
  return rows.sort((left,right)=>left.id.localeCompare(right.id,'en',{numeric:true}));
 };
 
@@ -300,18 +313,18 @@ const SNOW_JIANDAO_LIST_BASE=nf6RenderSchemeList;
 nf6RenderSchemeList=function(){snowJiandaoInstallFilterOptions();SNOW_JIANDAO_LIST_BASE()};
 
 function snowJiandaoUpdateSelectionCount(){
- if(UX.view==='selection'&&$('#nf6SelectionCount'))$('#nf6SelectionCount').textContent=`${chosen().length} / ${D.entries.length+1} 个候选（含1个带调合同）`;
+ const count=snowJiandaoSchemes().length;
+ if(UX.view==='selection'&&$('#nf6SelectionCount'))$('#nf6SelectionCount').textContent=`${chosen().length} / ${D.entries.length+count} 个候选（含${count}个带调合同）`;
 }
 
 const SNOW_JIANDAO_R2_CONTROLS_BASE=r2InstallControls;
 r2InstallControls=function(){SNOW_JIANDAO_R2_CONTROLS_BASE();snowJiandaoUpdateSelectionCount()};
 
 const SNOW_JIANDAO_CURRENT_BASE=current;
-current=function(){return CURRENT===SNOW_JIANDAO_TONED_ID?snowJiandaoTonedFacade():SNOW_JIANDAO_CURRENT_BASE()};
+current=function(){const native=snowJiandaoNative();return native?snowJiandaoTonedFacade(native):SNOW_JIANDAO_CURRENT_BASE()};
 
-function snowJiandaoBenchmarkVisible(){
- const facade=snowJiandaoTonedFacade();if(!facade)return false;
- const i=D.tonedContractBenchmark.schemes.snowJiandao;
+function snowJiandaoBenchmarkVisible(i=snowJiandaoNative(SNOW_JIANDAO_TONED_ID)){
+ const facade=snowJiandaoTonedFacade(i);if(!facade)return false;
  const family=$('#family')?.value||'all';if(family!=='all'&&family!=='new'&&family!=='Snow Jiandao toned')return false;
  const aux=$('#uxAux')?.value||'all';if(aux!=='all'&&aux!=='AVUIO')return false;
  const query=($('#uxQuery')?.value||'').trim().toLowerCase();
@@ -323,34 +336,34 @@ function snowJiandaoBenchmarkVisible(){
  if(filter.logicTemplate&&filter.logicTemplate!=='all'&&filter.logicTemplate!=='toneInMain')return false;
  const eligibility=$('#refEligibility')?.value||'all';if(eligibility==='yes'||eligibility==='no')return false;
  const r=R2_STATE?.benchmark;if(r?.d!==''&&facade.memoryAuditR2.ordinaryDisplacedCount>Number(r.d))return false;
- if(!snowJiandaoMetricFilterPass(r))return false;
+ if(!snowJiandaoMetricFilterPass(r,i))return false;
  if(!compareKeyCount(i.columns.rules.lu.score,filter.logicOp,filter.logicValue))return false;
  if(!compareKeyCount(i.columns.rules.fa.score,filter.faOp,filter.faValue))return false;
  return true;
 }
 
 const SNOW_JIANDAO_TABLE_BASE=uxTable;
-uxTable=function(...args){return SNOW_JIANDAO_TABLE_BASE(...args).replaceAll('<tr data-dv-scheme="SNOW-JIANDAO-TONED"','<tr class="snow-jiandao-contract-row" data-contract="tone-in-main" data-dv-scheme="SNOW-JIANDAO-TONED"')};
+uxTable=function(...args){let html=SNOW_JIANDAO_TABLE_BASE(...args);for(const i of snowJiandaoSchemes())html=html.replaceAll(`<tr data-dv-scheme="${i.id}"`,`<tr class="snow-jiandao-contract-row" data-contract="tone-in-main" data-dv-scheme="${i.id}"`);return html};
 
 function snowJiandaoSelectionCard(){
- if(!chosen().some(entry=>entry.id===SNOW_JIANDAO_TONED_ID))return '';
- const i=D.tonedContractBenchmark.schemes.snowJiandao;
- return `<section class="dv-cohort snow-jiandao-contract-card"><div class="dv-cohort-head"><h3>带调主码合同 · 21×21</h3><span>1 个带调方案 · 20 合同适配与原生 CKT-T</span></div>
- <div class="scroll"><table><thead><tr><th>方案</th><th>M-T1</th><th>D / F</th><th>带调音节 / 占桶</th><th>CKT-T v5.1 ↓</th><th>日常移动手 ↑</th></tr></thead><tbody><tr><td class="first"><button type="button" class="link" data-snow-jiandao-open>${esc(i.name)}</button><small>${esc(i.id)} · AVUIO 纯形辅</small></td><td>${i.memory.lower} / ${i.memory.guard}<small>下限 / 守门</small></td><td>${i.memory.D} / ${i.memory.F}</td><td>${i.inventory.legalTonedSyllables} / ${i.inventory.occupiedBuckets}</td><td>${num(i.ckt.v51.score,9)}</td><td>${num(i.macro['daily|native-punctuation'].score,6)}</td></tr></tbody></table></div>
+ const ids=new Set(chosen().map(entry=>entry.id)),natives=snowJiandaoSchemes().filter(i=>ids.has(i.id));if(!natives.length)return '';
+ return `<section class="dv-cohort snow-jiandao-contract-card"><div class="dv-cohort-head"><h3>带调主码合同 · 21×21</h3><span>${natives.length} 个带调方案 · 20 合同适配与原生 CKT-T</span></div>
+ <div class="scroll"><table><thead><tr><th>方案</th><th>M-T1</th><th>D / F</th><th>带调音节 / 占桶</th><th>CKT-T v5.1 ↓</th><th>日常移动手 ↑</th></tr></thead><tbody>${natives.map(i=>`<tr><td class="first"><button type="button" class="link" data-snow-jiandao-open="${i.id}">${esc(i.name)}</button><small>${esc(i.id)} · AVUIO 纯形辅</small></td><td>${i.memory.lower} / ${i.memory.guard}<small>下限 / 守门</small></td><td>${i.memory.D} / ${i.memory.F}</td><td>${i.inventory.legalTonedSyllables} / ${i.inventory.occupiedBuckets}</td><td>${num(i.ckt.v51.score,9)}</td><td>${num(i.macro['daily|native-punctuation'].score,6)}</td></tr>`).join('')}</tbody></table></div>
  <p class="hint">该行响应上方 21×21、AVUIO、IVUAO、M≤、D≤ 与“火星十韵＋带调主码”筛选；指标采用带调原生合同。</p></section>`;
 }
 
 function snowJiandaoRenderDetail(){
- const i=D.tonedContractBenchmark.schemes.snowJiandao,q=D.tonedContractBenchmark.schemes.qzE8f37a;
+ const i=snowJiandaoNative(),q=D.tonedContractBenchmark.schemes.qzE8f37a;
  const m=i.macro['daily|native-punctuation'],e=i.ergonomics,c=i.ckt.v51.tracks.character;
  const a=i.columns;
+ const title=i.name.includes(i.id)?i.name:i.name+' · '+i.id;
  VIEW='keyboard';UX.view='scheme';uxSyncNav();snowJiandaoInstallFilterOptions();
- $('#view').innerHTML=`<section class="panel" id="snowJiandaoTonedDetail"><div class="r2-hero"><div><small>TONE-IN-MAIN 21×21 · SHAPE-ONLY AVUIO</small><h2>${esc(i.name)} · ${esc(i.id)}</h2><p>火星十韵声韵拆分；声调已进入前两码，后续只使用键道形笔辅。作为独立合同进入筛选与详情，不冒充旧无调 codeList 条目。</p></div><strong>${num(i.ckt.v51.score,6)}<small>CKT-T v5.1 ↓</small></strong></div>
+ $('#view').innerHTML=`<section class="panel" id="snowJiandaoTonedDetail"><div class="r2-hero"><div><small>TONE-IN-MAIN 21×21 · SHAPE-ONLY AVUIO</small><h2>${esc(title)}</h2><p>火星十韵声韵拆分；声调已进入前两码，后续只使用键道形笔辅。作为独立合同进入筛选与详情，不冒充旧无调 codeList 条目。</p></div><strong>${num(i.ckt.v51.score,6)}<small>CKT-T v5.1 ↓</small></strong></div>
  <div class="heading"><button data-action="nav:selection">返回方案筛选</button><button data-r11-report>打开跨合同完整表</button></div>
  <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>21×21</b>；AVUIO 五形辅；toneKeysByTone=<b>IVUAO</b>。</p><p>M-T1 下限/守门：<b>${i.memory.lower}/${i.memory.guard}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p></section>
  <section class="card"><h3>合同边界</h3><p>CKT-T v5/v5.1 使用 S005=10 的四条带调原生轨，只计形辅；不再次加入调笔辅。</p><p>通用 benchmark 列按带调版本的相应合同重算，保留各代公式、样本、权重和基线；原生四轨 CKT-T 作为另一项明确命名的生产指标。</p></section></div>
  ${snowJiandaoKeyboardPanel()}
- ${uxTable(['指标','冰雪剑道','QZ-e8f37a','口径'],[
+ ${uxTable(['指标',i.name,'QZ-e8f37a','口径'],[
   ['CKT v5',num(i.ckt.v5.score,9),num(q.ckt.v5,9),'各自生产合同；S005=10'],
   ['CKT v5.1',num(i.ckt.v51.score,9),num(q.ckt.v51,9),'各自生产合同；S005=10'],
   ['S2规则补全平均键数',num(a.sound.meanKeys,6),num(q.completion.meanKeys,6),'同一 S2-5SUF 合同；各自合法音节'],
@@ -371,7 +384,7 @@ function snowJiandaoRenderDetail(){
 
 const SNOW_JIANDAO_UX_RENDER_BASE=uxRender;
 uxRender=function(){
- if(UX.view==='scheme'&&CURRENT===SNOW_JIANDAO_TONED_ID){++runToken;uxHideTip();snowJiandaoRenderDetail();return}
+ if(UX.view==='scheme'&&snowJiandaoNative()){++runToken;uxHideTip();snowJiandaoRenderDetail();return}
  const result=SNOW_JIANDAO_UX_RENDER_BASE();
  snowJiandaoInstallFilterOptions();
  if(UX.view==='selection'){
@@ -384,7 +397,7 @@ uxRender=function(){
 
 document.addEventListener('click',event=>{
  const button=event.target.closest('[data-snow-jiandao-open]');if(!button)return;
- event.preventDefault();event.stopImmediatePropagation();CURRENT=SNOW_JIANDAO_TONED_ID;UX.view='scheme';snowJiandaoInstallFilterOptions();if($('#scheme'))$('#scheme').value=CURRENT;uxRender();uxCommit();window.scrollTo(0,0);
+ event.preventDefault();event.stopImmediatePropagation();CURRENT=button.dataset.snowJiandaoOpen||SNOW_JIANDAO_TONED_ID;UX.view='scheme';snowJiandaoInstallFilterOptions();if($('#scheme'))$('#scheme').value=CURRENT;uxRender();uxCommit();window.scrollTo(0,0);
 },true);
 /* SNOW_JIANDAO_SELECTABLE_V1_END */
 
@@ -447,6 +460,9 @@ def main() -> None:
     html = patch_selectable_ui(patch_report(HTML.read_text(encoding="utf-8")))
     data, body, end = helper.extract_payload(html)
     result = bridge(data, native, fixture)
+    research = data.get("tonedContractBenchmark", {}).get("schemes", {}).get("research")
+    if research:
+        result["schemes"]["research"] = research
     data["tonedContractBenchmark"] = result
     AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

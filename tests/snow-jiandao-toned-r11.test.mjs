@@ -31,6 +31,9 @@ test('tone-in-main fixture adapter preserves only legal toned syllables', () => 
   assert.deepEqual(inventory.tokenKeys, ['a1', 'a2', 'ba1', 'ba3']);
   assert.deepEqual(layout.tonedCodes, ['ZA', 'XA', 'BA', 'BC']);
   assert.deepEqual(layout.declaredMemory, { M: 21, lower: 21, guard: 23 });
+  fixture.publication = {memoryAudit: {memoryLower: 22, memoryGuard: 24}};
+  assert.deepEqual(fixtureAdapter(fixture, {pinyin: fixture.pinyin}).layout.declaredMemory,
+    {M: 22, lower: 22, guard: 24}, 'CR repartition uses its audited memory instead of the production baseline offset');
 });
 
 test('native load metric normalizes weighted terminal strokes', () => {

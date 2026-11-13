@@ -61,9 +61,9 @@ function fixtureAdapter(fixture, data) {
       id: fixture.layoutId,
       tonedCodes,
       declaredMemory: {
-        M: fixture.baselineMemoryLower + 1,
-        lower: fixture.baselineMemoryLower + 1,
-        guard: fixture.baselineMemoryGuard + 1,
+        M: fixture.publication?.memoryAudit?.memoryLower ?? fixture.baselineMemoryLower + 1,
+        lower: fixture.publication?.memoryAudit?.memoryLower ?? fixture.baselineMemoryLower + 1,
+        guard: fixture.publication?.memoryAudit?.memoryGuard ?? fixture.baselineMemoryGuard + 1,
       },
     },
   };
@@ -303,8 +303,9 @@ function main() {
   const occupied = new Set(fixture.tonedCodes.flat().filter(Boolean));
   const outputData = {
     version: "snow-jiandao-toned-r11-native-benchmark-v1",
-    id: "SNOW-JIANDAO-TONED",
-    name: "冰雪剑道",
+    id: fixture.publication?.id || "SNOW-JIANDAO-TONED",
+    name: fixture.publication?.name || "冰雪剑道",
+    publication: fixture.publication,
     layoutId: fixture.layoutId,
     contract: {
       main: "tone-in-main 21x21",
@@ -316,9 +317,10 @@ function main() {
       oldR11IndependentToneAuxiliary: false,
     },
     memory: {
-      definition: "M-T1: baseline rule links plus one ordinary-initial displacement",
-      lower: fixture.baselineMemoryLower + 1,
-      guard: fixture.baselineMemoryGuard + 1,
+      definition: fixture.publication?.memoryDefinition || "M-T1: baseline rule links plus one ordinary-initial displacement",
+      lower: fixture.publication?.memoryAudit?.memoryLower ?? fixture.baselineMemoryLower + 1,
+      guard: fixture.publication?.memoryAudit?.memoryGuard ?? fixture.baselineMemoryGuard + 1,
+      audit: fixture.publication?.memoryAudit,
       ...ordinaryOnsetDiagnostics(fixture),
       onsetDefinition: "ordinary written initials; D counts displaced initials, F counts additional first-key incidences; derived from actual toned codes",
     },

@@ -41,12 +41,12 @@ try {
       }
     }
     let tonedCount = 0;
-    if (window.App7.data.tonedContractBenchmark?.schemes?.snowJiandao) {
+    for (const native of snowJiandaoSchemes()) {
       try {
-        snowJiandaoKeyboardSVG('semantic');
+        snowJiandaoKeyboardSVG('semantic', null, native);
         tonedCount++;
       } catch (error) {
-        failures.push({id: 'SNOW-JIANDAO-TONED', error: String(error)});
+        failures.push({id: native.id, error: String(error)});
       }
     }
     return {count: window.App7.data.entries.length + tonedCount, failures};

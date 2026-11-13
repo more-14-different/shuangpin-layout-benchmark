@@ -19,7 +19,7 @@ page.on('pageerror', error => errors.push(String(error)));
 try {
   await page.goto(pathToFileURL(artifact).href, {timeout: 120_000});
   await page.waitForFunction(() => window.App7?.ready, null, {timeout: 120_000});
-  await page.locator('[data-snow-jiandao-open]').click();
+  await page.locator('[data-snow-jiandao-open="SNOW-JIANDAO-TONED"]').click();
   await page.waitForSelector('#snowJiandaoTonedDetail');
   assert.equal(await page.locator('#svgbox svg').count(), 1);
   assert.match(await page.locator('#svgbox g[data-key="R"]').textContent(), /Ø A\/E\/O/);

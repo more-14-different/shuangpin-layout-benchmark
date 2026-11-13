@@ -1,5 +1,14 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-frontier-benchmark:
+    python -X utf8 tools/integrate_cr_frontier_r11.py
+    node tools/sync_keymap_link_colors.js
+
+cr-frontier-benchmark-test:
+    python -m unittest discover -s tests -p test_cr_frontier_r11.py
+    node tests/cr-frontier-r11-browser.test.mjs
+    node tools/audit_keymap_link_colors.mjs
+
 snow-jiandao-ui:
     python -X utf8 tools/integrate_snow_jiandao_toned_r11.py --ui-only
     node tools/sync_keymap_link_colors.js

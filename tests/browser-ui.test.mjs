@@ -110,9 +110,9 @@ try {
 
   await page.locator('#nf6SelectionHost').selectOption('21x21');
   await page.waitForSelector('.snow-jiandao-contract-card');
-  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\/ 851 个候选（含1个带调合同）/);
+  assert.match(await page.locator('#nf6SelectionCount').innerText(), /\/ 855 个候选（含5个带调合同）/);
   assert.match(await page.locator('.snow-jiandao-contract-card').innerText(), /冰雪剑道/);
-  await page.locator('[data-snow-jiandao-open]').click();
+  await page.locator('[data-snow-jiandao-open="SNOW-JIANDAO-TONED"]').click();
   await page.waitForSelector('#snowJiandaoTonedDetail');
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
   assert.match(await page.locator('#snowJiandaoTonedDetail h2').innerText(), /SNOW-JIANDAO-TONED/);
@@ -145,11 +145,11 @@ try {
   await page.waitForTimeout(250);
   await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
   await page.waitForSelector('table[data-ux-table="benchmark"] .snow-jiandao-contract-row');
-  assert.match(await page.locator('table[data-ux-table="benchmark"] .snow-jiandao-contract-row').innerText(),
+  assert.match(await page.locator('table[data-ux-table="benchmark"] [data-dv-scheme="SNOW-JIANDAO-TONED"]').innerText(),
     /SNOW-JIANDAO-TONED/);
   await page.locator('[data-action="fair"]').click();
   await page.waitForSelector('table[data-ux-table="fair"] .snow-jiandao-contract-row');
-  assert.match(await page.locator('table[data-ux-table="fair"] .snow-jiandao-contract-row').innerText(),
+  assert.match(await page.locator('table[data-ux-table="fair"] [data-dv-scheme="SNOW-JIANDAO-TONED"]').innerText(),
     /同列公式适配/);
   await page.locator('#tabs [data-action="nav:selection"]').click();
   await page.waitForFunction(() => window.App7.UX.view === 'selection');
@@ -159,7 +159,7 @@ try {
   await page.waitForTimeout(250);
   assert.equal(
     await page.locator('#nf6SelectionCount').innerText(),
-    `61 / 851 个候选（含1个带调合同）`,
+    `61 / 855 个候选（含5个带调合同）`,
   );
   assert.match(await page.locator('.nf6-filter-live').innerText(), /\d+ 个候选/);
 

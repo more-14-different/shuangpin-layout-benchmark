@@ -32,7 +32,8 @@ function snowKeyboardEntry(native) {
   }
   // The ordinary renderer uses toneKeysByTone only as an auxiliary boundary
   // adapter. Its independent tone labels are replaced with shape-only labels.
-  return {id: native.id, name: native.name, roles, rhymes,
+  const displayName = native.name.startsWith(native.id + ' · ') ? native.name.slice(native.id.length + 3) : native.name;
+  return {id: native.id, name: displayName, roles, rhymes,
     tone: native.contract.toneKeysByTone, rhymeTonesByKey};
 }
 

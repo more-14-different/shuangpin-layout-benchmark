@@ -66,3 +66,6 @@ V 仍计 a/e/i/o/u 五种普通韵类中发生原键偏移的类别数：任一�
 `just snow-jiandao-benchmark-test` 验证公式和表格联动；
 `python -m unittest discover -s tests -p test_toned_benchmark_columns.py` 验证带调碰撞语料。
 原四轨生产分与键盘筛选功能均保留。HTML 与生成的审计 JSON 为被忽略的本地产物。
+
+四个 CR 前沿方案使用同一逐列计算器，通过 `schemes.research` 独立注册。
+完整数值与重现方式见 [CR 前沿接入说明](cr-frontier-r11.md)。
