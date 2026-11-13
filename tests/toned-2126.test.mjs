@@ -6,6 +6,25 @@ import model from '../tools/ckt_v4_model.js';
 import frontier from '../tools/frontier_toned_2126.js';
 import toneProbe from '../tools/probe_tone_regions_2126.js';
 import fastScorer from '../tools/fast_toned_2126.js';
+import qempty from '../tools/explore_qempty_2126.js';
+
+test('Q-empty search keeps exactly 9/9/7 and exhausts the legal neighborhood', () => {
+  const maps = [[1, 2, 3, 4, 5, 6, 7, 8, 9, 1],
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 0], [0, 1, 2, 3, 4, 5, 6, 0, 1, 2]];
+  assert.ok(qempty.valid(maps));
+  const next = qempty.constrainedNeighbors(maps);
+  assert.ok(next.length > 0);
+  assert.ok(next.every(n => qempty.valid(n.maps)));
+  assert.deepEqual(next, frontier.neighbors(maps, false).filter(n => qempty.valid(n.maps)));
+  const withQ = maps.map(row => [...row]); withQ[0][9] = 0;
+  assert.equal(qempty.valid(withQ), false);
+  const seeds = qempty.seeds(withQ);
+  assert.equal(seeds.length, 9);
+  assert.ok(seeds.every(qempty.valid));
+  const extraVacancy = maps.map(row => [...row]); extraVacancy[0][1] = 1;
+  assert.equal(qempty.valid(extraVacancy), false);
+  assert.equal(JSON.stringify(maps[0]), '[1,2,3,4,5,6,7,8,9,1]');
+});
 
 test('prepared scorer preserves early winners and balanced terminal ranks across word lengths', () => {
   const tokenKeys = ['ba1'];

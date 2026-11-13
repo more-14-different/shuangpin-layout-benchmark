@@ -61,3 +61,9 @@ alternative-policy-full:
 
 final-tone-probe:
     node tools/probe_tone_regions_2126.js research/notes/2026-11-13-toned-2126-alternative-policies.json research/notes/2026-11-13-toned-2126-final-tone-probe.json
+
+qempty mode:
+    node tools/explore_qempty_2126.js {{mode}} research/notes/2026-11-13-toned-2126-qempty-{{mode}}.json
+
+qempty-check mode:
+    node tools/verify_qempty_2126.js research/notes/2026-11-13-toned-2126-qempty-{{mode}}.json
