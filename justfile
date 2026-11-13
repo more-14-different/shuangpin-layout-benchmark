@@ -17,6 +17,9 @@ unified-keyboard-filter-test: snow-jiandao-ui
     node --test tests/unified-keyboard-query.test.mjs tests/snow-jiandao-toned-r11.test.mjs
     node tests/unified-keyboard-filter-browser.test.mjs
 
+toned-detail-kpis-test: snow-jiandao-ui
+    node tests/toned-detail-kpis.browser.mjs
+
 snow-jiandao-ui-test: snow-jiandao-ui
     node --test tests/snow-jiandao-toned-r11.test.mjs tests/keymap-link-colors.test.mjs tests/auxiliary-semantics.test.mjs
     node tests/snow-jiandao-toned-browser.test.mjs

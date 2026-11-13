@@ -62,6 +62,12 @@ V 仍计 a/e/i/o/u 五种普通韵类中发生原键偏移的类别数：任一�
 列折叠也计入带调行，避免仅因为无调行的样本数／键数相同而隐藏实际有差异的列。
 未知列适配会报错，不能静默填“不适用”或拿邻近属性充数。
 
+详情页顶部的 A7E-v5／v4、M、FA、LU、裸二键唯一也使用同一列适配器，
+在每次进入带调详情或切换方案时刷新。A7E 使用相应 20 合同系综分，
+不是原生四轨 CKT-T；裸二键唯一的分母为合法带调音节数。当前两种 21×26
+代表的 M 在正式数据中尚未建立对齐的记忆账，显示“待定”并保留定义提示，
+不会继承前一方案的 M 或填成零；21×21 使用各自已审计的 M-T1。
+
 运行 `just snow-jiandao-benchmark` 重算并更新本地 HTML，
 `just snow-jiandao-benchmark-test` 验证公式和表格联动；
 `python -m unittest discover -s tests -p test_toned_benchmark_columns.py` 验证带调碰撞语料。

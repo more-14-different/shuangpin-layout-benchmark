@@ -151,6 +151,32 @@ function snowJiandaoColumn(header, tableKey, context) {
   throw new Error(`未定义带调列适配：${tableKey} / ${label}`);
 }
 
+// Every detail navigation must replace the KPI strip as well as the page body.
+// Reuse the final-column adapter so the strip cannot drift to legacy metadata.
+const SNOW_TONED_KPIS_BASE = uxKpis;
+uxKpis = function(entry, stat) {
+  const native = snowJiandaoNative(entry.id), box = $('#kpis');
+  if (!native) {
+    delete box.dataset.tonedScheme;
+    return SNOW_TONED_KPIS_BASE(entry, stat);
+  }
+  const context = {native};
+  const metrics = [
+    ['v5', 'A7E-v5', value => num(value)],
+    ['v4', 'A7E-v4', value => num(value)],
+    ['memory', '声韵记忆项 M', value => typeof value === 'number' ? num(value, 0) : esc(value)],
+    ['fa', 'FA-1 加权', value => num(value, 2) + '%'],
+    ['lu', 'LU-v1r', value => num(value, 2)],
+    ['unique', '裸二键唯一', (_value, cell) => cell.html],
+  ];
+  box.dataset.tonedScheme = native.id;
+  box.innerHTML = metrics.map(([help, label, format]) => {
+    const cell = snowJiandaoColumn(label, 'scheme-kpis', context);
+    return `<div class="kpi"><small>${uxTerm(help, label)}</small><b data-toned-kpi="${esc(label)}" data-ux-value="${esc(JSON.stringify(cell.value))}" title="${esc(cell.note)}">${format(cell.value, cell)}</b></div>`;
+  }).join('');
+};
+updateKpis = uxKpis;
+
 function snowJiandaoTableRows(headers, rows, ids, key, raws) {
   const natives = snowJiandaoSchemes().filter(native => !ids.includes(native.id) && snowJiandaoBenchmarkVisible(native));
   if (!['benchmark','fair','four-code-collision','r9-macro'].includes(key) || !natives.length) return {headers,rows,ids,raws};
