@@ -357,7 +357,7 @@ function snowJiandaoRenderDetail(){
  const m=i.macro['daily|native-punctuation'],e=i.ergonomics,c=i.ckt.v51.tracks.character;
  const a=i.columns;
  const title=i.name.includes(i.id)?i.name:i.name+' · '+i.id;
- VIEW='keyboard';UX.view='scheme';uxSyncNav();snowJiandaoInstallFilterOptions();
+ VIEW='keyboard';UX.view='scheme';uxSyncNav();snowJiandaoInstallFilterOptions();uxKpis(snowJiandaoTonedFacade(i),{});
  $('#view').innerHTML=`<section class="panel" id="snowJiandaoTonedDetail"><div class="r2-hero"><div><small>TONE-IN-MAIN ${(i.contract.capacity||[21,21]).join('×')} · SHAPE-ONLY ${i.contract.shapeKeysByMeaning}</small><h2>${esc(title)}</h2><p>火星十韵声韵拆分；声调已进入前两码，后续只使用键道形笔辅。作为独立合同进入筛选与详情，不冒充旧无调 codeList 条目。</p></div><strong>${num(i.ckt.v51.score,6)}<small>CKT-T v5.1 ↓</small></strong></div>
  <div class="heading"><button data-action="nav:selection">返回方案筛选</button><button data-r11-report>打开跨合同完整表</button></div>
  <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>${(i.contract.capacity||[21,21]).join('×')}</b>；${i.contract.shapeKeysByMeaning} 五形辅；toneKeysByTone=<b>${i.contract.toneKeysByTone}</b>。</p><p>M-T1 下限/守门：<b>${i.memory.lower??'待定'}/${i.memory.guard??'待定'}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p></section>
