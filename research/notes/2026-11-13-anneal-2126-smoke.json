@@ -1,0 +1,48 @@
+{
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU (8 GB)",
+  "python": "3.14.4",
+  "node": "24.13.0",
+  "numpy": "2.5.4",
+  "cupy": "14.2.0",
+  "unitTests": 30,
+  "seedOriginalScorerParity": true,
+  "independentExportVerification": {
+    "route": "keep",
+    "difference": -7.460698725481052e-14
+  },
+  "gpu": {
+    "backend": "cuda",
+    "proxyParityMaxError": 1.7053025658242404e-13,
+    "seedScores": {
+      "keep": 8.890382234262121,
+      "swap": 8.919768532843102,
+      "full26": 8.871530178018425
+    },
+    "note": "GPU proxy is not CKT; acceptance uses full CKT"
+  },
+  "fullProposals": 36,
+  "replicaVisits": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "resume": "27 -> 36; batch64",
+  "best": {
+    "keep": 8.890382234262121,
+    "swap": 8.919768532843102,
+    "full26": 8.871530178018425
+  },
+  "bundleZipBytes": 68877937,
+  "bundleZipSha256": "08df0d8e95a42e71add36506bd81d9f76e0d135daed5884d8c37160d21d913c9",
+  "limitations": [
+    "GPU proxy only; no end-to-end speedup claim",
+    "RTX3070 not tested locally",
+    "smoke run is not convergence evidence"
+  ]
+}
