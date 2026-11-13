@@ -1,14 +1,18 @@
 """Replay improving v5.1 neighbors through the existing 20-contract engines."""
 import json
+import argparse
 import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-CACHE = ROOT / 'research/.cache/untoned-2121-v51'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--tag', default='untoned-2121-v51')
+args = parser.parse_args()
+CACHE = ROOT / 'research/.cache' / args.tag
 REPLAY = ROOT / 'research/.cache/R11_integrated_replay'
-report_path = ROOT / 'research/notes/2026-11-14-untoned-2121-v51-neighbors.json'
+report_path = ROOT / f'research/notes/2026-11-14-{args.tag}-neighbors.json'
 report = json.loads(report_path.read_text())
-base = next(r for r in report['results'] if r['mutation'] == 'baseline')
+base = report['results'][0]
 ids = {r['id'] for r in report['results'] if r['score'] <= base['score']}
 entries = [e for e in json.loads((CACHE / 'candidates.json').read_text()) if e['id'] in ids]
 for e in entries:
@@ -25,7 +29,8 @@ subprocess.run(['node', str(CACHE / 'audit.js')], check=True)
 output = []
 for e in entries:
     r = json.loads((CACHE / 'exact' / (e['id'] + '.json')).read_text())
-    output.append({'id': e['id'], 'mutation': e['mutation'], 'movingHand': e['movingHand'],
+    measured = next(row for row in report['results'] if row['id'] == e['id'])
+    output.append({'id': e['id'], 'mutation': e['mutation'], 'movingHand': measured['movingHand'],
                    'scores': r['scores'], 'tracks': {k: {x: v.get(x) for x in ['home', 'sfb', 'upperMs']} for k, v in r['tracks'].items()},
                    'verification': r['verification']})
-(ROOT / 'research/notes/2026-11-14-untoned-2121-v51-ergonomics.json').write_text(json.dumps(output, indent=2))
+(ROOT / f'research/notes/2026-11-14-{args.tag}-ergonomics.json').write_text(json.dumps(output, indent=2))
