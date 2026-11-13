@@ -13,6 +13,10 @@ snow-jiandao-ui:
     python -X utf8 tools/integrate_snow_jiandao_toned_r11.py --ui-only
     node tools/sync_keymap_link_colors.js
 
+unified-keyboard-filter-test: snow-jiandao-ui
+    node --test tests/unified-keyboard-query.test.mjs tests/snow-jiandao-toned-r11.test.mjs
+    node tests/unified-keyboard-filter-browser.test.mjs
+
 snow-jiandao-ui-test: snow-jiandao-ui
     node --test tests/snow-jiandao-toned-r11.test.mjs tests/keymap-link-colors.test.mjs tests/auxiliary-semantics.test.mjs
     node tests/snow-jiandao-toned-browser.test.mjs

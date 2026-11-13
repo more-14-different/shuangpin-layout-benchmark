@@ -403,7 +403,7 @@ document.addEventListener('click',event=>{
 
 '''
     scripts = "\n".join((ROOT / "tools" / name).read_text(encoding="utf-8")
-                        for name in ("toned_benchmark_metrics.js", "snow_jiandao_toned_view.js", "snow_jiandao_toned_ui.js", "snow_jiandao_toned_benchmark_ui.js"))
+                        for name in ("unified_keyboard_query.js", "unified_keyboard_filter_ui.js", "toned_benchmark_metrics.js", "snow_jiandao_toned_view.js", "snow_jiandao_toned_ui.js", "snow_jiandao_toned_benchmark_ui.js"))
     source = source.replace("function snowJiandaoRenderDetail(){", scripts + "\nfunction snowJiandaoRenderDetail(){", 1)
     if SELECTABLE_MARKER in html:
         start = html.index(SELECTABLE_MARKER)

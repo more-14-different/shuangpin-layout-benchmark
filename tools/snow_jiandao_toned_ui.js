@@ -68,26 +68,18 @@ function snowJiandaoFilterState() {
   const native = snowJiandaoNative();
   const mode = $('#snowJiandaoKeyboardMode')?.value || 'semantic', query = $('#nf5Query')?.value || '';
   const kind = ['semantic', 'overall', 'daily'].includes(mode) ? 'all' : mode;
-  const rows = snowFilteredRows(native, query, kind);
-  let preview = [];
-  if (query.trim()) {
-    preview = snowPinyinPreview(native, D.pinyin, query);
-    if (!rows.length && !preview.length && /^[\u3400-\u9fff]+$/.test(query.trim())) {
-      const paths = [...query.trim()].map(char => D.characters.filter(row => row[0] === char)
-        .map(row => native.tonedCodes[row[1]]?.[row[2] - 1]).filter(Boolean));
-      if (paths.every(codes => codes.length)) preview = [{keys: [...new Set(paths.flat().join(''))]}];
-    }
-  }
-  return {mode, query, rows, preview};
+  const rows = snowFilteredRows(native, query, kind, D.pinyin);
+  const queryKeys = query.trim() ? snowQueryKeys(native, D, query, rows) : new Set();
+  const preview = !rows.length && queryKeys.size ? [{keys: [...queryKeys]}] : [];
+  return {mode, query, rows, preview, queryKeys};
 }
 
 function snowJiandaoDrawKeyboard() {
-  const state = snowJiandaoFilterState(), {mode, query, rows, preview} = state;
+  const state = snowJiandaoFilterState(), {mode, query, rows, preview, queryKeys} = state;
   let load = null;
   if (query.trim() || mode !== 'daily') load = snowRowsLoad(rows, mode === 'daily');
   $('#svgbox').innerHTML = snowJiandaoKeyboardSVG(mode, load);
-  const relevant = new Set(rows.flatMap(row => [...row[mode === 'daily' ? 2 : 3]]));
-  for (const row of preview) for (const key of row.keys) relevant.add(key);
+  const relevant = mode === 'semantic' || !rows.length ? queryKeys : new Set(rows.flatMap(row => [...row[mode === 'daily' ? 2 : 3]]));
   if (query.trim()) for (const group of $('#svgbox').querySelectorAll('g[data-key]')) {
     const active = relevant.has(group.getAttribute('data-key'));
     group.classList.toggle('nf5-dim', !active);group.setAttribute('data-active', String(active));
@@ -96,7 +88,7 @@ function snowJiandaoDrawKeyboard() {
       base?.setAttribute('stroke', '#53675b');base?.setAttribute('stroke-width', '3.5');
     }
   }
-  $('#nf5FilterSummary').textContent = `当前筛选 ${rows.length.toLocaleString('zh-CN')} 项；${!rows.length && preview.length ? '语料未命中，显示合法拼音／逐字主码预览（无频率，不计入热力）。' : query.trim() && !rows.length ? '无匹配，所有键已淡化。' : '键盘激活、热力图与下方明细共用筛选。'}${preview.length ? ' 全拼未指定声调时激活所有合法声调；热力仅统计命中语料。' : ''}${mode === 'overall' ? ' 总热力图按字／二字／三字／四字轨 1:3:1:1 混合，各轨先按击键归一；筛选后对非空轨重新归一。' : ''}${mode === 'daily' ? query.trim() ? ' 当前为筛选字词主码负担；清空后恢复日常文章回放。' : ' 日常图采用冻结文章回放，含标点。' : ''}`;
+  $('#nf5FilterSummary').textContent = `当前筛选 ${rows.length.toLocaleString('zh-CN')} 项；${!rows.length && preview.length ? '语料未命中，显示合法拼音／逐字主码预览（无频率，不计入热力）。' : query.trim() && !rows.length ? '无匹配，所有键已淡化。' : '明细按完整字词／音节匹配，热力仅统计匹配语料。'}${query.trim() ? ' 声韵图只激活查询本身的主码；全拼未指定声调时合并所有合法声调，指定 01234 时按调取码。' : ''}${mode === 'overall' ? ' 总热力图按字／二字／三字／四字轨 1:3:1:1 混合，各轨先按击键归一；筛选后对非空轨重新归一。' : ''}${mode === 'daily' ? query.trim() ? ' 当前为筛选字词主码负担；清空后恢复日常文章回放。' : ' 日常图采用冻结文章回放，含标点。' : ''}`;
   const shown = rows.slice(0, 120);
   $('#snowJiandaoFilteredData').innerHTML = `<p class="hint">显示前 ${shown.length} / ${rows.length} 项；声调数字 0 代表轻声。终码包含实际选用的形辅。</p><div class="scroll">${table(['字词', '全拼声调', '主码', '终码', '频率', '轨'], shown.map(row => row.map((value, index) => esc(index === 5 ? ({character: '单字', word2: '二字', word3: '三字', word4: '四字'})[value] : value))))}</div>`;
 }
