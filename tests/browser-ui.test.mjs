@@ -59,7 +59,7 @@ try {
   assert.ok(Math.abs(tonedContractBridge.cktV51 - 9.203609845305458) < 1e-12);
   assert.ok(Math.abs(tonedContractBridge.macroDaily - 122.77842860194683) < 1e-12);
   assert.match(tonedContractBridge.reportMarkup, /snow-jiandao-toned-performance/);
-  assert.match(tonedContractBridge.reportMarkup, /旧 20 合同假设独立调辅/);
+  assert.match(tonedContractBridge.reportMarkup, /20 合同负载/);
   const bPathCoverage = await page.evaluate(() => {
     const layouts = window.App7.data.entries.filter(entry => entry.capacity.join('x') === '21x21');
     return {
@@ -150,7 +150,7 @@ try {
   await page.locator('[data-action="fair"]').click();
   await page.waitForSelector('table[data-ux-table="fair"] .snow-jiandao-contract-row');
   assert.match(await page.locator('table[data-ux-table="fair"] .snow-jiandao-contract-row').innerText(),
-    /带调字轨/);
+    /同列公式适配/);
   await page.locator('#tabs [data-action="nav:selection"]').click();
   await page.waitForFunction(() => window.App7.UX.view === 'selection');
 

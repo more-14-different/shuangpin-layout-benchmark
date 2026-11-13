@@ -571,7 +571,9 @@ function base64Gzip(str) {
   return zlib.gzipSync(Buffer.from(str, 'utf8'), { mtime: 0 }).toString('base64');
 }
 
-run().catch(err => {
+if (require.main === module) run().catch(err => {
   console.error(err);
   process.exit(1);
 });
+
+module.exports = {extractMultiwords, makeRowsForScheme, strokeOptions};

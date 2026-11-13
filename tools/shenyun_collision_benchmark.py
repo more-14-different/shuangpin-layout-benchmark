@@ -93,6 +93,7 @@ def read_word_corpus(
     paths: Iterable[Path],
     max_cut: int = 10000,
     allowed_pinyin: set[str] | None = None,
+    preserve_tones: bool = False,
 ) -> dict[int, list[dict]]:
     """Merge, globally sort, and retain only the largest requested cut.
 
@@ -120,7 +121,8 @@ def read_word_corpus(
                 length = len(word)
                 if length not in FAMILY_STAGE:
                     continue
-                syllables = tuple(normalize_pinyin(value) for value in reading.split())
+                syllables = tuple(normalize_toned_pinyin(value) if preserve_tones else normalize_pinyin(value)
+                                  for value in reading.split())
                 if len(syllables) != length:
                     continue
                 try:
@@ -135,12 +137,39 @@ def read_word_corpus(
     for row in merged.values():
         readings = sorted(row["readings"])
         if allowed_pinyin is not None:
-            readings = [reading for reading in readings if set(reading) <= allowed_pinyin]
+            readings = [reading for reading in readings
+                        if {normalize_pinyin(value) for value in reading} <= allowed_pinyin]
         row["readings"] = readings
         result[len(row["word"])].append(row)
     for length, rows in result.items():
         rows.sort(key=lambda row: (-row["weight"], row["word"]))
         result[length] = rows[:max_cut]
+    return result
+
+
+def normalize_toned_pinyin(value: str) -> str:
+    match = re.fullmatch(r"([a-zü:]+)([0-5])?", value.strip().lower())
+    if not match:
+        return value.strip().lower()
+    tone = int(match[2] or 5) or 5
+    return normalize_pinyin(match[1]) + str(tone)
+
+
+def evaluate_toned_layout(fixture: dict, corpus: dict[int, list[dict]], cuts: tuple[int, ...] = CUTS) -> dict:
+    """Same standard AUAU/AAAU/AAAA families, using actual legal tone codes."""
+    lookup = {pinyin + str(tone): code
+              for pinyin, codes in zip(fixture["pinyin"], fixture["tonedCodes"])
+              for tone, code in enumerate(codes, 1) if code}
+    encoded = {length: [_encode_row(row, length, lookup) for row in corpus[length]]
+               for length in FAMILY_STAGE}
+    result = {"families": list(FAMILY_STAGE.values()), "cuts": {},
+              "contract": "tone-aware standard four-code family replay; same dictionaries/ranks/cuts/winner rules"}
+    for cut in cuts:
+        result["cuts"][str(cut)] = _combine({FAMILY_NAME[length]: encoded[length][:cut]
+                                            for length in FAMILY_STAGE})
+    for field, source in [("fiveCutAverageCrossAffectedRate", "crossAffectedRate"),
+                          ("fiveCutAverageCrossFirstChoiceLossRate", "crossFirstChoiceLossRate")]:
+        result[field] = sum(row[source] for row in result["cuts"].values()) / len(cuts)
     return result
 
 

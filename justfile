@@ -8,6 +8,14 @@ snow-jiandao-ui-test: snow-jiandao-ui
     node --test tests/snow-jiandao-toned-r11.test.mjs tests/keymap-link-colors.test.mjs tests/auxiliary-semantics.test.mjs
     node tests/snow-jiandao-toned-browser.test.mjs
 
+snow-jiandao-benchmark:
+    python -X utf8 tools/integrate_snow_jiandao_toned_r11.py
+    node tools/sync_keymap_link_colors.js
+
+snow-jiandao-benchmark-test:
+    node --test tests/toned-benchmark-columns.test.mjs tests/snow-jiandao-toned-r11.test.mjs tests/auxiliary-semantics.test.mjs
+    node tests/toned-benchmark-browser.test.mjs
+
 toned-representative-benchmark:
     node tools/benchmark_toned_representatives.js
     python tools/report_toned_representatives.py

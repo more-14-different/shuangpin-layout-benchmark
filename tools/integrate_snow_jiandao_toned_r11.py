@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "a7_CKT_R11.html"
 FIXTURE = ROOT / "research" / ".cache" / "ckt-v51-toned-mars10-D1-final.json"
 NATIVE = ROOT / "a7_CKT_R11_integrated_materials" / "snow_jiandao_toned_native.json"
+COLUMNS = ROOT / "a7_CKT_R11_integrated_materials" / "snow_jiandao_toned_columns.json"
 AUDIT = ROOT / "a7_CKT_R11_integrated_materials" / "snow_jiandao_toned_benchmark.json"
 SNOW = Path(r"D:\C2D\Documents\rime-snow-pinyin")
 REPLAY = ROOT / "research" / ".cache" / "R11_integrated_replay"
@@ -135,6 +136,13 @@ def qz_baseline(data: dict) -> dict:
 
 def bridge(data: dict, native: dict, fixture: dict) -> dict:
     macro = macro_replay(data, fixture)
+    from shenyun_collision_benchmark import read_word_corpus, evaluate_toned_layout
+    corpus = read_word_corpus(
+        [SNOW / name for name in ("snow_pinyin.base.dict.yaml", "snow_pinyin.ext.dict.yaml", "snow_pinyin.tencent.dict.yaml")],
+        allowed_pinyin={data["pinyin"][index] for index, _weight in data["base"]},
+        preserve_tones=True,
+    )
+    native["columns"]["collision"] = evaluate_toned_layout(fixture, corpus)
     ice = {
         **native,
         "macro": macro,
@@ -145,10 +153,11 @@ def bridge(data: dict, native: dict, fixture: dict) -> dict:
                 "native key-load shares within the explicitly named track set",
             ],
             "normalizedButDifferentTaskContract": ["CKT v5", "CKT v5.1"],
-            "notApplicable": [
-                "legacy A7E v3/v4/v5 20-contract ensemble",
-                "legacy 20-contract peak labels",
-                "independent sanpin tone-auxiliary half",
+            "adaptedWithSameColumnFormula": [
+                "A7E v1-v6 and public-pair sensitivity: original frozen references/weights",
+                "same 20 contract key loads, complete shapes, datasets and peak definitions",
+                "completion v1-v4: original cohorts, motor versions, pools and cognitive formulas",
+                "sanpin: remove only tone strokes already present in the actual main code",
             ],
         },
     }
@@ -164,7 +173,7 @@ def bridge(data: dict, native: dict, fixture: dict) -> dict:
             ),
             "cktReference": "S005=10; native four tone-aware cohorts; shape-only completion",
             "legacy20ContractPolicy": (
-                "not synthesized: old A7E and 20-contract peaks remain N/A for Snow Jiandao"
+                "replayed with actual toned codes; tone evidence already in full syllables is not appended twice; original track weights and references retained"
             ),
             "macroPolicy": (
                 "exact frozen daily/default corpus replay; tone is recovered from the "
@@ -183,26 +192,26 @@ def patch_report(html: str) -> str:
 function r11TonedContractTable(){
  const b=D.tonedContractBenchmark;if(!b)return '';
  const i=b.schemes.snowJiandao,q=b.schemes.qzE8f37a;
- const na='<span title="旧 20 合同假设独立调辅；本方案调已进入前两码">不适用</span>';
+ const a=i.columns,score=snowJiandaoScores(600,300,300);
  const macro=(x,key)=>x.macro[key];
  const peak=(x,name)=>x.ergonomics[name]&&x.ergonomics[name].value;
  const performance=[
-  ['冰雪剑道','带调 21×21＋纯形辅',i.memory.lower+' / '+i.memory.guard+'（M-T1 下限/守门）',i.memory.D+' / '+i.memory.F,i.inventory.legalTonedSyllables+' / '+i.inventory.occupiedBuckets+' / '+i.inventory.capacity,num(i.ckt.v5.score,9),num(i.ckt.v51.score,9),na,na,na],
+  ['冰雪剑道','带调 21×21＋纯形辅',i.memory.lower+' / '+i.memory.guard+'（M-T1 下限/守门）',i.memory.D+' / '+a.rules.V,i.inventory.legalTonedSyllables+' / '+i.inventory.occupiedBuckets+' / '+i.inventory.capacity,num(i.ckt.v5.score,9),num(i.ckt.v51.score,9),num(a.ensemble.v3,9),num(a.ensemble.v4,9),num(a.ensemble.v5,9)],
   [esc(q.name),'无调 21×21＋形/调辅系综',q.memory.lower+'（M-R2）',q.memory.D+' / V'+q.memory.V,q.inventory.legalSyllables+' / '+q.inventory.occupiedBuckets+' / '+q.inventory.capacity,num(q.ckt.v5,9),num(q.ckt.v51,9),num(q.ckt.ensembleV3,9),num(q.ckt.ensembleV4,9),num(q.ckt.ensembleV5,9)]
  ];
  const ergonomics=[
-  ['冰雪剑道','4 条带调原生轨',num(macro(i,'daily|native-punctuation').avg_effective_distance,6),pct(macro(i,'daily|native-punctuation').left_load/macro(i,'daily|native-punctuation').hits),pct(macro(i,'daily|native-punctuation').same_hand_rate),num(macro(i,'daily|native-punctuation').score,6),pct(i.ergonomics.homeS2),pct(i.ergonomics.leftPinkyQAZPeak4NativeTracks.value),pct(i.ergonomics.rightPinkyPeak4NativeTracks.value),pct(i.ergonomics.maxFingerPeak4NativeTracks.value),pct(i.ergonomics.indexFingerTYBPeak4NativeTracks.value),pct(i.ergonomics.homeFloor4NativeTracks),pct(i.ergonomics.s2DifferentKeySameFingerRate)],
+  ['冰雪剑道','20 合同带调适配',num(macro(i,'daily|native-punctuation').avg_effective_distance,6),pct(macro(i,'daily|native-punctuation').left_load/macro(i,'daily|native-punctuation').hits),pct(macro(i,'daily|native-punctuation').same_hand_rate),num(macro(i,'daily|native-punctuation').score,6),pct(a.load.homeS2),pct(a.load.leftPinkyMax20),pct(a.load.rightPinkyMax20),pct(a.load.maxFinger20),pct(a.load.indexFingerTYBMax20),pct(a.load.homeFloor),pct(a.tracks.S2.sfb)],
   [esc(q.name),'旧 20 合同',num(macro(q,'daily|native-punctuation').avg_effective_distance,6),pct(macro(q,'daily|native-punctuation').left_load/macro(q,'daily|native-punctuation').hits),pct(macro(q,'daily|native-punctuation').same_hand_rate),num(macro(q,'daily|native-punctuation').score,6),pct(q.ergonomics.homeS2),pct(peak(q,'leftPinkyQAZPeak20Contracts')),pct(peak(q,'rightPinkyPeak20Contracts')),pct(peak(q,'maxFingerPeak20Contracts')),pct(peak(q,'indexFingerTYBPeak20Contracts')),pct(q.ergonomics.homeFloor20Contracts),pct(q.ergonomics.s2DifferentKeySameFingerRate)]
  ];
  const completion=[
-  ['冰雪剑道','带调字轨 / 4 条原生轨',num(i.ckt.v51.tracks.character.meanKeys,6),pct(i.ckt.v51.tracks.character.selectionRate),num(i.ckt.v51.tracks.character.effectiveMs,4),na,na,num(i.ckt.v5.score,9),num(i.ckt.v51.score,9),pct(i.ckt.aggregateV51.firstAuxRate),pct(i.ckt.aggregateV51.secondAuxRate),pct(i.ckt.aggregateV51.thirdAuxRate),num(i.ckt.aggregateV51.effectiveMs,4)],
+  ['冰雪剑道','带调 S2-5SUF / 原生四轨',num(a.sound.meanKeys,6),pct(a.tracks.S2.miss),num(a.sound.upperMs,4),num(score.v3,9),num(score.v4,9),num(i.ckt.v5.score,9),num(i.ckt.v51.score,9),pct(i.ckt.aggregateV51.firstAuxRate),pct(i.ckt.aggregateV51.secondAuxRate),pct(i.ckt.aggregateV51.thirdAuxRate),num(i.ckt.aggregateV51.effectiveMs,4)],
   [esc(q.name),'旧 S2 / 形辅调辅系综',num(q.completion.meanKeys,6),pct(q.completion.missOrSelectionRate),num(q.completion.centerOrEffectiveMs,4),num(q.ckt.v3,9),num(q.ckt.v4,9),num(q.ckt.v5,9),num(q.ckt.v51,9),pct(q.ckt.aggregateV51.firstAuxRate),pct(q.ckt.aggregateV51.secondAuxRate),pct(q.ckt.aggregateV51.thirdAuxRate),num(q.ckt.aggregateV51.effectiveMs,4)]
  ];
  return `<h3>${esc(b.title)}</h3><p>冰雪剑道不是普通 R11 无调条目：调已进入前两码，后续只使用形辅。下表在同一页面并列展示，但保留合同列；CKT 均以 S005=10 归一，任务合同仍不同。日常移动手使用同一冻结语料与几何，可直接比较。</p>
- ${uxTable(['方案','合同','M','D / F(V)','有效音节 / 占桶 / 容量','CKT-T v5','CKT-T v5.1','A7E-v3','A7E-v4','A7E-v5'],performance,[],'snow-jiandao-toned-performance')}
+ ${uxTable(['方案','合同','M','D / V','有效音节 / 占桶 / 容量','CKT-T v5','CKT-T v5.1','A7E-v3','A7E-v4','A7E-v5'],performance,[],'snow-jiandao-toned-performance')}
  ${uxTable(['方案','负载合同','日常平均有效距离 ↓','日常左手占比','日常同手率 ↓','日常纯双拼移动手 ↑','S2/字轨主行','QAZ 左小指峰值 ↓','P 区右小指峰值 ↓','最大单指峰值 ↓','TYB 双食指峰值 ↓','主键区下限','S2 异键同指 ↓'],ergonomics,[],'snow-jiandao-toned-ergonomics')}
- ${uxTable(['方案','补全合同','字轨/S2 平均键数 ↓','字轨选重/S2 频权漏选 ↓','字轨有效/S2 中心 ms ↓','CKT v3','CKT v4','CKT v5','CKT v5.1','首辅率 ↓','二辅率 ↓','三辅率 ↓','四轨加权有效时间 ms ↓'],completion,[],'snow-jiandao-toned-completion')}
- <details class="card"><summary>可比性与定义修改</summary><p>严格可比：同语料日常移动手、各自定义下的 M/D，以及明确轨集合内的按键负载。CKT-T v5/v5.1 使用同一个 S005 参考，但冰雪剑道是“带调主码＋纯形辅”，QZ 是“无调主码＋形/调辅系综”，所以它们是生产任务分数，不应解释成同一编码合同的消融实验。</p><p>不生成冰雪剑道的旧 A7E-v3/v4/v5 和旧 20 合同峰值：那会再次加入已经编码在前两码中的调辅贡献。替代项为 4 条原生带调轨（字、二字、三字、四字）的峰值和 CKT-T。完整机器可读审计见 a7_CKT_R11_integrated_materials/snow_jiandao_toned_benchmark.json。</p></details>`;
+ ${uxTable(['方案','补全合同','S2规则补全平均键数 ↓','S2裸主码非首选 ↓','S2规则补全 CKT ms ↓','CKT v3','CKT v4','CKT v5','CKT v5.1','首辅率 ↓','二辅率 ↓','三辅率 ↓','四轨加权有效时间 ms ↓'],completion,[],'snow-jiandao-toned-completion')}
+ <details class="card"><summary>可比性与定义修改</summary><p>严格可比：同语料日常移动手、各自定义下的 M/D，以及明确轨集合内的按键负载。CKT-T v5/v5.1 使用同一个 S005 参考，但冰雪剑道是“带调主码＋纯形辅”，QZ 是“无调主码＋形/调辅系综”，所以它们是生产任务分数，不应解释成同一编码合同的消融实验。</p><p>A7E-v1～v6、20 合同负载、S2规则补全和各代消歧补全均按原列公式做带调适配：原主码已含声调的步骤不重复击键；形辅、选重、参考基线与各版本权重分别保留。CKT v3/v4 此表使用 τ=600、首辅=300、次辅=300 ms；详细公平表随滑杆重算。完整机器可读审计见 a7_CKT_R11_integrated_materials/snow_jiandao_toned_benchmark.json。</p></details>`;
 }
 
 '''
@@ -237,7 +246,7 @@ function snowJiandaoTonedFacade(){
   searchMemoryNoTone:i.memory.lower,
   memory:{firstLinks:i.memory.lower,nontrivialFinals:0,commonNontrivial:i.memory.lower,toneLinks:0},
   memoryAuditR2:{M:i.memory.lower,ordinaryDisplacedCount:i.memory.D,ordinaryDisplaced:['p→K'],scope:'M-T1 contract facade'},
-  logicUniformity:{template:'toneInMain',score:null},
+  logicUniformity:{...i.columns?.rules?.lu,template:'toneInMain'},
   tonedContract:true
  }:null;
 }
@@ -256,6 +265,7 @@ function snowJiandaoStateMatch(s,kind){
   if(!words.every(word=>hay.includes(word)))return false;
  }
  const r=R2_STATE?.[kind];
+ if(!snowJiandaoMetricFilterPass(r))return false;
  if(r?.d!==''&&i.memory.D>Number(r.d))return false;
  if(r?.fresh===true)return true;
  return true;
@@ -301,6 +311,7 @@ current=function(){return CURRENT===SNOW_JIANDAO_TONED_ID?snowJiandaoTonedFacade
 
 function snowJiandaoBenchmarkVisible(){
  const facade=snowJiandaoTonedFacade();if(!facade)return false;
+ const i=D.tonedContractBenchmark.schemes.snowJiandao;
  const family=$('#family')?.value||'all';if(family!=='all'&&family!=='new'&&family!=='Snow Jiandao toned')return false;
  const aux=$('#uxAux')?.value||'all';if(aux!=='all'&&aux!=='AVUIO')return false;
  const query=($('#uxQuery')?.value||'').trim().toLowerCase();
@@ -312,63 +323,19 @@ function snowJiandaoBenchmarkVisible(){
  if(filter.logicTemplate&&filter.logicTemplate!=='all'&&filter.logicTemplate!=='toneInMain')return false;
  const eligibility=$('#refEligibility')?.value||'all';if(eligibility==='yes'||eligibility==='no')return false;
  const r=R2_STATE?.benchmark;if(r?.d!==''&&facade.memoryAuditR2.ordinaryDisplacedCount>Number(r.d))return false;
+ if(!snowJiandaoMetricFilterPass(r))return false;
+ if(!compareKeyCount(i.columns.rules.lu.score,filter.logicOp,filter.logicValue))return false;
+ if(!compareKeyCount(i.columns.rules.fa.score,filter.faOp,filter.faValue))return false;
  return true;
 }
 
-function snowJiandaoNA(note='旧无调合同不适用'){return `<span title="${esc(note)}">不适用</span>`}
-
-function snowJiandaoPeakKey(i,keys){
- let maximum=0;for(const track of Object.values(i.ergonomics.tracks))for(const key of keys)maximum=Math.max(maximum,track.load[key]||0);return maximum;
-}
-
-function snowJiandaoBenchmarkCell(header,key){
- const i=D.tonedContractBenchmark.schemes.snowJiandao,e=i.ergonomics,c=e.tracks.character,m=i.macro['daily|hanzi-only'];
- const label=String(typeof header==='object'?header.label:header).replace(/[↕↑↓]/g,'').trim();
- if(label.startsWith('方案'))return `<button type="button" class="link" data-snow-jiandao-open>${esc(i.id)}</button><small>${esc(i.name)} · 带调原生合同</small>`;
- if(label.includes('实际 / 宿主键域')||label==='宿主键域')return '21×21<small>带调前两码</small>';
- if(label==='五辅键方向'||label==='固定五辅')return 'AVUIO<small>shapeKeysByMeaning；toneKeysByTone=IVUAO</small>';
- if(label.includes('声韵记忆项 M'))return `${i.memory.lower}<small>守门 ${i.memory.guard} · M-T1</small>`;
- if(label.includes('原键偏移 D'))return String(i.memory.D);
- if(label.includes('韵偏移 V'))return snowJiandaoNA('火星十韵使用 M-T1/F，不套用旧 V 定义');
- if(label==='S2右小指'||label==='右小指负担')return pct(c.rightPinky);
- if(label.includes('右小指20合同最高'))return `${pct(e.rightPinkyPeak4NativeTracks.value)}<small>4原生轨</small>`;
- if(label.includes('左小指QAZ 20合同最高'))return `${pct(e.leftPinkyQAZPeak4NativeTracks.value)}<small>4原生轨</small>`;
- if(label.includes('主行·含形辅下限'))return `${pct(e.homeFloor4NativeTracks)}<small>4原生轨</small>`;
- if(label.includes("QP;/[']YTBZX,.最大"))return `${pct(snowJiandaoPeakKey(i,"QP;/[']YTBZX,."))}<small>4原生轨单键峰值</small>`;
- if(label==='当前 CKT ms/项'||label==='S2规则补全 CKT ms')return `${num(i.ckt.v51.tracks.character.effectiveMs,4)}<small>带调字轨</small>`;
- if(label==='裸 CKT ms')return `${num(i.ckt.v51.tracks.character.motorUpperMs,4)}<small>带调字轨运动上界</small>`;
- if(label==='非首选权重')return `${pct(i.ckt.v51.tracks.character.selectionRate)}<small>带调字轨选重</small>`;
- if(label==='异键同指')return pct(e.s2DifferentKeySameFingerRate);
- if(label==='最大单指负担')return pct(c.maxFinger);
- if(label==='主行占比')return pct(e.homeS2);
- if(label==='含外推键占比')return '0.000%';
- if(label.includes('MX34 日常纯汉字'))return num(m.score,6);
- if(label==='原生／统一附辅')return '原生带调＋纯形辅';
- if(label==='裸二键唯一')return `${i.inventory.occupiedBuckets}/${i.inventory.capacity}<small>带调占桶；非399唯一码</small>`;
- if(label==='键道·单字 补全CKT ms')return num(i.ckt.v51.tracks.character.effectiveMs,4);
- if(label==='键道·二字词 补全CKT ms')return num(i.ckt.v51.tracks.word2.effectiveMs,4);
- if(label==='键道·单字 补全键数')return num(i.ckt.v51.tracks.character.meanKeys,6);
- if(label==='键道·二字词 补全键数')return num(i.ckt.v51.tracks.word2.meanKeys,6);
- if(label==='键道·单字 两B后非首选')return pct(i.ckt.v51.tracks.character.selectionRate);
- if(label==='键道·二字词 两B后非首选')return pct(i.ckt.v51.tracks.word2.selectionRate);
- return snowJiandaoNA();
-}
-
 const SNOW_JIANDAO_TABLE_BASE=uxTable;
-uxTable=function(headers,rows,ids=[],key='table',raws=[]){
- let html=SNOW_JIANDAO_TABLE_BASE(headers,rows,ids,key,raws);
- if((key==='benchmark'||key==='fair')&&snowJiandaoBenchmarkVisible()){
-  const cells=headers.map((header,index)=>`<td${index===0?' class="first"':''}>${snowJiandaoBenchmarkCell(header,key)}</td>`).join('');
-  const row=`<tr class="snow-jiandao-contract-row" data-contract="tone-in-main">${cells}</tr>`;
-  html=html.replace('</tbody>',row+'</tbody>');
- }
- return html;
-};
+uxTable=function(...args){return SNOW_JIANDAO_TABLE_BASE(...args).replaceAll('<tr data-dv-scheme="SNOW-JIANDAO-TONED"','<tr class="snow-jiandao-contract-row" data-contract="tone-in-main" data-dv-scheme="SNOW-JIANDAO-TONED"')};
 
 function snowJiandaoSelectionCard(){
  if(!chosen().some(entry=>entry.id===SNOW_JIANDAO_TONED_ID))return '';
  const i=D.tonedContractBenchmark.schemes.snowJiandao;
- return `<section class="dv-cohort snow-jiandao-contract-card"><div class="dv-cohort-head"><h3>带调主码合同 · 21×21</h3><span>1 个跨合同方案 · 不参加旧 20 合同授标</span></div>
+ return `<section class="dv-cohort snow-jiandao-contract-card"><div class="dv-cohort-head"><h3>带调主码合同 · 21×21</h3><span>1 个带调方案 · 20 合同适配与原生 CKT-T</span></div>
  <div class="scroll"><table><thead><tr><th>方案</th><th>M-T1</th><th>D / F</th><th>带调音节 / 占桶</th><th>CKT-T v5.1 ↓</th><th>日常移动手 ↑</th></tr></thead><tbody><tr><td class="first"><button type="button" class="link" data-snow-jiandao-open>${esc(i.name)}</button><small>${esc(i.id)} · AVUIO 纯形辅</small></td><td>${i.memory.lower} / ${i.memory.guard}<small>下限 / 守门</small></td><td>${i.memory.D} / ${i.memory.F}</td><td>${i.inventory.legalTonedSyllables} / ${i.inventory.occupiedBuckets}</td><td>${num(i.ckt.v51.score,9)}</td><td>${num(i.macro['daily|native-punctuation'].score,6)}</td></tr></tbody></table></div>
  <p class="hint">该行响应上方 21×21、AVUIO、IVUAO、M≤、D≤ 与“火星十韵＋带调主码”筛选；指标采用带调原生合同。</p></section>`;
 }
@@ -376,25 +343,27 @@ function snowJiandaoSelectionCard(){
 function snowJiandaoRenderDetail(){
  const i=D.tonedContractBenchmark.schemes.snowJiandao,q=D.tonedContractBenchmark.schemes.qzE8f37a;
  const m=i.macro['daily|native-punctuation'],e=i.ergonomics,c=i.ckt.v51.tracks.character;
+ const a=i.columns;
  VIEW='keyboard';UX.view='scheme';uxSyncNav();snowJiandaoInstallFilterOptions();
  $('#view').innerHTML=`<section class="panel" id="snowJiandaoTonedDetail"><div class="r2-hero"><div><small>TONE-IN-MAIN 21×21 · SHAPE-ONLY AVUIO</small><h2>${esc(i.name)} · ${esc(i.id)}</h2><p>火星十韵声韵拆分；声调已进入前两码，后续只使用键道形笔辅。作为独立合同进入筛选与详情，不冒充旧无调 codeList 条目。</p></div><strong>${num(i.ckt.v51.score,6)}<small>CKT-T v5.1 ↓</small></strong></div>
  <div class="heading"><button data-action="nav:selection">返回方案筛选</button><button data-r11-report>打开跨合同完整表</button></div>
  <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>21×21</b>；AVUIO 五形辅；toneKeysByTone=<b>IVUAO</b>。</p><p>M-T1 下限/守门：<b>${i.memory.lower}/${i.memory.guard}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p></section>
- <section class="card"><h3>合同边界</h3><p>CKT-T v5/v5.1 使用 S005=10 的四条带调原生轨，只计形辅；不再次加入调笔辅。</p><p>旧 A7E v3/v4/v5 和旧 20 合同峰值不适用。下列人体工学峰值来自字、二字、三字、四字四条原生轨。</p></section></div>
+ <section class="card"><h3>合同边界</h3><p>CKT-T v5/v5.1 使用 S005=10 的四条带调原生轨，只计形辅；不再次加入调笔辅。</p><p>通用 benchmark 列按带调版本的相应合同重算，保留各代公式、样本、权重和基线；原生四轨 CKT-T 作为另一项明确命名的生产指标。</p></section></div>
  ${snowJiandaoKeyboardPanel()}
  ${uxTable(['指标','冰雪剑道','QZ-e8f37a','口径'],[
   ['CKT v5',num(i.ckt.v5.score,9),num(q.ckt.v5,9),'各自生产合同；S005=10'],
   ['CKT v5.1',num(i.ckt.v51.score,9),num(q.ckt.v51,9),'各自生产合同；S005=10'],
-  ['字轨/S2 平均键数',num(c.meanKeys,6),num(q.completion.meanKeys,6),'带调字轨 / 旧无调S2'],
-  ['字轨选重/S2频权漏选',pct(c.selectionRate),pct(q.completion.missOrSelectionRate),'不同合同的最近等价指标'],
+  ['S2规则补全平均键数',num(a.sound.meanKeys,6),num(q.completion.meanKeys,6),'同一 S2-5SUF 合同；各自合法音节'],
+  ['S2裸主码非首选',pct(a.tracks.S2.miss),pct(q.completion.missOrSelectionRate),'带调／无调音节裸二键频权非首选率'],
+  ['S2规则补全 CKT ms',num(a.sound.upperMs,6),num(q.completion.centerOrEffectiveMs,6),'同一 base5 固定宽度后缀消歧公式'],
   ['日常平均有效距离',num(m.avg_effective_distance,6),num(q.macro['daily|native-punctuation'].avg_effective_distance,6),'同冻结语料与几何，可直接比较'],
   ['日常纯双拼移动手',num(m.score,6),num(q.macro['daily|native-punctuation'].score,6),'越高越好；含标点'],
-  ['主行占比',pct(e.homeS2),pct(q.ergonomics.homeS2),'带调字轨 / 旧S2'],
-  ['QAZ 左小指峰值',pct(e.leftPinkyQAZPeak4NativeTracks.value),pct(q.ergonomics.leftPinkyQAZPeak20Contracts.value),'4原生轨 / 旧20合同'],
-  ['P 区右小指峰值',pct(e.rightPinkyPeak4NativeTracks.value),pct(q.ergonomics.rightPinkyPeak20Contracts.value),'4原生轨 / 旧20合同'],
-  ['最大单指峰值',pct(e.maxFingerPeak4NativeTracks.value),pct(q.ergonomics.maxFingerPeak20Contracts.value),'4原生轨 / 旧20合同'],
-  ['TYB 双食指峰值',pct(e.indexFingerTYBPeak4NativeTracks.value),pct(q.ergonomics.indexFingerTYBPeak20Contracts.value),'4原生轨 / 旧20合同'],
-  ['主键区下限',pct(e.homeFloor4NativeTracks),pct(q.ergonomics.homeFloor20Contracts),'4原生轨 / 旧20合同']
+  ['S2主行占比',pct(a.load.homeS2),pct(q.ergonomics.homeS2),'同一裸音节合同，实际主码击键归一'],
+  ['QAZ 左小指峰值',pct(a.load.leftPinkyMax20),pct(q.ergonomics.leftPinkyQAZPeak20Contracts.value),'同一20合同峰值；带调主码不重复调辅'],
+  ['P 区右小指峰值',pct(a.load.rightPinkyMax20),pct(q.ergonomics.rightPinkyPeak20Contracts.value),'同一20合同峰值'],
+  ['最大单指峰值',pct(a.load.maxFinger20),pct(q.ergonomics.maxFingerPeak20Contracts.value),'同一20合同峰值'],
+  ['TYB 双食指峰值',pct(a.load.indexFingerTYBMax20),pct(q.ergonomics.indexFingerTYBPeak20Contracts.value),'同一20合同峰值'],
+  ['含形辅主行下限',pct(a.load.homeFloor),pct(q.ergonomics.homeFloor20Contracts),'min(C4-Snow主行, WX-Snow-12主行)']
  ],[],'snow-jiandao-selectable-detail')}
  <details class="card" open><summary>四条带调原生轨</summary><pre>${esc(JSON.stringify(i.ckt.v51.tracks,null,2))}</pre></details></section>`;
  snowJiandaoWireKeyboard();$('#uxEnvironment').hidden=true;uxFinishSoon();
@@ -421,7 +390,7 @@ document.addEventListener('click',event=>{
 
 '''
     scripts = "\n".join((ROOT / "tools" / name).read_text(encoding="utf-8")
-                        for name in ("snow_jiandao_toned_view.js", "snow_jiandao_toned_ui.js"))
+                        for name in ("toned_benchmark_metrics.js", "snow_jiandao_toned_view.js", "snow_jiandao_toned_ui.js", "snow_jiandao_toned_benchmark_ui.js"))
     source = source.replace("function snowJiandaoRenderDetail(){", scripts + "\nfunction snowJiandaoRenderDetail(){", 1)
     if SELECTABLE_MARKER in html:
         start = html.index(SELECTABLE_MARKER)
@@ -429,6 +398,12 @@ document.addEventListener('click',event=>{
         html = html[:start] + source.rstrip() + html[end:]
     else:
         html = html.replace(anchor, source + anchor, 1)
+    table_anchor = "function uxTable(headers,rows,ids=[],key='table',raws=[]){"
+    hook = "/* SNOW_TONED_TABLE_COLUMNS_V2 */"
+    if hook not in html:
+        if table_anchor not in html:
+            raise ValueError("base table renderer not found")
+        html = html.replace(table_anchor, table_anchor + "\n " + hook + "\n if(typeof snowJiandaoTableRows==='function')({headers,rows,ids,raws}=snowJiandaoTableRows(headers,rows,ids,key,raws));", 1)
     return html
 
 
@@ -440,7 +415,7 @@ def main() -> None:
 
     if "--ui-only" in sys.argv:
         html = HTML.read_text(encoding="utf-8")
-        HTML.write_text(patch_selectable_ui(html), encoding="utf-8", newline="\n")
+        HTML.write_text(patch_selectable_ui(patch_report(html)), encoding="utf-8", newline="\n")
         print(f"Updated Snow Jiandao UI: {HTML}")
         return
 
@@ -461,6 +436,13 @@ def main() -> None:
         "--snow", str(SNOW),
     )
     native = json.loads(NATIVE.read_text(encoding="utf-8"))
+    run(
+        "node", "--max-old-space-size=2600",
+        str(ROOT / "tools" / "score_toned_benchmark_columns.js"),
+        "--html", str(HTML), "--native", str(NATIVE), "--snow", str(SNOW),
+        "--output", str(COLUMNS),
+    )
+    native["columns"] = json.loads(COLUMNS.read_text(encoding="utf-8"))
     fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
     html = patch_selectable_ui(patch_report(HTML.read_text(encoding="utf-8")))
     data, body, end = helper.extract_payload(html)
