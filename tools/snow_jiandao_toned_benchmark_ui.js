@@ -80,10 +80,10 @@ function snowJiandaoColumn(header, tableKey, context) {
   const text = (value, note = '') => ({value, note, html: `<span title="${esc(note)}">${esc(value)}</span>`});
   const formula20 = '同一20合同、语料/形源/词库/顺序及原冻结基线；带调主码已含的调信息不重复追加';
   if (label.startsWith('方案')) return {value: native.id, html: `<button type="button" class="link" data-snow-jiandao-open="${native.id}">${esc(native.id)}</button><small>${esc(native.name)} · 带调主码 · 同列公式适配</small>`};
-  if (label.includes('宿主键域') || label === '宿主键域') return text('21×21');
+  if (label.includes('宿主键域') || label === '宿主键域') return text((native.contract.capacity||[21,21]).join('×'));
   if (label === '五辅键方向') return text(native.contract.toneKeysByTone, 'toneKeysByTone 边界映射；形辅按 ' + native.contract.shapeKeysByMeaning + '＝折横撇竖点，不追加独立调辅');
-  if (label === '固定五辅') return {value: 1, html: '<span title="shapeKeysByMeaning=AVUIO，toneKeysByTone=IVUAO">是</span>'};
-  if (label.includes('声韵记忆项 M')) return number(native.memory.lower, `M-T1 规则记忆账；守门 ${native.memory.guard}。同为声韵规则关联数，不替换成无调 M-R2。`, 'integer');
+  if (label === '固定五辅') return {value: 1, html: '<span title="纯形辅；主码已含声调">是</span>'};
+  if (label.includes('声韵记忆项 M')) return native.memory.lower==null ? text('待定',native.memory.definition) : number(native.memory.lower, `M-T1 规则记忆账；守门 ${native.memory.guard}。同为声韵规则关联数，不替换成无调 M-R2。`, 'integer');
   if (label.includes('原键偏移 D')) return number(native.memory.D, '普通单字母声母只要实际首键离开同名键即计一次', 'integer');
   if (label.includes('韵偏移 V')) return number(c.rules.V, c.rules.definition, 'integer');
   if (/^A7E-v[1-5]$/.test(label)) return number(c.ensemble['v' + label.slice(-1)], formula20 + '；各版本保留自己的轨权重和 β=4 广义均值');
@@ -174,8 +174,8 @@ function snowJiandaoTableRows(headers, rows, ids, key, raws) {
     dataRows.push({raw,row:raw.map((v,at)=>at===0?`<button class="link" data-snow-jiandao-open="${native.id}">${esc(v)}</button>`:at===1?esc(v):at===26?`<button data-snow-macro-heat="${native.id}">查看</button>`:at>=11&&at<=24?pct(v):at===3||at===4||at===25?v:num(v,5))});
   } else if (key === 'four-code-collision') {
     for (const [cut, metric] of Object.entries(native.columns.collision.cuts)) dataRows.push({
-      row: [`<button class="link" data-snow-jiandao-open="${native.id}">${esc(native.id)}</button>`,'21×21','纯 ØY · 带调',Number(cut).toLocaleString(),pct(metric.crossAffectedRate),pct(metric.crossFirstChoiceLossRate),metric.crossBuckets,metric.collisionBuckets,metric.maxBucket],
-      raw: [native.id,'21×21','纯 ØY · 带调',Number(cut),metric.crossAffectedRate,metric.crossFirstChoiceLossRate,metric.crossBuckets,metric.collisionBuckets,metric.maxBucket]});
+      row: [`<button class="link" data-snow-jiandao-open="${native.id}">${esc(native.id)}</button>`,(native.contract.capacity||[21,21]).join('×'),'纯 ØY · 带调',Number(cut).toLocaleString(),pct(metric.crossAffectedRate),pct(metric.crossFirstChoiceLossRate),metric.crossBuckets,metric.collisionBuckets,metric.maxBucket],
+      raw: [native.id,(native.contract.capacity||[21,21]).join('×'),'纯 ØY · 带调',Number(cut),metric.crossAffectedRate,metric.crossFirstChoiceLossRate,metric.crossBuckets,metric.collisionBuckets,metric.maxBucket]});
   } else {
     const cells = headers.map(header => snowJiandaoColumn(header, key, context));
     dataRows.push({row: cells.map(cell => cell.html), raw: cells.map(cell => cell.value)});

@@ -27,7 +27,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
     const content = group.querySelector(':scope > g');
     if (!content) continue;
     if (!heat && tones) base.setAttribute('fill', SNOW_TONE_FILLS[tones]);
-    if (native.keyboards.shapeByKey[key]?.length) {
+    if (native.keyboards.shapeByKey[key]?.length && !(entry.roles[key]?.length || entry.rhymes[key]?.length)) {
       // The tone-in-main contract has no independent auxiliary tone layer.
       if (!heat) base.setAttribute('fill', SNOW_SHAPE_PALETTE.keyFill);
       base.setAttribute('stroke', SNOW_SHAPE_PALETTE.stroke);
@@ -39,6 +39,16 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
       add(content, 'text', {x: x + 46, y: y + 65, 'text-anchor': 'middle', 'font-size': 15, fill: SNOW_SHAPE_PALETTE.ink, 'font-weight': 750}, meaning);
       add(content, 'text', {x: x + 46, y: y + 89, 'text-anchor': 'middle', 'font-size': 20, fill: SNOW_SHAPE_PALETTE.ink}, {折: '㇕', 横: '一', 撇: '丿', 竖: '丨', 点: '丶'}[meaning]);
       if (heat) add(content, 'text', {x: x + 84, y: y + 20, 'text-anchor': 'end', 'font-size': 9, fill: SNOW_SHAPE_PALETTE.ink}, pct(load?.[key] || 0));
+    }
+    if (native.keyboards.shapeByKey[key]?.length && (entry.roles[key]?.length || entry.rhymes[key]?.length)) {
+      // Replace the ordinary independent tone/shape badge at the top corner.
+      // Embedded-tone schemes only need a shape label here.
+      for (const node of [...content.children]) {
+        if (node.tagName === 'rect' && Number(node.getAttribute('y')) === y+5 ||
+            node.tagName === 'text' && Number(node.getAttribute('y')) === y+19) node.remove();
+      }
+      add(content,'rect',{x:x+40,y:y+5,width:47,height:21,rx:6,fill:SNOW_SHAPE_PALETTE.badgeFill,stroke:SNOW_SHAPE_PALETTE.stroke});
+      add(content, 'text', {x:x+63.5,y:y+19,'text-anchor':'middle','font-size':9,fill:SNOW_SHAPE_PALETTE.ink,'data-shape':true}, '形辅·'+native.keyboards.shapeByKey[key].join('/'));
     }
     for (const rhyme of entry.rhymes[key] || []) {
       const text = [...content.querySelectorAll('text')].find(node => node.textContent === label(rhyme));
@@ -53,13 +63,14 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
         content.insertBefore(backing, text);
       }
     }
-    if (tones) add(content, 'text', {x: x + 84, y: y + (heat ? 37 : 20), 'text-anchor': 'end', 'font-size': 11, fill: '#516068', 'data-tones': tones}, tones === '01' ? '1/0' : tones.split('').join('/'));
+    if (tones) add(content, 'text', {x: x + 84, y: y + (heat || native.keyboards.shapeByKey[key]?.length ? 37 : 20), 'text-anchor': 'end', 'font-size': 11, fill: '#516068', 'data-tones': tones}, tones === '01' ? '1/0' : tones.split('').join('/'));
     group.querySelector('title').textContent = `${key}｜声母 ${entry.roles[key]?.join(' / ') || '—'}｜${Object.entries(entry.rhymeTonesByKey[key] || {}).map(([name, digits]) => name + '·' + digits).join(' / ') || '—'}${native.keyboards.shapeByKey[key]?.length ? '｜纯形辅 ' + native.keyboards.shapeByKey[key].join('/') : ''}${heat ? '｜负担 ' + pct(load?.[key] || 0) : ''}`;
   }
   const captions = svg.querySelectorAll(':scope > text');
   captions[1].textContent = '声母 / 零声母 / 十韵组 / 纯形辅 · 声调 01234（0＝轻声）';
-  captions[2].textContent = '上排 4 声 · 中排 2/3 声 · 下排 1/0 声；同调区同底色，同韵组同文字色。';
-  captions[3].textContent = heat ? '负担按本图最大键归一；五形辅以淡紫色标签标识；韵组文字色和声母移位 link 保持一致。' : '淡紫底色为 AVUIO 五形辅；声母移位 link 沿用统一 OKLab 链式约束。';
+  const toneRows = native.publication?.toneRowsByTone || {1:2,2:1,3:1,4:0,5:2};
+  captions[2].textContent = ['上排','中排','下排'].map((name,r)=>name+' '+[1,2,3,4,5].filter(t=>toneRows[t]===r).map(t=>t===5?0:t).join('/')+' 声').join(' · ')+'；同韵组同文字色。';
+  captions[3].textContent = '形辅 '+native.contract.shapeKeysByMeaning+'（折横撇竖点）；与声韵共键时保留全部角色；声母位移 link 使用统一配色。';
   add(svg, 'style', {}, '.nf5-dim{opacity:.16}');
   return new XMLSerializer().serializeToString(svg);
 }
@@ -102,7 +113,7 @@ function snowJiandaoKeyboardPanel() {
   ${nf4TypeTools('keyboard').replaceAll('data-nf4-action', 'data-snow-export')}
   <div class="nf5-shared-tools"><label class="control"><span>键盘图</span><select id="snowJiandaoKeyboardMode"><option value="semantic">声韵形辅合并键盘图</option><option value="overall">总热力图 · 字词 1:3:1:1</option><option value="daily">日常文章热力图</option><option value="character">单字热力图</option><option value="word2">二字词热力图</option><option value="word3">三字词热力图</option><option value="word4">四字词热力图</option></select></label><label class="control nf5-query"><span>统一筛选</span><input id="nf5Query" placeholder="全拼、汉字、词语；如 jian4dao1 / jiandao" autocomplete="off"></label><button id="nf5Reset" type="button">清空筛选</button><button id="snowJiandaoExportRows" type="button">导出筛选 TSV</button></div>
   <p id="nf5FilterSummary" class="nf5-filter-summary" aria-live="polite"></p><div id="svgbox"></div>
-  <div class="kbdlegend">${keymapLinkLegendHtml()}<p>语义图底色：蓝＝4 声，绿＝2/3 声，黄＝1/0 声，淡紫＝AVUIO 五形辅。热力图按负担着色，五形辅保留淡紫标签。韵组颜色跨排一致；同键共用的韵组分行显示。</p></div>
+  <div class="kbdlegend">${keymapLinkLegendHtml()}<p>语义图底色：蓝＝4 声，绿＝2/3 声，黄＝1/0 声，淡紫＝独立形辅；形辅键 ${esc(snowJiandaoNative().contract.shapeKeysByMeaning)}。热力图按负担着色，韵组颜色跨排一致。</p></div>
   <div class="nf5-data-section"><h3>筛选明细</h3><div id="snowJiandaoFilteredData"></div></div></section>`;
 }
 
