@@ -1,0 +1,1895 @@
+{
+  "version": "untoned-v51-original-memory-and-deployment-verification-1",
+  "passed": true,
+  "recordsVerified": 156,
+  "inputReports": {
+    "2026-11-14-untoned-2126-v51-descent.json": "4227de42cf3a294a040de23b9df318853a85fefa8585c819e5ba4ef420f8da05",
+    "2026-11-14-untoned-2126-v51-combinations.json": "cd7df9aecede4fe2674d084bb8da0fde78d6de31cf13713c7397dcfafa292fe1",
+    "2026-11-14-untoned-2121-v51-partial.json": "4df7faa985fc8952bacd0cd5d37647602afe6484fffda47ed0fe20981d81a29e"
+  },
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\a7_CKT_R11.html": "efa0b4006bd79a9d3fff06873d6b7fcc94e702620d81dc7ca6f7bb8c76860ce8",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\ckt-v4-ergonomics.json": "86380f69a0dff22df15af083e33acd0bda8f89cab64a59ac2ca896202c0be4aa",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\R11_integrated_replay\\memory_r2.py": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+    "D:\\C2D\\Documents\\rime-snow-pinyin\\snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+    "D:\\C2D\\Documents\\rime-snow-pinyin\\rime-stroke\\stroke.dict.yaml": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+    "D:\\C2D\\Documents\\rime-snow-pinyin\\scripts\\research\\evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+    "D:\\C2D\\Documents\\rime-snow-pinyin\\scripts\\research\\evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810",
+    "D:\\C2D\\Documents\\rime-snow-pinyin\\config\\shenyun-21x26-mapping.json": "e4a2299ece15ba80d4aa141eaec70b10802f30852a8e60d23a5117c56cd4568c"
+  },
+  "results": [
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "SNOW-SHENYUN-21X26-D3V1-BALANCED",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "59a45cf4b3b52ee4d46785dfc6993d073075f3cd8fa6e402a2a51f68f2ff1d6c"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-e9e05b15d694",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "1518c02598b93dd4f445cd37ea30bec43348e9a1de2cd44d0922ffec7efe997d"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-97b60f6a3d06",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "23104e3834ad56c0434eedeae49e2eb8faed4a8e122283916905f4a0bae3879b"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-214b73058ac6",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "5f26776f8668ed51276a0f031337a75f817ea856c893783e92322a834cefe2ff"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-9993a94e0f46",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "531e6be185e792f3bc237bcbd259d97a20bd2cbeaf77f4edae1f9731f8f330fb"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ee8dc96192d4",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "55eed87f6c2565cdb8a67cedf6e16d8bacc7c41569a51fbb1ed295a38361bfc5"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-e2ca168cff0e",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "ff5f3f26916aef6d1c3c80a7b46dfb45d0a300a39c32443a2f51984f46c2026f"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-0e57ed70886c",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "9c94f807568ff3953dbdc9b0cb32f53bf90f18d7597058fa151785ef4b5b39b8"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-5b6def216c24",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "7067012c59ee065bc2b00576d9ca1d3ddfdd66b41743853977eb1e8fc8878a91"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-47397044f5d7",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "180f954ba55dee262a5b10b4837b579055c5fe6d930b750f0a1d37ed4b788a41"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ad5c2e030f63",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "40866ce8086375c7daed3ce9d2f58b6f3f15847c0d4a64a4c3f0d3aabec01c64"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-92cf089ec39d",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "ebaf6e7bf74a1e8b3ccc8e822947f20e8cf785d60b8deeff3cfa5dc84a3d05df"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-7a3bdc7f48e9",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "ca3e1fbff2db58924b497a4f9446849fb9cd62416f13b77050a9cdd922cf1513"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-d9f95e657c0c",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "9ccf12c91b1d578a35d2df4af2eb58b58e531a08d97714676feb76881eb1abcd"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-b88cc2f88c44",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "dac5384b40620fdc798b07f55d93140bfe7b3c15ea913cf863651578dfb55e05"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-878c7da6f8bf",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "b3211f615a617eea42685add6609d24f8e9a637fca49112b8b27ed6ed701ef83"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-a091c0d5de68",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "9be55f0d0b9df510267b7800d3c0d5afbacff126caf400fd42a1954963b9e3e4"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-b97ac2d7be70",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "93a49ef74b5d9cbfe754b4fe94cce88f33ea963ab9cc71419f5bdacdfbd08b1d"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-012128d6fd29",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "d0e1eae7c3705f9dbea6c08891e5ebc2e74461caccad1025010442e85e2e6d16"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-bb7487cbbb84",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "50095eb2c9ed14ebe5c90dd50615144902f728286b2714f6e00eec6b282e5ae4"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-b48412f735ad",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0066f004713f4139f1b3ff0adfba6f1c07ed812cf62ebd4abc4ee896d9834ac9"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-df726abd59a5",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "cb8f511e41efedb9688b4c9934e4ad1255ec9c721c9f7bcf9c5598e90f4bcb08"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-119d20e6f3b6",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "8712747fffcf20d3da0655413b8ebd7d9a5c644c73adc774aae778adfdc31c8e"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ba47b795339e",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "f228ae4c9d3f4266195fc006fe7c52719841af14a3c38f1ba46fd7f1d861af15"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-0c608cb8ed46",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "6d1c7d266ac7b4e5ce208bd5835f47a4e0a64887be46bb7f35194012adfe35ca"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-89c12030e3e3",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "c833501b96869b9712e4d7a0cecc5bdbd8f5f068d5ef3b0fa9dda9fbcf925b58"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-a42eea103d6f",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "3bdb729587b622a6efc23de9f66bcf8bd6790310ee7694de9e46709ead8ebabe"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-849eb319c5f7",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0141bb41850408044cbc7ad740e6533a06e7f6a463e62869c58572c84534d649"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-9fe850876aed",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "dce39c9a57bbde852a6fc5e7c1a5d44b1498dd5b797659ec1dc4722097f6d33b"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-2d23d40e4fb1",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "afcc612f2b2bb46a05608028310910be030efcaa9103ae8e487d46c9a8d740b4"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-1ce8d99374f0",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "222f0cdfe02efc448293c7da7425f805a984db8d18f812d5d35746aea67d3664"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-48cd4311b025",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "ae5dcd51b50dacaedc191dc8217674155766e4a026af917d5299238cfedc4145"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-9532d94ad23f",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "433d3198cdb620cc9c90c0d1861c70cb3ee8c641b5c733348ba2d4055be7aaa3"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-f614aa5adc63",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "2f30f817a1ed266a9ea873bca2a812dc8256cd7d604b3c49833f260ff1d60f28"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-65580debbce3",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "1c81fdcab1c1f9978cecea92175ed802cd211cf46f861c7324115c9500f8e4a0"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-e0aa7d95df76",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "07a127809148da68c131612cea0d1c41657b3ba134ce89539fdeecc1cccea07c"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-96cc2ced540b",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "33aab5dc882558d204cdef03d7799e0f0d1ee53f78cb0eb1b94c2ee14293050c"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-1b5757faf3e0",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "7fc5e939ffcf5dc23aa6cb12d2993086dae2edf32c9239895ae1351cc602e561"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "R6-21X26-M37-C19",
+      "originalMR2": [
+        37,
+        2,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "470f955050d1c27ed25ed02137bd43d4ad5be488860d4435a02726cc8e204822"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-0be5e258f388",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "445df54ae8b050cc9265ad8e68bb7fc1a5456e5e81b78d45576e88413ceff47a"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-59a0f62c9d9a",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "48c45042e649f6786db6072502362575e7611fbeb5dbd2e557e2ee2cdabdbe16"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-e1a447f933af",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "4157d391b1826d3c13367c4dd7a54e241b8e9c3147c77ebe8da7bc9187b1e677"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-36bbd5208dbc",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "56462d2270957c40255d0fefa3fc96184d8660a832c8fa9e80dafbf3e539f2af"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-01d3b7c2ebc2",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "f6e24e59605da64d1c75648be01f8fb1422d7761b0e7c9bec2b1adf7d8c52350"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ee7bf32721db",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "66f77dfb61e187c3fa50a38b4c82627989a54afc9ebcae4764c0ac21a1b42e41"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-676622f2bedb",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0f1ec0a868014caf05e937a15d654ddf03ffb7e4acfea89b5444944065732bb8"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ff9ce5ad0d38",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "dd1bde1e6a1f21f32ae137d31e027ad5306dc6e30e75d8f4300e0827f8894fdf"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-fafc35244676",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "2765200885d6f3cbb71604e57e63a0fcb2849e12bbba57f84409006f26d93627"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-d2b4df6fec85",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "67042b6b63b7984c0814806ae21fde10df036e40c5967e87d834d8620e2dce43"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-c023802b69e3",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "c48bbde91db1700b6b983e8476b1c4b18a3f832246b58166a14ac75df44ad107"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-5bfb567d1533",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "02fcf111240c324dfa027a532ac8bcb2e6d1b27b8d964280c8c8c099864f3b60"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-445715ee9698",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "65ef350412aba141ecb28ec619b4cbfe72e89ddf4df359a98f6ab043a93a0740"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-39ec2131e38d",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "f35b1fc6e2175d18b044f7def61a389bc045b7e1cc9c1f4723ec8a4c07ce7ae1"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-bebb113ffb67",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "03d0bbe9adbb57593f4dab3302eec8c4fad108a6013ed9aa0ac1fbf321e793a3"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-24c82c76446b",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "8779c674561db3cffbaed8369e1c7eb27a0693596f8cf7b9f5454814aa31b9f6"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-aeb5de0e91ef",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "77136b66d8c3ea6b2048cee0502242abbaa963751ccdf3ff4a4105809ba61f76"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-b79ed3f15e85",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "369b61150ddf0b9419c153b0ff020ba2f9e3cafc67729b69d822443428e894d3"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-3e022fc9c99c",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "fcc56516d612175f21988f06335dc91bf8780fa0ddbef80088afc5ae09e78ed6"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-a886df8ae231",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "4017bea8e8ef7d9ff80f005ebf77d646560b5837f625567f5c36f17c223c6715"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-3492d62bb370",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0ada55b5b5e34027abbb45705984c289923fe29533cd230ec63c351d728c677f"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-49267af3bcc7",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "b9d0ce23468fe6e9eb4bd8996d568897d70ca12a0a4765394a297509d884c9a5"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-a2e765b8cc39",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "494c1790c0eb4dd6664552c8d782d394f3eca77f59ec2fbb7b28bff547250b2c"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-0db5943f1e89",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "158326ddfa31ff9f354bf13d12237ab5fd0e3eb9c6de6ea9200f624f1eecb74e"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-d9165a77a9a4",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "371a4462be9981ca999138ea2d2e0c49bf19316518f1a4c3aaaab12d0919e8ef"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-82d7cbf90167",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "02332baf1a6bf732b44a5f0189cd6447c797fe6cbae524417461f531e02f25e2"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-a1711c533f16",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0e4c78d219d5bbcc16795fbe86043e817f64fe32823e7a95a6a502208b77a1c1"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-a725a322f7ff",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "404c98000844c8d4ab9e405fcbcc04016866132dae3a53f4bbad9f36a595eb50"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-4d90d19f7f10",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "d0eb2234b6a58a32d33d86a1c66384af7ba732275af22d571320704c20ed31f5"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-03e97691ad4a",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "06d2c31d1bf8753a9368a568d49f0c72281f1596e7b54e86e67d6524dcf6b6d3"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-5476de1d3581",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "bf439891d3f5c6f69844e92a38b9df9fde2970385292c0e0051478aaad77adda"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-d6502d2d7acd",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "5efd2688afdaa1440ca085557c97982dc4dfc128a87dcd806f2d8cb5733e5890"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ed0007f4fbf2",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0e650b2b488105f8f27e137d3d6c2b0f35462b8a2aac41c776ee4f87dd919189"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-ea82637ad4d9",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "307eada0ea55bcb43eb96e31be88df265b7bc77f5d032258acb906b8a42c8b46"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-95e8c97fab6f",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "8864879c2ab88b1c22d32ba0097f064330a718e0923c9fd93e8416ff7e2f15ba"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-06e6244b4229",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "b63e2aee2d1f744f75fb68d9b734e568d62e05c8b7a7328af2d692b68c52bda1"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-0d24a98c9fc1",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "61856f679433a132466e8a853d51a796f413da7fa90fa2ac7acc512d6408bc06"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-d8eaab4e5301",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "a160a51c5e1a6452eb21c7ac548c38d8e626aa694960eb10493e31eb7a7baf38"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-f79436eaf3b9",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "bb869c3fd22298f7cfed48ff8e8b68215a260d1b9f6e16268932e6d1ba8da159"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-50866dbdbc15",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0fee9aad82d105a379097e21757a8a4f279398bb92eb1f835bcaf4f1d53e2a88"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-f41a2efdbd4a",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "e902e48ed4cdc68520df8f85242d3c18558baf19f44c62b3987fb9363dda41ac"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-000008b11741",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "ce143ccaa4a6455984f1993d81c58c82e4ffd9c7467fee10ec367e319e0df031"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-b41217f3173d",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "a6f7560ee0eecca5ea971e131f46ee088643c3254904c7e2bfb3c6fcdf6f4776"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-f6e44c221d47",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "fa257726135d4e7d47445e0bdb69ebcbbb239f38d3c88cb9d90b6d256b4eb9e5"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-d11963fb699a",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "17a9af85fd875ecf44a7d6f34306dfdfb3587b6e4563a065f960ec315b4d0c54"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-c482b9c352bb",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "091443c10e8f9d76c7b516d5fe3ebe53dcd7b25170a0d890e7eced50babe5bfc"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-234184a7d469",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "68ca96f2c3259c7efc9d1934007cbbe3fe2f83632029d09cad2877b5c316a71a"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-8d424260b8bd",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "1cb0b4104276f4937bddb4240690b88f2e8e29db5a5244d10369654d4cba760f"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-8a381e674a3a",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "f1afc4ce3aaa3de8b19bb3a90680c993b820abbad09ec128067026a4b1889a63"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-810636dba9a1",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "af7efab2239b96eab967e7d14265e9bcc19e798c6cd51a1757bb2c1b2adbbb20"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-0548d6b67f75",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "59011be93ba0a8f1b2ab99df32d51d8ce6a311d591066440e0b4b24750882503"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-de8249a96e39",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "3387163247a6e5af1fa50d0d3e9c77409a4f807e24fd112e8d540241e222629c"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-b91dfbc1207e",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "1e276107e42bc774b931a1636a9b78aae875b12ab2f9b47fc25ab3a0fad8b373"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-descent.json",
+      "id": "UV51-26-9d9b94483c30",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "2f5ca327d3e0bbe14a122171d311015c353b03c814fc1cbcfeaa73bb26578f2d"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-combinations.json",
+      "id": "SNOW-SHENYUN-21X26-D3V1-BALANCED",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "59a45cf4b3b52ee4d46785dfc6993d073075f3cd8fa6e402a2a51f68f2ff1d6c"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-combinations.json",
+      "id": "UV51-26-03e97691ad4a",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "06d2c31d1bf8753a9368a568d49f0c72281f1596e7b54e86e67d6524dcf6b6d3"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-combinations.json",
+      "id": "UV51-C-3fc6667c66d4",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "7eeda8e9694a4143a8a259607d5d1a2ceabb2509f7df3a3a1d5b6b831edcd1ce"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-combinations.json",
+      "id": "UV51-C-3a1b3f1a7ebb",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "0842c1f6ce9796c93b958c964628b313e6ef4b558da7bf0822e865a4e7bce2c1"
+    },
+    {
+      "source": "2026-11-14-untoned-2126-v51-combinations.json",
+      "id": "UV51-C-0c4b5e01774b",
+      "originalMR2": [
+        40,
+        3,
+        1,
+        0,
+        399
+      ],
+      "common399CodeSha256": "2312b7936db15b6a659cff5996af683de7f8e0caf972241fa630f12e82b4de35"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "QZ-e8f37a0998f9",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "d684d9565c4e1edc11da45348e8e58d0f294d92195dcf65a430655e3c3e4b59e"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-f1ccad05fc8b",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        346
+      ],
+      "common399CodeSha256": "aa4f716f96f4f6380289bd8e44483eb2c8e109de6c160a1bee1da6441fe9fc7c"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-346435e299f8",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "3796ca1bea5d69bd8fd2d9424cbdf39ff14c308813cb60b2910cbc00e9dd9bc2"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-4802d70bda14",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "bacc63885978ba8dc4b39c85ebb89d4883ecc4bff0bf985e7cfa4f91cf450c53"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-cf3efb16ee53",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "cdeac6fe8fa8fcf037eb767361eb18306ae29e5eea7108ac0d87e5ca64299c04"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-53992eb8a8e3",
+      "originalMR2": [
+        41,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "bb61d95e476455cc83a727d5df6cadaa2273b11d20c6f5bc9cd0d1022751ca95"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-ce49d91c8436",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "164b3039555cc9334ab2177c44449b2b56407bfd264975fadaa2687851ed8152"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-e47c4781f6ac",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "8ebb636dc96c082f3f4cb05f7a70953c08573120655fe8c36c87aee28ace8baf"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-6b04d3422473",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "5753faf17714597a64ac4b72c8f5f6a8ed7b96e5a6453fca03addd00b75f6b39"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-07704cf4f738",
+      "originalMR2": [
+        41,
+        2,
+        5,
+        0,
+        346
+      ],
+      "common399CodeSha256": "cbe5d7273083e2b7d8737ba989550abe652283c7bb4b0163eb7c89dcff2db15a"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-940705e645f1",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "9b0f07d066cafb9650023365fc826b334f085cae97faa3b8502efd8a3fe7fbc8"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-2853c563ea85",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "57b359425858e8adf3b568e21825d319e9a2550e8848e7adb2df75a7aad14710"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-89c7b1ad04cd",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "1e2fa48990be9bd18ee5adb4efd381f0b0e69b33f00e2da8dc4de922314923b6"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-ef63b0901d44",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "f041c3d695b9774affa04050be7877b56a3b178427af4d8a31fa78ff9c4437e8"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-4ae0313ea8c4",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "b3ef2b3d2c45c86420c0140569675423d263538141726491526c9613ac077a50"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-19166a4a1057",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "d7b18c6dc04cefb09e0603424cbbbe36efb5e43b51fabd7704d3a0c608ef7f07"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-431cf8b18c4a",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "23594aff7534b3c9c3ad7bbec15a86f68cb769b22eebf192d016d0bece9ea5aa"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-c4d50410bc7a",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "953ab56bc621ddbe3fbb658af1ba017a4795271f05b18a88f7c672faf881e797"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-486d4e1e8fc2",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "2f3fe6e81f860029d63054a1522c124218492830a26390bbc5991ea6f2cfd77e"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-adfb30d298b2",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "1803e54ad9d53e041d9435a0d6e6198c03a4338d0fb8897002927a1be96dfa9f"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-174b58735a02",
+      "originalMR2": [
+        41,
+        2,
+        5,
+        0,
+        346
+      ],
+      "common399CodeSha256": "13619a419cc2b076d4d9678976a7e52f758fbe3a905945f4f9949ac293f28376"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-2b098708c633",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "300815bff997442a763e280350e5f171c77766ac7085dadd69be47f6ce1d5093"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-c6147ab639ce",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "3ce773965dc21801fee9e4b5674346b4cc2ab64524af8e94562237f170f8d51e"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-951dfcfb109d",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        347
+      ],
+      "common399CodeSha256": "74ca55303358ae30a1cdd2fd47c044e4f888791fea06a5694e20ab3445b6a2ca"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-fad707807cf1",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "2d0e1a8458151379a5ef49bb17069175a62167b5a149e7e8e8dbca2ab849f1ff"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-b43e917e594b",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "26658d63f44d07018a10dc0782435ace907cfb3a6621908e091a8fbe959c5179"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-a41c3144e522",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "66ad4d6fb0ed4e1abaea9ee9846533e448d096101a695e7b81b7e6f50ec3cab5"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-ccf4e73c9f55",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "0d9cf05e55726019a4e53fbb50f57e32fb50703d641f99ffe65d7568981d3994"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-821953a13176",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "23720003968c3a8e0c7efa02f91a417f73b7a55fbbe4a7b2e3679d13d059e794"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-9423c93b596d",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "e0c4c10c86a698d7ce6c6d72045c7e6fbf75f5aba9162a61a2b1dd58658dc5ae"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-797229b1337a",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "009776d43f481c50c815e8537bb1f6dae59fb0c0dd9b8bd3bf263f88baea1c1f"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-ad5540d4dfe9",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "d732679b057d189c9b06c4123de1b8897fc1a8e0ed5a0337e6387f1f1c80cf02"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-239ddc8113de",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        346
+      ],
+      "common399CodeSha256": "596b615e9a344bb326db98abafc247c728c959bf2f27391ac20d5e7526a412fb"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-a53051e09af4",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "520f18bbd0f3638cdca76e0aadd38359493548e03e4ebc5064b3af6e126315f8"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-b04c0d69fe22",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "768c3092ac3a9ba54e01f78961d5eb988aef511b85c0cc829b82c60500e32bba"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-95351b8e91f7",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "497a55d571ba2c4abcfd1c923733ecb722eb3702621cef4f5f99e8779076b73c"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-2be4596db6fc",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "29c37842a9a9b74f224291ef0b68b83267464745771d8e97ef9e49ef76d9d497"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-f54c489892d3",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "7b027f25c176d267debb3d34bf1492a65ec910601f97afe703a359ff4ff4f1aa"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-02c36cec5f65",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "f0bbcb00bf412a1cb81f48c6f9eeaf212f194660d7e1901b94bfcafb71238802"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-c6f6d1c68e20",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "c49d326ca689f591641ed786accfcc1d68f4e5e729af25282bf7ac24ace367a4"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-bf3b4751a92b",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "e432593cdd14866749b1601fb9a6469cea22735c22894d8cf9adc01e40fc1452"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-39ce06faf8ad",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "0499c2163aea7231a150c4e324c1b0865e6337a32938e73d275f327dc4172990"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-3c0d2b0b16f6",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "93a16741eca2629667a1fdd215f64450927526f514b1a7470eb42b9e8e6245d0"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-eb1c66a16894",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        346
+      ],
+      "common399CodeSha256": "cde782589c670b7b1b0adf47f7149fde6556f2c252d80e50b66749ade7a53dc5"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-c2757f61cc66",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "732cf3239d48f6d873b43dd4e44bd696987d39c9a5890b1695ae756a105c67ea"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-9b3b62c4c308",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "722531ec1bf8ed29aa66c2bc3c159e3ba9fe77b6f51b89a1ec194d06318cdddc"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-fe14baa3712d",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "1d99b424a36e6055978dc476c10cfedeba6f4746271a2b7dd899c9a8c6ab6893"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-8791a3f87fb2",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "05a42620953e6c7dcadc0d0171f94fe5da5174d92b92ca15482e08505a0f8b15"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-3ad2d0d6b99b",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "cad1f40cf7f835f48a567827300ead1eb7a343c4def908ab34fc35963f567b7b"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "QZ-c6f1cd673f93",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "01c7c3bbdbde004372685e51eb5c408ba3a084a10574405aa9b249bcfbbdc4d0"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-f55fca4115bf",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "bee21fc6ccb2838ca79338f78822c9192bfb823ceae756d6275005f0a49f03fa"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-f1c9cf7b8e4a",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "6c6c06cd59b940e61498101ca8c17f0a0d5caed13a8385beb586355c202b2782"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-40e946f91c58",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "c9ebcbdee9aaacc788ff48057f8f703851efbb88972cd7bc3c98dc2e2b3f4e60"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-328e2b51ca43",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "bc4a6d73d55472446be808b7d69d6683f1553a602f2d06c50ff5ee6179ea7cd2"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-dff9ffe84a7d",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "40e2eb9e52e7518d29629565fa716236e35ffef528e0a30938e434cbb8654da4"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-f7e35ec08e60",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "93cc1ee2608566420d6699366ec20564754ef1fd6bbdf17a0b5e084284b0e8a7"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-0842823457a4",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "755d87c598d575224c9c34f5967c9424de649445995c8e86e7d123255d6ce839"
+    },
+    {
+      "source": "2026-11-14-untoned-2121-v51-partial.json",
+      "id": "UV51-21-1d37aa1e7dea",
+      "originalMR2": [
+        42,
+        2,
+        5,
+        0,
+        345
+      ],
+      "common399CodeSha256": "86cca4b073bd8b7570fcc20ee2b9cc87e16ed611f2ed1b746a5ec41e923601ce"
+    }
+  ]
+}

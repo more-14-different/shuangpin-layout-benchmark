@@ -37,6 +37,8 @@ R11 冻结后没有直接顺延为 R12，而是先重建 CKT v4 精确评分、�
 
 完整的时间线、状态规模、负结果、证据分支和可复用方法见 [`docs/POST_R11_EXPLORATION.md`](docs/POST_R11_EXPLORATION.md)。后续 CKT v4 约 9.x 的归一化分数与本页 R11“补全 CKT ms”不是同一数值轴，不能直接横向比较。
 
+2026-11-14 的[无调21×26局部下潜](research/notes/2026-11-14-untoned-production-v51-descent.md)在现行生产辅序、M40/D3/V1、Common399无重码及QZ/ZQ双空下找到研究候选：CKT v5.1由9.103000降至9.087580，移手、主行及传统当量改善，W峰值增加0.2313个百分点。该候选尚未替换生产布局；报告同时列出已计算后停止的21×21结果。
+
 ## 代表方案性能
 
 <!-- README_REPRESENTATIVES:START（由 tools/update_readme_representatives.mjs 生成，请勿手改） -->

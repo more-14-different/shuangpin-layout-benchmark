@@ -1,5 +1,21 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-production-v51-search family="26" rounds="2" retain="32":
+    node tools/search_untoned_production_v51.js --only "{{family}}" --rounds "{{rounds}}" --retain "{{retain}}" --output "research/notes/2026-11-14-untoned-21{{family}}-v51-descent.json"
+
+untoned-production-v51-audit:
+    node tools/audit_untoned_v51_finalists.js research/notes/2026-11-14-untoned-2126-v51-descent.json research/notes/2026-11-14-untoned-2126-v51-combinations.json
+
+untoned-production-v51-combine:
+    node tools/refine_untoned_v51_finalists.js
+
+untoned-production-v51-report:
+    python -X utf8 tools/report_untoned_v51_descent.py
+
+untoned-production-v51-test:
+    node --test tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
+    python -X utf8 tools/verify_untoned_v51_results.py
+
 untoned-2121-v51-neighbors:
     python -X utf8 tools/explore_untoned_2121_v51.py
     python -X utf8 tools/audit_untoned_2121_neighbors.py
