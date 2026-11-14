@@ -1,5 +1,16 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2126-double-empty-closure workers="3" centers="6":
+    node tools/close_untoned_2126_double_empty.js --workers "{{workers}}" --max-centers "{{centers}}"
+
+untoned-2126-double-empty-closure-report:
+    node tools/verify_untoned_2126_closure.js
+    python -X utf8 tools/report_untoned_2126_closure.py
+
+untoned-2126-double-empty-closure-test:
+    node --test tests/untoned-double-empty-closure.test.mjs tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
+    python -m unittest discover -s tests -p test_untoned_closure_report.py
+
 untoned-production-v51-search family="26" rounds="2" retain="32":
     node tools/search_untoned_production_v51.js --only "{{family}}" --rounds "{{rounds}}" --retain "{{retain}}" --output "research/notes/2026-11-14-untoned-21{{family}}-v51-descent.json"
 
