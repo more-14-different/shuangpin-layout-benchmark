@@ -1,5 +1,18 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-three-step:
+    node tools/probe_untoned_2121_three_step.js
+    python -X utf8 tools/report_untoned_2121_three_step.py
+    node tools/verify_untoned_2121_three_step.js
+
+untoned-2121-other-centers:
+    node tools/probe_untoned_2121_other_centers.js
+    python -X utf8 tools/audit_untoned_2121_other_centers.py
+    node tools/verify_untoned_2121_other_centers.js
+
+untoned-2121-multicenter-report:
+    python -X utf8 tools/report_untoned_2121_multicenter.py
+
 untoned-2121-two-step:
     node tools/probe_untoned_2121_two_step.js
     python -X utf8 tools/report_untoned_2121_two_step.py
