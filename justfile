@@ -1,5 +1,13 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-local-closure workers="2":
+    node tools/close_untoned_2121_local.js --workers "{{workers}}" --max-centers 8
+    node tools/verify_untoned_2121_local.js
+    python -X utf8 tools/report_untoned_2121_local.py
+
+untoned-2121-local-closure-test:
+    node --test tests/untoned-2121-local-closure.test.mjs tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
+
 # Prepare once for a new frozen run; resume with twohop-search directly.
 untoned-2126-twohop-prepare:
     node --max-old-space-size=8192 tools/export_untoned_v51_templates.js
