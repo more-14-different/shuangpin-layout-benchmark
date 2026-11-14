@@ -27,6 +27,17 @@ untoned-2121-local-closure workers="2":
 untoned-2121-local-closure-test:
     node --test tests/untoned-2121-local-closure.test.mjs tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
 
+untoned-2126-anneal-100k workers="16":
+    node --max-old-space-size=8192 tools/anneal_untoned_2126_v51.js --workers "{{workers}}"
+
+untoned-2126-anneal-100k-audit:
+    python -X utf8 tools/verify_untoned_2126_anneal_memory.py
+    node --max-old-space-size=8192 tools/verify_untoned_2126_anneal.js
+    python -X utf8 tools/report_untoned_2126_anneal.py
+
+untoned-2126-anneal-100k-test:
+    node --test tests/untoned-2126-anneal.test.mjs tests/untoned-2126-threehop.test.mjs tests/untoned-2126-recenter.test.mjs tests/untoned-2126-twohop.test.mjs tests/untoned-2126-coupled-search.test.mjs tests/untoned-double-empty-closure.test.mjs tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
+
 untoned-2126-threehop-search workers="12":
     node --max-old-space-size=8192 tools/explore_untoned_2126_threehop.js --workers "{{workers}}"
 
