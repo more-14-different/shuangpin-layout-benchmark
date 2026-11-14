@@ -1,0 +1,23 @@
+{
+  "objective": "Descend from DE26-e53e454ffc9a using two-step endpoints; try more distant layouts if local gain is below 0.001 CKT",
+  "memoryAudit": "M-R2-explicit",
+  "maximumMemory": 40,
+  "maximumOrdinaryInitialDisplacements": 3,
+  "maximumBaseVowelDisplacements": 1,
+  "additionalRoutes": 0,
+  "common399UniqueCodes": 399,
+  "emptyCommon399Buckets": ["QZ", "ZQ"],
+  "shapeKeysByMeaning": "AEUIO",
+  "toneKeysByTone": "IEUAO",
+  "toneDigitsByShapeMeaning": "42310",
+  "shapeAuxiliaryOrder": "12/12/24",
+  "toneAuxiliaryOrder": "12/21/13",
+  "candidateRanking": "soft-page-fill-v2",
+  "acceptance": "moving hand, S2 home and minimum 20-contract home >= original production; S2 e34 and A7E-v4 <= original production",
+  "localSelection": "112 candidates in first selected two-operation endpoint screen; at most 80 in a second screen if an admissible improvement exists",
+  "farSelection": "if total local gain <0.001, up to 80 final candidates selected from 8000 seeded legal walks, >=6 token mappings away from the best local anchor",
+  "farRefinement": "Descend the best selected distant endpoint for up to two further rounds, at most 64 new native-scored one-hop endpoints per round; cached neighbors participate without rescoring",
+  "scope": "All operations and pairs are generated before final endpoint screening; native CKT is computed only for selected endpoints, not an exhaustive two-hop CKT proof",
+  "intermediateState": "may violate memory, uniqueness, empty-bucket or ergonomic gates; final endpoint must satisfy all frozen gates",
+  "productionDeployment": "read-only"
+}

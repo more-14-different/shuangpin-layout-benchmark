@@ -1,5 +1,18 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2126-coupled-search workers="3" local="112" far="80":
+    node --max-old-space-size=8192 tools/search_untoned_2126_coupled.js --workers "{{workers}}" --local "{{local}}" --far "{{far}}"
+
+untoned-2126-coupled-report:
+    node tools/verify_untoned_2126_coupled.js
+    python -X utf8 tools/report_untoned_2126_coupled.py
+
+untoned-2126-coupled-far-refine:
+    node tools/refine_untoned_2126_far.js
+
+untoned-2126-coupled-test:
+    node --test tests/untoned-2126-coupled-search.test.mjs tests/untoned-double-empty-closure.test.mjs tests/auxiliary-semantics.test.mjs
+
 untoned-2126-double-empty-closure workers="3" centers="6":
     node tools/close_untoned_2126_double_empty.js --workers "{{workers}}" --max-centers "{{centers}}"
 
