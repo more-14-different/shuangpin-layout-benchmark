@@ -1,5 +1,11 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-two-step:
+    node tools/probe_untoned_2121_two_step.js
+    python -X utf8 tools/report_untoned_2121_two_step.py
+    node tools/verify_untoned_2121_two_step.js
+    node tools/audit_untoned_v51_finalists.js research/notes/2026-11-15-untoned-2121-two-step-finalists.json
+
 untoned-2121-local-closure workers="2":
     node tools/close_untoned_2121_local.js --workers "{{workers}}" --max-centers 8
     node tools/verify_untoned_2121_local.js
