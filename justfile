@@ -1,5 +1,14 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-anneal-2k:
+    node tools/anneal_untoned_2121_multicenter_2k.js
+    python -X utf8 tools/report_untoned_2121_anneal_2k.py
+    node tools/verify_untoned_2121_anneal_2k.js
+    python -X utf8 tools/summarize_untoned_2121_anneal_2k.py
+
+untoned-2121-anneal-2k-test:
+    node --test tests/untoned-2121-anneal-2k.test.mjs tests/untoned-2121-local-closure.test.mjs tests/auxiliary-semantics.test.mjs
+
 untoned-2121-three-step:
     node tools/probe_untoned_2121_three_step.js
     python -X utf8 tools/report_untoned_2121_three_step.py
