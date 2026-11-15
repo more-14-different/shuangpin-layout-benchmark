@@ -434,6 +434,27 @@ def validate_expected(metrics: dict, expected: dict) -> None:
             raise ValueError(f"benchmark anchor mismatch: {field}: {metrics[field]} != {value}")
 
 
+def apply_robust_production_display(entry: dict, selection: dict) -> None:
+    metrics = entry['productionCandidateMetrics']
+    expected = {'keytao': {'word2': '12', 'word3': '213', 'word4': '24'},
+                'sanpin': {'word2': '12', 'word3': '213', 'word4': '21'}}
+    if metrics['cktV51Policies']['candidate'] != expected:
+        raise ValueError('production display requires the audited robust policies')
+    aggregate = metrics['cktV51Aggregate']
+    if abs(aggregate['motorUpperMs'] + aggregate['cognitiveMs'] - aggregate['effectiveMs']) > 1e-9:
+        raise ValueError('inconsistent production aggregate')
+    # Every unversioned production attribute comes from the same v5.1 replay.
+    for field in ('firstAuxRate', 'secondAuxRate', 'thirdAuxRate', 'selectionRate',
+                  'motorUpperMs', 'cognitiveMs', 'effectiveMs', 'meanKeys',
+                  'meanRejectedCandidates', 'meanPageActions'):
+        entry['readmeBenchmarkMetrics']['aggregate' + field[0].upper() + field[1:]] = aggregate[field]
+    entry['readmeBenchmarkMetrics'].pop('cktV51DefaultPointOptimal', None)
+    for field in ('cktV51DefaultPointOptimal', 'cktV51DefaultPointPolicies', 'cktV51DefaultPointAggregate'):
+        metrics.pop(field, None)
+    metrics['cktV51AuxOrderSelection'] = selection
+    metrics['productionMetricContract'] = 'CKT v5.1; robust auxiliary policies; character/word2/word3/word4=1:3:1:1; two members equally weighted'
+
+
 def patch_production_ui(html: str) -> str:
     # Keep the visible policy labels out of numeric CSV score cells.
     html = html.replace("c.querySelectorAll('.dv-chip-line,.dv-cell-flag,.dv-row-label,.ux-sort')",
@@ -541,21 +562,22 @@ def main() -> None:
         replaced_ids = helper.prune_scheme_ids(data, candidate_ids)
         existing_ids -= set(replaced_ids)
     if candidate_ids <= existing_ids:
+        update_payload = bool(candidate_source and candidate_source.get('productionDisplay') == 'robust-v51')
         for candidate in CANDIDATES:
             present = next(entry for entry in data["entries"] if entry["id"] == candidate["id"])
             if present.get("r11Provenance", {}).get("stateKey") != candidate["stateKey"]:
                 raise ValueError(f"already-integrated mapping differs: {candidate['id']}")
             if any(candidate["id"] in missing for missing in production.missing_by_map(data, existing_ids).values()):
                 raise ValueError(f"already-integrated benchmark incomplete: {candidate['id']}")
+            if update_payload:
+                apply_robust_production_display(present, candidate_source['auxOrderSelection'])
             validate_expected(present.get("readmeBenchmarkMetrics", {}), candidate.get("expected", {}))
         if candidate_source:
             patched = patch_production_ui(html)
-            if patched != html:
+            if update_payload or patched != html:
                 if HTML.read_text(encoding="utf-8") != html:
                     raise ValueError("HTML changed while updating the table adapter")
-                staged = HTML.with_name(HTML.name + ".tmp")
-                staged.write_text(patched, encoding="utf-8")
-                staged.replace(HTML)
+                fixed.write_payload(HTML, patched, body, end, data)
         print(json.dumps({"alreadyIntegrated": sorted(candidate_ids), "catalogue": len(existing_ids)}))
         return
     if candidate_ids & existing_ids:
@@ -794,6 +816,8 @@ def main() -> None:
                 "cktV51DefaultPointAggregate": point["aggregate"],
                 "cktV51AuxOrderSelection": candidate_source["auxOrderSelection"],
             })
+        if candidate_source and candidate_source.get('productionDisplay') == 'robust-v51':
+            apply_robust_production_display(entry, candidate_source['auxOrderSelection'])
         if ident == E8F37A_ID:
             entry["productionCandidateMetrics"]["cktV51AuxOrderRobustness"] = copy.deepcopy(
                 E8F37A_ROBUSTNESS
@@ -810,7 +834,8 @@ def main() -> None:
             raise ValueError(f"incomplete or changed benchmark map {name}: {sorted(missing)}")
 
     audit = {
-        "version": "untoned-2121-production-candidate-full-benchmark-v1" if candidate_source else "a7-qz-zq-empty-m42d2-six-full-benchmark-v1",
+        "version": ("untoned-2121-production-candidate-full-benchmark-v2" if candidate_source.get('productionDisplay') == 'robust-v51'
+                    else "untoned-2121-production-candidate-full-benchmark-v1") if candidate_source else "a7-qz-zq-empty-m42d2-six-full-benchmark-v1",
         "catalogueCount": len(data["entries"]),
         "source": {"branch": SOURCE_BRANCH, "commit": SOURCE_COMMIT},
         "auxiliarySemantics": {

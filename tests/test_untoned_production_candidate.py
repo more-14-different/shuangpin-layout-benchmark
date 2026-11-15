@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from integrate_a7_qz_empty_six import decode_state, patch_production_ui, score_v5_v51_21x21, validate_expected
+from integrate_a7_qz_empty_six import apply_robust_production_display, decode_state, patch_production_ui, score_v5_v51_21x21, validate_expected
 
 
 class ProductionCandidateTest(unittest.TestCase):
@@ -45,7 +45,23 @@ class ProductionCandidateTest(unittest.TestCase):
             self.assertEqual(decoded['toneKeys'], 'IVUAO')
             row = report['schemes'][candidate['id']]
             self.assertEqual(candidate['expected']['cktV51'], row['mainPositiveRobustDefaultScore'])
-            self.assertEqual(candidate['expected']['cktV51DefaultPointOptimal'], row['defaultOptimalScore'])
+            self.assertNotIn('cktV51DefaultPointOptimal', candidate['expected'])
+        self.assertEqual(config['productionDisplay'], 'robust-v51')
+
+    def test_production_attributes_use_robust_replay_and_remove_point_metrics(self):
+        aggregate = dict(firstAuxRate=.2, secondAuxRate=.1, thirdAuxRate=.02, selectionRate=.003,
+                         motorUpperMs=300, cognitiveMs=100, effectiveMs=400, meanKeys=3.8,
+                         meanRejectedCandidates=.004, meanPageActions=.00001)
+        entry = dict(readmeBenchmarkMetrics={'aggregateSelectionRate': .9, 'cktV51DefaultPointOptimal': 1},
+                     productionCandidateMetrics=dict(cktV51Policies={'candidate': {
+                         'keytao': {'word2':'12','word3':'213','word4':'24'},
+                         'sanpin': {'word2':'12','word3':'213','word4':'21'}}}, cktV51Aggregate=aggregate,
+                         cktV51DefaultPointOptimal=1, cktV51DefaultPointPolicies={}, cktV51DefaultPointAggregate={}))
+        apply_robust_production_display(entry, {'criterion':'test'})
+        for field,value in aggregate.items():
+            self.assertEqual(entry['readmeBenchmarkMetrics']['aggregate'+field[0].upper()+field[1:]], value)
+        self.assertNotIn('cktV51DefaultPointOptimal', entry['readmeBenchmarkMetrics'])
+        self.assertFalse(any(field.startswith('cktV51DefaultPoint') for field in entry['productionCandidateMetrics']))
 
     def test_candidate_aux_order_does_not_change_s005_reference(self):
         with tempfile.TemporaryDirectory() as location:

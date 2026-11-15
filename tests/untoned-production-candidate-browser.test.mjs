@@ -27,13 +27,12 @@ try {
     if (Object.keys(data.ckt.tracks[id]).length !== 20) throw new Error('Incomplete contract replay');
     if (Object.keys(entry.bPathMetricsNative).length !== 8) throw new Error('Incomplete B paths');
     if (entry.productionCandidateMetrics.cktV51Policies.candidate.sanpin.word4 !== '21') throw new Error('Wrong robust policy');
-    if (entry.productionCandidateMetrics.cktV51DefaultPointPolicies.candidate.sanpin.word4 !== '12') throw new Error('Wrong default-point policy');
-    return [id, entry.readmeBenchmarkMetrics];
+    if (Object.keys(entry.productionCandidateMetrics).some(key => key.startsWith('cktV51DefaultPoint'))) throw new Error('Nonproduction point data retained');
+    if ('cktV51DefaultPointOptimal' in entry.readmeBenchmarkMetrics) throw new Error('Nonproduction point metric retained');
+    return [id, {...entry.readmeBenchmarkMetrics, productionAggregate: entry.productionCandidateMetrics.cktV51Aggregate}];
   })), ids);
   assert.ok(Math.abs(metrics[ids[0]].cktV51 - 9.54170846001124) < 1e-9);
   assert.ok(Math.abs(metrics[ids[1]].cktV51 - 9.538996462957561) < 1e-9);
-  assert.ok(Math.abs(metrics[ids[0]].cktV51DefaultPointOptimal - 9.541534787172992) < 1e-9);
-  assert.ok(Math.abs(metrics[ids[1]].cktV51DefaultPointOptimal - 9.538688350324465) < 1e-9);
   await page.locator('#nf6SelectionHost').selectOption('21x21');
   await page.locator('#nf6SelectionMemory').fill('42');
   await page.locator('#uxQuery').evaluate((input, id) => {
@@ -58,12 +57,20 @@ try {
   };
   const validate = (table, id) => {
     assert.equal(table.length, table.count, 'column alignment');
-    for (const [label, field] of [['CKT v5 · 生产辅序', 'cktV5'], ['CKT v5.1 · 生产辅序', 'cktV51'], ['CKT v5.1 · 默认点最优', 'cktV51DefaultPointOptimal']]) {
+    assert.ok(!('CKT v5.1 · 默认点最优' in table.cells));
+    for (const [label, field] of [['CKT v5 · 历史合同', 'cktV5'], ['CKT v5.1 · 生产辅序', 'cktV51']]) {
       assert.equal(table.cells[label].raw, metrics[id][field], label + ' sort/CSV value');
       assert.equal(table.cells[label].scoreText, metrics[id][field].toFixed(6), label + ' display');
     }
     assert.match(table.cells['CKT v5.1 · 生产辅序'].text, /稳健：形 12\/213\/24；调 12\/213\/21/);
-    assert.match(table.cells['CKT v5.1 · 默认点最优'].text, /默认点：形 12\/213\/24；调 12\/213\/12/);
+    for (const [label, field] of [['生产首辅率','firstAuxRate'], ['生产次辅率','secondAuxRate'],
+      ['生产三辅率','thirdAuxRate'], ['生产选重率','selectionRate'], ['生产平均键数','meanKeys'],
+      ['生产运动 ms','motorUpperMs'], ['生产认知 ms','cognitiveMs'], ['生产有效 ms','effectiveMs'],
+      ['生产平均扫描候选数','meanRejectedCandidates'], ['生产平均翻页次数','meanPageActions']]) {
+      const expected = metrics[id].productionAggregate[field];
+      assert.equal(table.cells[label].raw, expected, label);
+      assert.equal(metrics[id]['aggregate' + field[0].toUpperCase() + field.slice(1)], expected, 'canonical production field ' + field);
+    }
   };
   for (const id of ids) validate(await read('benchmark', id), id);
   const scoreHeader = page.locator('table[data-ux-table="benchmark"] th').filter({hasText: 'CKT v5.1 · 生产辅序'});
@@ -77,7 +84,8 @@ try {
   ]);
   const csv = readFileSync(await download.path(), 'utf8');
   for (const id of ids) assert.ok(csv.includes(id));
-  for (const value of ['9.541708', '9.538996', '9.541535', '9.538688']) assert.ok(csv.includes('"' + value + '"'), 'numeric CSV score ' + value);
+  for (const value of ['9.541708', '9.538996']) assert.ok(csv.includes('"' + value + '"'), 'numeric CSV score ' + value);
+  assert.ok(!csv.includes('默认点最优'));
   await page.locator('[data-action="fair"]').click();
   for (const id of ids) {
     const fair = await read('fair', id);
@@ -91,7 +99,7 @@ try {
   await page.locator('#uxTau').dispatchEvent('change');
   for (const id of ids) validate(await read('fair', id), id);
   assert.deepEqual(errors, []);
-  console.log('BF/E1 robust candidates: native tracks, policy labels, benchmark/fair columns, sorting, CSV and default-point optimal scores passed');
+  console.log('BF/E1: robust production scores and all 10 aggregate attributes, policy labels, sorting and numeric CSV passed');
 } finally {
   await browser.close();
 }
