@@ -284,11 +284,13 @@ def aggregate_completion(scheme: dict) -> dict[str, float]:
 
 def score_v5_v51_21x21(
     scorer_source: Path, staged: Path, output: Path, ident: str, temp: Path,
-    *, keytao_word3: str | None = None,
+    *, keytao_word3: str | None = None, sanpin_word4: str = "23",
 ) -> dict:
     v51_keytao_word3 = keytao_word3 or ("213" if ident == E8F37A_ID else "231")
     if v51_keytao_word3 not in {"213", "231"}:
         raise ValueError("unsupported 21x21 v5.1 Keytao word3 policy")
+    if sanpin_word4 not in {"12", "21", "23"}:
+        raise ValueError("unsupported 21x21 v5.1 Sanpin word4 policy")
     source = scorer_source.read_text(encoding="utf-8")
     source = source.replace(
         'require("./auxiliary_semantics.js")',
@@ -306,7 +308,7 @@ def score_v5_v51_21x21(
         'keytao: { word2: "12", word3: "21", word4: "14" },\n'
         '    sanpin: { word2: "12", word3: "21", word4: "13" },',
         f'keytao: {{ word2: "12", word3: "{v51_keytao_word3}", word4: "24" }},\n'
-        '    sanpin: { word2: "12", word3: "213", word4: "23" },',
+        f'    sanpin: {{ word2: "12", word3: "213", word4: "{sanpin_word4}" }},',
         1,
     )
     v51_at = source.index("const V51_POLICIES")
@@ -433,6 +435,9 @@ def validate_expected(metrics: dict, expected: dict) -> None:
 
 
 def patch_production_ui(html: str) -> str:
+    # Keep the visible policy labels out of numeric CSV score cells.
+    html = html.replace("c.querySelectorAll('.dv-chip-line,.dv-cell-flag,.dv-row-label,.ux-sort')",
+                        "c.querySelectorAll('.dv-chip-line,.dv-cell-flag,.dv-row-label,.ux-sort,.untoned-policy-label')", 1)
     hook = " /* UNTONED_PRODUCTION_COLUMNS_V1 */\n if(typeof untonedProductionTableColumns==='function')({headers,rows,ids,raws}=untonedProductionTableColumns(headers,rows,ids,key,raws));\n"
     if "/* UNTONED_PRODUCTION_COLUMNS_V1 */" not in html:
         anchor = "if(typeof snowJiandaoTableRows==='function')({headers,rows,ids,raws}=snowJiandaoTableRows(headers,rows,ids,key,raws));"
@@ -447,6 +452,30 @@ def patch_production_ui(html: str) -> str:
     return html[:body_end.start()].rstrip('\r\n') + '\n<script id="untoned-production-benchmark-ui">\n' + source + '\n</script>\n' + html[body_end.start():]
 
 
+def fresh_exact_replay(entries: list[dict], replay: Path) -> dict:
+    """Replay in private input/output files without touching shared cache jobs."""
+    with tempfile.TemporaryDirectory(prefix="oc21-exact-") as location:
+        temp = Path(location)
+        inputs = temp / "entries.json"
+        inputs.write_text(json.dumps(entries, ensure_ascii=False), encoding="utf-8")
+        source = (replay / "eval_full.js").read_text(encoding="utf-8")
+        substitutions = {
+            "const R=__dirname;": f"const R={json.dumps(str(replay))};",
+            "require('./script1.js')": f"require({json.dumps(str(replay / 'script1.js'))})",
+            "require('./script2.js')": f"require({json.dumps(str(replay / 'script2.js'))})",
+            "path.join(R,'entries_to_score.json')": json.dumps(str(inputs)),
+            "path.join(R,'exact')": json.dumps(str(temp / "exact")),
+        }
+        for old, new in substitutions.items():
+            if source.count(old) != 1:
+                raise ValueError(f"frozen replay adapter boundary differs: {old}")
+            source = source.replace(old, new, 1)
+        runner = temp / "eval.js"
+        runner.write_text(source, encoding="utf-8")
+        run("node", "--max-old-space-size=1800", str(runner), "0", str(len(entries)), cwd=replay)
+        return {e["id"]: json.loads((temp / "exact" / (e["id"] + ".json")).read_text(encoding="utf-8")) for e in entries}
+
+
 def main() -> None:
     global HTML, REPLAY, V5_CACHE, AUDIT, CANDIDATES, SOURCE_BRANCH, SOURCE_COMMIT
     if not sys.flags.utf8_mode:
@@ -459,10 +488,13 @@ def main() -> None:
     parser.add_argument("--replay", type=Path, default=REPLAY)
     parser.add_argument("--candidate-file", type=Path)
     parser.add_argument("--audit", type=Path, default=AUDIT)
+    parser.add_argument("--replace-existing", action="store_true")
+    parser.add_argument("--fresh", action="store_true", help="recompute native tracks and production CKT without score caches")
     args = parser.parse_args()
     HTML, REPLAY, AUDIT = args.html.resolve(), args.replay.resolve(), args.audit.resolve()
     candidate_source = None
     keytao_word3 = None
+    sanpin_word4 = "23"
     if args.candidate_file:
         candidate_file = args.candidate_file.resolve()
         candidate_source = json.loads(candidate_file.read_text(encoding="utf-8"))
@@ -472,6 +504,7 @@ def main() -> None:
         SOURCE_BRANCH = candidate_source["source"]["branch"]
         SOURCE_COMMIT = candidate_source["source"]["commit"]
         keytao_word3 = candidate_source["v51KeytaoWord3"]
+        sanpin_word4 = candidate_source.get("v51SanpinWord4", "23")
         for row in CANDIDATES:
             row.setdefault("archivedCktV4", None)
         # Separate these scores from the historical per-layout policy caches.
@@ -495,6 +528,18 @@ def main() -> None:
     data, body, end = helper.extract_payload(html)
     existing_ids = {entry["id"] for entry in data["entries"]}
     candidate_ids = {candidate["id"] for candidate in CANDIDATES}
+    replaced_ids = []
+    if args.replace_existing:
+        if candidate_source is None:
+            raise ValueError("replacement requires an explicit candidate file")
+        # Replacement is limited to the listed layouts; reject mapping drift.
+        for entry in data["entries"]:
+            if entry["id"] in candidate_ids:
+                expected = next(c for c in CANDIDATES if c["id"] == entry["id"])
+                if entry.get("r11Provenance", {}).get("stateKey") != expected["stateKey"]:
+                    raise ValueError("replacement mapping differs: " + entry["id"])
+        replaced_ids = helper.prune_scheme_ids(data, candidate_ids)
+        existing_ids -= set(replaced_ids)
     if candidate_ids <= existing_ids:
         for candidate in CANDIDATES:
             present = next(entry for entry in data["entries"] if entry["id"] == candidate["id"])
@@ -582,7 +627,7 @@ def main() -> None:
     missing_entries = []
     for entry in entries:
         path = REPLAY / "exact" / f"{entry['id']}.json"
-        if path.exists():
+        if path.exists() and not args.fresh:
             scored = json.loads(path.read_text(encoding="utf-8"))
             if scored.get("entry", {}).get("codeList") != entry["codeList"]:
                 raise ValueError(f"stale exact replay cache: {entry['id']}")
@@ -590,26 +635,7 @@ def main() -> None:
         else:
             missing_entries.append(entry)
     if missing_entries:
-        score_list = REPLAY / "entries_to_score.json"
-        original = score_list.read_bytes() if score_list.exists() else None
-        try:
-            score_list.write_text(
-                json.dumps(missing_entries, ensure_ascii=False, indent=2), encoding="utf-8"
-            )
-            run(
-                "node", "--max-old-space-size=1800", "eval_full.js", "0",
-                str(len(missing_entries)), cwd=REPLAY,
-            )
-        finally:
-            if original is None:
-                score_list.unlink(missing_ok=True)
-            else:
-                score_list.write_bytes(original)
-        for entry in missing_entries:
-            exact[entry["id"]] = json.loads(
-                (REPLAY / "exact" / f"{entry['id']}.json").read_text(encoding="utf-8")
-            )
-
+        exact.update(fresh_exact_replay(missing_entries, REPLAY))
     before_snapshot = helper.preservation_snapshot(data, existing_ids)
     original_cwd = Path.cwd()
     try:
@@ -626,10 +652,14 @@ def main() -> None:
     ]
     if scope not in data["r11Research"]["scopeRows"]:
         data["r11Research"]["scopeRows"].append(scope)
-    collision_results = helper.attach_four_code_collisions(data, source)
+    # This catalogue-wide collision contract applies only to 21x26/21x28.
+    # These 21x21 candidates cannot change its corpus or existing measurements.
+    if helper.select_collision_entries(entries):
+        helper.attach_four_code_collisions(data, source)
     data["fourCodeCollisionBenchmark"]["catalogueCount"] = len(data["entries"])
 
     v5_results = {}
+    point_results = {}
     ids_arg = ",".join(entry["id"] for entry in entries)
     with tempfile.TemporaryDirectory(prefix="a7-qz-empty-six-") as location:
         temp = Path(location)
@@ -712,18 +742,24 @@ def main() -> None:
             ident = entry["id"]
             V5_CACHE.mkdir(parents=True, exist_ok=True)
             output = V5_CACHE / f"{ident}.json"
-            if output.exists():
+            if output.exists() and not args.fresh:
                 cached = json.loads(output.read_text(encoding="utf-8"))
                 if (
                     cached.get("id") == ident
                     and cached.get("version") == "ckt-v5-v5.1-fixed-21x21-production-policies-2"
                 ):
                     v5_results[ident] = cached
-                    continue
-            v5_results[ident] = score_v5_v51_21x21(
-                ROOT / "tools" / "score_ckt_v5_v51_scheme.js",
-                staged, output, ident, temp, keytao_word3=keytao_word3,
-            )
+            if ident not in v5_results:
+                v5_results[ident] = score_v5_v51_21x21(
+                    ROOT / "tools" / "score_ckt_v5_v51_scheme.js",
+                    staged, output, ident, temp, keytao_word3=keytao_word3, sanpin_word4=sanpin_word4,
+                )
+            if candidate_source and candidate_source.get("defaultPointSanpinWord4"):
+                point_results[ident] = score_v5_v51_21x21(
+                    ROOT / "tools" / "score_ckt_v5_v51_scheme.js", staged,
+                    temp / f"{ident}-point-optimal.json", ident, temp,
+                    keytao_word3=keytao_word3, sanpin_word4=candidate_source["defaultPointSanpinWord4"],
+                )
 
     for entry in entries:
         ident = entry["id"]
@@ -733,6 +769,8 @@ def main() -> None:
             for key, mode, kind, stage in NATIVE_B_PATHS
         }
         metrics = readme_metrics(data, entry, v5_results[ident], production)
+        if ident in point_results:
+            metrics["cktV51DefaultPointOptimal"] = point_results[ident]["cktV51"]["score"]
         validate_expected(metrics, candidate_by_id[ident].get("expected", {}))
         entry["readmeBenchmarkMetrics"] = metrics
         entry["productionCandidateMetrics"].update({
@@ -748,6 +786,14 @@ def main() -> None:
             "cktV5Policies": v5_results[ident]["cktV5"]["policies"],
             "cktV51Policies": v5_results[ident]["cktV51"]["policies"],
         })
+        if ident in point_results:
+            point = point_results[ident]["cktV51"]
+            entry["productionCandidateMetrics"].update({
+                "cktV51DefaultPointOptimal": point["score"],
+                "cktV51DefaultPointPolicies": point["policies"],
+                "cktV51DefaultPointAggregate": point["aggregate"],
+                "cktV51AuxOrderSelection": candidate_source["auxOrderSelection"],
+            })
         if ident == E8F37A_ID:
             entry["productionCandidateMetrics"]["cktV51AuxOrderRobustness"] = copy.deepcopy(
                 E8F37A_ROBUSTNESS
@@ -773,6 +819,7 @@ def main() -> None:
             "toneDigitsByShapeMeaning": TONE_DIGITS_BY_SHAPE_MEANING,
         },
         "schemes": {},
+        "replacedIds": replaced_ids,
     }
     if candidate_source:
         audit["candidateSource"] = candidate_source
@@ -804,6 +851,7 @@ def main() -> None:
             "completionBV3": data["completionBV3"]["schemes"][ident],
             "completionBV4": data["completionBV4"]["schemes"][ident],
             "cktV5V51": v5_results[ident],
+            "cktV51DefaultPointOptimalReplay": point_results.get(ident),
         }
     AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text(json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -814,7 +862,8 @@ def main() -> None:
         "html": str(HTML),
         "audit": str(AUDIT),
         "catalogue": len(data["entries"]),
-        "added": [entry["id"] for entry in entries],
+        "added": [entry["id"] for entry in entries if entry["id"] not in replaced_ids],
+        "updated": replaced_ids,
         "htmlSha256": hashlib.sha256(HTML.read_bytes()).hexdigest(),
         "metrics": {entry["id"]: entry["readmeBenchmarkMetrics"] for entry in entries},
     }, ensure_ascii=False, indent=2))

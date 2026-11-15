@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-oc21-robust-benchmark html="a7_CKT_R11.html":
+    python -X utf8 tools/integrate_a7_qz_empty_six.py --candidate-file research/config/untoned-2121-oc21-robust-candidates.json --replace-existing --fresh --html "{{html}}" --audit research/notes/2026-11-15-untoned-2121-oc21-robust-html-benchmark.json
+    node tools/sync_keymap_link_colors.js --html "{{html}}"
+
 untoned-2121-candidate-aux-components html="a7_CKT_R11.html":
     node --expose-gc --max-old-space-size=4096 tools/export_untoned_2121_candidate_aux_orders.js --html "{{html}}"
 

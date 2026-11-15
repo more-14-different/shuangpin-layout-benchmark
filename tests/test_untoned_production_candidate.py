@@ -2,11 +2,13 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
-from integrate_a7_qz_empty_six import decode_state, patch_production_ui, validate_expected
+from integrate_a7_qz_empty_six import decode_state, patch_production_ui, score_v5_v51_21x21, validate_expected
 
 
 class ProductionCandidateTest(unittest.TestCase):
@@ -31,6 +33,35 @@ class ProductionCandidateTest(unittest.TestCase):
     def test_score_contract_mismatch_blocks_publication(self):
         with self.assertRaisesRegex(ValueError, 'benchmark anchor mismatch'):
             validate_expected({'cktV51': 9.53}, {'cktV51': 9.541757919664565})
+
+    def test_robust_cohort_round_trip_and_report_anchors(self):
+        config = json.loads((ROOT / 'research/config/untoned-2121-oc21-robust-candidates.json').read_text(encoding='utf-8'))
+        report = json.loads((ROOT / config['auxOrderSelection']['report']).read_text(encoding='utf-8'))
+        self.assertEqual(len(config['candidates']), 2)
+        for candidate in config['candidates']:
+            decoded = decode_state(candidate)
+            self.assertEqual(decoded['initialMap'], candidate['initialMap'])
+            self.assertEqual(decoded['finalMap'], candidate['finalMap'])
+            self.assertEqual(decoded['toneKeys'], 'IVUAO')
+            row = report['schemes'][candidate['id']]
+            self.assertEqual(candidate['expected']['cktV51'], row['mainPositiveRobustDefaultScore'])
+            self.assertEqual(candidate['expected']['cktV51DefaultPointOptimal'], row['defaultOptimalScore'])
+
+    def test_candidate_aux_order_does_not_change_s005_reference(self):
+        with tempfile.TemporaryDirectory() as location:
+            temp = Path(location)
+            output = temp / 'score.json'
+            def inspect_generated(*args, **kwargs):
+                source = Path(args[1]).read_text(encoding='utf-8')
+                policies = source.split('const V51_POLICIES = Object.freeze({', 1)[1].split('function parseArgs', 1)[0]
+                candidate, reference = policies.split('reference:', 1)
+                self.assertIn('sanpin: { word2: "12", word3: "213", word4: "21" }', candidate)
+                self.assertIn('sanpin: { word2: "12", word3: "213", word4: "23" }', reference)
+                self.assertIn('keytao: { word2: "12", word3: "213", word4: "24" }', reference)
+                output.write_text('{}', encoding='utf-8')
+            with patch('integrate_a7_qz_empty_six.run', side_effect=inspect_generated):
+                score_v5_v51_21x21(ROOT / 'tools/score_ckt_v5_v51_scheme.js', temp/'page.html', output, 'bf', temp,
+                                  keytao_word3='213', sanpin_word4='21')
 
 
 if __name__ == '__main__':

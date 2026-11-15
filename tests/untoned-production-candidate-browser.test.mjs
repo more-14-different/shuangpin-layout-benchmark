@@ -14,30 +14,35 @@ if (!existsSync(artifact) || !existsSync(edge)) {
 const {chromium} = require('playwright');
 const browser = await chromium.launch({executablePath: edge, headless: true});
 const page = await browser.newPage({viewport: {width: 1600, height: 1000}});
-const errors = [], id = 'OC21-bf9bf45a7e60';
-page.on('pageerror', error => errors.push(String(error)));
+const errors = [], ids = ['OC21-bf9bf45a7e60', 'OC21-e1f155973380'];
+page.on('pageerror', error => {errors.push(String(error)); console.error(error.stack)});
 try {
   await page.goto(pathToFileURL(artifact).href, {timeout: 120_000});
   await page.waitForFunction(() => window.App7?.ready, null, {timeout: 120_000});
-  const metrics = await page.evaluate(id => {
+  const metrics = await page.evaluate(ids => Object.fromEntries(ids.map(id => {
     const data = window.App7.data, entry = data.entries.find(entry => entry.id === id);
     if (!entry) throw new Error('Missing candidate');
     const maps = ['completionB', 'completionBFixed', 'completionBV2', 'completionBV3', 'completionBV4'];
     if (!maps.every(name => data[name].schemes[id])) throw new Error('Incomplete completion columns');
     if (Object.keys(data.ckt.tracks[id]).length !== 20) throw new Error('Incomplete contract replay');
     if (Object.keys(entry.bPathMetricsNative).length !== 8) throw new Error('Incomplete B paths');
-    return entry.readmeBenchmarkMetrics;
-  }, id);
-  assert.ok(Math.abs(metrics.cktV51 - 9.541757919664565) < 1e-9);
+    if (entry.productionCandidateMetrics.cktV51Policies.candidate.sanpin.word4 !== '21') throw new Error('Wrong robust policy');
+    if (entry.productionCandidateMetrics.cktV51DefaultPointPolicies.candidate.sanpin.word4 !== '12') throw new Error('Wrong default-point policy');
+    return [id, entry.readmeBenchmarkMetrics];
+  })), ids);
+  assert.ok(Math.abs(metrics[ids[0]].cktV51 - 9.54170846001124) < 1e-9);
+  assert.ok(Math.abs(metrics[ids[1]].cktV51 - 9.538996462957561) < 1e-9);
+  assert.ok(Math.abs(metrics[ids[0]].cktV51DefaultPointOptimal - 9.541534787172992) < 1e-9);
+  assert.ok(Math.abs(metrics[ids[1]].cktV51DefaultPointOptimal - 9.538688350324465) < 1e-9);
   await page.locator('#nf6SelectionHost').selectOption('21x21');
   await page.locator('#nf6SelectionMemory').fill('42');
   await page.locator('#uxQuery').evaluate((input, id) => {
     input.value = id;
     input.dispatchEvent(new Event('input', {bubbles: true}));
-  }, id);
+  }, 'OC21-');
   await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
 
-  const read = async key => {
+  const read = async (key, id) => {
     const table = page.locator(`table[data-ux-table="${key}"]`);
     await table.locator(`[data-dv-scheme="${id}"]`).waitFor({timeout: 120_000});
     return table.evaluate((table, id) => {
@@ -46,34 +51,47 @@ try {
       return {length: row.cells.length, count: headers.length,
         cells: Object.fromEntries([...row.cells].map((cell, index) => [headers[index], {
           text: cell.textContent.trim(),
+          scoreText: cell.querySelector('[data-production-ckt]')?.textContent.trim(),
           raw: cell.dataset.uxValue ? JSON.parse(cell.dataset.uxValue) : null,
         }]))};
     }, id);
   };
-  const validate = table => {
+  const validate = (table, id) => {
     assert.equal(table.length, table.count, 'column alignment');
-    for (const [label, field] of [['CKT v5 · 生产辅序', 'cktV5'], ['CKT v5.1 · 生产辅序', 'cktV51']]) {
-      assert.equal(table.cells[label].raw, metrics[field], label + ' sort/CSV value');
-      assert.equal(table.cells[label].text, metrics[field].toFixed(6), label + ' display');
+    for (const [label, field] of [['CKT v5 · 生产辅序', 'cktV5'], ['CKT v5.1 · 生产辅序', 'cktV51'], ['CKT v5.1 · 默认点最优', 'cktV51DefaultPointOptimal']]) {
+      assert.equal(table.cells[label].raw, metrics[id][field], label + ' sort/CSV value');
+      assert.equal(table.cells[label].scoreText, metrics[id][field].toFixed(6), label + ' display');
     }
+    assert.match(table.cells['CKT v5.1 · 生产辅序'].text, /稳健：形 12\/213\/24；调 12\/213\/21/);
+    assert.match(table.cells['CKT v5.1 · 默认点最优'].text, /默认点：形 12\/213\/24；调 12\/213\/12/);
   };
-  validate(await read('benchmark'));
+  for (const id of ids) validate(await read('benchmark', id), id);
+  const scoreHeader = page.locator('table[data-ux-table="benchmark"] th').filter({hasText: 'CKT v5.1 · 生产辅序'});
+  await scoreHeader.locator('.ux-sort').click();
+  assert.equal(await scoreHeader.getAttribute('aria-sort'), 'ascending');
+  const sortedCandidates = await page.locator('table[data-ux-table="benchmark"] tbody tr').evaluateAll((rows, ids) =>
+    rows.map(row => row.dataset.dvScheme).filter(id => ids.includes(id)), ids);
+  assert.deepEqual(sortedCandidates, [ids[1], ids[0]], 'ascending CKT order among the two scored candidates');
   const [download] = await Promise.all([
     page.waitForEvent('download'), page.locator('[data-action="export-visible"]').click(),
   ]);
-  assert.match(readFileSync(await download.path(), 'utf8'), /OC21-bf9bf45a7e60/);
+  const csv = readFileSync(await download.path(), 'utf8');
+  for (const id of ids) assert.ok(csv.includes(id));
+  for (const value of ['9.541708', '9.538996', '9.541535', '9.538688']) assert.ok(csv.includes('"' + value + '"'), 'numeric CSV score ' + value);
   await page.locator('[data-action="fair"]').click();
-  const fair = await read('fair');
-  validate(fair);
-  assert.equal(fair.cells['裸二键唯一'].text, '345/399');
-  for (const [label, cell] of Object.entries(fair.cells)) {
-    assert.doesNotMatch(cell.text, /NaN|undefined|待审|—/u, label);
+  for (const id of ids) {
+    const fair = await read('fair', id);
+    validate(fair, id);
+    assert.equal(fair.cells['裸二键唯一'].text, '345/399');
+    for (const [label, cell] of Object.entries(fair.cells)) {
+      assert.doesNotMatch(cell.text, /NaN|undefined|待审|—/u, label);
+    }
   }
   await page.locator('#uxTau').fill('1000');
   await page.locator('#uxTau').dispatchEvent('change');
-  validate(await read('fair'));
+  for (const id of ids) validate(await read('fair', id), id);
   assert.deepEqual(errors, []);
-  console.log('OC21 production candidate: 20 tracks, B paths, benchmark/fair columns, CSV and fixed-policy scores passed');
+  console.log('BF/E1 robust candidates: native tracks, policy labels, benchmark/fair columns, sorting, CSV and default-point optimal scores passed');
 } finally {
   await browser.close();
 }
