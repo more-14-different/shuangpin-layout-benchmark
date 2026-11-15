@@ -1,5 +1,5 @@
 {
-  "version": "untoned-candidate-a-r11-1",
+  "version": "untoned-candidate-a-r11-2",
   "id": "RC26-39a5bfdc045342cd",
   "provenance": {
     "kind": "audited untoned production candidate; not deployed",
@@ -704,7 +704,7 @@
       "研究候选；未替换 Rime 生产配置。",
       "Common399 全覆盖且399码互异；QZ/ZQ双空；M40/D3/V1。",
       "shapeKeysByMeaning=AEUIO；toneKeysByTone=IEUAO；toneDigitsByShapeMeaning=42310。",
-      "CKT v5.1 固定形辅序12/12/24、调辅序12/21/13；soft-page-fill-v2；未做候选专属辅序稳健性扫描。"
+      "CKT v5.1 固定形辅序12/12/24、调辅序12/21/13；soft-page-fill-v2；六延时0%–500%独立网格稳健冠军，已完成候选专属辅序扫描。"
     ],
     "memoryAuditR2": {
       "version": "M-R2-explicit",
@@ -5814,7 +5814,7 @@
     "metricVerification": {
       "engine": "original JS row/path engines; no candidate score cache; complete common corpus",
       "maxFactorDifference": null,
-      "seconds": 2.803
+      "seconds": 2.594
     },
     "fourCodeCollision": {
       "families": [
@@ -5966,7 +5966,7 @@
       "rpMax": 0.031498080493856884,
       "replayedCktV3": 9.57068990153491,
       "replayedCktV4": 9.06288519631148,
-      "replayedCktV5": 9.075493861059034,
+      "replayedCktV5": 9.07278927536223,
       "replayedCktV51": 9.082777229838413,
       "cktV4Aggregate": {
         "motorUpperMs": 339.8489714432206,
@@ -5977,16 +5977,16 @@
         "meanPageActions": 1.3432662162489908e-06
       },
       "cktV5Aggregate": {
-        "motorUpperMs": 339.7918819149968,
-        "cognitiveMs": 80.51097825327975,
-        "effectiveMs": 420.3028601682765,
+        "motorUpperMs": 339.75497328817954,
+        "cognitiveMs": 80.37540225952317,
+        "effectiveMs": 420.1303755477026,
         "firstAuxRate": 0.20961675259014534,
-        "secondAuxRate": 0.04522244782544153,
+        "secondAuxRate": 0.0448426155372979,
         "thirdAuxRate": 0,
-        "selectionRate": 0.006104225318540656,
-        "meanRejectedCandidates": 0.00783724638781051,
-        "meanPageActions": 1.6068726962527562e-05,
-        "meanKeys": 3.841946645709869
+        "selectionRate": 0.006071275035137917,
+        "meanRejectedCandidates": 0.007801951156219821,
+        "meanPageActions": 1.5764141321522044e-05,
+        "meanKeys": 3.8415668134217253
       },
       "cktV51Aggregate": {
         "motorUpperMs": 339.75497328817954,
@@ -6004,8 +6004,8 @@
         "candidate": {
           "keytao": {
             "word2": "12",
-            "word3": "21",
-            "word4": "42"
+            "word3": "12",
+            "word4": "24"
           },
           "sanpin": {
             "word2": "12",
@@ -6052,7 +6052,90 @@
           }
         }
       },
-      "cktV51BalanceContract": "soft-page-fill-v2"
+      "cktV51BalanceContract": "soft-page-fill-v2",
+      "cktV51AuxOrderRobustness": {
+        "version": "untoned-2126-six-delay-robust-v1",
+        "report": "research/notes/2026-11-15-untoned-2126-aux-robust-comparison.json",
+        "reportSha256": "c2f449dc9aa523234c5271d3bee5fa4cb1d4d3d0f0bab7ebf7773b58dc97b3c6",
+        "selectedPolicies": {
+          "keytao": {
+            "word2": "12",
+            "word3": "12",
+            "word4": "24"
+          },
+          "sanpin": {
+            "word2": "12",
+            "word3": "21",
+            "word4": "13"
+          }
+        },
+        "grid": {
+          "rangePercent": [
+            0,
+            500
+          ],
+          "stepPercent": 50,
+          "coefficients": [
+            "firstAuxMs",
+            "secondAuxMs",
+            "thirdAuxMs",
+            "selectionDecisionMs",
+            "scanPerCandidateMs",
+            "pageActionMs"
+          ],
+          "points": 1771561,
+          "positiveSubsetPoints": 1000000
+        },
+        "cases": {
+          "keytao": {
+            "winner": {
+              "policy": "12/12/24",
+              "top1Rate": 0.9925845059808835,
+              "top3Rate": 0.9995614037563482,
+              "meanRank": 1.0092398737610502,
+              "worstRank": 10
+            },
+            "runnerUp": {
+              "policy": "12/12/23",
+              "top1Rate": 0.0,
+              "top3Rate": 0.9890362228565655,
+              "meanRank": 2.063964492331904,
+              "worstRank": 16
+            },
+            "meanRankDistance": 1.0547246185708539,
+            "defaultOptimal": {
+              "policy": "12/12/24",
+              "score": 9.099115513960598
+            }
+          },
+          "sanpin": {
+            "winner": {
+              "policy": "12/21/13",
+              "top1Rate": 0.7694592509092264,
+              "top3Rate": 0.9304240723294315,
+              "meanRank": 1.564260558908217,
+              "worstRank": 13
+            },
+            "runnerUp": {
+              "policy": "21/21/13",
+              "top1Rate": 0.17809886309305747,
+              "top3Rate": 0.41248085727784706,
+              "meanRank": 3.583929088527011,
+              "worstRank": 11
+            },
+            "meanRankDistance": 2.019668529618794,
+            "defaultOptimal": {
+              "policy": "12/21/13",
+              "score": 9.066350297939533
+            }
+          }
+        },
+        "normalized": {
+          "selectedPairScore": 9.082777229838413
+        },
+        "scope": "Fixed AEUIO shape / IEUAO tone mapping; word auxiliary position order only. Historical benchmark columns keep their named contracts."
+      },
+      "cktV5PolicyScope": "v5 model with v5.1 robust candidate word auxiliary orders; unchanged v5 reference"
     }
   },
   "productionCandidateMetrics": {
@@ -6067,7 +6150,7 @@
     "rpMax": 0.031498080493856884,
     "replayedCktV3": 9.57068990153491,
     "replayedCktV4": 9.06288519631148,
-    "replayedCktV5": 9.075493861059034,
+    "replayedCktV5": 9.07278927536223,
     "replayedCktV51": 9.082777229838413,
     "cktV4Aggregate": {
       "motorUpperMs": 339.8489714432206,
@@ -6078,16 +6161,16 @@
       "meanPageActions": 1.3432662162489908e-06
     },
     "cktV5Aggregate": {
-      "motorUpperMs": 339.7918819149968,
-      "cognitiveMs": 80.51097825327975,
-      "effectiveMs": 420.3028601682765,
+      "motorUpperMs": 339.75497328817954,
+      "cognitiveMs": 80.37540225952317,
+      "effectiveMs": 420.1303755477026,
       "firstAuxRate": 0.20961675259014534,
-      "secondAuxRate": 0.04522244782544153,
+      "secondAuxRate": 0.0448426155372979,
       "thirdAuxRate": 0,
-      "selectionRate": 0.006104225318540656,
-      "meanRejectedCandidates": 0.00783724638781051,
-      "meanPageActions": 1.6068726962527562e-05,
-      "meanKeys": 3.841946645709869
+      "selectionRate": 0.006071275035137917,
+      "meanRejectedCandidates": 0.007801951156219821,
+      "meanPageActions": 1.5764141321522044e-05,
+      "meanKeys": 3.8415668134217253
     },
     "cktV51Aggregate": {
       "motorUpperMs": 339.75497328817954,
@@ -6105,8 +6188,8 @@
       "candidate": {
         "keytao": {
           "word2": "12",
-          "word3": "21",
-          "word4": "42"
+          "word3": "12",
+          "word4": "24"
         },
         "sanpin": {
           "word2": "12",
@@ -6153,7 +6236,90 @@
         }
       }
     },
-    "cktV51BalanceContract": "soft-page-fill-v2"
+    "cktV51BalanceContract": "soft-page-fill-v2",
+    "cktV51AuxOrderRobustness": {
+      "version": "untoned-2126-six-delay-robust-v1",
+      "report": "research/notes/2026-11-15-untoned-2126-aux-robust-comparison.json",
+      "reportSha256": "c2f449dc9aa523234c5271d3bee5fa4cb1d4d3d0f0bab7ebf7773b58dc97b3c6",
+      "selectedPolicies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "12",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "21",
+          "word4": "13"
+        }
+      },
+      "grid": {
+        "rangePercent": [
+          0,
+          500
+        ],
+        "stepPercent": 50,
+        "coefficients": [
+          "firstAuxMs",
+          "secondAuxMs",
+          "thirdAuxMs",
+          "selectionDecisionMs",
+          "scanPerCandidateMs",
+          "pageActionMs"
+        ],
+        "points": 1771561,
+        "positiveSubsetPoints": 1000000
+      },
+      "cases": {
+        "keytao": {
+          "winner": {
+            "policy": "12/12/24",
+            "top1Rate": 0.9925845059808835,
+            "top3Rate": 0.9995614037563482,
+            "meanRank": 1.0092398737610502,
+            "worstRank": 10
+          },
+          "runnerUp": {
+            "policy": "12/12/23",
+            "top1Rate": 0.0,
+            "top3Rate": 0.9890362228565655,
+            "meanRank": 2.063964492331904,
+            "worstRank": 16
+          },
+          "meanRankDistance": 1.0547246185708539,
+          "defaultOptimal": {
+            "policy": "12/12/24",
+            "score": 9.099115513960598
+          }
+        },
+        "sanpin": {
+          "winner": {
+            "policy": "12/21/13",
+            "top1Rate": 0.7694592509092264,
+            "top3Rate": 0.9304240723294315,
+            "meanRank": 1.564260558908217,
+            "worstRank": 13
+          },
+          "runnerUp": {
+            "policy": "21/21/13",
+            "top1Rate": 0.17809886309305747,
+            "top3Rate": 0.41248085727784706,
+            "meanRank": 3.583929088527011,
+            "worstRank": 11
+          },
+          "meanRankDistance": 2.019668529618794,
+          "defaultOptimal": {
+            "policy": "12/21/13",
+            "score": 9.066350297939533
+          }
+        }
+      },
+      "normalized": {
+        "selectedPairScore": 9.082777229838413
+      },
+      "scope": "Fixed AEUIO shape / IEUAO tone mapping; word auxiliary position order only. Historical benchmark columns keep their named contracts."
+    },
+    "cktV5PolicyScope": "v5 model with v5.1 robust candidate word auxiliary orders; unchanged v5 reference"
   },
   "cktTracks": {
     "S2": {
@@ -14787,5 +14953,24 @@
     "load",
     "macroxue",
     "pair"
-  ]
+  ],
+  "refreshFromOriginalRows": true,
+  "freshExactSha256": "ed8773b8d579f6d2ec88da4905d0114814acfb0d5957285f39fc4502d25c055c",
+  "contracts": {
+    "historicalColumns": "original per-column benchmark contracts",
+    "cktV51": "per-layout robust policy; soft-page-fill-v2",
+    "cktV5": "v5 joint competition, v5 S005 reference; candidate uses v5.1 robust word auxiliary orders"
+  },
+  "rawScoreSha256": {
+    "entries-to-score.json": "d58e430ee4ade7d03b5aa78075a998b80ffcb7f03e35d00c63d945739ca8f04e",
+    "fixed.json": "22c6dc33b03622212b0aabe2a47eb7dddee1d948f664cae6e89d97ecbc720609",
+    "native.json": "091ea8006ccf5fd26bfbcfbb04269c786fc5dfa1f9b878a1ae1a1b484bfe48f0",
+    "robust-policies.json": "0883c5d4df72f6dd2d16a49d3b92e726f935b60330ef31e904bda5f97b8856d4",
+    "terminal.json": "1dd9708e9d0b08db7163df4d00df41f98e34f9e45ad0c94e8c1926620492748e",
+    "v2.json": "c9f3dd5373a380c274858ecadb036685fa73a0335d69bdcd86e11a15cd89dc99",
+    "v3.json": "16b48709443d50013fc7768e3694b2285dc672c3b7717aa03f17de2c345825f1",
+    "v4.json": "40e422585d9aa6113be588565331badc2566b30e3bfbeda884d2824dbfdf49ad",
+    "v5-legacy-v51.json": "1d19d158fcb3511317ecaebe586652be009ebd3885f41080f5f95b26ff6a40c2",
+    "v51-fixed.json": "53ebd72f31175c17053fd5bbcf65b2e3b380664b4cc3c719397c84683f04f76e"
+  }
 }

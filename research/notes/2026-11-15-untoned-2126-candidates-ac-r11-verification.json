@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "updated": "A",
+  "added": "C",
+  "benchmarksPerCandidate": 17,
+  "testsPassed": 9,
+  "keymapColorAuditPassed": true,
+  "unrelatedCatalogueValuesPreserved": true,
+  "historicalBenchmarkColumns": "original named column contracts",
+  "v5CandidatePolicies": "v5.1 robust orders, original v5 model and S005 reference",
+  "v51CandidatePolicies": "v5.1 robust orders, soft-page-fill-v2, unchanged S005 reference",
+  "productionDeploymentChanged": false,
+  "htmlSha256": "4d1d276bde87dcef3a719d1bd945ae51f4ef36860b14ef4989070f29f286ab0a",
+  "htmlBeforeSha256": "86ca3f47f6b8471e910d01c8f891852a0d5cdd4787a965f59e6c5e7c4bda3834",
+  "candidates": {
+    "A": {
+      "id": "RC26-39a5bfdc045342cd",
+      "auditSha256": "5d8b75c4cf631d9006ab9e4884a3c94291fdc198ad60afcd1e5d2d4cf511925c",
+      "v5": 9.07278927536223,
+      "v51": 9.082777229838413,
+      "robustPolicies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "12",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "21",
+          "word4": "13"
+        }
+      }
+    },
+    "C": {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "auditSha256": "31261446c1a97c4edbc3f1fdbade9098f5a04f7148573bb2c4710c999825de02",
+      "v5": 9.069487116000184,
+      "v51": 9.07926885388391,
+      "robustPolicies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "12",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "21",
+          "word4": "13"
+        }
+      }
+    }
+  }
+}

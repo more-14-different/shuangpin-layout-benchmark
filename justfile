@@ -39,7 +39,12 @@ untoned-aux-comparison-test:
     python -X utf8 -m unittest discover -s tests -p test_untoned_aux_comparison.py
 
 untoned-candidate-a-r11:
-    python -X utf8 tools/integrate_untoned_candidate_a_r11.py
+    python -X utf8 tools/integrate_untoned_candidate_a_r11.py --candidate A --refresh --robust
+    node tools/sync_keymap_link_colors.js
+
+untoned-candidates-ac-r11:
+    python -X utf8 tools/integrate_untoned_candidate_a_r11.py --candidate A --refresh --robust
+    python -X utf8 tools/integrate_untoned_candidate_a_r11.py --candidate C --refresh --robust
     node tools/sync_keymap_link_colors.js
 
 untoned-candidate-a-r11-test:

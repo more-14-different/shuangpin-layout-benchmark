@@ -97,6 +97,15 @@ function aggregateModes(modes) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
+  const v5Policies = args['candidate-policies']
+    ? { ...V5_POLICIES, candidate: JSON.parse(fs.readFileSync(args['candidate-policies'], 'utf8')) }
+    : V5_POLICIES;
+  if (args['candidate-policies']) for (const mode of ['keytao', 'sanpin']) for (const [kind, length] of [['word2', 2], ['word3', 3], ['word4', 4]]) {
+    const order = v5Policies.candidate[mode]?.[kind];
+    if (typeof order !== 'string' || order.length !== 2 || new Set(order).size !== 2 || [...order].some(k => !'1234'.slice(0, length).includes(k))) {
+      throw new Error(`Invalid candidate word auxiliary order: ${mode}/${kind}`);
+    }
+  }
   if (!args.id || !args.html || !args.snow || !args.output) {
     throw new Error("usage: --id ID --html HTML --snow DIR --output JSON");
   }
@@ -174,9 +183,9 @@ function main() {
   }
 
   const v5Reference = Object.fromEntries(["keytao", "sanpin"].map(mode =>
-    [mode, evaluateV5Mode(referenceEntry, mode, V5_POLICIES.reference[mode])]));
+    [mode, evaluateV5Mode(referenceEntry, mode, v5Policies.reference[mode])]));
   const v5Modes = Object.fromEntries(["keytao", "sanpin"].map(mode =>
-    [mode, evaluateV5Mode(entry, mode, V5_POLICIES.candidate[mode])]));
+    [mode, evaluateV5Mode(entry, mode, v5Policies.candidate[mode])]));
   const v51Reference = Object.fromEntries(["keytao", "sanpin"].map(mode =>
     [mode, evaluateV51ReferenceMode(referenceEntry, mode, V51_POLICIES.reference[mode])]));
   const v51Modes = Object.fromEntries(["keytao", "sanpin"].map(mode =>
@@ -190,7 +199,7 @@ function main() {
     trackWeights: TRACK_WEIGHTS,
     cktV5: {
       score: normalizedScore(v5Modes, v5Reference),
-      policies: V5_POLICIES,
+      policies: v5Policies,
       aggregate: aggregateModes(v5Modes),
       modes: v5Modes,
     },
