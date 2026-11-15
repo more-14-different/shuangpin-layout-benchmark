@@ -27,6 +27,14 @@ untoned-2121-local-closure workers="2":
 untoned-2121-local-closure-test:
     node --test tests/untoned-2121-local-closure.test.mjs tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
 
+untoned-candidate-a-r11:
+    python -X utf8 tools/integrate_untoned_candidate_a_r11.py
+    node tools/sync_keymap_link_colors.js
+
+untoned-candidate-a-r11-test:
+    node --test tests/untoned-candidate-a-r11.test.mjs tests/auxiliary-semantics.test.mjs
+    node tools/audit_keymap_link_colors.mjs
+
 untoned-2126-anneal-100k workers="16":
     node --max-old-space-size=8192 tools/anneal_untoned_2126_v51.js --workers "{{workers}}"
 
