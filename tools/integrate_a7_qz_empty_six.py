@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import copy
 import collections
+import argparse
 import hashlib
 import importlib
 import json
 import math
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -245,7 +247,7 @@ def make_entry(helper, source: dict, split, candidate: dict) -> dict:
             "stateKey": candidate["stateKey"],
         },
         "productionCandidateMetrics": {
-            "archivedCktV4": candidate["archivedCktV4"],
+            "archivedCktV4": candidate.get("archivedCktV4"),
             "memory": 42,
             "displacedInitials": 2,
             "displacedVowels": 5,
@@ -281,9 +283,12 @@ def aggregate_completion(scheme: dict) -> dict[str, float]:
 
 
 def score_v5_v51_21x21(
-    scorer_source: Path, staged: Path, output: Path, ident: str, temp: Path
+    scorer_source: Path, staged: Path, output: Path, ident: str, temp: Path,
+    *, keytao_word3: str | None = None,
 ) -> dict:
-    v51_keytao_word3 = "213" if ident == E8F37A_ID else "231"
+    v51_keytao_word3 = keytao_word3 or ("213" if ident == E8F37A_ID else "231")
+    if v51_keytao_word3 not in {"213", "231"}:
+        raise ValueError("unsupported 21x21 v5.1 Keytao word3 policy")
     source = scorer_source.read_text(encoding="utf-8")
     source = source.replace(
         'require("./auxiliary_semantics.js")',
@@ -421,11 +426,58 @@ def readme_metrics(data: dict, entry: dict, v5_v51: dict, production) -> dict:
     }
 
 
+def validate_expected(metrics: dict, expected: dict) -> None:
+    for field, value in expected.items():
+        if not math.isclose(metrics[field], value, rel_tol=0, abs_tol=1e-9):
+            raise ValueError(f"benchmark anchor mismatch: {field}: {metrics[field]} != {value}")
+
+
+def patch_production_ui(html: str) -> str:
+    hook = " /* UNTONED_PRODUCTION_COLUMNS_V1 */\n if(typeof untonedProductionTableColumns==='function')({headers,rows,ids,raws}=untonedProductionTableColumns(headers,rows,ids,key,raws));\n"
+    if "/* UNTONED_PRODUCTION_COLUMNS_V1 */" not in html:
+        anchor = "if(typeof snowJiandaoTableRows==='function')({headers,rows,ids,raws}=snowJiandaoTableRows(headers,rows,ids,key,raws));"
+        if html.count(anchor) != 1:
+            raise ValueError("expected exactly one final table-column adapter boundary")
+        html = html.replace(anchor, anchor + "\n" + hook, 1)
+    html = re.sub(r'\n?<script id="untoned-production-benchmark-ui">[\s\S]*?</script>\n?', '\n', html)
+    source = (ROOT / "tools/untoned_production_benchmark_ui.js").read_text(encoding="utf-8")
+    body_end = re.search(r'</body>\s*</html>\s*$', html)
+    if body_end is None:
+        raise ValueError("expected the document body end")
+    return html[:body_end.start()].rstrip('\r\n') + '\n<script id="untoned-production-benchmark-ui">\n' + source + '\n</script>\n' + html[body_end.start():]
+
+
 def main() -> None:
+    global HTML, REPLAY, V5_CACHE, AUDIT, CANDIDATES, SOURCE_BRANCH, SOURCE_COMMIT
     if not sys.flags.utf8_mode:
         environment = os.environ.copy()
         environment["PYTHONUTF8"] = "1"
         raise SystemExit(subprocess.call([sys.executable, *sys.argv], env=environment))
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--html", type=Path, default=HTML)
+    parser.add_argument("--replay", type=Path, default=REPLAY)
+    parser.add_argument("--candidate-file", type=Path)
+    parser.add_argument("--audit", type=Path, default=AUDIT)
+    args = parser.parse_args()
+    HTML, REPLAY, AUDIT = args.html.resolve(), args.replay.resolve(), args.audit.resolve()
+    candidate_source = None
+    keytao_word3 = None
+    if args.candidate_file:
+        candidate_file = args.candidate_file.resolve()
+        candidate_source = json.loads(candidate_file.read_text(encoding="utf-8"))
+        CANDIDATES = candidate_source["candidates"]
+        if not CANDIDATES or len({row["id"] for row in CANDIDATES}) != len(CANDIDATES):
+            raise ValueError("candidate IDs must be nonempty and unique")
+        SOURCE_BRANCH = candidate_source["source"]["branch"]
+        SOURCE_COMMIT = candidate_source["source"]["commit"]
+        keytao_word3 = candidate_source["v51KeytaoWord3"]
+        for row in CANDIDATES:
+            row.setdefault("archivedCktV4", None)
+        # Separate these scores from the historical per-layout policy caches.
+        V5_CACHE = REPLAY / "exact-v5-v51-21x21" / hashlib.sha256(candidate_file.read_bytes()).hexdigest()[:16]
+    else:
+        V5_CACHE = REPLAY / "exact-v5-v51-21x21"
 
     production = importlib.import_module("integrate_shenyun_21x26_production")
     sys.path.insert(0, str(RESEARCH))
@@ -444,6 +496,21 @@ def main() -> None:
     existing_ids = {entry["id"] for entry in data["entries"]}
     candidate_ids = {candidate["id"] for candidate in CANDIDATES}
     if candidate_ids <= existing_ids:
+        for candidate in CANDIDATES:
+            present = next(entry for entry in data["entries"] if entry["id"] == candidate["id"])
+            if present.get("r11Provenance", {}).get("stateKey") != candidate["stateKey"]:
+                raise ValueError(f"already-integrated mapping differs: {candidate['id']}")
+            if any(candidate["id"] in missing for missing in production.missing_by_map(data, existing_ids).values()):
+                raise ValueError(f"already-integrated benchmark incomplete: {candidate['id']}")
+            validate_expected(present.get("readmeBenchmarkMetrics", {}), candidate.get("expected", {}))
+        if candidate_source:
+            patched = patch_production_ui(html)
+            if patched != html:
+                if HTML.read_text(encoding="utf-8") != html:
+                    raise ValueError("HTML changed while updating the table adapter")
+                staged = HTML.with_name(HTML.name + ".tmp")
+                staged.write_text(patched, encoding="utf-8")
+                staged.replace(HTML)
         print(json.dumps({"alreadyIntegrated": sorted(candidate_ids), "catalogue": len(existing_ids)}))
         return
     if candidate_ids & existing_ids:
@@ -480,7 +547,7 @@ def main() -> None:
                 "stateKey": candidate["stateKey"],
             },
             "productionCandidateMetrics": {
-                "archivedCktV4": candidate["archivedCktV4"],
+                "archivedCktV4": candidate.get("archivedCktV4"),
                 "memory": 42,
                 "displacedInitials": 2,
                 "displacedVowels": 5,
@@ -500,6 +567,15 @@ def main() -> None:
             "qzEmpty": True,
             "zqEmpty": True,
         })
+        # Bare-code coverage and uniqueness are different for colliding layouts.
+        entry["notes"][0] = "21x21；Common399 覆盖 399/399；M42、D2、V5；QZ 与 ZQ 均为空桶；重码按实际桶补全计费。"
+        if candidate_source:
+            entry["sourceSearchRound"] = "untoned-2121-other-centers-production-candidate"
+            entry["r11Provenance"].update(candidate_source["source"])
+            entry["r11Provenance"]["parent"] = candidate.get("parent")
+            entry["r11Provenance"]["mutation"] = candidate.get("mutation")
+        if candidate.get("archivedCktV4") is None:
+            entry["productionCandidateMetrics"].pop("archivedCktV4", None)
         entries.append(entry)
 
     exact = {}
@@ -546,7 +622,7 @@ def main() -> None:
 
     scope = [
         "Snow Shenyun 21x21 M42/D2 QZ+ZQ empty reviewed basin",
-        f"six representatives from {SOURCE_BRANCH}@{SOURCE_COMMIT}",
+        f"{len(entries)} representatives from {SOURCE_BRANCH}@{SOURCE_COMMIT}",
     ]
     if scope not in data["r11Research"]["scopeRows"]:
         data["r11Research"]["scopeRows"].append(scope)
@@ -646,7 +722,7 @@ def main() -> None:
                     continue
             v5_results[ident] = score_v5_v51_21x21(
                 ROOT / "tools" / "score_ckt_v5_v51_scheme.js",
-                staged, output, ident, temp,
+                staged, output, ident, temp, keytao_word3=keytao_word3,
             )
 
     for entry in entries:
@@ -657,6 +733,7 @@ def main() -> None:
             for key, mode, kind, stage in NATIVE_B_PATHS
         }
         metrics = readme_metrics(data, entry, v5_results[ident], production)
+        validate_expected(metrics, candidate_by_id[ident].get("expected", {}))
         entry["readmeBenchmarkMetrics"] = metrics
         entry["productionCandidateMetrics"].update({
             "replayedCktV3": metrics["cktV3"],
@@ -687,7 +764,7 @@ def main() -> None:
             raise ValueError(f"incomplete or changed benchmark map {name}: {sorted(missing)}")
 
     audit = {
-        "version": "a7-qz-zq-empty-m42d2-six-full-benchmark-v1",
+        "version": "untoned-2121-production-candidate-full-benchmark-v1" if candidate_source else "a7-qz-zq-empty-m42d2-six-full-benchmark-v1",
         "catalogueCount": len(data["entries"]),
         "source": {"branch": SOURCE_BRANCH, "commit": SOURCE_COMMIT},
         "auxiliarySemantics": {
@@ -697,6 +774,8 @@ def main() -> None:
         },
         "schemes": {},
     }
+    if candidate_source:
+        audit["candidateSource"] = candidate_source
     for entry in entries:
         ident = entry["id"]
         audit["schemes"][ident] = {
@@ -728,7 +807,9 @@ def main() -> None:
         }
     AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text(json.dumps(audit, ensure_ascii=False, indent=2), encoding="utf-8")
-    fixed.write_payload(HTML, html, body, end, data)
+    if HTML.read_text(encoding="utf-8") != html:
+        raise ValueError("HTML changed during scoring; rerun against the latest page")
+    fixed.write_payload(HTML, patch_production_ui(html) if candidate_source else html, body, end, data)
     print(json.dumps({
         "html": str(HTML),
         "audit": str(AUDIT),

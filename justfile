@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-oc21-benchmark html="a7_CKT_R11.html":
+    python -X utf8 tools/integrate_a7_qz_empty_six.py --candidate-file research/config/untoned-2121-oc21-production-candidate.json --html "{{html}}" --audit research/notes/2026-11-15-untoned-2121-oc21-html-benchmark.json
+    node tools/sync_keymap_link_colors.js --html "{{html}}"
+
 untoned-2121-anneal-2k:
     node tools/anneal_untoned_2121_multicenter_2k.js
     python -X utf8 tools/report_untoned_2121_anneal_2k.py
