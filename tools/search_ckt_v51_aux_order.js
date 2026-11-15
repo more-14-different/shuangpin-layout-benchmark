@@ -275,3 +275,5 @@ function main() {
 }
 
 if (require.main === module) main();
+
+module.exports = {BASELINE, TRACK_WEIGHTS, REFERENCE_POLICIES, enumerateMode, referenceMode, parseArgs};

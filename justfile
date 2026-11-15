@@ -1,5 +1,12 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-2121-candidate-aux-components html="a7_CKT_R11.html":
+    node --expose-gc --max-old-space-size=4096 tools/export_untoned_2121_candidate_aux_orders.js --html "{{html}}"
+
+untoned-2121-candidate-aux-robustness:
+    $env:OPENBLAS_NUM_THREADS='2'; $env:MKL_NUM_THREADS='2'; python -X utf8 tools/analyze_untoned_2121_candidate_aux.py --input research/notes/2026-11-15-untoned-2121-candidates-aux-components.json.gz --output research/notes/2026-11-15-untoned-2121-candidates-aux-robustness.json
+    python -X utf8 tools/verify_untoned_2121_candidate_aux.py --components research/notes/2026-11-15-untoned-2121-candidates-aux-components.json.gz --report research/notes/2026-11-15-untoned-2121-candidates-aux-robustness.json
+
 untoned-2121-oc21-benchmark html="a7_CKT_R11.html":
     python -X utf8 tools/integrate_a7_qz_empty_six.py --candidate-file research/config/untoned-2121-oc21-production-candidate.json --html "{{html}}" --audit research/notes/2026-11-15-untoned-2121-oc21-html-benchmark.json
     node tools/sync_keymap_link_colors.js --html "{{html}}"
