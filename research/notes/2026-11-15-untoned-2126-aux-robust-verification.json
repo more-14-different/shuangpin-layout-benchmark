@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "layouts": 7,
+  "policiesPerMode": 144,
+  "nativePolicies": 2016,
+  "gridPointsPerMember": 1771561,
+  "positiveSubsetPointsPerMember": 1000000,
+  "freshNativeComparisons": 14,
+  "maximumFreshDifference": 1.7763568394002505e-15,
+  "historicalProductionPolicyTracksExactlyEqual": 288,
+  "comparisonSha256": "c2f449dc9aa523234c5271d3bee5fa4cb1d4d3d0f0bab7ebf7773b58dc97b3c6",
+  "freshSha256": "d7170935d63f985f902b2384a8a291805615176a6b96dd2b71a1dc52ae2f3ed1",
+  "exports": {
+    "2026-11-15-untoned-2126-aux-robust-P-components.json.gz": {
+      "sha256": "f83f4424d0e9c2cff20d4c5188e05507d1ec746280038dff97c9509797389e26",
+      "uncompressedSha256": "f92636aab3de3be66b0f3ffc610b3b5c5c7458c1efec74a235d1d40f5c9a3cce",
+      "policiesPerMode": 144
+    },
+    "2026-11-15-untoned-2126-aux-robust-D-components.json.gz": {
+      "sha256": "f1df4dab0918d37a37865d1592609c9bfe359ba87e586292b39d4d7dcfcf9c7e",
+      "uncompressedSha256": "f67c05046d06f7fefa76134b0083810e81f40d045281817d4fe013a916406276",
+      "policiesPerMode": 144
+    },
+    "2026-11-15-untoned-2126-aux-robust-A-components.json.gz": {
+      "sha256": "a51e4ae93d1eedbe2b8deddb8a79b183a341b46756600c6db50b4d823450a402",
+      "uncompressedSha256": "3102a9242e741887e579d2797c3f2fc7dbf9cd7aa1c9c702a734179299f896ef",
+      "policiesPerMode": 144
+    },
+    "2026-11-15-untoned-2126-aux-robust-B-components.json.gz": {
+      "sha256": "1502ee4ea174f1c5635b142a389d2d0a69d0a6617bd6173387b010554b34bab8",
+      "uncompressedSha256": "7c8bdeb3251fac1b7ada2df9d4f9f45f3a7c4d1c468791dbdb0f7601e676e18f",
+      "policiesPerMode": 144
+    },
+    "2026-11-15-untoned-2126-aux-robust-C-components.json.gz": {
+      "sha256": "ff5a6f31aef4f43973938f0330ffd82e750c8b421d90aba4dee35f944f1e4739",
+      "uncompressedSha256": "55ef34c9fd2418a92d9325231c4b1d585591547a7dbfb61913229cab1cd012dc",
+      "policiesPerMode": 144
+    },
+    "2026-11-15-untoned-2126-aux-robust-F-components.json.gz": {
+      "sha256": "d925b4c7eb69df796bdd64623726cc9e713bd6dc6f9e128cd82594c0a6f6e75d",
+      "uncompressedSha256": "e1631a936ed49f54eec1855cefa7e2a9343714d2d5c2545a1f724a762c37f828",
+      "policiesPerMode": 144
+    },
+    "2026-11-15-untoned-2126-aux-robust-M-components.json.gz": {
+      "sha256": "ef291007eed1aa4efb3b00ca077dbbe51b2dfbaf0754af78b251031db782e861",
+      "uncompressedSha256": "a1842d359b4fc832d1d4897744d88795de3a03898879378384ccbf9806c1d695",
+      "policiesPerMode": 144
+    }
+  },
+  "scripts": {
+    "tools/prepare_untoned_aux_comparison.js": "635a055cbebf785ee818bcff71fb667739da673437499c620637cca7df2b8261",
+    "tools/search_untoned_aux_checkpoint.js": "807a62747047bb7adc3dafbd5ed60566357b6583bc039ebc2d51fdb015fee678",
+    "tools/analyze_untoned_aux_comparison.py": "b5362e353be121d9d0b879a398f9c27e23bc9bfbc65b7aa5f9a4aae7864fe83f",
+    "tools/verify_untoned_aux_policies.js": "ca5d7d74b48cb35a093e7bcb896fc5800e42acc3af49ea47a02752192699a723",
+    "tools/export_untoned_aux_comparison.py": "6ece9535197594e5d32eea5264cbd30f6ba2a7aad5a6eb4ca4a69bc411f30095",
+    "tools/compare_untoned_aux_pairwise.py": "b4941464d5f1111bf124739c84b1fc9f1d05e9d8f662c310e808eb32d63bb466",
+    "tools/report_untoned_aux_comparison.py": "0ac3f4da2184958f6bb3c5f7978ef17c54331d6ec3bbcb0741c65f7696ab72e8"
+  },
+  "pairwiseSha256": "7b1dfceb66507af8cc8cae3026da7d587f558e9148417a76ffb1380acc5a7584"
+}

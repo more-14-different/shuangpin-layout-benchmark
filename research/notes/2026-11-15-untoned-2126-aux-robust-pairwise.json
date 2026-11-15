@@ -1,0 +1,97 @@
+{
+  "pairs": {
+    "C-vs-F": {
+      "firstWinsRate": 0.8002704959072817,
+      "firstWinsPositiveRate": 0.882638,
+      "minimumSecondMinusFirst": -0.0037418494006065117,
+      "maximumSecondMinusFirst": 0.0034569390965195623,
+      "meanSecondMinusFirst": 0.00116455750648408
+    },
+    "A-vs-D": {
+      "firstWinsRate": 0.17683895728117746,
+      "firstWinsPositiveRate": 0.093353,
+      "minimumSecondMinusFirst": -0.008530955352812342,
+      "maximumSecondMinusFirst": 0.008006582133646134,
+      "meanSecondMinusFirst": -0.0028859795796703346
+    },
+    "A-vs-C": {
+      "firstWinsRate": 0.08773392505253841,
+      "firstWinsPositiveRate": 0.018831,
+      "minimumSecondMinusFirst": -0.021648176461729562,
+      "maximumSecondMinusFirst": 0.009382479645029917,
+      "meanSecondMinusFirst": -0.010991930857199142
+    },
+    "A-vs-F": {
+      "firstWinsRate": 0.06482644402309602,
+      "firstWinsPositiveRate": 0.002946,
+      "minimumSecondMinusFirst": -0.01845039919787972,
+      "maximumSecondMinusFirst": 0.006208351402925416,
+      "meanSecondMinusFirst": -0.009827373350715063
+    }
+  },
+  "positiveSubset": {
+    "P": {
+      "top1Rate": 0.0,
+      "meanRank": 6.167925
+    },
+    "D": {
+      "top1Rate": 0.0,
+      "meanRank": 3.106894
+    },
+    "A": {
+      "top1Rate": 0.002946,
+      "meanRank": 4.313335
+    },
+    "B": {
+      "top1Rate": 0.0,
+      "meanRank": 4.558153
+    },
+    "C": {
+      "top1Rate": 0.882638,
+      "meanRank": 1.136193
+    },
+    "F": {
+      "top1Rate": 0.114416,
+      "meanRank": 1.885584
+    },
+    "M": {
+      "top1Rate": 0.0,
+      "meanRank": 6.831915
+    }
+  },
+  "synchronizedCostSweep": {
+    "rangePercent": [
+      0,
+      500
+    ],
+    "stepPercent": 1,
+    "winnerSegments": [
+      {
+        "startPercent": 0,
+        "endPercent": 20,
+        "winner": "M"
+      },
+      {
+        "startPercent": 21,
+        "endPercent": 22,
+        "winner": "B"
+      },
+      {
+        "startPercent": 23,
+        "endPercent": 33,
+        "winner": "A"
+      },
+      {
+        "startPercent": 34,
+        "endPercent": 137,
+        "winner": "F"
+      },
+      {
+        "startPercent": 138,
+        "endPercent": 500,
+        "winner": "C"
+      }
+    ],
+    "notContinuousThresholdProof": true
+  }
+}

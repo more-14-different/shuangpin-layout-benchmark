@@ -27,6 +27,17 @@ untoned-2121-local-closure workers="2":
 untoned-2121-local-closure-test:
     node --test tests/untoned-2121-local-closure.test.mjs tests/untoned-production-v51.test.mjs tests/auxiliary-semantics.test.mjs
 
+untoned-aux-comparison:
+    node --max-old-space-size=8192 tools/prepare_untoned_aux_comparison.js
+    $env:OPENBLAS_NUM_THREADS='1'; $env:MKL_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/analyze_untoned_aux_comparison.py
+    node --max-old-space-size=6144 tools/verify_untoned_aux_policies.js
+    $env:OPENBLAS_NUM_THREADS='1'; $env:MKL_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/compare_untoned_aux_pairwise.py
+    python -X utf8 tools/export_untoned_aux_comparison.py
+    python -X utf8 tools/report_untoned_aux_comparison.py
+
+untoned-aux-comparison-test:
+    python -X utf8 -m unittest discover -s tests -p test_untoned_aux_comparison.py
+
 untoned-candidate-a-r11:
     python -X utf8 tools/integrate_untoned_candidate_a_r11.py
     node tools/sync_keymap_link_colors.js
