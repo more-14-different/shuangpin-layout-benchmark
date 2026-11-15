@@ -1,0 +1,231 @@
+{
+  "version": 1,
+  "timestamp": "2026-11-16T04:00:00+08:00",
+  "branch": "research/cr-frontier-gpu-anneal",
+  "device": "NVIDIA GeForce RTX 3070",
+  "rounds": 90743,
+  "evaluations": 130931,
+  "frontierSize": 256,
+  "bestCkt": 9.121110146688881,
+  "baselineCkt": 9.172683083564511,
+  "netGain": -0.051572936875629694,
+  "chains": [
+    {
+      "id": "CR0-0374/ckt",
+      "steps": 22686,
+      "accepted": 1148,
+      "metrics": {
+        "d": 1,
+        "m": 20,
+        "guard": 24,
+        "daily": 114.97376596147959,
+        "dailyPinky": 0.07305723592368543,
+        "ckt": 9.31521532696143,
+        "pinky": 0.08962263842931388,
+        "pinkyTracks": [
+          0.08348839721168162,
+          0.08233903795497918,
+          0.08962263842931388,
+          0.07044061183844004
+        ],
+        "verified": true
+      },
+      "profile": {
+        "dailyFloor": 0,
+        "maxM": 22,
+        "name": "ckt",
+        "pinkyCeiling": 1
+      }
+    },
+    {
+      "id": "CR0-0374/balanced",
+      "steps": 22686,
+      "accepted": 1243,
+      "metrics": {
+        "ckt": 9.190775359454156,
+        "d": 2,
+        "daily": 124.95493381583995,
+        "dailyPinky": 0.07352256863657515,
+        "guard": 24,
+        "m": 21,
+        "pinky": 0.08952096439595132,
+        "pinkyTracks": [
+          0.07242587797318759,
+          0.07806288306457457,
+          0.08952096439595132,
+          0.06986261758791269
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 122.9586249541484,
+        "maxM": 22,
+        "name": "balanced",
+        "pinkyCeiling": 0.1079140049
+      }
+    },
+    {
+      "id": "CR1-0004/ckt",
+      "steps": 22686,
+      "accepted": 1175,
+      "metrics": {
+        "d": 1,
+        "m": 22,
+        "guard": 24,
+        "daily": 120.03686583653823,
+        "dailyPinky": 0.10842252210330386,
+        "ckt": 9.244817332654232,
+        "pinky": 0.08965138532604244,
+        "pinkyTracks": [
+          0.07745008571368951,
+          0.08528175617615708,
+          0.08965138532604244,
+          0.06994777431148833
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 0,
+        "maxM": 22,
+        "name": "ckt",
+        "pinkyCeiling": 1
+      }
+    },
+    {
+      "id": "CR1-0004/balanced",
+      "steps": 22686,
+      "accepted": 1504,
+      "metrics": {
+        "d": 2,
+        "m": 21,
+        "guard": 24,
+        "daily": 127.35073871467073,
+        "dailyPinky": 0.062354583527221966,
+        "ckt": 9.23895586416476,
+        "pinky": 0.08982307111741693,
+        "pinkyTracks": [
+          0.0747135768558205,
+          0.06653862264925256,
+          0.08982307111741693,
+          0.07028146574836745
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 122.9586249541484,
+        "maxM": 22,
+        "name": "balanced",
+        "pinkyCeiling": 0.1079140049
+      }
+    },
+    {
+      "id": "CR1-0004/m21",
+      "steps": 22686,
+      "accepted": 1055,
+      "metrics": {
+        "d": 2,
+        "m": 21,
+        "guard": 24,
+        "daily": 119.35077699787402,
+        "dailyPinky": 0.08282922289436948,
+        "ckt": 9.258040567987779,
+        "pinky": 0.09751341635874228,
+        "pinkyTracks": [
+          0.09751341635874228,
+          0.07733213604214416,
+          0.08783505631899644,
+          0.07523139261337286
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 0,
+        "maxM": 21,
+        "name": "m21",
+        "pinkyCeiling": 1
+      }
+    },
+    {
+      "id": "CR1-0009/ckt",
+      "steps": 22686,
+      "accepted": 1152,
+      "metrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 122.69724477171128,
+        "dailyPinky": 0.07584923220102373,
+        "ckt": 9.222884598637242,
+        "pinky": 0.0897867217056892,
+        "pinkyTracks": [
+          0.08716344234113775,
+          0.07599660032868445,
+          0.0897867217056892,
+          0.07003115117773585
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 0,
+        "maxM": 22,
+        "name": "ckt",
+        "pinkyCeiling": 1
+      }
+    },
+    {
+      "id": "CR1-0009/m21",
+      "steps": 22685,
+      "accepted": 1189,
+      "metrics": {
+        "d": 1,
+        "m": 21,
+        "guard": 24,
+        "daily": 128.19789949362738,
+        "dailyPinky": 0.08748255002326663,
+        "ckt": 9.247308189243524,
+        "pinky": 0.08982476103996166,
+        "pinkyTracks": [
+          0.08106099847499425,
+          0.08203198508786957,
+          0.08982476103996166,
+          0.06998509845156001
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 0,
+        "maxM": 21,
+        "name": "m21",
+        "pinkyCeiling": 1
+      }
+    },
+    {
+      "id": "CR1-1036/ckt",
+      "steps": 22685,
+      "accepted": 1053,
+      "metrics": {
+        "d": 2,
+        "m": 21,
+        "guard": 24,
+        "daily": 120.05123447211541,
+        "dailyPinky": 0.0832945556072592,
+        "ckt": 9.242625983249404,
+        "pinky": 0.08982238347927256,
+        "pinkyTracks": [
+          0.06971435331404033,
+          0.08282003477482457,
+          0.08982238347927256,
+          0.0697223862334508
+        ],
+        "verified": false
+      },
+      "profile": {
+        "dailyFloor": 0,
+        "maxM": 22,
+        "name": "ckt",
+        "pinkyCeiling": 1
+      }
+    }
+  ],
+  "beatenBaselineCount": 33
+}
