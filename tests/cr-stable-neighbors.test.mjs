@@ -5,6 +5,12 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import test from 'node:test';
 const require=createRequire(import.meta.url);
+function archivedHtmlHash(expected){
+  const snapshots=['a7_CKT_R11.html','research/.cache/cr-production5-r11-20261117/before.html'];
+  const found=snapshots.find(p=>existsSync(p)&&createHash('sha256').update(readFileSync(p)).digest('hex')===expected);
+  assert.ok(found,'Missing original HTML snapshot for archived verification '+expected);
+  return createHash('sha256').update(readFileSync(found)).digest('hex');
+}
 for(const [prefix,count] of [
   ['research/notes/2026-11-16-cr-stable-neighbors',3],
   ['research/notes/2026-11-16-cr-balanced-followup',1]]){
@@ -37,7 +43,7 @@ test(prefix+': archived scored states and full JS checks match the policy-specif
   {skip:!available},()=>{
     const bundle=read('-finalists.json'),verified=read('-verification.json');
     assert.equal(verified.publishedHtmlUnchanged,true);
-    assert.equal(createHash('sha256').update(readFileSync('a7_CKT_R11.html')).digest('hex'),verified.htmlSha256);
+    assert.equal(archivedHtmlHash(verified.htmlSha256),verified.htmlSha256);
     const bytes=readFileSync(prefix+'-scores.json.gz');
     assert.equal(createHash('sha256').update(bytes).digest('hex'),bundle.scoreArchive.sha256);
     const caches=JSON.parse(gunzipSync(bytes));

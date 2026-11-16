@@ -99,6 +99,16 @@ cr-667-regroup-test:
     python -m unittest discover -s tests -p test_cr_667_root_regroup.py
     node --test tests/cr-667-root-regroup.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
 
+cr-667-zero phase="carriers":
+    python -X utf8 tools/search_cr_667_zero_carriers.py --phase "{{phase}}"
+
+cr-667-zero-verify:
+    python -X utf8 tools/verify_cr_667_zero_carriers.py
+
+cr-667-zero-test:
+    python -X utf8 -m unittest discover -s tests -p test_cr_667_zero_carriers.py
+    node --test tests/cr-667-zero-carriers.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js

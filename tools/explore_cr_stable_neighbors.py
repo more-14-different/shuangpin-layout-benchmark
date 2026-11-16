@@ -66,7 +66,7 @@ def adapt_shape_corpus(content,policy):
 
 
 class StableNeighbors(Followup):
-    def __init__(self,output,parent,*,anchor=None):
+    def __init__(self,output,parent,*,anchor=None,space_class=SearchSpace):
         self.output=output/parent;self.output.mkdir(parents=True,exist_ok=True)
         bundle=json.loads(LAYOUTS.read_text(encoding='utf8'))
         stable=json.loads(STABILITY.read_text(encoding='utf8'))
@@ -77,7 +77,7 @@ class StableNeighbors(Followup):
         corpus_path=self.output/'inputs/corpus.bin'
         corpus,audit=adapt_shape_corpus(corpus_path.read_bytes(),self.policy)
         corpus_path.write_bytes(corpus)
-        self.space=SearchSpace(self.output/'inputs')
+        self.space=space_class(self.output/'inputs')
         metrics=dict(layout['metrics'],ckt=selected['selectedScore'],pinky=selected['selectedPinky'])
         # pinkyTracks from the former policy must never be reused as new evidence.
         metrics.pop('pinkyTracks',None)
@@ -99,6 +99,8 @@ class StableNeighbors(Followup):
             maxD=2,maxGuard=24,shapeKeysByMeaning='AVUIO',toneKeysByTone='IVUAO',parent=parent)
         if anchor is not None:
             contract['pinnedAnchor']=dict(key=anchor['key'],digest=digest(self.seeds[parent]))
+        if space_class is not SearchSpace:
+            contract['memoryModel']=space_class.MEMORY_MODEL
         self.progress=json.loads(self.state_path.read_text(encoding='utf8')) if self.state_path.exists() else dict(
             contract=contract,profiles=self.profiles,centers=copy.deepcopy(self.seeds),rounds=[])
         if self.progress['contract']!=contract or self.progress['profiles']!=self.profiles:
