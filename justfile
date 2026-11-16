@@ -120,6 +120,16 @@ cr-667-m24-test:
     python -X utf8 -m unittest discover -s tests -p test_cr_667_m24_joint.py
     node --test tests/cr-667-m24-joint.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
 
+cr-m24-portfolio-build:
+    pwsh -NoProfile -File tools/run_cr_m24_portfolio.ps1 -Mode Build
+
+cr-m24-portfolio-test:
+    python -X utf8 -m unittest discover -s tests -p test_cr_m24_portfolio.py
+    node --test tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
+cr-m24-portfolio-audit:
+    pwsh -NoProfile -File tools/run_cr_m24_portfolio.ps1 -Mode Audit -Output research/.cache/cr-m24-portfolio-audit
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js

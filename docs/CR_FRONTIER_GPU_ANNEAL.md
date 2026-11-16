@@ -1,5 +1,7 @@
 # CR 四种子长期 GPU 退火
 
+最新 M≤24/26、D≤2 的八种子入口见本文末尾的 [M24D2 八种子长时退火](#m24d2-八种子长时退火)。
+
 分支：`research/cr-frontier-gpu-anneal`。入口：`tools/run_cr_anneal.ps1`。
 四个种子是 CR0-0374、CR1-0004、CR1-0009、CR1-1036；最低参考 CKT 为 9.17268308356451。
 冻结输入包 `research/config/cr-anneal-inputs.zip` 已随 Git 保存，包括原生语料、评分参数、完整韵母 fixture、四种子、含标点日常序列和带许可证的移动手评分器。
@@ -491,3 +493,113 @@ fresh为实际新增评分，首轮另有2,451项与现合同逐项匹配的D≤
 未穷尽所有五个零声母、全部声母与多组任意排列的联合状态，不能当作全局最优证明。
 没有更新HTML。来源见[候选及搜索档案](../research/notes/2026-11-17-cr-667-m24-d2-joint-finalists.json)，
 [独立复算](../research/notes/2026-11-17-cr-667-m24-d2-joint-verification.json)。
+
+## M24D2 八种子长时退火
+
+2026-11-17：用户授权将本session里性能较好且布局有差异的方案交给另一台
+RTX3070/64GB机器长期退火。单中心邻域检查只回答局部算子是否还有改进，
+放宽M后不能据此推断整个空间已经充分搜索；本入口采用多起点、重热和组合扰动。
+入口`tools/run_cr_m24_portfolio.ps1`，冻结输入`research/config/cr-m24-portfolio-inputs.zip`。
+此包自带适配后的原生语料、八种子、移动手日常序列/评分器/许可证及完整参数，
+目标机器只需更新本分支，无需原机器HTML、原词典路径或任何`.cache`。
+维护者重建包的工具是`tools/prepare_cr_m24_portfolio.py`，目标机不运行准备工具。
+
+八个种子都重新统一为`21/231/14`，CPU完整评分及独立JS全量终码/M-T1/双小指交叉检查通过：
+
+| 种子 | CKT v5.1↓ | 日常分↑ | M下限/guard | 右P峰值 | 起点用途/默认链 |
+|---|---:|---:|---:|---:|---|
+| 29ce221cfe | 9.113794320 | 119.466641 | 22/24 | 7.468030% | 最低CKT，speed |
+| 795c0eee49 | 9.159565262 | 131.157665 | 21/24 | 7.001966% | 最高日常分，daily |
+| 6a384d9d0d | 9.158771740 | 130.602062 | 21/24 | 6.578521% | 高日常分的另一组键位，daily |
+| 87de6cc69c | 9.119955263 | 126.370628 | 22/24 | 7.465231% | 均衡低CKT，balanced |
+| 0cfbd2058b | 9.120006048 | 126.582914 | 23/25 | 7.467866% | O载键拆分，balanced |
+| e63c8224a7 | 9.133456410 | 127.107971 | 22/24 | 7.467797% | 完整韵根重分组的另一中心，balanced |
+| 971fbdef9a | 9.148622712 | 127.257749 | 24/26 | 7.465992% | W/卷舌联动＋O拆分，balanced |
+| f0ae939a38 | 9.122664476 | 126.234570 | 22/24 | 7.462730% | 667精修之前的均衡中心，balanced |
+
+全体D=2、F=0，左QAZ四轨峰值≤9.032422256373%。795在历史导出中的辅序为21/231/24，
+本包已重算为21/231/14，不能拿旧分数9.159766006作为启动审计参考。
+667与87/0cf过近，未另加一条原667链；f0/e63在组属和键位方面提供不同起点。
+这里包含相近的受控替代种子，不宣称八个都是相互独立的远端吸引域。
+
+距离按展开物理键位比较，消除任意组编号的影响：35%首键原子差异比例、
+50%完整韵母×调区按键差异比例、15%韵根两两同组关系差异比例；这是选种多样性启发式，
+不作为人体工学指标。距离矩阵保存在`research/notes/2026-11-17-cr-m24-portfolio-finalists.json`。
+相对87，795/6a分别有64/69个首键＋韵母调区单元不同，f0有17个、e63有19个；
+795与6a之间只有5个，0cf与971之间只有3个，因此同类替代种子不能算作多个远端区域的证据。
+
+### 3070/64GB 的启动命令
+
+Python3.10+、Rust/Cargo、CUDA Toolkit/nvcc、NVIDIA驱动及MSVC Build Tools须在PATH可用。
+在更新后的`research/cr-frontier-gpu-anneal`仓库根目录依次执行，先等前一条成功：
+
+```powershell
+pwsh -NoProfile -File tools/run_cr_m24_portfolio.ps1 -Mode Audit -Output research/.cache/cr-m24-audit
+pwsh -NoProfile -File tools/run_cr_m24_portfolio.ps1 -Mode Smoke -Output research/.cache/cr-m24-smoke -Cycle 2
+pwsh -NoProfile -File tools/run_cr_m24_portfolio.ps1 -Output research/.cache/cr-m24-main -Hours 60
+```
+
+第三条运行本次60小时，去掉`-Hours 60`即持续运行。每次只运行一个GPU退火进程。
+默认8条独立链轮流交给单个持久CUDA进程，batch2、CPU线程2、Duty0.25，
+温度≥75°C或空闲显存<1024MiB等待。Duty是主动工作/休息比例，不是硬GPU利用率限制。
+3070与本机都为8GB显存，先通过目标机Audit/Smoke，再根据实测资源调整Batch/Duty；
+不因目标机有64GB内存便同时启动8个GPU进程。
+
+所有路线都硬限D≤2、M_lower≤24、M_guard≤26、左峰值≤9.032422256373%、
+右峰值≤7.468205050496%，不会把P简单列为禁键。日常门槛分开：
+
+| 路线 | 日常分下限 | 初始种子数 | 结果意义 |
+|---|---:|---:|---|
+| speed | 119.46664129382486 | 1 | 保持29ce原日常水平的低CKT探索 |
+| balanced | 126.23457023071755 | 5 | 保持原667探索的均衡门槛 |
+| daily | 130 | 2 | 保留高日常分优势 |
+
+status的`bestByRoute`按这些阈值分别统计全部合规前沿；不能用speed路线的较低日常分结果声称改善balanced。
+每链只提出一个候选，分别按温度接受；不会把一批最低者当作普通退火的单步提案。
+首键算子覆盖零声母单独迁移、A/E/O共同迁移/独立拆分、W/Y联动、卷舌迁移/互换、
+普通声母迁移与首键两两互换；普通声母依然受D≤2约束。
+35%概率叠加2—5个算子，只验证组合终点，允许越过单步超预算中间状态。
+韵母只进行一个调区或三调区整组交换，不拆组内韵根，不迁移组内韵母。
+不同种子的完整分组保留在各起点中；冷/热重启可跨种子使用已有合规布局，单步算子不另行重分组。
+
+每链5000步从0.025冷却到0.00002再重热；重启50%回原种子，35%取同族合规前沿，
+15%取其他合规前沿，无可用池则回原种子。这样保留不同起点，降低所有链过早挤到同一中心的机会。
+有限链数和退火仍不构成全局最优证明；该提案也是优化启发式，不用于估计严格平衡分布。
+
+### 恢复、暂停与交回结果
+
+用同一Run命令/输出目录续跑；`-Hours 60`表示本次再跑60小时。
+种子、温度、周期、批量、源码或冻结包变化会拒绝复用旧断点，应另建输出目录。
+Duty、线程数、温控和本次时长可调整。Audit/Smoke使用独立目录，尤其Smoke的Cycle2不能续作默认Cycle5000。
+
+```powershell
+New-Item -ItemType File research/.cache/cr-m24-main/PAUSE
+Remove-Item -LiteralPath research/.cache/cr-m24-main/PAUSE
+New-Item -ItemType File research/.cache/cr-m24-main/STOP
+```
+
+移除STOP后用原Run命令恢复。Ctrl+C/断电从最后提交批次恢复；SQLite事务同时提交
+全部链、随机数状态、前沿和缓存，未完成批次重放。缓存默认最近50000个布局、前沿最多256项，
+前沿保留CKT、日常分、左右小指、M/D的取舍，导出是有限代表集。
+启动核验全部8种子及续跑的全部链；CUDA/CPU逐outcome一致检查默认每100批一次，
+新进入前沿的未核验候选必须再通过CPU完整复算。所有发布前沿均满足双小指硬约束。
+反馈时提供`status.json`、`frontier.json`和完整`search.sqlite`（进程停止后复制）；
+SQLite为恢复真值，不要只交JSON或删除断点。另记录GPU型号、命令及运行时长。
+最后仍需独立JS与稳健辅序审计再决定生产选型，不直接修改HTML。
+
+停止后可运行一致性检查并导出交接摘要：
+
+```powershell
+python -X utf8 tools/check_cr_m24_portfolio.py research/.cache/cr-m24-main --report research/.cache/cr-m24-main/handoff.json
+```
+
+给另一台电脑的简短指令：
+
+> 更新 research/cr-frontier-gpu-anneal 分支后，按 docs/CR_FRONTIER_GPU_ANNEAL.md 的“M24D2 八种子长时退火”部分，先执行新入口 tools/run_cr_m24_portfolio.ps1 的 Audit、Smoke，通过后单进程运行60小时。固定D≤2、M≤24/26、21/231/14、双小指上限，保持三路线日常分门槛；不运行旧四种子入口。保留SQLite断点及两份JSON，完成后报告各路线前沿和实际硬件。不改HTML。
+
+本机实测：RTX4060 Laptop 8GB，八种子CUDA/CPU逐outcome审计通过，独立JS种子复算通过。
+修正重启时链布局key同步后，真实CUDA重新运行16批并续跑5批，合计41个新评分、8链16次重启，
+SQLite integrity_check=ok，所有链key/状态/预算/日常门槛及前沿CPU核验标记通过。
+短测只验证运行与恢复，不证明RTX3070吞吐或长期搜索收益。6项新事务/约束测试、
+6项旧runner回归和6项五辅语义/词辅策略测试通过。实测摘要见
+`research/notes/2026-11-17-cr-m24-portfolio-smoke.json`。

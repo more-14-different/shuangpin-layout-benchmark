@@ -1,0 +1,52 @@
+{
+  "version": "cr-m24-portfolio-check-v1",
+  "integrity": "ok",
+  "round": 21,
+  "evaluations": 41,
+  "cacheRows": 49,
+  "chains": 8,
+  "steps": [
+    6,
+    6,
+    5,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "restarts": 16,
+  "frontier": 10,
+  "bestByRoute": {
+    "speed": 9.113794320280636,
+    "balanced": 9.119955263161566,
+    "daily": 9.158771739501063
+  },
+  "bundleSha256": "ccc4af5c32d67b41e67d95f417d8ac48cc337def4c940575fd8bf0e43d669caa",
+  "sourceContract": {
+    "batch": 2,
+    "cacheLimit": 50000,
+    "compositeProposalProbability": 0.35,
+    "cycle": 2,
+    "manifest": "b93d0da241c257636e1f4d0a96cfabba072263dd47ae4ec45d5bba5fe7e5b5a9",
+    "minTemp": 2e-05,
+    "restartProbabilities": {
+      "globalFrontier": 0.15,
+      "original": 0.5,
+      "sameFamily": 0.35
+    },
+    "runnerSources": "9c1827eff9bf1aaa09deb9252894036f788359bd533f6b96dc1bcb4ab4789d3a",
+    "scorerSources": "5c5c3cbe92eef3befbd61fc4731afca2d91fb1fbe08183ec3496016731ee89c1",
+    "seed": 2026111701,
+    "temp": 0.025,
+    "version": "cr-m24-portfolio-v1"
+  },
+  "sourceHashes": {
+    "tools/run_cr_m24_portfolio.py": "4dcb4f8e13b8ad27af2372a107a24d8ba60315445e7f78383cdcaf41462b00b8",
+    "tools/run_cr_m24_portfolio.ps1": "3727da5f6ecc5d67eca3d351c79f6717dfa405fd95bffb3b2547a10464f147d3",
+    "tools/prepare_cr_m24_portfolio.py": "18a37d6b3f8e493957185efe10b0320eb23a0aaf0ed9c4b817b386f8391666f0",
+    "tools/check_cr_m24_portfolio.py": "fbcc997b7022afc0cfdf792bffd2e7f7ccd6cc09116066a30e6dc199fc3b1ef4",
+    "tests/test_cr_m24_portfolio.py": "10eada1535e8297533830df473ca0d5e8351a4cd9693c449d4eb478d27299266"
+  },
+  "gpuObservedAtCheck": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB"
+}
