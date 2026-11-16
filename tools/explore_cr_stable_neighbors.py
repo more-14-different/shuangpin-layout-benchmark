@@ -105,10 +105,12 @@ class StableNeighbors(Followup):
             raise ValueError('changed experiment inputs or constraints; use a new output')
         self.engine=None
 
-    def export_layout(self,bundle):
-        self.audit_seeds();self.cross_profile({})
+    def export_layout(self,bundle,*,representative=None):
+        self.audit_seeds()
+        if representative is None:self.cross_profile({})
+        item=self.full_score(representative if representative is not None else self.progress['centers'][self.parent])
         atomic_json(self.cache_path,self.cache);atomic_json(self.state_path,self.progress)
-        item=self.full_score(self.progress['centers'][self.parent]);state=item['state'];f=self.space.f
+        state=item['state'];f=self.space.f
         expanded=self.space.expand(state)
         decomposition=json.loads((ROOT/'research/config/ckt-v51-toned-2121-seeds.json').read_text(encoding='utf8'))['decomposition']
         finals={r['pinyin']:r['fullFinal'] for r in decomposition}
