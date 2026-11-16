@@ -109,6 +109,17 @@ cr-667-zero-test:
     python -X utf8 -m unittest discover -s tests -p test_cr_667_zero_carriers.py
     node --test tests/cr-667-zero-carriers.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
 
+cr-667-m24 phase="local":
+    python -X utf8 tools/search_cr_667_m24_joint.py --phase "{{phase}}"
+
+cr-667-m24-verify:
+    python -X utf8 tools/verify_cr_667_m24_joint.py
+
+cr-667-m24-test:
+    cargo test --locked --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --lib pinky::tests
+    python -X utf8 -m unittest discover -s tests -p test_cr_667_m24_joint.py
+    node --test tests/cr-667-m24-joint.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js

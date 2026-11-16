@@ -13,6 +13,7 @@ pub mod model;
 pub mod motor;
 pub mod moving_hand;
 pub mod native;
+pub mod pinky;
 pub mod search;
 pub mod toned_bucket;
 

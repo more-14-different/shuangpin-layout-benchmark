@@ -80,16 +80,20 @@ fn metrics(rows: &[Row], outcomes: &[Outcome], alphabet: &KeyAlphabet, reference
     })?;
     let mut hits = [0.0_f64;4];
     let mut pinky = [0.0_f64;4];
+    let mut right_pinky = [0.0_f64;4];
     for out in outcomes {
         let row = &rows[out.row_index];
         for k in alphabet.unpack(out.code).chars() {
             hits[row.kind.index()] += row.weight;
             if "QAZ".contains(k) { pinky[row.kind.index()] += row.weight; }
+            if k == 'P' { right_pinky[row.kind.index()] += row.weight; }
         }
     }
     let load: Vec<f64> = (0..4).map(|i| pinky[i]/hits[i]).collect();
+    let right_load: Vec<f64> = (0..4).map(|i| right_pinky[i]/hits[i]).collect();
     Ok(json!({"ckt": normalized_score(&summary,reference)?,
-        "pinky": load.iter().copied().fold(0.0_f64,f64::max), "pinkyTracks": load}))
+        "pinky": load.iter().copied().fold(0.0_f64,f64::max), "pinkyTracks": load,
+        "rightPinky": right_load.iter().copied().fold(0.0_f64,f64::max), "rightPinkyTracks": right_load}))
 }
 fn main() -> Result<(),Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();

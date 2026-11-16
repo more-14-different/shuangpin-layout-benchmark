@@ -5,6 +5,7 @@ use ckt_v4_core::{
 };
 use serde::Deserialize;
 use serde_json::json;
+use ckt_v4_core::pinky::PinkyTotals;
 use std::{collections::HashMap, env, fs, path::Path, time::Instant};
 #[derive(Deserialize)]
 struct Candidate {
@@ -26,6 +27,8 @@ struct Job {
     forbidden_rhyme_keys: Vec<char>,
     #[serde(default, rename = "preserveQInitial")]
     preserve_q_initial: bool,
+    #[serde(default, rename = "trackPinkies")]
+    track_pinkies: bool,
 }
 fn default_max_d() -> usize {
     2
@@ -138,6 +141,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ..CognitiveParameters::default()
         },
     )?;
+    let mut pinkies = job.track_pinkies.then(|| PinkyTotals::new(&alphabet));
+    if let Some(load) = &mut pinkies {
+        for out in resolver.outcomes() {
+            let row = &resolver.rows()[out.row_index];
+            load.add(row.kind.index(), row.weight, out.code);
+        }
+    }
     let start = Instant::now();
     let mut results = Vec::new();
     let mut current = base;
@@ -169,9 +179,24 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         )?;
         let receipt = resolver.apply_updates(updates)?;
         summary.apply_changes(resolver.rows(), receipt.outcome_changes())?;
+        if let Some(load) = &mut pinkies {
+            for change in receipt.outcome_changes() {
+                let row = &resolver.rows()[change.row_index];
+                load.add(row.kind.index(), -row.weight, change.old.code);
+                load.add(row.kind.index(), row.weight, change.new.code);
+            }
+        }
         let score = normalized_score(&summary.summary(), &fixture.reference_effective_ms)?;
         current = candidate;
-        results.push(json!({"id":c.id,"score":score,"memory":c.memory}));
+        let mut result = json!({"id":c.id,"score":score,"memory":c.memory});
+        if let Some(load) = &pinkies {
+            let (left, right) = load.tracks();
+            result["pinky"] = json!(left.iter().copied().fold(0.0_f64, f64::max));
+            result["rightPinky"] = json!(right.iter().copied().fold(0.0_f64, f64::max));
+            result["pinkyTracks"] = json!(left);
+            result["rightPinkyTracks"] = json!(right);
+        }
+        results.push(result);
         if results.len() % 10 == 0 || results.len() == job.candidates.len() {
             fs::write(
                 &args[4],

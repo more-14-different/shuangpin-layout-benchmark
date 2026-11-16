@@ -178,6 +178,8 @@ class Followup:
             if not old_score_path.exists():
                 continue
             old_job = json.loads(old_job_path.read_text(encoding='utf8'))
+            if old_job.get('trackPinkies',False)!=getattr(self,'track_pinkies',False):
+                continue
             if old_job['fixture'] != self.space.f:
                 raise ValueError('recovery fixture mismatch')
             old_scores = json.loads(old_score_path.read_text(encoding='utf8'))
@@ -187,12 +189,17 @@ class Followup:
                 if key == anchor['key']:
                     if abs(result['score'] - anchor['metrics']['ckt']) > 1e-9:
                         raise ValueError('recovery anchor mismatch')
+                    if getattr(self,'track_pinkies',False):
+                        for field in ['pinky','rightPinky']:
+                            if not math.isfinite(result[field]) or abs(result[field]-anchor['metrics'][field])>1e-9:
+                                raise ValueError('recovery anchor '+field+' mismatch')
                     continue
                 if key in missing:
                     item = missing[key]
                     if old_items[key]['state'] != self.space.expand(item['state']) or not math.isfinite(result['score']):
                         raise ValueError('recovery state mismatch')
-                    self.cache[key] = dict(item, metrics=dict(item['metrics'], ckt=result['score'], verified=False))
+                    extra={k:result[k] for k in ['pinky','rightPinky','pinkyTracks','rightPinkyTracks'] if k in result}
+                    self.cache[key] = dict(item, metrics=dict(item['metrics'], **extra, ckt=result['score'], verified=False))
                     del missing[key]
         atomic_json(self.cache_path, self.cache)
         if missing:
@@ -203,8 +210,10 @@ class Followup:
                     states = [anchor] + pending[worker*len(pending)//workers:(worker+1)*len(pending)//workers]
                     # A new suffix preserves earlier partial recovery evidence.
                     shard = Path(str(path) + f'-part{worker}-{len(pending)}')
-                    job = dict(fixture=self.space.f, maxD=2, maxM=22, requireEmpty=[], candidates=[
+                    job = dict(fixture=self.space.f, maxD=getattr(self,'score_max_d',2),
+                        maxM=getattr(self,'score_max_m',22), requireEmpty=[], candidates=[
                         dict(id=item['key'], state=self.space.expand(item['state']), memory=item['metrics']['m']) for item in states])
+                    if getattr(self,'track_pinkies',False):job['trackPinkies']=True
                     atomic_json(Path(str(shard) + '-job.json'), job)
                     log = Path(str(shard) + '.log').open('w', encoding='utf8'); logs.append(log)
                     processes.append(subprocess.Popen([str(ROOT / 'research/ckt-v4-core/target/release/audit-toned-rhyme-neighbors.exe'),
@@ -245,8 +254,13 @@ class Followup:
                     if item['key'] == anchor['key']:
                         if abs(result['score'] - anchor['metrics']['ckt']) > 1e-9:
                             raise ValueError('incremental anchor mismatch')
+                        if getattr(self,'track_pinkies',False):
+                            for field in ['pinky','rightPinky']:
+                                if not math.isfinite(result[field]) or abs(result[field]-anchor['metrics'][field])>1e-9:
+                                    raise ValueError('incremental anchor '+field+' mismatch')
                         continue
-                    self.cache[item['key']] = dict(item, metrics=dict(item['metrics'], ckt=result['score'], verified=False))
+                    extra={k:result[k] for k in ['pinky','rightPinky','pinkyTracks','rightPinkyTracks'] if k in result}
+                    self.cache[item['key']] = dict(item, metrics=dict(item['metrics'], **extra, ckt=result['score'], verified=False))
             atomic_json(self.cache_path, self.cache)
         return [self.cache[item['key']] for item in candidates], fresh
 
