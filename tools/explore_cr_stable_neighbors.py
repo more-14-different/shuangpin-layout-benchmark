@@ -7,12 +7,13 @@ import json
 from pathlib import Path
 import struct
 
-from explore_cr_frontier_followup import Followup
+from explore_cr_frontier_followup import Followup,local_moves
 from run_cr_anneal import ROOT, SearchSpace, unpack, atomic_json, digest, lock_run
 
 PREFIX=ROOT/'research/notes/2026-11-16-cr-stable-neighbors'
 OUTPUT=ROOT/'research/.cache/cr-stable-neighbors-20261116'
 PARENTS=['0a4ee7fb52','3d3dcbafc0','29ce221cfe']
+SUPPORTED_PARENTS=PARENTS+['f0ae939a38']
 LAYOUTS=ROOT/'research/notes/2026-11-16-cr-frontier-followup-finalists.json'
 STABILITY=ROOT/'research/notes/2026-11-16-cr-toned-stable-policies.json'
 
@@ -115,7 +116,7 @@ class StableNeighbors(Followup):
         if [f['pinyin'][py]+str(t) for py,t in token_pairs]!=bundle['tokenKeys']:
             raise ValueError('token order mismatch')
         return dict(id='CRN-'+self.parent+'-'+item['key'][:10],parent=self.parent,
-            profile='speed' if self.parent=='29ce221cfe' else 'daily',key=item['key'],state=state,
+            profile='speed' if self.parent=='29ce221cfe' else ('balanced' if self.parent=='f0ae939a38' else 'daily'),key=item['key'],state=state,
             description='New stable-policy neighborhood search from '+self.parent,
             wordAuxiliaryPolicy=self.policy,rustScore=item['metrics']['ckt'],metrics=item['metrics'],
             before=self.seeds[self.parent]['metrics'],anchorKey=self.seeds[self.parent]['key'],constraints=self.profiles[self.parent],
@@ -146,25 +147,54 @@ class StableNeighbors(Followup):
         atomic_json(self.cache_path,self.cache);atomic_json(self.state_path,self.progress)
         print(json.dumps(dict(profile=self.parent,**item)),flush=True)
 
+    def beam(self,width):
+        """Expand complete one-step neighborhoods of the best scored local alternatives."""
+        self.audit_seeds();center=self.full_score(self.progress['centers'][self.parent])
+        local=list(self.candidates(center['state'],self.profiles[self.parent],local_moves(center['state'],self.space)))
+        if any(r['key'] not in self.cache for r in local):
+            raise ValueError('run local or polish at the current center before beam')
+        branches=sorted((self.cache[r['key']] for r in local if r['key']!=center['key']),
+            key=lambda r:(r['metrics']['ckt'],r['key']))[:width]
+        def moves():
+            for branch in branches:
+                for label,state in local_moves(branch['state'],self.space):
+                    yield 'beam:'+branch['key'][:10]+'/'+label,state
+        candidates=list(self.candidates(center['state'],self.profiles[self.parent],moves()))
+        scored,fresh=self.score_batch(f'{len(self.progress["rounds"])+1}-beam-{self.parent}',candidates,center)
+        winner=self.select(scored,self.parent,center);self.progress['centers'][self.parent]=winner
+        item=dict(available=len(candidates),considered=len(candidates),fresh=fresh,
+            before=center['metrics']['ckt'],after=winner['metrics']['ckt'],winner=winner['key'],metrics=winner['metrics'])
+        record=dict(phase='beam',seed=None,branchKeys=[r['key'] for r in branches],profiles={self.parent:item})
+        self.cross_profile(record);self.progress['rounds'].append(record)
+        atomic_json(self.cache_path,self.cache);atomic_json(self.state_path,self.progress)
+        print(json.dumps(dict(profile=self.parent,**item)),flush=True)
+
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,default=OUTPUT)
+    p.add_argument('--prefix',type=Path,default=PREFIX)
     p.add_argument('--parents',default=','.join(PARENTS))
-    p.add_argument('--phase',choices=['local','coupled','polish','transfer','export'],default='local')
+    p.add_argument('--phase',choices=['local','coupled','polish','beam','transfer','export'],default='local')
     p.add_argument('--limit',type=int,default=180);p.add_argument('--seed',type=int,default=20261116)
     p.add_argument('--workers',type=int,default=8)
+    p.add_argument('--beam-width',type=int,default=3)
     a=p.parse_args();exports=[];caches={};contracts={}
     if not 1<=a.workers<=16:p.error('workers must be between 1 and 16')
-    for parent in a.parents.split(','):
-        if parent not in PARENTS:
-            p.error('unknown parent')
+    if not 1<=a.beam_width<=10:p.error('beam-width must be between 1 and 10')
+    parents=a.parents.split(',')
+    if len(set(parents))!=len(parents) or any(parent not in SUPPORTED_PARENTS for parent in parents):
+        p.error('parents must be distinct supported layout IDs')
+    if a.phase=='export' and parents!=PARENTS and a.prefix.resolve()==PREFIX:
+        p.error('use --prefix to keep exports for a different parent selection separate')
+    for parent in parents:
         s=StableNeighbors(a.output,parent);s.workers=a.workers;lock=lock_run(s.output)
         try:
             if a.phase=='export':
                 exports.append(s.export_layout(json.loads(LAYOUTS.read_text(encoding='utf8'))))
                 caches[parent]=s.cache;contracts[parent]=s.progress['contract']
             elif a.phase=='transfer':s.transfer()
+            elif a.phase=='beam':s.beam(a.beam_width)
             else:
                 s.run(a.phase,a.limit,a.seed)
         finally:
@@ -172,12 +202,13 @@ def main():
             lock.close()
     if a.phase=='export':
         bundle=json.loads(LAYOUTS.read_text(encoding='utf8'))
-        archive=Path(str(PREFIX)+'-scores.json.gz')
+        a.prefix.parent.mkdir(parents=True,exist_ok=True)
+        archive=Path(str(a.prefix)+'-scores.json.gz')
         archive.write_bytes(gzip.compress(json.dumps(caches,ensure_ascii=False,separators=(',',':')).encode(),mtime=0))
         paths=[Path(__file__),ROOT/'tools/explore_cr_frontier_followup.py',ROOT/'tools/run_cr_anneal.py',LAYOUTS,STABILITY,
             ROOT/'research/config/cr-anneal-inputs.zip',ROOT/'research/config/ckt-v51-toned-2121-seeds.json',
             ROOT/'research/ckt-v4-core/target/release/score-toned-stream.exe',ROOT/'research/ckt-v4-core/target/release/audit-toned-rhyme-neighbors.exe']
-        atomic_json(Path(str(PREFIX)+'-finalists.json'),dict(version='cr-stable-neighbors-v1',tokenKeys=bundle['tokenKeys'],
+        atomic_json(Path(str(a.prefix)+'-finalists.json'),dict(version='cr-stable-neighbors-v1',tokenKeys=bundle['tokenKeys'],
             keyDefinition='sha256 of expanded sound-key mapping plus D/M/guard memory ledger; excludes auxiliary policy',
             firstAtomNames=bundle['firstAtomNames'],layouts=exports,contracts=contracts,
             sourceHashes={str(path.relative_to(ROOT)).replace('\\','/'):hashlib.sha256(path.read_bytes()).hexdigest() for path in paths},

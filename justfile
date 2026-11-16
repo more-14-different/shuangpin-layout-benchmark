@@ -38,6 +38,17 @@ cr-stable-neighbors-report:
     node --max-old-space-size=6144 tools/verify_cr_stable_neighbors.js
     python -X utf8 tools/report_cr_stable_neighbors.py
 
+cr-balanced-followup phase="local" limit="240" workers="8":
+    python -X utf8 tools/explore_cr_stable_neighbors.py --parents f0ae939a38 --phase "{{phase}}" --output research/.cache/cr-balanced-followup-20261116 --prefix research/notes/2026-11-16-cr-balanced-followup --limit "{{limit}}" --workers "{{workers}}"
+
+cr-balanced-followup-auxiliary:
+    node --max-old-space-size=6144 tools/optimize_cr_frontier_auxiliary.js --layouts research/notes/2026-11-16-cr-balanced-followup-finalists.json --output research/notes/2026-11-16-cr-balanced-followup-auxiliary.json --macro-output research/.cache/cr-balanced-followup-20261116/macro-input.json
+    $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --input research/notes/2026-11-16-cr-balanced-followup-auxiliary.json --output research/notes/2026-11-16-cr-balanced-followup-robustness.json
+
+cr-balanced-followup-verify:
+    node --max-old-space-size=6144 tools/verify_cr_stable_neighbors.js --prefix research/notes/2026-11-16-cr-balanced-followup
+    python -X utf8 tools/report_cr_stable_neighbors.py --prefix research/notes/2026-11-16-cr-balanced-followup --output research/.cache/cr-balanced-followup-20261116 --json-only
+
 cr-frontier-followup output="research/.cache/cr-frontier-followup-20261116":
     cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
     python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase local

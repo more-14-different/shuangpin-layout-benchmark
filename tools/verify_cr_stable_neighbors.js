@@ -4,7 +4,9 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const scorer=require('./score_completion_ckt_v4'),toned=require('./score_toned_2121_ckt_v51');
 const native=require('./score_snow_jiandao_toned_benchmark'),{tonedMemoryAudit}=require('./toned_memory_audit');
 const {toneKeysFromShapeKeys}=require('./auxiliary_semantics');
-const prefix='research/notes/2026-11-16-cr-stable-neighbors';
+const prefixIndex=process.argv.indexOf('--prefix');
+const prefix=prefixIndex<0?'research/notes/2026-11-16-cr-stable-neighbors':process.argv[prefixIndex+1];
+if(!prefix)throw Error('--prefix requires a path');
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const bundle=read(prefix+'-finalists.json'),aux=read(prefix+'-auxiliary.json'),rank=read(prefix+'-robustness.json');

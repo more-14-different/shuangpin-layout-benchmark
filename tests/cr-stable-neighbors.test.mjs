@@ -5,11 +5,13 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import test from 'node:test';
 const require=createRequire(import.meta.url);
-const prefix='research/notes/2026-11-16-cr-stable-neighbors';
+for(const [prefix,count] of [
+  ['research/notes/2026-11-16-cr-stable-neighbors',3],
+  ['research/notes/2026-11-16-cr-balanced-followup',1]]){
 const read=suffix=>JSON.parse(readFileSync(prefix+suffix,'utf8'));
 const available=existsSync(prefix+'-finalists.json')&&existsSync(prefix+'-verification.json');
 
-test('stable-policy representatives retain independently derived five-key semantics and memory budgets',
+test(prefix+': representatives retain independently derived five-key semantics and memory budgets',
   {skip:!available},()=>{
     const bundle=read('-finalists.json');
     const pinyin=[...new Set(bundle.tokenKeys.map(t=>t.replace(/[1-5]$/,'')))];
@@ -18,7 +20,7 @@ test('stable-policy representatives retain independently derived five-key semant
     const {toneKeysFromShapeKeys,shapeKeysFromToneKeys}=require('../tools/auxiliary_semantics');
     assert.equal(toneKeysFromShapeKeys('AVUIO'),'IVUAO');
     assert.equal(shapeKeysFromToneKeys('IVUAO'),'AVUIO');
-    assert.equal(bundle.layouts.length,3);
+    assert.equal(bundle.layouts.length,count);
     for(const layout of bundle.layouts){
       const codes=new Map(bundle.tokenKeys.map((t,i)=>[t,layout.tonedCodes[i]]));
       const m=tonedMemoryAudit({publication:{rhymeGroups:layout.rhymeGroups},
@@ -31,7 +33,7 @@ test('stable-policy representatives retain independently derived five-key semant
     }
   });
 
-test('archived scored states and full JS checks match the policy-specific search winners',
+test(prefix+': archived scored states and full JS checks match the policy-specific search winners',
   {skip:!available},()=>{
     const bundle=read('-finalists.json'),verified=read('-verification.json');
     assert.equal(verified.publishedHtmlUnchanged,true);
@@ -59,3 +61,4 @@ test('archived scored states and full JS checks match the policy-specific search
       assert.ok(Math.abs(v.macro['daily|native-punctuation'].score-layout.metrics.daily)<1e-9);
     }
   });
+}

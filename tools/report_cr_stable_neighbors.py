@@ -1,5 +1,6 @@
 """Independently validate stable-policy search representatives and render the result."""
 import hashlib
+import argparse
 import json
 from pathlib import Path
 
@@ -13,21 +14,35 @@ def key(policy):return '/'.join(policy[k] for k in ['word2','word3','word4'])
 
 
 def main():
-    bundle=read(str(PREFIX)+'-finalists.json');aux=read(str(PREFIX)+'-auxiliary.json')
-    robust=read(str(PREFIX)+'-robustness.json');old_robust=read(STABILITY)
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--prefix',type=Path,default=PREFIX)
+    parser.add_argument('--output',type=Path,default=OUTPUT)
+    parser.add_argument('--json-only',action='store_true')
+    args=parser.parse_args();prefix=args.prefix.resolve();output=args.output.resolve()
+    bundle=read(str(prefix)+'-finalists.json');aux=read(str(prefix)+'-auxiliary.json')
+    archive=prefix.parent/bundle['scoreArchive']['file']
+    if hashlib.sha256(archive.read_bytes()).hexdigest()!=bundle['scoreArchive']['sha256']:
+        raise ValueError('score archive hash mismatch')
+    scored=json.loads(gzip_read(archive))
+    coverage=dict(statePolicyPairs=sum(len(rows) for rows in scored.values()),
+        canonicalStates=len({r['key'] for rows in scored.values() for r in rows.values()}),
+        fullyVerified=sum(r['metrics'].get('verified',False) for rows in scored.values() for r in rows.values()))
+    robust=read(str(prefix)+'-robustness.json');old_robust=read(STABILITY)
+    if not args.json_only and {r['parent'] for r in bundle['layouts']}!={'0a4ee7fb52','3d3dcbafc0','29ce221cfe'}:
+        parser.error('use --json-only for a different set of research layouts')
     old_columns_path=ROOT/'research/notes/2026-11-16-cr-stable-r11-columns.json'
     old_columns=read(old_columns_path)['schemes']
-    native_checks={r['id']:r for r in read(str(PREFIX)+'-native.json')['results']}
+    native_checks={r['id']:r for r in read(str(prefix)+'-native.json')['results']}
     html_hash=hashlib.sha256((ROOT/'a7_CKT_R11.html').read_bytes()).hexdigest()
     published_hash=read(ROOT/'a7_CKT_R11_integrated_materials/cr_robust_frontier/manifest.json')['htmlSha256']
     if html_hash!=published_hash or aux['sourceHashes']['a7_CKT_R11.html']!=html_hash:
         raise ValueError('published HTML changed or auxiliary verification used a different HTML')
-    data=read(OUTPUT/'macro-input.json');old_layouts=read(LAYOUTS)
+    data=read(output/'macro-input.json');old_layouts=read(LAYOUTS)
     lookup={r['id']:r for r in aux['results']};ranked={r['id']:r for r in robust['results']}
-    if len(lookup)!=3 or set(lookup)!=set(ranked):raise ValueError('incomplete final auxiliary verification')
+    if len(lookup)!=len(bundle['layouts']) or set(lookup)!=set(ranked):raise ValueError('incomplete final auxiliary verification')
     verification=[]
     for layout in bundle['layouts']:
-        a=lookup[layout['id']];r=ranked[layout['id']];s=SearchSpace(OUTPUT/layout['parent']/'inputs')
+        a=lookup[layout['id']];r=ranked[layout['id']];s=SearchSpace(output/layout['parent']/'inputs')
         if s.key(layout['state'])!=layout['key']:raise ValueError('state key mismatch')
         tokens=dict(zip(bundle['tokenKeys'],layout['tonedCodes'],strict=True))
         encoded_layout=dict(tonedCodes=[[tokens.get(py+str(t)) for t in [1,2,3,4,5]] for py in data['pinyin']])
@@ -66,11 +81,14 @@ def main():
             beforePublished=dict(ergonomics=old_columns['CR-GPU-'+layout['parent']]['ergonomics'],
                 aggregate=old_columns['CR-GPU-'+layout['parent']]['ckt']['aggregateV51']),
             selectedPinky=chosen['pinky'],selectedPassesPinky=chosen['pinky']<=profile['pinkyCeiling']+1e-12))
-    sources=[Path(str(PREFIX)+suffix) for suffix in ['-finalists.json','-auxiliary.json','-robustness.json','-native.json']]+[
-        Path(__file__),OUTPUT/'macro-input.json',ROOT/'tools/integrate_snow_jiandao_toned_r11.py',old_columns_path]
-    atomic_json(Path(str(PREFIX)+'-verification.json'),dict(version='cr-stable-neighbor-verification-v1',tolerance=1e-9,
+    sources=[Path(str(prefix)+suffix) for suffix in ['-finalists.json','-auxiliary.json','-robustness.json','-native.json']]+[
+        Path(__file__),output/'macro-input.json',ROOT/'tools/integrate_snow_jiandao_toned_r11.py',old_columns_path]
+    atomic_json(Path(str(prefix)+'-verification.json'),dict(version='cr-stable-neighbor-verification-v1',tolerance=1e-9,
+        coverage=coverage,
         publishedHtmlUnchanged=True,htmlSha256=html_hash,
         sourceHashes={str(p.relative_to(ROOT)).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},results=verification))
+    if args.json_only:
+        print('Verified',str(prefix)+'-verification.json');return
     lines=['# 新稳健辅序下的三方案声韵精修','',
         '在已发布的新辅序下重新搜索，避免把旧12/213/24下的局部最优误当成新目标的局部最优。'
         '保留18韵根、10非空组、调区、D≤2、M_guard≤24；两套日常方案M≤21，冠军M≤22。'
@@ -161,7 +179,7 @@ def main():
             lines.append(f"| {layout['parent']} | {phase['phase']} / {phase['seed']} | {item['available']} | {item['considered']} | {item['fresh']} | "
                 f"{item['before']:.9f} → {item['after']:.9f} |")
     total=sum(l['uniqueScoredLayouts'] for l in bundle['layouts'])
-    unique=len({r['key'] for rows in json.loads(gzip_read(Path(str(PREFIX)+'-scores.json.gz'))).values() for r in rows.values()})
+    unique=len({r['key'] for rows in json.loads(gzip_read(Path(str(prefix)+'-scores.json.gz'))).values() for r in rows.values()})
     lines+=['',f'按辅序隔离缓存共{total}个状态/辅序评分条目，规范化声韵映射及记忆账跨路线去重为{unique}个；两种数不能混用。'
         '有限一步邻域及抽样组合不是全局最优证明。','',
         '## 核验与复现','',
@@ -175,8 +193,8 @@ def main():
         '`just cr-stable-neighbors-report`独立重建终码并生成报告。',
         '- 增量分片默认最多8个低优先级CPU进程，`--workers`可调1至16；并行度不参与目标或候选抽样。',
         '- 页面未更新，本轮保存为研究候选。']
-    Path(str(PREFIX)+'.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
-    print('Wrote',str(PREFIX)+'.md')
+    Path(str(prefix)+'.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
+    print('Wrote',str(prefix)+'.md')
 
 
 def gzip_read(path):

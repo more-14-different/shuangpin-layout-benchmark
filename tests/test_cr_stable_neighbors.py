@@ -1,8 +1,10 @@
 """A policy adapter changes shape positions only and keeps scoring caches isolated."""
 import json
+import copy
 import gzip
 import hashlib
 import math
+import subprocess
 from pathlib import Path
 import struct
 import sys
@@ -32,7 +34,13 @@ class ShapePolicyAdapterTests(unittest.TestCase):
         self.assertEqual(source_hashes([path]),{path.as_posix():hashlib.sha256(path.read_bytes()).hexdigest()})
 
     def test_recorded_states_reproduce_layout_keys_and_all_memory_budgets(self):
-        path=Path(str(PREFIX)+'-finalists.json')
+        self.check_recorded_states(PREFIX)
+
+    def test_balanced_recorded_states_reproduce_layout_keys_and_all_memory_budgets(self):
+        self.check_recorded_states(ROOT/'research/notes/2026-11-16-cr-balanced-followup')
+
+    def check_recorded_states(self,prefix):
+        path=Path(str(prefix)+'-finalists.json')
         if not path.exists():self.skipTest('no recorded experiment')
         bundle=json.loads(path.read_text(encoding='utf8'))
         archive=path.parent/bundle['scoreArchive']['file'];content=archive.read_bytes()
@@ -99,6 +107,43 @@ class ShapePolicyAdapterTests(unittest.TestCase):
             atomic_json(a.state_path,a.progress)
             resumed=StableNeighbors(Path(temp),'0a4ee7fb52')
             self.assertEqual(resumed.progress['contract'],a.progress['contract'])
+
+    def test_balanced_route_protects_its_own_current_floor_and_pinky_budget(self):
+        with tempfile.TemporaryDirectory() as temp:
+            s=StableNeighbors(Path(temp),'f0ae939a38')
+            profile=s.profiles['f0ae939a38']
+            self.assertEqual(s.policy,dict(word2='21',word3='231',word4='14'))
+            self.assertEqual(profile['maxM'],22)
+            self.assertAlmostEqual(profile['dailyFloor'],126.23457023071755)
+            self.assertAlmostEqual(profile['pinkyCeiling'],.09032422256372921)
+            self.assertAlmostEqual(s.seeds['f0ae939a38']['metrics']['ckt'],9.122664475500086)
+
+    def test_beam_requires_scored_local_alternatives_before_branch_ranking(self):
+        with tempfile.TemporaryDirectory() as temp:
+            s=StableNeighbors(Path(temp),'f0ae939a38')
+            s.audit_seeds=lambda:None
+            s.full_score=lambda item:item
+            with self.assertRaisesRegex(ValueError,'run local or polish'):
+                s.beam(3)
+
+    def test_balanced_subset_export_cannot_overwrite_the_three_route_archive(self):
+        result=subprocess.run([sys.executable,str(ROOT/'tools/explore_cr_stable_neighbors.py'),
+            '--parents','f0ae939a38','--phase','export'],capture_output=True,text=True)
+        self.assertEqual(result.returncode,2)
+        self.assertIn('use --prefix',result.stderr)
+
+    def test_daily_floor_can_be_repaired_by_a_two_step_sound_key_path(self):
+        with tempfile.TemporaryDirectory() as temp:
+            s=StableNeighbors(Path(temp),'f0ae939a38');seed=s.seeds['f0ae939a38']['state']
+            floor=s.profiles['f0ae939a38']['dailyFloor']
+            upper_only=copy.deepcopy(seed);upper_only['groupKeys'][0][2]='E'
+            self.assertLess(s.space.daily(upper_only)['daily'],floor)
+            lower_first=copy.deepcopy(seed);lower_first['groupKeys'][2][6]='C'
+            self.assertGreaterEqual(s.space.daily(lower_first)['daily'],floor)
+            combined=copy.deepcopy(lower_first);combined['groupKeys'][0][2]='E'
+            self.assertGreaterEqual(s.space.daily(combined)['daily'],floor)
+            self.assertEqual(s.space.memory(combined),dict(d=2,m=22,guard=24))
+            self.assertTrue(s.space.key(combined).startswith('fab751bbbe'))
 
 
 if __name__=='__main__':unittest.main()
