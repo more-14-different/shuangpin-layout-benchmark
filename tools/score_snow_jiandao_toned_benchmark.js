@@ -287,11 +287,12 @@ function main() {
   const words = scorer.multiwords(path.join(snow, "snow_pinyin.base.dict.yaml"), data, 0.99);
   const strokes = scorer.strokeOptions(path.join(snow, "rime-stroke/stroke.dict.yaml"));
   const motor = toned.projectedMotor(data);
+  const wordAuxiliaryPolicy = toned.validateWordAuxiliaryPolicy(fixture.publication?.wordAuxiliaryPolicy || V51_POLICY);
   const reference51 = toned.buildReference({data, words, strokes, motor, snow});
   const v51 = toned.evaluateLayoutPolicy({
     layout, layouts: inventory, data, words, motor, reference: reference51,
     shapeKeysByMeaning: fixture.shapeKeysByMeaning,
-    policy: V51_POLICY,
+    policy: wordAuxiliaryPolicy,
   });
   const reference5 = v5Reference({data, words, strokes, motor, snow});
   const v5 = evaluateV5({
@@ -314,7 +315,7 @@ function main() {
       shapeKeysByMeaning: fixture.shapeKeysByMeaning,
       toneKeysByTone: fixture.toneKeysByTone,
       toneDigitsByShapeMeaning: "42310",
-      wordAuxiliaryPolicy: V51_POLICY,
+      wordAuxiliaryPolicy,
       oldR11IndependentToneAuxiliary: false,
     },
     memory: {
@@ -349,7 +350,7 @@ function main() {
       },
       v51: {
         score: v51.score,
-        policy: V51_POLICY,
+        policy: wordAuxiliaryPolicy,
         reference: "S005 keytao-only; same four tone-aware cohorts; word3 permits third shape stage",
         tracks: v51.tracks,
       },

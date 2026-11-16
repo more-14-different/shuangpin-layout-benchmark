@@ -368,6 +368,7 @@ function snowJiandaoRenderDetail(){
  <div class="heading"><button data-action="nav:selection">返回方案筛选</button><button data-r11-report>打开跨合同完整表</button></div>
  <div class="two"><section class="card"><h3>结构与记忆</h3><p>宿主键域 <b>${(i.contract.capacity||[21,21]).join('×')}</b>；${i.contract.shapeKeysByMeaning} 五形辅；toneKeysByTone=<b>${i.contract.toneKeysByTone}</b>。</p><p>M-T1 规则下界/保守上界：<b>${i.memory.lower}/${i.memory.guard}</b>；D/F：<b>${i.memory.D}/${i.memory.F}</b>。</p><p>合法带调音节 <b>${i.inventory.legalTonedSyllables}</b>；占桶 <b>${i.inventory.occupiedBuckets}/${i.inventory.capacity}</b>。</p><details><summary>M 规则记账依据</summary><p>下界把多根韵组视为压缩规则，上界逐根计关联边；两者均计入声母、零声母载体、去韵头与调区合并规则，不是人体学习时间的置信区间。</p><pre>${esc(JSON.stringify(i.memory.audit,null,2))}</pre></details></section>
  <section class="card"><h3>合同边界</h3><p>CKT-T v5/v5.1 使用 S005=10 的四条带调原生轨，只计形辅；不再次加入调笔辅。</p><p>通用 benchmark 列按带调版本的相应合同重算，保留各代公式、样本、权重和基线；原生四轨 CKT-T 作为另一项明确命名的生产指标。</p></section></div>
+ ${snowJiandaoPolicyPanel(i)}
  ${snowJiandaoKeyboardPanel()}
  ${uxTable(['指标',i.name,'QZ-e8f37a','口径'],[
   ['CKT v5',num(i.ckt.v5.score,9),num(q.ckt.v5,9),'各自生产合同；S005=10'],

@@ -14,7 +14,7 @@ const read=key=>page.locator(`table[data-ux-table="${key}"]`).evaluate(table=>{
   return [...table.querySelectorAll('.snow-jiandao-contract-row')].map(row=>({id:row.dataset.dvScheme,count:row.cells.length,headers,
     cells:Object.fromEntries([...row.cells].map((cell,i)=>[headers[i],{text:cell.textContent,metric:!!cell.querySelector('[data-toned-metric]'),
       raw:cell.hasAttribute('data-ux-value')?JSON.parse(cell.dataset.uxValue):null}]))}));
-});
+}).then(rows=>rows.filter(row=>ids.includes(row.id)));
 const validate=(rows,count=3)=>{
   assert.equal(rows.length,count);
   for(const row of rows){assert.equal(row.count,row.headers.length,row.id);
@@ -32,7 +32,11 @@ try{
   await page.locator('#tabs [data-action="nav:scheme"]').click();
   for(const [index,id] of ids.entries()){
     const n=frozen[id];
-    assert.equal(n.id,id);assert.ok(Math.abs(n.ckt.v51.score-anchors[index])<1e-9);
+    assert.equal(n.id,id);
+    if(n.publication.policySelection){
+      assert.ok(Math.abs(n.publication.originalFixedPolicyScore-anchors[index])<1e-9);
+      assert.equal(n.ckt.v51.score,n.publication.policySelection.selectedScore);
+    }else assert.ok(Math.abs(n.ckt.v51.score-anchors[index])<1e-9);
     assert.equal(n.memory.lower,[22,22,21][index]);assert.equal(n.memory.guard,24);
     assert.equal(n.memory.D,2);assert.equal(n.memory.F,0);
     assert.equal(n.inventory.legalTonedSyllables,1407);
@@ -77,7 +81,7 @@ try{
   }
   await page.locator('#tabs [data-action="nav:benchmark"]').click();
   await page.locator('#uxQuery').evaluate(input=>{input.value='CR-GPU';input.dispatchEvent(new Event('input',{bubbles:true}))});
-  await page.waitForFunction(()=>document.querySelectorAll('table[data-ux-table="benchmark"] .snow-jiandao-contract-row').length===3);
+  await page.waitForFunction(()=>document.querySelectorAll('table[data-ux-table="benchmark"] .snow-jiandao-contract-row').length>=3);
   let rows=await read('benchmark');validate(rows);
   for(const row of rows){const c=frozen[row.id].columns;
     assert.equal(row.cells['A7E-v5'].raw,c.ensemble.v5);

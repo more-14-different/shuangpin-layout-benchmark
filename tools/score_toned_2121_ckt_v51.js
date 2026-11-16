@@ -30,6 +30,16 @@ function parsePolicy(value) {
   return {word2, word3, word4};
 }
 
+function validateWordAuxiliaryPolicy(policy) {
+  for (const [kind,length,max] of [['word2',2,2],['word3',3,3],['word4',2,4]]) {
+    const order=policy?.[kind];
+    if(typeof order!=='string'||order.length!==length||new Set(order).size!==length||
+        [...order].some(position=>!new RegExp(`^[1-${max}]$`).test(position)))
+      throw new Error('invalid native shape auxiliary policy: '+kind+'='+order);
+  }
+  return policy;
+}
+
 function sampleCorpus(data, words, count) {
   if (!(count > 0)) return {data, words};
   return {
@@ -141,6 +151,7 @@ function projectedMotor(data) {
 
 function evaluateLayoutPolicy({layout, layouts, data, words, motor, reference,
   shapeKeysByMeaning, policy}) {
+  validateWordAuxiliaryPolicy(policy);
   const toneKeysByTone = toneKeysFromShapeKeys(shapeKeysByMeaning);
   const characterRows = buildCharacterRows(layout, layouts, data, toneKeysByTone);
   const word2Rows = buildWordRows(layout, layouts, data, words, toneKeysByTone,
@@ -319,6 +330,7 @@ function main() {
 if (require.main === module) main();
 
 module.exports = {
+  validateWordAuxiliaryPolicy,
   buildCharacterRows,
   buildReference,
   buildWordRows,

@@ -57,7 +57,7 @@ def make_fixture(source, baseline, decomposition, ident, *, labels=LABELS, sourc
     if (lower, guard) != (audit['memoryLower'], audit['memoryGuard']):
         raise ValueError(f'{ident}: memory formula mismatch')
     fixture['layoutId'] = ident
-    fixture['expected'] = {'score': layout['rustScore']}
+    fixture['expected'] = {'score': layout.get('nativeScore', layout['rustScore'])}
     fixture['publication'] = dict(id=ident, name=f'{ident} · {labels[ident]}', research=True,
         description=layout['description'], source=str(source_path.relative_to(ROOT)).replace('\\', '/'),
         sourceSha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
@@ -67,6 +67,10 @@ def make_fixture(source, baseline, decomposition, ident, *, labels=LABELS, sourc
     if 'annealKey' in layout:
         fixture['publication']['annealKey'] = layout['annealKey']
         fixture['publication']['annealOrigin'] = layout['origin']
+    if 'wordAuxiliaryPolicy' in layout:
+        fixture['publication']['wordAuxiliaryPolicy'] = layout['wordAuxiliaryPolicy']
+        fixture['publication']['policySelection'] = layout['policySelection']
+        fixture['publication']['originalFixedPolicyScore'] = layout['rustScore']
     return fixture
 
 

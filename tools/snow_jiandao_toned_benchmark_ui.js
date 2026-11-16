@@ -1,6 +1,27 @@
 // Column adapters run at the innermost table boundary, after every R2/R9/R10
 // wrapper has inserted its columns. Every numeric cell also supplies sort/CSV
 // data, rather than appending an unsortable row to rendered HTML.
+function snowJiandaoPolicyPanel(native) {
+  const policy=native.contract.wordAuxiliaryPolicy;
+  if (!policy) return '';
+  const key=p=>['word2','word3','word4'].map(k=>p[k]).join('/');
+  const selection=native.publication?.policySelection;
+  const head=`<p>二／三／四字词形辅顺序：<b data-native-word-policy>${esc(key(policy))}</b>。声调已在主码，后续辅键只取字形。</p>`;
+  if (!selection) return `<section class="card snow-native-word-policy">${head}</section>`;
+  const rows=Object.entries(selection.grids).map(([name,g])=>{
+    const selected=g.selected;
+    const range=`${g.minimum*100}%–${g.maximum*100}%`;
+    return [range,num(selected.meanRank,6),pct(selected.top1Rate),pct(selected.top3Rate),selected.worstRank,
+      num(g.selectedVsRunner.minGap,9)];
+  });
+  return `<section class="card" id="snowJiandaoPolicyStability" data-stable-scheme="${esc(native.id)}"><h3>词辅序稳定性</h3>${head}
+    <p>全 144 套辅序、六项认知成本独立扰动；四网格等权按平均竞争排名选取。默认 CKT v5.1：<b data-stable-ckt>${num(selection.selectedScore,9)}</b>。</p>
+    <p>综合第二名：<b data-policy-runner>${esc(key(selection.runnerPolicy))}</b>；平均排名差（第二−当前）：<b data-policy-rank-gap>${num(selection.meanRankGap,9)}</b>；默认 CKT 差（第二−当前）：<b data-policy-ckt-gap>${num(selection.defaultScoreGap,9)}</b>。</p>
+    ${uxTable(['各成本相对默认值','当前平均排名↓','全144中 Top-1','Top-3','最坏排名','对固定第二最小 CKT 差'],rows,[],'toned-policy-stability')}
+    <p class="hint">Top-1 为对应网格内的最优比例；最小差为负表示第二名可在部分参数点反超，不代表存在处处有效的安全余量。默认首／次／三辅各300 ms、选重600 ms、扫描50 ms、翻页300 ms；参考 S005 固定12/213/24。此处稳定性选择不额外排除小指负荷较高的辅序，负荷按实际终码另列。</p>
+  </section>`;
+}
+
 function snowJiandaoProductionTableRows(headers, rows, ids, key, raws) {
   if (!['benchmark','fair'].includes(key)) return {headers,rows,ids,raws};
   const fields = {'生产首辅率':['firstAuxRate',true], '生产次辅率':['secondAuxRate',true],
