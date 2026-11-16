@@ -56,11 +56,11 @@ try{
   await page.waitForFunction(()=>document.querySelectorAll('.snow-jiandao-contract-card [data-snow-jiandao-open]').length===1);
   assert.equal(await page.locator('.snow-jiandao-contract-card [data-snow-jiandao-open]').getAttribute('data-snow-jiandao-open'),'T2126-FULL26-8871530');
   await page.locator('#nf6SelectionHost').selectOption('all');await page.locator('#nf6SelectionMemory').fill('');
-  await page.waitForFunction(()=>document.querySelectorAll('.snow-jiandao-contract-card [data-snow-jiandao-open]').length===7);
+  await page.waitForFunction(count=>document.querySelectorAll('.snow-jiandao-contract-card [data-snow-jiandao-open]').length===count,frozen.length);
   await page.locator('.nf6-preference-card [data-action="nav:benchmark"]').click();
   await page.waitForSelector('table[data-ux-table="benchmark"] .snow-jiandao-contract-row');
   const validate=(rows)=>{
-    assert.equal(rows.length,7);
+    assert.equal(rows.length,frozen.length);
     for(const row of rows){assert.equal(row.count,row.headers.length);for(const cell of Object.values(row.cells))assert.doesNotMatch(cell.text,/待定|不适用|NaN|undefined|N\/A/)}
   };
   let rows=await read('benchmark');validate(rows);
@@ -77,5 +77,5 @@ try{
     assert.equal(row.cells['综合补全 CKT v2 · 固定 IVUAO · 字:词=1:2 · ×10'].raw,scores.v2);
   }
   assert.deepEqual(errors,[]);
-  console.log('Seven toned contracts: final SVG link inks, W/Y chain, M intervals and filtering, benchmark/fair columns and fixed auxiliary controls: ok');
+  console.log(`${frozen.length} toned contracts: final SVG link inks, W/Y chain, M intervals and filtering, benchmark/fair columns and fixed auxiliary controls: ok`);
 }finally{await browser.close()}

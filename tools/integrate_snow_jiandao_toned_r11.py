@@ -238,6 +238,12 @@ function r11TonedContractTable(){
 
 def patch_selectable_ui(html: str) -> str:
     """Expose the cross-contract scheme without adding it to legacy entries."""
+    # The large standalone payload must not allocate an intermediate Array of
+    # one string per base64-decoded byte (Uint8Array.from's string iterator).
+    html = html.replace("Uint8Array.from(atob(n.textContent.trim()),c=>c.charCodeAt(0))",
+        "(()=>{if(typeof Uint8Array.fromBase64==='function')return Uint8Array.fromBase64(n.textContent.trim());"
+        "const binary=atob(n.textContent.trim()),bytes=new Uint8Array(binary.length);"
+        "for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);return bytes})()")
     anchor = "// All data loading uses the original payload; only the UI boot path has changed."
     if anchor not in html:
         raise ValueError("final R11 UI boot anchor not found")
@@ -417,6 +423,13 @@ document.addEventListener('click',event=>{
         if table_anchor not in html:
             raise ValueError("base table renderer not found")
         html = html.replace(table_anchor, table_anchor + "\n " + hook + "\n if(typeof snowJiandaoTableRows==='function')({headers,rows,ids,raws}=snowJiandaoTableRows(headers,rows,ids,key,raws));", 1)
+    # Some releases append native production attributes after the toned adapter.
+    # Fill those columns after their owner has created them, retaining its
+    # ordinary-scheme values and the toned scheme's own evaluation contract.
+    production_hook = " if(typeof untonedProductionTableColumns==='function')({headers,rows,ids,raws}=untonedProductionTableColumns(headers,rows,ids,key,raws));"
+    if production_hook in html and '/* TONED_PRODUCTION_ATTRIBUTES_V1 */' not in html:
+        html = html.replace(production_hook, production_hook +
+            "\n /* TONED_PRODUCTION_ATTRIBUTES_V1 */\n ({headers,rows,ids,raws}=snowJiandaoProductionTableRows(headers,rows,ids,key,raws));", 1)
     return html
 
 

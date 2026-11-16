@@ -21,7 +21,7 @@ try {
     v5:native.columns.ensemble.v5,v4:native.columns.ensemble.v4,M:native.memory.lower,upper:native.memory.guard,
     fa:native.columns.rules.fa.score,lu:native.columns.rules.lu.score,
     unique:native.columns.sound.uniqueCodes,syllables:native.columns.sound.syllables})));
-  assert.equal(frozen.length,7,'all five 21x21 and two 21x26 toned schemes');
+  assert.ok(frozen.length>=7,'all published toned schemes');
   await page.locator('#tabs [data-action="nav:scheme"]').click();
   const select = async id => {
     await page.locator('#nf6SchemeQuery').fill(id);
@@ -64,5 +64,5 @@ try {
   await page.locator(`[data-snow-jiandao-open="${frozen.at(-1).id}"]`).click();
   await validate(frozen.at(-1));
   assert.deepEqual(errors,[]);
-  console.log('Seven toned schemes: six KPI values match frozen column contracts; domain/memory switches and ordinary navigation: ok');
+  console.log(`${frozen.length} toned schemes: six KPI values match frozen column contracts; domain/memory switches and ordinary navigation: ok`);
 } finally {await browser.close()}

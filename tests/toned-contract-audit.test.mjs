@@ -43,7 +43,8 @@ test('derived M lower/upper reproduces existing 21x21 ledgers and covers moved W
   const decomposition=require('../research/config/ckt-v51-toned-2121-seeds.json').decomposition;
   const natives=[data.tonedContractBenchmark.schemes.snowJiandao,...Object.values(data.tonedContractBenchmark.schemes.research)];
   const expected={'SNOW-JIANDAO-TONED':[21,23],'CR0-0374':[22,24],'CR1-0004':[21,24],'CR1-0009':[21,24],'CR1-1036':[22,24],
-    'T2126-QEMPTY-8890382':[20,23],'T2126-FULL26-8871530':[19,22]};
+    'T2126-QEMPTY-8890382':[20,23],'T2126-FULL26-8871530':[19,22],
+    'CR-GPU-c42359003b':[22,24],'CR-GPU-29ce221cfe':[22,24],'CR-GPU-579ec1d473':[21,24]};
   for(const native of natives){
     const memory=tonedMemoryAudit(native,data.pinyin,decomposition);
     assert.deepEqual([memory.lower,memory.guard],expected[native.id],native.id);

@@ -28,7 +28,7 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
-def make_fixture(source, baseline, decomposition, ident):
+def make_fixture(source, baseline, decomposition, ident, *, labels=LABELS, source_path=SOURCE):
     layout = next(row for row in source['layouts'] if row['id'] == ident)
     fixture = copy.deepcopy(baseline)
     lookup = dict(zip(source['tokenKeys'], layout['tonedCodes'], strict=True))
@@ -58,56 +58,55 @@ def make_fixture(source, baseline, decomposition, ident):
         raise ValueError(f'{ident}: memory formula mismatch')
     fixture['layoutId'] = ident
     fixture['expected'] = {'score': layout['rustScore']}
-    fixture['publication'] = dict(id=ident, name=f'{ident} · {LABELS[ident]}', research=True,
-        description=layout['description'], source=str(SOURCE.relative_to(ROOT)).replace('\\', '/'),
-        sourceSha256=hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
+    fixture['publication'] = dict(id=ident, name=f'{ident} · {labels[ident]}', research=True,
+        description=layout['description'], source=str(source_path.relative_to(ROOT)).replace('\\', '/'),
+        sourceSha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
         memoryAudit=audit,
         memoryDefinition='M-T1 root repartition: 5 + ordinary D + multi-root group rules/links + tone-region merges',
         rhymeGroups=layout['rhymeGroups'])
+    if 'annealKey' in layout:
+        fixture['publication']['annealKey'] = layout['annealKey']
+        fixture['publication']['annealOrigin'] = layout['origin']
     return fixture
 
 
-def load_payload_module():
+def load_payload_module(destination=DESTINATION):
     # The tracked CKT corpus reader provides the exact gzip payload boundaries.
     script = "const fs=require('fs'),z=require('zlib');const s=fs.readFileSync('a7_CKT_R11.html','utf8'),at=s.indexOf('<script id=\"payload\"'),start=s.indexOf('>',at)+1,end=s.indexOf('</script>',start);fs.writeFileSync(process.argv[1],z.gunzipSync(Buffer.from(s.slice(start,end),'base64')));"
-    target = DESTINATION / 'payload-input.json'
+    target = destination / 'payload-input.json'
     subprocess.run(['node', '-e', script, str(target)], cwd=ROOT, check=True)
     return read(target)
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--reuse-scores', action='store_true', help='reuse the per-layout raw scores; verify anchors before publishing')
-    args = parser.parse_args()
-    source, baseline = read(SOURCE), read(BASELINE)
-    decomposition = read(ROOT / 'research/config/ckt-v51-toned-2121-seeds.json')['decomposition']
-    references = {row['id']: row for row in read(REFERENCE)['results']}
-    DESTINATION.mkdir(parents=True, exist_ok=True)
+def publish(source, baseline, decomposition, references, *, labels=LABELS, source_path=SOURCE,
+            destination=DESTINATION, audit_path=None, reuse_scores=False):
+    audit_path = audit_path or ROOT / 'research/notes/2026-11-13-cr-frontier-r11-columns.json'
+    destination.mkdir(parents=True, exist_ok=True)
     fixtures = {}
-    for ident in LABELS:
-        fixture = make_fixture(source, baseline, decomposition, ident)
+    for ident in labels:
+        fixture = make_fixture(source, baseline, decomposition, ident, labels=labels, source_path=source_path)
         fixtures[ident] = fixture
-        fixture_path, native_path, columns_path = [DESTINATION / (ident + suffix) for suffix in ('.fixture.json', '.native.json', '.columns.json')]
+        fixture_path, native_path, columns_path = [destination / (ident + suffix) for suffix in ('.fixture.json', '.native.json', '.columns.json')]
         write(fixture_path, fixture)
-        if not args.reuse_scores:
-            subprocess.run(['node', '--max-old-space-size=1800', 'tools/score_snow_jiandao_toned_benchmark.js',
+        if not reuse_scores:
+            subprocess.run(['node', '--max-old-space-size=4096', 'tools/score_snow_jiandao_toned_benchmark.js',
                 '--fixture', str(fixture_path), '--output', str(native_path)], cwd=ROOT, check=True)
-            subprocess.run(['node', '--max-old-space-size=2600', 'tools/score_toned_benchmark_columns.js',
+            subprocess.run(['node', '--max-old-space-size=4096', 'tools/score_toned_benchmark_columns.js',
                 '--native', str(native_path), '--output', str(columns_path)], cwd=ROOT, check=True)
-    data = load_payload_module()
+    data = load_payload_module(destination)
     # Rebuild rather than retaining two copies of the four large filter corpora
     # during a repeat publication.
-    for ident in LABELS:
+    for ident in labels:
         data['tonedContractBenchmark']['schemes'].get('research', {}).pop(ident, None)
     corpus = read_word_corpus([SNOW / name for name in ('snow_pinyin.base.dict.yaml', 'snow_pinyin.ext.dict.yaml', 'snow_pinyin.tencent.dict.yaml')],
         allowed_pinyin={data['pinyin'][py] for py, _ in data['base']}, preserve_tones=True)
     research = {}
     for ident, fixture in fixtures.items():
-        native = read(DESTINATION / (ident + '.native.json'))
+        native = read(destination / (ident + '.native.json'))
         if (native['id'] != ident or native['tonedCodes'] != fixture['tonedCodes']
                 or native.get('publication') != fixture['publication']):
             raise ValueError(f'{ident}: stale score cache')
-        native['columns'] = read(DESTINATION / (ident + '.columns.json'))
+        native['columns'] = read(destination / (ident + '.columns.json'))
         codes_hash = hashlib.sha256(json.dumps(native['tonedCodes'], ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
         if (native['columns'].get('version') != 'tone-in-main-column-contracts-v3'
                 or native['columns'].get('nativeId') != ident or native['columns'].get('tonedCodesSha256') != codes_hash):
@@ -124,7 +123,7 @@ def main():
             raise ValueError(f'{ident}: publication memory mismatch')
         native['publication']['validation'] = {'anchorsVerified': True, 'tolerance': 1e-9}
         research[ident] = native
-        write(DESTINATION / (ident + '.benchmark.json'), native)
+        write(destination / (ident + '.benchmark.json'), native)
         print(json.dumps({'id': ident, 'M': [native['memory']['lower'], native['memory']['guard']],
             'cktV51': checks[0][0], 'daily': checks[1][0], 'leftPinky4Native': checks[2][0]}, ensure_ascii=False), flush=True)
     # Keep every computed metric under version control without the large
@@ -132,24 +131,33 @@ def main():
     audit = {ident: {name: value for name, value in native.items()
                      if name not in {'filterRows', 'tonedCodes', 'keyboards'}}
              for ident, native in research.items()}
-    write(ROOT / 'research/notes/2026-11-13-cr-frontier-r11-columns.json',
+    write(audit_path,
           {'version': 'cr-frontier-r11-v2', 'schemes': audit})
     data['tonedContractBenchmark']['schemes'].setdefault('research', {}).update(research)
     html = patch_selectable_ui(patch_report(HTML.read_text(encoding='utf-8')))
-    payload_path = DESTINATION / 'payload-output.json'
+    payload_path = destination / 'payload-output.json'
     with payload_path.open('w', encoding='utf-8', newline='\n') as stream:
         json.dump(data, stream, ensure_ascii=False, separators=(',', ':'))
     stage_path = HTML.with_name(HTML.name + '.tmp')
     # Gzip in Node avoids creating several full-size Python string copies.
-    ui_path = DESTINATION / 'ui-stage.html'
+    ui_path = destination / 'ui-stage.html'
     ui_path.write_text(html, encoding='utf-8', newline='\n')
     pack = "const fs=require('fs'),z=require('zlib');const [ui,payload,out]=process.argv.slice(1),s=fs.readFileSync(ui,'utf8'),at=s.indexOf('<script id=\"payload\"'),start=s.indexOf('>',at)+1,end=s.indexOf('</script>',start);fs.writeFileSync(out,s.slice(0,start)+z.gzipSync(fs.readFileSync(payload),{mtime:0}).toString('base64')+s.slice(end));"
     subprocess.run(['node', '-e', pack, str(ui_path), str(payload_path), str(stage_path)], cwd=ROOT, check=True)
     stage_path.replace(HTML)
-    write(DESTINATION / 'manifest.json', {'version': 'cr-frontier-r11-v1', 'ids': list(LABELS),
-        'sourceSha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
+    write(destination / 'manifest.json', {'version': 'cr-frontier-r11-v2', 'ids': list(labels),
+        'sourceSha256': hashlib.sha256(source_path.read_bytes()).hexdigest(),
         'htmlSha256': hashlib.sha256(HTML.read_bytes()).hexdigest()})
     print(f'Published {len(research)} CR layouts: {HTML}', flush=True)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--reuse-scores', action='store_true', help='reuse scores; verify anchors before publishing')
+    args = parser.parse_args()
+    publish(read(SOURCE), read(BASELINE),
+            read(ROOT / 'research/config/ckt-v51-toned-2121-seeds.json')['decomposition'],
+            {row['id']: row for row in read(REFERENCE)['results']}, reuse_scores=args.reuse_scores)
 
 
 if __name__ == '__main__':

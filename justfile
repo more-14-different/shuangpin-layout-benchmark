@@ -1,5 +1,13 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-gpu-benchmark:
+    python -X utf8 tools/integrate_cr_gpu_r11.py
+    node tools/sync_keymap_link_colors.js
+
+cr-gpu-benchmark-test:
+    python -m unittest discover -s tests -p test_cr_gpu_r11.py
+    node tests/cr-gpu-r11.browser.mjs
+
 cr-frontier-benchmark:
     python -X utf8 tools/integrate_cr_frontier_r11.py
     node tools/sync_keymap_link_colors.js

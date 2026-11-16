@@ -1,6 +1,30 @@
 // Column adapters run at the innermost table boundary, after every R2/R9/R10
 // wrapper has inserted its columns. Every numeric cell also supplies sort/CSV
 // data, rather than appending an unsortable row to rendered HTML.
+function snowJiandaoProductionTableRows(headers, rows, ids, key, raws) {
+  if (!['benchmark','fair'].includes(key)) return {headers,rows,ids,raws};
+  const fields = {'生产首辅率':['firstAuxRate',true], '生产次辅率':['secondAuxRate',true],
+    '生产三辅率':['thirdAuxRate',true], '生产选重率':['selectionRate',true],
+    '生产平均键数':['meanKeys'], '生产运动 ms':['motorUpperMs'], '生产认知 ms':['cognitiveMs'],
+    '生产有效 ms':['effectiveMs'], '生产平均扫描候选数':['meanRejectedCandidates'],
+    '生产平均翻页次数':['meanPageActions']};
+  rows.forEach((row,index) => {
+    const native=snowJiandaoNative(ids[index]);if (!native) return;
+    const aggregate=native.ckt.aggregateV51;
+    headers.forEach((header,at) => {
+      const label=typeof header==='object'?header.label:header, spec=fields[label];if (!spec) return;
+      const [field,percent]=spec;
+      const value=field==='cognitiveMs'?aggregate.effectiveMs-aggregate.motorUpperMs:aggregate[field];
+      if (!Number.isFinite(value)) throw new Error(native.id+': missing native production attribute '+field);
+      const note='带调主码＋纯形辅原生 v5.1；字/二/三/四轨 1:3:1:1；辅序 '+
+        JSON.stringify(native.contract.wordAuxiliaryPolicy)+'；冻结认知参数，不随历史合同滑杆变化。';
+      row[at]=`<span data-toned-metric="${esc(label)}" title="${esc(note)}">${percent?pct(value):num(value,6)}</span>`;
+      (raws[index] ||= [])[at]=value;
+    });
+  });
+  return {headers,rows,ids,raws};
+}
+
 const SNOW_TONED_ROWS_BASE = Engine7.rowsFor;
 Engine7.rowsFor = function(entry, options) {
   return entry?.tonedContract ? tonedRowsFor(D, snowJiandaoNative(entry.id),
