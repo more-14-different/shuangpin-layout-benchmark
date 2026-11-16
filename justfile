@@ -8,6 +8,26 @@ cr-gpu-benchmark-test:
     python -m unittest discover -s tests -p test_cr_gpu_r11.py
     node tests/cr-gpu-r11.browser.mjs
 
+cr-frontier-followup output="research/.cache/cr-frontier-followup-20261116":
+    cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
+    python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase local
+    python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase coupled --limit 120 --seed 20261116
+    python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase anneal --steps 24 --seed 20261117
+    python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase export
+
+cr-frontier-followup-test:
+    python -m unittest discover -s tests -p test_cr_frontier_followup.py
+    python -m unittest discover -s tests -p test_cr_anneal.py
+    node --test tests/auxiliary-semantics.test.mjs
+    node --test tests/cr-frontier-auxiliary.test.mjs
+
+cr-frontier-followup-auxiliary:
+    node --max-old-space-size=6144 tools/optimize_cr_frontier_auxiliary.js --layouts research/notes/2026-11-16-cr-frontier-followup-auxiliary-inputs.json
+
+cr-frontier-followup-report:
+    node --max-old-space-size=6144 tools/verify_cr_frontier_followup.js
+    python -X utf8 tools/report_cr_frontier_followup.py
+
 cr-frontier-benchmark:
     python -X utf8 tools/integrate_cr_frontier_r11.py
     node tools/sync_keymap_link_colors.js
