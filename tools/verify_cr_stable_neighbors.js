@@ -7,9 +7,13 @@ const {toneKeysFromShapeKeys}=require('./auxiliary_semantics');
 const prefixIndex=process.argv.indexOf('--prefix');
 const prefix=prefixIndex<0?'research/notes/2026-11-16-cr-stable-neighbors':process.argv[prefixIndex+1];
 if(!prefix)throw Error('--prefix requires a path');
+const fixedOnly=process.argv.includes('--fixed-only');
+const sourceIndex=process.argv.indexOf('--source-auxiliary');
+const auxiliaryFile=sourceIndex<0?prefix+'-auxiliary.json':process.argv[sourceIndex+1];
+if(!auxiliaryFile)throw Error('--source-auxiliary requires a path');
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-const bundle=read(prefix+'-finalists.json'),aux=read(prefix+'-auxiliary.json'),rank=read(prefix+'-robustness.json');
+const bundle=read(prefix+'-finalists.json'),aux=read(auxiliaryFile),rank=fixedOnly?null:read(prefix+'-robustness.json');
 const html='a7_CKT_R11.html',snow='D:/C2D/Documents/rime-snow-pinyin';
 for(const p of [html,path.join(snow,'snow_pinyin.base.dict.yaml'),path.join(snow,'rime-stroke/stroke.dict.yaml')])
   if(hash(p)!==aux.sourceHashes[p])throw Error('verification input changed: '+p);
@@ -22,8 +26,9 @@ const pinyin=[...new Set(bundle.tokenKeys.map(t=>t.replace(/[1-5]$/,'')))];
 const close=(a,b,label)=>{if(!Number.isFinite(a)||!Number.isFinite(b)||Math.abs(a-b)>1e-9)
   throw Error(label+': '+a+' != '+b);};
 const result={version:'cr-stable-neighbors-full-native-v1',tolerance:1e-9,
+  mode:fixedOnly?'fixed-policy-only':'fixed-and-six-cost-selected',
   shapeKeysByMeaning:'AVUIO',toneKeysByTone:toneKeysFromShapeKeys('AVUIO'),
-  sourceHashes:Object.fromEntries([__filename,html,prefix+'-finalists.json',prefix+'-auxiliary.json',prefix+'-robustness.json',
+  sourceHashes:Object.fromEntries([__filename,html,prefix+'-finalists.json',auxiliaryFile,...(fixedOnly?[]:[prefix+'-robustness.json']),
     'tools/score_toned_2121_ckt_v51.js','tools/score_snow_jiandao_toned_benchmark.js','tools/toned_memory_audit.js',
     'tools/ckt_v4_model.js','tools/ckt_v4_upstream_role_tables.json'].map(p=>[p,hash(p)])),results:[]};
 for(const layout of bundle.layouts){
@@ -32,25 +37,29 @@ for(const layout of bundle.layouts){
     tonedCodes:pinyin.map(py=>[1,2,3,4,5].map(t=>codes.get(py+t)||null))},pinyin,decomposition);
   close(memory.lower,layout.metrics.m,'M');close(memory.guard,layout.metrics.guard,'M guard');
   close(memory.D,layout.metrics.d,'D');close(memory.F,0,'F');
-  const row=aux.results.find(r=>r.id===layout.id),r=rank.results.find(r=>r.id===layout.id);
-  if(!row||!r)throw Error('missing layout '+layout.id);
+  const row=fixedOnly?null:aux.results.find(r=>r.id===layout.id);
+  const r=fixedOnly?{selectedPolicy:layout.wordAuxiliaryPolicy,selectedScore:layout.rustScore}:rank.results.find(r=>r.id===layout.id);
+  if((!fixedOnly&&!row)||!r)throw Error('missing layout '+layout.id);
   const evaluated=new Map();
   const evaluate=policy=>{
     const key=JSON.stringify(policy);if(evaluated.has(key))return evaluated.get(key);
     const v=toned.evaluateLayoutPolicy({layout,layouts:bundle,data,words,motor,reference,shapeKeysByMeaning:'AVUIO',policy});
-    const record=row.policies.find(p=>JSON.stringify(p.policy)===key);
-    if(!record)throw Error('unrecorded policy');
-    close(v.score,record.score,'full/factorized score');
-    for(const kind of ['character','word2','word3','word4'])for(const field of Object.keys(record.tracks[kind]))
-      if(typeof record.tracks[kind][field]==='number')close(v.tracks[kind][field],record.tracks[kind][field],kind+'/'+field);
+    const record=row?.policies.find(p=>JSON.stringify(p.policy)===key);
+    if(!fixedOnly){
+      if(!record)throw Error('unrecorded policy');
+      close(v.score,record.score,'full/factorized score');
+      for(const kind of ['character','word2','word3','word4'])for(const field of Object.keys(record.tracks[kind]))
+        if(typeof record.tracks[kind][field]==='number')close(v.tracks[kind][field],record.tracks[kind][field],kind+'/'+field);
+    }
     const ergonomics=native.loadSummary(v.outcomes);
-    close(ergonomics.leftPinkyQAZPeak4NativeTracks.value,record.pinky,'pinky');
+    if(record)close(ergonomics.leftPinkyQAZPeak4NativeTracks.value,record.pinky,'pinky');
     const value={policy,score:v.score,tracks:v.tracks,ergonomics,aggregate:native.weightedAggregate(v.tracks,
       ['effectiveMs','motorUpperMs','meanKeys','firstAuxRate','secondAuxRate','thirdAuxRate','selectionRate','meanRejectedCandidates','meanPageActions'])};
     evaluated.set(key,value);return value;
   };
   const fixed=evaluate(layout.wordAuxiliaryPolicy),selected=evaluate(r.selectedPolicy);
   close(fixed.score,layout.rustScore,'Rust/JS');close(selected.score,r.selectedScore,'selected score');
+  close(fixed.ergonomics.leftPinkyQAZPeak4NativeTracks.value,layout.metrics.pinky,'Rust/JS pinky');
   result.results.push({id:layout.id,memory,fixed,selected});
   fs.writeFileSync(prefix+'-native.json',JSON.stringify(result,null,2)+'\n');
   console.log(JSON.stringify({id:layout.id,fixed:fixed.score,selected:selected.score,policy:selected.policy}));
