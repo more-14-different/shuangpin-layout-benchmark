@@ -59,6 +59,21 @@ cr-f0-origin-test:
     python -m unittest discover -s tests -p test_cr_f0_origin_completion.py
     node --test tests/cr-f0-origin-completion.test.mjs tests/cr-stable-neighbors.test.mjs tests/auxiliary-semantics.test.mjs
 
+cr-667-neighbors phase="coupled":
+    python -X utf8 tools/explore_cr_667_neighbors.py --phase "{{phase}}"
+
+cr-667-neighbors-verify:
+    node --max-old-space-size=6144 tools/verify_cr_stable_neighbors.js --prefix research/notes/2026-11-17-cr-667-neighbors
+    python -X utf8 tools/verify_cr_667_macro.py
+
+cr-667-neighbors-auxiliary:
+    node --max-old-space-size=6144 tools/optimize_cr_frontier_auxiliary.js --layouts research/notes/2026-11-17-cr-667-neighbors-finalists.json --output research/notes/2026-11-17-cr-667-neighbors-auxiliary.json --macro-output research/.cache/cr-667-neighbors-20261117/macro-input.json
+    $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --input research/notes/2026-11-17-cr-667-neighbors-auxiliary.json --output research/notes/2026-11-17-cr-667-neighbors-robustness.json
+
+cr-667-neighbors-test:
+    python -m unittest discover -s tests -p test_cr_667_neighbors.py
+    node --test tests/cr-f0-origin-completion.test.mjs tests/cr-stable-neighbors.test.mjs tests/auxiliary-semantics.test.mjs
+
 cr-frontier-followup output="research/.cache/cr-frontier-followup-20261116":
     cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
     python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase local

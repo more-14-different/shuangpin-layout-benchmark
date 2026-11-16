@@ -66,7 +66,7 @@ def adapt_shape_corpus(content,policy):
 
 
 class StableNeighbors(Followup):
-    def __init__(self,output,parent):
+    def __init__(self,output,parent,*,anchor=None):
         self.output=output/parent;self.output.mkdir(parents=True,exist_ok=True)
         bundle=json.loads(LAYOUTS.read_text(encoding='utf8'))
         stable=json.loads(STABILITY.read_text(encoding='utf8'))
@@ -85,11 +85,20 @@ class StableNeighbors(Followup):
         self.seeds={parent:dict(key=layout['key'],state=layout['state'],metrics=metrics,origin=layout['id'])}
         self.profiles={parent:dict(maxM=metrics['m'],dailyFloor=0 if parent=='29ce221cfe' else metrics['daily'],
             pinkyCeiling=1 if parent=='29ce221cfe' else metrics['pinky'])}
+        if anchor is not None:
+            if anchor['parent']!=parent or anchor['wordAuxiliaryPolicy']!=self.policy or anchor['constraints']!=self.profiles[parent]:
+                raise ValueError('pinned anchor changes the policy or constraints')
+            if self.space.key(anchor['state'])!=anchor['key']:
+                raise ValueError('pinned anchor state key mismatch')
+            self.seeds={parent:dict(key=anchor['key'],state=copy.deepcopy(anchor['state']),
+                metrics=copy.deepcopy(anchor['metrics']),origin=anchor['id'])}
         self.cache_path=self.output/'cache.json';self.state_path=self.output/'state.json'
         self.cache=json.loads(self.cache_path.read_text(encoding='utf8')) if self.cache_path.exists() else {}
         contract=dict(version='stable-neighbors-v1',bundle=digest(self.manifest),layouts=digest(bundle),stability=digest(stable),
             wordAuxiliaryPolicy=self.policy,corpusSha256=hashlib.sha256(corpus).hexdigest(),adapter=audit,
             maxD=2,maxGuard=24,shapeKeysByMeaning='AVUIO',toneKeysByTone='IVUAO',parent=parent)
+        if anchor is not None:
+            contract['pinnedAnchor']=dict(key=anchor['key'],digest=digest(self.seeds[parent]))
         self.progress=json.loads(self.state_path.read_text(encoding='utf8')) if self.state_path.exists() else dict(
             contract=contract,profiles=self.profiles,centers=copy.deepcopy(self.seeds),rounds=[])
         if self.progress['contract']!=contract or self.progress['profiles']!=self.profiles:
