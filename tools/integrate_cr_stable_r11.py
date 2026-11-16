@@ -16,23 +16,27 @@ LABELS = {'CR-GPU-f0ae939a38':'带调键道 · 均衡精修 · 稳定辅序',
           'CR-GPU-29ce221cfe':'带调键道 · GPU 最低当量 · 稳定辅序'}
 
 
-def stable_source(bundle, robust, components, space):
-    if len(robust['results']) != 4:
-        raise ValueError('requires all four complete stability audits')
+def stable_source(bundle, robust, components, space, *, labels=LABELS,
+                  layout_path=LAYOUTS, robust_path=ROBUST, components_path=COMPONENTS):
+    if len(robust['results']) < len(labels):
+        raise ValueError('requires complete stability audits for every requested layout')
     reference = robust['reference']
-    for path in [COMPONENTS]:
+    for path in [components_path]:
         key = str(path.relative_to(ROOT)).replace('\\','/')
         if hashlib.sha256(path.read_bytes()).hexdigest() != robust['sourceHashes'][key]:
             raise ValueError('stability source hash mismatch: '+key)
     layouts, references = [], {}
-    for ident in LABELS:
+    for ident in labels:
         prefix = ident.removeprefix('CR-GPU-')
         matches = [row for row in bundle['layouts'] if row['key'].startswith(prefix)]
         if len(matches)!=1:
             raise ValueError(ident+': missing/ambiguous layout')
         layout = copy.deepcopy(matches[0])
-        checked = next(row for row in robust['results'] if row['id']==layout['id'])
-        policies = next(row for row in components['results'] if row['id']==layout['id'])
+        matches = [row for row in robust['results'] if row['id']==layout['id']]
+        policy_matches = [row for row in components['results'] if row['id']==layout['id']]
+        if len(matches)!=1 or len(policy_matches)!=1:
+            raise ValueError(ident+': missing/ambiguous policy audit')
+        checked,policies = matches[0],policy_matches[0]
         if not policies['cohortEqualityVerified'] or policies['policyCount']!=144:
             raise ValueError(ident+': incomplete policy components')
         candidates = [row for row in policies['policies'] if row['policy']==checked['selectedPolicy']]
@@ -64,9 +68,9 @@ def stable_source(bundle, robust, components, space):
         layout['wordAuxiliaryPolicy']=checked['selectedPolicy']
         layout['policySelection']=dict(
             version=robust['version'],rule=robust['selectionRule'],candidateSet=robust['candidateSet'],
-            auditSource=str(ROBUST.relative_to(ROOT)).replace('\\','/'),
-            auditSha256=hashlib.sha256(ROBUST.read_bytes()).hexdigest(),
-            layoutSourceSha256=hashlib.sha256(LAYOUTS.read_bytes()).hexdigest(),
+            auditSource=str(robust_path.relative_to(ROOT)).replace('\\','/'),
+            auditSha256=hashlib.sha256(robust_path.read_bytes()).hexdigest(),
+            layoutSourceSha256=hashlib.sha256(layout_path.read_bytes()).hexdigest(),
             baselineCostsMs=robust['baselineCostsMs'],reference=reference,
             grids={name:dict(**robust['grids'][name],winner=g['ranking'][0],runner=g['ranking'][1],
                 selected=next(r for r in g['ranking'] if r['policy']=='/'.join(checked['selectedPolicy'][k] for k in ['word2','word3','word4'])),

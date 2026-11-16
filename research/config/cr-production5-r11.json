@@ -1,0 +1,104 @@
+{
+  "version": "cr-production5-r11-v1",
+  "selection": "first pooled broad-grid rank among all 144 auxiliary policies",
+  "groups": [
+    {
+      "layouts": "research/notes/2026-11-17-cr-87-neighbors-finalists.json",
+      "robustness": "research/notes/2026-11-17-cr-87-neighbors-robustness.json",
+      "components": "research/notes/2026-11-17-cr-87-neighbors-auxiliary.json",
+      "ids": [
+        "CR-GPU-87de6cc69c"
+      ],
+      "sha256": {
+        "research/notes/2026-11-17-cr-87-neighbors-finalists.json": "18eca746c6a3067b8fe25c8f355dd4139b39e98894c16ad331c7eb37a059c2cc",
+        "research/notes/2026-11-17-cr-87-neighbors-robustness.json": "7f9acb84467547c8879bb6698cb197df41a0203d3440c77d71c0c4a1f9341527",
+        "research/notes/2026-11-17-cr-87-neighbors-auxiliary.json": "a9163df3e8dfb8c8614982c7e10576689afdc0c8ddff344b2e436bd1d052882a"
+      }
+    },
+    {
+      "layouts": "research/notes/2026-11-16-cr-balanced-followup-finalists.json",
+      "robustness": "research/notes/2026-11-16-cr-balanced-followup-robustness.json",
+      "components": "research/notes/2026-11-16-cr-balanced-followup-auxiliary.json",
+      "ids": [
+        "CR-GPU-667610a3fc"
+      ],
+      "sha256": {
+        "research/notes/2026-11-16-cr-balanced-followup-finalists.json": "c3fb149bd97b73b53a8a995a457fbfb9832f7d2b853da7cf80a7a9f6d28a343f",
+        "research/notes/2026-11-16-cr-balanced-followup-robustness.json": "070ed8cdaca6cf8ebac548b8e38b62a93540631c7fe27d9c35de23daa4ed1b79",
+        "research/notes/2026-11-16-cr-balanced-followup-auxiliary.json": "cee0c065597636086bd93c787fdaa5107ce2672917dd2b775ca486c34b1c2da5"
+      }
+    },
+    {
+      "layouts": "research/notes/2026-11-16-cr-stable-neighbors-finalists.json",
+      "robustness": "research/notes/2026-11-16-cr-stable-neighbors-robustness.json",
+      "components": "research/notes/2026-11-16-cr-stable-neighbors-auxiliary.json",
+      "ids": [
+        "CR-GPU-29ce221cfe",
+        "CR-GPU-6a384d9d0d",
+        "CR-GPU-795c0eee49"
+      ],
+      "sha256": {
+        "research/notes/2026-11-16-cr-stable-neighbors-finalists.json": "cc1a22cfee7384198731fbaad6c126791253aaca2b35e7a48dd07651246880dd",
+        "research/notes/2026-11-16-cr-stable-neighbors-robustness.json": "63f981cf37f4a1fe15ce59d81c3948a9c135da48b5f5521dcb24fa6a40549770",
+        "research/notes/2026-11-16-cr-stable-neighbors-auxiliary.json": "151cb51c49816be4b963f51e9264888177e71eeddf32401abf56e0f03c9d6f88"
+      }
+    }
+  ],
+  "expected": {
+    "CR-GPU-87de6cc69c": {
+      "cktV51": 9.119955263161568,
+      "wordAuxiliaryPolicy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      },
+      "daily": 126.37062765066638,
+      "memoryLower": 22,
+      "memoryGuard": 24
+    },
+    "CR-GPU-667610a3fc": {
+      "cktV51": 9.120831893920391,
+      "wordAuxiliaryPolicy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      },
+      "daily": 126.58291412358322,
+      "memoryLower": 22,
+      "memoryGuard": 24
+    },
+    "CR-GPU-29ce221cfe": {
+      "cktV51": 9.113794320280636,
+      "wordAuxiliaryPolicy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      },
+      "daily": 119.46664129382486,
+      "memoryLower": 22,
+      "memoryGuard": 24
+    },
+    "CR-GPU-6a384d9d0d": {
+      "cktV51": 9.158771739501063,
+      "wordAuxiliaryPolicy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      },
+      "daily": 130.6020622445853,
+      "memoryLower": 21,
+      "memoryGuard": 24
+    },
+    "CR-GPU-795c0eee49": {
+      "cktV51": 9.159565261550586,
+      "wordAuxiliaryPolicy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      },
+      "daily": 131.15766466367515,
+      "memoryLower": 21,
+      "memoryGuard": 24
+    }
+  }
+}

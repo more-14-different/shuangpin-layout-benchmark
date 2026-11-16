@@ -24,7 +24,8 @@ try{
   await page.goto(pathToFileURL(resolve('a7_CKT_R11.html')).href,{timeout:120000});
   await page.waitForFunction(()=>window.App7?.ready,null,{timeout:120000});
   const registry=await page.evaluate(()=>snowJiandaoSchemes().map(n=>n.id));
-  assert.equal(registry.length,13);assert.equal(registry.filter(id=>id==='CR-GPU-29ce221cfe').length,1);
+  assert.ok(registry.length>=13);assert.equal(new Set(registry).size,registry.length);
+  assert.equal(registry.filter(id=>id==='CR-GPU-29ce221cfe').length,1);
   await page.locator('#tabs [data-action="nav:scheme"]').click();
   for(const id of ids){
     const expected=report.results.find(r=>r.id.endsWith(id.slice(-10))),n=audits[id];
@@ -61,7 +62,7 @@ try{
   await page.locator('#tabs [data-action="nav:benchmark"]').click();
   await page.locator('#uxQuery').evaluate(n=>{n.value='CR-GPU';n.dispatchEvent(new Event('input',{bubbles:true}))});
   let rows=await read('benchmark');validate(rows);
-  assert.equal(rows.length,6);
+  assert.equal(rows.length,registry.filter(id=>id.startsWith('CR-GPU-')).length);
   for(const id of ids){const row=rows.find(r=>r.id===id),n=audits[id];
     assert.equal(row.cells['CKT v5.1 · 生产辅序'].value,n.ckt.v51.score);
     assert.equal(row.cells['A7E-v5'].value,n.columns.ensemble.v5);

@@ -6,6 +6,7 @@ import {pathToFileURL} from 'node:url';
 const require=createRequire(import.meta.url),{chromium}=require('playwright');
 const ids=['CR-GPU-c42359003b','CR-GPU-29ce221cfe','CR-GPU-579ec1d473'];
 const anchors=[9.127800871307997,9.121110146688881,9.173113102514876];
+const production5=JSON.parse(readFileSync('research/config/cr-production5-r11.json','utf8')).expected;
 const browser=await chromium.launch({executablePath:process.env.EDGE_PATH||chromium.executablePath(),headless:true});
 const page=await browser.newPage({viewport:{width:1600,height:1200}}),errors=[];
 page.on('pageerror',error=>errors.push(String(error)));
@@ -34,7 +35,10 @@ try{
     const n=frozen[id];
     assert.equal(n.id,id);
     if(n.publication.policySelection){
-      assert.ok(Math.abs(n.publication.originalFixedPolicyScore-anchors[index])<1e-9);
+      // The new 29 archive was searched at fixed 21/231/14; the original GPU
+      // archive used fixed 12/213/24. Verify the actual publication source.
+      const fixed=n.publication.source==='research/config/cr-production5-r11.json'?production5[id].cktV51:anchors[index];
+      assert.ok(Math.abs(n.publication.originalFixedPolicyScore-fixed)<1e-9);
       assert.equal(n.ckt.v51.score,n.publication.policySelection.selectedScore);
     }else assert.ok(Math.abs(n.ckt.v51.score-anchors[index])<1e-9);
     assert.equal(n.memory.lower,[22,22,21][index]);assert.equal(n.memory.guard,24);

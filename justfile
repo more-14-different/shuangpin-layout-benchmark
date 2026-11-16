@@ -89,6 +89,15 @@ cr-87-neighbors-test:
     python -m unittest discover -s tests -p test_cr_87_neighbors.py
     node --test tests/cr-87-neighbors.test.mjs tests/cr-stable-neighbors.test.mjs tests/auxiliary-semantics.test.mjs
 
+cr-production5-benchmark:
+    python -X utf8 tools/integrate_cr_production5_r11.py
+    node tools/sync_keymap_link_colors.js
+
+cr-production5-benchmark-test:
+    python -m unittest discover -s tests -p test_cr_production5_r11.py
+    node --max-old-space-size=6144 tools/audit_cr_production5_r11.js
+    node tests/cr-production5-r11.browser.mjs
+
 cr-frontier-followup output="research/.cache/cr-frontier-followup-20261116":
     cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
     python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase local
