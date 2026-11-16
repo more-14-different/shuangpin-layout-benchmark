@@ -20,6 +20,24 @@ cr-stable-benchmark-test:
     node --test tests/toned-native-policy.test.mjs tests/toned-contract-audit.test.mjs tests/auxiliary-semantics.test.mjs
     node tests/cr-stable-r11.browser.mjs
 
+cr-stable-neighbors phase="local":
+    python -X utf8 tools/explore_cr_stable_neighbors.py --phase "{{phase}}" --limit 180
+
+cr-stable-neighbors-build:
+    cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors --bin score-toned-stream
+
+cr-stable-neighbors-test:
+    python -m unittest discover -s tests -p test_cr_stable_neighbors.py
+    node --test tests/toned-native-policy.test.mjs tests/cr-frontier-auxiliary.test.mjs tests/cr-stable-neighbors.test.mjs
+
+cr-stable-neighbors-auxiliary:
+    node --max-old-space-size=6144 tools/optimize_cr_frontier_auxiliary.js --layouts research/notes/2026-11-16-cr-stable-neighbors-finalists.json --output research/notes/2026-11-16-cr-stable-neighbors-auxiliary.json --macro-output research/.cache/cr-stable-neighbors-20261116/macro-input.json
+    $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --input research/notes/2026-11-16-cr-stable-neighbors-auxiliary.json --output research/notes/2026-11-16-cr-stable-neighbors-robustness.json
+
+cr-stable-neighbors-report:
+    node --max-old-space-size=6144 tools/verify_cr_stable_neighbors.js
+    python -X utf8 tools/report_cr_stable_neighbors.py
+
 cr-frontier-followup output="research/.cache/cr-frontier-followup-20261116":
     cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors
     python -X utf8 tools/explore_cr_frontier_followup.py --output "{{output}}" --phase local

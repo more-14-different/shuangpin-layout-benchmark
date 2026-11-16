@@ -111,3 +111,26 @@ M≤22/24（高日常路线 M≤21/24），并保护其原日常分与左小指�
 `just cr-frontier-followup-auxiliary`、`just cr-frontier-followup-report`。
 使用不同新目录做独立实验；已有目录保存跨阶段缓存，重新运行搜索阶段会追加一轮。
 本轮使用两个低优先级 CPU 增量评分进程及一个串行完整核验进程，无需重启原GPU退火。
+
+## 新稳健辅序下的三路线精修（2026-11-16）
+
+将已发布的0a4ee7fb52、3d3dcbafc0、29ce221cfe作为新起点，在各自稳定辅序下
+重新检查单步、近优组合、韵根与键位联动及跨路线布局。共保存3,216个布局×辅序
+评分条目；跨辅序只传递声韵布局，分数按目标路线重新计算。
+
+固定当前辅序时，0a路线得到795c0eee49：CKT9.159766006、日常131.157665；
+3d路线得到6a384d9d0d：CKT9.158771740、日常130.602062，二者均M21/24。
+最低CKT路线仍为29ce221cfe、9.113794320。新布局再次枚举144辅序及四个六维
+认知成本网格，结果、其他人体工学取舍和核验见
+[本轮研究报告](../research/notes/2026-11-16-cr-stable-neighbors.md)。
+重选稳健辅序后三者均为21/231/14；795c0eee49的CKT为9.159565262，但其辅序
+四网格首选不一致、平均排名仅领先第二0.119899。6a384d9d0d四网格首选一致，
+平均排名领先第二1.938022；不能把默认单点最低分与宽网格稳健首选混用。
+候选保存在研究档案中，本轮没有修改R11页面。
+
+新机器先`just cr-stable-neighbors-build`，随后可用
+`just cr-stable-neighbors local`、`polish`、`coupled`、`transfer`追加阶段；
+`just cr-stable-neighbors export`导出，`just cr-stable-neighbors-auxiliary`重算辅序，
+`just cr-stable-neighbors-report`独立核验并出报告。
+阶段的候选ID、实际评分状态、约束、词辅序专属语料哈希和输入来源随JSON及gzip保存。
+默认最多8个低优先级增量进程；`--workers`可调1至16，不改变目标或抽样。

@@ -196,7 +196,7 @@ class Followup:
                     del missing[key]
         atomic_json(self.cache_path, self.cache)
         if missing:
-            pending = list(missing.values()); workers = min(2, len(pending))
+            pending = list(missing.values()); workers = min(getattr(self, 'workers', 2), len(pending))
             processes, logs, shards = [], [], []
             try:
                 for worker in range(workers):

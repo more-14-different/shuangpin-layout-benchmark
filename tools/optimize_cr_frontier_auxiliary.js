@@ -22,6 +22,9 @@ function chooseRobust(rows,cases){
 async function main(){
   const option=(key,fallback)=>{const i=process.argv.indexOf('--'+key);return i<0?fallback:process.argv[i+1]};
   const data=scorer.loadPayload(option('html','a7_CKT_R11.html')),snow='D:/C2D/Documents/rime-snow-pinyin';
+  const macroOutput=option('macro-output',null);
+  if(macroOutput)fs.writeFileSync(macroOutput,JSON.stringify({pinyin:data.pinyin,characters:data.characters,
+    macroxue:{corpora:data.macroxue.corpora}})+'\n');
   delete data.tonedContractBenchmark;
   const words=scorer.multiwords(path.join(snow,'snow_pinyin.base.dict.yaml'),data,.99);
   const strokes=scorer.strokeOptions(path.join(snow,'rime-stroke/stroke.dict.yaml'));
@@ -41,7 +44,8 @@ async function main(){
   const result={version:'cr-frontier-auxiliary-policy-v1',contract:{shapeKeysByMeaning:'AVUIO',toneKeysByTone:'IVUAO',
     reference:'S005 fixed 12/213/24; native four tracks 1:3:1:1',memory:'sound-rule M-T1 unchanged; auxiliary-order learning is outside this ledger',
     sensitivity:'same frequency-ranked routing and motor outcomes; recompute cognitive costs and S005 reference for each case'},
-    sourceHashes:Object.fromEntries([option('html','a7_CKT_R11.html'),'tools/ckt_v4_upstream_role_tables.json',
+    sourceHashes:Object.fromEntries([option('html','a7_CKT_R11.html'),'tools/ckt_v4_upstream_role_tables.json',__filename,
+      path.join(snow,'snow_pinyin.base.dict.yaml'),path.join(snow,'rime-stroke/stroke.dict.yaml'),
       ...(file?[file]:Object.values(original).map(item=>'a7_CKT_R11_integrated_materials/cr_gpu_frontier/CR-GPU-'+item.key.slice(0,10)+'.fixture.json'))]
       .map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')])),cases,results:[]};
   const output=option('output','research/notes/2026-11-16-cr-frontier-followup-auxiliary.json');
@@ -65,12 +69,13 @@ async function main(){
           caseScores:cases.map(c=>sensitivityScore(tracks,reference.tracks,c.auxiliary,c.selection))});
       }
     }
-    const baseline=rows.find(r=>r.policy.word2==='12'&&r.policy.word3==='213'&&r.policy.word4==='24');
+    const anchor=layout.wordAuxiliaryPolicy||{word2:'12',word3:'213',word4:'24'};
+    const baseline=rows.find(r=>['word2','word3','word4'].every(kind=>r.policy[kind]===anchor[kind]));
     if(Math.abs(baseline.score-layout.rustScore)>1e-9)throw Error('fixed-policy anchor mismatch '+layout.id);
     for(const row of rows)for(const kind of Object.keys(weights))
       if(row.tracks[kind].count!==baseline.tracks[kind].count||row.tracks[kind].totalWeight!==baseline.tracks[kind].totalWeight)
         throw Error('auxiliary policy changed the evaluated cohort: '+layout.id+'/'+kind);
-    const ceiling=layout.profile==='speed'?1:original[layout.profile].metrics.pinky;
+    const ceiling=layout.constraints?.pinkyCeiling??(layout.profile==='speed'?1:original[layout.profile].metrics.pinky);
     const eligible=rows.filter(r=>r.pinky<=ceiling+1e-12),standard=[...eligible].sort((a,b)=>a.score-b.score)[0];
     const robust=chooseRobust(eligible,cases)[0];
     const preserving=rows.filter(r=>r.pinky<=baseline.pinky+1e-12).sort((a,b)=>a.score-b.score)[0];
@@ -84,7 +89,7 @@ async function main(){
       return {...row,ergonomics,aggregate:native.weightedAggregate(v.tracks,
         ['effectiveMs','motorUpperMs','meanKeys','firstAuxRate','secondAuxRate','thirdAuxRate','selectionRate','meanRejectedCandidates','meanPageActions'])};};
     const item={id:layout.id,profile:layout.profile,policyCount:rows.length,eligiblePolicyCount:eligible.length,cohortEqualityVerified:true,pinkyCeiling:ceiling,
-      baseline,bestStandard:verify(standard),bestRobust:verify(robust),bestPinkyPreserving:verify(preserving),policies:rows};
+      baseline,baselineVerified:verify(baseline),bestStandard:verify(standard),bestRobust:verify(robust),bestPinkyPreserving:verify(preserving),policies:rows};
     result.results.push(item);fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
     console.log(JSON.stringify({id:item.id,before:baseline.score,standard:standard.score,standardPolicy:standard.policy,
       robust:robust.score,robustPolicy:robust.policy,worstRegret:robust.worstRegret}));

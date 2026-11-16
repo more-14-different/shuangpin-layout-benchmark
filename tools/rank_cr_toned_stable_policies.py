@@ -21,6 +21,15 @@ def read(path):
     return json.loads(Path(path).read_text(encoding='utf8'))
 
 
+def source_hashes(paths):
+    result={}
+    for path in paths:
+        resolved=Path(path).resolve()
+        name=resolved.relative_to(ROOT) if resolved.is_relative_to(ROOT) else resolved
+        result[name.as_posix()]=hashlib.sha256(resolved.read_bytes()).hexdigest()
+    return result
+
+
 def policy_key(policy):
     return '/'.join(policy[k] for k in ('word2','word3','word4'))
 
@@ -89,12 +98,13 @@ def pair_margins(selected, runner, reference, points, chunk=16384):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--input',type=Path,default=SOURCE)
     parser.add_argument('--output',type=Path,default=OUTPUT)
     parser.add_argument('--chunk',type=int,default=4096)
     args=parser.parse_args()
     if args.chunk<1:
         parser.error('chunk must be positive')
-    source,reference=read(SOURCE),read(REFERENCE)
+    source,reference=read(args.input),read(REFERENCE)
     gridspec={'main0To500Step50':(0,5,.5),'mainPositive50To500Step50':(.5,5,.5),
               'extreme0To1000Step100':(0,10,1),'extremePositive100To1000Step100':(1,10,1)}
     report=dict(version='cr-toned-stable-policy-six-cost-v1',baselineCostsMs=COSTS,coefficients=list(COMPONENTS),
@@ -102,8 +112,7 @@ def main():
         selectionRule='equal-weight mean competition rank across four grids; then higher top3, higher top1, lower worst rank, lexical policy',
         candidateSet='all 144 policies; no additional pinky exclusion',
         grids={name:dict(minimum=lo,maximum=hi,step=step,points=round((hi-lo)/step+1)**6) for name,(lo,hi,step) in gridspec.items()},
-        sourceHashes={str(p.relative_to(ROOT)).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest()
-                      for p in [SOURCE,REFERENCE,Path(__file__),ROOT/'tools/analyze_single_ckt_v51_aux_order.py']},results=[])
+        sourceHashes=source_hashes([args.input,REFERENCE,Path(__file__),ROOT/'tools/analyze_single_ckt_v51_aux_order.py']),results=[])
     started=time.monotonic()
     for layout in source['results']:
         rows=layout['policies']

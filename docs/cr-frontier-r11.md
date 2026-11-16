@@ -99,3 +99,7 @@ CKT-T、日常移动手和原生四轨左小指峰值均在发布前与退火归
 详细分差和反超范围见
 [稳定性报告](../research/notes/2026-11-16-cr-toned-stable-policies.md)；
 完整当前逐列数值见 `research/notes/2026-11-16-cr-stable-r11-columns.json`。
+
+后续对三条路线的声韵布局精修已生成795c0eee49与6a384d9d0d研究候选；
+见[新辅序下的精修报告](../research/notes/2026-11-16-cr-stable-neighbors.md)。
+这些候选未接入R11，上表仍是当前发布值。
