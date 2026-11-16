@@ -89,6 +89,16 @@ cr-87-neighbors-test:
     python -m unittest discover -s tests -p test_cr_87_neighbors.py
     node --test tests/cr-87-neighbors.test.mjs tests/cr-stable-neighbors.test.mjs tests/auxiliary-semantics.test.mjs
 
+cr-667-regroup phase="joint":
+    python -X utf8 tools/regroup_cr_667_roots.py --phase "{{phase}}"
+
+cr-667-regroup-verify:
+    python -X utf8 tools/verify_cr_667_regroup.py
+
+cr-667-regroup-test:
+    python -m unittest discover -s tests -p test_cr_667_root_regroup.py
+    node --test tests/cr-667-root-regroup.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js
