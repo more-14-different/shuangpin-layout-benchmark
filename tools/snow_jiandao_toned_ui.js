@@ -26,7 +26,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
     const tones = [...new Set(Object.values(entry.rhymeTonesByKey[key] || {}).join(''))].sort().join('');
     const content = group.querySelector(':scope > g');
     if (!content) continue;
-    if (!heat && tones) base.setAttribute('fill', SNOW_TONE_FILLS[tones]);
+    if (!heat && tones) base.setAttribute('fill', snowToneFill(tones, !!native.keyboards.shapeByKey[key]?.length));
     if (native.keyboards.shapeByKey[key]?.length && !(entry.roles[key]?.length || entry.rhymes[key]?.length)) {
       // The tone-in-main contract has no independent auxiliary tone layer.
       if (!heat) base.setAttribute('fill', SNOW_SHAPE_PALETTE.keyFill);
@@ -69,7 +69,7 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
   const captions = svg.querySelectorAll(':scope > text');
   captions[1].textContent = '声母 / 零声母 / 十韵组 / 纯形辅 · 声调 01234（0＝轻声）';
   const toneRows = native.publication?.toneRowsByTone || {1:2,2:1,3:1,4:0,5:2};
-  captions[2].textContent = ['上排','中排','下排'].map((name,r)=>name+' '+[1,2,3,4,5].filter(t=>toneRows[t]===r).map(t=>t===5?0:t).join('/')+' 声').join(' · ')+'；同韵组同文字色。';
+  captions[2].textContent = ['上排','中排','下排'].map((name,r)=>name+' '+[1,2,3,4,5].filter(t=>toneRows[t]===r).map(t=>t===5?0:t).join('/')+' 声').join(' · ')+'；同韵组同文字色，兼作韵键的形辅同色加深。';
   captions[3].textContent = '形辅 '+native.contract.shapeKeysByMeaning+'（折横撇竖点）；W/Y 源键与迁入的 ØW/ØY 各自同色，并遵循移位链约束。';
   add(svg, 'style', {}, '.nf5-dim{opacity:.16}');
   return new XMLSerializer().serializeToString(svg);
@@ -113,7 +113,7 @@ function snowJiandaoKeyboardPanel() {
   ${nf4TypeTools('keyboard').replaceAll('data-nf4-action', 'data-snow-export')}
   <div class="nf5-shared-tools"><label class="control"><span>键盘图</span><select id="snowJiandaoKeyboardMode"><option value="semantic">声韵形辅合并键盘图</option><option value="overall">总热力图 · 字词 1:3:1:1</option><option value="daily">日常文章热力图</option><option value="character">单字热力图</option><option value="word2">二字词热力图</option><option value="word3">三字词热力图</option><option value="word4">四字词热力图</option></select></label><label class="control nf5-query"><span>统一筛选</span><input id="nf5Query" placeholder="全拼、汉字、词语；如 jian4dao1 / jiandao" autocomplete="off"></label><button id="nf5Reset" type="button">清空筛选</button><button id="snowJiandaoExportRows" type="button">导出筛选 TSV</button></div>
   <p id="nf5FilterSummary" class="nf5-filter-summary" aria-live="polite"></p><div id="svgbox"></div>
-  <div class="kbdlegend">${keymapLinkLegendHtml()}<p>语义图底色：蓝＝4 声，绿＝2/3 声，黄＝1/0 声，淡紫＝独立形辅；形辅键 ${esc(snowJiandaoNative().contract.shapeKeysByMeaning)}。热力图按负担着色，韵组颜色跨排一致。</p></div>
+  <div class="kbdlegend">${keymapLinkLegendHtml()}<p>语义图底色：蓝＝4 声，绿＝2/3 声，黄＝1/0 声；兼作韵键的形辅保持所属声调色并加深，独立形辅使用淡紫。形辅键 ${esc(snowJiandaoNative().contract.shapeKeysByMeaning)}。热力图按负担着色，韵组颜色跨排一致。</p></div>
   <div class="nf5-data-section"><h3>筛选明细</h3><div id="snowJiandaoFilteredData"></div></div></section>`;
 }
 

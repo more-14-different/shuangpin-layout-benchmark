@@ -11,6 +11,18 @@ const SNOW_RHYME_COLORS = Object.freeze({
 const SNOW_TONE_FILLS = Object.freeze({'4': '#d8e9f3', '23': '#dcefdc', '01': '#f5e8bd'});
 const SNOW_SHAPE_PALETTE = Object.freeze({keyFill: '#e8d8f5', badgeFill: '#f4eafb', stroke: '#a080b7', ink: '#684780'});
 
+// A key may lack one of its region's legal tones (e.g. B has only tone 1).
+// Resolve subsets as well as complete regions; never emit fill="undefined".
+function snowToneFill(tones, sharedShape = false) {
+  if (!tones) return null;
+  const region = Object.keys(SNOW_TONE_FILLS).find(group => [...tones].every(tone => group.includes(tone)));
+  if (!region) throw new Error('Unsupported keymap tone region: ' + tones);
+  const fill = SNOW_TONE_FILLS[region];
+  // Shared rhyme/shape keys keep their tone hue, with 12% darker channels.
+  return sharedShape ? '#' + fill.slice(1).match(/../g)
+    .map(channel => Math.round(parseInt(channel, 16) * .88).toString(16).padStart(2, '0')).join('') : fill;
+}
+
 function snowNormalizeQuery(value) {
   return String(value || '').toLowerCase().replace(/u:|ü/g, 'v')
     .replace(/5/g, '0').replace(/[\s'’·-]+/g, '');
@@ -97,6 +109,6 @@ function snowPinyinPreview(native, pinyin, query) {
 }
 
 if (typeof module !== 'undefined') module.exports = {
-  SNOW_TONED_TRACK_WEIGHTS, SNOW_RHYME_COLORS, SNOW_TONE_FILLS,
+  SNOW_TONED_TRACK_WEIGHTS, SNOW_RHYME_COLORS, SNOW_TONE_FILLS, snowToneFill,
   snowNormalizeQuery, snowKeyboardEntry, snowFilteredRows, snowRowsLoad, snowPinyinPreview, snowQueryKeys,
 };

@@ -16,6 +16,8 @@
 
 ## 显示语义
 
+带调主码方案使用独立的声调分区底色：四声蓝、二三声绿、一轻声黄；某键实际只含分区内的一个声调时仍使用该区底色，避免缺少轻声的 B 键生成无效填色。兼作韵键的五辅键保持所属声调色相，将 RGB 通道统一乘以 `0.88` 加深；纯形辅键仍用淡紫。热力图继续按实际负担着色。真源为 `tools/snow_jiandao_toned_view.js` 和 `tools/snow_jiandao_toned_ui.js`，用 `python tools/integrate_snow_jiandao_toned_r11.py --ui-only` 更新本地 HTML；`node --test tests/toned-keymap-palette.test.mjs` 和 `node tests/toned-keymap-palette.browser.mjs` 分别检查色区子集、全部带调方案的最终 SVG、切换筛选和 B 键回归。
+
 传统单字母声母离开同名字母键时，来源键帽字母改为细体，来源键帽和目标键上的声母标签使用同一种高饱和度 link 色；目标声母仍保持粗体和下划线。每条位移 link 独立着色，同一张图中的 link 前景色不得重复。真源为各声母定义首选色，并提供受控的高饱和候选色池；每张键位图按自己的位移邻接关系确定性求解，首选色冲突时才沿链换色。
 
 W/Y 零声母位移遵循同一 link 关系，但只从受控的柔和莫兰迪样式池中选择，并同步改变目标零声母卡片的背景色和虚线边框色。W 与 Y 同时位移时强制使用不同样式。A/E/O 零声母不进入 link 配色，继续使用常规样式。
