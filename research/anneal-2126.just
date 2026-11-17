@@ -20,3 +20,12 @@ stop:
 
 verify route snow:
     node tools/verify_anneal_2126.js research/.cache/anneal-2126-bundle research/.cache/anneal-2126-run/best-{{route}}.json '{{snow}}'
+
+polish:
+    node --max-old-space-size=8192 tools/polish_full26.js
+
+polish-test:
+    node --test tests/polish-2126.test.mjs tests/toned-2126.test.mjs tests/ckt-v4-model.test.mjs
+
+polish-check:
+    node --max-old-space-size=8192 tools/verify_full26_polish.js
