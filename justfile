@@ -164,6 +164,10 @@ cr-lan-f19-benchmark-test:
     python -X utf8 -m unittest discover -s tests -p test_cr_lan_f19_r11.py
     node tests/cr-production5-r11.browser.mjs --lan-f19
 
+cr-lan-zero-carriers:
+    python -X utf8 tools/compare_cr_lan_zero_carriers.py
+    python -X utf8 -m unittest discover -s tests -p test_cr_lan_zero_carriers.py
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js
