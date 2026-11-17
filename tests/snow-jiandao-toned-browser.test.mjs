@@ -90,7 +90,7 @@ try {
     await page.locator('#snowJiandaoKeyboardMode').selectOption(mode);
     assert.equal(await input.inputValue(), '你好');
     assert.equal(await page.locator('#svgbox svg').count(), 1);
-    assert.match(await page.locator('#svgbox svg').getAttribute('aria-label'), /冰雪剑道/);
+    assert.match(await page.locator('#svgbox svg').getAttribute('aria-label'), /冰雪尘道/);
   }
   await page.locator('#nf5Reset').click();
   await page.locator('#snowJiandaoKeyboardMode').selectOption('overall');

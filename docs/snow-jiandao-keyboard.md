@@ -1,4 +1,4 @@
-# 冰雪剑道合并键盘与筛选
+# 冰雪尘道合并键盘与筛选
 
 `SNOW-JIANDAO-TONED` 的声母、零声母、十韵组和纯形辅使用一张合并键盘。
 渲染复用无调 21×21 的 `keyboardSVG`：键位、边框、密度缩放、声母位移 link
@@ -9,7 +9,7 @@
 下排一声／轻声用黄底；同韵组跨排使用同一文字色，同键多个韵组分行显示。
 五个形辅键统一用淡紫底、紫色边框和字样，与蓝／绿／黄三个调区区分。
 热力图保留按负担着色的键面，形辅标签仍为淡紫色，避免覆盖热力数值含义。
-该配色适用于冰雪剑道及四个 CR 带调方案，也随 SVG／HTML 导出保留。
+该配色适用于冰雪尘道及四个 CR 带调方案，也随 SVG／HTML 导出保留。
 AVUIO 是保留键集合，纯形辅顺序由 `shapeKeysByMeaning` 表示；
 `toneKeysByTone=IVUAO` 仅作为公共渲染器的边界适配，不显示独立调辅。
 
@@ -54,7 +54,7 @@ AVUIO 是保留键集合，纯形辅顺序由 `shapeKeysByMeaning` 表示；
 `just snow-jiandao-ui-test` 执行语义往返、查询、权重与配色测试，并在无头 Edge
 检查完整零声母、跨排韵组颜色、形辅、文字裁切、带调／无调／汉字筛选和
 四轨热力一致性。`node tests/browser-ui.test.mjs` 检查跨方案切换等通用交互；
-`node tools/audit_keymap_link_colors.mjs` 复核全量普通方案和冰雪剑道的链式配色。
+`node tools/audit_keymap_link_colors.mjs` 复核全量普通方案和冰雪尘道的链式配色。
 `just unified-keyboard-filter-test` 覆盖五个带调方案、S005／BCW 无调方案、
 完整字词与音节匹配，以及单字／词／音节数据集和热力切换。
 

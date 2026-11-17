@@ -107,7 +107,7 @@ try {
   await page.locator('#nf6SelectionHost').selectOption('21x21');
   await page.waitForSelector('.snow-jiandao-contract-card');
   assert.match(await page.locator('#nf6SelectionCount').innerText(), /\/ 857 个候选（含7个带调合同）/);
-  assert.match(await page.locator('.snow-jiandao-contract-card').innerText(), /冰雪剑道/);
+  assert.match(await page.locator('.snow-jiandao-contract-card').innerText(), /冰雪尘道/);
   await page.locator('[data-snow-jiandao-open="SNOW-JIANDAO-TONED"]').click();
   await page.waitForSelector('#snowJiandaoTonedDetail');
   assert.equal(await page.evaluate(() => window.App7.UX.view), 'scheme');
@@ -122,7 +122,7 @@ try {
   assert.match(await page.locator('#svgbox').textContent(), /a-ou/);
   assert.match(await page.locator('#svgbox g[data-key="R"]').textContent(), /Ø A\/E\/O/);
   assert.equal(await page.locator('#nf6SchemePicker').isVisible(), true);
-  await page.locator('#nf6SchemeQuery').fill('冰雪剑道');
+  await page.locator('#nf6SchemeQuery').fill('冰雪尘道');
   await page.locator('#nf6SchemeHost').selectOption('21x21');
   await page.locator('#nf6SchemeAux').selectOption('AVUIO');
   await page.locator('#nf6SchemeLogic').selectOption('toneInMain');

@@ -2,7 +2,7 @@
 "use strict";
 
 /*
- * Score the production Snow Jiandao layout without pretending that its
+ * Score the production Snow Chendao layout without pretending that its
  * tone-in-main contract is an ordinary untoned R11 entry.  The output is a
  * compact, auditable bridge for the cross-contract table in a7_CKT_R11.html.
  */
@@ -306,7 +306,7 @@ function main() {
   const outputData = {
     version: "snow-jiandao-toned-r11-native-benchmark-v1",
     id: fixture.publication?.id || "SNOW-JIANDAO-TONED",
-    name: fixture.publication?.name || "冰雪剑道",
+    name: fixture.publication?.name || "冰雪尘道",
     publication: fixture.publication,
     layoutId: fixture.layoutId,
     contract: {
