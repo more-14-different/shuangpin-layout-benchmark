@@ -26,7 +26,10 @@ function snowJiandaoKeyboardSVG(mode = 'semantic', load = null, native = snowJia
     const tones = [...new Set(Object.values(entry.rhymeTonesByKey[key] || {}).join(''))].sort().join('');
     const content = group.querySelector(':scope > g');
     if (!content) continue;
-    if (!heat && tones) base.setAttribute('fill', SNOW_TONE_FILLS[tones]);
+    if (!heat && tones) {
+      const family=/^[01]+$/.test(tones)?'01':/^[23]+$/.test(tones)?'23':tones;
+      base.setAttribute('fill', SNOW_TONE_FILLS[family]);
+    }
     if (native.keyboards.shapeByKey[key]?.length && !(entry.roles[key]?.length || entry.rhymes[key]?.length)) {
       // The tone-in-main contract has no independent auxiliary tone layer.
       if (!heat) base.setAttribute('fill', SNOW_SHAPE_PALETTE.keyFill);

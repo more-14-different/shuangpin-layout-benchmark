@@ -39,7 +39,8 @@ function loadPayload(file) {
   if (at < 0) throw new Error('HTML payload not found');
   const start = html.indexOf('>', at) + 1;
   const end = html.indexOf('</script>', start);
-  return JSON.parse(zlib.gunzipSync(Buffer.from(html.slice(start, end), 'base64')));
+  return require('./toned_filter_payload').restoreTonedFilterPayload(
+    JSON.parse(zlib.gunzipSync(Buffer.from(html.slice(start, end), 'base64'))));
 }
 
 function strokeOptions(file) {

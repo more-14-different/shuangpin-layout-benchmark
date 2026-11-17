@@ -48,9 +48,12 @@ test('derived M lower/upper reproduces existing 21x21 ledgers and covers moved W
     'CR-GPU-f0ae939a38':[22,24],'CR-GPU-3d3dcbafc0':[21,24],'CR-GPU-0a4ee7fb52':[21,24]};
   for(const native of natives){
     const memory=tonedMemoryAudit(native,data.pinyin,decomposition);
-    assert.deepEqual([memory.lower,memory.guard],expected[native.id],native.id);
+    // Keep fixed historical anchors, and audit newer catalogue entries against
+    // the ledger published with their actual codes rather than a closed ID list.
+    assert.deepEqual([memory.lower,memory.guard],expected[native.id] || [native.memory.lower,native.memory.guard],native.id);
     assert.equal(memory.audit.groups.flatMap(group=>group.roots).length,18);
     if(native.id.startsWith('T2126'))assert.deepEqual(memory.audit.carrierMoves,[{name:'zero-W',key:'J'},{name:'zero-Y',key:'W'}]);
-    else assert.equal(memory.audit.carrierMoves.length,0);
+    else if(expected[native.id]) assert.equal(memory.audit.carrierMoves.length,0);
+    else assert.deepEqual(memory.audit.carrierMoves,native.memory.audit.carrierMoves,native.id);
   }
 });

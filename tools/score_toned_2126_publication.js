@@ -6,9 +6,8 @@ const native=require('./score_snow_jiandao_toned_benchmark');
 const {toneKeysFromShapeKeys}=require('./auxiliary_semantics');
 const {marsFirstAtom,marsFirstAtomInitial}=require('./mars_toned_factorization');
 const [which,out]=process.argv.slice(2);
-assert.ok(['keep','26'].includes(which));
-const sourcePath=`research/notes/2026-11-13-toned-2126-regroup-${which}-refine.json`;
-const source=JSON.parse(fs.readFileSync(sourcePath));const best=source.results[0],layout=best.layout;
+const publication=require('./toned_2126_publication_catalog').load(which);
+const {sourcePath,source,best,id,name,robustness}=publication,layout=best.layout;
 const data=scorer.loadPayload('a7_CKT_R11.html'),snow='D:/C2D/Documents/rime-snow-pinyin';
 const words=scorer.multiwords(path.join(snow,'snow_pinyin.base.dict.yaml'),data,.99);
 const strokes=scorer.strokeOptions(path.join(snow,'rime-stroke/stroke.dict.yaml'));
@@ -18,7 +17,6 @@ const tone=toneKeysFromShapeKeys(layout.shapeKeysByMeaning);assert.equal(tone,'I
 const codes=new Map(source.tokenKeys.map((t,i)=>[t,layout.tonedCodes[i]]));
 const inventory=JSON.parse(fs.readFileSync('research/config/ckt-v51-toned-2121-seeds.json'));
 const decomposition=new Map(inventory.decomposition.map(d=>[d.pinyin,d]));
-const id=which==='keep'?'T2126-QEMPTY-8890382':'T2126-FULL26-8871530';
 const fixture={layoutId:id,pinyin:data.pinyin,toneKeysByTone:tone,shapeKeysByMeaning:'AEUIO',
   soundKeys:'BCDFGHJKLMNPQRSTVWXYZ',tonedCodes:data.pinyin.map(p=>[1,2,3,4,5].map(t=>codes.get(p+t)||null))};
 const atoms=new Map();
@@ -46,13 +44,14 @@ for(const row of filterRows)if(row[5]==='word3'){
  const tokens=row[1].split(' '),last=tokens[2].replace(/0$/,'5');
  row[2]+=codes.get(last)[1];
 }
-const result={version:'toned-2126-r11-1',id,name:which==='keep'?'21×26 带调 · Q韵空键 9/9/7':'21×26 带调 · 全次键 10/9/7',layoutId:layout.id,
- publication:{research:true,source:sourcePath,rhymeGroups:fixture.rhymeAtoms.map(a=>({roots:a.roots,finals:a.finals})),toneRowsByTone:layout.toneRowsByTone,description:'er→en/n；上二三／中四／下一轻；形辅21/12/24',validation:{anchorsVerified:true,tolerance:1e-10}},
- contract:{main:'tone-in-main 21x26',capacity:[21,26],actual:[21,which==='keep'?25:26],rowCounts:which==='keep'?[9,9,7]:[10,9,7],completion:'shape-only AEUIO',shapeKeysByMeaning:'AEUIO',toneKeysByTone:tone,toneDigitsByShapeMeaning:'42310',wordAuxiliaryPolicy:best.policy,oldR11IndependentToneAuxiliary:false},
+const rowCounts=exp.ROWS.map(row=>new Set(layout.tonedCodes.map(c=>c[1]).filter(k=>row.includes(k))).size);
+const result={version:'toned-2126-r11-2',id,name,layoutId:layout.id,
+ publication:{research:true,source:sourcePath,sourceSha256:require('node:crypto').createHash('sha256').update(fs.readFileSync(sourcePath)).digest('hex'),rhymeGroups:fixture.rhymeAtoms.map(a=>({roots:a.roots,finals:a.finals})),toneRowsByTone:layout.toneRowsByTone,robustness,description:`十韵组统一重分组；原生形辅${robustness.selectedPolicy}`,validation:{anchorsVerified:true,tolerance:1e-10}},
+ contract:{main:'tone-in-main 21x26',capacity:[21,26],actual:[21,rowCounts.reduce((a,b)=>a+b,0)],rowCounts,completion:'shape-only AEUIO',shapeKeysByMeaning:'AEUIO',toneKeysByTone:tone,toneDigitsByShapeMeaning:'42310',wordAuxiliaryPolicy:best.policy,oldR11IndependentToneAuxiliary:false},
  memory:null,
  inventory:{legalTonedSyllables:codes.size,occupiedBuckets:occupied.size,capacity:546,emptyBuckets:546-occupied.size,qzEmpty:!occupied.has('QZ'),zqEmpty:!occupied.has('ZQ')},
  keyboards:{soundKeys:fixture.soundKeys,...native.keyboardSemantics(fixture)},tonedCodes:fixture.tonedCodes,filterRowColumns:['text','readingWithTone0','mainCode','terminalCode','weight','kind'],filterRows,
- ckt:{v5:{score:v5,policy:best.policy,tracks:summary5,reference:'S005 v5; native21x26 routing, 21/12/24'},v51:{score,tracks,policy:best.policy,reference:'S005 shape-only v5.1; AUAU/AAAU/AAAA, joint pools, soft-page-fill-v2'},aggregateV51:native.weightedAggregate(tracks,['motorUpperMs','firstAuxRate','secondAuxRate','thirdAuxRate','selectionRate','meanRejectedCandidates','meanPageActions','meanKeys','effectiveMs'])},ergonomics:native.loadSummary(outcomes)};
+ ckt:{v5:{score:v5,policy:best.policy,tracks:summary5,reference:'S005 v5; native21x26 routing, selected robust policy'},v51:{score,tracks,policy:best.policy,reference:'S005 shape-only v5.1; AUAU/AAAU/AAAA, joint pools, soft-page-fill-v2'},aggregateV51:native.weightedAggregate(tracks,['motorUpperMs','firstAuxRate','secondAuxRate','thirdAuxRate','selectionRate','meanRejectedCandidates','meanPageActions','meanKeys','effectiveMs'])},ergonomics:native.loadSummary(outcomes)};
 result.memory=require('./toned_memory_audit').tonedMemoryAudit(result,data.pinyin,inventory.decomposition);
 fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify({native:result,fixture}));
 fs.writeFileSync(out.replace(/\.json$/,'.native.json'),JSON.stringify(result));
