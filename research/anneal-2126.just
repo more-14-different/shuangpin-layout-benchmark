@@ -29,3 +29,15 @@ polish-test:
 
 polish-check:
     node --max-old-space-size=8192 tools/verify_full26_polish.js
+
+robust-prepare:
+    node --max-old-space-size=8192 tools/prepare_full26_robustness.js
+
+robust:
+    .venv-anneal/Scripts/python.exe tools/audit_full26_robustness.py
+
+robust-test:
+    .venv-anneal/Scripts/python.exe -m unittest discover -s tests -p test_full26_robust_metrics.py
+
+robust-check:
+    .venv-anneal/Scripts/python.exe tools/verify_full26_robustness.py
