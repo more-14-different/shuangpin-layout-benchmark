@@ -176,6 +176,15 @@ lan-aeo-all:
     python -X utf8 tools/complete_lan_aeo_comparison.py --phase assemble
     python -X utf8 -m unittest discover -s tests -p test_lan_aeo_comparison.py
 
+cr-lan-213-prepare:
+    python -X utf8 tools/prepare_cr_lan_213.py
+    node --max-old-space-size=6144 tools/verify_cr_stable_neighbors.js --prefix research/notes/2026-11-18-cr-lan-213 --fixed-only --source-auxiliary research/notes/2026-11-18-cr-lan-213-provenance.json
+    python -X utf8 tools/prepare_cr_lan_213.py --freeze
+
+cr-lan-213-test:
+    python -X utf8 -m unittest discover -s tests -p test_cr_lan_213.py
+    node --max-old-space-size=6144 --test --test-concurrency=1 tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js

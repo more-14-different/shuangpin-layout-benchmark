@@ -1,0 +1,118 @@
+{
+  "version": "cr-lan-213-check-v1",
+  "integrity": "ok",
+  "round": 20,
+  "evaluations": 40,
+  "cacheRows": 48,
+  "chains": 12,
+  "steps": [
+    4,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "accepted": 4,
+  "restarts": 12,
+  "exchanges": {
+    "accepted": 10,
+    "attempted": 30
+  },
+  "operatorCounts": {
+    "multi-root-regroup": 4,
+    "region-key-cycle": 4,
+    "region-key-move": 6,
+    "region-key-shuffle": 5,
+    "region-key-swap": 10,
+    "root-cycle": 11,
+    "root-move": 9,
+    "root-swap": 3,
+    "two-group-repartition": 5,
+    "whole-group-swap": 6
+  },
+  "proposalSizeCounts": {
+    "0": 0,
+    "1": 33,
+    "2": 0,
+    "3": 3,
+    "4": 0,
+    "5": 3,
+    "6": 1
+  },
+  "proposalAttempts": 68,
+  "feasibleFrontier": 1,
+  "diagnosticFrontier": 15,
+  "bestFeasible": {
+    "key": "f19a0ad1dc8d077c5f2ea53b223e51010bb3096ff17b99bddd6d694fc029e578",
+    "metrics": {
+      "ckt": 9.107001929844568,
+      "d": 2,
+      "daily": 121.73336093086186,
+      "dailyPinky": 0.07584923220102373,
+      "guard": 25,
+      "m": 24,
+      "pinky": 0.0896911549494506,
+      "pinkyTracks": [
+        0.06942549381010589,
+        0.0727547384048275,
+        0.0896911549494506,
+        0.06823985829426306
+      ],
+      "rightPinky": 0.05323576853835622,
+      "rightPinkyTracks": [
+        0.03266848489620615,
+        0.05323576853835622,
+        0.025102072867954316,
+        0.033836763340054234
+      ],
+      "verified": true
+    }
+  },
+  "cpuReplayedFrontier": true,
+  "bundleSha256": "2dde66f101e3b01a6e9418540476ce4cc1ba7c068bdf519e6f258e781c9af085",
+  "sourceContract": {
+    "batch": 2,
+    "cacheLimit": 50000,
+    "compositePrimitiveCount": [
+      2,
+      6
+    ],
+    "compositeProposalProbability": 0.35,
+    "cycle": 2,
+    "exchangeEvery": 4,
+    "manifest": "655cc55368a11e1755b02fdd4af912b02a7dbc393145a3297ab0abf28f9ec29f",
+    "minTemp": 0.0001,
+    "operators": [
+      "root-move",
+      "root-swap",
+      "root-cycle",
+      "whole-group-swap",
+      "two-group-repartition",
+      "region-key-move",
+      "region-key-swap",
+      "region-key-cycle",
+      "multi-root-regroup",
+      "region-key-shuffle"
+    ],
+    "runnerSources": "4e563306262b4225c3c2d0a92c9faf5f3b1482e6a9e84f96739efc6ce34e57bc",
+    "scorerSources": "5c5c3cbe92eef3befbd61fc4731afca2d91fb1fbe08183ec3496016731ee89c1",
+    "seed": 2026111801,
+    "temp": 2,
+    "verifyEvery": 4,
+    "version": "cr-lan-213-daily-v1"
+  },
+  "sourceHashes": {
+    "tools/run_cr_lan_213.py": "5e134857caf1c23f5d71374c752d92fca9e7b676da53f154935bfa3528e100b5",
+    "tools/prepare_cr_lan_213.py": "30c7bffaf8e96d04fe5e3fc1a6b3cf285dc7a72f72a298285f1ca7165895df30",
+    "tools/run_cr_lan_213.ps1": "68367659ec1c55dc9e9e6e67040ac56bfe8df5a6769e53408ad66767b8c1fc49",
+    "tools/check_cr_lan_213.py": "e4e9383fc67c507447be5127428149581ea42f25ca93685d829d34dcc3cfb59c",
+    "tests/test_cr_lan_213.py": "bb83ec8666bebd4e443bccddab0c04e247cab0a7cec7b14f7b69b8dc1a97c358"
+  }
+}
