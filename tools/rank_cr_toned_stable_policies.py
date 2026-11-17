@@ -34,6 +34,20 @@ def policy_key(policy):
     return '/'.join(policy[k] for k in ('word2','word3','word4'))
 
 
+def policy_candidates(layout, constrained=False):
+    rows=layout['policies']
+    if len(rows)!=144 or len({policy_key(r['policy']) for r in rows})!=144 or not layout['cohortEqualityVerified']:
+        raise ValueError('incomplete or incomparable policy enumeration')
+    if not constrained:
+        return rows
+    if 'rightPinkyCeiling' not in layout or any('rightPinky' not in r for r in rows):
+        raise ValueError('constrained ranking requires both pinky metrics and ceilings')
+    eligible=[r for r in rows if r['pinky']<=layout['pinkyCeiling']+1e-12 and r['rightPinky']<=layout['rightPinkyCeiling']+1e-12]
+    if len(eligible)<2:
+        raise ValueError('fewer than two eligible policies')
+    return eligible
+
+
 def ranked_rows(keys, totals):
     count = totals['count']
     rows = [dict(policy=key, meanRank=float(totals['ranks'][i]/count),
@@ -101,6 +115,7 @@ def main():
     parser.add_argument('--input',type=Path,default=SOURCE)
     parser.add_argument('--output',type=Path,default=OUTPUT)
     parser.add_argument('--chunk',type=int,default=4096)
+    parser.add_argument('--constrained',action='store_true',help='exclude policies exceeding the recorded left/right native pinky ceilings')
     args=parser.parse_args()
     if args.chunk<1:
         parser.error('chunk must be positive')
@@ -110,14 +125,13 @@ def main():
     report=dict(version='cr-toned-stable-policy-six-cost-v1',baselineCostsMs=COSTS,coefficients=list(COMPONENTS),
         tracks=list(TRACKS),trackWeights=WEIGHTS.astype(int).tolist(),reference=reference,
         selectionRule='equal-weight mean competition rank across four grids; then higher top3, higher top1, lower worst rank, lexical policy',
-        candidateSet='all 144 policies; no additional pinky exclusion',
+        candidateSet=('144 policies enumerated, then filter recorded left/right pinky ceilings' if args.constrained else 'all 144 policies; no additional pinky exclusion'),
         grids={name:dict(minimum=lo,maximum=hi,step=step,points=round((hi-lo)/step+1)**6) for name,(lo,hi,step) in gridspec.items()},
         sourceHashes=source_hashes([args.input,REFERENCE,Path(__file__),ROOT/'tools/analyze_single_ckt_v51_aux_order.py']),results=[])
     started=time.monotonic()
     for layout in source['results']:
-        rows=layout['policies']
-        if len(rows)!=144 or len({policy_key(r['policy']) for r in rows})!=144 or not layout['cohortEqualityVerified']:
-            raise ValueError('incomplete or incomparable policy enumeration')
+        rows=policy_candidates(layout,args.constrained)
+        total_policies=len(layout['policies'])
         base=np.asarray([vectors(r,COSTS) for r in rows]);ref=vectors(reference,COSTS)
         scores=score_at(base,ref,np.ones(6))
         for row,score in zip(rows,scores,strict=True):
@@ -138,7 +152,8 @@ def main():
             gaps=pair_margins(selected,runner,reference,grid(0,upper,step))
             results[all_name]['selectedVsRunner']=gaps['all'];results[positive_name]['selectedVsRunner']=gaps['positive']
         default_order=sorted(rows,key=lambda r:(r['score'],policy_key(r['policy'])))
-        item=dict(id=layout['id'],selectedPolicy=selected['policy'],selectedScore=selected['score'],selectedPinky=selected['pinky'],
+        item=dict(id=layout['id'],candidatePolicyCount=total_policies,rankedPolicyCount=len(rows),
+            selectedPolicy=selected['policy'],selectedScore=selected['score'],selectedPinky=selected['pinky'],
             runnerPolicy=runner['policy'],runnerScore=runner['score'],defaultScoreGap=runner['score']-selected['score'],
             defaultRelativeGap=(runner['score']/selected['score']-1),meanRankGap=pooled[1]['meanRank']-pooled[0]['meanRank'],
             selectedRank=pooled[0],runnerRank=pooled[1],pooledRanking=pooled,grids=results,

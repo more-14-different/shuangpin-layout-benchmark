@@ -52,7 +52,8 @@ async function main(){
   const selected=option('ids',null)?.split(','),layouts=bundle.layouts.filter(layout=>!selected||selected.includes(layout.id));
   if(selected&&layouts.length!==selected.length)throw Error('unknown requested layout IDs');
   for(const layout of layouts){
-    const summarize=rows=>({metric:reference.summarize(rows),pinky:native.loadMetric(rows).leftPinkyQAZ});
+    const summarize=rows=>{const load=native.loadMetric(rows);return {metric:reference.summarize(rows),
+      pinky:load.leftPinkyQAZ,rightPinky:load.rightPinky};};
     const chars=summarize(model.resolveCompetition(toned.buildCharacterRows(layout,bundle,data,'IVUAO'),{motorCost:motor}));
     const three=new Map(permutations(['1','2','3']).map(order=>[order,summarize(model.resolveCompetition(
       toned.buildWordRows(layout,bundle,data,words,'IVUAO','word3',order),{motorCost:motor}))]));
@@ -65,7 +66,8 @@ async function main(){
       for(const [word3,third] of three){
         const tracks={character:chars.metric,word2:two.metric,word3:third.metric,word4:four.metric};
         rows.push({policy:{word2,word3,word4},score:toned.normalizedScore(tracks,reference.tracks),
-          pinky:Math.max(chars.pinky,two.pinky,third.pinky,four.pinky),tracks,
+          pinky:Math.max(chars.pinky,two.pinky,third.pinky,four.pinky),
+          rightPinky:Math.max(chars.rightPinky,two.rightPinky,third.rightPinky,four.rightPinky),tracks,
           caseScores:cases.map(c=>sensitivityScore(tracks,reference.tracks,c.auxiliary,c.selection))});
       }
     }
@@ -76,7 +78,8 @@ async function main(){
       if(row.tracks[kind].count!==baseline.tracks[kind].count||row.tracks[kind].totalWeight!==baseline.tracks[kind].totalWeight)
         throw Error('auxiliary policy changed the evaluated cohort: '+layout.id+'/'+kind);
     const ceiling=layout.constraints?.pinkyCeiling??(layout.profile==='speed'?1:original[layout.profile].metrics.pinky);
-    const eligible=rows.filter(r=>r.pinky<=ceiling+1e-12),standard=[...eligible].sort((a,b)=>a.score-b.score)[0];
+    const rightCeiling=layout.constraints?.rightPinkyCeiling??1;
+    const eligible=rows.filter(r=>r.pinky<=ceiling+1e-12&&r.rightPinky<=rightCeiling+1e-12),standard=[...eligible].sort((a,b)=>a.score-b.score)[0];
     const robust=chooseRobust(eligible,cases)[0];
     const preserving=rows.filter(r=>r.pinky<=baseline.pinky+1e-12).sort((a,b)=>a.score-b.score)[0];
     const verify=row=>{const v=toned.evaluateLayoutPolicy({layout,layouts:bundle,data,words,motor,reference,
@@ -86,9 +89,10 @@ async function main(){
         if(Math.abs(v.tracks[kind][field]-row.tracks[kind][field])>1e-9)throw Error('factorized/full track mismatch');
       const ergonomics=native.loadSummary(v.outcomes);
       if(Math.abs(ergonomics.leftPinkyQAZPeak4NativeTracks.value-row.pinky)>1e-12)throw Error('policy load mismatch');
+      if(Math.abs(ergonomics.rightPinkyPeak4NativeTracks.value-row.rightPinky)>1e-12)throw Error('policy right-pinky mismatch');
       return {...row,ergonomics,aggregate:native.weightedAggregate(v.tracks,
         ['effectiveMs','motorUpperMs','meanKeys','firstAuxRate','secondAuxRate','thirdAuxRate','selectionRate','meanRejectedCandidates','meanPageActions'])};};
-    const item={id:layout.id,profile:layout.profile,policyCount:rows.length,eligiblePolicyCount:eligible.length,cohortEqualityVerified:true,pinkyCeiling:ceiling,
+    const item={id:layout.id,profile:layout.profile,policyCount:rows.length,eligiblePolicyCount:eligible.length,cohortEqualityVerified:true,pinkyCeiling:ceiling,rightPinkyCeiling:rightCeiling,
       baseline,baselineVerified:verify(baseline),bestStandard:verify(standard),bestRobust:verify(robust),bestPinkyPreserving:verify(preserving),policies:rows};
     result.results.push(item);fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
     console.log(JSON.stringify({id:item.id,before:baseline.score,standard:standard.score,standardPolicy:standard.policy,

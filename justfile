@@ -144,6 +144,17 @@ cr-lan-fixed-test:
     python -X utf8 -m unittest discover -s tests -p test_cr_lan_fixed.py
     node --max-old-space-size=6144 --test --test-concurrency=1 tests/cr-lan-fixed.test.mjs tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
 
+cr-lan-f19-stability:
+    python -X utf8 tools/prepare_cr_lan_stability.py
+    node --max-old-space-size=6144 tools/optimize_cr_frontier_auxiliary.js --layouts research/notes/2026-11-17-cr-lan-f19-stability-finalists.json --output research/notes/2026-11-17-cr-lan-f19-stability-auxiliary.json
+    just cr-lan-f19-stability-rank
+    node --max-old-space-size=6144 tools/verify_cr_lan_stability.js
+    python -X utf8 -m unittest discover -s tests -p test_cr_lan_stability.py
+
+cr-lan-f19-stability-rank:
+    $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --input research/notes/2026-11-17-cr-lan-f19-stability-auxiliary.json --output research/notes/2026-11-17-cr-lan-f19-stability-robustness.json
+    $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --constrained --input research/notes/2026-11-17-cr-lan-f19-stability-auxiliary.json --output research/notes/2026-11-17-cr-lan-f19-stability-constrained-robustness.json
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js

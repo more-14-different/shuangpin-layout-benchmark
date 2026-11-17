@@ -1,0 +1,2832 @@
+{
+  "version": "cr-toned-stable-policy-six-cost-v1",
+  "baselineCostsMs": {
+    "firstAuxMs": 300,
+    "secondAuxMs": 300,
+    "thirdAuxMs": 300,
+    "selectionDecisionMs": 600,
+    "scanPerCandidateMs": 50,
+    "pageActionMs": 300
+  },
+  "coefficients": [
+    "firstAuxMs",
+    "secondAuxMs",
+    "thirdAuxMs",
+    "selectionDecisionMs",
+    "scanPerCandidateMs",
+    "pageActionMs"
+  ],
+  "tracks": [
+    "character",
+    "word2",
+    "word3",
+    "word4"
+  ],
+  "trackWeights": [
+    1,
+    3,
+    1,
+    1
+  ],
+  "reference": {
+    "id": "S005",
+    "policy": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "tracks": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 112.42254451086282,
+        "firstAuxRate": 0.22060613808019708,
+        "secondAuxRate": 0.04566821511806128,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.004804384379755336,
+        "meanRejectedCandidates": 0.0059137069818788034,
+        "meanPageActions": 4.005724736186477e-06,
+        "meanKeys": 2.2662743531982583,
+        "effectiveMs": 195.4843681647083
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 414.4344264362817,
+        "firstAuxRate": 0.1892694210310565,
+        "secondAuxRate": 0.034756806080910474,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003775437554998475,
+        "meanRejectedCandidates": 0.004530663854527311,
+        "meanPageActions": 0,
+        "meanKeys": 4.224026227111967,
+        "effectiveMs": 484.1340902955972
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 344.2651202341585,
+        "firstAuxRate": 0.5172872168968791,
+        "secondAuxRate": 0.20701254452783532,
+        "thirdAuxRate": 0.052980406019336686,
+        "selectionRate": 0.007349652222944726,
+        "meanRejectedCandidates": 0.00913989969982548,
+        "meanPageActions": 6.68463499215639e-06,
+        "meanKeys": 3.7772801674440513,
+        "effectiveMs": 582.3179621766296
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 448.8043124204852,
+        "firstAuxRate": 0.27835105638906893,
+        "secondAuxRate": 0.04469433486596384,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003829566677066131,
+        "meanRejectedCandidates": 0.004522254400754552,
+        "meanPageActions": 0,
+        "meanKeys": 4.323045391255032,
+        "effectiveMs": 548.2417825232724
+      }
+    }
+  },
+  "selectionRule": "equal-weight mean competition rank across four grids; then higher top3, higher top1, lower worst rank, lexical policy",
+  "candidateSet": "144 policies enumerated, then filter recorded left/right pinky ceilings",
+  "grids": {
+    "main0To500Step50": {
+      "minimum": 0,
+      "maximum": 5,
+      "step": 0.5,
+      "points": 1771561
+    },
+    "mainPositive50To500Step50": {
+      "minimum": 0.5,
+      "maximum": 5,
+      "step": 0.5,
+      "points": 1000000
+    },
+    "extreme0To1000Step100": {
+      "minimum": 0,
+      "maximum": 10,
+      "step": 1,
+      "points": 1771561
+    },
+    "extremePositive100To1000Step100": {
+      "minimum": 1,
+      "maximum": 10,
+      "step": 1,
+      "points": 1000000
+    }
+  },
+  "sourceHashes": {
+    "research/notes/2026-11-17-cr-lan-f19-stability-auxiliary.json": "974b42444927a3756f3a8132545a77fba610dd8027a8a429e91b2fcf95ab9453",
+    "research/config/cr-toned-stability-reference.json": "f76b409377727afbd7e5e3bc7c179551fdb8a138875f535030626d3436bd2e7f",
+    "tools/rank_cr_toned_stable_policies.py": "c19d53aeba8f9b58bd9b7db8a660b15c039cf42f75ea6f4346ad22a9ff580d25",
+    "tools/analyze_single_ckt_v51_aux_order.py": "e3a036f2e31f3d71342e396af317a1790fb09f151ac6fcdcfdaf9a7415d6897b"
+  },
+  "results": [
+    {
+      "id": "CRLAN-f19a0ad1dc-213",
+      "candidatePolicyCount": 144,
+      "rankedPolicyCount": 72,
+      "selectedPolicy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      },
+      "selectedScore": 9.107001929844568,
+      "selectedPinky": 0.0896911549494506,
+      "runnerPolicy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "12"
+      },
+      "runnerScore": 9.107572819692809,
+      "defaultScoreGap": 0.0005708898482410518,
+      "defaultRelativeGap": 6.268691416111416e-05,
+      "meanRankGap": 0.9951281091859099,
+      "selectedRank": {
+        "policy": "21/213/14",
+        "meanRank": 1.0263519009506306,
+        "top1Rate": 0.974981527590639,
+        "top3Rate": 0.999642970239241,
+        "worstRank": 4
+      },
+      "runnerRank": {
+        "policy": "21/213/12",
+        "meanRank": 2.0214800101365404,
+        "top1Rate": 0.02424542536215236,
+        "top3Rate": 0.9883934281687168,
+        "worstRank": 5
+      },
+      "pooledRanking": [
+        {
+          "policy": "21/213/14",
+          "meanRank": 1.0263519009506306,
+          "top1Rate": 0.974981527590639,
+          "top3Rate": 0.999642970239241,
+          "worstRank": 4
+        },
+        {
+          "policy": "21/213/12",
+          "meanRank": 2.0214800101365404,
+          "top1Rate": 0.02424542536215236,
+          "top3Rate": 0.9883934281687168,
+          "worstRank": 5
+        },
+        {
+          "policy": "21/213/13",
+          "meanRank": 3.104583824111899,
+          "top1Rate": 0.0,
+          "top3Rate": 0.9515377793680262,
+          "worstRank": 15
+        },
+        {
+          "policy": "21/213/24",
+          "meanRank": 4.501137411720511,
+          "top1Rate": 0.0,
+          "top3Rate": 0.043342652374092676,
+          "worstRank": 13
+        },
+        {
+          "policy": "21/213/23",
+          "meanRank": 5.560009982283986,
+          "top1Rate": 0.0,
+          "top3Rate": 0.013205516187418892,
+          "worstRank": 27
+        },
+        {
+          "policy": "12/213/24",
+          "meanRank": 6.544597638009501,
+          "top1Rate": 0.0007730470472086482,
+          "top3Rate": 0.003464740982670086,
+          "worstRank": 25
+        },
+        {
+          "policy": "21/213/21",
+          "meanRank": 7.793623276305473,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 24
+        },
+        {
+          "policy": "12/213/23",
+          "meanRank": 8.038570587199228,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 26
+        },
+        {
+          "policy": "21/213/42",
+          "meanRank": 9.604277139595673,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0002452639226083663,
+          "worstRank": 20
+        },
+        {
+          "policy": "21/213/41",
+          "meanRank": 10.14495227066525,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 21
+        },
+        {
+          "policy": "12/213/21",
+          "meanRank": 10.279525821974095,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 32
+        },
+        {
+          "policy": "12/213/14",
+          "meanRank": 12.21294129422639,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 32
+        },
+        {
+          "policy": "12/213/41",
+          "meanRank": 14.5020583260122,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 26
+        },
+        {
+          "policy": "12/213/12",
+          "meanRank": 14.523312606533871,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 42
+        },
+        {
+          "policy": "12/213/42",
+          "meanRank": 15.953700448753105,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0001676487572259719,
+          "worstRank": 28
+        },
+        {
+          "policy": "12/213/13",
+          "meanRank": 16.628519627314553,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 45
+        },
+        {
+          "policy": "21/132/14",
+          "meanRank": 17.247699437753344,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 28
+        },
+        {
+          "policy": "21/123/14",
+          "meanRank": 19.515855020030216,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 47
+        },
+        {
+          "policy": "21/132/12",
+          "meanRank": 20.33091333742163,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 29
+        },
+        {
+          "policy": "21/213/43",
+          "meanRank": 20.39890292302749,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 41
+        },
+        {
+          "policy": "21/213/32",
+          "meanRank": 21.772528962284674,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 56
+        },
+        {
+          "policy": "21/132/13",
+          "meanRank": 22.30559409977613,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 41
+        },
+        {
+          "policy": "12/213/32",
+          "meanRank": 22.35841053020627,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 40
+        },
+        {
+          "policy": "21/123/12",
+          "meanRank": 23.427846449626067,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 46
+        },
+        {
+          "policy": "21/123/13",
+          "meanRank": 25.31802112349476,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 58
+        },
+        {
+          "policy": "12/213/31",
+          "meanRank": 26.091842453477753,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 56
+        },
+        {
+          "policy": "21/213/31",
+          "meanRank": 26.280247900725968,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 63
+        },
+        {
+          "policy": "21/132/24",
+          "meanRank": 28.78018734345769,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 39
+        },
+        {
+          "policy": "21/132/23",
+          "meanRank": 30.132571634688844,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 54
+        },
+        {
+          "policy": "12/213/43",
+          "meanRank": 30.952286496401058,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 65
+        },
+        {
+          "policy": "21/123/24",
+          "meanRank": 32.21186500507321,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 58
+        },
+        {
+          "policy": "21/123/23",
+          "meanRank": 33.74535610530205,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 66
+        },
+        {
+          "policy": "12/132/24",
+          "meanRank": 33.89905913823374,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 41
+        },
+        {
+          "policy": "21/132/21",
+          "meanRank": 36.04774540377342,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 50
+        },
+        {
+          "policy": "12/132/23",
+          "meanRank": 36.39157205049318,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 47
+        },
+        {
+          "policy": "21/213/34",
+          "meanRank": 37.04303815963859,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 62
+        },
+        {
+          "policy": "12/123/24",
+          "meanRank": 37.12752435826539,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 49
+        },
+        {
+          "policy": "12/213/34",
+          "meanRank": 37.33362520608647,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 67
+        },
+        {
+          "policy": "21/123/21",
+          "meanRank": 39.260088763800255,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 65
+        },
+        {
+          "policy": "21/132/42",
+          "meanRank": 39.751719935553446,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 51
+        },
+        {
+          "policy": "12/123/23",
+          "meanRank": 39.765074131079594,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 54
+        },
+        {
+          "policy": "21/132/41",
+          "meanRank": 40.49141941986474,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 55
+        },
+        {
+          "policy": "12/132/21",
+          "meanRank": 41.26885288312398,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 55
+        },
+        {
+          "policy": "21/123/42",
+          "meanRank": 43.43886802563149,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 57
+        },
+        {
+          "policy": "21/123/41",
+          "meanRank": 44.206221007767866,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 61
+        },
+        {
+          "policy": "12/123/21",
+          "meanRank": 44.27747844078753,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 58
+        },
+        {
+          "policy": "12/132/14",
+          "meanRank": 45.25300523626282,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 54
+        },
+        {
+          "policy": "12/123/14",
+          "meanRank": 48.181084465389844,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 59
+        },
+        {
+          "policy": "12/132/12",
+          "meanRank": 48.71502785313574,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 61
+        },
+        {
+          "policy": "12/132/41",
+          "meanRank": 49.477320288470594,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 56
+        },
+        {
+          "policy": "12/132/42",
+          "meanRank": 51.321120532411385,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 55
+        },
+        {
+          "policy": "12/132/13",
+          "meanRank": 51.75721708299178,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 63
+        },
+        {
+          "policy": "12/123/12",
+          "meanRank": 51.81256445328301,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 63
+        },
+        {
+          "policy": "12/123/41",
+          "meanRank": 52.38857498800225,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 59
+        },
+        {
+          "policy": "12/123/42",
+          "meanRank": 54.230665757547015,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 58
+        },
+        {
+          "policy": "12/123/13",
+          "meanRank": 54.60356906992943,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 65
+        },
+        {
+          "policy": "21/132/43",
+          "meanRank": 57.13063251946335,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 63
+        },
+        {
+          "policy": "21/132/32",
+          "meanRank": 58.511340323852096,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 67
+        },
+        {
+          "policy": "12/132/32",
+          "meanRank": 59.28560834908479,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 63
+        },
+        {
+          "policy": "21/123/43",
+          "meanRank": 59.341314628532686,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 65
+        },
+        {
+          "policy": "21/123/32",
+          "meanRank": 60.98709361981806,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 70
+        },
+        {
+          "policy": "12/123/32",
+          "meanRank": 61.537528488945625,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 67
+        },
+        {
+          "policy": "12/132/31",
+          "meanRank": 63.260965770637874,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 66
+        },
+        {
+          "policy": "21/132/31",
+          "meanRank": 63.877286086401064,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 70
+        },
+        {
+          "policy": "12/132/43",
+          "meanRank": 64.91439259460569,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 69
+        },
+        {
+          "policy": "12/123/31",
+          "meanRank": 65.05545646415915,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 70
+        },
+        {
+          "policy": "21/123/31",
+          "meanRank": 66.00449874112492,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 72
+        },
+        {
+          "policy": "12/123/43",
+          "meanRank": 66.74332471659358,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 70
+        },
+        {
+          "policy": "12/132/34",
+          "meanRank": 68.97425193595704,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 71
+        },
+        {
+          "policy": "21/132/34",
+          "meanRank": 69.51881360171396,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 71
+        },
+        {
+          "policy": "12/123/34",
+          "meanRank": 70.49753894702582,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 72
+        },
+        {
+          "policy": "21/123/34",
+          "meanRank": 71.00766485325315,
+          "top1Rate": 0.0,
+          "top3Rate": 0.0,
+          "worstRank": 72
+        }
+      ],
+      "grids": {
+        "main0To500Step50": {
+          "points": 1771561,
+          "ranking": [
+            {
+              "policy": "21/213/14",
+              "meanRank": 1.032623206313528,
+              "top1Rate": 0.9680535979286065,
+              "top3Rate": 0.9999379078676941,
+              "worstRank": 4
+            },
+            {
+              "policy": "21/213/12",
+              "meanRank": 2.001036938609509,
+              "top1Rate": 0.03008363810221607,
+              "top3Rate": 0.9994722168753997,
+              "worstRank": 4
+            },
+            {
+              "policy": "21/213/13",
+              "meanRank": 3.1984650824893976,
+              "top1Rate": 0.0,
+              "top3Rate": 0.9082029915989345,
+              "worstRank": 12
+            },
+            {
+              "policy": "21/213/24",
+              "meanRank": 4.518978460239303,
+              "top1Rate": 0.0,
+              "top3Rate": 0.08148350522505293,
+              "worstRank": 13
+            },
+            {
+              "policy": "21/213/23",
+              "meanRank": 5.943386087185257,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0005153646981390988,
+              "worstRank": 26
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 6.345633032111229,
+              "top1Rate": 0.0018627639691774656,
+              "top3Rate": 0.010102389926172455,
+              "worstRank": 17
+            },
+            {
+              "policy": "12/213/23",
+              "meanRank": 7.947406270515099,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 24
+            },
+            {
+              "policy": "21/213/21",
+              "meanRank": 8.166077826278633,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 24
+            },
+            {
+              "policy": "21/213/42",
+              "meanRank": 9.477134572278347,
+              "top1Rate": 0.0,
+              "top3Rate": 0.00022353167630129587,
+              "worstRank": 15
+            },
+            {
+              "policy": "21/213/41",
+              "meanRank": 10.26902037242861,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 17
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 10.276414416438383,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 30
+            },
+            {
+              "policy": "12/213/14",
+              "meanRank": 12.027451496166375,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 30
+            },
+            {
+              "policy": "12/213/41",
+              "meanRank": 14.013381418985855,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 21
+            },
+            {
+              "policy": "12/213/12",
+              "meanRank": 14.231008133504858,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 37
+            },
+            {
+              "policy": "12/213/42",
+              "meanRank": 15.057709556712979,
+              "top1Rate": 0.0,
+              "top3Rate": 6.209213230591552e-05,
+              "worstRank": 27
+            },
+            {
+              "policy": "12/213/13",
+              "meanRank": 16.33639372282411,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 42
+            },
+            {
+              "policy": "21/132/14",
+              "meanRank": 17.974462070456507,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 28
+            },
+            {
+              "policy": "21/213/43",
+              "meanRank": 19.492979355494956,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 36
+            },
+            {
+              "policy": "21/132/12",
+              "meanRank": 20.81367618727213,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 27
+            },
+            {
+              "policy": "21/123/14",
+              "meanRank": 20.973101688285077,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 46
+            },
+            {
+              "policy": "21/213/32",
+              "meanRank": 21.794093457690703,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/213/32",
+              "meanRank": 21.923815776030292,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 40
+            },
+            {
+              "policy": "21/132/13",
+              "meanRank": 22.72489742097506,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 36
+            },
+            {
+              "policy": "21/123/12",
+              "meanRank": 24.868235414981477,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 46
+            },
+            {
+              "policy": "12/213/31",
+              "meanRank": 25.61530762982477,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "21/213/31",
+              "meanRank": 26.071111861234243,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "21/123/13",
+              "meanRank": 26.731023656537936,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "21/132/24",
+              "meanRank": 28.83657068540118,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 39
+            },
+            {
+              "policy": "12/213/43",
+              "meanRank": 28.946315706882235,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 64
+            },
+            {
+              "policy": "21/132/23",
+              "meanRank": 30.732321382103127,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 46
+            },
+            {
+              "policy": "21/123/24",
+              "meanRank": 33.32438679785793,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "12/132/24",
+              "meanRank": 33.38833943623731,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/123/23",
+              "meanRank": 35.51784330316597,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 66
+            },
+            {
+              "policy": "12/132/23",
+              "meanRank": 35.76046040751631,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 44
+            },
+            {
+              "policy": "21/213/34",
+              "meanRank": 35.800740702691016,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "12/213/34",
+              "meanRank": 35.83613491152718,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 66
+            },
+            {
+              "policy": "21/132/21",
+              "meanRank": 36.28719417508062,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 45
+            },
+            {
+              "policy": "12/123/24",
+              "meanRank": 37.82499501851757,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 49
+            },
+            {
+              "policy": "21/132/42",
+              "meanRank": 39.04124498112117,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 51
+            },
+            {
+              "policy": "21/132/41",
+              "meanRank": 40.07349281227121,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 53
+            },
+            {
+              "policy": "12/123/23",
+              "meanRank": 40.506821949681665,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/132/21",
+              "meanRank": 40.798544899103106,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 52
+            },
+            {
+              "policy": "21/123/21",
+              "meanRank": 40.84383094908953,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/123/42",
+              "meanRank": 43.923219691560156,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "12/132/14",
+              "meanRank": 44.45884787484032,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 52
+            },
+            {
+              "policy": "21/123/41",
+              "meanRank": 45.001635280975364,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "12/123/21",
+              "meanRank": 45.0263513364767,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "12/132/12",
+              "meanRank": 47.9277902369718,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 59
+            },
+            {
+              "policy": "12/132/41",
+              "meanRank": 48.62426075082935,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/123/14",
+              "meanRank": 48.650624505732516,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 59
+            },
+            {
+              "policy": "12/132/42",
+              "meanRank": 49.9185193171446,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/132/13",
+              "meanRank": 50.81668991358469,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/123/12",
+              "meanRank": 52.45087016478688,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/123/41",
+              "meanRank": 52.703154449663316,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 59
+            },
+            {
+              "policy": "12/123/42",
+              "meanRank": 53.99377667492116,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "12/123/13",
+              "meanRank": 54.92622212839411,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/132/43",
+              "meanRank": 56.38875150220625,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 60
+            },
+            {
+              "policy": "21/132/32",
+              "meanRank": 58.794958231751544,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "12/132/32",
+              "meanRank": 59.1674088558057,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "21/123/43",
+              "meanRank": 59.33154997203032,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/123/32",
+              "meanRank": 61.996358578677224,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/123/32",
+              "meanRank": 62.01735757334915,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "12/132/31",
+              "meanRank": 63.12268953764505,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "12/132/43",
+              "meanRank": 63.81137031126786,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "21/132/31",
+              "meanRank": 63.88847011195212,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/123/31",
+              "meanRank": 65.39678453070483,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/123/43",
+              "meanRank": 66.21499852390068,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "21/123/31",
+              "meanRank": 66.64208288622294,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            },
+            {
+              "policy": "12/132/34",
+              "meanRank": 68.52897190669698,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "21/132/34",
+              "meanRank": 69.3972609467018,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "12/123/34",
+              "meanRank": 70.36357427150406,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            },
+            {
+              "policy": "21/123/34",
+              "meanRank": 71.17130316144915,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            }
+          ],
+          "selectedVsRunner": {
+            "minGap": -0.00012717877499923702,
+            "maxGap": 0.0030093577935765836,
+            "medianGap": 0.0009242089809422538,
+            "p05Gap": 3.554752275292117e-05,
+            "p95Gap": 0.002095504100985579,
+            "selectedWins": 0.9693699511334919,
+            "runnerWins": 0.030623839653277533,
+            "tied": 6.209213230591551e-06
+          }
+        },
+        "mainPositive50To500Step50": {
+          "points": 1000000,
+          "ranking": [
+            {
+              "policy": "21/213/14",
+              "meanRank": 1.0,
+              "top1Rate": 1.0,
+              "top3Rate": 1.0,
+              "worstRank": 1
+            },
+            {
+              "policy": "21/213/12",
+              "meanRank": 2.0,
+              "top1Rate": 0.0,
+              "top3Rate": 1.0,
+              "worstRank": 2
+            },
+            {
+              "policy": "21/213/13",
+              "meanRank": 3.00117,
+              "top1Rate": 0.0,
+              "top3Rate": 0.99883,
+              "worstRank": 4
+            },
+            {
+              "policy": "21/213/24",
+              "meanRank": 4.41457,
+              "top1Rate": 0.0,
+              "top3Rate": 0.00117,
+              "worstRank": 7
+            },
+            {
+              "policy": "21/213/23",
+              "meanRank": 5.59166,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 8
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 6.379205,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 11
+            },
+            {
+              "policy": "21/213/21",
+              "meanRank": 7.80667,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 12
+            },
+            {
+              "policy": "12/213/23",
+              "meanRank": 7.908484,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 12
+            },
+            {
+              "policy": "21/213/42",
+              "meanRank": 9.49448,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 9.989564,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 27
+            },
+            {
+              "policy": "21/213/41",
+              "meanRank": 10.17981,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/213/14",
+              "meanRank": 11.876456,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 27
+            },
+            {
+              "policy": "12/213/12",
+              "meanRank": 13.913739,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 32
+            },
+            {
+              "policy": "12/213/41",
+              "meanRank": 14.082907,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 18
+            },
+            {
+              "policy": "12/213/42",
+              "meanRank": 15.286833,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 22
+            },
+            {
+              "policy": "12/213/13",
+              "meanRank": 15.792682,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 36
+            },
+            {
+              "policy": "21/132/14",
+              "meanRank": 17.843342,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 25
+            },
+            {
+              "policy": "21/213/43",
+              "meanRank": 19.248739,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 34
+            },
+            {
+              "policy": "21/123/14",
+              "meanRank": 20.396307,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 30
+            },
+            {
+              "policy": "21/132/12",
+              "meanRank": 20.829056,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 27
+            },
+            {
+              "policy": "12/213/32",
+              "meanRank": 21.654412,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 35
+            },
+            {
+              "policy": "21/213/32",
+              "meanRank": 21.756697,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 28
+            },
+            {
+              "policy": "21/132/13",
+              "meanRank": 22.581749,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 29
+            },
+            {
+              "policy": "21/123/12",
+              "meanRank": 24.263598,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 31
+            },
+            {
+              "policy": "12/213/31",
+              "meanRank": 25.295798,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/123/13",
+              "meanRank": 25.841272,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 37
+            },
+            {
+              "policy": "21/213/31",
+              "meanRank": 25.906169,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 36
+            },
+            {
+              "policy": "12/213/43",
+              "meanRank": 28.853514,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 60
+            },
+            {
+              "policy": "21/132/24",
+              "meanRank": 29.084446,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 37
+            },
+            {
+              "policy": "21/132/23",
+              "meanRank": 30.650081,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 38
+            },
+            {
+              "policy": "21/123/24",
+              "meanRank": 32.624665,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 45
+            },
+            {
+              "policy": "12/132/24",
+              "meanRank": 33.718097,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/123/23",
+              "meanRank": 34.472292,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 48
+            },
+            {
+              "policy": "21/213/34",
+              "meanRank": 35.67945,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/213/34",
+              "meanRank": 35.69224,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "12/132/23",
+              "meanRank": 36.048922,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 43
+            },
+            {
+              "policy": "21/132/21",
+              "meanRank": 36.132085,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "12/123/24",
+              "meanRank": 37.677429,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 45
+            },
+            {
+              "policy": "21/132/42",
+              "meanRank": 39.766674,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 50
+            },
+            {
+              "policy": "21/123/21",
+              "meanRank": 40.010013,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 53
+            },
+            {
+              "policy": "12/123/23",
+              "meanRank": 40.246539,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 48
+            },
+            {
+              "policy": "21/132/41",
+              "meanRank": 40.671258,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 50
+            },
+            {
+              "policy": "12/132/21",
+              "meanRank": 41.193608,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 51
+            },
+            {
+              "policy": "21/123/42",
+              "meanRank": 43.888566,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 53
+            },
+            {
+              "policy": "12/123/21",
+              "meanRank": 44.769797,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "21/123/41",
+              "meanRank": 44.811511,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/132/14",
+              "meanRank": 45.126556,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 52
+            },
+            {
+              "policy": "12/123/14",
+              "meanRank": 48.464725,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/132/12",
+              "meanRank": 48.561938,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 56
+            },
+            {
+              "policy": "12/132/41",
+              "meanRank": 49.584124,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/132/42",
+              "meanRank": 51.17915,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/132/13",
+              "meanRank": 51.24069,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "12/123/12",
+              "meanRank": 52.254065,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "12/123/41",
+              "meanRank": 52.871731,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "12/123/42",
+              "meanRank": 54.475158,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "12/123/13",
+              "meanRank": 54.6903,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 64
+            },
+            {
+              "policy": "21/132/43",
+              "meanRank": 56.963056,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 60
+            },
+            {
+              "policy": "21/132/32",
+              "meanRank": 59.155601,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "21/123/43",
+              "meanRank": 59.16481,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 64
+            },
+            {
+              "policy": "12/132/32",
+              "meanRank": 59.312473,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 62
+            },
+            {
+              "policy": "12/123/32",
+              "meanRank": 61.718394,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 66
+            },
+            {
+              "policy": "21/123/32",
+              "meanRank": 61.941327,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/132/31",
+              "meanRank": 63.140318,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/132/31",
+              "meanRank": 64.248737,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/132/43",
+              "meanRank": 64.636935,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/123/31",
+              "meanRank": 65.209208,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "21/123/31",
+              "meanRank": 66.587414,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "12/123/43",
+              "meanRank": 66.640463,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/132/34",
+              "meanRank": 68.965166,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "21/132/34",
+              "meanRank": 69.651642,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "12/123/34",
+              "meanRank": 70.646436,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            },
+            {
+              "policy": "21/123/34",
+              "meanRank": 71.242937,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            }
+          ],
+          "selectedVsRunner": {
+            "minGap": 7.145412687670216e-05,
+            "maxGap": 0.0026784103969053064,
+            "medianGap": 0.00096909841611037,
+            "p05Gap": 0.000189047889038374,
+            "p95Gap": 0.0019735526724997676,
+            "selectedWins": 1.0,
+            "runnerWins": 0.0,
+            "tied": 0.0
+          }
+        },
+        "extreme0To1000Step100": {
+          "points": 1771561,
+          "ranking": [
+            {
+              "policy": "21/213/14",
+              "meanRank": 1.0727843974889941,
+              "top1Rate": 0.9318725124339495,
+              "top3Rate": 0.9986339730892698,
+              "worstRank": 4
+            },
+            {
+              "policy": "21/213/12",
+              "meanRank": 2.0739331019366536,
+              "top1Rate": 0.06689806334639338,
+              "top3Rate": 0.9541014957994672,
+              "worstRank": 5
+            },
+            {
+              "policy": "21/213/13",
+              "meanRank": 3.2193602139581983,
+              "top1Rate": 0.0,
+              "top3Rate": 0.9053281258731706,
+              "worstRank": 15
+            },
+            {
+              "policy": "21/213/24",
+              "meanRank": 4.54939118664274,
+              "top1Rate": 0.0,
+              "top3Rate": 0.08835710427131778,
+              "worstRank": 13
+            },
+            {
+              "policy": "21/213/23",
+              "meanRank": 5.443753841950686,
+              "top1Rate": 0.0,
+              "top3Rate": 0.04845670005153647,
+              "worstRank": 27
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 6.743638519926776,
+              "top1Rate": 0.0012294242196571274,
+              "top3Rate": 0.003756574004507889,
+              "worstRank": 25
+            },
+            {
+              "policy": "21/213/21",
+              "meanRank": 7.749235278943259,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 24
+            },
+            {
+              "policy": "12/213/23",
+              "meanRank": 8.228079078281809,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 26
+            },
+            {
+              "policy": "21/213/42",
+              "meanRank": 9.711296986104346,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0007575240141321693,
+              "worstRank": 20
+            },
+            {
+              "policy": "21/213/41",
+              "meanRank": 10.092980710232387,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 21
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 10.656519871457997,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 32
+            },
+            {
+              "policy": "12/213/14",
+              "meanRank": 12.72918968073919,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 32
+            },
+            {
+              "policy": "12/213/41",
+              "meanRank": 15.056337885062947,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 26
+            },
+            {
+              "policy": "12/213/12",
+              "meanRank": 15.267067292630623,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 42
+            },
+            {
+              "policy": "21/132/14",
+              "meanRank": 16.680432680556866,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 28
+            },
+            {
+              "policy": "12/213/42",
+              "meanRank": 16.719358238299442,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0006085028965979721,
+              "worstRank": 28
+            },
+            {
+              "policy": "12/213/13",
+              "meanRank": 17.58214478643411,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 45
+            },
+            {
+              "policy": "21/123/14",
+              "meanRank": 18.57339939183579,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 47
+            },
+            {
+              "policy": "21/132/12",
+              "meanRank": 19.841193162414392,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 29
+            },
+            {
+              "policy": "21/213/43",
+              "meanRank": 21.546306336614997,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/213/32",
+              "meanRank": 21.723566391447996,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 56
+            },
+            {
+              "policy": "21/132/13",
+              "meanRank": 22.058544978129458,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/123/12",
+              "meanRank": 22.53920638352278,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 46
+            },
+            {
+              "policy": "12/213/32",
+              "meanRank": 23.006175344794787,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 40
+            },
+            {
+              "policy": "21/123/13",
+              "meanRank": 24.705302837441103,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "21/213/31",
+              "meanRank": 26.651567741669634,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/213/31",
+              "meanRank": 26.90908018408624,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 56
+            },
+            {
+              "policy": "21/132/24",
+              "meanRank": 28.426605688429582,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 39
+            },
+            {
+              "policy": "21/132/23",
+              "meanRank": 29.50772115665224,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "21/123/24",
+              "meanRank": 31.501663222434903,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "21/123/23",
+              "meanRank": 32.712121118042226,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 66
+            },
+            {
+              "policy": "12/213/43",
+              "meanRank": 33.11730727872199,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "12/132/24",
+              "meanRank": 34.101783116697646,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/132/21",
+              "meanRank": 35.98009044001307,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 50
+            },
+            {
+              "policy": "12/123/24",
+              "meanRank": 36.55001041454401,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 47
+            },
+            {
+              "policy": "12/132/23",
+              "meanRank": 36.72745279445641,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 47
+            },
+            {
+              "policy": "21/213/34",
+              "meanRank": 38.39050193586334,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 62
+            },
+            {
+              "policy": "21/123/21",
+              "meanRank": 38.3946971061115,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "12/213/34",
+              "meanRank": 39.014326912818696,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "12/123/23",
+              "meanRank": 39.23783657463672,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 53
+            },
+            {
+              "policy": "21/132/42",
+              "meanRank": 39.78679876109262,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 50
+            },
+            {
+              "policy": "21/132/41",
+              "meanRank": 40.35668486718775,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/132/21",
+              "meanRank": 41.43014663339281,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "21/123/42",
+              "meanRank": 42.84390941096581,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "21/123/41",
+              "meanRank": 43.4715197500961,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 60
+            },
+            {
+              "policy": "12/123/21",
+              "meanRank": 43.741002426673425,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "12/132/14",
+              "meanRank": 45.60229707021096,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/123/14",
+              "meanRank": 47.940871355826864,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 59
+            },
+            {
+              "policy": "12/132/12",
+              "meanRank": 49.037565175571146,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "12/132/41",
+              "meanRank": 49.52664740305301,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 56
+            },
+            {
+              "policy": "12/123/12",
+              "meanRank": 51.41009764834516,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/132/42",
+              "meanRank": 51.614805812500954,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/123/41",
+              "meanRank": 51.896624502345674,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 59
+            },
+            {
+              "policy": "12/132/13",
+              "meanRank": 52.471210418382434,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/123/42",
+              "meanRank": 53.933543355266906,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "12/123/13",
+              "meanRank": 54.53476115132361,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/132/43",
+              "meanRank": 57.424446575647124,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "21/132/32",
+              "meanRank": 57.74434806365685,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "12/132/32",
+              "meanRank": 59.210892540533465,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "21/123/43",
+              "meanRank": 59.44107654210044,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/123/32",
+              "meanRank": 59.83218190059501,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/123/32",
+              "meanRank": 61.19833638243335,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "12/132/31",
+              "meanRank": 63.41126554490644,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 66
+            },
+            {
+              "policy": "21/132/31",
+              "meanRank": 63.454911233652126,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/123/31",
+              "meanRank": 64.87827232593176,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "21/123/31",
+              "meanRank": 65.28244807827673,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            },
+            {
+              "policy": "12/132/43",
+              "meanRank": 65.3082710671549,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/123/43",
+              "meanRank": 66.84676734247367,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/132/34",
+              "meanRank": 69.02181183713121,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "21/132/34",
+              "meanRank": 69.43116946015407,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "12/123/34",
+              "meanRank": 70.3553335165992,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            },
+            {
+              "policy": "21/123/34",
+              "meanRank": 70.76794025156345,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            }
+          ],
+          "selectedVsRunner": {
+            "minGap": -0.0004727320591229045,
+            "maxGap": 0.0058734680863175015,
+            "medianGap": 0.0012703836499259324,
+            "p05Gap": -4.888688092563598e-05,
+            "p95Gap": 0.0034607992459534387,
+            "selectedWins": 0.9322823205071685,
+            "runnerWins": 0.06771767949283146,
+            "tied": 0.0
+          }
+        },
+        "extremePositive100To1000Step100": {
+          "points": 1000000,
+          "ranking": [
+            {
+              "policy": "21/213/14",
+              "meanRank": 1.0,
+              "top1Rate": 1.0,
+              "top3Rate": 1.0,
+              "worstRank": 1
+            },
+            {
+              "policy": "21/213/12",
+              "meanRank": 2.01095,
+              "top1Rate": 0.0,
+              "top3Rate": 1.0,
+              "worstRank": 3
+            },
+            {
+              "policy": "21/213/13",
+              "meanRank": 2.99934,
+              "top1Rate": 0.0,
+              "top3Rate": 0.99379,
+              "worstRank": 5
+            },
+            {
+              "policy": "21/213/24",
+              "meanRank": 4.52161,
+              "top1Rate": 0.0,
+              "top3Rate": 0.00236,
+              "worstRank": 7
+            },
+            {
+              "policy": "21/213/23",
+              "meanRank": 5.26124,
+              "top1Rate": 0.0,
+              "top3Rate": 0.00385,
+              "worstRank": 8
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 6.709914,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 11
+            },
+            {
+              "policy": "21/213/21",
+              "meanRank": 7.45251,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 9
+            },
+            {
+              "policy": "12/213/23",
+              "meanRank": 8.070313,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 16
+            },
+            {
+              "policy": "21/213/42",
+              "meanRank": 9.734197,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 15
+            },
+            {
+              "policy": "21/213/41",
+              "meanRank": 10.037998,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 16
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 10.195605,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 28
+            },
+            {
+              "policy": "12/213/14",
+              "meanRank": 12.218668,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 29
+            },
+            {
+              "policy": "12/213/12",
+              "meanRank": 14.681436,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 34
+            },
+            {
+              "policy": "12/213/41",
+              "meanRank": 14.855607,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 22
+            },
+            {
+              "policy": "21/132/14",
+              "meanRank": 16.492561,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 25
+            },
+            {
+              "policy": "12/213/42",
+              "meanRank": 16.750901,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 25
+            },
+            {
+              "policy": "12/213/13",
+              "meanRank": 16.802858,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 36
+            },
+            {
+              "policy": "21/123/14",
+              "meanRank": 18.120612,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 28
+            },
+            {
+              "policy": "21/132/12",
+              "meanRank": 19.839728,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 27
+            },
+            {
+              "policy": "21/213/43",
+              "meanRank": 21.307587,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 36
+            },
+            {
+              "policy": "21/213/32",
+              "meanRank": 21.815759,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 34
+            },
+            {
+              "policy": "21/132/13",
+              "meanRank": 21.857185,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 30
+            },
+            {
+              "policy": "21/123/12",
+              "meanRank": 22.040346,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 29
+            },
+            {
+              "policy": "12/213/32",
+              "meanRank": 22.849239,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 35
+            },
+            {
+              "policy": "21/123/13",
+              "meanRank": 23.994486,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 33
+            },
+            {
+              "policy": "21/213/31",
+              "meanRank": 26.492143,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 40
+            },
+            {
+              "policy": "12/213/31",
+              "meanRank": 26.547184,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 42
+            },
+            {
+              "policy": "21/132/24",
+              "meanRank": 28.773127,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 37
+            },
+            {
+              "policy": "21/132/23",
+              "meanRank": 29.640163,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 39
+            },
+            {
+              "policy": "21/123/24",
+              "meanRank": 31.396745,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 39
+            },
+            {
+              "policy": "21/123/23",
+              "meanRank": 32.279168,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 42
+            },
+            {
+              "policy": "12/213/43",
+              "meanRank": 32.892009,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/132/24",
+              "meanRank": 34.388017,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "21/132/21",
+              "meanRank": 35.791612,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 41
+            },
+            {
+              "policy": "12/123/24",
+              "meanRank": 36.457663,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 43
+            },
+            {
+              "policy": "12/132/23",
+              "meanRank": 37.029453,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 43
+            },
+            {
+              "policy": "21/123/21",
+              "meanRank": 37.791814,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 45
+            },
+            {
+              "policy": "21/213/34",
+              "meanRank": 38.30146,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/213/34",
+              "meanRank": 38.791799,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 66
+            },
+            {
+              "policy": "12/123/23",
+              "meanRank": 39.069099,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 45
+            },
+            {
+              "policy": "21/132/42",
+              "meanRank": 40.412162,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 50
+            },
+            {
+              "policy": "21/132/41",
+              "meanRank": 40.864242,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 51
+            },
+            {
+              "policy": "12/132/21",
+              "meanRank": 41.653112,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 52
+            },
+            {
+              "policy": "21/123/42",
+              "meanRank": 43.099777,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 52
+            },
+            {
+              "policy": "21/123/41",
+              "meanRank": 43.540218,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 53
+            },
+            {
+              "policy": "12/123/21",
+              "meanRank": 43.572763,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/132/14",
+              "meanRank": 45.82432,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 53
+            },
+            {
+              "policy": "12/123/14",
+              "meanRank": 47.668117,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 54
+            },
+            {
+              "policy": "12/132/12",
+              "meanRank": 49.332818,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 58
+            },
+            {
+              "policy": "12/132/41",
+              "meanRank": 50.174249,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/123/12",
+              "meanRank": 51.135225,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 61
+            },
+            {
+              "policy": "12/123/41",
+              "meanRank": 52.08279,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "12/132/13",
+              "meanRank": 52.500278,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "12/132/42",
+              "meanRank": 52.572007,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 55
+            },
+            {
+              "policy": "12/123/13",
+              "meanRank": 54.262993,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 64
+            },
+            {
+              "policy": "12/123/42",
+              "meanRank": 54.520185,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 57
+            },
+            {
+              "policy": "21/132/43",
+              "meanRank": 57.746276,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "21/132/32",
+              "meanRank": 58.350454,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "21/123/43",
+              "meanRank": 59.427822,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 64
+            },
+            {
+              "policy": "12/132/32",
+              "meanRank": 59.451659,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 63
+            },
+            {
+              "policy": "21/123/32",
+              "meanRank": 60.178507,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/123/32",
+              "meanRank": 61.216026,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 64
+            },
+            {
+              "policy": "12/132/31",
+              "meanRank": 63.36959,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 65
+            },
+            {
+              "policy": "21/132/31",
+              "meanRank": 63.917026,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/123/31",
+              "meanRank": 64.737561,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 67
+            },
+            {
+              "policy": "21/123/31",
+              "meanRank": 65.50605,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/132/43",
+              "meanRank": 65.900994,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 69
+            },
+            {
+              "policy": "12/123/43",
+              "meanRank": 67.27107,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 70
+            },
+            {
+              "policy": "12/132/34",
+              "meanRank": 69.381058,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "21/132/34",
+              "meanRank": 69.595182,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 71
+            },
+            {
+              "policy": "12/123/34",
+              "meanRank": 70.624812,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            },
+            {
+              "policy": "21/123/34",
+              "meanRank": 70.848479,
+              "top1Rate": 0.0,
+              "top3Rate": 0.0,
+              "worstRank": 72
+            }
+          ],
+          "selectedVsRunner": {
+            "minGap": 2.873562715954847e-05,
+            "maxGap": 0.004730987930598118,
+            "medianGap": 0.0013190167089787153,
+            "p05Gap": 0.00017972497093525776,
+            "p95Gap": 0.0030937232116266416,
+            "selectedWins": 1.0,
+            "runnerWins": 0.0,
+            "tied": 0.0
+          }
+        }
+      },
+      "defaultTop10": [
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "14"
+          },
+          "score": 9.107001929844568
+        },
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "12"
+          },
+          "score": 9.107572819692809
+        },
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "13"
+          },
+          "score": 9.10793149963403
+        },
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "24"
+          },
+          "score": 9.109526460914966
+        },
+        {
+          "policy": {
+            "word2": "12",
+            "word3": "213",
+            "word4": "24"
+          },
+          "score": 9.10978960911317
+        },
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "23"
+          },
+          "score": 9.110008182965826
+        },
+        {
+          "policy": {
+            "word2": "12",
+            "word3": "213",
+            "word4": "23"
+          },
+          "score": 9.110284641337895
+        },
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "21"
+          },
+          "score": 9.110645662906443
+        },
+        {
+          "policy": {
+            "word2": "21",
+            "word3": "213",
+            "word4": "42"
+          },
+          "score": 9.110777786598947
+        },
+        {
+          "policy": {
+            "word2": "12",
+            "word3": "213",
+            "word4": "21"
+          },
+          "score": 9.11091754748014
+        }
+      ],
+      "sameWinnerAllGrids": true
+    }
+  ],
+  "elapsedSeconds": 37.0
+}
