@@ -130,6 +130,20 @@ cr-m24-portfolio-test:
 cr-m24-portfolio-audit:
     pwsh -NoProfile -File tools/run_cr_m24_portfolio.ps1 -Mode Audit -Output research/.cache/cr-m24-portfolio-audit
 
+cr-lan-fixed phase="transfer":
+    python -X utf8 tools/explore_cr_lan_fixed.py --phase "{{phase}}"
+
+cr-lan-fixed-verify:
+    python -X utf8 tools/verify_cr_lan_fixed.py
+
+cr-lan-fixed-policy:
+    python -X utf8 tools/replay_cr_lan_policies.py
+    python -X utf8 tools/verify_cr_lan_fixed.py --policy-replay
+
+cr-lan-fixed-test:
+    python -X utf8 -m unittest discover -s tests -p test_cr_lan_fixed.py
+    node --max-old-space-size=6144 --test --test-concurrency=1 tests/cr-lan-fixed.test.mjs tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js
