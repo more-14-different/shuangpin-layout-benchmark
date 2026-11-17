@@ -168,6 +168,14 @@ cr-lan-zero-carriers:
     python -X utf8 tools/compare_cr_lan_zero_carriers.py
     python -X utf8 -m unittest discover -s tests -p test_cr_lan_zero_carriers.py
 
+lan-aeo-all:
+    node --max-old-space-size=8192 tools/enumerate_lan_aeo.js --family toned --output research/notes/2026-11-18-lan-aeo-toned.json
+    node --max-old-space-size=8192 tools/enumerate_lan_aeo.js --family untoned --output research/notes/2026-11-18-lan-aeo-untoned.json
+    python -X utf8 tools/complete_lan_aeo_comparison.py --phase toned-columns
+    node --max-old-space-size=8192 tools/score_lan_aeo_untoned_columns.js
+    python -X utf8 tools/complete_lan_aeo_comparison.py --phase assemble
+    python -X utf8 -m unittest discover -s tests -p test_lan_aeo_comparison.py
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js
