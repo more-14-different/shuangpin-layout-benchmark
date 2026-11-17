@@ -1,0 +1,260 @@
+{
+  "version": "cr-m24-portfolio-two-cycle-report-v1",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3070",
+    "vramMiB": 8192,
+    "systemMemoryGB": 64,
+    "os": "Windows 11"
+  },
+  "runtimeHours": 20.93,
+  "round": 40814,
+  "evaluations": 51095,
+  "cacheTotal": 50026,
+  "chains": 8,
+  "cyclesCompleted": 2,
+  "totalRestarts": 16,
+  "chainSteps": [
+    10204,
+    10204,
+    10204,
+    10204,
+    10203,
+    10203,
+    10203,
+    10203
+  ],
+  "bestByRoute": {
+    "speed": {
+      "champion": "47cbce5ae1",
+      "fullKey": "47cbce5ae1b9f67c7f3d92b18653c7a7f00580d245bc72344f78bd368d66792f",
+      "metrics": {
+        "ckt": 9.113665440709287,
+        "d": 2,
+        "daily": 119.46664129382486,
+        "dailyPinky": 0.07538389948813401,
+        "guard": 25,
+        "m": 23,
+        "pinky": 0.09032242331196652,
+        "pinkyTracks": [
+          0.06889274131271989,
+          0.07226155488233743,
+          0.09032242331196652,
+          0.06822487425513535
+        ],
+        "rightPinky": 0.07467829353966354,
+        "rightPinkyTracks": [
+          0.03419152916009419,
+          0.06878299220956209,
+          0.06605514393291578,
+          0.07467829353966354
+        ],
+        "verified": true
+      },
+      "seedBaseline": "29ce221cfe",
+      "deltaCkt": -0.00012887957134921635,
+      "deltaDaily": 0.0,
+      "structuralDiff": "zero-O moved from R to K (split zero-carrier)",
+      "runnerUps": [
+        {
+          "key": "29ce221cfe",
+          "ckt": 9.113794320280636,
+          "daily": 119.46664129382486,
+          "m": 22,
+          "guard": 24,
+          "d": 2
+        },
+        {
+          "key": "dfbf8086ae",
+          "ckt": 9.113968547914213,
+          "daily": 119.46664129382486,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "8df04395b5",
+          "ckt": 9.114386335526653,
+          "daily": 119.46664129382486,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "78a06cc202",
+          "ckt": 9.11469452089431,
+          "daily": 119.46664129382486,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "d91e517fc7",
+          "ckt": 9.11477519265491,
+          "daily": 119.46664129382486,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        }
+      ]
+    },
+    "balanced": {
+      "champion": "87de6cc69c",
+      "fullKey": "87de6cc69ca1753d4d03e1833dc8ffc2a886a316ff87b2aef556d83c014d8d31",
+      "metrics": {
+        "ckt": 9.119955263161566,
+        "d": 2,
+        "daily": 126.37062765066638,
+        "dailyPinky": 0.07538389948813401,
+        "guard": 24,
+        "m": 22,
+        "pinky": 0.0903242225637292,
+        "pinkyTracks": [
+          0.0805105995129855,
+          0.07387387155410143,
+          0.0903242225637292,
+          0.06834882400155708
+        ],
+        "rightPinky": 0.07465231417751043,
+        "rightPinkyTracks": [
+          0.033520508850985946,
+          0.07299231207191162,
+          0.06605697214195315,
+          0.07465231417751043
+        ],
+        "verified": true
+      },
+      "seedBaseline": "87de6cc69c",
+      "deltaCkt": 0.0,
+      "deltaDaily": 0.0,
+      "tradeoffChampion": {
+        "key": "0cfbd2058b",
+        "ckt": 9.120006048109701,
+        "daily": 126.58291412358322,
+        "note": "O-carrier split, higher daily by +0.212"
+      },
+      "runnerUps": [
+        {
+          "key": "0cfbd2058b",
+          "ckt": 9.120006048109701,
+          "daily": 126.58291412358322,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "667610a3fc",
+          "ckt": 9.12083189392039,
+          "daily": 126.58291412358322,
+          "m": 22,
+          "guard": 24,
+          "d": 2
+        },
+        {
+          "key": "8b6e7dd622",
+          "ckt": 9.1210607549509,
+          "daily": 126.37062765066638,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "f95ad3c26c",
+          "ckt": 9.121173516829707,
+          "daily": 126.58291412358322,
+          "m": 23,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "bbdcc9e2ce",
+          "ckt": 9.121963994349887,
+          "daily": 127.27262835468431,
+          "m": 22,
+          "guard": 24,
+          "d": 2
+        }
+      ]
+    },
+    "daily": {
+      "champion": "5e9230337b",
+      "fullKey": "5e9230337b006beab74c86244b4d3be001dd31f991f92ead1cc2c698fa02bb64",
+      "metrics": {
+        "ckt": 9.155868857643666,
+        "d": 2,
+        "daily": 131.70613298238544,
+        "dailyPinky": 0.068869241507678,
+        "guard": 24,
+        "m": 21,
+        "pinky": 0.0903242225637292,
+        "pinkyTracks": [
+          0.08373751719011498,
+          0.07287050236550693,
+          0.0903242225637292,
+          0.06830916271229785
+        ],
+        "rightPinky": 0.06580007866847143,
+        "rightPinkyTracks": [
+          0.05133425019221975,
+          0.06580007866847143,
+          0.04826026187525365,
+          0.06376968868023192
+        ],
+        "verified": true
+      },
+      "seedBaseline": "795c0eee49",
+      "deltaCkt": -0.0036964039069182775,
+      "deltaDaily": 0.5484683187102917,
+      "structuralDiff": "Rhyme group rearrangement across tone regions, firstKeys identical",
+      "maxDailyLayout": {
+        "key": "49a4fcf470",
+        "daily": 138.66299184846517,
+        "ckt": 9.411718093666149,
+        "m": 23,
+        "guard": 25,
+        "d": 2
+      },
+      "runnerUps": [
+        {
+          "key": "d23a47dbf9",
+          "ckt": 9.156810669361752,
+          "daily": 132.2711892220431,
+          "m": 21,
+          "guard": 24,
+          "d": 2
+        },
+        {
+          "key": "85076417d7",
+          "ckt": 9.159284028206917,
+          "daily": 131.70613298238544,
+          "m": 22,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "965d24e431",
+          "ckt": 9.15982103723338,
+          "daily": 132.74927185032706,
+          "m": 21,
+          "guard": 24,
+          "d": 2
+        },
+        {
+          "key": "c97d8e64f5",
+          "ckt": 9.159903360392658,
+          "daily": 131.70613298238544,
+          "m": 22,
+          "guard": 25,
+          "d": 2
+        },
+        {
+          "key": "78144056c9",
+          "ckt": 9.159929093753377,
+          "daily": 131.70613298238544,
+          "m": 22,
+          "guard": 25,
+          "d": 2
+        }
+      ]
+    }
+  }
+}
