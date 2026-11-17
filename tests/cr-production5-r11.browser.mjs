@@ -4,8 +4,15 @@ import {readFileSync,mkdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 const require=createRequire(import.meta.url),{chromium}=require('playwright');
-const expected=JSON.parse(readFileSync('research/config/cr-production5-r11.json','utf8')).expected;
-const audits=JSON.parse(readFileSync('research/notes/2026-11-17-cr-production5-r11-columns.json','utf8')).schemes;
+const lan=process.argv.includes('--lan-f19');
+const json=p=>JSON.parse(readFileSync(p,'utf8'));
+const lanLayout=lan?json('research/notes/2026-11-17-cr-lan-f19-stability-finalists.json').layouts[0]:null;
+const lanPolicy=lan?json('research/notes/2026-11-17-cr-lan-f19-stability-constrained-robustness.json').results[0]:null;
+const expected=lan?{'CR-LAN-f19a0ad1dc':{cktV51:lanPolicy.selectedScore,wordAuxiliaryPolicy:lanPolicy.selectedPolicy,
+  memoryLower:lanLayout.metrics.m,memoryGuard:lanLayout.metrics.guard,daily:lanLayout.metrics.daily}}:
+  json('research/config/cr-production5-r11.json').expected;
+const audits=json(lan?'research/notes/2026-11-17-cr-lan-f19-r11-columns.json':
+  'research/notes/2026-11-17-cr-production5-r11-columns.json').schemes;
 const ids=Object.keys(expected);
 const browser=await chromium.launch({executablePath:process.env.EDGE_PATH||chromium.executablePath(),headless:true});
 const page=await browser.newPage({viewport:{width:1650,height:1250}}),errors=[];
@@ -18,7 +25,7 @@ const read=table=>page.locator(`table[data-ux-table="${table}"]`).evaluate(table
       text:cell.textContent,metric:!!cell.querySelector('[data-toned-metric]'),
       value:cell.hasAttribute('data-ux-value')?JSON.parse(cell.dataset.uxValue):null}]))}));
 }).then(rows=>rows.filter(r=>ids.includes(r.id)));
-const validate=(rows,count=5)=>{
+const validate=(rows,count=ids.length)=>{
   assert.equal(rows.length,count);
   for(const row of rows){assert.equal(row.count,row.headers.length,row.id);
     for(const [label,cell] of Object.entries(row.cells)){
@@ -31,19 +38,20 @@ try{
   await page.goto(pathToFileURL(resolve('a7_CKT_R11.html')).href,{timeout:120000});
   await page.waitForFunction(()=>window.App7?.ready,null,{timeout:120000});
   const registry=await page.evaluate(()=>snowJiandaoSchemes().map(n=>n.id));
-  assert.equal(registry.length,17);assert.equal(new Set(registry).size,17);
+  assert.ok(registry.length>=17);assert.equal(new Set(registry).size,registry.length);
+  for(const id of ids)assert.equal(registry.filter(value=>value===id).length,1);
   assert.equal(registry.filter(id=>id==='CR-GPU-29ce221cfe').length,1);
   await page.locator('#tabs [data-action="nav:scheme"]').click();
   for(const id of ids){
     const e=expected[id],n=audits[id],selection=n.publication.policySelection;
     assert.ok(Math.abs(n.ckt.v51.score-e.cktV51)<1e-9,id);
-    assert.equal(policy(n.ckt.v51.policy),'21/231/14');
+    assert.equal(policy(n.ckt.v51.policy),policy(e.wordAuxiliaryPolicy));
     await page.locator('#nf6SchemeQuery').fill(id);await page.locator('#nf6SchemeList').selectOption(id);
     await page.waitForFunction(id=>window.App7.current().id===id,id);
     assert.equal(await page.locator('#kpis [data-toned-kpi="A7E-v5"]').textContent(),n.columns.ensemble.v5.toFixed(4));
     assert.equal(await page.locator('#kpis [data-toned-kpi="声韵记忆项 M"]').textContent(),e.memoryLower+' / '+e.memoryGuard);
     const panel=page.locator('#snowJiandaoPolicyStability');
-    assert.equal(await panel.locator('[data-native-word-policy]').textContent(),'21/231/14');
+    assert.equal(await panel.locator('[data-native-word-policy]').textContent(),policy(e.wordAuxiliaryPolicy));
     assert.equal(await panel.locator('[data-stable-ckt]').textContent(),e.cktV51.toFixed(9));
     assert.equal(await panel.locator('[data-policy-runner]').textContent(),policy(selection.runnerPolicy));
     assert.equal(await panel.locator('[data-policy-rank-gap]').textContent(),selection.meanRankGap.toFixed(9));
@@ -74,7 +82,7 @@ try{
     await page.locator('#svgbox').screenshot({path:`research/.cache/cr-production5-r11-20261117/${id}-keyboard.png`});
   }
   await page.locator('#tabs [data-action="nav:benchmark"]').click();
-  await page.locator('#uxQuery').evaluate(n=>{n.value='CR-GPU';n.dispatchEvent(new Event('input',{bubbles:true}))});
+  await page.locator('#uxQuery').evaluate((n,q)=>{n.value=q;n.dispatchEvent(new Event('input',{bubbles:true}))},lan?'f19a0ad1dc':'CR-GPU');
   let rows=await read('benchmark');validate(rows);
   for(const id of ids){const n=audits[id],row=rows.find(r=>r.id===id);
     assert.equal(row.cells['CKT v5.1 · 生产辅序'].value,n.ckt.v51.score);
@@ -95,7 +103,7 @@ try{
   for(const id of ids){const m=audits[id].columns.completion.independent.v1.keytao.word;
     assert.equal(rows.find(r=>r.id===id).cells['键道·二字词 T(τ) ms'].value,m.completionUpperMs+tau*m.p2);}
   await page.locator('#tabs [data-action="nav:benchmark"]').click();
-  await page.locator('[data-action="collision"]').click();rows=await read('four-code-collision');validate(rows,25);
+  await page.locator('[data-action="collision"]').click();rows=await read('four-code-collision');validate(rows,ids.length*5);
   await page.locator('#uxSubnav [data-r9-bench="macro"]').click();
   await page.locator('#r9MacroCorpus').selectOption('daily');
   await page.locator('#r9MacroVariant').selectOption('native-punctuation');
@@ -105,5 +113,5 @@ try{
     await page.locator(`[data-snow-macro-heat="${id}"]`).click();
     assert.match(await page.locator('#r9MacroSVG svg').getAttribute('aria-label'),new RegExp(id));}
   assert.deepEqual(errors,[]);
-  console.log('Five stable-policy publications: KPIs, exact filtering, colors, combined keyboards, all heatmaps, tables, CSV and live controls: ok');
+  console.log(`${ids.length} stable-policy publications: KPIs, exact filtering, colors, combined keyboards, all heatmaps, tables, CSV and live controls: ok`);
 }finally{await browser.close()}

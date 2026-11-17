@@ -52,8 +52,10 @@ def make_fixture(source, baseline, decomposition, ident, *, labels=LABELS, sourc
         if keys != {layout['firstKeys'][atom['name']]}:
             raise ValueError(f'{ident}: onset metadata/code mismatch for {atom["name"]}')
     audit = layout['memoryAudit']
-    lower = 5 + audit['ordinaryD'] + audit['sourceRhymeColumnMergeRules'] + audit['toneRegionMergeLower']
-    guard = 5 + audit['ordinaryD'] + audit['sourceRhymeColumnMergeLinks'] + audit['toneRegionMergeLower']
+    onset_rules = (audit['retroflexRules'] + audit['zeroCarrierRules'] + audit['headDeletionRules']
+                   + len(audit['carrierMoves'])) if audit.get('version') == 'M-T1-derived-v1' else 5
+    lower = onset_rules + audit['ordinaryD'] + audit['sourceRhymeColumnMergeRules'] + audit['toneRegionMergeLower']
+    guard = onset_rules + audit['ordinaryD'] + audit['sourceRhymeColumnMergeLinks'] + audit['toneRegionMergeLower']
     if (lower, guard) != (audit['memoryLower'], audit['memoryGuard']):
         raise ValueError(f'{ident}: memory formula mismatch')
     fixture['layoutId'] = ident
@@ -62,7 +64,7 @@ def make_fixture(source, baseline, decomposition, ident, *, labels=LABELS, sourc
         description=layout['description'], source=str(source_path.relative_to(ROOT)).replace('\\', '/'),
         sourceSha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
         memoryAudit=audit,
-        memoryDefinition='M-T1 root repartition: 5 + ordinary D + multi-root group rules/links + tone-region merges',
+        memoryDefinition=layout.get('memoryDefinition', 'M-T1 root repartition: 5 + ordinary D + multi-root group rules/links + tone-region merges'),
         rhymeGroups=layout['rhymeGroups'])
     if 'annealKey' in layout:
         fixture['publication']['annealKey'] = layout['annealKey']

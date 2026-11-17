@@ -1,0 +1,302 @@
+{
+  "version": "cr-lan-f19-r11-verification-v1",
+  "id": "CR-LAN-f19a0ad1dc",
+  "htmlSha256": "7072d6aed58648565fe11570f86087063395ac69e4faef2baf5880104c3a23c4",
+  "auditSha256": "ed1b82a1799121fc82ebb53b532138515b7f77737abdbba8c21e5135009987f4",
+  "fixtureSha256": "89f2d8034150ed7f04560c56125160898bd4e913b797c817815a5f4f73df31f5",
+  "wordAuxiliaryPolicy": {
+    "word2": "21",
+    "word3": "213",
+    "word4": "14"
+  },
+  "cktV51": 9.107001929844568,
+  "daily": 121.73336093086186,
+  "filterRows": 289644,
+  "memory": {
+    "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+    "lower": 24,
+    "guard": 25,
+    "upper": 25,
+    "D": 2,
+    "F": 0,
+    "audit": {
+      "version": "M-T1-derived-v1",
+      "retroflexRules": 3,
+      "zeroCarrierRules": 2,
+      "ordinaryMoves": [
+        {
+          "name": "k",
+          "key": "P"
+        },
+        {
+          "name": "l",
+          "key": "E"
+        }
+      ],
+      "carrierMoves": [],
+      "headDeletionRules": 1,
+      "sourceRhymeColumnMergeRules": 7,
+      "sourceRhymeColumnMergeLinks": 8,
+      "toneRegionMergeLower": 9,
+      "regionMerges": [
+        {
+          "row": 0,
+          "groups": 10,
+          "usedKeys": [
+            "R",
+            "Y",
+            "Q",
+            "T",
+            "W",
+            "E",
+            "P"
+          ],
+          "links": 3
+        },
+        {
+          "row": 1,
+          "groups": 10,
+          "usedKeys": [
+            "S",
+            "H",
+            "L",
+            "K",
+            "D",
+            "F",
+            "G",
+            "J"
+          ],
+          "links": 2
+        },
+        {
+          "row": 2,
+          "groups": 10,
+          "usedKeys": [
+            "X",
+            "Z",
+            "N",
+            "C",
+            "M",
+            "B"
+          ],
+          "links": 4
+        }
+      ],
+      "groups": [
+        {
+          "roots": [
+            "a"
+          ],
+          "keys": [
+            "R",
+            "S",
+            "X"
+          ]
+        },
+        {
+          "roots": [
+            "ai",
+            "ang"
+          ],
+          "keys": [
+            "Y",
+            "H",
+            "Z"
+          ]
+        },
+        {
+          "roots": [
+            "an",
+            "er"
+          ],
+          "keys": [
+            "Q",
+            "L",
+            "N"
+          ]
+        },
+        {
+          "roots": [
+            "ao",
+            "eng",
+            "v"
+          ],
+          "keys": [
+            "T",
+            "K",
+            "C"
+          ]
+        },
+        {
+          "roots": [
+            "e",
+            "ei"
+          ],
+          "keys": [
+            "W",
+            "D",
+            "M"
+          ]
+        },
+        {
+          "roots": [
+            "en",
+            "ou"
+          ],
+          "keys": [
+            "E",
+            "S",
+            "N"
+          ]
+        },
+        {
+          "roots": [
+            "i"
+          ],
+          "keys": [
+            "R",
+            "F",
+            "B"
+          ]
+        },
+        {
+          "roots": [
+            "n",
+            "o"
+          ],
+          "keys": [
+            "P",
+            "G",
+            "B"
+          ]
+        },
+        {
+          "roots": [
+            "ng"
+          ],
+          "keys": [
+            "E",
+            "G",
+            "M"
+          ]
+        },
+        {
+          "roots": [
+            "ong",
+            "u"
+          ],
+          "keys": [
+            "P",
+            "J",
+            "M"
+          ]
+        }
+      ],
+      "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+    }
+  },
+  "preservedPayloadFields": {
+    "version": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "pinyin": "f1178f139bedf92a1f874b495833d79da546a4caaf227fdff5d9fca88fb1dbab",
+    "base": "57022315cf53812c376dafafbace8fb026701e0b5a62a2bf158267822222de5e",
+    "characters": "3c41c253d2e1d574c1140b11c081ebe44baeadb8cb4188594f7816d2657b7320",
+    "readings": "0ddbef28653f693c3cff489f628745186793d78d887216a934b7b22f183afe71",
+    "words": "6f96c29ed257846e115e4b528dd1d5f15059c7fc1d754ee4319f815afdeabb69",
+    "shapes": "024dba7f9ebb2f38cab680f044a1f3297e113bce91105a038b2367251f7a9c7a",
+    "native": "e34bf04d3bb28e8e2adc327d848741adaa172e9f553a82fea6ec336710ea5959",
+    "entries": "2b1dbf9ddf0ec34c1e0d68ed88d421e84ab4c7786dc9b7f22c0e16367f3d0112",
+    "reference": "624e718e8a89f4fe6b765c91df8f81b5bba8a93c5d04728fac01435bdbe8bf72",
+    "audit": "ad17ee401273db8e88b5f36b867683691c8c15dbd66410cf1c49fe332b04acc4",
+    "corpusAudit": "de8a689eefe0a47d175a6464e15b0511d15a6a6529f5d9a6430694c20ef64d21",
+    "sourceAudit": "01a10fa31bc4f12a14ef138077dd2a38ea0fb6602fca5b91d1c66b9b1c48e968",
+    "contracts": "212532482597b3f7aa3d2b9fd7e4d82d2065cc83c0b49e37e8b63f7906c0eb0f",
+    "nextgen": "cc496dc94f491af2581def4879e835a400d1691607c6c5f3bc9a4a8267c700b6",
+    "quick": "6fee927bfc2b2c2607dcf75d27f03f5f09685ae15363462aa834c5bc76a41d8c",
+    "ensemble": "69a54d717cfaaee1dbf03b4402e955be2d062e66ee14df433566b41e4632beb4",
+    "ensembleV2": "b67d78b7e8a7a9500e117301a9b7f9270c1f111040951f79e6b258bf6b349c11",
+    "ensembleV3": "35867b2bba0fcb072e5e137d1b28bf5711ff556fe8e5a11bb8846d28d11084d0",
+    "ensembleV4": "dcc98aa950c14dc597c6e343d692bd6eac1c95ce3af75cede030290bb0294a75",
+    "logicUniformity": "e5027667671a0ae2ee96b0a3009c6effa9d1824fd6d9f51ae0a899b05704a7e3",
+    "logicalPhase": "00f10fcb4cf0c80da6db531b56812858b697b3e3b6621c46b9da53a07f61a125",
+    "ensembleV5": "f901a4755be950ce00f790f20eefcf87e95d9436e88e352c274a5093ac7378fa",
+    "ckt": "55a386cccc63a403a9000c9466773b88934ec58932a5dbccb922f459f12d1dd4",
+    "fairCKT": "2fd1990ba2a516a401470751f5e3737f62451ace7687bcae446175c0967b19de",
+    "memorySearch": "9fe66f0fcc1fa7558849afdd872bdd5b19b714d75bc2c2a488d1cf8c1e7a44ef",
+    "memoryFrontier": "d9b0852ac6db5e2f254ede526ab3955c119226e54c7da7ad3f450afc468ba89c",
+    "lite": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+    "logicRegroupingV3": "ddc496543aee5e1a546b498e98422fb25fb709501f4e3265642db51f00a0ca11",
+    "boundedProbeV4": "39c5c2bdea8a99f635e1c05a54b26d88672e247347ceb5d60769cec6ebf5d07b",
+    "finalRound": "cd073052efafb16094fdc3a6bb6493427793fc56f6b748d80f4adc3c815792f0",
+    "finalSelection": "e8bf0d03bb919a13b8b8ff21af1c83f50e42d7d2ea72a2b52668aab229af9d69",
+    "singleOnsetRevision": "d05b476fba116cd55a2b9cd002b7f1c9575ba596cfe0572dbfea083ac00775aa",
+    "carrierSwapRevision": "4db902ac1a87d4b74cc1f1ab1da267047d508aabf7e1b327dae53e47c6c6c87b",
+    "carrierJointRevision": "8616cb85ec0cd008e2afbb322376559a63439ccdb4a02d7c01d5a5083b97f511",
+    "comparisonBaselines": "d876613939dd637e23220a191642139fba62bfb330cc60cd2f8c5d393070e950",
+    "nf4Integration": "c589b103f364e7159e18c824d13a1bb1b86f37626c188c21d0abdec1c8a05463",
+    "r2HistoricalS005": "9e8b299fbcfac01eaad322ca7818471d09075e32cd10bf3b522774558e28a625",
+    "r2Research": "2c83cd9f2041d7564074e903eb943ef9572a6e10ffe02462d0ded6fa5d5c7529",
+    "r3Research": "77ad8b3539ec977260ee26c2deb29346a30f120a85311015c9b4f0aef20e60a9",
+    "r4Research": "bce25aba330963a24c1394b5e72d1ce4163c90d2aaef191ffd08ac53b062cc35",
+    "r5Research": "b35f07fa1f1ca0ab85aab40668f82b4d6eb8b76dec64087aaaf2962ac24b82cd",
+    "r5LoadSummaries": "099b6308ce744ece170738b5923fe6107b22102fd4497b57d9a55b4cc2fb7493",
+    "r6LoadSummaries": "f199bcf2c99ca927d4be06259361745e4181d1e39a0a592baef5c5ecbce58d00",
+    "r6Research": "9b74e041651d89d4bcd297930d452265b14b2c80771726cc9a9b2e41f9d8cd3e",
+    "r7LoadSummaries": "ffd794903d8815e61a478e993e121695f336907e8b2a302bbd7c0615dc729e87",
+    "r7Research": "c19fa6fe53952d731460864364e4ff9f1d47b0b4516e2197dd6b001005798aef",
+    "r8LoadSummaries": "6eb405ed7f17936629dc28de1bb204d2072fcea2fee52a993ba22034b289069e",
+    "ensembleV6": "303ed08f98b58d74656874ddef3987481320e6dada101bff6f612f7be9090e40",
+    "r8PairMetrics": "55a97516c6b07b7444943fe1cbbacb79770f7e22904ee4c6c20be0efe0ba7d6f",
+    "r8ModelAudit": "e7d034c9ee4c0bd32202f4cd47f4629e604fd4cad1117872cdaa90e0215a0822",
+    "r8Research": "210b05b8216a8e0afbe2da87b08e6800272a06cd119ba3da6783a65d2c12dd82",
+    "r9LoadSummaries": "e4483459af05c7cb5e08ed03efd9aa0a53b4e32a28b521e9924c2fdc84d32820",
+    "r9PairMetrics": "91fab4ffac566d4a43c71d1e3c7eae4a28de32f50ed6ec03fbc5207101b8874c",
+    "r9ModelAudit": "e7d034c9ee4c0bd32202f4cd47f4629e604fd4cad1117872cdaa90e0215a0822",
+    "r9Research": "590eb3368d30facf9d788b4aa2539f8707465efbac7befc1d49f36b1baa7557a",
+    "macroxue": "b09f42d4c908ba90b281a49ba07b16dacf5b18986e7f10f4d0f7ec52e93f213d",
+    "r10LoadSummaries": "0a493b6c09f9c019143dc4807461f57b9253ab73f6c3371fd41778ce2fb8d747",
+    "r10PairMetrics": "3007fd1b5e24829dae0e8739b11f9a1935a70a1cdc80e79fa726a6032dcff4d6",
+    "r10ModelAudit": "e7d034c9ee4c0bd32202f4cd47f4629e604fd4cad1117872cdaa90e0215a0822",
+    "r10Research": "1f94c17eb9de176f1ec7390fe2226d523d55086535d50f33c7bddb3a9451a384",
+    "r10Eligibility": "e35183624c429798a88db2c429628587146d1e17e776e1138a5b802339c32da7",
+    "r10EligibilityAudit": "d32a37180a7b97b052259637c88c6c1b45fcc2c4572092030308a32a3b01385f",
+    "r11LoadSummaries": "e4483459af05c7cb5e08ed03efd9aa0a53b4e32a28b521e9924c2fdc84d32820",
+    "r11PairMetrics": "91fab4ffac566d4a43c71d1e3c7eae4a28de32f50ed6ec03fbc5207101b8874c",
+    "r11ModelAudit": "e7d034c9ee4c0bd32202f4cd47f4629e604fd4cad1117872cdaa90e0215a0822",
+    "r11Research": "ba559f675fb8af3e06530d9c0eae94303e00ff4c0c09b78880fed8644b57eba1",
+    "r11Eligibility": "e35183624c429798a88db2c429628587146d1e17e776e1138a5b802339c32da7",
+    "r11EligibilityAudit": "93d3fb23f8de84f5a118e7a73dc87d34263f4e3cc1283c795425a178cd5a840f",
+    "fourCodeCollisionBenchmark": "81ef73eabd7d695dea723a6be804f7a1cfd42df3c36f73ba08cd0c6548dac941",
+    "bPathBenchmark": "44c8c6fa044984aa0d09cda697726038e6192da828d6391688f4acb7bb40a77f",
+    "completionB": "fdb2380cdb037cbe29b22bea2402e93d72b93380b40c54dfb2986454d2949028",
+    "completionBFixed": "6a6783ea85d080ea1bd1b23eb3a85ff8638e63ad2ebd08bdfe859ca466c91fa1",
+    "bPathBenchmarkLegacy": "8e6c0cc535b3a2a48e6ef09fa9c38501abcd482785edbce4cb640fb2fc7989f5",
+    "cktV2": "f6e381a74de9406192de2a3f01bda92677fd381a713864b5ecffe7017e764ff3",
+    "completionBV2": "88240d4e3fd74ca8c8ba1435f1b11e030a7ea71dcfa0edc0e13664d6f27669c8",
+    "completionBV3": "c2ada385d874c35b0d1deabf9296f33505e6a7944e70220c4ac24861b7590928",
+    "completionBV4": "58485cacf8da824b93eed54465da5aa77982df6c64c32df0b51a195b3a3e537f",
+    "tonedFilterRowPool": "ab2fa00212d0092f066c298a5cdc11c915cb081e7dad7f5d6a7969d4c8a39fb8"
+  },
+  "preservedResearch": {
+    "CR0-0374": "679ba5283da29e9a385dbb5e29da32c3f03220a812f934a02dbeb1fb529cb0d5",
+    "CR1-0004": "13ba402da9a7640e7b591e09c233988ef4e21e82bcc5e4278e1881c88caf9a5a",
+    "CR1-0009": "4992d9fe9b3bacf2b40b9ab00bde070bbceb0c77178764ee1d647248026a2fe9",
+    "CR1-1036": "df31fd2be84ac1188460dc7a40adf1dfa5259d16812338f4d66bfde16ff2981a",
+    "T2126-QEMPTY-8890382": "fed42a69e9b6279756375c0e92cb22c75f478576f9ea01132c2e0159ab12b6f3",
+    "T2126-FULL26-8871530": "3b8acb13d3243b192a92637e8251d602e776fd12994156c152296f089f5f0d26",
+    "CR-GPU-c42359003b": "8433c54bcfc950597a4de89d60ee39c07ce1e8f8c474ad92d3266a76acfb9161",
+    "CR-GPU-579ec1d473": "97da9354de7065aa295899b5969e9e0842acab1bd00f3286da44c12c637ef72e",
+    "CR-GPU-f0ae939a38": "9d8ebcafe07420cbe8ad65daecd27daef1f10f3f1fe2bef6e3f287ba82919d37",
+    "CR-GPU-3d3dcbafc0": "3aa1cb16eccfb617a364d842304611a9e952027c0efc5236c85a173dfaf19122",
+    "CR-GPU-0a4ee7fb52": "3a0703f998ec28023989c58af418173d85f68f5d1aa5c8a9525f4b0172eb59a2",
+    "CR-GPU-87de6cc69c": "3999070301aa12039b9120675dcba2bae1a49076d3988d66fbee4c167f3f0dcd",
+    "CR-GPU-667610a3fc": "6f43fb1d64fbc124347c82ced26a974300799777d60c5e9a666a345c3aba93a2",
+    "CR-GPU-29ce221cfe": "63bf51faac17068c885c808d26874cdec56da49e3a175c01b46c76c971c687f5",
+    "CR-GPU-6a384d9d0d": "e9712f55725ea4a4d0eb0724c65a13c759ba77f82448d1accb375939deeab6c0",
+    "CR-GPU-795c0eee49": "07f64449d320dd2d7568a1a838345dbbce6c176bcb6acca0fc9915ed03fa7faa",
+    "T2126-POLISHED-8832091": "d538093388224ae42be1e4e58be51fa1d5b67c7625b39491fb13be2f170a6a61",
+    "T2126-ANNEAL-8842639": "fd1e08e0d0731255eed68fe17d65c211c5d3e96339050ef36b8a7ff169248713",
+    "T2126-QEMPTY-ANNEAL-8879093": "29a698b7cebbf35b0a80cea236bf0d2ec76f3fe490b791ea5357a667dde18c77",
+    "T2126-QEMPTY-SWAP-8918781": "fe5bafb6d72c82ddd1fbd7038880f841eb8809fcc386643e0757cc1163619855"
+  },
+  "otherSchemesUnchanged": true
+}

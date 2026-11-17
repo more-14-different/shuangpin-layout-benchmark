@@ -17,7 +17,8 @@ LABELS = {'CR-GPU-f0ae939a38':'带调键道 · 均衡精修 · 稳定辅序',
 
 
 def stable_source(bundle, robust, components, space, *, labels=LABELS,
-                  layout_path=LAYOUTS, robust_path=ROBUST, components_path=COMPONENTS):
+                  layout_path=LAYOUTS, robust_path=ROBUST, components_path=COMPONENTS,
+                  memory_budget=(22,24)):
     if len(robust['results']) < len(labels):
         raise ValueError('requires complete stability audits for every requested layout')
     reference = robust['reference']
@@ -27,7 +28,7 @@ def stable_source(bundle, robust, components, space, *, labels=LABELS,
             raise ValueError('stability source hash mismatch: '+key)
     layouts, references = [], {}
     for ident in labels:
-        prefix = ident.removeprefix('CR-GPU-')
+        prefix = ident.removeprefix('CR-GPU-').removeprefix('CR-LAN-')
         matches = [row for row in bundle['layouts'] if row['key'].startswith(prefix)]
         if len(matches)!=1:
             raise ValueError(ident+': missing/ambiguous layout')
@@ -45,7 +46,7 @@ def stable_source(bundle, robust, components, space, *, labels=LABELS,
         if checked['selectedRank'] != checked['pooledRanking'][0] or checked['runnerRank'] != checked['pooledRanking'][1]:
             raise ValueError(ident+': inconsistent stability ranking')
         state=layout['state'];memory=space.memory(state)
-        if space.key(state)!=layout['key'] or not memory or memory['d']>2 or memory['m']>22 or memory['guard']>24:
+        if space.key(state)!=layout['key'] or not memory or memory['d']>2 or memory['m']>memory_budget[0] or memory['guard']>memory_budget[1]:
             raise ValueError(ident+': invalid state or budget')
         for field,value in dict(memory,**space.daily(state)).items():
             if abs(value-layout['metrics'][field])>1e-9:

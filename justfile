@@ -155,6 +155,15 @@ cr-lan-f19-stability-rank:
     $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --input research/notes/2026-11-17-cr-lan-f19-stability-auxiliary.json --output research/notes/2026-11-17-cr-lan-f19-stability-robustness.json
     $env:OPENBLAS_NUM_THREADS='2'; $env:OMP_NUM_THREADS='2'; python -X utf8 tools/rank_cr_toned_stable_policies.py --constrained --input research/notes/2026-11-17-cr-lan-f19-stability-auxiliary.json --output research/notes/2026-11-17-cr-lan-f19-stability-constrained-robustness.json
 
+cr-lan-f19-benchmark:
+    python -X utf8 tools/integrate_cr_lan_f19_r11.py
+    node tools/sync_keymap_link_colors.js
+    node --max-old-space-size=6144 tools/verify_cr_lan_f19_r11.js
+
+cr-lan-f19-benchmark-test:
+    python -X utf8 -m unittest discover -s tests -p test_cr_lan_f19_r11.py
+    node tests/cr-production5-r11.browser.mjs --lan-f19
+
 cr-production5-benchmark:
     python -X utf8 tools/integrate_cr_production5_r11.py
     node tools/sync_keymap_link_colors.js
