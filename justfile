@@ -3,6 +3,15 @@ set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 ckt-long-export python="python":
     & "{{python}}" -X utf8 tools/export_ckt_long_error_profile.py
 
+ckt-block-export python="python":
+    & "{{python}}" -X utf8 tools/export_ckt_long_error_profile.py --all-roles --output research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json
+
+ckt-block-audit samples="100000":
+    node --max-old-space-size=6144 tools/audit_ckt_block_error.js --samples "{{samples}}"
+
+ckt-block-test:
+    node --test tests/ckt-block-error.test.mjs tests/ckt-long-continuation.test.mjs tests/ckt-v4-model.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
+
 ckt-long-audit samples="100000":
     node --max-old-space-size=6144 tools/audit_ckt_long_continuation.js --samples "{{samples}}"
 

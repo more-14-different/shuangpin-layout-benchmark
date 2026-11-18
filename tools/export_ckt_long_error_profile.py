@@ -32,7 +32,7 @@ def fingerprint(snapshot):
     return h.hexdigest()
 
 
-def export(cache, output):
+def export(cache, output, all_roles=False):
     cache.mkdir(parents=True, exist_ok=True)
     upstream = cache/'upstream'
     for name, expected in SOURCES.items():
@@ -74,33 +74,38 @@ def export(cache, output):
         next_features.append(((lookup-ns['muN'][i])/ns['sdN'][i], '(b,n)' in name))
     tables = {}
     max_feature_difference = 0
-    for role,dimensions in [(4,4),(5,3)]:
+    role_axes = {0:'ab',1:'abn',2:'pab',3:'abn',4:'pabn',5:'pab'}
+    role_names = ['L2i1','L3i1','L3i2','L4i1','L4i2','L4i3']
+    for role in (range(6) if all_roles else [4,5]):
+        axes_names = role_axes[role]
+        dimensions = len(axes_names)
         shape = [30]*dimensions
         values = np.empty(30**dimensions,dtype='<f4')
         for start in range(0,len(values),16384):
             stop = min(start+16384,len(values))
-            axes = np.unravel_index(np.arange(start,stop),shape)
-            p_,a,b = axes[:3]
-            n = axes[3] if role == 4 else np.full(stop-start,30)
+            axes = dict(zip(axes_names,np.unravel_index(np.arange(start,stop),shape)))
+            empty = np.full(stop-start,30)
+            p_,a,b,n = [axes.get(k,empty) for k in ['p','a','b','n']]
             features = np.zeros((stop-start,140),dtype=float)
             for offset,indices in [(0,p_),(31,a),(61,b),(91,n)]:
                 features[np.arange(stop-start),offset+indices] = 1
             features[:,122:126] = bb[b]
             features[:,126:131] = ab[a,b]
-            features[:,131:133] = pa[p_,a]
-            if role == 4:
+            if 'p' in axes_names:
+                features[:,131:133] = pa[p_,a]
+            if 'n' in axes_names:
                 for j,(lookup,is_bn) in enumerate(next_features):
                     features[:,133+j] = lookup[b if is_bn else a,n]
             features[:,137:140] = ns['ROLE_IND'][role]
             # Independent upstream named-feature path validates every block boundary.
             for row in {0,stop-start-1}:
-                expected = ns['_feat_by_name'](letters[p_[row]],letters[a[row]],letters[b[row]],
-                    letters[n[row]] if role == 4 else '',role)
+                expected = ns['_feat_by_name'](letters[p_[row]] if 'p' in axes_names else '',
+                    letters[a[row]],letters[b[row]],letters[n[row]] if 'n' in axes_names else '',role)
                 max_feature_difference = max(max_feature_difference,float(np.max(np.abs(features[row,122:]-expected))))
             if max_feature_difference > 1e-10:
                 raise ValueError('vectorized feature mismatch')
             values[start:stop] = ns['XGB_ERR'].predict_proba(features)[:,1]
-        tables['L4i2' if role == 4 else 'L4i3'] = dict(shape=shape,base64=base64.b64encode(values.tobytes()).decode())
+        tables[role_names[role]] = dict(shape=shape,base64=base64.b64encode(values.tobytes()).decode())
         print('exported',role,len(values),flush=True)
     profile = dict(version='ckt-long-error-profile-v1',keys=snapshot['keys'],upstreamCommit=PIN,
         snapshotFingerprint=fingerprint(snapshot),errorRecoveryMs=snapshot['errorRecoveryMs'],
@@ -118,5 +123,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--cache',type=Path,default=ROOT/'research/.cache/ckt-long-code-audit-20261118')
     parser.add_argument('--output',type=Path,default=ROOT/'research/.cache/ckt-long-code-audit-20261118/error-profile.json')
+    parser.add_argument('--all-roles',action='store_true',help='Also export two/three/four-key boundary roles for block-success composition')
     args = parser.parse_args()
-    export(args.cache,args.output)
+    export(args.cache,args.output,args.all_roles)

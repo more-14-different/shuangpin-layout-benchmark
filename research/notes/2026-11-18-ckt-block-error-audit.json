@@ -1,0 +1,2221 @@
+{
+  "version": "ckt-four-prefix-tail-success-audit-v1",
+  "experimental": true,
+  "seed": 20261120,
+  "interpretation": "block: S5=S4(ABCD)*S2(DE), S6=S4(ABCD)*S3(DEF); sequential comparison: S6=S5*(1-h_L3i2(DEF)). Each risk is conditional on the anchor first key being correct. No total-cost guard or position-strength parameter.",
+  "costConvention": "Keep frozen <=4 costs. Long timing remains the inferred original rolling timing. Anchor the four-key summed-hazard cost; charge 782.2*(P_long-P_four) for added first-error risk.",
+  "caveat": "Rebuilt context error tables are not the hash-verified original error artifact. Standalone short-tail success approximates conditional tail success; no human five/six-key validation.",
+  "sourceHashes": {
+    "tools/audit_ckt_block_error.js": "5c047d8b91284a06393412ebe2808577252a69171d5a11d3af9ccc7e09d021a0",
+    "tools/ckt_block_error.js": "7cad8b13d0ddfdd64370d73fc943530b05d0920ab558c23c0dd2f4105a815fde",
+    "tools/export_ckt_long_error_profile.py": "e5c18ac67293d18d22dbd084f9454c5ed527f08e55beca818c67154bbc19b055",
+    "tools/ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+    "research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c"
+  },
+  "shortAudit": {
+    "frozenCodeCounts": {
+      "2": 900,
+      "3": 27000,
+      "4": 810000
+    },
+    "tailRiskDropsOutOf27000": 55,
+    "worstTailRiskDrop": {
+      "code": "U,T",
+      "pair": 0.021620456129312515,
+      "triple": 0.016783497657318125,
+      "delta": -0.00483695847199439
+    }
+  },
+  "globalCostBounds": {
+    "block": {
+      "contextsChecked": 810000,
+      "tailContextsChecked": 27000,
+      "tailRiskDrops": 55,
+      "minimumTimingIncrementMs": 16.498943794518738,
+      "timingContext": ",WA;",
+      "minimumTailRiskIncrement": -0.00483695847199439,
+      "tailContext": "U,T",
+      "fourToFiveCostLowerBoundMs": 16.498943794518738,
+      "fiveToSixCostLowerBoundMs": 12.715474877724725,
+      "certifiesNondecreasingCost": true
+    },
+    "sequential": {
+      "contextsChecked": 810000,
+      "tailContextsChecked": 27000,
+      "tailRiskDrops": 55,
+      "minimumTimingIncrementMs": 16.498943794518738,
+      "timingContext": ",WA;",
+      "minimumTailRiskIncrement": -0.00483695847199439,
+      "tailContext": "U,T",
+      "fourToFiveCostLowerBoundMs": 16.498943794518738,
+      "fiveToSixCostLowerBoundMs": 16.498943794518738,
+      "certifiesNondecreasingCost": true
+    }
+  },
+  "samples": [
+    {
+      "domain": "uniform30",
+      "length": 5,
+      "count": 100000,
+      "models": {
+        "legacy": {
+          "costReversals": 60,
+          "riskReversals": null,
+          "riskBelowFour": null,
+          "minimumIncrement": {
+            "code": "Y,WAP",
+            "ms": -29.65514373779297,
+            "from": 525.8337020874023,
+            "to": 496.1785583496094
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": 0,
+            "p01": 0,
+            "median": 0,
+            "p99": 0,
+            "max": 0,
+            "mean": 0
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": -29.65514373779297,
+            "p01": 36.581871032714844,
+            "median": 146.8778076171875,
+            "p99": 338.13812255859375,
+            "max": 453.7820739746094,
+            "mean": 158.1372124307251
+          }
+        },
+        "block": {
+          "costReversals": 0,
+          "riskReversals": 0,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "Y,WAP",
+            "ms": 23.471514374109688,
+            "from": 525.8337020874023,
+            "to": 549.305216461512
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -385.0714304861508,
+            "p01": -84.46643674262327,
+            "median": -8.441606530805984,
+            "p99": 44.45066127293774,
+            "max": 99.58126677945688,
+            "mean": -11.662339488262848
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 23.471514374109688,
+            "p01": 56.58281339103871,
+            "median": 137.498185409087,
+            "p99": 282.6263895260346,
+            "max": 377.18621822007594,
+            "mean": 146.47487294246102
+          }
+        },
+        "sequential": {
+          "costReversals": 0,
+          "riskReversals": 0,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "Y,WAP",
+            "ms": 23.471514374109688,
+            "from": 525.8337020874023,
+            "to": 549.305216461512
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -385.0714304861508,
+            "p01": -84.46643674262327,
+            "median": -8.441606530805984,
+            "p99": 44.45066127293774,
+            "max": 99.58126677945688,
+            "mean": -11.662339488262848
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 23.471514374109688,
+            "p01": 56.58281339103871,
+            "median": 137.498185409087,
+            "p99": 282.6263895260346,
+            "max": 377.18621822007594,
+            "mean": 146.47487294246102
+          }
+        }
+      }
+    },
+    {
+      "domain": "uniform30",
+      "length": 6,
+      "count": 100000,
+      "models": {
+        "legacy": {
+          "costReversals": 69,
+          "riskReversals": null,
+          "riskBelowFour": null,
+          "minimumIncrement": {
+            "code": ".DSK,E",
+            "ms": -33.395172119140625,
+            "from": 642.9471206665039,
+            "to": 609.5519485473633
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": 0,
+            "p01": 0,
+            "median": 0,
+            "p99": 0,
+            "max": 0,
+            "mean": 0
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": -33.395172119140625,
+            "p01": 36.15449142456055,
+            "median": 147.3618927001953,
+            "p99": 335.72242736816406,
+            "max": 454.75709533691406,
+            "mean": 158.33514591426848
+          }
+        },
+        "block": {
+          "costReversals": 0,
+          "riskReversals": 193,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "BU,WA.",
+            "ms": 26.060875793978994,
+            "from": 613.0710927343707,
+            "to": 639.1319685283497
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -383.16756386595364,
+            "p01": -82.03697361397701,
+            "median": -10.979691179479687,
+            "p99": 39.580540407146714,
+            "max": 98.92269449827359,
+            "mean": -13.419118560026686
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 26.060875793978994,
+            "p01": 60.91075201261856,
+            "median": 145.87419864077367,
+            "p99": 306.9856214585676,
+            "max": 397.93982623807824,
+            "mean": 156.71145165930926
+          }
+        },
+        "sequential": {
+          "costReversals": 0,
+          "riskReversals": 0,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "BU,WA.",
+            "ms": 29.79594119702881,
+            "from": 613.0710927343707,
+            "to": 642.8670339313995
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -383.02310986758425,
+            "p01": -94.38194878177865,
+            "median": -11.611395501910351,
+            "p99": 39.06658386285028,
+            "max": 99.49903760684879,
+            "mean": -15.159296481525367
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 29.79594119702881,
+            "p01": 61.213639913469365,
+            "median": 144.93315518632505,
+            "p99": 302.01674306989867,
+            "max": 397.3110559635219,
+            "mean": 154.97127373781058
+          }
+        }
+      }
+    },
+    {
+      "domain": "sound21-shape5",
+      "length": 5,
+      "count": 100000,
+      "models": {
+        "legacy": {
+          "costReversals": 124,
+          "riskReversals": null,
+          "riskBelowFour": null,
+          "minimumIncrement": {
+            "code": "CYWXO",
+            "ms": -36.54014205932617,
+            "from": 560.1137084960938,
+            "to": 523.5735664367676
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": 0,
+            "p01": 0,
+            "median": 0,
+            "p99": 0,
+            "max": 0,
+            "mean": 0
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": -36.54014205932617,
+            "p01": 27.698429107666016,
+            "median": 124.00833129882812,
+            "p99": 336.8764190673828,
+            "max": 404.73768615722656,
+            "mean": 138.8715009173584
+          }
+        },
+        "block": {
+          "costReversals": 0,
+          "riskReversals": 0,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "KLRGO",
+            "ms": 33.85752809445637,
+            "from": 399.92437744140625,
+            "to": 433.7819055358626
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -112.0803964474427,
+            "p01": -66.77741010559589,
+            "median": -4.701650534317309,
+            "p99": 36.91081926580739,
+            "max": 90.70315759339144,
+            "mean": -8.124300485594144
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 33.85752809445637,
+            "p01": 48.46578349317906,
+            "median": 116.98694494955197,
+            "p99": 289.8375700284729,
+            "max": 338.7941428491026,
+            "mean": 130.74720043176393
+          }
+        },
+        "sequential": {
+          "costReversals": 0,
+          "riskReversals": 0,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "KLRGO",
+            "ms": 33.85752809445637,
+            "from": 399.92437744140625,
+            "to": 433.7819055358626
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -112.0803964474427,
+            "p01": -66.77741010559589,
+            "median": -4.701650534317309,
+            "p99": 36.91081926580739,
+            "max": 90.70315759339144,
+            "mean": -8.124300485594144
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 33.85752809445637,
+            "p01": 48.46578349317906,
+            "median": 116.98694494955197,
+            "p99": 289.8375700284729,
+            "max": 338.7941428491026,
+            "mean": 130.74720043176393
+          }
+        }
+      }
+    },
+    {
+      "domain": "sound21-shape5",
+      "length": 6,
+      "count": 100000,
+      "models": {
+        "legacy": {
+          "costReversals": 232,
+          "riskReversals": null,
+          "riskBelowFour": null,
+          "minimumIncrement": {
+            "code": "NZMWAO",
+            "ms": -21.719192504882812,
+            "from": 677.4398422241211,
+            "to": 655.7206497192383
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": 0,
+            "p01": 0,
+            "median": 0,
+            "p99": 0,
+            "max": 0,
+            "mean": 0
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": -21.719192504882812,
+            "p01": 16.394115447998047,
+            "median": 141.87914276123047,
+            "p99": 253.36042022705078,
+            "max": 306.66429138183594,
+            "mean": 138.63533486774443
+          }
+        },
+        "block": {
+          "costReversals": 0,
+          "riskReversals": 1158,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "CRNWAI",
+            "ms": 26.251980519292715,
+            "from": 529.1092144800036,
+            "to": 555.3611949992963
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -87.27092071062589,
+            "p01": -42.930034942722386,
+            "median": -6.048454443455171,
+            "p99": 33.68278570666189,
+            "max": 84.47171758305012,
+            "mean": -5.8965232485530015
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 26.251980519292715,
+            "p01": 48.23409085197636,
+            "median": 136.80991030461325,
+            "p99": 265.6872209441551,
+            "max": 311.9738301604419,
+            "mean": 140.7328317391656
+          }
+        },
+        "sequential": {
+          "costReversals": 0,
+          "riskReversals": 0,
+          "riskBelowFour": 0,
+          "minimumIncrement": {
+            "code": "RMNWAI",
+            "ms": 30.24954847719812,
+            "from": 612.0439296380574,
+            "to": 642.2934781152555
+          },
+          "deltaMs": {
+            "n": 100000,
+            "min": -88.94447750005384,
+            "p01": -52.15389296315345,
+            "median": -7.301406797159416,
+            "p99": 32.867827614509906,
+            "max": 84.51837532691911,
+            "mean": -8.018131505620307
+          },
+          "incrementMs": {
+            "n": 100000,
+            "min": 30.24954847719812,
+            "p01": 51.580029503395735,
+            "median": 134.3617079127714,
+            "p99": 259.4451599368181,
+            "max": 306.9465693532424,
+            "mean": 138.6112234821003
+          }
+        }
+      }
+    }
+  ],
+  "native": {
+    "inputHashes": {
+      "payload": "7bd32ab8bf272f5924f5875ef83851737aba709bb1ef300b41305c6ae808a062",
+      "dictionary": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+      "stroke": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631"
+    },
+    "references": {
+      "legacy": {
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 112.42254451086264,
+            "firstAuxRate": 0.22060613808019708,
+            "secondAuxRate": 0.04566821511806128,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.004804384379755336,
+            "meanRejectedCandidates": 0.0059137069818788034,
+            "meanPageActions": 0.000004005724736186477,
+            "meanKeys": 2.2662743531982583,
+            "effectiveMs": 195.4843681647081
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 414.4344264362789,
+            "firstAuxRate": 0.1892694210310565,
+            "secondAuxRate": 0.034756806080910474,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003775437554998475,
+            "meanRejectedCandidates": 0.004530663854527311,
+            "meanPageActions": 0,
+            "meanKeys": 4.224026227111967,
+            "effectiveMs": 484.13409029559443
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 344.2651202341476,
+            "firstAuxRate": 0.5172872168968791,
+            "secondAuxRate": 0.20701254452783532,
+            "thirdAuxRate": 0.052980406019336686,
+            "selectionRate": 0.007349652222944726,
+            "meanRejectedCandidates": 0.00913989969982548,
+            "meanPageActions": 0.00000668463499215639,
+            "meanKeys": 3.7772801674440513,
+            "effectiveMs": 582.3179621766187
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 448.80431242048945,
+            "firstAuxRate": 0.27835105638906893,
+            "secondAuxRate": 0.04469433486596384,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003829566677066131,
+            "meanRejectedCandidates": 0.004522254400754552,
+            "meanPageActions": 0,
+            "meanKeys": 4.323045391255032,
+            "effectiveMs": 548.2417825232767
+          }
+        },
+        "weightedCostDeltaMs": 0,
+        "costReversalFrequency": 0.00017081259633203478,
+        "riskReversalFrequency": null,
+        "riskBelowFourFrequency": null,
+        "mostFrequentLongRows": [
+          {
+            "text": "发表时间",
+            "code": "FBEJV",
+            "mass": 0.00009933344389031657,
+            "oldMs": 592.9425277709961,
+            "newMs": 592.9425277709961,
+            "deltaMs": 0
+          },
+          {
+            "text": "监督管理",
+            "code": "JDGLI",
+            "mass": 0.00008252117224738234,
+            "oldMs": 401.89835357666016,
+            "newMs": 401.89835357666016,
+            "deltaMs": 0
+          },
+          {
+            "text": "知识产权",
+            "code": "FEJQO",
+            "mass": 0.00008239139825013853,
+            "oldMs": 367.71323013305664,
+            "newMs": 367.71323013305664,
+            "deltaMs": 0
+          },
+          {
+            "text": "行政许可",
+            "code": "XQXKV",
+            "mass": 0.00007952530431100978,
+            "oldMs": 624.5497741699219,
+            "newMs": 624.5497741699219,
+            "deltaMs": 0
+          },
+          {
+            "text": "共产党员",
+            "code": "GJDYO",
+            "mass": 0.00007669240837117595,
+            "oldMs": 426.9933395385742,
+            "newMs": 426.9933395385742,
+            "deltaMs": 0
+          },
+          {
+            "text": "实施",
+            "code": "EKEKO",
+            "mass": 0.00006957780837700131,
+            "oldMs": 464.8838882446289,
+            "newMs": 464.8838882446289,
+            "deltaMs": 0
+          }
+        ]
+      },
+      "block": {
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 112.42254451086264,
+            "firstAuxRate": 0.22060613808019708,
+            "secondAuxRate": 0.04566821511806128,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.004804384379755336,
+            "meanRejectedCandidates": 0.0059137069818788034,
+            "meanPageActions": 0.000004005724736186477,
+            "meanKeys": 2.2662743531982583,
+            "effectiveMs": 195.4843681647081
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 412.6845559627492,
+            "firstAuxRate": 0.1892694210310565,
+            "secondAuxRate": 0.034756806080910474,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003775437554998475,
+            "meanRejectedCandidates": 0.004530663854527311,
+            "meanPageActions": 0,
+            "meanKeys": 4.224026227111967,
+            "effectiveMs": 482.3842198220647
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 343.1166663463901,
+            "firstAuxRate": 0.5172872168968791,
+            "secondAuxRate": 0.20701254452783532,
+            "thirdAuxRate": 0.052980406019336686,
+            "selectionRate": 0.007349652222944726,
+            "meanRejectedCandidates": 0.00913989969982548,
+            "meanPageActions": 0.00000668463499215639,
+            "meanKeys": 3.7772801674440513,
+            "effectiveMs": 581.1695082888613
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 447.02694567047075,
+            "firstAuxRate": 0.27835105638906893,
+            "secondAuxRate": 0.04469433486596384,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003829566677066131,
+            "meanRejectedCandidates": 0.004522254400754552,
+            "meanPageActions": 0,
+            "meanKeys": 4.323045391255032,
+            "effectiveMs": 546.464415773258
+          }
+        },
+        "weightedCostDeltaMs": -1.3625720097288745,
+        "costReversalFrequency": 0,
+        "riskReversalFrequency": 0.0001336221905337065,
+        "riskBelowFourFrequency": 0,
+        "mostFrequentLongRows": [
+          {
+            "text": "发表时间",
+            "code": "FBEJV",
+            "mass": 0.00009933344389031657,
+            "oldMs": 592.9425277709961,
+            "newMs": 591.2352699573694,
+            "deltaMs": -1.7072578136267111,
+            "errorProbability": 0.04392670765585038,
+            "prefixErrorProbability": 0.0397396652684191
+          },
+          {
+            "text": "监督管理",
+            "code": "JDGLI",
+            "mass": 0.00008252117224738234,
+            "oldMs": 401.89835357666016,
+            "newMs": 394.89687456610596,
+            "deltaMs": -7.001479010554192,
+            "errorProbability": 0.038511098499971474,
+            "prefixErrorProbability": 0.0344600030809763
+          },
+          {
+            "text": "知识产权",
+            "code": "FEJQO",
+            "mass": 0.00008239139825013853,
+            "oldMs": 367.71323013305664,
+            "newMs": 366.81055771199607,
+            "deltaMs": -0.9026724210605721,
+            "errorProbability": 0.031751931427647984,
+            "prefixErrorProbability": 0.027936948025085062
+          },
+          {
+            "text": "行政许可",
+            "code": "XQXKV",
+            "mass": 0.00007952530431100978,
+            "oldMs": 624.5497741699219,
+            "newMs": 612.6797499449252,
+            "deltaMs": -11.870024224996655,
+            "errorProbability": 0.06019298355257163,
+            "prefixErrorProbability": 0.05511518404625393
+          },
+          {
+            "text": "共产党员",
+            "code": "GJDYO",
+            "mass": 0.00007669240837117595,
+            "oldMs": 426.9933395385742,
+            "newMs": 412.7858804257419,
+            "deltaMs": -14.207459112832339,
+            "errorProbability": 0.022289774238914872,
+            "prefixErrorProbability": 0.016056973468920654
+          },
+          {
+            "text": "实施",
+            "code": "EKEKO",
+            "mass": 0.00006957780837700131,
+            "oldMs": 464.8838882446289,
+            "newMs": 443.2053729136071,
+            "deltaMs": -21.6785153310218,
+            "errorProbability": 0.03052767771159759,
+            "prefixErrorProbability": 0.02462999482200179
+          }
+        ]
+      },
+      "sequential": {
+        "tracks": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 112.42254451086264,
+            "firstAuxRate": 0.22060613808019708,
+            "secondAuxRate": 0.04566821511806128,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.004804384379755336,
+            "meanRejectedCandidates": 0.0059137069818788034,
+            "meanPageActions": 0.000004005724736186477,
+            "meanKeys": 2.2662743531982583,
+            "effectiveMs": 195.4843681647081
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 412.5909509239521,
+            "firstAuxRate": 0.1892694210310565,
+            "secondAuxRate": 0.034756806080910474,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003775437554998475,
+            "meanRejectedCandidates": 0.004530663854527311,
+            "meanPageActions": 0,
+            "meanKeys": 4.224026227111967,
+            "effectiveMs": 482.29061478326764
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 343.04544768680785,
+            "firstAuxRate": 0.5172872168968791,
+            "secondAuxRate": 0.20701254452783532,
+            "thirdAuxRate": 0.052980406019336686,
+            "selectionRate": 0.007349652222944726,
+            "meanRejectedCandidates": 0.00913989969982548,
+            "meanPageActions": 0.00000668463499215639,
+            "meanKeys": 3.7772801674440513,
+            "effectiveMs": 581.098289629279
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 446.936593282018,
+            "firstAuxRate": 0.27835105638906893,
+            "secondAuxRate": 0.04469433486596384,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003829566677066131,
+            "meanRejectedCandidates": 0.004522254400754552,
+            "meanPageActions": 0,
+            "meanKeys": 4.323045391255032,
+            "effectiveMs": 546.3740633848051
+          }
+        },
+        "weightedCostDeltaMs": -1.436303037134227,
+        "costReversalFrequency": 0,
+        "riskReversalFrequency": 0,
+        "riskBelowFourFrequency": 0,
+        "mostFrequentLongRows": [
+          {
+            "text": "发表时间",
+            "code": "FBEJV",
+            "mass": 0.00009933344389031657,
+            "oldMs": 592.9425277709961,
+            "newMs": 591.2352699573694,
+            "deltaMs": -1.7072578136267111,
+            "errorProbability": 0.04392670765585038,
+            "prefixErrorProbability": 0.0397396652684191
+          },
+          {
+            "text": "监督管理",
+            "code": "JDGLI",
+            "mass": 0.00008252117224738234,
+            "oldMs": 401.89835357666016,
+            "newMs": 394.89687456610596,
+            "deltaMs": -7.001479010554192,
+            "errorProbability": 0.038511098499971474,
+            "prefixErrorProbability": 0.0344600030809763
+          },
+          {
+            "text": "知识产权",
+            "code": "FEJQO",
+            "mass": 0.00008239139825013853,
+            "oldMs": 367.71323013305664,
+            "newMs": 366.81055771199607,
+            "deltaMs": -0.9026724210605721,
+            "errorProbability": 0.031751931427647984,
+            "prefixErrorProbability": 0.027936948025085062
+          },
+          {
+            "text": "行政许可",
+            "code": "XQXKV",
+            "mass": 0.00007952530431100978,
+            "oldMs": 624.5497741699219,
+            "newMs": 612.6797499449252,
+            "deltaMs": -11.870024224996655,
+            "errorProbability": 0.06019298355257163,
+            "prefixErrorProbability": 0.05511518404625393
+          },
+          {
+            "text": "共产党员",
+            "code": "GJDYO",
+            "mass": 0.00007669240837117595,
+            "oldMs": 426.9933395385742,
+            "newMs": 412.7858804257419,
+            "deltaMs": -14.207459112832339,
+            "errorProbability": 0.022289774238914872,
+            "prefixErrorProbability": 0.016056973468920654
+          },
+          {
+            "text": "实施",
+            "code": "EKEKO",
+            "mass": 0.00006957780837700131,
+            "oldMs": 464.8838882446289,
+            "newMs": 443.2053729136071,
+            "deltaMs": -21.6785153310218,
+            "errorProbability": 0.03052767771159759,
+            "prefixErrorProbability": 0.02462999482200179
+          }
+        ]
+      }
+    },
+    "layouts": [
+      {
+        "id": "production",
+        "policy": {
+          "word2": "12",
+          "word3": "213",
+          "word4": "24"
+        },
+        "models": {
+          "legacy": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 102.21807027259302,
+                "firstAuxRate": 0.1857217140572167,
+                "secondAuxRate": 0.033514524640937945,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0027628097521678573,
+                "meanRejectedCandidates": 0.003167037084122442,
+                "meanPageActions": 3.5086640024991044e-7,
+                "meanKeys": 2.2192362386981546,
+                "effectiveMs": 169.80508484746636
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 401.1726652807668,
+                "firstAuxRate": 0.13477212090398621,
+                "secondAuxRate": 0.015621309601529984,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0009590503787175064,
+                "meanRejectedCandidates": 0.0010625355122062129,
+                "meanPageActions": 0,
+                "meanKeys": 4.150393430505516,
+                "effectiveMs": 446.91925143526254
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 331.9533690629369,
+                "firstAuxRate": 0.4888949338196351,
+                "secondAuxRate": 0.17899402905306327,
+                "thirdAuxRate": 0.041409250191547065,
+                "selectionRate": 0.005369009309876268,
+                "meanRejectedCandidates": 0.006527437579567515,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.7092982130642453,
+                "effectiveMs": 548.291138009439
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 434.2960007149186,
+                "firstAuxRate": 0.2323411318918461,
+                "secondAuxRate": 0.028262332019753287,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0019669899086242814,
+                "meanRejectedCandidates": 0.002263540996726011,
+                "meanPageActions": 0,
+                "meanKeys": 4.2606034639115995,
+                "effectiveMs": 513.7704108834092
+              }
+            },
+            "weightedCostDeltaMs": 0,
+            "costReversalFrequency": 0.00008096698850939562,
+            "riskReversalFrequency": null,
+            "riskBelowFourFrequency": null,
+            "mostFrequentLongRows": [
+              {
+                "text": "债券",
+                "code": "EPQQI",
+                "mass": 0.0001790539892891609,
+                "oldMs": 517.5415725708008,
+                "newMs": 517.5415725708008,
+                "deltaMs": 0
+              },
+              {
+                "text": "发表时间",
+                "code": "FBPJV",
+                "mass": 0.00009933344389031657,
+                "oldMs": 532.4166946411133,
+                "newMs": 532.4166946411133,
+                "deltaMs": 0
+              },
+              {
+                "text": "及其",
+                "code": "JFQFU",
+                "mass": 0.00006950427986796023,
+                "oldMs": 472.6486053466797,
+                "newMs": 472.6486053466797,
+                "deltaMs": 0
+              },
+              {
+                "text": "她的",
+                "code": "TZDMA",
+                "mass": 0.00006950372493581652,
+                "oldMs": 522.3067474365234,
+                "newMs": 522.3067474365234,
+                "deltaMs": 0
+              },
+              {
+                "text": "工具",
+                "code": "GNJPV",
+                "mass": 0.00006950025660991837,
+                "oldMs": 512.569580078125,
+                "newMs": 512.569580078125,
+                "deltaMs": 0
+              },
+              {
+                "text": "它的",
+                "code": "TZDMO",
+                "mass": 0.00006948249878131976,
+                "oldMs": 507.05638885498047,
+                "newMs": 507.05638885498047,
+                "deltaMs": 0
+              }
+            ],
+            "score": 9.203609845305678
+          },
+          "block": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 102.21807027259302,
+                "firstAuxRate": 0.1857217140572167,
+                "secondAuxRate": 0.033514524640937945,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0027628097521678573,
+                "meanRejectedCandidates": 0.003167037084122442,
+                "meanPageActions": 3.5086640024991044e-7,
+                "meanKeys": 2.2192362386981546,
+                "effectiveMs": 169.80508484746636
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 399.84552017160166,
+                "firstAuxRate": 0.13477212090398621,
+                "secondAuxRate": 0.015621309601529984,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0009590503787175064,
+                "meanRejectedCandidates": 0.0010625355122062129,
+                "meanPageActions": 0,
+                "meanKeys": 4.150393430505516,
+                "effectiveMs": 445.5921063260974
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 330.914394158385,
+                "firstAuxRate": 0.4888949338196351,
+                "secondAuxRate": 0.17899402905306327,
+                "thirdAuxRate": 0.041409250191547065,
+                "selectionRate": 0.005369009309876268,
+                "meanRejectedCandidates": 0.006527437579567515,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.7092982130642453,
+                "effectiveMs": 547.2521631048871
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 432.2996846667054,
+                "firstAuxRate": 0.2323411318918461,
+                "secondAuxRate": 0.028262332019753287,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0019669899086242814,
+                "meanRejectedCandidates": 0.002263540996726011,
+                "meanPageActions": 0,
+                "meanKeys": 4.2606034639115995,
+                "effectiveMs": 511.774094835196
+              }
+            },
+            "weightedCostDeltaMs": -1.1694543800377142,
+            "costReversalFrequency": 0,
+            "riskReversalFrequency": 0.00007650474150845888,
+            "riskBelowFourFrequency": 0,
+            "mostFrequentLongRows": [
+              {
+                "text": "债券",
+                "code": "EPQQI",
+                "mass": 0.0001790539892891609,
+                "oldMs": 517.5415725708008,
+                "newMs": 513.0910204206855,
+                "deltaMs": -4.4505521501153,
+                "errorProbability": 0.05884094764872194,
+                "prefixErrorProbability": 0.05625450123779718
+              },
+              {
+                "text": "发表时间",
+                "code": "FBPJV",
+                "mass": 0.00009933344389031657,
+                "oldMs": 532.4166946411133,
+                "newMs": 539.8354396675774,
+                "deltaMs": 7.41874502646408,
+                "errorProbability": 0.05749022827105188,
+                "prefixErrorProbability": 0.05336258617875844
+              },
+              {
+                "text": "及其",
+                "code": "JFQFU",
+                "mass": 0.00006950427986796023,
+                "oldMs": 472.6486053466797,
+                "newMs": 477.0926945483416,
+                "deltaMs": 4.444089201661939,
+                "errorProbability": 0.03990160104069451,
+                "prefixErrorProbability": 0.03717483430121482
+              },
+              {
+                "text": "她的",
+                "code": "TZDMA",
+                "mass": 0.00006950372493581652,
+                "oldMs": 522.3067474365234,
+                "newMs": 512.5644144167468,
+                "deltaMs": -9.742333019776652,
+                "errorProbability": 0.051838933404965704,
+                "prefixErrorProbability": 0.04576929964179177
+              },
+              {
+                "text": "工具",
+                "code": "GNJPV",
+                "mass": 0.00006950025660991837,
+                "oldMs": 512.569580078125,
+                "newMs": 504.68532002093224,
+                "deltaMs": -7.884260057192762,
+                "errorProbability": 0.05886734876585986,
+                "prefixErrorProbability": 0.05336322386070269
+              },
+              {
+                "text": "它的",
+                "code": "TZDMO",
+                "mass": 0.00006948249878131976,
+                "oldMs": 507.05638885498047,
+                "newMs": 501.9093132927198,
+                "deltaMs": -5.147075562260682,
+                "errorProbability": 0.05048765068453953,
+                "prefixErrorProbability": 0.04576929964179177
+              }
+            ],
+            "score": 9.205692935567114
+          },
+          "sequential": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 102.21807027259302,
+                "firstAuxRate": 0.1857217140572167,
+                "secondAuxRate": 0.033514524640937945,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0027628097521678573,
+                "meanRejectedCandidates": 0.003167037084122442,
+                "meanPageActions": 3.5086640024991044e-7,
+                "meanKeys": 2.2192362386981546,
+                "effectiveMs": 169.80508484746636
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 399.8093096326944,
+                "firstAuxRate": 0.13477212090398621,
+                "secondAuxRate": 0.015621309601529984,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0009590503787175064,
+                "meanRejectedCandidates": 0.0010625355122062129,
+                "meanPageActions": 0,
+                "meanKeys": 4.150393430505516,
+                "effectiveMs": 445.55589578719014
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 330.85874530945165,
+                "firstAuxRate": 0.4888949338196351,
+                "secondAuxRate": 0.17899402905306327,
+                "thirdAuxRate": 0.041409250191547065,
+                "selectionRate": 0.005369009309876268,
+                "meanRejectedCandidates": 0.006527437579567515,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.7092982130642453,
+                "effectiveMs": 547.1965142559538
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 432.2389389212109,
+                "firstAuxRate": 0.2323411318918461,
+                "secondAuxRate": 0.028262332019753287,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0019669899086242814,
+                "meanRejectedCandidates": 0.002263540996726011,
+                "meanPageActions": 0,
+                "meanKeys": 4.2606034639115995,
+                "effectiveMs": 511.7133490897015
+              }
+            },
+            "weightedCostDeltaMs": -1.2069587485614028,
+            "costReversalFrequency": 0,
+            "riskReversalFrequency": 0,
+            "riskBelowFourFrequency": 0,
+            "mostFrequentLongRows": [
+              {
+                "text": "债券",
+                "code": "EPQQI",
+                "mass": 0.0001790539892891609,
+                "oldMs": 517.5415725708008,
+                "newMs": 513.0910204206855,
+                "deltaMs": -4.4505521501153,
+                "errorProbability": 0.05884094764872194,
+                "prefixErrorProbability": 0.05625450123779718
+              },
+              {
+                "text": "发表时间",
+                "code": "FBPJV",
+                "mass": 0.00009933344389031657,
+                "oldMs": 532.4166946411133,
+                "newMs": 539.8354396675774,
+                "deltaMs": 7.41874502646408,
+                "errorProbability": 0.05749022827105188,
+                "prefixErrorProbability": 0.05336258617875844
+              },
+              {
+                "text": "及其",
+                "code": "JFQFU",
+                "mass": 0.00006950427986796023,
+                "oldMs": 472.6486053466797,
+                "newMs": 477.0926945483416,
+                "deltaMs": 4.444089201661939,
+                "errorProbability": 0.03990160104069451,
+                "prefixErrorProbability": 0.03717483430121482
+              },
+              {
+                "text": "她的",
+                "code": "TZDMA",
+                "mass": 0.00006950372493581652,
+                "oldMs": 522.3067474365234,
+                "newMs": 512.5644144167468,
+                "deltaMs": -9.742333019776652,
+                "errorProbability": 0.051838933404965704,
+                "prefixErrorProbability": 0.04576929964179177
+              },
+              {
+                "text": "工具",
+                "code": "GNJPV",
+                "mass": 0.00006950025660991837,
+                "oldMs": 512.569580078125,
+                "newMs": 504.68532002093224,
+                "deltaMs": -7.884260057192762,
+                "errorProbability": 0.05886734876585986,
+                "prefixErrorProbability": 0.05336322386070269
+              },
+              {
+                "text": "它的",
+                "code": "TZDMO",
+                "mass": 0.00006948249878131976,
+                "oldMs": 507.05638885498047,
+                "newMs": 501.9093132927198,
+                "deltaMs": -5.147075562260682,
+                "errorProbability": 0.05048765068453953,
+                "prefixErrorProbability": 0.04576929964179177
+              }
+            ],
+            "score": 9.206331053622558
+          }
+        }
+      },
+      {
+        "id": "f19a0ad1dc",
+        "policy": {
+          "word2": "21",
+          "word3": "213",
+          "word4": "14"
+        },
+        "models": {
+          "legacy": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 99.2919497919633,
+                "firstAuxRate": 0.1796778064019785,
+                "secondAuxRate": 0.03161426145605112,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.002532992260004166,
+                "meanRejectedCandidates": 0.0029539149848373087,
+                "meanPageActions": 9.648826006872538e-7,
+                "meanKeys": 2.2112920678580297,
+                "effectiveMs": 164.3473507193968
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 397.23084164060253,
+                "firstAuxRate": 0.13583108320811912,
+                "secondAuxRate": 0.01617085945837446,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.00086359067389108,
+                "meanRejectedCandidates": 0.0009764871790709733,
+                "meanPageActions": 2.774660718531406e-10,
+                "meanKeys": 4.152001942666494,
+                "effectiveMs": 443.39840328707857
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 332.40152101065564,
+                "firstAuxRate": 0.486548010494748,
+                "secondAuxRate": 0.1771289378135697,
+                "thirdAuxRate": 0.0410958340484991,
+                "selectionRate": 0.005359668251960432,
+                "meanRejectedCandidates": 0.006516430583146912,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.704772782356817,
+                "effectiveMs": 547.3755057603586
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 430.8683512986794,
+                "firstAuxRate": 0.2262729106455254,
+                "secondAuxRate": 0.026082367891652237,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.001837768808968731,
+                "meanRejectedCandidates": 0.002610630304554389,
+                "meanPageActions": 0.00004162304791599306,
+                "meanKeys": 4.252355278537178,
+                "effectiveMs": 507.8206145748165
+              }
+            },
+            "weightedCostDeltaMs": 0,
+            "costReversalFrequency": 0.00006962792596827617,
+            "riskReversalFrequency": null,
+            "riskBelowFourFrequency": null,
+            "mostFrequentLongRows": [
+              {
+                "text": "发表时间",
+                "code": "FBLJA",
+                "mass": 0.00009933344389031657,
+                "oldMs": 499.8258743286133,
+                "newMs": 499.8258743286133,
+                "deltaMs": 0
+              },
+              {
+                "text": "监督管理",
+                "code": "JDGEI",
+                "mass": 0.00008252117224738234,
+                "oldMs": 482.61492919921875,
+                "newMs": 482.61492919921875,
+                "deltaMs": 0
+              },
+              {
+                "text": "国家法律",
+                "code": "GJFEI",
+                "mass": 0.00007486692080994638,
+                "oldMs": 399.03240966796875,
+                "newMs": 399.03240966796875,
+                "deltaMs": 0
+              },
+              {
+                "text": "商品名称",
+                "code": "LPMSO",
+                "mass": 0.00007266539045670337,
+                "oldMs": 471.14244079589844,
+                "newMs": 471.14244079589844,
+                "deltaMs": 0
+              },
+              {
+                "text": "及其",
+                "code": "JFQFV",
+                "mass": 0.00006950427986796023,
+                "oldMs": 668.2989654541016,
+                "newMs": 668.2989654541016,
+                "deltaMs": 0
+              },
+              {
+                "text": "她的",
+                "code": "TXDMU",
+                "mass": 0.00006950372493581652,
+                "oldMs": 593.3000030517578,
+                "newMs": 593.3000030517578,
+                "deltaMs": 0
+              }
+            ],
+            "score": 9.107001929844557
+          },
+          "block": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 99.2919497919633,
+                "firstAuxRate": 0.1796778064019785,
+                "secondAuxRate": 0.03161426145605112,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.002532992260004166,
+                "meanRejectedCandidates": 0.0029539149848373087,
+                "meanPageActions": 9.648826006872538e-7,
+                "meanKeys": 2.2112920678580297,
+                "effectiveMs": 164.3473507193968
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 395.967968098011,
+                "firstAuxRate": 0.13583108320811912,
+                "secondAuxRate": 0.01617085945837446,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.00086359067389108,
+                "meanRejectedCandidates": 0.0009764871790709733,
+                "meanPageActions": 2.774660718531406e-10,
+                "meanKeys": 4.152001942666494,
+                "effectiveMs": 442.13552974448703
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 331.43272237619317,
+                "firstAuxRate": 0.486548010494748,
+                "secondAuxRate": 0.1771289378135697,
+                "thirdAuxRate": 0.0410958340484991,
+                "selectionRate": 0.005359668251960432,
+                "meanRejectedCandidates": 0.006516430583146912,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.704772782356817,
+                "effectiveMs": 546.4067071258961
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 429.24833387075364,
+                "firstAuxRate": 0.2262729106455254,
+                "secondAuxRate": 0.026082367891652237,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.001837768808968731,
+                "meanRejectedCandidates": 0.002610630304554389,
+                "meanPageActions": 0.00004162304791599306,
+                "meanKeys": 4.252355278537178,
+                "effectiveMs": 506.20059714689074
+              }
+            },
+            "weightedCostDeltaMs": -1.062906115026419,
+            "costReversalFrequency": 0,
+            "riskReversalFrequency": 0.000092887179559496,
+            "riskBelowFourFrequency": 0,
+            "mostFrequentLongRows": [
+              {
+                "text": "发表时间",
+                "code": "FBLJA",
+                "mass": 0.00009933344389031657,
+                "oldMs": 499.8258743286133,
+                "newMs": 522.1101792139117,
+                "deltaMs": 22.28430488529841,
+                "errorProbability": 0.0810032025991968,
+                "prefixErrorProbability": 0.07528178642423089
+              },
+              {
+                "text": "监督管理",
+                "code": "JDGEI",
+                "mass": 0.00008252117224738234,
+                "oldMs": 482.61492919921875,
+                "newMs": 492.6613434112115,
+                "deltaMs": 10.046414211992726,
+                "errorProbability": 0.0503563381301646,
+                "prefixErrorProbability": 0.048241869131333104
+              },
+              {
+                "text": "国家法律",
+                "code": "GJFEI",
+                "mass": 0.00007486692080994638,
+                "oldMs": 399.03240966796875,
+                "newMs": 404.89372990391837,
+                "deltaMs": 5.86132023594962,
+                "errorProbability": 0.03932460028310292,
+                "prefixErrorProbability": 0.037185568104820654
+              },
+              {
+                "text": "商品名称",
+                "code": "LPMSO",
+                "mass": 0.00007266539045670337,
+                "oldMs": 471.14244079589844,
+                "newMs": 470.7561020745188,
+                "deltaMs": -0.3863387213796159,
+                "errorProbability": 0.03994616939094664,
+                "prefixErrorProbability": 0.037170027654431115
+              },
+              {
+                "text": "及其",
+                "code": "JFQFV",
+                "mass": 0.00006950427986796023,
+                "oldMs": 668.2989654541016,
+                "newMs": 631.104002817526,
+                "deltaMs": -37.19496263657561,
+                "errorProbability": 0.04544599900635804,
+                "prefixErrorProbability": 0.03717483430121482
+              },
+              {
+                "text": "她的",
+                "code": "TXDMU",
+                "mass": 0.00006950372493581652,
+                "oldMs": 593.3000030517578,
+                "newMs": 589.2587490132887,
+                "deltaMs": -4.041254038469106,
+                "errorProbability": 0.06423206924655611,
+                "prefixErrorProbability": 0.05598641994944231
+              }
+            ],
+            "score": 9.111019023167389
+          },
+          "sequential": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 99.2919497919633,
+                "firstAuxRate": 0.1796778064019785,
+                "secondAuxRate": 0.03161426145605112,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.002532992260004166,
+                "meanRejectedCandidates": 0.0029539149848373087,
+                "meanPageActions": 9.648826006872538e-7,
+                "meanKeys": 2.2112920678580297,
+                "effectiveMs": 164.3473507193968
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 395.93061469023786,
+                "firstAuxRate": 0.13583108320811912,
+                "secondAuxRate": 0.01617085945837446,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.00086359067389108,
+                "meanRejectedCandidates": 0.0009764871790709733,
+                "meanPageActions": 2.774660718531406e-10,
+                "meanKeys": 4.152001942666494,
+                "effectiveMs": 442.0981763367139
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 331.37814766726467,
+                "firstAuxRate": 0.486548010494748,
+                "secondAuxRate": 0.1771289378135697,
+                "thirdAuxRate": 0.0410958340484991,
+                "selectionRate": 0.005359668251960432,
+                "meanRejectedCandidates": 0.006516430583146912,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.704772782356817,
+                "effectiveMs": 546.3521324169676
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 429.18169867590336,
+                "firstAuxRate": 0.2262729106455254,
+                "secondAuxRate": 0.026082367891652237,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.001837768808968731,
+                "meanRejectedCandidates": 0.002610630304554389,
+                "meanPageActions": 0.00004162304791599306,
+                "meanKeys": 4.252355278537178,
+                "effectiveMs": 506.13396195204047
+              }
+            },
+            "weightedCostDeltaMs": -1.1017844695439076,
+            "costReversalFrequency": 0,
+            "riskReversalFrequency": 0,
+            "riskBelowFourFrequency": 0,
+            "mostFrequentLongRows": [
+              {
+                "text": "发表时间",
+                "code": "FBLJA",
+                "mass": 0.00009933344389031657,
+                "oldMs": 499.8258743286133,
+                "newMs": 522.1101792139117,
+                "deltaMs": 22.28430488529841,
+                "errorProbability": 0.0810032025991968,
+                "prefixErrorProbability": 0.07528178642423089
+              },
+              {
+                "text": "监督管理",
+                "code": "JDGEI",
+                "mass": 0.00008252117224738234,
+                "oldMs": 482.61492919921875,
+                "newMs": 492.6613434112115,
+                "deltaMs": 10.046414211992726,
+                "errorProbability": 0.0503563381301646,
+                "prefixErrorProbability": 0.048241869131333104
+              },
+              {
+                "text": "国家法律",
+                "code": "GJFEI",
+                "mass": 0.00007486692080994638,
+                "oldMs": 399.03240966796875,
+                "newMs": 404.89372990391837,
+                "deltaMs": 5.86132023594962,
+                "errorProbability": 0.03932460028310292,
+                "prefixErrorProbability": 0.037185568104820654
+              },
+              {
+                "text": "商品名称",
+                "code": "LPMSO",
+                "mass": 0.00007266539045670337,
+                "oldMs": 471.14244079589844,
+                "newMs": 470.7561020745188,
+                "deltaMs": -0.3863387213796159,
+                "errorProbability": 0.03994616939094664,
+                "prefixErrorProbability": 0.037170027654431115
+              },
+              {
+                "text": "及其",
+                "code": "JFQFV",
+                "mass": 0.00006950427986796023,
+                "oldMs": 668.2989654541016,
+                "newMs": 631.104002817526,
+                "deltaMs": -37.19496263657561,
+                "errorProbability": 0.04544599900635804,
+                "prefixErrorProbability": 0.03717483430121482
+              },
+              {
+                "text": "她的",
+                "code": "TXDMU",
+                "mass": 0.00006950372493581652,
+                "oldMs": 593.3000030517578,
+                "newMs": 589.2587490132887,
+                "deltaMs": -4.041254038469106,
+                "errorProbability": 0.06423206924655611,
+                "prefixErrorProbability": 0.05598641994944231
+              }
+            ],
+            "score": 9.11162405960846
+          }
+        }
+      },
+      {
+        "id": "7af91c1a1c",
+        "policy": {
+          "word2": "21",
+          "word3": "213",
+          "word4": "14"
+        },
+        "models": {
+          "legacy": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 101.76174344671195,
+                "firstAuxRate": 0.18212533345465515,
+                "secondAuxRate": 0.03422421041317676,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.002682052002377003,
+                "meanRejectedCandidates": 0.0030653443057833425,
+                "meanPageActions": 5.555384670623581e-7,
+                "meanKeys": 2.216349543867832,
+                "effectiveMs": 168.42927168531702
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 401.23829946546675,
+                "firstAuxRate": 0.13665833969990102,
+                "secondAuxRate": 0.01682549820260295,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0009938102183349804,
+                "meanRejectedCandidates": 0.0011139877107063719,
+                "meanPageActions": 0,
+                "meanKeys": 4.153483837902504,
+                "effectiveMs": 447.9354363527542
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 332.40152101065564,
+                "firstAuxRate": 0.486548010494748,
+                "secondAuxRate": 0.1771289378135697,
+                "thirdAuxRate": 0.0410958340484991,
+                "selectionRate": 0.005359668251960432,
+                "meanRejectedCandidates": 0.006516430583146912,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.704772782356817,
+                "effectiveMs": 547.3755057603586
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 430.8559351798763,
+                "firstAuxRate": 0.22701626093053784,
+                "secondAuxRate": 0.026442115898411767,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0019753364892470134,
+                "meanRejectedCandidates": 0.0027828965336957304,
+                "meanPageActions": 0.00004162304791599306,
+                "meanKeys": 4.25345837682895,
+                "effectiveMs": 508.230281863169
+              }
+            },
+            "weightedCostDeltaMs": 0,
+            "costReversalFrequency": 0.00006879284656866597,
+            "riskReversalFrequency": null,
+            "riskBelowFourFrequency": null,
+            "mostFrequentLongRows": [
+              {
+                "text": "发表时间",
+                "code": "FBLJA",
+                "mass": 0.00009933344389031657,
+                "oldMs": 499.8258743286133,
+                "newMs": 499.8258743286133,
+                "deltaMs": 0
+              },
+              {
+                "text": "监督管理",
+                "code": "JDGEI",
+                "mass": 0.00008252117224738234,
+                "oldMs": 482.61492919921875,
+                "newMs": 482.61492919921875,
+                "deltaMs": 0
+              },
+              {
+                "text": "商品名称",
+                "code": "LPMSO",
+                "mass": 0.00007266539045670337,
+                "oldMs": 471.14244079589844,
+                "newMs": 471.14244079589844,
+                "deltaMs": 0
+              },
+              {
+                "text": "方法",
+                "code": "FMFSA",
+                "mass": 0.0000696711757101799,
+                "oldMs": 501.26695251464844,
+                "newMs": 501.26695251464844,
+                "deltaMs": 0
+              },
+              {
+                "text": "当然",
+                "code": "DMRLU",
+                "mass": 0.00006952453489120551,
+                "oldMs": 409.78736114501953,
+                "newMs": 409.78736114501953,
+                "deltaMs": 0
+              },
+              {
+                "text": "及其",
+                "code": "JFQFV",
+                "mass": 0.00006950427986796023,
+                "oldMs": 668.2989654541016,
+                "newMs": 668.2989654541016,
+                "deltaMs": 0
+              }
+            ],
+            "score": 9.184139378153638
+          },
+          "block": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 101.76174344671195,
+                "firstAuxRate": 0.18212533345465515,
+                "secondAuxRate": 0.03422421041317676,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.002682052002377003,
+                "meanRejectedCandidates": 0.0030653443057833425,
+                "meanPageActions": 5.555384670623581e-7,
+                "meanKeys": 2.216349543867832,
+                "effectiveMs": 168.42927168531702
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 399.87102301532735,
+                "firstAuxRate": 0.13665833969990102,
+                "secondAuxRate": 0.01682549820260295,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0009938102183349804,
+                "meanRejectedCandidates": 0.0011139877107063719,
+                "meanPageActions": 0,
+                "meanKeys": 4.153483837902504,
+                "effectiveMs": 446.5681599026148
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 331.43272237619317,
+                "firstAuxRate": 0.486548010494748,
+                "secondAuxRate": 0.1771289378135697,
+                "thirdAuxRate": 0.0410958340484991,
+                "selectionRate": 0.005359668251960432,
+                "meanRejectedCandidates": 0.006516430583146912,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.704772782356817,
+                "effectiveMs": 546.4067071258961
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 429.2745167891542,
+                "firstAuxRate": 0.22701626093053784,
+                "secondAuxRate": 0.026442115898411767,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0019753364892470134,
+                "meanRejectedCandidates": 0.0027828965336957304,
+                "meanPageActions": 0.00004162304791599306,
+                "meanKeys": 4.25345837682895,
+                "effectiveMs": 506.64886347244686
+              }
+            },
+            "weightedCostDeltaMs": -1.1086743959369316,
+            "costReversalFrequency": 0,
+            "riskReversalFrequency": 0.00012300243521201485,
+            "riskBelowFourFrequency": 0,
+            "mostFrequentLongRows": [
+              {
+                "text": "发表时间",
+                "code": "FBLJA",
+                "mass": 0.00009933344389031657,
+                "oldMs": 499.8258743286133,
+                "newMs": 522.1101792139117,
+                "deltaMs": 22.28430488529841,
+                "errorProbability": 0.0810032025991968,
+                "prefixErrorProbability": 0.07528178642423089
+              },
+              {
+                "text": "监督管理",
+                "code": "JDGEI",
+                "mass": 0.00008252117224738234,
+                "oldMs": 482.61492919921875,
+                "newMs": 492.6613434112115,
+                "deltaMs": 10.046414211992726,
+                "errorProbability": 0.0503563381301646,
+                "prefixErrorProbability": 0.048241869131333104
+              },
+              {
+                "text": "商品名称",
+                "code": "LPMSO",
+                "mass": 0.00007266539045670337,
+                "oldMs": 471.14244079589844,
+                "newMs": 470.7561020745188,
+                "deltaMs": -0.3863387213796159,
+                "errorProbability": 0.03994616939094664,
+                "prefixErrorProbability": 0.037170027654431115
+              },
+              {
+                "text": "方法",
+                "code": "FMFSA",
+                "mass": 0.0000696711757101799,
+                "oldMs": 501.26695251464844,
+                "newMs": 475.0591686757314,
+                "deltaMs": -26.20778383891701,
+                "errorProbability": 0.05413919665735201,
+                "prefixErrorProbability": 0.044172345512892175
+              },
+              {
+                "text": "当然",
+                "code": "DMRLU",
+                "mass": 0.00006952453489120551,
+                "oldMs": 409.78736114501953,
+                "newMs": 399.6508307567148,
+                "deltaMs": -10.13653038830472,
+                "errorProbability": 0.03311747701942913,
+                "prefixErrorProbability": 0.02631105974867365
+              },
+              {
+                "text": "及其",
+                "code": "JFQFV",
+                "mass": 0.00006950427986796023,
+                "oldMs": 668.2989654541016,
+                "newMs": 631.104002817526,
+                "deltaMs": -37.19496263657561,
+                "errorProbability": 0.04544599900635804,
+                "prefixErrorProbability": 0.03717483430121482
+              }
+            ],
+            "score": 9.18735635999197
+          },
+          "sequential": {
+            "tracks": {
+              "character": {
+                "count": 6233,
+                "totalWeight": 34201052,
+                "motorUpperMs": 101.76174344671195,
+                "firstAuxRate": 0.18212533345465515,
+                "secondAuxRate": 0.03422421041317676,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.002682052002377003,
+                "meanRejectedCandidates": 0.0030653443057833425,
+                "meanPageActions": 5.555384670623581e-7,
+                "meanKeys": 2.216349543867832,
+                "effectiveMs": 168.42927168531702
+              },
+              "word2": {
+                "count": 132814,
+                "totalWeight": 3604044247,
+                "motorUpperMs": 399.82866913569,
+                "firstAuxRate": 0.13665833969990102,
+                "secondAuxRate": 0.01682549820260295,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0009938102183349804,
+                "meanRejectedCandidates": 0.0011139877107063719,
+                "meanPageActions": 0,
+                "meanKeys": 4.153483837902504,
+                "effectiveMs": 446.52580602297746
+              },
+              "word3": {
+                "count": 72923,
+                "totalWeight": 1101481234,
+                "motorUpperMs": 331.37814766726467,
+                "firstAuxRate": 0.486548010494748,
+                "secondAuxRate": 0.1771289378135697,
+                "thirdAuxRate": 0.0410958340484991,
+                "selectionRate": 0.005359668251960432,
+                "meanRejectedCandidates": 0.006516430583146912,
+                "meanPageActions": 0.000001758541081054859,
+                "meanKeys": 3.704772782356817,
+                "effectiveMs": 546.3521324169676
+              },
+              "word4": {
+                "count": 77674,
+                "totalWeight": 828363172,
+                "motorUpperMs": 429.20615911201526,
+                "firstAuxRate": 0.22701626093053784,
+                "secondAuxRate": 0.026442115898411767,
+                "thirdAuxRate": 0,
+                "selectionRate": 0.0019753364892470134,
+                "meanRejectedCandidates": 0.0027828965336957304,
+                "meanPageActions": 0.00004162304791599306,
+                "meanKeys": 4.25345837682895,
+                "effectiveMs": 506.58050579530794
+              }
+            },
+            "weightedCostDeltaMs": -1.1503400667671557,
+            "costReversalFrequency": 0,
+            "riskReversalFrequency": 0,
+            "riskBelowFourFrequency": 0,
+            "mostFrequentLongRows": [
+              {
+                "text": "发表时间",
+                "code": "FBLJA",
+                "mass": 0.00009933344389031657,
+                "oldMs": 499.8258743286133,
+                "newMs": 522.1101792139117,
+                "deltaMs": 22.28430488529841,
+                "errorProbability": 0.0810032025991968,
+                "prefixErrorProbability": 0.07528178642423089
+              },
+              {
+                "text": "监督管理",
+                "code": "JDGEI",
+                "mass": 0.00008252117224738234,
+                "oldMs": 482.61492919921875,
+                "newMs": 492.6613434112115,
+                "deltaMs": 10.046414211992726,
+                "errorProbability": 0.0503563381301646,
+                "prefixErrorProbability": 0.048241869131333104
+              },
+              {
+                "text": "商品名称",
+                "code": "LPMSO",
+                "mass": 0.00007266539045670337,
+                "oldMs": 471.14244079589844,
+                "newMs": 470.7561020745188,
+                "deltaMs": -0.3863387213796159,
+                "errorProbability": 0.03994616939094664,
+                "prefixErrorProbability": 0.037170027654431115
+              },
+              {
+                "text": "方法",
+                "code": "FMFSA",
+                "mass": 0.0000696711757101799,
+                "oldMs": 501.26695251464844,
+                "newMs": 475.0591686757314,
+                "deltaMs": -26.20778383891701,
+                "errorProbability": 0.05413919665735201,
+                "prefixErrorProbability": 0.044172345512892175
+              },
+              {
+                "text": "当然",
+                "code": "DMRLU",
+                "mass": 0.00006952453489120551,
+                "oldMs": 409.78736114501953,
+                "newMs": 399.6508307567148,
+                "deltaMs": -10.13653038830472,
+                "errorProbability": 0.03311747701942913,
+                "prefixErrorProbability": 0.02631105974867365
+              },
+              {
+                "text": "及其",
+                "code": "JFQFV",
+                "mass": 0.00006950427986796023,
+                "oldMs": 668.2989654541016,
+                "newMs": 631.104002817526,
+                "deltaMs": -37.19496263657561,
+                "errorProbability": 0.04544599900635804,
+                "prefixErrorProbability": 0.03717483430121482
+              }
+            ],
+            "score": 9.18791264369483
+          }
+        }
+      }
+    ],
+    "fullF19BlockReplayVerified": true
+  },
+  "examples": [
+    {
+      "code": "YYWX",
+      "models": {
+        "legacy": {
+          "upperMs": 598.8310699462891,
+          "exact": true,
+          "codeLength": 4,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        },
+        "block": {
+          "upperMs": 598.8310699462891,
+          "exact": true,
+          "codeLength": 4,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        },
+        "sequential": {
+          "upperMs": 598.8310699462891,
+          "exact": true,
+          "codeLength": 4,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        }
+      },
+      "risk": {
+        "block": {
+          "success": 0.8563338997244968,
+          "errorProbability": 0.1436661002755032,
+          "errorSum": 0.14500912028597668
+        },
+        "sequential": {
+          "success": 0.8563338997244968,
+          "errorProbability": 0.1436661002755032,
+          "errorSum": 0.14500912028597668
+        }
+      }
+    },
+    {
+      "code": "YYWXO",
+      "models": {
+        "legacy": {
+          "upperMs": 562.2909278869629,
+          "exact": false,
+          "codeLength": 5,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        },
+        "block": {
+          "upperMs": 635.9211163431532,
+          "exact": false,
+          "codeLength": 5,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 562.2909278869629,
+          "success": 0.8535225955340177,
+          "errorProbability": 0.14647740446598234,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.0032829532865434885,
+          "incrementalErrorProbability": 0.002811304190479139,
+          "anchoredErrorSum": 0.14782042447645583,
+          "prefixErrorSum": 0.14500912028597668,
+          "errorCorrectionMs": 73.63018845619031,
+          "oldErrorSum": 0.05368824797915295,
+          "inferredTimingMs": 520.2959803176694,
+          "anchoredErrorCostMs": 115.62513602548376,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "block"
+        },
+        "sequential": {
+          "upperMs": 635.9211163431532,
+          "exact": false,
+          "codeLength": 5,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 562.2909278869629,
+          "success": 0.8535225955340177,
+          "errorProbability": 0.14647740446598234,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.0032829532865434885,
+          "incrementalErrorProbability": 0.002811304190479139,
+          "anchoredErrorSum": 0.14782042447645583,
+          "prefixErrorSum": 0.14500912028597668,
+          "errorCorrectionMs": 73.63018845619031,
+          "oldErrorSum": 0.05368824797915295,
+          "inferredTimingMs": 520.2959803176694,
+          "anchoredErrorCostMs": 115.62513602548376,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "sequential"
+        }
+      },
+      "risk": {
+        "block": {
+          "success": 0.8535225955340177,
+          "errorProbability": 0.14647740446598234,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.0032829532865434885,
+          "incrementalErrorProbability": 0.002811304190479139,
+          "anchoredErrorSum": 0.14782042447645583,
+          "prefixErrorSum": 0.14500912028597668
+        },
+        "sequential": {
+          "success": 0.8535225955340177,
+          "errorProbability": 0.14647740446598234,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.0032829532865434885,
+          "incrementalErrorProbability": 0.002811304190479139,
+          "anchoredErrorSum": 0.14782042447645583,
+          "prefixErrorSum": 0.14500912028597668
+        }
+      }
+    },
+    {
+      "code": "YYWXOA",
+      "models": {
+        "legacy": {
+          "upperMs": 738.0458679199219,
+          "exact": false,
+          "codeLength": 6,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        },
+        "block": {
+          "upperMs": 802.4035284556095,
+          "exact": false,
+          "codeLength": 6,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 738.0458679199219,
+          "success": 0.8343080207016355,
+          "errorProbability": 0.16569197929836454,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.025721134045899152,
+          "incrementalErrorProbability": 0.022025879022861346,
+          "anchoredErrorSum": 0.16703499930883803,
+          "prefixErrorSum": 0.14500912028597668,
+          "errorCorrectionMs": 64.35766053568763,
+          "oldErrorSum": 0.08475724357413128,
+          "inferredTimingMs": 671.7487519962364,
+          "anchoredErrorCostMs": 130.65477645937312,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "block"
+        },
+        "sequential": {
+          "upperMs": 802.5227741022177,
+          "exact": false,
+          "codeLength": 6,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 738.0458679199219,
+          "success": 0.8341555716520214,
+          "errorProbability": 0.16584442834797863,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.02589915928776232,
+          "incrementalErrorProbability": 0.02217832807247543,
+          "anchoredErrorSum": 0.16718744835845212,
+          "prefixErrorSum": 0.14500912028597668,
+          "errorCorrectionMs": 64.47690618229576,
+          "oldErrorSum": 0.08475724357413128,
+          "inferredTimingMs": 671.7487519962364,
+          "anchoredErrorCostMs": 130.77402210598126,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "sequential"
+        }
+      },
+      "risk": {
+        "block": {
+          "success": 0.8343080207016355,
+          "errorProbability": 0.16569197929836454,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.025721134045899152,
+          "incrementalErrorProbability": 0.022025879022861346,
+          "anchoredErrorSum": 0.16703499930883803,
+          "prefixErrorSum": 0.14500912028597668
+        },
+        "sequential": {
+          "success": 0.8341555716520214,
+          "errorProbability": 0.16584442834797863,
+          "prefixErrorProbability": 0.1436661002755032,
+          "tailErrorProbability": 0.02589915928776232,
+          "incrementalErrorProbability": 0.02217832807247543,
+          "anchoredErrorSum": 0.16718744835845212,
+          "prefixErrorSum": 0.14500912028597668
+        }
+      }
+    },
+    {
+      "code": "XFYWA",
+      "models": {
+        "legacy": {
+          "upperMs": 596.3913269042969,
+          "exact": false,
+          "codeLength": 5,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        },
+        "block": {
+          "upperMs": 527.8633873356018,
+          "exact": false,
+          "codeLength": 5,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 596.3913269042969,
+          "success": 0.961827631872808,
+          "errorProbability": 0.03817236812719205,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.014888525940477848,
+          "incrementalErrorProbability": 0.01453662455924397,
+          "anchoredErrorSum": 0.038333621592303566,
+          "prefixErrorSum": 0.023796997033059597,
+          "errorCorrectionMs": -68.52793956869502,
+          "oldErrorSum": 0.12594285141676664,
+          "inferredTimingMs": 497.878828526102,
+          "anchoredErrorCostMs": 29.984558809499852,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "block"
+        },
+        "sequential": {
+          "upperMs": 527.8633873356018,
+          "exact": false,
+          "codeLength": 5,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 596.3913269042969,
+          "success": 0.961827631872808,
+          "errorProbability": 0.03817236812719205,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.014888525940477848,
+          "incrementalErrorProbability": 0.01453662455924397,
+          "anchoredErrorSum": 0.038333621592303566,
+          "prefixErrorSum": 0.023796997033059597,
+          "errorCorrectionMs": -68.52793956869502,
+          "oldErrorSum": 0.12594285141676664,
+          "inferredTimingMs": 497.878828526102,
+          "anchoredErrorCostMs": 29.984558809499852,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "sequential"
+        }
+      },
+      "risk": {
+        "block": {
+          "success": 0.961827631872808,
+          "errorProbability": 0.03817236812719205,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.014888525940477848,
+          "incrementalErrorProbability": 0.01453662455924397,
+          "anchoredErrorSum": 0.038333621592303566,
+          "prefixErrorSum": 0.023796997033059597
+        },
+        "sequential": {
+          "success": 0.961827631872808,
+          "errorProbability": 0.03817236812719205,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.014888525940477848,
+          "incrementalErrorProbability": 0.01453662455924397,
+          "anchoredErrorSum": 0.038333621592303566,
+          "prefixErrorSum": 0.023796997033059597
+        }
+      }
+    },
+    {
+      "code": "XFYWAO",
+      "models": {
+        "legacy": {
+          "upperMs": 586.5693969726562,
+          "exact": false,
+          "codeLength": 6,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19"
+        },
+        "block": {
+          "upperMs": 573.1432021168234,
+          "exact": false,
+          "codeLength": 6,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 586.5693969726562,
+          "success": 0.964328023988541,
+          "errorProbability": 0.035671976011458995,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.012327604543303505,
+          "incrementalErrorProbability": 0.012036232443510913,
+          "anchoredErrorSum": 0.03583322947657051,
+          "prefixErrorSum": 0.023796997033059597,
+          "errorCorrectionMs": -13.426194855832863,
+          "oldErrorSum": 0.052997886668890715,
+          "inferredTimingMs": 545.1144500202499,
+          "anchoredErrorCostMs": 28.028752096573456,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "block"
+        },
+        "sequential": {
+          "upperMs": 578.8452086252457,
+          "exact": false,
+          "codeLength": 6,
+          "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+          "legacyUpperMs": 586.5693969726562,
+          "success": 0.957038319937886,
+          "errorProbability": 0.04296168006211398,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.019793777134764268,
+          "incrementalErrorProbability": 0.019325936494165866,
+          "anchoredErrorSum": 0.04312293352722546,
+          "prefixErrorSum": 0.023796997033059597,
+          "errorCorrectionMs": -7.724188347410562,
+          "oldErrorSum": 0.052997886668890715,
+          "inferredTimingMs": 545.1144500202499,
+          "anchoredErrorCostMs": 33.730758604995756,
+          "continuationModel": "four-prefix-tail-success-v1",
+          "tailMode": "sequential"
+        }
+      },
+      "risk": {
+        "block": {
+          "success": 0.964328023988541,
+          "errorProbability": 0.035671976011458995,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.012327604543303505,
+          "incrementalErrorProbability": 0.012036232443510913,
+          "anchoredErrorSum": 0.03583322947657051,
+          "prefixErrorSum": 0.023796997033059597
+        },
+        "sequential": {
+          "success": 0.957038319937886,
+          "errorProbability": 0.04296168006211398,
+          "prefixErrorProbability": 0.023635743567948064,
+          "tailErrorProbability": 0.019793777134764268,
+          "incrementalErrorProbability": 0.019325936494165866,
+          "anchoredErrorSum": 0.04312293352722546,
+          "prefixErrorSum": 0.023796997033059597
+        }
+      }
+    }
+  ]
+}
