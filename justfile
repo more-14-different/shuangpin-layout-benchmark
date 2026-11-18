@@ -1,5 +1,10 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-76-aeo-v52:
+    node --max-old-space-size=4096 tools/export_ckt_v52_templates.js
+    python -X utf8 tools/search_cr_76_aeo_v52.py
+    node --max-old-space-size=4096 tools/verify_cr_76_aeo_v52.js
+
 ckt-v52-score:
     node --max-old-space-size=6144 tools/score_ckt_v52.js
 
