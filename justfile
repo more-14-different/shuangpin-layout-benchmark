@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-retroflex-home-v52:
+    python -X utf8 tools/search_cr_retroflex_home_v52.py
+    node --max-old-space-size=4096 tools/verify_cr_76_aeo_v52.js research/notes/2026-11-18-cr-retroflex-home-v52.json --selected-only
+
 cr-aeo-onsets-v52:
     python -X utf8 tools/search_cr_aeo_onsets_v52.py
     node --max-old-space-size=4096 tools/verify_cr_76_aeo_v52.js research/notes/2026-11-18-cr-aeo-onsets-v52.json --selected-only
