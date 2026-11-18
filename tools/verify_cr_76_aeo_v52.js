@@ -39,6 +39,12 @@ function main() {
       const retroflex = fixture.atoms.flatMap((atom,index) => ['ch','sh','zh'].includes(atom.name) ? [index] : []);
       assert.ok(retroflex.filter(index => 'ASDFGHJKL'.includes(state.firstKeys[index])).length >= report.constraints.minRetroflexHome);
     }
+    if (report.constraints.minRetroflexOnRow) {
+      const rowKeys = {home:'ASDFGHJKL',bottom:'ZXCVBNM'}[report.constraints.retroflexRow];
+      assert.ok(rowKeys,'unknown retroflex row');
+      const indices = fixture.atoms.flatMap((atom,index) => ['ch','sh','zh'].includes(atom.name) ? [index] : []);
+      assert.ok(indices.filter(index => rowKeys.includes(state.firstKeys[index])).length >= report.constraints.minRetroflexOnRow);
+    }
     const layout = {tonedCodes: []}, bundle = {tokenKeys: []};
     fixture.tonedCodes.forEach((codes, py) => codes.forEach((code, index) => {
       if (!code) return;
