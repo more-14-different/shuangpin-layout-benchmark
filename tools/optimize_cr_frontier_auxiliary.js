@@ -28,7 +28,15 @@ async function main(){
   delete data.tonedContractBenchmark;
   const words=scorer.multiwords(path.join(snow,'snow_pinyin.base.dict.yaml'),data,.99);
   const strokes=scorer.strokeOptions(path.join(snow,'rime-stroke/stroke.dict.yaml'));
-  const motor=toned.projectedMotor(data),reference=toned.buildReference({data,words,strokes,motor,snow});
+  const version=option('version','v51');
+  if(!['v51','v52'].includes(version))throw Error('unknown CKT version');
+  const profilePath=option('profile','research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json');
+  const motor=version==='v51'?toned.projectedMotor(data):model.projectedMotor(
+    require('./ckt_block_error').blockErrorMotor(JSON.parse(fs.readFileSync('tools/ckt_v4_upstream_role_tables.json','utf8')),
+      JSON.parse(fs.readFileSync(profilePath,'utf8'))),'ABCDEFGHIJKLMNOPQRSTUVWXYZ;,./',data.ckt.calibration.extension_maps);
+  const reference=version==='v51'?toned.buildReference({data,words,strokes,motor,snow}):{
+    tracks:JSON.parse(fs.readFileSync('research/notes/2026-11-18-ckt-v52-all-schemes.json','utf8')).references.v52.keytao,
+    summarize:require(path.join(snow,'scripts/research/evaluate_ckt51_aux_order.js')).summarize};
   const archive=require('../research/config/cr-frontier-finalists.json');
   const original={speed:archive.finalists.find(r=>r.role==='global_ckt_minimum').item,
     balanced:archive.finalists.find(r=>r.role==='balanced_daily_king').item,daily:archive.finalists.find(r=>r.role==='ultra_high_daily').item};
@@ -41,11 +49,12 @@ async function main(){
     bundle={tokenKeys:fixtures[0].inventory.tokenKeys,layouts:fixtures.map(f=>({...f.layout,profile:f.profile,rustScore:f.metrics.ckt}))};
   }
   const cases=[200,300,400].flatMap(auxiliary=>[300,600,900].map(selection=>({auxiliary,selection})));
-  const result={version:'cr-frontier-auxiliary-policy-v1',contract:{shapeKeysByMeaning:'AVUIO',toneKeysByTone:'IVUAO',
+  const result={version:'cr-frontier-auxiliary-policy-v1',cktVersion:version,reference:{tracks:reference.tracks},contract:{shapeKeysByMeaning:'AVUIO',toneKeysByTone:'IVUAO',
     reference:'S005 fixed 12/213/24; native four tracks 1:3:1:1',memory:'sound-rule M-T1 unchanged; auxiliary-order learning is outside this ledger',
     sensitivity:'same frequency-ranked routing and motor outcomes; recompute cognitive costs and S005 reference for each case'},
     sourceHashes:Object.fromEntries([option('html','a7_CKT_R11.html'),'tools/ckt_v4_upstream_role_tables.json',__filename,
       path.join(snow,'snow_pinyin.base.dict.yaml'),path.join(snow,'rime-stroke/stroke.dict.yaml'),
+      ...(version==='v52'?[profilePath,'tools/ckt_block_error.js','research/notes/2026-11-18-ckt-v52-all-schemes.json']:[]),
       ...(file?[file]:Object.values(original).map(item=>'a7_CKT_R11_integrated_materials/cr_gpu_frontier/CR-GPU-'+item.key.slice(0,10)+'.fixture.json'))]
       .map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')])),cases,results:[]};
   const output=option('output','research/notes/2026-11-16-cr-frontier-followup-auxiliary.json');
@@ -73,11 +82,12 @@ async function main(){
     }
     const anchor=layout.wordAuxiliaryPolicy||{word2:'12',word3:'213',word4:'24'};
     const baseline=rows.find(r=>['word2','word3','word4'].every(kind=>r.policy[kind]===anchor[kind]));
-    if(Math.abs(baseline.score-layout.rustScore)>1e-9)throw Error('fixed-policy anchor mismatch '+layout.id);
+    const expected=version==='v51'?layout.rustScore:layout.expectedV52;
+    if(expected!==undefined&&Math.abs(baseline.score-expected)>1e-9)throw Error('fixed-policy anchor mismatch '+layout.id);
     for(const row of rows)for(const kind of Object.keys(weights))
       if(row.tracks[kind].count!==baseline.tracks[kind].count||row.tracks[kind].totalWeight!==baseline.tracks[kind].totalWeight)
         throw Error('auxiliary policy changed the evaluated cohort: '+layout.id+'/'+kind);
-    const ceiling=layout.constraints?.pinkyCeiling??(layout.profile==='speed'?1:original[layout.profile].metrics.pinky);
+    const ceiling=layout.constraints?.pinkyCeiling??(layout.profile==='speed'?1:(original[layout.profile]?.metrics.pinky??1));
     const rightCeiling=layout.constraints?.rightPinkyCeiling??1;
     const eligible=rows.filter(r=>r.pinky<=ceiling+1e-12&&r.rightPinky<=rightCeiling+1e-12),standard=[...eligible].sort((a,b)=>a.score-b.score)[0];
     const robust=chooseRobust(eligible,cases)[0];

@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+f19-v52-audit-prepare:
+    python -X utf8 tools/prepare_f19_v52_audit.py
+    node --max-old-space-size=2048 tools/export_f19_v52_policy_templates.js
+    python -X utf8 tools/enumerate_f19_v52_policies.py
+
+f19-v52-audit:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/audit_f19_v52_robustness.py --workers 3
+    python -X utf8 tools/f19_v52_ergonomics.py
+    node --max-old-space-size=6144 tools/verify_f19_v52_audit.js
+    python -X utf8 tools/report_f19_v52_audit.py
+
+f19-v52-audit-test:
+    python -m unittest discover -s tests -p test_f19_v52_audit.py
+    node --test tests/cr-frontier-auxiliary.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 continuous-shuangpin-5500:
     python -X utf8 tools/continuous_shuangpin.py
 
