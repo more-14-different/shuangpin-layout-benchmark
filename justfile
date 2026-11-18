@@ -1,5 +1,24 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-lan-f19-combined phase="all" workers="12":
+    python -X utf8 tools/search_cr_lan_f19_combined.py --phase "{{phase}}" --workers "{{workers}}"
+
+cr-lan-f19-combined-verify:
+    python -X utf8 tools/verify_cr_lan_f19_combined.py
+
+cr-lan-f19-combined-targeted phase="propose" workers="4":
+    python -X utf8 tools/explore_cr_lan_f19_two_swap.py --phase "{{phase}}" --workers "{{workers}}"
+
+cr-lan-f19-combined-refine phase="joint1" workers="12":
+    python -X utf8 tools/refine_cr_lan_f19_full.py --phase "{{phase}}" --workers "{{workers}}"
+
+cr-lan-f19-combined-target rounds="3" workers="12":
+    python -X utf8 tools/refine_cr_lan_f19_target.py --rounds "{{rounds}}" --workers "{{workers}}"
+
+cr-lan-f19-combined-test:
+    python -m unittest discover -s tests -p test_cr_lan_f19_combined.py
+    node --test tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
 cr-lan-f19-regroup phase="all" workers="4":
     python -X utf8 tools/regroup_cr_lan_f19_roots.py --phase "{{phase}}" --workers "{{workers}}"
 
