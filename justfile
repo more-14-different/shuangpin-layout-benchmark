@@ -1,5 +1,14 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+ckt-long-export python="python":
+    & "{{python}}" -X utf8 tools/export_ckt_long_error_profile.py
+
+ckt-long-audit samples="100000":
+    node --max-old-space-size=6144 tools/audit_ckt_long_continuation.js --samples "{{samples}}"
+
+ckt-long-test:
+    node --test tests/ckt-long-continuation.test.mjs tests/ckt-v4-model.test.mjs tests/toned-native-policy.test.mjs tests/auxiliary-semantics.test.mjs
+
 cr-lan-aeo-heads phase="all" workers="12":
     python -X utf8 tools/search_cr_lan_aeo_heads.py --phase "{{phase}}" --workers "{{workers}}"
 
