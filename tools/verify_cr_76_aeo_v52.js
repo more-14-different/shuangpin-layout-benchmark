@@ -40,7 +40,7 @@ function main() {
       assert.ok(retroflex.filter(index => 'ASDFGHJKL'.includes(state.firstKeys[index])).length >= report.constraints.minRetroflexHome);
     }
     if (report.constraints.minRetroflexOnRow) {
-      const rowKeys = {home:'ASDFGHJKL',bottom:'ZXCVBNM'}[report.constraints.retroflexRow];
+      const rowKeys = {home:'ASDFGHJKL',bottom:'ZXCVBNM',top:'QWERTYUIOP'}[report.constraints.retroflexRow];
       assert.ok(rowKeys,'unknown retroflex row');
       const indices = fixture.atoms.flatMap((atom,index) => ['ch','sh','zh'].includes(atom.name) ? [index] : []);
       assert.ok(indices.filter(index => rowKeys.includes(state.firstKeys[index])).length >= report.constraints.minRetroflexOnRow);

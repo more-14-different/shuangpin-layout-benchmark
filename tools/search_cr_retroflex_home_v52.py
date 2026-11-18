@@ -17,7 +17,7 @@ from search_cr_lan_f19_combined import (
     single_root_moves,
 )
 
-ROWS = {"home": set("ASDFGHJKL"), "bottom": set("ZXCVBNM")}
+ROWS = {"home": set("ASDFGHJKL"), "bottom": set("ZXCVBNM"), "top": set("QWERTYUIOP")}
 LEFT_LIMIT = 0.09032422256372921
 RIGHT_LIMIT = 0.07468205050495597
 
@@ -216,6 +216,38 @@ def main():
 
         batch(evacuate_bottom_hosts(), "evacuate-bottom-hosts")
         batch(neighbors(True), "bottom-compensated-polish")
+    if args.row == "top":
+
+        def evacuate_top_hosts():
+            ordinary = {
+                a["baselineKey"]: i
+                for i, a in enumerate(space.f["atoms"])
+                if len(a["initial"]) == 1 and a["initial"] != "_"
+            }
+            occupied = sorted(
+                row_keys.intersection(space.allowed_first).intersection(ordinary)
+            )
+            for seed in seeds.values():
+                for pair in itertools.permutations(occupied, 2):
+                    for remaining in retroflex:
+                        state = copy.deepcopy(seed["state"])
+                        for i, a in enumerate(space.f["atoms"]):
+                            if len(a["initial"]) == 1 and a["initial"] != "_":
+                                state["firstKeys"][i] = a["baselineKey"]
+                        moving = [i for i in retroflex if i != remaining]
+                        for i, key in zip(moving, pair):
+                            state["firstKeys"][i] = key
+                        destinations = {(key, "E") for key in space.allowed_first} | {
+                            ("E", key) for key in space.allowed_first
+                        }
+                        for first, second in sorted(destinations):
+                            candidate = copy.deepcopy(state)
+                            candidate["firstKeys"][ordinary[pair[0]]] = first
+                            candidate["firstKeys"][ordinary[pair[1]]] = second
+                            yield f"evacuate-top:{pair}>{first}/{second}", candidate
+
+        batch(evacuate_top_hosts(), "evacuate-top-hosts")
+        batch(neighbors(True), "top-compensated-polish")
     rows = sorted(cache.values(), key=lambda r: r["metrics"]["cktV52"])
     target = [r for r in rows if r["metrics"]["daily"] > 130]
     production = [r for r in target if loads_ok(r)]
@@ -275,10 +307,14 @@ def main():
         report["bestWithExactlyTwoHomeProduction"] = report[
             "bestWithExactlyTwoOnRowProduction"
         ]
-    else:
+    elif args.row == "bottom":
         report[
             "scope"
         ] += "; simultaneous bottom-host evacuation and compensated polish included"
+    elif args.row == "top":
+        report[
+            "scope"
+        ] += "; simultaneous top-host evacuation through E and compensated polish included"
     atomic_json(OUTPUT, report)
     OUTPUT.with_name(OUTPUT.stem + "-scores.json.gz").write_bytes(
         gzip.compress(
