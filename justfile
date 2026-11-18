@@ -1,5 +1,17 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+ckt-v52-score:
+    node --max-old-space-size=6144 tools/score_ckt_v52.js
+
+ckt-v52-integrate:
+    node --max-old-space-size=6144 tools/integrate_ckt_v52.js
+
+ckt-v52-test:
+    node --test tests/ckt-v52.test.mjs tests/ckt-block-error.test.mjs tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
+ckt-v52-browser:
+    node tests/ckt-v52.browser.mjs
+
 ckt-long-export python="python":
     & "{{python}}" -X utf8 tools/export_ckt_long_error_profile.py
 

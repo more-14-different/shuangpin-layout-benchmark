@@ -89,4 +89,4 @@ just ckt-block-test
 just ckt-block-audit
 ```
 
-实现为 `tools/ckt_block_error.js`，默认 `tailMode: 'block'`，对照为 `tailMode: 'sequential'`。记录为 `research/notes/2026-11-18-ckt-block-error-audit.json`。默认评分入口与已发布榜单仍使用冻结历史口径。
+实现为 `tools/ckt_block_error.js`，默认 `tailMode: 'block'`，对照为 `tailMode: 'sequential'`。记录为 `research/notes/2026-11-18-ckt-block-error-audit.json`。该分块公式现作为 [CKT v5.2](CKT_v52_SPEC.md) 单独发布；原历史评分入口和 v5.1 列保留。
