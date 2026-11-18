@@ -1,0 +1,2173 @@
+{
+  "version": "continuous-shuangpin-5500-v1-experimental",
+  "definition": "Each Han is exactly two sound keys. Sum every native interval once using L4i2 centrally and native boundary roles at Han-run ends. Punctuation/line ends split runs. No word resets, error losses, or startup penalty.",
+  "corpusSha256": "ac313db8c93b7dc365496e4c2c8062c58709b3bff48cf3425829a84faf518123",
+  "timingSha256": "7ef4dce9a5a099228e536d6757f1dc4e57b77c56e0e552c63e3672ef07aadfe2",
+  "timingModel": {
+    "version": "continuous-motor-timing-v1",
+    "keys": "ABCDEFGHIJKLMNOPQRSTUVWXYZ;,./",
+    "upstream": "https://github.com/zhanghaozhecn/better-keystroke-timing",
+    "upstreamCommit": "e37cbcfe454f872f05df7b37c686be0b6974cf19",
+    "snapshotSha256": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+    "errorProfileSha256": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "errorProfileFit": {
+      "events": 50461,
+      "errors": 932,
+      "xgboostVersion": "3.4.1",
+      "sourceHashes": {
+        "分析-错误率.py": "4125b0b0077debb9bd1a5a22126a5eb2bfe9ea2535a84d3e6b825524f1b2b63b",
+        "分析-按键时间.py": "d710c08ae1efe6dd466ed0e93b1ea63da1ec7f93709d4b9e987b1d46f4367690",
+        "数据/击键测速数据.tsv": "e010cfe686660ff2579dccf95e27ed834121aa26a65bb744eec9750472c30f95"
+      },
+      "maximumNamedFeatureDifference": 0
+    },
+    "interpretation": "Experimental timing-only reconstruction: frozen native equivalent minus rebuilt pinned XGB error probability times recovery time. Continuous use is a local-context extrapolation, not a measured long-string model.",
+    "startupMs": 0
+  },
+  "referenceId": "f19a0ad1dc",
+  "scoreDefinition": "100 * f19 msPerHan / candidate msPerHan; higher is better; primary physical quantity is msPerHan",
+  "sourceHashes": {
+    "research/config/cr-76-aeo-v52.json": "442489a1f645ca970efd6b93de8f27902674e6f1546f79e5275f58783d5aca4b",
+    "research/notes/2026-11-17-cr-lan-fixed-finalists.json": "397e6066d4d79351ef1634bfed25394a2ff2422a874e893b273c1c9100151974",
+    "research/notes/2026-11-18-cr-pair-group-swaps-v52.json": "91f8a1c55880f7b0f360a15b89d1780c797d1ff432aa115ab0dbd2a0c4ee3cc4",
+    "research/notes/2026-11-19-cr-six-root-regroup-v52.json": "3a387f251e6dd3da319038bca0b8bc8c1312a65c016a915d3106e058cdbd8687"
+  },
+  "corpusStatistics5500": {
+    "wordCounts": {
+      "1": 333,
+      "4": 350,
+      "2": 1014,
+      "3": 325,
+      "5": 145
+    },
+    "sharesWithinLengths1to4": {
+      "1": 0.16468842729970326,
+      "2": 0.5014836795252225,
+      "3": 0.16073194856577647,
+      "4": 0.17309594460929772
+    },
+    "adjacentWordLengthCounts": {
+      "1>1": 48,
+      "1>2": 128,
+      "1>3": 60,
+      "1>4": 44,
+      "1>5": 28,
+      "2>1": 123,
+      "2>2": 399,
+      "2>3": 122,
+      "2>4": 135,
+      "2>5": 57,
+      "3>1": 29,
+      "3>2": 147,
+      "3>3": 28,
+      "3>4": 57,
+      "3>5": 22,
+      "4>1": 56,
+      "4>2": 89,
+      "4>3": 33,
+      "4>4": 42,
+      "4>5": 14,
+      "5>1": 11,
+      "5>2": 50,
+      "5>3": 20,
+      "5>4": 25,
+      "5>5": 8
+    },
+    "twoThenTwoShare": 0.2247887323943662
+  },
+  "corpusStatistics5000": {
+    "wordCounts": {
+      "1": 296,
+      "4": 333,
+      "2": 882,
+      "3": 288,
+      "5": 141
+    },
+    "sharesWithinLengths1to4": {
+      "1": 0.16453585325180656,
+      "2": 0.490272373540856,
+      "3": 0.16008893829905502,
+      "4": 0.1851028349082824
+    },
+    "adjacentWordLengthCounts": {
+      "1>1": 45,
+      "1>2": 112,
+      "1>3": 52,
+      "1>4": 40,
+      "1>5": 28,
+      "2>1": 105,
+      "2>2": 335,
+      "2>3": 105,
+      "2>4": 129,
+      "2>5": 53,
+      "3>1": 23,
+      "3>2": 126,
+      "3>3": 28,
+      "3>4": 53,
+      "3>5": 22,
+      "4>1": 54,
+      "4>2": 84,
+      "4>3": 31,
+      "4>4": 41,
+      "4>5": 14,
+      "5>1": 10,
+      "5>2": 49,
+      "5>3": 19,
+      "5>4": 25,
+      "5>5": 8
+    },
+    "twoThenTwoShare": 0.21055939660590822
+  },
+  "results": [
+    {
+      "id": "cfefbd5d64",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 23,
+        "guard": 24,
+        "daily": 132.15942520765503,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.149098640708473,
+        "cktV52": 9.152660886754187,
+        "effectiveTracksV52": {
+          "character": 165.66330813985113,
+          "word2": 444.08476826962794,
+          "word3": 547.9581753473715,
+          "word4": 508.49073853357504
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.05684102697848039
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1439393.9642791748,
+        "msPerHan": 261.7079935053045,
+        "independentSyllableMsPerHan": 72.29969833235307,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 719402.2838516235
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 473322.80910491943
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 246668.87132263184
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129365.9786605835,
+          "2": 132541.60330963135,
+          "3": 130995.47302627563,
+          "4": 135789.85986328125,
+          "5": 131683.64863967896,
+          "6": 130099.57824707031,
+          "7": 129445.8303565979,
+          "8": 134077.89932632446,
+          "9": 128192.88005828857,
+          "10": 257201.21279144287
+        },
+        "scoreF19Equals100": 100.74346628021638
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1310793.3578834534,
+        "msPerHan": 262.15867157669067,
+        "independentSyllableMsPerHan": 72.55741194000244,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 655902.2082099915
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 433875.1679763794
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 221015.98169708252
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129365.9786605835,
+          "2": 132541.60330963135,
+          "3": 130995.47302627563,
+          "4": 135789.85986328125,
+          "5": 131683.64863967896,
+          "6": 130099.57824707031,
+          "7": 129445.8303565979,
+          "8": 134077.89932632446,
+          "9": 128192.88005828857,
+          "10": 128600.60639572144
+        },
+        "scoreF19Equals100": 100.77759289919841
+      }
+    },
+    {
+      "id": "cf831a816f",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 132.57766119921507,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.164194736695247,
+        "cktV52": 9.168007365297882,
+        "effectiveTracksV52": {
+          "character": 166.39686722571884,
+          "word2": 445.04716423815034,
+          "word3": 547.9581753473715,
+          "word4": 508.5542489526893
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.058820589236262766
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1439798.332271576,
+        "msPerHan": 261.78151495846834,
+        "independentSyllableMsPerHan": 73.12561006788773,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720332.6583061218
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 470422.4971694946
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 249043.17679595947
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 127930.96411132812,
+          "2": 132474.8402633667,
+          "3": 132694.38803482056,
+          "4": 134079.39806365967,
+          "5": 131276.8688659668,
+          "6": 131098.73567199707,
+          "7": 130117.52522277832,
+          "8": 133840.27095031738,
+          "9": 128939.08190917969,
+          "10": 257346.25917816162
+        },
+        "scoreF19Equals100": 100.71517243357539
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1311125.2026824951,
+        "msPerHan": 262.225040536499,
+        "independentSyllableMsPerHan": 73.1522407157898,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 655819.9102706909
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 431775.27408599854
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 223530.01832580566
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 127930.96411132812,
+          "2": 132474.8402633667,
+          "3": 132694.38803482056,
+          "4": 134079.39806365967,
+          "5": 131276.8688659668,
+          "6": 131098.73567199707,
+          "7": 130117.52522277832,
+          "8": 133840.27095031738,
+          "9": 128939.08190917969,
+          "10": 128673.12958908081
+        },
+        "scoreF19Equals100": 100.75208616651177
+      }
+    },
+    {
+      "id": "a42f8d197b",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 132.49468116992264,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.158258997889344,
+        "cktV52": 9.162009870752627,
+        "effectiveTracksV52": {
+          "character": 165.49679631613094,
+          "word2": 445.110295959978,
+          "word3": 547.9581753473715,
+          "word4": 508.3765427913968
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.05882029337320734
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1440213.4861183167,
+        "msPerHan": 261.8569974760576,
+        "independentSyllableMsPerHan": 73.1364875349565,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720718.0329093933
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 470630.7267150879
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 248864.72649383545
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 127930.96411132812,
+          "2": 132484.8402709961,
+          "3": 132635.9548149109,
+          "4": 134079.39806365967,
+          "5": 131276.0955581665,
+          "6": 131098.73567199707,
+          "7": 130164.68753051758,
+          "8": 133823.80500793457,
+          "9": 129069.14248657227,
+          "10": 257649.8626022339
+        },
+        "scoreF19Equals100": 100.68614042431844
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1311388.5548171997,
+        "msPerHan": 262.2777109634399,
+        "independentSyllableMsPerHan": 73.16419228439331,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 656164.4641189575
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 431875.0754852295
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 223349.0152130127
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 127930.96411132812,
+          "2": 132484.8402709961,
+          "3": 132635.9548149109,
+          "4": 134079.39806365967,
+          "5": 131276.0955581665,
+          "6": 131098.73567199707,
+          "7": 130164.68753051758,
+          "8": 133823.80500793457,
+          "9": 129069.14248657227,
+          "10": 128824.93130111694
+        },
+        "scoreF19Equals100": 100.73185320285624
+      }
+    },
+    {
+      "id": "40efbd68bc",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 130.24955692208619,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.145438670537223,
+        "cktV52": 9.149150076780304,
+        "effectiveTracksV52": {
+          "character": 166.1590883971757,
+          "word2": 443.6977904017097,
+          "word3": 547.9581753473715,
+          "word4": 507.61392615524824
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.0574312203974924
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1441341.158569336,
+        "msPerHan": 262.06202883078834,
+        "independentSyllableMsPerHan": 71.91985082591664,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720550.6762313843
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 472651.32063293457
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 248139.1617050171
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129266.55801391602,
+          "2": 131920.69566345215,
+          "3": 131707.93111038208,
+          "4": 135755.5941543579,
+          "5": 131471.66708755493,
+          "6": 131125.90322875977,
+          "7": 130295.13893890381,
+          "8": 133715.22996520996,
+          "9": 128973.86000061035,
+          "10": 257108.58040618896
+        },
+        "scoreF19Equals100": 100.60736588431386
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1312786.8683662415,
+        "msPerHan": 262.55737367324826,
+        "independentSyllableMsPerHan": 72.12171497802734,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 657067.2602729797
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 433379.7257232666
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 222339.88236999512
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129266.55801391602,
+          "2": 131920.69566345215,
+          "3": 131707.93111038208,
+          "4": 135755.5941543579,
+          "5": 131471.66708755493,
+          "6": 131125.90322875977,
+          "7": 130295.13893890381,
+          "8": 133715.22996520996,
+          "9": 128973.86000061035,
+          "10": 128554.29020309448
+        },
+        "scoreF19Equals100": 100.6245587755979
+      }
+    },
+    {
+      "id": "c2e49137b9",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 130.17113231638908,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.142073137425372,
+        "cktV52": 9.145727871014987,
+        "effectiveTracksV52": {
+          "character": 165.3595383046935,
+          "word2": 443.93975641884026,
+          "word3": 547.9581753473715,
+          "word4": 507.4434010399133
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.057431576788754435
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1441836.4584274292,
+        "msPerHan": 262.15208335044167,
+        "independentSyllableMsPerHan": 71.99475067693537,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 721133.6530761719
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 472758.7492828369
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 247944.0560684204
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129266.55801391602,
+          "2": 131930.69567108154,
+          "3": 131648.58073043823,
+          "4": 135755.5941543579,
+          "5": 131470.34213638306,
+          "6": 131125.90322875977,
+          "7": 130342.09871673584,
+          "8": 133698.76402282715,
+          "9": 129100.71488189697,
+          "10": 257497.20687103271
+        },
+        "scoreF19Equals100": 100.57280522817678
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1313087.8549919128,
+        "msPerHan": 262.6175709983826,
+        "independentSyllableMsPerHan": 72.18061629486084,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 657511.292766571
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 433425.1082458496
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 222151.4539794922
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129266.55801391602,
+          "2": 131930.69567108154,
+          "3": 131648.58073043823,
+          "4": 135755.5941543579,
+          "5": 131470.34213638306,
+          "6": 131125.90322875977,
+          "7": 130342.09871673584,
+          "8": 133698.76402282715,
+          "9": 129100.71488189697,
+          "10": 128748.60343551636
+        },
+        "scoreF19Equals100": 100.60149356614491
+      }
+    },
+    {
+      "id": "eb3e6d94a8",
+      "source": "research/notes/2026-11-18-cr-pair-group-swaps-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 128.2964978823103,
+        "dailyPinky": 0.07538389948813401,
+        "cktV51": 9.13822847369749,
+        "cktV52": 9.141369704463333,
+        "effectiveTracksV52": {
+          "character": 164.8571634552535,
+          "word2": 444.16659201216675,
+          "word3": 547.9581753473715,
+          "word4": 506.3815875020875
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.05743117985092954
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1442828.3748283386,
+        "msPerHan": 262.33243178697063,
+        "independentSyllableMsPerHan": 71.22792229184238,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 719496.7352867126
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 474645.300239563
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 248686.339302063
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129736.18273544312,
+          "2": 132439.44133758545,
+          "3": 131559.63940048218,
+          "4": 135962.0336151123,
+          "5": 131111.37616348267,
+          "6": 130854.66571426392,
+          "7": 130329.837890625,
+          "8": 133595.4864845276,
+          "9": 129395.52194213867,
+          "10": 257844.18954467773
+        },
+        "scoreF19Equals100": 100.5036633837747
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1313906.2800559998,
+        "msPerHan": 262.78125601119996,
+        "independentSyllableMsPerHan": 71.40534583282471,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 655935.6465568542
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 435132.54246520996
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 222838.09103393555
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129736.18273544312,
+          "2": 132439.44133758545,
+          "3": 131559.63940048218,
+          "4": 135962.0336151123,
+          "5": 131111.37616348267,
+          "6": 130854.66571426392,
+          "7": 130329.837890625,
+          "8": 133595.4864845276,
+          "9": 129395.52194213867,
+          "10": 128922.09477233887
+        },
+        "scoreF19Equals100": 100.53882944384877
+      }
+    },
+    {
+      "id": "0cd0ecdfae",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 23,
+        "guard": 24,
+        "daily": 132.03387654388533,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.153080369138424,
+        "cktV52": 9.156917751330035,
+        "effectiveTracksV52": {
+          "character": 165.36622104870585,
+          "word2": 444.6731278163253,
+          "word3": 547.9581753473715,
+          "word4": 508.50537042619266
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.056845345357504296
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1443920.0471878052,
+        "msPerHan": 262.53091767051,
+        "independentSyllableMsPerHan": 73.55214663626931,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 724487.5527954102
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 472825.743888855
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 246606.75050354004
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129654.7279663086,
+          "2": 132597.63285064697,
+          "3": 131710.67055130005,
+          "4": 135886.6728630066,
+          "5": 132137.83421707153,
+          "6": 130032.19817352295,
+          "7": 129665.19723510742,
+          "8": 135098.1028022766,
+          "9": 128528.30031585693,
+          "10": 258608.71021270752
+        },
+        "scoreF19Equals100": 100.42767782518723
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1314615.6920814514,
+        "msPerHan": 262.92313841629027,
+        "independentSyllableMsPerHan": 73.73833010406494,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 660107.466709137
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 433486.7676010132
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 221021.45777130127
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129654.7279663086,
+          "2": 132597.63285064697,
+          "3": 131710.67055130005,
+          "4": 135886.6728630066,
+          "5": 132137.83421707153,
+          "6": 130032.19817352295,
+          "7": 129665.19723510742,
+          "8": 135098.1028022766,
+          "9": 128528.30031585693,
+          "10": 129304.35510635376
+        },
+        "scoreF19Equals100": 100.48457521954435
+      }
+    },
+    {
+      "id": "a2bf3baaa2",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 130.60393666861614,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.145337468516535,
+        "cktV52": 9.149342487273561,
+        "effectiveTracksV52": {
+          "character": 165.08923401667283,
+          "word2": 444.174784215116,
+          "word3": 547.9581753473715,
+          "word4": 508.3654590498476
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.057433648418994135
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1444334.274898529,
+        "msPerHan": 262.60623179973254,
+        "independentSyllableMsPerHan": 73.01183131755482,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 723724.9998435974
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 472785.10384368896
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 247824.17121124268
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129274.08195495605,
+          "2": 131960.23861694336,
+          "3": 132331.66959762573,
+          "4": 135768.89581298828,
+          "5": 131774.74459457397,
+          "6": 130820.43350219727,
+          "7": 130410.18323898315,
+          "8": 134317.30813598633,
+          "9": 129104.53315734863,
+          "10": 258572.18628692627
+        },
+        "scoreF19Equals100": 100.39887567889615
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1315048.181755066,
+        "msPerHan": 263.00963635101317,
+        "independentSyllableMsPerHan": 73.10301475906373,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 659444.8373565674
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 433414.00650024414
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 222189.3378982544
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129274.08195495605,
+          "2": 131960.23861694336,
+          "3": 132331.66959762573,
+          "4": 135768.89581298828,
+          "5": 131774.74459457397,
+          "6": 130820.43350219727,
+          "7": 130410.18323898315,
+          "8": 134317.30813598633,
+          "9": 129104.53315734863,
+          "10": 129286.09314346313
+        },
+        "scoreF19Equals100": 100.45152811013578
+      }
+    },
+    {
+      "id": "b97635389d",
+      "source": "research/notes/2026-11-18-cr-pair-group-swaps-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 132.00008275172073,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.163399638928338,
+        "cktV52": 9.167394240397119,
+        "effectiveTracksV52": {
+          "character": 164.44749478113826,
+          "word2": 446.3424266248114,
+          "word3": 547.9581753473715,
+          "word4": 508.15090131345795
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.05740275630127892
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1444644.2860298157,
+        "msPerHan": 262.6625974599665,
+        "independentSyllableMsPerHan": 73.86615383980491,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 724847.9073753357
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 472043.6590270996
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 247752.71962738037
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129059.44639968872,
+          "2": 131884.20903778076,
+          "3": 132459.5601196289,
+          "4": 136158.96914672852,
+          "5": 131826.1889076233,
+          "6": 130817.7970123291,
+          "7": 130368.11793518066,
+          "8": 134273.13270568848,
+          "9": 129172.1619682312,
+          "10": 258624.70279693604
+        },
+        "scoreF19Equals100": 100.37733074265813
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1315331.9346313477,
+        "msPerHan": 263.06638692626956,
+        "independentSyllableMsPerHan": 73.96502775039673,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 660468.9370498657
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 432707.11251068115
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 222155.88507080078
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129059.44639968872,
+          "2": 131884.20903778076,
+          "3": 132459.5601196289,
+          "4": 136158.96914672852,
+          "5": 131826.1889076233,
+          "6": 130817.7970123291,
+          "7": 130368.11793518066,
+          "8": 134273.13270568848,
+          "9": 129172.1619682312,
+          "10": 129312.35139846802
+        },
+        "scoreF19Equals100": 100.42985798316806
+      }
+    },
+    {
+      "id": "c4f8088bf4",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 131.25008638160483,
+        "dailyPinky": 0.06840390879478828,
+        "cktV51": 9.15093124189508,
+        "cktV52": 9.154941791757532,
+        "effectiveTracksV52": {
+          "character": 165.13884395972417,
+          "word2": 444.5804178828849,
+          "word3": 547.9581753473715,
+          "word4": 508.6708875039101
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.05741728200662831
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1446660.1006393433,
+        "msPerHan": 263.02910920715334,
+        "independentSyllableMsPerHan": 72.92987408794056,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 724591.8590927124
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 472755.7272491455
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 249312.51429748535
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 129306.16855621338,
+          "2": 132411.66730499268,
+          "3": 132764.01655197144,
+          "4": 135890.62237548828,
+          "5": 132101.10409545898,
+          "6": 131012.4123916626,
+          "7": 130597.51211166382,
+          "8": 134838.9553527832,
+          "9": 129447.18580627441,
+          "10": 258290.45609283447
+        },
+        "scoreF19Equals100": 100.23746230384032
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1317514.872592926,
+        "msPerHan": 263.50297451858523,
+        "independentSyllableMsPerHan": 73.01602793579102,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 660181.05626297
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 433681.3724975586
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 223652.44383239746
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 129306.16855621338,
+          "2": 132411.66730499268,
+          "3": 132764.01655197144,
+          "4": 135890.62237548828,
+          "5": 132101.10409545898,
+          "6": 131012.4123916626,
+          "7": 130597.51211166382,
+          "8": 134838.9553527832,
+          "9": 129447.18580627441,
+          "10": 129145.22804641724
+        },
+        "scoreF19Equals100": 100.26345974810607
+      }
+    },
+    {
+      "id": "76f30871bf",
+      "source": "research/config/cr-76-aeo-v52.json",
+      "historicalMetrics": {},
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1446985.267337799,
+        "msPerHan": 263.08823042505435,
+        "independentSyllableMsPerHan": 71.70123057486794,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720542.1740837097
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 476293.23836517334
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 250149.85488891602
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 130483.13343048096,
+          "2": 133099.32167053223,
+          "3": 132385.80973052979,
+          "4": 135764.5792350769,
+          "5": 131531.68170928955,
+          "6": 131090.61680984497,
+          "7": 130538.99983978271,
+          "8": 134006.24070358276,
+          "9": 129934.01042938232,
+          "10": 258150.87377929688
+        },
+        "scoreF19Equals100": 100.21493692959179
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1317909.8304481506,
+        "msPerHan": 263.5819660896301,
+        "independentSyllableMsPerHan": 71.89994772491455,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 657150.1990089417
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 436659.5546722412
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 224100.07676696777
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 130483.13343048096,
+          "2": 133099.32167053223,
+          "3": 132385.80973052979,
+          "4": 135764.5792350769,
+          "5": 131531.68170928955,
+          "6": 131090.61680984497,
+          "7": 130538.99983978271,
+          "8": 134006.24070358276,
+          "9": 129934.01042938232,
+          "10": 129075.43688964844
+        },
+        "scoreF19Equals100": 100.23341228954358
+      }
+    },
+    {
+      "id": "7f8eed5175",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 132.18210694020829,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.159824279005287,
+        "cktV52": 9.163124453105786,
+        "effectiveTracksV52": {
+          "character": 165.54993701330395,
+          "word2": 445.06218235670605,
+          "word3": 547.9581753473715,
+          "word4": 508.7727459818253
+        },
+        "pinky": 0.08961252468340437,
+        "rightPinky": 0.051869730841909434
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1446989.2913742065,
+        "msPerHan": 263.0889620680376,
+        "independentSyllableMsPerHan": 72.60931757770885,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 725317.13646698
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 473825.97424316406
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 247846.1806640625
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 130300.72636413574,
+          "2": 132369.5493774414,
+          "3": 131659.24256515503,
+          "4": 136814.14558029175,
+          "5": 132194.15102767944,
+          "6": 131057.7124786377,
+          "7": 129582.50624084473,
+          "8": 135107.59002304077,
+          "9": 128318.68571472168,
+          "10": 259584.9820022583
+        },
+        "scoreF19Equals100": 100.2146582346787
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1317196.8003730774,
+        "msPerHan": 263.4393600746155,
+        "independentSyllableMsPerHan": 72.65363068618774,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 660585.3314704895
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 434511.9657974243
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 222099.50310516357
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 130300.72636413574,
+          "2": 132369.5493774414,
+          "3": 131659.24256515503,
+          "4": 136814.14558029175,
+          "5": 132194.15102767944,
+          "6": 131057.7124786377,
+          "7": 129582.50624084473,
+          "8": 135107.59002304077,
+          "9": 128318.68571472168,
+          "10": 129792.49100112915
+        },
+        "scoreF19Equals100": 100.28767102860931
+      }
+    },
+    {
+      "id": "f19a0ad1dc",
+      "source": "research/notes/2026-11-17-cr-lan-fixed-finalists.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 24,
+        "guard": 25,
+        "daily": 121.73336093086186,
+        "dailyPinky": 0.07584923220102373,
+        "ckt": 9.107123999658706,
+        "pinky": 0.09060178865841471,
+        "pinkyTracks": [
+          0.06942549381010589,
+          0.0727547384048275,
+          0.09060178865841471,
+          0.06823985829426306
+        ],
+        "rightPinky": 0.05323576853835622,
+        "rightPinkyTracks": [
+          0.03266848489620615,
+          0.05323576853835622,
+          0.0251006856783682,
+          0.033836763340054234
+        ],
+        "verified": true
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1450095.3730430603,
+        "msPerHan": 263.6537041896473,
+        "independentSyllableMsPerHan": 71.25944646523216,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 721063.8299293518
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 477923.715133667
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 251107.8279800415
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 131113.16510009766,
+          "2": 133058.41262817383,
+          "3": 131138.83503723145,
+          "4": 136196.1802444458,
+          "5": 132078.17197418213,
+          "6": 133417.3550567627,
+          "7": 130597.73628234863,
+          "8": 134334.3659248352,
+          "9": 129942.39262390137,
+          "10": 258218.75817108154
+        },
+        "scoreF19Equals100": 100.0
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1320985.9939575195,
+        "msPerHan": 264.1971987915039,
+        "independentSyllableMsPerHan": 71.62158949203491,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 658338.1111831665
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 438039.7432632446
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 224608.1395111084
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 131113.16510009766,
+          "2": 133058.41262817383,
+          "3": 131138.83503723145,
+          "4": 136196.1802444458,
+          "5": 132078.17197418213,
+          "6": 133417.3550567627,
+          "7": 130597.73628234863,
+          "8": 134334.3659248352,
+          "9": 129942.39262390137,
+          "10": 129109.37908554077
+        },
+        "scoreF19Equals100": 100.0
+      }
+    },
+    {
+      "id": "5bd306d6ca",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 132.5649041610401,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.15176051914412,
+        "cktV52": 9.15199898790372,
+        "effectiveTracksV52": {
+          "character": 165.51174189192264,
+          "word2": 446.04505890604145,
+          "word3": 541.6748899072867,
+          "word4": 508.1505195044768
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06581086526715774
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1451051.838874817,
+        "msPerHan": 263.82760706814855,
+        "independentSyllableMsPerHan": 70.84800924474543,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 718826.1879997253
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 477012.276927948
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 255213.37394714355
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 131627.0757369995,
+          "2": 132583.49710464478,
+          "3": 131726.73733901978,
+          "4": 133779.52432250977,
+          "5": 131613.861869812,
+          "6": 129365.63332748413,
+          "7": 130410.72640991211,
+          "8": 134618.26264190674,
+          "9": 132286.93086624146,
+          "10": 263039.5892562866
+        },
+        "scoreF19Equals100": 99.9340846545842
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1319532.0442466736,
+        "msPerHan": 263.9064088493347,
+        "independentSyllableMsPerHan": 70.95914358596802,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 654551.5417327881
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 437063.0255012512
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 227917.47701263428
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 131627.0757369995,
+          "2": 132583.49710464478,
+          "3": 131726.73733901978,
+          "4": 133779.52432250977,
+          "5": 131613.861869812,
+          "6": 129365.63332748413,
+          "7": 130410.72640991211,
+          "8": 134618.26264190674,
+          "9": 132286.93086624146,
+          "10": 131519.7946281433
+        },
+        "scoreF19Equals100": 100.11018676789135
+      }
+    },
+    {
+      "id": "3255cb4c77",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 134.29583252110265,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.168953152720324,
+        "cktV52": 9.170052896628349,
+        "effectiveTracksV52": {
+          "character": 165.19829570374935,
+          "word2": 446.99166005954487,
+          "word3": 541.6748899072867,
+          "word4": 511.26811330914245
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06366511756475751
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1451900.3154945374,
+        "msPerHan": 263.98187554446133,
+        "independentSyllableMsPerHan": 71.62401139623469,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720174.6564788818
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 476823.5672264099
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 254902.0917892456
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 131330.650680542,
+          "2": 132342.72652816772,
+          "3": 131554.99870681763,
+          "4": 134436.45658874512,
+          "5": 131966.47314071655,
+          "6": 129697.65456390381,
+          "7": 130466.96590805054,
+          "8": 134910.64764404297,
+          "9": 131864.647190094,
+          "10": 263329.09454345703
+        },
+        "scoreF19Equals100": 99.87568413394399
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1320235.7682228088,
+        "msPerHan": 264.0471536445618,
+        "independentSyllableMsPerHan": 71.77417668304443,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 655749.1578674316
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 436854.5562324524
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 227632.0541229248
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 131330.650680542,
+          "2": 132342.72652816772,
+          "3": 131554.99870681763,
+          "4": 134436.45658874512,
+          "5": 131966.47314071655,
+          "6": 129697.65456390381,
+          "7": 130466.96590805054,
+          "8": 134910.64764404297,
+          "9": 131864.647190094,
+          "10": 131664.54727172852
+        },
+        "scoreF19Equals100": 100.05682513326545
+      }
+    },
+    {
+      "id": "5ac3f286b0",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 134.22445126195538,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.164892267022113,
+        "cktV52": 9.166012774866184,
+        "effectiveTracksV52": {
+          "character": 165.06912707833922,
+          "word2": 446.69526214054,
+          "word3": 541.6748899072867,
+          "word4": 511.2651069508585
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06410220813475716
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1452127.2274513245,
+        "msPerHan": 264.0231322638772,
+        "independentSyllableMsPerHan": 71.63745507535067,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720386.0891265869
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 476861.0219230652
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 254880.11640167236
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 131330.650680542,
+          "2": 132357.90563583374,
+          "3": 131591.7279624939,
+          "4": 134436.45658874512,
+          "5": 132019.54098129272,
+          "6": 129697.65456390381,
+          "7": 130532.98901748657,
+          "8": 134914.26587677002,
+          "9": 131891.42765426636,
+          "10": 263354.60848999023
+        },
+        "scoreF19Equals100": 99.86007738372687
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1320449.9232063293,
+        "msPerHan": 264.08998464126586,
+        "independentSyllableMsPerHan": 71.78969559783935,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 655945.6710510254
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 436887.66875076294
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 227616.58340454102
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 131330.650680542,
+          "2": 132357.90563583374,
+          "3": 131591.7279624939,
+          "4": 134436.45658874512,
+          "5": 132019.54098129272,
+          "6": 129697.65456390381,
+          "7": 130532.98901748657,
+          "8": 134914.26587677002,
+          "9": 131891.42765426636,
+          "10": 131677.30424499512
+        },
+        "scoreF19Equals100": 100.0405975828215
+      }
+    },
+    {
+      "id": "37af224387",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 133.0451162146956,
+        "dailyPinky": 0.068869241507678,
+        "cktV51": 9.15641185221491,
+        "cktV52": 9.156974388087317,
+        "effectiveTracksV52": {
+          "character": 166.01868426807425,
+          "word2": 446.0915368687423,
+          "word3": 541.6748899072867,
+          "word4": 508.47674137829114
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06580741213616924
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1453454.1065177917,
+        "msPerHan": 264.26438300323485,
+        "independentSyllableMsPerHan": 71.09905542130903,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 720385.5900650024
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 477134.8594779968
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 255933.65697479248
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 132483.754447937,
+          "2": 132930.73537826538,
+          "3": 132189.4391784668,
+          "4": 133961.61234283447,
+          "5": 131936.77857208252,
+          "6": 129390.06602096558,
+          "7": 130195.54951095581,
+          "8": 134487.96027755737,
+          "9": 132461.88969802856,
+          "10": 263416.32109069824
+        },
+        "scoreF19Equals100": 99.76891368914438
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1321745.9459724426,
+        "msPerHan": 264.34918919448853,
+        "independentSyllableMsPerHan": 71.28628788452149,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 656262.3880233765
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 436964.86906051636
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 228518.6888885498
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 132483.754447937,
+          "2": 132930.73537826538,
+          "3": 132189.4391784668,
+          "4": 133961.61234283447,
+          "5": 131936.77857208252,
+          "6": 129390.06602096558,
+          "7": 130195.54951095581,
+          "8": 134487.96027755737,
+          "9": 132461.88969802856,
+          "10": 131708.16054534912
+        },
+        "scoreF19Equals100": 99.94250392692796
+      }
+    },
+    {
+      "id": "2223759f72",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 133.5054327802502,
+        "dailyPinky": 0.07166123778501629,
+        "cktV51": 9.160858102390554,
+        "cktV52": 9.16115902556629,
+        "effectiveTracksV52": {
+          "character": 165.14101313137007,
+          "word2": 446.1707583306564,
+          "word3": 541.6748899072867,
+          "word4": 511.3472729995056
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06650981372937888
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1454712.700504303,
+        "msPerHan": 264.4932182735096,
+        "independentSyllableMsPerHan": 70.94348138358376,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 719245.8602600098
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 480400.834148407
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 255066.00609588623
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 131553.81240844727,
+          "2": 133356.20277786255,
+          "3": 133545.94717025757,
+          "4": 133879.9804534912,
+          "5": 131728.11791610718,
+          "6": 130860.04000854492,
+          "7": 130444.90491867065,
+          "8": 135396.57610321045,
+          "9": 132650.9252281189,
+          "10": 261296.19351959229
+        },
+        "scoreF19Equals100": 99.68259523274651
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1324064.6037445068,
+        "msPerHan": 264.8129207489014,
+        "independentSyllableMsPerHan": 70.97204089889526,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 655398.1903953552
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 440448.7438392639
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 228217.6695098877
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 131553.81240844727,
+          "2": 133356.20277786255,
+          "3": 133545.94717025757,
+          "4": 133879.9804534912,
+          "5": 131728.11791610718,
+          "6": 130860.04000854492,
+          "7": 130444.90491867065,
+          "8": 135396.57610321045,
+          "9": 132650.9252281189,
+          "10": 130648.09675979614
+        },
+        "scoreF19Equals100": 99.76748794747017
+      }
+    },
+    {
+      "id": "f1d16e8a44",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 22,
+        "guard": 24,
+        "daily": 133.16469587594736,
+        "dailyPinky": 0.0693345742205677,
+        "cktV51": 9.166621483566201,
+        "cktV52": 9.166968375877705,
+        "effectiveTracksV52": {
+          "character": 165.28830396397493,
+          "word2": 447.60746254002,
+          "word3": 541.6748899072867,
+          "word4": 508.0633035973974
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06585443897473184
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1458968.9443740845,
+        "msPerHan": 265.2670807952881,
+        "independentSyllableMsPerHan": 71.63898980158025,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 724858.6355934143
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 478480.30756759644
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 255630.00121307373
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 132094.2378768921,
+          "2": 133184.43029022217,
+          "3": 132030.20278930664,
+          "4": 134721.64770507812,
+          "5": 132803.563331604,
+          "6": 130004.93880081177,
+          "7": 130949.5358467102,
+          "8": 136180.74226760864,
+          "9": 133208.89609909058,
+          "10": 263790.74936676025
+        },
+        "scoreF19Equals100": 99.39179162344465
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1327073.5696907043,
+        "msPerHan": 265.4147139381409,
+        "independentSyllableMsPerHan": 71.75025493850708,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 660160.786529541
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 438475.04803848267
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 228437.73512268066
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 132094.2378768921,
+          "2": 133184.43029022217,
+          "3": 132030.20278930664,
+          "4": 134721.64770507812,
+          "5": 132803.563331604,
+          "6": 130004.93880081177,
+          "7": 130949.5358467102,
+          "8": 136180.74226760864,
+          "9": 133208.89609909058,
+          "10": 131895.37468338013
+        },
+        "scoreF19Equals100": 99.54127820248853
+      }
+    },
+    {
+      "id": "71930790fa",
+      "source": "research/notes/2026-11-19-cr-six-root-regroup-v52.json",
+      "historicalMetrics": {
+        "d": 2,
+        "m": 23,
+        "guard": 24,
+        "daily": 133.55710190694697,
+        "dailyPinky": 0.0693345742205677,
+        "cktV51": 9.168010937596069,
+        "cktV52": 9.16873931922924,
+        "effectiveTracksV52": {
+          "character": 165.3550427854167,
+          "word2": 447.6103610559728,
+          "word3": 541.6748899072867,
+          "word4": 508.4693492556052
+        },
+        "pinky": 0.08952096439595132,
+        "rightPinky": 0.06584910859108493
+      },
+      "5500": {
+        "han": 5500,
+        "soundKeys": 11000,
+        "runs": 392,
+        "intervals": 10608,
+        "timingMs": 1460207.4356002808,
+        "msPerHan": 265.49226101823285,
+        "independentSyllableMsPerHan": 71.76072865850276,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5500,
+            "timingMs": 724036.3403282166
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3333,
+            "timingMs": 479306.34870529175
+          },
+          "acrossWords": {
+            "intervals": 1775,
+            "timingMs": 256864.74656677246
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 392,
+          "L4i2": 9824,
+          "L4i3": 392
+        },
+        "sceneTimingMs": {
+          "1": 132813.1052093506,
+          "2": 132993.97750854492,
+          "3": 132464.07329177856,
+          "4": 134765.63749694824,
+          "5": 132971.99645233154,
+          "6": 129873.79899215698,
+          "7": 130704.39251708984,
+          "8": 136046.7251701355,
+          "9": 133603.6958656311,
+          "10": 263970.0330963135
+        },
+        "scoreF19Equals100": 99.30749136659043
+      },
+      "5000": {
+        "han": 5000,
+        "soundKeys": 10000,
+        "runs": 349,
+        "intervals": 9651,
+        "timingMs": 1328222.419052124,
+        "msPerHan": 265.6444838104248,
+        "independentSyllableMsPerHan": 71.98460324020385,
+        "edges": {
+          "withinSyllable": {
+            "intervals": 5000,
+            "timingMs": 659697.9612159729
+          },
+          "withinWordAcrossSyllables": {
+            "intervals": 3060,
+            "timingMs": 439029.6414985657
+          },
+          "acrossWords": {
+            "intervals": 1591,
+            "timingMs": 229494.81633758545
+          }
+        },
+        "nativeRoles": {
+          "L4i1": 349,
+          "L4i2": 8953,
+          "L4i3": 349
+        },
+        "sceneTimingMs": {
+          "1": 132813.1052093506,
+          "2": 132993.97750854492,
+          "3": 132464.07329177856,
+          "4": 134765.63749694824,
+          "5": 132971.99645233154,
+          "6": 129873.79899215698,
+          "7": 130704.39251708984,
+          "8": 136046.7251701355,
+          "9": 133603.6958656311,
+          "10": 131985.01654815674
+        },
+        "scoreF19Equals100": 99.45517972059464
+      }
+    }
+  ]
+}
