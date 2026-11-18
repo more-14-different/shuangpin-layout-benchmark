@@ -1,5 +1,15 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-lan-f19-regroup phase="all" workers="4":
+    python -X utf8 tools/regroup_cr_lan_f19_roots.py --phase "{{phase}}" --workers "{{workers}}"
+
+cr-lan-f19-regroup-verify:
+    python -X utf8 tools/verify_cr_lan_f19_regroup.py
+
+cr-lan-f19-regroup-test:
+    python -m unittest discover -s tests -p test_cr_lan_f19_regroup.py
+    node --test tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
 cr-gpu-benchmark:
     python -X utf8 tools/integrate_cr_gpu_r11.py
     node tools/sync_keymap_link_colors.js
