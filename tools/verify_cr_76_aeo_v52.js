@@ -12,7 +12,7 @@ const read = filename => JSON.parse(fs.readFileSync(path.resolve(ROOT, filename)
 const hash = filename => crypto.createHash('sha256').update(fs.readFileSync(path.resolve(ROOT, filename))).digest('hex');
 
 function main() {
-  const filename = 'research/notes/2026-11-18-cr-76-aeo-v52.json';
+  const filename = process.argv[2] || 'research/notes/2026-11-18-cr-76-aeo-v52.json';
   const report = read(filename);
   const fixture = read('research/.cache/cr-lan-fixed-20261117/inputs/fixture.json');
   const spec = read('research/.cache/cr-lan-fixed-20261117/inputs/seeds.json');
@@ -28,8 +28,9 @@ function main() {
   fixture.atoms.forEach((atom, index) => atom.pinyin.forEach(py => first[py] = index));
   fixture.rhymeAtoms.forEach((atom, index) => atom.pinyin.forEach(py => roots[py] = spec.finalRoots[index]));
   fixture.toneRegions.forEach((region, index) => region.tones.forEach(tone => regions[tone] = index));
-  const candidates = new Map([...report.controls, ...report.selected, ...report.frontier].map(row => [row.key, row]));
-  const auditPath = path.join(ROOT,'research/notes/2026-11-18-cr-76-aeo-v52-verification.json');
+  const rows = process.argv.includes('--selected-only') ? report.selected : [...report.controls,...report.selected,...report.frontier];
+  const candidates = new Map(rows.map(row => [row.key,row]));
+  const auditPath = path.resolve(ROOT,filename.replace(/\.json$/,'-verification.json'));
   const results = [];
   for (const row of candidates.values()) {
     const state = row.state;
@@ -71,10 +72,16 @@ function main() {
     'research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json',
     'tools/ckt_v4_upstream_role_tables.json', 'tools/score_toned_2121_ckt_v51.js',
     'tools/ckt_v4_model.js','tools/score_completion_ckt_v4.js',
-    'research/notes/2026-11-18-cr-76-aeo-v52-scores.json.gz',
+    filename.replace(/\.json$/,'-scores.json.gz'),
     'a7_CKT_R11_integrated_materials/cr_lan_f19/payload-input.json',
     path.join(snow,'snow_pinyin.base.dict.yaml')];
-  const audit = {version:'cr-76-aeo-v52-native-verification-v1', reportHash:hash(filename),
+  if (filename.includes('onsets')) sources.push('tools/search_cr_aeo_onsets_v52.py',
+    'tools/search_cr_lan_aeo_heads.py','tools/search_cr_lan_f19_combined.py',
+    'tools/search_cr_667_zero_carriers.py','tools/run_cr_anneal.py',
+    'research/notes/2026-11-18-cr-lan-aeo-heads-scores.json.gz',
+    'research/notes/2026-11-16-cr-stable-neighbors-finalists.json',
+    'research/notes/2026-11-17-cr-667-neighbors-finalists.json');
+  const audit = {version:report.version+'-native-verification-v1', reportHash:hash(filename),
     auxiliarySemantics:auxiliarySemantics(report.toneKeysByTone),
     results,sourceHashes:Object.fromEntries(sources.map(file => [file.replaceAll('\\','/'),hash(file)]))};
   fs.writeFileSync(auditPath, JSON.stringify(audit,null,2)+'\n');

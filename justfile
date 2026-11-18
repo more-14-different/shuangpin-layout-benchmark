@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-aeo-onsets-v52:
+    python -X utf8 tools/search_cr_aeo_onsets_v52.py
+    node --max-old-space-size=4096 tools/verify_cr_76_aeo_v52.js research/notes/2026-11-18-cr-aeo-onsets-v52.json --selected-only
+
 cr-76-aeo-v52:
     node --max-old-space-size=4096 tools/export_ckt_v52_templates.js
     python -X utf8 tools/search_cr_76_aeo_v52.py
