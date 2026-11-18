@@ -1,5 +1,9 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-six-root-regroup-v52:
+    python -X utf8 tools/search_cr_pair_group_swaps_v52.py --root-regroup
+    node --max-old-space-size=4096 tools/verify_cr_76_aeo_v52.js research/notes/2026-11-19-cr-six-root-regroup-v52.json --selected-only
+
 cr-pair-group-swaps-v52:
     python -X utf8 tools/search_cr_pair_group_swaps_v52.py
     node --max-old-space-size=4096 tools/verify_cr_76_aeo_v52.js research/notes/2026-11-18-cr-pair-group-swaps-v52.json --selected-only

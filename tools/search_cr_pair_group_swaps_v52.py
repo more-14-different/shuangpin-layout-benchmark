@@ -11,7 +11,11 @@ from ckt_v52_toned_kernel import TonedV52Scorer
 from explore_cr_frontier_followup import paired_moves
 from run_cr_anneal import ROOT, atomic_json
 from search_cr_667_zero_carriers import CarrierSpace
-from search_cr_lan_f19_combined import group_exchanges
+from search_cr_lan_f19_combined import (
+    group_exchanges,
+    root_exchanges,
+    single_root_moves,
+)
 
 WORK = ROOT / "research/.cache/cr-pair-group-swaps-v52"
 OUTPUT = ROOT / "research/notes/2026-11-18-cr-pair-group-swaps-v52.json"
@@ -24,7 +28,14 @@ def load(path):
 
 
 def main():
-    WORK.mkdir(parents=True, exist_ok=True)
+    regroup = "--root-regroup" in sys.argv
+    work = ROOT / "research/.cache/cr-six-root-regroup-v52" if regroup else WORK
+    output = (
+        ROOT / "research/notes/2026-11-19-cr-six-root-regroup-v52.json"
+        if regroup
+        else OUTPUT
+    )
+    work.mkdir(parents=True, exist_ok=True)
     space = CarrierSpace(ROOT / "research/.cache/cr-lan-fixed-20261117/inputs")
     scorer = TonedV52Scorer(ROOT / "research/.cache/cr-76-aeo-v52/templates.bin", ROOT)
     origins = [
@@ -32,8 +43,31 @@ def main():
         load(ROOT / "research/notes/2026-11-18-cr-retroflex-top-v52.json")["best"],
     ]
     origins = {row["key"][:10]: row for row in origins}
-    cache = load(WORK / "cache.json") if "--resume" in sys.argv else {}
-    rounds = load(WORK / "rounds.json") if "--resume" in sys.argv else []
+    if regroup:
+        previous = load(OUTPUT)
+        wanted = [
+            "c2e49137b9",
+            "a2bf3baaa2",
+            "c4f8088bf4",
+            "5bd306d6ca",
+            "37af224387",
+            "5ac3f286b0",
+        ]
+        available = {r["key"][:10]: r for r in previous["selected"]}
+        origins = {ident: available[ident] for ident in wanted}
+    cache = load(work / "cache.json") if "--resume" in sys.argv else {}
+    rounds = load(work / "rounds.json") if "--resume" in sys.argv else []
+
+    def cache_key(origin, state):
+        key = space.key(state)
+        return origin + ":" + key if regroup else key
+
+    def moves(state):
+        if regroup:
+            yield from single_root_moves(state)
+            yield from root_exchanges(state)
+        else:
+            yield from group_exchanges(state)
 
     def eligible(row):
         m = row["metrics"]
@@ -53,22 +87,27 @@ def main():
         pending = {}
         for origin, label, state in moves:
             baseline = origins[origin]["state"]
-            assert (
-                state["firstKeys"] == baseline["firstKeys"]
-                and state["partition"] == baseline["partition"]
-            )
-            assert all(
-                sorted(a) == sorted(b)
-                for a, b in zip(state["groupKeys"], baseline["groupKeys"])
-            )
-            key = space.key(state)
-            if key in cache or key in pending:
-                continue
+            assert state["firstKeys"] == baseline["firstKeys"]
+            if regroup:
+                assert state["groupKeys"] == baseline["groupKeys"]
+            else:
+                assert state["partition"] == baseline["partition"]
+                assert all(
+                    sorted(a) == sorted(b)
+                    for a, b in zip(state["groupKeys"], baseline["groupKeys"])
+                )
             metrics = space.memory(state)
-            assert metrics == {
-                k: origins[origin]["metrics"][k] for k in ["d", "m", "guard"]
-            }
-            pending[key] = dict(
+            if not metrics:
+                continue
+            key = space.key(state)
+            address = cache_key(origin, state)
+            if address in cache or address in pending:
+                continue
+            fixed_metrics = ["d", "guard"] if regroup else ["d", "m", "guard"]
+            assert all(
+                metrics[k] == origins[origin]["metrics"][k] for k in fixed_metrics
+            )
+            pending[address] = dict(
                 key=key,
                 origin=origin,
                 label=label,
@@ -80,7 +119,7 @@ def main():
             row["metrics"].update(space.daily(row["state"]))
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             for row in executor.map(evaluate, pending.values()):
-                cache[row["key"]] = row
+                cache[cache_key(row["origin"], row["state"])] = row
         best = {
             origin: min(
                 [r for r in cache.values() if r["origin"] == origin and eligible(r)],
@@ -90,8 +129,8 @@ def main():
         }
         record = dict(stage=stage, fresh=len(pending), total=len(cache), best=best)
         rounds.append(record)
-        atomic_json(WORK / "cache.json", cache)
-        atomic_json(WORK / "rounds.json", rounds)
+        atomic_json(work / "cache.json", cache)
+        atomic_json(work / "rounds.json", rounds)
         print(
             json.dumps(
                 dict(
@@ -139,12 +178,12 @@ def main():
         near = [r for r in rows if r["metrics"]["daily"] > 128]
         if near:
             chosen[near[0]["key"]] = near[0]
-        return list(chosen.values())[:6]
+        return list(chosen.values())[: 3 if regroup else 6]
 
     def single_swaps():
         for origin in origins:
             for center in centers(origin):
-                for label, state in group_exchanges(center["state"]):
+                for label, state in moves(center["state"]):
                     yield origin, label, state
 
     for index in range(5):
@@ -157,8 +196,8 @@ def main():
                 key=lambda r: r["metrics"]["cktV52"],
             )
             alternatives = []
-            for label, state in group_exchanges(center["state"]):
-                row = cache.get(space.key(state))
+            for label, state in moves(center["state"]):
+                row = cache.get(cache_key(origin, state))
                 if row:
                     alternatives.append(row)
             by_speed = sorted(alternatives, key=lambda r: r["metrics"]["cktV52"])[:30]
@@ -179,6 +218,14 @@ def main():
                 [r for r in cache.values() if r["origin"] == origin and eligible(r)],
                 key=lambda r: r["metrics"]["cktV52"],
             )
+            if regroup:
+                er, v = [space.spec["roots"].index(root) for root in ["er", "v"]]
+                for first, second in itertools.product(range(10), repeat=2):
+                    state = copy.deepcopy(center["state"])
+                    state["partition"][er] = first
+                    state["partition"][v] = second
+                    yield origin, f"er-v:{first}/{second}", state
+                continue
             for groups in itertools.combinations(range(10), 3):
                 for direction in [1, 2]:
                     for mask in range(1, 8):
@@ -221,14 +268,17 @@ def main():
         for row in [rows[0], same_daily[0], *centers(origin)]:
             chosen[row["key"]] = row
     report = dict(
-        version="cr-pair-group-swaps-v52-v1",
+        version=(
+            "cr-six-root-regroup-v52-v1" if regroup else "cr-pair-group-swaps-v52-v1"
+        ),
         policy=dict(word2="21", word3="213", word4="14"),
         shapeKeysByMeaning="AVUIO",
         toneKeysByTone="IVUAO",
         constraints=dict(
             maxD=2,
             fixedFirstKeys=True,
-            fixedRootPartition=True,
+            fixedRootPartition=not regroup,
+            fixedGroupKeys=regroup,
             fixedRegionalKeyMultisets=True,
             targetDailyStrictlyGreaterThan=130,
             leftLimit=LEFT_LIMIT,
@@ -242,8 +292,12 @@ def main():
         scored=len(cache),
         scope="Five multi-center exchange rounds, compatible paired exchanges, all three-group cycles at the best centers, then two polish rounds; candidate scoring retains baseline auxiliary policy",
     )
-    atomic_json(OUTPUT, report)
-    OUTPUT.with_name(OUTPUT.stem + "-scores.json.gz").write_bytes(
+    if regroup:
+        report["scope"] = (
+            "Six frozen keyboard maps; intact 18 roots repartitioned across ten nonempty groups; five multi-center local rounds, compatible paired moves, joint er/v placements and two polish rounds; onsets/group keys/auxiliary policy fixed, M lower unrestricted"
+        )
+    atomic_json(output, report)
+    output.with_name(output.stem + "-scores.json.gz").write_bytes(
         gzip.compress(
             json.dumps(cache, ensure_ascii=False, separators=(",", ":")).encode(),
             mtime=0,
@@ -252,7 +306,7 @@ def main():
     print(
         json.dumps(
             dict(
-                output=str(OUTPUT),
+                output=str(output),
                 scored=len(cache),
                 best={k: r["best"]["metrics"] for k, r in results.items()},
             )

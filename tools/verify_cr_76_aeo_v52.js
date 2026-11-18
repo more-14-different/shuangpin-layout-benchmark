@@ -41,6 +41,13 @@ function main() {
       assert.deepEqual(state.partition,baseline.partition);
       state.groupKeys.forEach((region,index) => assert.deepEqual([...region].sort(),[...baseline.groupKeys[index]].sort()));
     }
+    if (report.constraints.fixedGroupKeys) {
+      const baseline = report.results[row.origin].baseline.state;
+      assert.deepEqual(state.firstKeys,baseline.firstKeys);
+      assert.deepEqual(state.groupKeys,baseline.groupKeys);
+      assert.equal(state.partition.length,18);
+      assert.equal(new Set(state.partition).size,10);
+    }
     if (report.constraints.minRetroflexHome) {
       const retroflex = fixture.atoms.flatMap((atom,index) => ['ch','sh','zh'].includes(atom.name) ? [index] : []);
       assert.ok(retroflex.filter(index => 'ASDFGHJKL'.includes(state.firstKeys[index])).length >= report.constraints.minRetroflexHome);
@@ -107,6 +114,10 @@ function main() {
     'tools/search_cr_667_zero_carriers.py','tools/run_cr_anneal.py',
     'research/notes/2026-11-18-cr-aeo-onsets-v52.json',
     'research/notes/2026-11-18-cr-retroflex-top-v52.json');
+  if (filename.includes('root-regroup') && report.results) sources.push('tools/search_cr_pair_group_swaps_v52.py',
+    'tools/search_cr_lan_f19_combined.py','tools/explore_cr_frontier_followup.py',
+    'tools/search_cr_667_zero_carriers.py','tools/run_cr_anneal.py',
+    'research/notes/2026-11-18-cr-pair-group-swaps-v52.json');
   const audit = {version:report.version+'-native-verification-v1', reportHash:hash(filename),
     auxiliarySemantics:auxiliarySemantics(report.toneKeysByTone),
     results,sourceHashes:Object.fromEntries(sources.map(file => [file.replaceAll('\\','/'),hash(file)]))};
