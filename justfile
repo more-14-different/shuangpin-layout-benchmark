@@ -1,5 +1,15 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-lan-aeo-heads phase="all" workers="12":
+    python -X utf8 tools/search_cr_lan_aeo_heads.py --phase "{{phase}}" --workers "{{workers}}"
+
+cr-lan-aeo-heads-verify:
+    python -X utf8 tools/verify_cr_lan_aeo_heads.py
+
+cr-lan-aeo-heads-test:
+    python -m unittest discover -s tests -p test_cr_lan_aeo_heads.py
+    node --test tests/auxiliary-semantics.test.mjs tests/toned-native-policy.test.mjs
+
 cr-lan-f19-combined phase="all" workers="12":
     python -X utf8 tools/search_cr_lan_f19_combined.py --phase "{{phase}}" --workers "{{workers}}"
 
