@@ -1,5 +1,15 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+recent-cr-r11:
+    python -X utf8 tools/integrate_recent_cr_r11.py
+    node --max-old-space-size=8192 tools/verify_recent_cr_r11.js
+    python -X utf8 tools/report_recent_cr_r11.py
+
+recent-cr-r11-test:
+    node --max-old-space-size=8192 tools/verify_recent_cr_r11.js
+    node --test tests/recent-cr-r11.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+    node tests/recent-cr-r11.browser.mjs
+
 cr-7e-refine-search:
     python -X utf8 tools/refine_7e_v52.py
     python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-7e-refinement
