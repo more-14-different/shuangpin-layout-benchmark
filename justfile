@@ -1,5 +1,39 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-far-prepare:
+    node --max-old-space-size=6144 tools/anneal_untoned_cr7e_far.js --prepare
+
+untoned-cr7e-far-search:
+    node --max-old-space-size=4096 tools/anneal_untoned_cr7e_far.js
+    node tools/polish_untoned_cr7e_far.js
+
+untoned-cr7e-far-verify:
+    node tools/replay_untoned_cr7e_far.js
+
+untoned-cr7e-far-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_far.js --id "{{id}}"
+
+untoned-cr7e-far-report:
+    python -X utf8 tools/report_untoned_cr7e_far.py
+
+untoned-cr7e-far-test:
+    node --test tests/untoned-cr7e-far.test.mjs tests/untoned-cr7e-coupled.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+u7x-02d-r11-columns:
+    python -X utf8 tools/publish_u7x_02d_r11.py
+
+u7x-02d-r11-policies:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_far.js --publication --id U7X-02d505540da0
+    python -X utf8 tools/robust_untoned_v52_policy.py --input research/notes/2026-11-20-u7x-02d-r11-components-U7X-02d505540da0.json.gz --output research/notes/2026-11-20-u7x-02d-r11-robustness.json
+
+u7x-02d-r11-publish:
+    node --max-old-space-size=4096 tools/finalize_u7x_02d_r11.js --extract
+    node --expose-gc --max-old-space-size=10240 tools/finalize_u7x_02d_r11.js
+
+u7x-02d-r11-test:
+    node tests/u7x-02d-r11.browser.mjs
+    python -X utf8 tools/validate_u7x_02d_r11.py
+
 untoned-cr7e-coupled-search:
     node --max-old-space-size=3072 tools/search_untoned_cr7e_coupled.js
     node --max-old-space-size=3072 tools/extend_untoned_cr7e_coupled.js

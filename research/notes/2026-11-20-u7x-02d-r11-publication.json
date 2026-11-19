@@ -1,0 +1,103 @@
+{
+  "version": "u7x-02d-r11-publication-1",
+  "id": "U7X-02d505540da0",
+  "html": "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark/a7_CKT_R11.html",
+  "htmlBeforeSha256": "39df29928cbec7ff567dafdc659239898f0f0b77e350cee2d270ac748999b195",
+  "htmlAfterSha256": "f3693deb465458b6c915a3f1e3f36405675c4687240e362d6823c377c5b4ae3e",
+  "preservedExistingSchemes": 854,
+  "catalogue": 855,
+  "policies": {
+    "keytao": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "sanpin": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "23"
+    }
+  },
+  "score": 9.538899751387039,
+  "doubledScore": 9.535389901125665,
+  "metrics": {
+    "M-R2": 42,
+    "flyingKeyComponents": {
+      "initials": 0,
+      "zeroInitialGroups": 0,
+      "finals": 0
+    },
+    "logicAuditFA1": 98.2983148805112,
+    "logicUniformityLUv1r": 70.57075643109889,
+    "common399UniqueCodes": 348,
+    "common399UniqueRate": 0.8721804511278195,
+    "common399CollisionExcess": 51,
+    "common399CollisionBuckets": 51,
+    "common399AffectedSyllables": 102,
+    "common399AffectedRate": 0.2556390977443609,
+    "s2FrequencyWeightedMiss": 0.021553573579842476,
+    "s2CompletionMeanKeys": 2.1030739255643867,
+    "s2CompletionCenterMs": 84.0797636063415,
+    "s2DifferentKeySameFingerRate": 0.045696859575175656,
+    "cktV3": 9.640728811560436,
+    "cktV4": 9.5326343379943,
+    "cktV5": 9.535933679820259,
+    "cktV51": 9.539046137905075,
+    "ensembleV3": 10.76082395411567,
+    "ensembleV4": 10.827132769358593,
+    "ensembleV5": 10.569447811048951,
+    "ensembleV6CW150": 9.5614654689877,
+    "aggregateSelectionRate": 0.00509125618059549,
+    "aggregateFirstAuxRate": 0.25000148747525,
+    "aggregateSecondAuxRate": 0.06292507986361462,
+    "dailyLeftRightLoad": {
+      "left": 1224,
+      "right": 925,
+      "leftShare": 0.5695672405770126
+    },
+    "dailySameHandRate": 0.47929269427640764,
+    "dailyMeanEffectiveDistance": 0.6944924195525639,
+    "leftPinkyQAZPeak20Contracts": {
+      "value": 0.1671654539183134,
+      "track": "W6-Snow"
+    },
+    "rightPinkyPeak20Contracts": {
+      "value": 0.058913898272917396,
+      "track": "W4-union"
+    },
+    "maxFingerPeak20Contracts": 0.26610811752851193,
+    "homeShareS2": 0.5210392231677836,
+    "homeFloor20Contracts": 0.3546910873009797,
+    "indexFingerTYBPeak20Contracts": {
+      "value": 0.14281018286825142,
+      "track": "W4-SBxh"
+    },
+    "dailyEightScenarioMovingHand": 133.54622795752468,
+    "dailyAverageOverlapDistance": 0.566954597232859,
+    "dailyAverageTotalDistance": 1.2614470167854228,
+    "dailyAverageTime": 0.7867846825588876,
+    "cktV52": 9.538899751387039,
+    "aggregateMotorUpperMs": 344.61512799292217,
+    "aggregateEffectiveMs": 444.3459210342906,
+    "aggregateThirdAuxRate": 0.008257139691466289,
+    "aggregateMeanRejectedCandidates": 0.006379904881190202,
+    "aggregateMeanPageActions": 6.439932840997263e-06,
+    "aggregateMeanKeys": 3.821183707030331,
+    "aggregateCognitiveMs": 99.73079304136843
+  },
+  "semantics": {
+    "toneKeyClass": "AVUIO",
+    "toneKeySet": "AIOUV",
+    "shapeKeysByMeaning": "AVUIO",
+    "toneKeysByTone": "IVUAO",
+    "toneDigitsByShapeMeaning": "42310"
+  },
+  "memory": 42,
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\finalize_u7x_02d_r11.js": "469f249143d1abdca24a7159f2e3623d4b52da87a0bb98af07aa1ffa284391c5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-u7x-02d-r11-columns.json": "8e29f3a5bd43272748697a4d15c39a2c92d6afa053945ac9a276b140d9e94d5d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-u7x-02d-r11-robustness.json": "3e875fcb094f5923673d9c2ba32e7380b79b106b5ca8fde2618e99dc8f8c99e0",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-u7x-02d-r11-policy-U7X-02d505540da0.json": "c24893bdfe03d426164e6a03f05acd667f03827e16f100f7275b2d6970057588"
+  },
+  "provenanceCorrection": "Policy enumeration used archived verifier v1; its original bytes were recovered and hash checked after adding cache-reuse support to the current verifier."
+}
