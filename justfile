@@ -1,5 +1,18 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-zero-n-search:
+    node --max-old-space-size=2048 tools/search_untoned_cr7e_zero_n.js
+    node tools/polish_untoned_cr7e_zero_n_swaps.js
+
+untoned-cr7e-zero-n-verify:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_zero_n.js
+
+untoned-cr7e-zero-n-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_zero_n.js --policies "{{id}}"
+
+untoned-cr7e-zero-n-report:
+    python -X utf8 tools/report_untoned_cr7e_zero_n.py
+
 untoned-cr7e-v52-prepare:
     cargo build --release --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-stream
     node --max-old-space-size=4096 tools/search_untoned_cr7e_v52.js --prepare
