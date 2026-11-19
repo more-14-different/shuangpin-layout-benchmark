@@ -7,14 +7,21 @@ r2-restore399-v52-construct:
     python -X utf8 tools/restore_untoned_r2_399_v52.py --rhymes
 
 r2-restore399-v52-search:
+    node --max-old-space-size=4096 tools/untoned_r2_search_inputs.js
     node --max-old-space-size=4096 tools/search_untoned_r2_restored399_v52.js
 
 r2-restore399-v52-diverse:
     python -X utf8 tools/restore_untoned_r2_399_v52.py --diverse
+    node --max-old-space-size=4096 tools/untoned_r2_search_inputs.js
     node --max-old-space-size=4096 tools/search_untoned_r2_restored399_v52.js
 
 r2-restore399-v52-twohop:
+    node --max-old-space-size=4096 tools/untoned_r2_search_inputs.js
     node --max-old-space-size=4096 tools/search_untoned_r2_restored399_twohop_v52.js
+
+r2-restore399-v52-threehop:
+    node --max-old-space-size=4096 tools/untoned_r2_search_inputs.js
+    node --max-old-space-size=4096 tools/search_untoned_r2_restored399_threehop_v52.js
 
 r2-restore399-v52-verify:
     node --max-old-space-size=6144 tools/verify_untoned_r2_v52.js research/notes/2026-11-20-untoned-r2-restored399-v52-search.json

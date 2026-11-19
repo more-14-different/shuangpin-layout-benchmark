@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),zlib=require('node:zlib'),assert=require('node:assert/strict');
-const scorer=require('./score_completion_ckt_v4'),model=require('./ckt_v4_model'),{HEADS,FINALS}=require('./ckt_v4_scheme_fixture');
+const model=require('./ckt_v4_model'),{HEADS,FINALS}=require('./ckt_v4_scheme_fixture'),{loadLayoutInputs}=require('./untoned_r2_search_inputs');
 const {audit,rebuild,ergonomics}=require('./untoned_r2_search_metrics'),{operations,apply}=require('./search_untoned_r2_v52'),{launch}=require('./untoned_r2_native_worker');
 const ROOT=path.resolve(__dirname,'..'),PREFIX='2026-11-20-untoned-r2-restored399-v52',read=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
 function changes(s,initialMap){const a=HEADS.map(h=>initialMap[h].charCodeAt(0)-65);return {entries:s.slice(0,27).filter((k,i)=>k!==a[i]).length,families:[...Array(21).keys(),24,25].filter(i=>s[i]!==a[i]).length+Number([21,22,23].some(i=>s[i]!==a[i]))};}
@@ -8,7 +8,7 @@ async function main(){
  const cache=path.join(ROOT,'research/.cache/r2-restore399-v52');fs.mkdirSync(cache,{recursive:true});const log=path.join(cache,'scores.jsonl'),output=path.join(ROOT,`research/notes/${PREFIX}-search.json`);
  const source=read('research/notes/2026-11-20-untoned-r2-onsets-v52-search.json'),construction=read('research/notes/2026-11-20-untoned-r2-399-rhyme-constructions.json');
  const manifest=read('research/.cache/r2-fixed-v52/manifest.json');for(const [p,h] of Object.entries(manifest.inputHashes))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,p))).digest('hex'),h);
- const data=scorer.loadPayload(path.join(ROOT,'a7_CKT_R11.html')),template=data.entries.find(e=>e.id==='RC26-39a5bfdc045342cd'),fixture=read('research/.cache/ckt-v4-ergonomics.json'),motor=model.upstreamMotor(read('tools/ckt_v4_upstream_role_tables.json'));
+ const {data,template}=loadLayoutInputs(),fixture=read('research/.cache/ckt-v4-ergonomics.json'),motor=model.upstreamMotor(read('tools/ckt_v4_upstream_role_tables.json'));
  function entry(s){return rebuild({...template,initialMap:Object.fromEntries(HEADS.map((h,i)=>[h,String.fromCharCode(65+s[i])])),finalMap:Object.fromEntries(FINALS.map((f,i)=>[f,String.fromCharCode(65+s[27+i])]))},data);}
  function prepare(s){const c=changes(s,source.initialMap);if(c.families!==4||c.entries!==6||new Set(s.slice(27)).size!==26)return null;const a=audit(entry(s),data);if(!a.valid||a.unique!==399||a.qz||a.zq||a.M>40||a.D>3||a.V>1||a.branches)return null;return {state:s,key:Buffer.from(s).toString('base64'),audit:a,onsetChanges:c};}
  const known=new Map();if(fs.existsSync(log))for(const line of fs.readFileSync(log,'utf8').trim().split('\n').filter(Boolean)){const r=JSON.parse(line);known.set(r.key,r);}
@@ -40,6 +40,7 @@ async function main(){
  }
  report.scope='Resumed multicenter rhyme-only descent at minimum 4 changed onset rule families and 6 entries; exact legal one-hop scans at listed centers, with additional MILP constructed basins where available; not global CKT optimality';
  if(report.twoHopScreens?.length)report.scope+='; two-operation endpoint legality enumeration and screened full-CKT scoring at listed two-hop centers';
+ if(report.threeHopScreens?.length)report.scope+='; selected four-token/four-key three-swap cycles, with screened full-CKT scoring only';
  report.oneHopStationary={multiplier1:expanded.has(sorted('score')[0].key),multiplier2:expanded.has(sorted('score2')[0].key)};
  const target=path.join(ROOT,`research/notes/${PREFIX}-scores.jsonl.gz`);fs.writeFileSync(target,zlib.gzipSync(fs.readFileSync(log),{level:9}));report.scoreArchive={path:path.relative(ROOT,target),sha256:crypto.createHash('sha256').update(fs.readFileSync(target)).digest('hex')};save(true);console.log(JSON.stringify({completed:true,scored:known.size,best1:sorted('score')[0].score,best2:sorted('score2')[0].score2}));
  }finally{workers.forEach(w=>w.close());}

@@ -66,9 +66,9 @@
   "minimumOnsetRules": 4,
   "minimumOnsetEntries": 6,
   "constructedSeeds": 256,
-  "exactlyScored": 5170,
+  "exactlyScored": 8446,
   "allRowsAudited399Unique": true,
-  "CKTSearchScope": "Resumed multicenter rhyme-only descent at minimum 4 changed onset rule families and 6 entries; exact legal one-hop scans at listed centers, with additional MILP constructed basins where available; not global CKT optimality; two-operation endpoint legality enumeration and screened full-CKT scoring at listed two-hop centers",
+  "CKTSearchScope": "Resumed multicenter rhyme-only descent at minimum 4 changed onset rule families and 6 entries; exact legal one-hop scans at listed centers, with additional MILP constructed basins where available; not global CKT optimality; two-operation endpoint legality enumeration and screened full-CKT scoring at listed two-hop centers; selected three-swap four-token/four-key cycles with legality screening and sampled full CKT; not exhaustive three-hop search",
   "baselines": [
     {
       "id": "RC26-39a5bfdc045342cd",
@@ -115,9 +115,9 @@
   ],
   "verified": [
     {
-      "id": "UR2-V52-ff56f72adf0e",
-      "score": 9.104186126074158,
-      "score2": 9.053754939050467,
+      "id": "UR2-V52-6d805a35d5fe",
+      "score": 9.102926550708515,
+      "score2": 9.050056729766151,
       "audit": {
         "valid": true,
         "M": 40,
@@ -129,198 +129,198 @@
         "zq": false
       },
       "erg": {
-        "mx": 131.033001287244,
+        "mx": 131.1151609806142,
         "hits": 2149,
-        "homeS2": 0.4260680888772551,
-        "homeFloor": 0.29847188994836527,
+        "homeS2": 0.4259817602845747,
+        "homeFloor": 0.2978902385338731,
         "rpMax": 0.033759385949270665,
         "wMax": 0.041810007065867294,
         "yMax": 0.06265999190823264,
-        "motor": 68.6824990644142
+        "motor": 68.73993349323152
       },
       "independent": {
-        "a7eV4": 10.678648361498519,
-        "a7eV5": 10.23417957732456,
+        "a7eV4": 10.678105108129362,
+        "a7eV5": 10.239063564380395,
         "tracks": {
           "S2": {
-            "home": 0.4260680888772551,
-            "sfb": 0.047033920930360434,
+            "home": 0.4259817602845747,
+            "sfb": 0.04706348711704683,
             "maxFinger": 0.2899924636075675,
             "rightPinky": 0.025424545391325874,
-            "upperMs": 69.60052283394883,
-            "e34": 1.3322824095291022,
-            "geometry": 1.368838504956019
+            "upperMs": 69.65767801731268,
+            "e34": 1.332358778238528,
+            "geometry": 1.3693606118850885
           },
           "C2": {
-            "home": 0.5000772326551906,
-            "sfb": 0.01928233059363101,
+            "home": 0.5083941690228342,
+            "sfb": 0.019580432351456647,
             "maxFinger": 0.35359456712523957,
             "rightPinky": 0.013370319034045713,
-            "upperMs": 67.74379723717655,
-            "e34": 1.3238066024247477,
-            "geometry": 1.3688524288591408
+            "upperMs": 67.76689743295194,
+            "e34": 1.3239280839152423,
+            "geometry": 1.368093619664293
           },
           "C3": {
-            "home": 0.4406132128163486,
-            "sfb": 0.04595758478133782,
+            "home": 0.4461578370614444,
+            "sfb": 0.04610663566025063,
             "maxFinger": 0.3231982295096591,
             "rightPinky": 0.008913546022697142,
-            "upperMs": 195.1943862917807,
-            "e34": 1.3295178696410956,
-            "geometry": 1.3833128781706374
+            "upperMs": 195.14931794192108,
+            "e34": 1.3282300695909521,
+            "geometry": 1.3821360007805357
           },
           "C4-Snow": {
-            "home": 0.3174525827240741,
-            "sfb": 0.07327883041799312,
+            "home": 0.3216252339782176,
+            "sfb": 0.07337865006051658,
             "maxFinger": 0.3119485451655079,
             "rightPinky": 0.006707960241556544,
-            "upperMs": 328.75154292347946,
-            "e34": 1.3059330232413986,
-            "geometry": 1.3209406889791033
+            "upperMs": 328.5487522915503,
+            "e34": 1.305425920233563,
+            "geometry": 1.3206888295345665
           },
           "C4-SBxh": {
-            "home": 0.3370579008896739,
-            "sfb": 0.07124053377468725,
+            "home": 0.34121636907349573,
+            "sfb": 0.07133990102729577,
             "maxFinger": 0.30984336658971606,
             "rightPinky": 0.006685159517022856,
-            "upperMs": 326.7643348770912,
-            "e34": 1.2967639353978944,
-            "geometry": 1.32479397890082
+            "upperMs": 326.56885387578103,
+            "e34": 1.2962396544929184,
+            "geometry": 1.3245478709064586
           },
           "C4-SBzr": {
-            "home": 0.3370579008896739,
-            "sfb": 0.07124053377468725,
+            "home": 0.34121636907349573,
+            "sfb": 0.07133990102729577,
             "maxFinger": 0.30984336658971606,
             "rightPinky": 0.006685159517022856,
-            "upperMs": 326.7643348770912,
-            "e34": 1.2967639353978944,
-            "geometry": 1.32479397890082
+            "upperMs": 326.56885387578103,
+            "e34": 1.2962396544929184,
+            "geometry": 1.3245478709064586
           },
           "C5-TX2": {
-            "home": 0.3183014089725473,
-            "sfb": 0.023057164958156993,
+            "home": 0.3216372544970288,
+            "sfb": 0.023131944577638792,
             "maxFinger": 0.3020129296266648,
             "rightPinky": 0.0053627101301542855,
-            "upperMs": 469.6481741792105,
-            "e34": 1.2952069511774396,
-            "geometry": 1.3165291991808155
+            "upperMs": 469.5714829343389,
+            "e34": 1.294432164312938,
+            "geometry": 1.3158211473812542
           },
           "W4-Snow": {
-            "home": 0.3917292301353353,
-            "sfb": 0.07599325076742558,
+            "home": 0.39085675301359696,
+            "sfb": 0.0760377952473411,
             "maxFinger": 0.2787998270795167,
             "rightPinky": 0.03366604343348839,
-            "upperMs": 363.75507824801906,
-            "e34": 1.3442169727372866,
-            "geometry": 1.3727204715272208
+            "upperMs": 364.0393054276806,
+            "e34": 1.34410285138286,
+            "geometry": 1.3733825591002824
           },
           "W4-SBxh": {
-            "home": 0.3861310760139167,
-            "sfb": 0.06799254761510437,
+            "home": 0.3835926657399004,
+            "sfb": 0.06886974914563501,
             "maxFinger": 0.28055690380490045,
             "rightPinky": 0.030009042360243574,
-            "upperMs": 357.27725610324995,
-            "e34": 1.335725837243471,
-            "geometry": 1.3678362464444411
+            "upperMs": 357.8753165501056,
+            "e34": 1.3358670659204364,
+            "geometry": 1.3690558997965305
           },
           "W4-SBzr": {
-            "home": 0.37862762477295964,
-            "sfb": 0.06620465340065419,
+            "home": 0.3801075106254769,
+            "sfb": 0.0671507581005849,
             "maxFinger": 0.27914262080601265,
             "rightPinky": 0.0301330769235541,
-            "upperMs": 357.8910055758132,
-            "e34": 1.3375613698073598,
-            "geometry": 1.3692132361456943
+            "upperMs": 358.3670294866442,
+            "e34": 1.3372737188567774,
+            "geometry": 1.3697028939003217
           },
           "W4-common": {
-            "home": 0.3800213170066577,
-            "sfb": 0.06606214630437243,
+            "home": 0.3812815906031292,
+            "sfb": 0.06683457741917843,
             "maxFinger": 0.28086012781551695,
             "rightPinky": 0.029871720090475486,
-            "upperMs": 355.91028436327395,
-            "e34": 1.333961017747781,
-            "geometry": 1.3672257914231776
+            "upperMs": 356.38837941023434,
+            "e34": 1.3336078842378567,
+            "geometry": 1.3676505152132359
           },
           "W4-union": {
-            "home": 0.3916226759839766,
-            "sfb": 0.07595990882194185,
+            "home": 0.390686106633807,
+            "sfb": 0.076027365909083,
             "maxFinger": 0.2788390480340378,
             "rightPinky": 0.033759385949270665,
-            "upperMs": 363.79292493989703,
-            "e34": 1.3442691119362147,
-            "geometry": 1.3727687679132723
+            "upperMs": 364.0845746878466,
+            "e34": 1.3441664899882964,
+            "geometry": 1.3734532051638972
           },
           "W6-Snow": {
-            "home": 0.38214947816726613,
-            "sfb": 0.06308333208136443,
+            "home": 0.38156782675277395,
+            "sfb": 0.06311005876931373,
             "maxFinger": 0.24942862570339372,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 681.7384873565345,
-            "e34": 1.3258586778799761,
-            "geometry": 1.3446731586940042
+            "upperMs": 682.048707800909,
+            "e34": 1.3257968724997484,
+            "geometry": 1.345249523493366
           },
           "W6-21": {
-            "home": 0.38214947816726613,
-            "sfb": 0.0642519111147231,
+            "home": 0.38156782675277395,
+            "sfb": 0.0642786378026724,
             "maxFinger": 0.24942862570339372,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 682.2735302684757,
-            "e34": 1.3261070022208596,
-            "geometry": 1.3447245594835202
+            "upperMs": 682.6346258069339,
+            "e34": 1.3260110671502063,
+            "geometry": 1.3452691833398969
           },
           "WX-Snow-12": {
-            "home": 0.31081665425722116,
-            "sfb": 0.060916846849939664,
+            "home": 0.310235002842729,
+            "sfb": 0.060943573537889005,
             "maxFinger": 0.24339263410871703,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 670.6482899997204,
-            "e34": 1.32075311117684,
-            "geometry": 1.3319972957205795
+            "upperMs": 671.0144803167161,
+            "e34": 1.3206462544952324,
+            "geometry": 1.3325135874680996
           },
           "WX-Snow-21": {
-            "home": 0.31081665425722116,
-            "sfb": 0.06179371845155394,
+            "home": 0.310235002842729,
+            "sfb": 0.06182044513950326,
             "maxFinger": 0.24339263410871703,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 671.1848642411167,
-            "e34": 1.3209645977974902,
-            "geometry": 1.3323183603787965
+            "upperMs": 671.5338041847441,
+            "e34": 1.3208422409902223,
+            "geometry": 1.3327720825455796
           },
           "WX-SBxh-12": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06270804613242073,
+            "home": 0.2978902385338731,
+            "sfb": 0.06273477282037002,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 670.9745227887299,
-            "e34": 1.3190795747796038,
-            "geometry": 1.328966012257138
+            "upperMs": 671.3133319119089,
+            "e34": 1.3189323943227098,
+            "geometry": 1.3294689385970322
           },
           "WX-SBxh-21": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06391329698656614,
+            "home": 0.2978902385338731,
+            "sfb": 0.06394002367451541,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 671.6866228712313,
-            "e34": 1.3194418895568965,
-            "geometry": 1.32947273093053
+            "upperMs": 672.0465239937729,
+            "e34": 1.3192445107669575,
+            "geometry": 1.3299341035033612
           },
           "WX-SBzr-12": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06270804613242073,
+            "home": 0.2978902385338731,
+            "sfb": 0.06273477282037002,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 670.9745227887299,
-            "e34": 1.3190795747796038,
-            "geometry": 1.328966012257138
+            "upperMs": 671.3133319119089,
+            "e34": 1.3189323943227098,
+            "geometry": 1.3294689385970322
           },
           "WX-SBzr-21": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06391329698656614,
+            "home": 0.2978902385338731,
+            "sfb": 0.06394002367451541,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 671.6866228712313,
-            "e34": 1.3194418895568965,
-            "geometry": 1.32947273093053
+            "upperMs": 672.0465239937729,
+            "e34": 1.3192445107669575,
+            "geometry": 1.3299341035033612
           }
         }
       },
@@ -368,13 +368,13 @@
         "i": "I",
         "ia": "B",
         "ian": "Q",
-        "iang": "F",
+        "iang": "G",
         "iao": "W",
         "ie": "Z",
         "in": "R",
         "ing": "E",
         "iong": "M",
-        "iu": "V",
+        "iu": "F",
         "o": "O",
         "ong": "M",
         "ou": "Y",
@@ -384,12 +384,12 @@
         "uan": "T",
         "uang": "E",
         "ui": "S",
-        "un": "G",
+        "un": "B",
         "uo": "O",
         "v": "S",
         "van": "T",
         "ve": "X",
-        "vn": "G"
+        "vn": "V"
       },
       "changesFromR2": {
         "q": [
@@ -419,9 +419,9 @@
       }
     },
     {
-      "id": "UR2-V52-f634244482c7",
-      "score": 9.104990319450577,
-      "score2": 9.053238069885388,
+      "id": "UR2-V52-29e4e969a151",
+      "score": 9.103505475847598,
+      "score2": 9.049245115417712,
       "audit": {
         "valid": true,
         "M": 40,
@@ -433,198 +433,198 @@
         "zq": false
       },
       "erg": {
-        "mx": 129.26341667893354,
+        "mx": 129.3433715665295,
         "hits": 2149,
-        "homeS2": 0.4260680888772551,
-        "homeFloor": 0.29847188994836527,
+        "homeS2": 0.4259817602845747,
+        "homeFloor": 0.2978902385338731,
         "rpMax": 0.033759385949270665,
         "wMax": 0.042174841178160026,
         "yMax": 0.06265999190823264,
-        "motor": 68.66881047707882
+        "motor": 68.72624490589615
       },
       "independent": {
-        "a7eV4": 10.67962351896659,
-        "a7eV5": 10.235748993401547,
+        "a7eV4": 10.679081461492697,
+        "a7eV5": 10.240652961505816,
         "tracks": {
           "S2": {
-            "home": 0.4260680888772551,
-            "sfb": 0.04703392093036043,
+            "home": 0.4259817602845747,
+            "sfb": 0.047063487117046825,
             "maxFinger": 0.2899924636075675,
             "rightPinky": 0.025424545391325874,
-            "upperMs": 69.5880372953314,
-            "e34": 1.3320879373124968,
-            "geometry": 1.3689220471909993
+            "upperMs": 69.64519247869525,
+            "e34": 1.3321643060219235,
+            "geometry": 1.369444154120069
           },
           "C2": {
-            "home": 0.5000772326551906,
-            "sfb": 0.01928233059363101,
+            "home": 0.5083941690228342,
+            "sfb": 0.019580432351456647,
             "maxFinger": 0.35359456712523957,
             "rightPinky": 0.013370319034045713,
-            "upperMs": 67.77058298522442,
-            "e34": 1.3240524750070912,
-            "geometry": 1.3687894625923285
+            "upperMs": 67.79368318099982,
+            "e34": 1.3241739564975863,
+            "geometry": 1.3680306533974813
           },
           "C3": {
-            "home": 0.4406132128163486,
-            "sfb": 0.04728263511604208,
+            "home": 0.4461578370614444,
+            "sfb": 0.04743168599495491,
             "maxFinger": 0.3231982295096591,
             "rightPinky": 0.008913546022697142,
-            "upperMs": 195.18942766279392,
-            "e34": 1.3295874098334746,
-            "geometry": 1.3833938027988033
+            "upperMs": 195.1443593129343,
+            "e34": 1.3282996097833317,
+            "geometry": 1.382216925408702
           },
           "C4-Snow": {
-            "home": 0.3174525827240741,
-            "sfb": 0.07311895396092546,
+            "home": 0.3216252339782176,
+            "sfb": 0.07321877360344892,
             "maxFinger": 0.3119485451655079,
             "rightPinky": 0.006707960241556544,
-            "upperMs": 328.8013229414862,
-            "e34": 1.3060145383496373,
-            "geometry": 1.3208955868374088
+            "upperMs": 328.5985323095571,
+            "e34": 1.3055074353418017,
+            "geometry": 1.320643727392872
           },
           "C4-SBxh": {
-            "home": 0.3370579008896739,
-            "sfb": 0.07121036993818933,
+            "home": 0.34121636907349573,
+            "sfb": 0.07130973719079785,
             "maxFinger": 0.30984336658971606,
             "rightPinky": 0.006685159517022856,
-            "upperMs": 326.83734791892067,
-            "e34": 1.2968525979110688,
-            "geometry": 1.3247905045718091
+            "upperMs": 326.64186691761046,
+            "e34": 1.2963283170060929,
+            "geometry": 1.3245443965774477
           },
           "C4-SBzr": {
-            "home": 0.3370579008896739,
-            "sfb": 0.07121036993818933,
+            "home": 0.34121636907349573,
+            "sfb": 0.07130973719079785,
             "maxFinger": 0.30984336658971606,
             "rightPinky": 0.006685159517022856,
-            "upperMs": 326.83734791892067,
-            "e34": 1.2968525979110688,
-            "geometry": 1.3247905045718091
+            "upperMs": 326.64186691761046,
+            "e34": 1.2963283170060929,
+            "geometry": 1.3245443965774477
           },
           "C5-TX2": {
-            "home": 0.3183014089725473,
-            "sfb": 0.02372194976550709,
+            "home": 0.3216372544970288,
+            "sfb": 0.02379672938498889,
             "maxFinger": 0.3020129296266648,
             "rightPinky": 0.0053627101301542855,
-            "upperMs": 469.6462695487816,
-            "e34": 1.2952487890602726,
-            "geometry": 1.3165778863500002
+            "upperMs": 469.56957830391,
+            "e34": 1.2944740021957712,
+            "geometry": 1.315869834550439
           },
           "W4-Snow": {
-            "home": 0.3917292301353353,
-            "sfb": 0.0760244563626676,
+            "home": 0.39085675301359696,
+            "sfb": 0.07606900084258313,
             "maxFinger": 0.2787998270795167,
             "rightPinky": 0.03366604343348839,
-            "upperMs": 364.0931456981728,
-            "e34": 1.3443201404434626,
-            "geometry": 1.3735826679558003
+            "upperMs": 364.3795813162357,
+            "e34": 1.344206019089036,
+            "geometry": 1.3742447555288626
           },
           "W4-SBxh": {
-            "home": 0.3861310760139167,
-            "sfb": 0.06803000079671481,
+            "home": 0.3835926657399004,
+            "sfb": 0.06890720232724547,
             "maxFinger": 0.28055690380490045,
             "rightPinky": 0.030009042360243574,
-            "upperMs": 357.3594681825548,
-            "e34": 1.3356276806683216,
-            "geometry": 1.3684731833132455
+            "upperMs": 357.9574298265313,
+            "e34": 1.3357689093452871,
+            "geometry": 1.3696928366653345
           },
           "W4-SBzr": {
-            "home": 0.37862762477295964,
-            "sfb": 0.06640738955651256,
+            "home": 0.3801075106254769,
+            "sfb": 0.06735349425644327,
             "maxFinger": 0.27914262080601265,
             "rightPinky": 0.0301330769235541,
-            "upperMs": 357.90068906637623,
-            "e34": 1.3374918748511844,
-            "geometry": 1.369818161922544
+            "upperMs": 358.38094895503764,
+            "e34": 1.3372042239006021,
+            "geometry": 1.3703078196771719
           },
           "W4-common": {
-            "home": 0.3800213170066577,
-            "sfb": 0.06613990775291605,
+            "home": 0.3812815906031292,
+            "sfb": 0.06691233886772206,
             "maxFinger": 0.28086012781551695,
             "rightPinky": 0.029871720090475486,
-            "upperMs": 355.9751293987201,
-            "e34": 1.333963047227544,
-            "geometry": 1.3678526524517576
+            "upperMs": 356.4536085393706,
+            "e34": 1.3336099137176198,
+            "geometry": 1.3682773762418163
           },
           "W4-union": {
-            "home": 0.3916226759839766,
-            "sfb": 0.07598865867008214,
+            "home": 0.390686106633807,
+            "sfb": 0.0760561157572233,
             "maxFinger": 0.2788390480340378,
             "rightPinky": 0.033759385949270665,
-            "upperMs": 364.12818630549543,
-            "e34": 1.3443673564489693,
-            "geometry": 1.373626831465687
+            "upperMs": 364.42193078176257,
+            "e34": 1.344264734501051,
+            "geometry": 1.374311268716313
           },
           "W6-Snow": {
-            "home": 0.38214947816726613,
-            "sfb": 0.06314419474111659,
+            "home": 0.38156782675277395,
+            "sfb": 0.06317092142906586,
             "maxFinger": 0.24942862570339372,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 682.0502624264179,
-            "e34": 1.3259735323581168,
-            "geometry": 1.3452832845828409
+            "upperMs": 682.3656468084588,
+            "e34": 1.3259117269778886,
+            "geometry": 1.3458596493822026
           },
           "W6-21": {
-            "home": 0.38214947816726613,
-            "sfb": 0.06498960127893884,
+            "home": 0.38156782675277395,
+            "sfb": 0.0650163279668881,
             "maxFinger": 0.24942862570339372,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 682.4416405797219,
-            "e34": 1.3260767861185596,
-            "geometry": 1.3453492750240603
+            "upperMs": 682.8063111696009,
+            "e34": 1.3259808510479056,
+            "geometry": 1.345893898880437
           },
           "WX-Snow-12": {
-            "home": 0.31081665425722116,
-            "sfb": 0.060800630697757256,
+            "home": 0.310235002842729,
+            "sfb": 0.06082735738570656,
             "maxFinger": 0.24339263410871703,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 670.9468917070463,
-            "e34": 1.3208490879044446,
-            "geometry": 1.332567383421404
+            "upperMs": 671.3176599727501,
+            "e34": 1.320742231222836,
+            "geometry": 1.3330836751689241
           },
           "WX-Snow-21": {
-            "home": 0.31081665425722116,
-            "sfb": 0.061511794321535064,
+            "home": 0.310235002842729,
+            "sfb": 0.06153852100948437,
             "maxFinger": 0.24339263410871703,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 671.6040032261565,
-            "e34": 1.3212258896646638,
-            "geometry": 1.3329423271522125
+            "upperMs": 671.9568575933824,
+            "e34": 1.3211035328573957,
+            "geometry": 1.3333960493189958
           },
           "WX-SBxh-12": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06258870425285396,
+            "home": 0.2978902385338731,
+            "sfb": 0.06261543094080324,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 671.3362812671576,
-            "e34": 1.3192416713321002,
-            "geometry": 1.3295830822385744
+            "upperMs": 671.6796084908882,
+            "e34": 1.3190944908752062,
+            "geometry": 1.3300860085784691
           },
           "WX-SBxh-21": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06375223048947899,
+            "home": 0.2978902385338731,
+            "sfb": 0.06377895717742826,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 672.0080568445393,
-            "e34": 1.3196554204032869,
-            "geometry": 1.3300761304013617
+            "upperMs": 672.372429281839,
+            "e34": 1.3194580416133472,
+            "geometry": 1.3305375029741933
           },
           "WX-SBzr-12": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06258870425285396,
+            "home": 0.2978902385338731,
+            "sfb": 0.06261543094080324,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 671.3362812671576,
-            "e34": 1.3192416713321002,
-            "geometry": 1.3295830822385744
+            "upperMs": 671.6796084908882,
+            "e34": 1.3190944908752062,
+            "geometry": 1.3300860085784691
           },
           "WX-SBzr-21": {
-            "home": 0.29847188994836527,
-            "sfb": 0.06375223048947899,
+            "home": 0.2978902385338731,
+            "sfb": 0.06377895717742826,
             "maxFinger": 0.26652232194692055,
             "rightPinky": 0.02244402895565893,
-            "upperMs": 672.0080568445393,
-            "e34": 1.3196554204032869,
-            "geometry": 1.3300761304013617
+            "upperMs": 672.372429281839,
+            "e34": 1.3194580416133472,
+            "geometry": 1.3305375029741933
           }
         }
       },
@@ -672,13 +672,13 @@
         "i": "I",
         "ia": "B",
         "ian": "Q",
-        "iang": "F",
+        "iang": "G",
         "iao": "Z",
         "ie": "W",
         "in": "R",
         "ing": "E",
         "iong": "M",
-        "iu": "V",
+        "iu": "F",
         "o": "O",
         "ong": "M",
         "ou": "Y",
@@ -688,12 +688,12 @@
         "uan": "T",
         "uang": "E",
         "ui": "S",
-        "un": "G",
+        "un": "B",
         "uo": "O",
         "v": "S",
         "van": "T",
         "ve": "X",
-        "vn": "G"
+        "vn": "V"
       },
       "changesFromR2": {
         "q": [
@@ -739,7 +739,7 @@
   ],
   "scoreArchive": {
     "path": "research\\notes\\2026-11-20-untoned-r2-restored399-v52-scores.jsonl.gz",
-    "sha256": "594829fb10f009eaf9715ba901ace126a89cc6a260d4c72377211b4aa910cb87"
+    "sha256": "b61803664dcdddfef490459bffdcbb93944337ac10ba3a4180d7a86751048537"
   },
   "oneHopStationary": {
     "multiplier1": true,
@@ -750,10 +750,12 @@
     "research/notes/2026-11-20-untoned-r2-399-onset-lower-bounds.json": "13c6e26f293ef552cf3e04982b856f02d5ee64b56d74f8d7d96877dc8d294b6a",
     "research/notes/2026-11-20-untoned-399-minimum26-certificate.json": "47cda581db456d104e4b76802c84e22ee6b5a23b7b4142849f0f0e0bf45b71c7",
     "tools/restore_untoned_r2_399_v52.py": "68321093d16144d96d59d7aa3068325562d53c81c68869dac598b00fc69499e3",
-    "tools/search_untoned_r2_restored399_v52.js": "97efd3db78669a34cb66b2f39cc140b14377a9629a173fadbf4d9f7655d287c5",
-    "tools/report_untoned_r2_restored399_v52.js": "5c99cd93ec6e9a9a86bedd910e836af5f94f2d3fdc884801e3e4d5770e8c9028",
+    "tools/search_untoned_r2_restored399_v52.js": "3d653a853ae5a289f6e5e53eadc7499660141d2e7ce5efda7b66ed9d245beec8",
+    "tools/report_untoned_r2_restored399_v52.js": "839b456646481be8cd132fc278204ca04e1f2f521e6c2ad20d5f11574fa1d108",
+    "tools/untoned_r2_search_inputs.js": "6143bd5d27f10788fe3ef2cd86210cb621126761712fbb3e7db12209a33cddf8",
     "research/notes/2026-11-20-untoned-r2-399-diverse-constructions.json": "2ff9f25840436f23c0d43a47afa30d1784ce49dc32a1db422792f360926251d5",
-    "tools/search_untoned_r2_restored399_twohop_v52.js": "290d583e38c0ad6cad7a5f479adf062ea9be10fb8d2e06e8c19429c977c42428"
+    "tools/search_untoned_r2_restored399_twohop_v52.js": "0347d5f81de603c78642ef650bd63f337a0b4610ce1efcd70031b8e23543c0ce",
+    "tools/search_untoned_r2_restored399_threehop_v52.js": "ac34718cf296626155d0bbcd972f1f4fe05a957a1ac4dc4601f4b22be0b079f9"
   },
   "diverseSeedSource": "research/notes/2026-11-20-untoned-r2-399-diverse-constructions.json",
   "twoHopScreens": [
@@ -780,6 +782,70 @@
       "viaIllegalIntermediate": 415,
       "selectedFullScores": 263,
       "selection": "top96 additive forecasts for each multiplier, top96 two-key motor, 32 deterministic exploration; deduplicated; not exhaustive full CKT of the two-hop space"
+    },
+    {
+      "kind": "two-hop-screen",
+      "center": "AQ8MBQMTDRYGCgcJBRgXEBURGQISGBgYCQsLAAsPDQoHAgMJAggBEAUWGREEDBUODBgUERATBBIGDhITFwY=",
+      "primitiveOperations": 2480,
+      "uniqueFirstStates": 1875,
+      "orderedPairsVisited": 4650000,
+      "legalEndpointsBeforeDedup": 107229,
+      "newLegalEndpoints": 33072,
+      "viaIllegalIntermediate": 409,
+      "selectedFullScores": 931,
+      "selection": "top384 additive forecasts for each multiplier, top384 two-key motor, 64 deterministic exploration plus 64 via illegal intermediates; deduplicated; not exhaustive full CKT of the two-hop space"
+    },
+    {
+      "kind": "two-hop-screen",
+      "center": "AQ8MBQMTDRYGCgcJBRgXEBURGQISGBgYCQsLAAsPDQoHAgMJAggBEAUZFhEEDBUODBgUERATBBIGDhITFwY=",
+      "primitiveOperations": 2480,
+      "uniqueFirstStates": 1875,
+      "orderedPairsVisited": 4650000,
+      "legalEndpointsBeforeDedup": 107229,
+      "newLegalEndpoints": 33075,
+      "viaIllegalIntermediate": 410,
+      "selectedFullScores": 944,
+      "selection": "top384 additive forecasts for each multiplier, top384 two-key motor, 64 deterministic exploration plus 64 via illegal intermediates; deduplicated; not exhaustive full CKT of the two-hop space"
     }
-  ]
+  ],
+  "threeHopScreens": [
+    {
+      "kind": "three-hop-screen",
+      "center": "AQ8MBQMTDRYGCgcJBRgXEBURGQISGBgYCQsLAAsPDQoHAgMJAggBEAYWGREEDAUODBgUERATBBIBDhITFxU=",
+      "cachedFullScoresAtCenter": 104,
+      "workerCount": 2,
+      "threeSwapCyclesVisited": 375564,
+      "validEndpointsBeforeDedup": 43309,
+      "newLegalEndpoints": 38250,
+      "viaIllegalFirstIntermediate": 2033,
+      "selectedFullScores": 272,
+      "selection": "top96 additive forecasts for each multiplier, top96 two-key motor, 32 deterministic exploration; all four-token and four-key cycles (three swaps), not all three-operation combinations"
+    },
+    {
+      "kind": "three-hop-screen",
+      "center": "AQ8MBQMTDRYGCgcJBRgXEBURGQISGBgYCQsLAAsPDQoHAgMJAggBEAYZFhEEDAUODBgUERATBBIBDhITFxU=",
+      "cachedFullScoresAtCenter": 0,
+      "workerCount": 2,
+      "threeSwapCyclesVisited": 375564,
+      "validEndpointsBeforeDedup": 43309,
+      "newLegalEndpoints": 38351,
+      "viaIllegalFirstIntermediate": 2033,
+      "selectedFullScores": 243,
+      "selection": "top96 additive forecasts for each multiplier, top96 two-key motor, 32 deterministic exploration; all four-token and four-key cycles (three swaps), not all three-operation combinations"
+    }
+  ],
+  "deepeningBaseline": {
+    "commit": "45cddff",
+    "scored": 5170,
+    "score": 9.104186126074158,
+    "score2": 9.053238069885388
+  },
+  "deepening": {
+    "newScored": 3276,
+    "best1": 9.102926550708515,
+    "best2": 9.049245115417712,
+    "threeHopScored": 619,
+    "delta1": -0.0012595753656423625,
+    "delta2": -0.003992954467676668
+  }
 }

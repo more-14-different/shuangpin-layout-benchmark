@@ -9,6 +9,8 @@ const {rebuild,audit}=require('../tools/untoned_r2_search_metrics');
 const {changes}=require('../tools/search_untoned_r2_restored399_v52');
 const {applyFinals,makeFinalGuard}=require('../tools/search_untoned_r2_restored399_twohop_v52');
 const {operations}=require('../tools/search_untoned_r2_v52');
+const {cycleFinals,permutations3}=require('../tools/search_untoned_r2_restored399_threehop_v52');
+const {loadLayoutInputs}=require('../tools/untoned_r2_search_inputs');
 const {auxiliarySemantics,toneKeysFromShapeKeys}=require('../tools/auxiliary_semantics');
 
 test('all constructed layouts preserve 399 unique codes within the original memory and no-branch budget',()=>{
@@ -57,4 +59,30 @@ test('two-hop compact legality matches the independent 399-code audit, including
  }
  assert.ok(legal>100&&invalid>100);
  assert.deepEqual([...original],state.slice(27));
+});
+
+test('three-hop cycle endpoints equal three actual primitive swaps for all six orientations',()=>{
+ const original=Uint8Array.from(constructions.candidates[0].state.slice(27));
+ for(const kind of ['key','token']){
+  const direct=new Uint8Array(35),a=new Uint8Array(35),b=new Uint8Array(35),keys=new Set();
+  for(const tail of permutations3(7,13,22)){
+   const cycle=[2,...tail];cycleFinals(original,direct,cycle,kind);
+   let current=original;
+   for(const end of tail){const out=current===a?b:a;applyFinals(current,out,kind==='key'?{kind:'group-swap',a:2,b:end}:{kind:'swap',a:29,b:end+27});current=out;}
+   assert.deepEqual([...direct],[...current]);
+   keys.add(Buffer.from(direct).toString('base64'));
+  }
+  assert.equal(keys.size,6);
+ }
+});
+
+test('minimal search inputs preserve the frozen Common399 inventory and full fallback spellings',()=>{
+ const saved=loadLayoutInputs(),{data,template}=saved;
+ assert.equal(saved.htmlSha256,input.sourceHashes['a7_CKT_R11.html']);
+ assert.deepEqual(data.base.map(([p,weight])=>({py:data.pinyin[p],weight})),input.common.map(({py,weight})=>({py,weight})));
+ assert.equal(template.codeList.length,data.pinyin.length);
+ assert.deepEqual(template.initialMap,input.baselines[0].initialMap);
+ assert.deepEqual(template.finalMap,input.baselines[0].finalMap);
+ const rebuilt=rebuild(template,data);assert.deepEqual(rebuilt.codeList,template.codeList);
+ assert.equal(audit(rebuilt,data).unique,399);
 });
