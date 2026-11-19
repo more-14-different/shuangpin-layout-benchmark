@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+r2-restore399-v52-construct:
+    node tools/export_untoned_r2_restore399_v52.js
+    python -X utf8 tools/restore_untoned_r2_399_v52.py
+    python -X utf8 tools/restore_untoned_r2_399_v52.py --certificate
+    python -X utf8 tools/restore_untoned_r2_399_v52.py --rhymes
+
+r2-restore399-v52-search:
+    node --max-old-space-size=4096 tools/search_untoned_r2_restored399_v52.js
+
+r2-restore399-v52-verify:
+    node --max-old-space-size=6144 tools/verify_untoned_r2_v52.js research/notes/2026-11-20-untoned-r2-restored399-v52-search.json
+    python -m unittest discover -s tests -p test_untoned_r2_restore399_v52.py
+    node --test --test-concurrency=1 tests/untoned-r2-restored399-v52.test.mjs tests/untoned-r2-empty-finals-v52.test.mjs tests/untoned-r2-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+    node tools/report_untoned_r2_restored399_v52.js
+
 r2-empty-finals-v52-search:
     node --max-old-space-size=4096 tools/search_untoned_r2_v52_empty_finals.js
 

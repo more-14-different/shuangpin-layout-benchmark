@@ -19,11 +19,12 @@ const independentBaseline=auditor(data.entries.find(e=>e.id==='SNOW-SHENYUN-21X2
 assert.ok(Math.abs(independentBaseline.a7eV4-10.670635896300677)<1e-10);
 for(const key of selected){
  const r=report.finalists.find(r=>r.key===key);assert.ok(r);
- assert.deepEqual(r.state.slice(0,27).map(i=>String.fromCharCode(65+i)),HEADS.map(h=>report.initialMap[h]));
+ const initialMap=r.initialMap||report.initialMap;
+ assert.deepEqual(r.state.slice(0,27).map(i=>String.fromCharCode(65+i)),HEADS.map(h=>initialMap[h]));
  const id='UR2-V52-'+crypto.createHash('sha256').update(key).digest('hex').slice(0,12);
- const e=rebuild({...data.entries.find(e=>e.id==='RC26-39a5bfdc045342cd'),id,initialMap:{...report.initialMap},finalMap:{...r.finalMap}},data);
+ const e=rebuild({...data.entries.find(e=>e.id==='RC26-39a5bfdc045342cd'),id,initialMap:{...initialMap},finalMap:{...r.finalMap}},data);
  const semantics=auxiliarySemantics(e.tone);assert.equal(semantics.shapeKeysByMeaning,'AEUIO');assert.equal(semantics.toneDigitsByShapeMeaning,'42310');
- const a=audit(e,data);assert.deepEqual(a,r.audit);assert.ok(a.unique<399);assert.ok(a.valid&&!a.qz&&!a.zq&&a.M<=40&&a.D<=3&&a.V<=1&&a.branches===0);
+ const a=audit(e,data);assert.deepEqual(a,r.audit);if(report.contract.mainCollisionsAllowed)assert.ok(a.unique<399);else assert.equal(a.unique,399);assert.ok(a.valid&&!a.qz&&!a.zq&&a.M<=40&&a.D<=3&&a.V<=1&&a.branches===0);
  const result=v52.evaluateUntoned(e,report.contract.policies,{pageSize:6,maximumCandidates:120,minimumInputLength:4},ctx);
  for(const mode of ['keytao','sanpin'])for(const kind of ['character','word2','word3','word4'])for(const [field,value] of Object.entries(r.modes[mode][kind]))if(typeof value==='number'){
   const next=result.v52[mode][kind][field];assert.ok(Math.abs(value-next)<1e-7,`${key}/${mode}/${kind}/${field}: ${value} != ${next}`);

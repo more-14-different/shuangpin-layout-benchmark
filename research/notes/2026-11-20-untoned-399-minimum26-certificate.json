@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "minimumFinalKeys": 26,
+  "maximumSoundKeys": 21,
+  "assumptions": [
+    "399 common syllables as frozen",
+    "one unconditional key per canonical initial/final",
+    "Y and YU use the same initial key; zero branches"
+  ],
+  "eligibleOrdinaryMergesAtCapacity25": [
+    [
+      "f",
+      "j"
+    ],
+    [
+      "f",
+      "q"
+    ],
+    [
+      "f",
+      "x"
+    ]
+  ],
+  "T14": [
+    "i",
+    "ia",
+    "ian",
+    "iang",
+    "iao",
+    "ie",
+    "in",
+    "ing",
+    "iong",
+    "iu",
+    "v",
+    "van",
+    "ve",
+    "vn"
+  ],
+  "U12": [
+    "a",
+    "ai",
+    "an",
+    "ang",
+    "ao",
+    "e",
+    "ei",
+    "en",
+    "eng",
+    "o",
+    "ou",
+    "u"
+  ],
+  "clique26": [
+    "a",
+    "ai",
+    "an",
+    "ang",
+    "ao",
+    "e",
+    "ei",
+    "en",
+    "eng",
+    "i",
+    "ia",
+    "ian",
+    "iang",
+    "iao",
+    "ie",
+    "in",
+    "ing",
+    "iong",
+    "iu",
+    "o",
+    "ou",
+    "u",
+    "v",
+    "van",
+    "ve",
+    "vn"
+  ],
+  "pairsChecked": 325,
+  "argument": [
+    "Y overlaps every ordinary onset and needs its own bucket.",
+    "Only f with j/q/x is a disjoint ordinary pair whose union fits 25 final keys. Exactly one such pair must merge.",
+    "A,E,W can attach only to j/q/x, and cannot attach to the one already hosting f. W conflicts with both A and E, so W occupies one remaining bucket and A/E the other.",
+    "Each of f,W,A/E is therefore merged with a member of j/q/x. Their identical 14-final sets form T.",
+    "U has 12 finals all co-occurring under m; every U final occurs under f,W,A or E. Thus U and T form a forced 26-clique."
+  ]
+}
