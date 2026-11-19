@@ -1,0 +1,2425 @@
+{
+  "version": 1,
+  "sourceHashes": {
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/verify_toned_2126_v52_m4.js": "247da9e46571cfb28658296dfe6dec19eed406bcad454c88b225836abdaa2f42",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/research/notes/2026-11-19-toned-2126-v52-m4-refine.json": "ffbb43096697dd643c780891b7e965f0ac3971386a63104b3fb419edc48eca6c",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/research/notes/2026-11-19-toned-2126-v52-m4-refine-finalists.json": "275f223a0fd3ee2a55b9d6d583136ba71dfe0ce968ce78f286ee1e58ba18a681",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/research/notes/2026-11-19-toned-2126-v52-m4-refine-policies.json.gz": "4733869d5a2cc8431dc4055dc49824ee8866c04d19e7b9edce53dccd8069d378",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/research/config/toned-2126-v52-onset-atoms.json": "0140bcae73e637a1108caafe788b9eea47bf874df43a60e791ef999240ff1781",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/search_toned_2126_v52_onsets.py": "123209eeaaf9116db64aad00b1864162754cf76608dcbb0456fc2b9571cd01bc",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/search_toned_2126_v52_m19.py": "bf484d95739dcebc7250d0af8c78119d305a47a9ac9c4c4d44a270d2f80879de",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/refine_toned_2126_v52_m4.py": "76e9f4df171dcf8d84d8cb5c834f291646ff23b928e9e36fcaa3eb3a1b1c959a",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/audit_toned_2126_v52_m4_policies.py": "08372f301c062811997d42fa4e485d598f2b9da7f9bd3011fdbc6b6d42815418",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/report_toned_2126_v52_m4.py": "06f0c04b64e0d10acf301f038b28857ab6dd54341a388a951b667d8d0d81fda5",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/toned_2126_v52_load_kernel.py": "25ae03d58ac5f3a163b487d052f9f27b221318186a8ee138e72cfc82359111df",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/ckt_v4_model.js": "871f5edfed2b1a39549a2c6c241f6c09e98b678690bba4d295b4ad11738278f4",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/explore_toned_2126.js": "8a52f2d10cb2f6b2101ea429c0cd6d67066cfb142d2526dc3ad93a29644b64fa",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/score_ckt_v52.js": "b21363ce1e231ac1adcebf4e59bc4e5644742a06a48830c361658d05a51c4bbe",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark-2126-v52/tools/toned_memory_audit.js": "3d7a7f7665e2cdfaaaf4bff6bb8553e13f5363c34a3a1c265b7364ad01c4ab0b",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark/a7_CKT_R11_integrated_materials/cr_lan_f19/payload-input.json": "7bd32ab8bf272f5924f5875ef83851737aba709bb1ef300b41305c6ae808a062",
+    "D:/C2D/Desktop/Code/Lua/inputMethod/shuangpin-layout-benchmark/research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be"
+  },
+  "results": [
+    {
+      "id": "T2126-V52-M4-9cd540fc9f2f",
+      "originRoutes": [
+        "original-M4"
+      ],
+      "policy": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "23"
+      },
+      "score": 8.688491919590954,
+      "doubleScore": 8.326630263323933,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 97.70717812566805,
+          "firstAuxRate": 0.1803658554128686,
+          "secondAuxRate": 0.03134938656272912,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0026470238400853868,
+          "meanRejectedCandidates": 0.003031368742692476,
+          "meanPageActions": 4.0934413362489553e-7,
+          "meanKeys": 2.2117152419755977,
+          "effectiveMs": 162.9616562627733
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 390.2048580415738,
+          "firstAuxRate": 0.12467912883534585,
+          "secondAuxRate": 0.01585415746423271,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0010555910913598726,
+          "meanRejectedCandidates": 0.0011907262247327231,
+          "meanPageActions": 0,
+          "meanKeys": 4.140533286299578,
+          "effectiveMs": 433.0577348975
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.6862813705233,
+          "firstAuxRate": 0.2068768445309709,
+          "secondAuxRate": 0.04147292354142822,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.004597643467432873,
+          "meanRejectedCandidates": 0.005400893647907578,
+          "meanPageActions": 7.871218984380809e-7,
+          "meanKeys": 3.7413533556396477,
+          "effectiveMs": 416.2200786916677
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 429.49069302817355,
+          "firstAuxRate": 0.21577202975894733,
+          "secondAuxRate": 0.028621319490528967,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00207897581424588,
+          "meanRejectedCandidates": 0.0024144953175199825,
+          "meanPageActions": 0,
+          "meanKeys": 4.244393349249476,
+          "effectiveMs": 504.17680805744
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.03568736602525537,
+              "W": 0.034385632677545734,
+              "E": 0.03968501350052433,
+              "R": 0.016666620837347143,
+              "T": 0.017195024078107544,
+              "Y": 0.028859277742968058,
+              "U": 0.02848869481464693,
+              "I": 0.034755409186109885,
+              "O": 0.0901249432399471,
+              "P": 0.03081479277365405,
+              "A": 0.030113075385123603,
+              "S": 0.04113132072466519,
+              "D": 0.07072015716777344,
+              "F": 0.017560358668010312,
+              "G": 0.028416222796487096,
+              "H": 0.054794556767112375,
+              "J": 0.0502189046260309,
+              "K": 0.024827311158041508,
+              "L": 0.032422833429054915,
+              "Z": 0.019160044285929052,
+              "X": 0.03233256729625752,
+              "C": 0.03967616932318961,
+              "V": 0.02566799714469238,
+              "B": 0.04513097763932858,
+              "N": 0.06920852994331742,
+              "M": 0.061956198768879936
+            },
+            "home": 0.35020474072229935,
+            "leftPinkyQAZ": 0.08496048569630801,
+            "rightPinky": 0.03081479277365405,
+            "indexFingerTYB": 0.09118527946040418,
+            "maxFinger": 0.2935261626629556,
+            "finger": [
+              0.08496048569630801,
+              0.10784952069846845,
+              0.15008133999148737,
+              0.15063720116397306,
+              0,
+              0,
+              0.2935261626629556,
+              0.059582720344151394,
+              0.12254777666900202,
+              0.03081479277365405
+            ],
+            "differentKeySameFingerRate": 0.04915144408311426
+          },
+          "word2": {
+            "load": {
+              "Q": 0.030669453799719613,
+              "W": 0.038401779941565226,
+              "E": 0.0310788515132247,
+              "R": 0.02734556095384133,
+              "T": 0.02613674203346077,
+              "Y": 0.04246676024561637,
+              "U": 0.030831388613137393,
+              "I": 0.03473579069790252,
+              "O": 0.046457693656072295,
+              "P": 0.043901928076296844,
+              "A": 0.025970626934598708,
+              "S": 0.048604645265253245,
+              "D": 0.04122223342762304,
+              "F": 0.03423721427638251,
+              "G": 0.034783660163032394,
+              "H": 0.05518397817137379,
+              "J": 0.05536815773773741,
+              "K": 0.04277807467551723,
+              "L": 0.05103349055442219,
+              "Z": 0.02829672589913106,
+              "X": 0.044352023747779364,
+              "C": 0.030901156311342742,
+              "V": 0.04476929813737823,
+              "B": 0.033349699087297825,
+              "N": 0.030767858808695633,
+              "M": 0.04635520727159759
+            },
+            "home": 0.38918208120594056,
+            "leftPinkyQAZ": 0.08493680663344938,
+            "rightPinky": 0.043901928076296844,
+            "indexFingerTYB": 0.10195320136637495,
+            "maxFinger": 0.26097335084815815,
+            "finger": [
+              0.08493680663344938,
+              0.13135844895459783,
+              0.10320224125219048,
+              0.20062217465139304,
+              0,
+              0,
+              0.26097335084815815,
+              0.07751386537341975,
+              0.09749118421049449,
+              0.043901928076296844
+            ],
+            "differentKeySameFingerRate": 0.09238664755306956
+          },
+          "word3": {
+            "load": {
+              "Q": 0.027918821928858074,
+              "W": 0.0499062386097437,
+              "E": 0.022907612003360875,
+              "R": 0.019275698344859937,
+              "T": 0.02463040633382003,
+              "Y": 0.04970301541162261,
+              "U": 0.01661996600539122,
+              "I": 0.018959769113924912,
+              "O": 0.025387950591662097,
+              "P": 0.04092267687653623,
+              "A": 0.015025844345174275,
+              "S": 0.0421838378861738,
+              "D": 0.07021865143380882,
+              "F": 0.025827526808136266,
+              "G": 0.039929110585514904,
+              "H": 0.04289920385886704,
+              "J": 0.06629004086982844,
+              "K": 0.02738101372916528,
+              "L": 0.08191178179801639,
+              "Z": 0.03792596137854705,
+              "X": 0.04968674496668875,
+              "C": 0.013635117684766883,
+              "V": 0.06776592826832385,
+              "B": 0.04408467287856001,
+              "N": 0.0359429379628779,
+              "M": 0.04305947032577066
+            },
+            "home": 0.4116670113146852,
+            "leftPinkyQAZ": 0.0808706276525794,
+            "rightPinky": 0.04092267687653623,
+            "indexFingerTYB": 0.11841809462400264,
+            "maxFinger": 0.2545146344343579,
+            "finger": [
+              0.0808706276525794,
+              0.14177682146260623,
+              0.10676138112193657,
+              0.221513343219215,
+              0,
+              0,
+              0.2545146344343579,
+              0.04634078284309019,
+              0.10729973238967849,
+              0.04092267687653623
+            ],
+            "differentKeySameFingerRate": 0.10370014173476262
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028401306203795884,
+              "W": 0.04680412820192796,
+              "E": 0.013299515761023518,
+              "R": 0.021308595343442416,
+              "T": 0.029938739101565207,
+              "Y": 0.06604527942519152,
+              "U": 0.00934887512691782,
+              "I": 0.012220491917877082,
+              "O": 0.013211565854651658,
+              "P": 0.05086048005965295,
+              "A": 0.009499829400396185,
+              "S": 0.04874618391285603,
+              "D": 0.05639997827491717,
+              "F": 0.03508997816990278,
+              "G": 0.06165283004202039,
+              "H": 0.035963471373051656,
+              "J": 0.08400707000031125,
+              "K": 0.019781547271450765,
+              "L": 0.08702473847814914,
+              "Z": 0.03198019385276234,
+              "X": 0.06391385536953365,
+              "C": 0.0122816737071028,
+              "V": 0.07477907888721692,
+              "B": 0.0379302547557893,
+              "N": 0.014022206003339565,
+              "M": 0.035488133505154035
+            },
+            "home": 0.4381656269230554,
+            "leftPinkyQAZ": 0.06988132945695441,
+            "rightPinky": 0.05086048005965295,
+            "indexFingerTYB": 0.13391427328254601,
+            "maxFinger": 0.260699476299937,
+            "finger": [
+              0.06988132945695441,
+              0.15946416748431763,
+              0.08198116774304348,
+              0.260699476299937,
+              0,
+              0,
+              0.24487503543396583,
+              0.03200203918932785,
+              0.1002363043328008,
+              0.05086048005965295
+            ],
+            "differentKeySameFingerRate": 0.10948415378341396
+          }
+        },
+        "homeS2": 0.35020474072229935,
+        "homeFloor4NativeTracks": 0.35020474072229935,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08496048569630801,
+          "track": "character"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.05086048005965295,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.2935261626629556,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.13391427328254601,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.04915144408311426
+      },
+      "memory": {
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 18,
+        "guard": 21,
+        "upper": 21,
+        "D": 2,
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "l",
+              "key": "W"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "P"
+            },
+            {
+              "name": "zero-Y",
+              "key": "L"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 4,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "P",
+                "U",
+                "I",
+                "E",
+                "Q",
+                "O",
+                "R",
+                "W",
+                "T",
+                "Y"
+              ],
+              "links": 0
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "H",
+                "A",
+                "S",
+                "G",
+                "K",
+                "L",
+                "J",
+                "D"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "C",
+                "V",
+                "Z",
+                "X",
+                "B",
+                "M",
+                "N"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "n",
+                "ong"
+              ],
+              "keys": [
+                "P",
+                "F",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "u",
+                "v"
+              ],
+              "keys": [
+                "U",
+                "H",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "I",
+                "A",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "ang",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "S",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "Q",
+                "G",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en",
+                "er",
+                "i"
+              ],
+              "keys": [
+                "O",
+                "K",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "eng",
+                "ng"
+              ],
+              "keys": [
+                "R",
+                "L",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "e"
+              ],
+              "keys": [
+                "W",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "o"
+              ],
+              "keys": [
+                "T",
+                "J",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ou"
+              ],
+              "keys": [
+                "Y",
+                "D",
+                "B"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
+      }
+    },
+    {
+      "id": "T2126-V52-M4-a38a5f3fb250",
+      "originRoutes": [
+        "default"
+      ],
+      "policy": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "score": 8.632424839489946,
+      "doubleScore": 8.248047262079616,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 96.1044999170625,
+          "firstAuxRate": 0.1679462374432225,
+          "secondAuxRate": 0.028554735684738587,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022254578601851194,
+          "meanRejectedCandidates": 0.002539571005008852,
+          "meanPageActions": 4.0934413362489553e-7,
+          "meanKeys": 2.196500973127961,
+          "effectiveMs": 156.5171679250524
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 390.1565846429142,
+          "firstAuxRate": 0.12296065881235559,
+          "secondAuxRate": 0.015413907319878696,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.00100324600704049,
+          "meanRejectedCandidates": 0.0011225439319641072,
+          "meanPageActions": 0,
+          "meanKeys": 4.138374566132234,
+          "effectiveMs": 432.32702928340694
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.6961328146896,
+          "firstAuxRate": 0.2044474250207698,
+          "secondAuxRate": 0.040438475595490714,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.004472876929649081,
+          "meanRejectedCandidates": 0.00523238964232776,
+          "meanPageActions": 7.871218984380809e-7,
+          "meanKeys": 3.7355789839992863,
+          "effectiveMs": 415.1074847760431
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 430.25695464480896,
+          "firstAuxRate": 0.2140538787738381,
+          "secondAuxRate": 0.02813172505452717,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0020543549707687874,
+          "meanRejectedCandidates": 0.002343406932629786,
+          "meanPageActions": 7.122479848729924e-7,
+          "meanKeys": 4.242185603828365,
+          "effectiveMs": 504.26263279680677
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.035934557894421286,
+              "W": 0.034623807969272224,
+              "E": 0.039697511179185865,
+              "R": 0.03341357367560173,
+              "T": 0.017314127016083192,
+              "Y": 0.02905917422182318,
+              "U": 0.02792727849142264,
+              "I": 0.03395475537309363,
+              "O": 0.08248587469844645,
+              "P": 0.03444709693657747,
+              "A": 0.030302048474225695,
+              "S": 0.04141622065378849,
+              "D": 0.07121000693213088,
+              "F": 0.018070623286368888,
+              "G": 0.02861305041393378,
+              "H": 0.05517409637498914,
+              "J": 0.05056675055260302,
+              "K": 0.024610648688030735,
+              "L": 0.03264741320872572,
+              "Z": 0.019292758119642327,
+              "X": 0.0325565218391408,
+              "C": 0.0399509900104155,
+              "V": 0.025845788920847886,
+              "B": 0.0454435815651004,
+              "N": 0.06968790928072234,
+              "M": 0.045753834223406724
+            },
+            "home": 0.35261085858479635,
+            "leftPinkyQAZ": 0.08552936448828931,
+            "rightPinky": 0.03444709693657747,
+            "indexFingerTYB": 0.09181688280300677,
+            "maxFinger": 0.27816904314496704,
+            "finger": [
+              0.08552936448828931,
+              0.10859655046220153,
+              0.15085850812173224,
+              0.16870074487793585,
+              0,
+              0,
+              0.27816904314496704,
+              0.058565404061124364,
+              0.11513328790717217,
+              0.03444709693657747
+            ],
+            "differentKeySameFingerRate": 0.04916541370140243
+          },
+          "word2": {
+            "load": {
+              "Q": 0.030685452053957087,
+              "W": 0.03842181164616253,
+              "E": 0.030952151595218393,
+              "R": 0.032436591061579104,
+              "T": 0.026150375867526457,
+              "Y": 0.04248891238538018,
+              "U": 0.030782985021553952,
+              "I": 0.03469667036448866,
+              "O": 0.04489869723365358,
+              "P": 0.045307012281393416,
+              "A": 0.025928224038024663,
+              "S": 0.048629999139409394,
+              "D": 0.041243736378895605,
+              "F": 0.034717871734730774,
+              "G": 0.034801804530461694,
+              "H": 0.05521276405449992,
+              "J": 0.055397039695333834,
+              "K": 0.042337591071612904,
+              "L": 0.0510601113987922,
+              "Z": 0.02831148645593715,
+              "X": 0.04437515930658316,
+              "C": 0.03091727542967231,
+              "V": 0.04479265136102259,
+              "B": 0.033367095450735726,
+              "N": 0.030783908394409767,
+              "M": 0.04130262204896496
+            },
+            "home": 0.389329142041761,
+            "leftPinkyQAZ": 0.0849251625479189,
+            "rightPinky": 0.045307012281393416,
+            "indexFingerTYB": 0.10200638370364236,
+            "maxFinger": 0.2559682316001426,
+            "finger": [
+              0.0849251625479189,
+              0.1314269700921551,
+              0.1031131634037863,
+              0.20626639000605634,
+              0,
+              0,
+              0.2559682316001426,
+              0.07703426143610156,
+              0.09595880863244577,
+              0.045307012281393416
+            ],
+            "differentKeySameFingerRate": 0.09192790097443508
+          },
+          "word3": {
+            "load": {
+              "Q": 0.027942961364216028,
+              "W": 0.04995208839521489,
+              "E": 0.02255898082682496,
+              "R": 0.028798849168699184,
+              "T": 0.02464553957615425,
+              "Y": 0.049793399611823906,
+              "U": 0.016273954065619076,
+              "I": 0.018795577336568663,
+              "O": 0.02407801656326644,
+              "P": 0.04232105216072327,
+              "A": 0.015010620235260078,
+              "S": 0.04226334109485382,
+              "D": 0.07032342630680212,
+              "F": 0.02592060047047042,
+              "G": 0.04000824635724646,
+              "H": 0.04295395975858574,
+              "J": 0.06639330301273197,
+              "K": 0.02730449220268713,
+              "L": 0.08202505177286812,
+              "Z": 0.037854028964594895,
+              "X": 0.04973580738901654,
+              "C": 0.013599926597664196,
+              "V": 0.06787207428227802,
+              "B": 0.04414873207859656,
+              "N": 0.03593358754065221,
+              "M": 0.03349238286658102
+            },
+            "home": 0.41220304121150586,
+            "leftPinkyQAZ": 0.080807610564071,
+            "rightPinky": 0.04232105216072327,
+            "indexFingerTYB": 0.11858767126657471,
+            "maxFinger": 0.2448405868559939,
+            "finger": [
+              0.080807610564071,
+              0.14195123687908526,
+              0.10648233373129128,
+              0.2313940419334449,
+              0,
+              0,
+              0.2448405868559939,
+              0.04610006953925579,
+              0.10610306833613456,
+              0.04232105216072327
+            ],
+            "differentKeySameFingerRate": 0.10529186020186855
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028416086993601125,
+              "W": 0.04682848630630549,
+              "E": 0.012630958097078468,
+              "R": 0.029625267689897622,
+              "T": 0.029954320012052872,
+              "Y": 0.06607965113280972,
+              "U": 0.009340319055419198,
+              "I": 0.01236736604715921,
+              "O": 0.013367503118121293,
+              "P": 0.05088694919666239,
+              "A": 0.009383671631206568,
+              "S": 0.048771552714313736,
+              "D": 0.05642933031309175,
+              "F": 0.035108239921241895,
+              "G": 0.06168491580297837,
+              "H": 0.03598218771332198,
+              "J": 0.08405078949810191,
+              "K": 0.01979184211106637,
+              "L": 0.08707002845030999,
+              "Z": 0.03199683719021579,
+              "X": 0.063947117827784,
+              "C": 0.01228806541444959,
+              "V": 0.07481799589472814,
+              "B": 0.037949994662073244,
+              "N": 0.014029503529659444,
+              "M": 0.02720101967634983
+            },
+            "home": 0.43827255815563254,
+            "leftPinkyQAZ": 0.06979659581502348,
+            "rightPinky": 0.05088694919666239,
+            "indexFingerTYB": 0.13398396580693583,
+            "maxFinger": 0.2691407339829721,
+            "finger": [
+              0.06979659581502348,
+              0.15954715684840323,
+              0.0813483538246198,
+              0.2691407339829721,
+              0,
+              0,
+              0.23668347060566208,
+              0.03215920815822558,
+              0.10043753156843128,
+              0.05088694919666239
+            ],
+            "differentKeySameFingerRate": 0.1106903289471861
+          }
+        },
+        "homeS2": 0.35261085858479635,
+        "homeFloor4NativeTracks": 0.35261085858479635,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08552936448828931,
+          "track": "character"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.05088694919666239,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.27816904314496704,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.13398396580693583,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.04916541370140243
+      },
+      "memory": {
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 18,
+        "guard": 21,
+        "upper": 21,
+        "D": 2,
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "l",
+              "key": "W"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "P"
+            },
+            {
+              "name": "zero-Y",
+              "key": "L"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 4,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "P",
+                "U",
+                "I",
+                "E",
+                "Q",
+                "O",
+                "R",
+                "W",
+                "T",
+                "Y"
+              ],
+              "links": 0
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "H",
+                "A",
+                "S",
+                "G",
+                "K",
+                "L",
+                "J",
+                "D"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "C",
+                "V",
+                "Z",
+                "X",
+                "B",
+                "M",
+                "N"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "er",
+                "n",
+                "ong"
+              ],
+              "keys": [
+                "P",
+                "F",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "u",
+                "v"
+              ],
+              "keys": [
+                "U",
+                "H",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "I",
+                "A",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "ang",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "S",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "Q",
+                "G",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en",
+                "i"
+              ],
+              "keys": [
+                "O",
+                "K",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "eng",
+                "ng"
+              ],
+              "keys": [
+                "R",
+                "L",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "e"
+              ],
+              "keys": [
+                "W",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "o"
+              ],
+              "keys": [
+                "T",
+                "J",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ou"
+              ],
+              "keys": [
+                "Y",
+                "D",
+                "B"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
+      }
+    },
+    {
+      "id": "T2126-V52-M4-ec60a3637a99",
+      "originRoutes": [
+        "double"
+      ],
+      "policy": {
+        "word2": "21",
+        "word3": "12",
+        "word4": "23"
+      },
+      "score": 8.640932204060537,
+      "doubleScore": 8.234488645251973,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 98.6425889429469,
+          "firstAuxRate": 0.1710322828666206,
+          "secondAuxRate": 0.028450703797064488,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.002371038177422145,
+          "meanRejectedCandidates": 0.002749856934225298,
+          "meanPageActions": 4.3858300031238806e-7,
+          "meanKeys": 2.199482986663685,
+          "effectiveMs": 160.04773227011705
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 391.45018363606545,
+          "firstAuxRate": 0.11915876264767734,
+          "secondAuxRate": 0.014061273815432155,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0007777601516222451,
+          "meanRejectedCandidates": 0.0008534773130381049,
+          "meanPageActions": 0,
+          "meanKeys": 4.1332200364631095,
+          "effectiveMs": 431.9255245316235
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.49457217487924,
+          "firstAuxRate": 0.20079721212935345,
+          "secondAuxRate": 0.03830249458430628,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.004022689505030642,
+          "meanRejectedCandidates": 0.004743763069866336,
+          "meanPageActions": 0.0000014997985884887077,
+          "meanKeys": 3.729792790096685,
+          "effectiveMs": 412.8757359850654
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 429.68599388699994,
+          "firstAuxRate": 0.2098315037115146,
+          "secondAuxRate": 0.02740302051960369,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0018605933388839745,
+          "meanRejectedCandidates": 0.0021615977876911214,
+          "meanPageActions": 0,
+          "meanKeys": 4.237234524231118,
+          "effectiveMs": 502.08078704905034
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.03588583856415542,
+              "W": 0.03457686572664124,
+              "E": 0.03977758242805362,
+              "R": 0.0333682722435917,
+              "T": 0.020827712390803055,
+              "Y": 0.026334857975775807,
+              "U": 0.027987415079677624,
+              "I": 0.03345438765323571,
+              "O": 0.0833805208910826,
+              "P": 0.03440039427510925,
+              "A": 0.02998056540841569,
+              "S": 0.041360069398544884,
+              "D": 0.07111346187775303,
+              "F": 0.01804612350911866,
+              "G": 0.028574257432060286,
+              "H": 0.05509929247643246,
+              "J": 0.040454980225094354,
+              "K": 0.03240224558360086,
+              "L": 0.034821399990364856,
+              "Z": 0.03492999473895731,
+              "X": 0.032512382380282034,
+              "C": 0.039896825284569025,
+              "V": 0.025810747734864293,
+              "B": 0.045381970097241556,
+              "N": 0.06959342785485478,
+              "M": 0.03002840877971992
+            },
+            "home": 0.3518523959013851,
+            "leftPinkyQAZ": 0.10079639871152843,
+            "rightPinky": 0.03440039427510925,
+            "indexFingerTYB": 0.09254454046382042,
+            "maxFinger": 0.24949838239155497,
+            "finger": [
+              0.10079639871152843,
+              0.10844931750546816,
+              0.15078786959037568,
+              0.17200908340767956,
+              0,
+              0,
+              0.24949838239155497,
+              0.06585663323683658,
+              0.11820192088144746,
+              0.03440039427510925
+            ],
+            "differentKeySameFingerRate": 0.05679887030824711
+          },
+          "word2": {
+            "load": {
+              "Q": 0.030723719814111948,
+              "W": 0.03846972740344729,
+              "E": 0.029303890675878373,
+              "R": 0.03247704266336105,
+              "T": 0.031354463020204275,
+              "Y": 0.04002190175191877,
+              "U": 0.03091790940931796,
+              "I": 0.03495989930563663,
+              "O": 0.04218868114649618,
+              "P": 0.04536351455733411,
+              "A": 0.0261983612836836,
+              "S": 0.04869064550499415,
+              "D": 0.041295171352343694,
+              "F": 0.0347611683166516,
+              "G": 0.034845205784788544,
+              "H": 0.055281619771815386,
+              "J": 0.0494968203696287,
+              "K": 0.04472600645347536,
+              "L": 0.0547574769402118,
+              "Z": 0.035796825884270356,
+              "X": 0.0444304994707167,
+              "C": 0.03095583229625208,
+              "V": 0.04484851217858427,
+              "B": 0.03340870748250661,
+              "N": 0.030822298939251504,
+              "M": 0.03390409822311907
+            },
+            "home": 0.39005247577759283,
+            "leftPinkyQAZ": 0.0927189069820659,
+            "rightPinky": 0.04536351455733411,
+            "indexFingerTYB": 0.10478507225462966,
+            "maxFinger": 0.2404446484650514,
+            "finger": [
+              0.0927189069820659,
+              0.13159087237915815,
+              0.10155489432447415,
+              0.21169509944609635,
+              0,
+              0,
+              0.2404446484650514,
+              0.079685905759112,
+              0.09694615808670798,
+              0.04536351455733411
+            ],
+            "differentKeySameFingerRate": 0.09056136395395657
+          },
+          "word3": {
+            "load": {
+              "Q": 0.027986310526425664,
+              "W": 0.05002958129778631,
+              "E": 0.0220124059124536,
+              "R": 0.028843526107832182,
+              "T": 0.02658400360228115,
+              "Y": 0.049372483927655114,
+              "U": 0.01600969787780168,
+              "I": 0.01848946201918303,
+              "O": 0.02237380215155903,
+              "P": 0.04238670669644285,
+              "A": 0.015028410198112843,
+              "S": 0.04232890610082302,
+              "D": 0.07043252217442962,
+              "F": 0.025960812254029072,
+              "G": 0.040070312934172854,
+              "H": 0.04302059615208932,
+              "J": 0.0656651584418829,
+              "K": 0.02755022761847634,
+              "L": 0.08278006761763229,
+              "Z": 0.03990684470429195,
+              "X": 0.049812964765217,
+              "C": 0.013621024770346648,
+              "V": 0.06797736725818053,
+              "B": 0.04421722197568656,
+              "N": 0.035989332917628215,
+              "M": 0.0315502499975802
+            },
+            "home": 0.4128370134916483,
+            "leftPinkyQAZ": 0.08292156542883045,
+            "rightPinky": 0.04238670669644285,
+            "indexFingerTYB": 0.12017370950562282,
+            "maxFinger": 0.24160751931463742,
+            "finger": [
+              0.08292156542883045,
+              0.14217145216382632,
+              0.10606595285722986,
+              0.23365324413218236,
+              0,
+              0,
+              0.24160751931463742,
+              0.046039689637659365,
+              0.10515386976919132,
+              0.04238670669644285
+            ],
+            "differentKeySameFingerRate": 0.10482040243259605
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028449290326516274,
+              "W": 0.04688320396750532,
+              "E": 0.01289084479104625,
+              "R": 0.02965988391365952,
+              "T": 0.02998932072343974,
+              "Y": 0.06615686319427244,
+              "U": 0.009083103502744267,
+              "I": 0.011809021570823084,
+              "O": 0.01289968019663704,
+              "P": 0.05094640904824553,
+              "A": 0.00930540603393717,
+              "S": 0.0488285407894814,
+              "D": 0.05649526626834788,
+              "F": 0.035149262831202455,
+              "G": 0.061756992749945436,
+              "H": 0.03602423180468227,
+              "J": 0.08414900028786038,
+              "K": 0.019814968276282777,
+              "L": 0.0871717671289049,
+              "Z": 0.032034224520769,
+              "X": 0.06402183808897544,
+              "C": 0.012302423644945258,
+              "V": 0.07490541844612646,
+              "B": 0.03799433807597034,
+              "N": 0.014045896577598607,
+              "M": 0.02723280324008078
+            },
+            "home": 0.43869543617064466,
+            "leftPinkyQAZ": 0.06978892088122243,
+            "rightPinky": 0.05094640904824553,
+            "indexFingerTYB": 0.1341405219936825,
+            "maxFinger": 0.26945521674034395,
+            "finger": [
+              0.06978892088122243,
+              0.15973358284596215,
+              0.08168853470433939,
+              0.26945521674034395,
+              0,
+              0,
+              0.23669189860723877,
+              0.03162398984710586,
+              0.10007144732554193,
+              0.05094640904824553
+            ],
+            "differentKeySameFingerRate": 0.11062177911209584
+          }
+        },
+        "homeS2": 0.3518523959013851,
+        "homeFloor4NativeTracks": 0.3518523959013851,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.10079639871152843,
+          "track": "character"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.05094640904824553,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.26945521674034395,
+          "track": "word4"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.1341405219936825,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.05679887030824711
+      },
+      "memory": {
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 18,
+        "guard": 21,
+        "upper": 21,
+        "D": 2,
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "l",
+              "key": "W"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "P"
+            },
+            {
+              "name": "zero-Y",
+              "key": "L"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 4,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "P",
+                "U",
+                "I",
+                "E",
+                "Q",
+                "Y",
+                "R",
+                "O",
+                "W",
+                "T"
+              ],
+              "links": 0
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "H",
+                "A",
+                "S",
+                "G",
+                "L",
+                "K",
+                "J",
+                "D"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "C",
+                "V",
+                "M",
+                "X",
+                "B",
+                "N",
+                "Z"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "er",
+                "n",
+                "ong"
+              ],
+              "keys": [
+                "P",
+                "F",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "u",
+                "v"
+              ],
+              "keys": [
+                "U",
+                "H",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "I",
+                "A",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ang",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "S",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "Q",
+                "G",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en"
+              ],
+              "keys": [
+                "Y",
+                "L",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "eng",
+                "ng"
+              ],
+              "keys": [
+                "R",
+                "L",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "i",
+                "o"
+              ],
+              "keys": [
+                "O",
+                "K",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "e"
+              ],
+              "keys": [
+                "W",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "ou"
+              ],
+              "keys": [
+                "T",
+                "D",
+                "B"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
+      }
+    },
+    {
+      "id": "T2126-V52-M4-9cd540fc9f2f",
+      "originRoutes": [
+        "original-M4"
+      ],
+      "policy": {
+        "word2": "21",
+        "word3": "12",
+        "word4": "23"
+      },
+      "score": 8.688659784097448,
+      "doubleScore": 8.325614149899112,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 97.70717812566805,
+          "firstAuxRate": 0.1803658554128686,
+          "secondAuxRate": 0.03134938656272912,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0026470238400853868,
+          "meanRejectedCandidates": 0.003031368742692476,
+          "meanPageActions": 4.0934413362489553e-7,
+          "meanKeys": 2.2117152419755977,
+          "effectiveMs": 162.9616562627733
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 390.42634666770095,
+          "firstAuxRate": 0.12467912883534585,
+          "secondAuxRate": 0.015646712730272426,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0009148644617070374,
+          "meanRejectedCandidates": 0.0010092154121103386,
+          "meanPageActions": 0,
+          "meanKeys": 4.140325841565618,
+          "effectiveMs": 433.1234785850162
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.54348066771735,
+          "firstAuxRate": 0.2068768445309709,
+          "secondAuxRate": 0.04019527853345162,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0042073363185414015,
+          "meanRejectedCandidates": 0.0049332660714217855,
+          "meanPageActions": 0.0000014997985884887077,
+          "meanKeys": 3.740075710631671,
+          "effectiveMs": 415.4366326213165
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 429.5527713384508,
+          "firstAuxRate": 0.21577202975894733,
+          "secondAuxRate": 0.028966997581587318,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0021083204312226473,
+          "meanRejectedCandidates": 0.0024180336206448346,
+          "meanPageActions": 0,
+          "meanKeys": 4.244739027340534,
+          "effectiveMs": 504.360373480377
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.03568736602525537,
+              "W": 0.034385632677545734,
+              "E": 0.03968501350052433,
+              "R": 0.016666620837347143,
+              "T": 0.017195024078107544,
+              "Y": 0.028859277742968058,
+              "U": 0.02848869481464693,
+              "I": 0.034755409186109885,
+              "O": 0.0901249432399471,
+              "P": 0.03081479277365405,
+              "A": 0.030113075385123603,
+              "S": 0.04113132072466519,
+              "D": 0.07072015716777344,
+              "F": 0.017560358668010312,
+              "G": 0.028416222796487096,
+              "H": 0.054794556767112375,
+              "J": 0.0502189046260309,
+              "K": 0.024827311158041508,
+              "L": 0.032422833429054915,
+              "Z": 0.019160044285929052,
+              "X": 0.03233256729625752,
+              "C": 0.03967616932318961,
+              "V": 0.02566799714469238,
+              "B": 0.04513097763932858,
+              "N": 0.06920852994331742,
+              "M": 0.061956198768879936
+            },
+            "home": 0.35020474072229935,
+            "leftPinkyQAZ": 0.08496048569630801,
+            "rightPinky": 0.03081479277365405,
+            "indexFingerTYB": 0.09118527946040418,
+            "maxFinger": 0.2935261626629556,
+            "finger": [
+              0.08496048569630801,
+              0.10784952069846845,
+              0.15008133999148737,
+              0.15063720116397306,
+              0,
+              0,
+              0.2935261626629556,
+              0.059582720344151394,
+              0.12254777666900202,
+              0.03081479277365405
+            ],
+            "differentKeySameFingerRate": 0.04915144408311426
+          },
+          "word2": {
+            "load": {
+              "Q": 0.03067099044609182,
+              "W": 0.03840370400438743,
+              "E": 0.029648338433083406,
+              "R": 0.027346931061614035,
+              "T": 0.026138051575198593,
+              "Y": 0.04246888797809888,
+              "U": 0.031090653199716486,
+              "I": 0.035064548637805,
+              "O": 0.04683649896837354,
+              "P": 0.043904127715682396,
+              "A": 0.02639267990914838,
+              "S": 0.04860708052713651,
+              "D": 0.04122429880498073,
+              "F": 0.03423892967997123,
+              "G": 0.03478540294546179,
+              "H": 0.05518674308073327,
+              "J": 0.055370931875134144,
+              "K": 0.04278021800593613,
+              "L": 0.051036047509907395,
+              "Z": 0.0282981436635778,
+              "X": 0.044354245938524495,
+              "C": 0.03090270456681716,
+              "V": 0.04477154123502249,
+              "B": 0.033351370023286815,
+              "N": 0.030769400385501258,
+              "M": 0.04635752982880881
+            },
+            "home": 0.3896223323384096,
+            "leftPinkyQAZ": 0.085361814018818,
+            "rightPinky": 0.043904127715682396,
+            "indexFingerTYB": 0.10195830957658428,
+            "maxFinger": 0.26124414634799287,
+            "finger": [
+              0.085361814018818,
+              0.13136503047004844,
+              0.10177534180488129,
+              0.20063222652055496,
+              0,
+              0,
+              0.26124414634799287,
+              0.07784476664374113,
+              0.09787254647828093,
+              0.043904127715682396
+            ],
+            "differentKeySameFingerRate": 0.09312231606118787
+          },
+          "word3": {
+            "load": {
+              "Q": 0.027928359260780154,
+              "W": 0.04992328704981815,
+              "E": 0.02283198638033501,
+              "R": 0.019282283104546903,
+              "T": 0.024638820312073838,
+              "Y": 0.04971999442874291,
+              "U": 0.016540608095209904,
+              "I": 0.018812375080975517,
+              "O": 0.02534644594968831,
+              "P": 0.040936656447504736,
+              "A": 0.015061902715870441,
+              "S": 0.04219824828159424,
+              "D": 0.07024263878497826,
+              "F": 0.025836349733993354,
+              "G": 0.039942750744901924,
+              "H": 0.04291385863002599,
+              "J": 0.06631268617071237,
+              "K": 0.027390367340752595,
+              "L": 0.08193976363239777,
+              "Z": 0.037938917243341516,
+              "X": 0.049703718425672165,
+              "C": 0.013639775569096227,
+              "V": 0.06778907774621191,
+              "B": 0.04409973261707585,
+              "N": 0.03595521640823924,
+              "M": 0.04307417984546072
+            },
+            "home": 0.41183856603522695,
+            "leftPinkyQAZ": 0.08092917921999211,
+            "rightPinky": 0.040936656447504736,
+            "indexFingerTYB": 0.1184585473578926,
+            "maxFinger": 0.25451654357839115,
+            "finger": [
+              0.08092917921999211,
+              0.14182525375708457,
+              0.10671440073440949,
+              0.22158901425880378,
+              0,
+              0,
+              0.25451654357839115,
+              0.046202742421728116,
+              0.10728620958208608,
+              0.040936656447504736
+            ],
+            "differentKeySameFingerRate": 0.10374849513167783
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028398993291447478,
+              "W": 0.046800316622090825,
+              "E": 0.013347379767139901,
+              "R": 0.02130686003898341,
+              "T": 0.029936300985555088,
+              "Y": 0.06603990090699098,
+              "U": 0.009347290448757426,
+              "I": 0.012229749307437346,
+              "O": 0.013186603834695028,
+              "P": 0.05085633814337869,
+              "A": 0.009546002377630541,
+              "S": 0.0487422141781579,
+              "D": 0.05639538523946782,
+              "F": 0.035087120553311764,
+              "G": 0.06164780923097406,
+              "H": 0.03596054262194305,
+              "J": 0.08400022873082305,
+              "K": 0.01977993632494618,
+              "L": 0.08701765145930576,
+              "Z": 0.031977589487148454,
+              "X": 0.06390865042775182,
+              "C": 0.012280673526527569,
+              "V": 0.07477298911607333,
+              "B": 0.03792716583607648,
+              "N": 0.014021064079331413,
+              "M": 0.03548524346405463
+            },
+            "home": 0.4381768907165602,
+            "leftPinkyQAZ": 0.06992258515622647,
+            "rightPinky": 0.05085633814337869,
+            "indexFingerTYB": 0.13390336772862255,
+            "maxFinger": 0.26067824576097415,
+            "finger": [
+              0.06992258515622647,
+              0.15945118122800053,
+              0.08202343853313529,
+              0.26067824576097415,
+              0,
+              0,
+              0.24485427025190054,
+              0.032009685632383524,
+              0.10020425529400079,
+              0.05085633814337869
+            ],
+            "differentKeySameFingerRate": 0.10947248989520536
+          }
+        },
+        "homeS2": 0.35020474072229935,
+        "homeFloor4NativeTracks": 0.35020474072229935,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.085361814018818,
+          "track": "word2"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.05085633814337869,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.2935261626629556,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.13390336772862255,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.04915144408311426
+      },
+      "memory": {
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 18,
+        "guard": 21,
+        "upper": 21,
+        "D": 2,
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "l",
+              "key": "W"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "P"
+            },
+            {
+              "name": "zero-Y",
+              "key": "L"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 4,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "P",
+                "U",
+                "I",
+                "E",
+                "Q",
+                "O",
+                "R",
+                "W",
+                "T",
+                "Y"
+              ],
+              "links": 0
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "H",
+                "A",
+                "S",
+                "G",
+                "K",
+                "L",
+                "J",
+                "D"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "C",
+                "V",
+                "Z",
+                "X",
+                "B",
+                "M",
+                "N"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "n",
+                "ong"
+              ],
+              "keys": [
+                "P",
+                "F",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "u",
+                "v"
+              ],
+              "keys": [
+                "U",
+                "H",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "I",
+                "A",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "ang",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "S",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "Q",
+                "G",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en",
+                "er",
+                "i"
+              ],
+              "keys": [
+                "O",
+                "K",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "eng",
+                "ng"
+              ],
+              "keys": [
+                "R",
+                "L",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "e"
+              ],
+              "keys": [
+                "W",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "o"
+              ],
+              "keys": [
+                "T",
+                "J",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ou"
+              ],
+              "keys": [
+                "Y",
+                "D",
+                "B"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
+      }
+    },
+    {
+      "id": "T2126-V52-M4-a38a5f3fb250",
+      "originRoutes": [
+        "default"
+      ],
+      "policy": {
+        "word2": "21",
+        "word3": "12",
+        "word4": "23"
+      },
+      "score": 8.633043287721971,
+      "doubleScore": 8.247669810296454,
+      "tracks": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 96.1044999170625,
+          "firstAuxRate": 0.1679462374432225,
+          "secondAuxRate": 0.028554735684738587,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0022254578601851194,
+          "meanRejectedCandidates": 0.002539571005008852,
+          "meanPageActions": 4.0934413362489553e-7,
+          "meanKeys": 2.196500973127961,
+          "effectiveMs": 156.5171679250524
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 390.3653755120615,
+          "firstAuxRate": 0.12296065881235559,
+          "secondAuxRate": 0.015272372709024623,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0008953957773093899,
+          "meanRejectedCandidates": 0.000986028682349859,
+          "meanPageActions": 0,
+          "meanKeys": 4.13823303152138,
+          "effectiveMs": 432.4218238689787
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 338.5596865599267,
+          "firstAuxRate": 0.2044474250207698,
+          "secondAuxRate": 0.03922849492685955,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.004090493656108898,
+          "meanRejectedCandidates": 0.004805952054921709,
+          "meanPageActions": 0.0000014997985884887077,
+          "meanKeys": 3.734369003330655,
+          "effectiveMs": 414.3575062802035
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 430.3833031632136,
+          "firstAuxRate": 0.2140538787738381,
+          "secondAuxRate": 0.02846418189146632,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0020093626277243527,
+          "meanRejectedCandidates": 0.0023021303511064346,
+          "meanPageActions": 0,
+          "meanKeys": 4.242518060665304,
+          "effectiveMs": 504.4594454569949
+        }
+      },
+      "ergonomics": {
+        "contract": "four native tone-in-main tracks; selected terminal codes include shape-only completion",
+        "tracks": {
+          "character": {
+            "load": {
+              "Q": 0.035934557894421286,
+              "W": 0.034623807969272224,
+              "E": 0.039697511179185865,
+              "R": 0.03341357367560173,
+              "T": 0.017314127016083192,
+              "Y": 0.02905917422182318,
+              "U": 0.02792727849142264,
+              "I": 0.03395475537309363,
+              "O": 0.08248587469844645,
+              "P": 0.03444709693657747,
+              "A": 0.030302048474225695,
+              "S": 0.04141622065378849,
+              "D": 0.07121000693213088,
+              "F": 0.018070623286368888,
+              "G": 0.02861305041393378,
+              "H": 0.05517409637498914,
+              "J": 0.05056675055260302,
+              "K": 0.024610648688030735,
+              "L": 0.03264741320872572,
+              "Z": 0.019292758119642327,
+              "X": 0.0325565218391408,
+              "C": 0.0399509900104155,
+              "V": 0.025845788920847886,
+              "B": 0.0454435815651004,
+              "N": 0.06968790928072234,
+              "M": 0.045753834223406724
+            },
+            "home": 0.35261085858479635,
+            "leftPinkyQAZ": 0.08552936448828931,
+            "rightPinky": 0.03444709693657747,
+            "indexFingerTYB": 0.09181688280300677,
+            "maxFinger": 0.27816904314496704,
+            "finger": [
+              0.08552936448828931,
+              0.10859655046220153,
+              0.15085850812173224,
+              0.16870074487793585,
+              0,
+              0,
+              0.27816904314496704,
+              0.058565404061124364,
+              0.11513328790717217,
+              0.03444709693657747
+            ],
+            "differentKeySameFingerRate": 0.04916541370140243
+          },
+          "word2": {
+            "load": {
+              "Q": 0.030686501548628425,
+              "W": 0.03842312573749529,
+              "E": 0.02953307111271197,
+              "R": 0.03243770044818405,
+              "T": 0.026151270254875816,
+              "Y": 0.042490365578478365,
+              "U": 0.03105300152052299,
+              "I": 0.03500896797555703,
+              "O": 0.04527510983623219,
+              "P": 0.045308561858303016,
+              "A": 0.026360096639517567,
+              "S": 0.04863166236812358,
+              "D": 0.04124514698485571,
+              "F": 0.03471905914501633,
+              "G": 0.03480299481139168,
+              "H": 0.05521465242497474,
+              "J": 0.055398934368349105,
+              "K": 0.04233903908926468,
+              "L": 0.051061857741480476,
+              "Z": 0.028312454756945746,
+              "X": 0.04437667701253548,
+              "C": 0.03091833285309754,
+              "V": 0.044794183345913535,
+              "B": 0.03336823666217403,
+              "N": 0.03078496125645547,
+              "M": 0.04130403466891517
+            },
+            "home": 0.38977344357297383,
+            "leftPinkyQAZ": 0.08535905294509173,
+            "rightPinky": 0.045308561858303016,
+            "indexFingerTYB": 0.10200987249552822,
+            "maxFinger": 0.25624594981769583,
+            "finger": [
+              0.08535905294509173,
+              0.13143146511815434,
+              0.10169655095066522,
+              0.20627344466755546,
+              0,
+              0,
+              0.25624594981769583,
+              0.07734800706482171,
+              0.09633696757771266,
+              0.045308561858303016
+            ],
+            "differentKeySameFingerRate": 0.09269725187804706
+          },
+          "word3": {
+            "load": {
+              "Q": 0.02795201522125181,
+              "W": 0.04996827347528117,
+              "E": 0.02252328328221075,
+              "R": 0.02880818034372283,
+              "T": 0.024653525028697512,
+              "Y": 0.049809533274807395,
+              "U": 0.01621001534097843,
+              "I": 0.01864356699991556,
+              "O": 0.024002506949236682,
+              "P": 0.0423347646928659,
+              "A": 0.015045101899735295,
+              "S": 0.04227703492791395,
+              "D": 0.07034621194643957,
+              "F": 0.02592899905814631,
+              "G": 0.040021209512369836,
+              "H": 0.04296787736043566,
+              "J": 0.06641481524494586,
+              "K": 0.027313339188001808,
+              "L": 0.08205162888051339,
+              "Z": 0.03786629412725989,
+              "X": 0.049751922391424126,
+              "C": 0.013604333138170317,
+              "V": 0.06789406565424695,
+              "B": 0.04416303680111114,
+              "N": 0.03594523045709673,
+              "M": 0.03350323480322114
+            },
+            "home": 0.4123662180185017,
+            "leftPinkyQAZ": 0.080863411248247,
+            "rightPinky": 0.0423347646928659,
+            "indexFingerTYB": 0.11862609510461605,
+            "maxFinger": 0.24485070648148521,
+            "finger": [
+              0.080863411248247,
+              0.14199723079461923,
+              0.10647382836682064,
+              0.23146901639829456,
+              0,
+              0,
+              0.24485070648148521,
+              0.04595690618791737,
+              0.10605413582975007,
+              0.0423347646928659
+            ],
+            "differentKeySameFingerRate": 0.1053384527119699
+          },
+          "word4": {
+            "load": {
+              "Q": 0.028413860221136046,
+              "W": 0.046824816681282466,
+              "E": 0.013143753548039521,
+              "R": 0.0296229461622933,
+              "T": 0.029951972698890862,
+              "Y": 0.06607447292696887,
+              "U": 0.009237629876230634,
+              "I": 0.01217552097417184,
+              "O": 0.013135075118981222,
+              "P": 0.05088296153793484,
+              "A": 0.009471727789758674,
+              "S": 0.04876773082459726,
+              "D": 0.05642490833623785,
+              "F": 0.035105488730975215,
+              "G": 0.06168008198219046,
+              "H": 0.03597936803780327,
+              "J": 0.08404420301827574,
+              "K": 0.01979029116110426,
+              "L": 0.0870632053735813,
+              "Z": 0.03199432981909038,
+              "X": 0.06394210673384866,
+              "C": 0.012287102483637895,
+              "V": 0.07481213292516488,
+              "B": 0.03794702078311579,
+              "N": 0.014028404134370938,
+              "M": 0.02719888812031782
+            },
+            "home": 0.43832700525452406,
+            "leftPinkyQAZ": 0.0698799178299851,
+            "rightPinky": 0.05088296153793484,
+            "indexFingerTYB": 0.13397346640897553,
+            "maxFinger": 0.2691196432826305,
+            "finger": [
+              0.0698799178299851,
+              0.1595346542397284,
+              0.08185576436791528,
+              0.2691196432826305,
+              0,
+              0,
+              0.23656296611396727,
+              0.0319658121352761,
+              0.10019828049256252,
+              0.05088296153793484
+            ],
+            "differentKeySameFingerRate": 0.11067897981791279
+          }
+        },
+        "homeS2": 0.35261085858479635,
+        "homeFloor4NativeTracks": 0.35261085858479635,
+        "leftPinkyQAZPeak4NativeTracks": {
+          "value": 0.08552936448828931,
+          "track": "character"
+        },
+        "rightPinkyPeak4NativeTracks": {
+          "value": 0.05088296153793484,
+          "track": "word4"
+        },
+        "maxFingerPeak4NativeTracks": {
+          "value": 0.27816904314496704,
+          "track": "character"
+        },
+        "indexFingerTYBPeak4NativeTracks": {
+          "value": 0.13397346640897553,
+          "track": "word4"
+        },
+        "s2DifferentKeySameFingerRate": 0.04916541370140243
+      },
+      "memory": {
+        "definition": "M-T1: onset/zero-carrier associations + one head-deletion rule + multi-root group rules (lower) or links (guard) + tone-region merge links",
+        "lower": 18,
+        "guard": 21,
+        "upper": 21,
+        "D": 2,
+        "F": 0,
+        "audit": {
+          "version": "M-T1-derived-v1",
+          "retroflexRules": 3,
+          "zeroCarrierRules": 1,
+          "ordinaryMoves": [
+            {
+              "name": "l",
+              "key": "W"
+            },
+            {
+              "name": "x",
+              "key": "Y"
+            }
+          ],
+          "carrierMoves": [
+            {
+              "name": "zero-W",
+              "key": "P"
+            },
+            {
+              "name": "zero-Y",
+              "key": "L"
+            }
+          ],
+          "headDeletionRules": 1,
+          "sourceRhymeColumnMergeRules": 5,
+          "sourceRhymeColumnMergeLinks": 8,
+          "toneRegionMergeLower": 4,
+          "regionMerges": [
+            {
+              "row": 0,
+              "groups": 10,
+              "usedKeys": [
+                "P",
+                "U",
+                "I",
+                "E",
+                "Q",
+                "O",
+                "R",
+                "W",
+                "T",
+                "Y"
+              ],
+              "links": 0
+            },
+            {
+              "row": 1,
+              "groups": 10,
+              "usedKeys": [
+                "F",
+                "H",
+                "A",
+                "S",
+                "G",
+                "K",
+                "L",
+                "J",
+                "D"
+              ],
+              "links": 1
+            },
+            {
+              "row": 2,
+              "groups": 10,
+              "usedKeys": [
+                "C",
+                "V",
+                "Z",
+                "X",
+                "B",
+                "M",
+                "N"
+              ],
+              "links": 3
+            }
+          ],
+          "groups": [
+            {
+              "roots": [
+                "a",
+                "er",
+                "n",
+                "ong"
+              ],
+              "keys": [
+                "P",
+                "F",
+                "C"
+              ]
+            },
+            {
+              "roots": [
+                "ai",
+                "u",
+                "v"
+              ],
+              "keys": [
+                "U",
+                "H",
+                "V"
+              ]
+            },
+            {
+              "roots": [
+                "an"
+              ],
+              "keys": [
+                "I",
+                "A",
+                "Z"
+              ]
+            },
+            {
+              "roots": [
+                "ang",
+                "ei"
+              ],
+              "keys": [
+                "E",
+                "S",
+                "X"
+              ]
+            },
+            {
+              "roots": [
+                "ao"
+              ],
+              "keys": [
+                "Q",
+                "G",
+                "B"
+              ]
+            },
+            {
+              "roots": [
+                "en",
+                "i"
+              ],
+              "keys": [
+                "O",
+                "K",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "eng",
+                "ng"
+              ],
+              "keys": [
+                "R",
+                "L",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "e"
+              ],
+              "keys": [
+                "W",
+                "J",
+                "N"
+              ]
+            },
+            {
+              "roots": [
+                "o"
+              ],
+              "keys": [
+                "T",
+                "J",
+                "M"
+              ]
+            },
+            {
+              "roots": [
+                "ou"
+              ],
+              "keys": [
+                "Y",
+                "D",
+                "B"
+              ]
+            }
+          ],
+          "scope": "compressed-rule lower / conservative association-link upper within the stated Mars-root model; no independent tone auxiliary; not an empirical learning bound"
+        }
+      }
+    }
+  ]
+}
