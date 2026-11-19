@@ -1,5 +1,23 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-crosswide-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_crosswide.js
+
+untoned-cr7e-crosswide-verify:
+    node tools/verify_untoned_cr7e_crosswide.js
+
+untoned-cr7e-crosswide-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_crosswide.js --policy "{{id}}"
+
+untoned-cr7e-crosswide-replay id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_crosswide.js --entry "{{id}}"
+
+untoned-cr7e-crosswide-report:
+    python -X utf8 tools/report_untoned_cr7e_crosswide.py
+
+untoned-cr7e-crosswide-test:
+    node --test tests/untoned-cr7e-crosswide.test.mjs tests/untoned-cr7e-blocks.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 untoned-cr7e-blocks-search:
     node --max-old-space-size=4096 tools/search_untoned_cr7e_blocks.js
 
