@@ -1,5 +1,23 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-recovery-search:
+    node --max-old-space-size=4096 tools/anneal_untoned_cr7e_recovery.js
+    node tools/polish_untoned_cr7e_recovery.js
+
+untoned-cr7e-recovery-verify:
+    node tools/verify_untoned_cr7e_recovery.js
+    node tools/audit_untoned_cr7e_recovery_rings.js
+
+untoned-cr7e-recovery-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_recovery.js --policy "{{id}}"
+
+untoned-cr7e-recovery-report:
+    python -X utf8 tools/report_untoned_cr7e_recovery.py
+
+untoned-cr7e-recovery-test:
+    node --test tests/untoned-cr7e-recovery.test.mjs tests/auxiliary-semantics.test.mjs
+    python -X utf8 tests/test_untoned_cr7e_ranker.py
+
 untoned-cr7e-far-prepare:
     node --max-old-space-size=6144 tools/anneal_untoned_cr7e_far.js --prepare
 
