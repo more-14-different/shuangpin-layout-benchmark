@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-u7e-fair-search phase="drop20":
+    if ("{{phase}}" -eq "restored21") { node --max-old-space-size=4096 tools/continue_untoned_cr7e_u7e_fair_restored.js } else { node --max-old-space-size=4096 tools/search_untoned_cr7e_u7e_fair.js --phase "{{phase}}" }
+
+untoned-cr7e-u7e-fair-test:
+    node --test tests/untoned-cr7e-u7e-fair.test.mjs tests/untoned-cr7e-dropfinal.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+untoned-cr7e-u7e-fair-verify phase="drop20":
+    node tools/verify_untoned_cr7e_u7e_fair.js --phase "{{phase}}"
+
+untoned-cr7e-u7e-fair-policy phase id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_u7e_fair.js --phase "{{phase}}" --policy "{{id}}"
+
+untoned-cr7e-u7e-fair-report phase="drop20":
+    python -X utf8 tools/report_untoned_cr7e_u7e_fair.py --phase "{{phase}}"
+
 untoned-cr7e-dropfinal-search:
     node --max-old-space-size=4096 tools/search_untoned_cr7e_dropfinal.js
 
