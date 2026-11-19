@@ -1,0 +1,625 @@
+{
+  "version": "cr-lan-213-report-v1",
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3070",
+    "vramMiB": 8192,
+    "systemMemoryGB": 64,
+    "os": "Windows 11"
+  },
+  "runtimeHours": 34.25,
+  "round": 54390,
+  "evaluations": 92206,
+  "cacheTotal": 50133,
+  "chains": 12,
+  "cyclesCompleted": 1,
+  "totalRestarts": 12,
+  "chainSteps": [
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065,
+    9065
+  ],
+  "exchanges": {
+    "accepted": 1044,
+    "attempted": 6522
+  },
+  "feasibleFrontier": 1,
+  "diagnosticFrontier": 255,
+  "paretoOptimalCount": 32,
+  "baseline": {
+    "key": "f19a0ad1dc8d077c5f2ea53b223e51010bb3096ff17b99bddd6d694fc029e578",
+    "ckt": 9.107001929844568,
+    "daily": 121.73336093086186,
+    "m": 24,
+    "guard": 25,
+    "d": 2
+  },
+  "bestByRoute": {
+    "lowCost": {
+      "title": "极低 CKT 代价高移手路线（CKT 微升 <0.005）",
+      "champion": {
+        "key": "391c0afa96",
+        "fullKey": "391c0afa9624b6b308a408d7e70fb5694cde5bcce8aeac9e6f60267ddfa2a011",
+        "ckt": 9.107564,
+        "daily": 123.6949,
+        "deltaCkt": 0.000562,
+        "deltaDaily": 1.9615,
+        "m": 24,
+        "d": 2,
+        "note": "18 韵根分组 100% 同 f19，仅中调区改动 1 键 S->H"
+      },
+      "runnerUps": [
+        {
+          "key": "ba0466ee5b",
+          "ckt": 9.108552,
+          "daily": 124.4856,
+          "deltaCkt": 0.00155,
+          "deltaDaily": 2.7522,
+          "m": 24,
+          "d": 2,
+          "note": "原根未动，中调区 S->H + 底调区 X<->Z 对调"
+        },
+        {
+          "key": "a455e5bfbf",
+          "ckt": 9.110171,
+          "daily": 124.7138,
+          "deltaCkt": 0.003169,
+          "deltaDaily": 2.9805,
+          "m": 24,
+          "d": 2,
+          "note": "原根未动，中调区 S->J + 底调区 X<->Z 对调"
+        },
+        {
+          "key": "12773fa654",
+          "ckt": 9.111059,
+          "daily": 125.2637,
+          "deltaCkt": 0.004057,
+          "deltaDaily": 3.5304,
+          "m": 24,
+          "d": 2,
+          "note": "原根未动，顶区 E->Y + 中区 S->H + 底区 X<->Z"
+        },
+        {
+          "key": "0ca4838ebd",
+          "ckt": 9.111385,
+          "daily": 123.8766,
+          "deltaCkt": 0.004383,
+          "deltaDaily": 2.1432,
+          "m": 23,
+          "d": 2,
+          "note": "M=23 突破！仅调动独立 er 根 + 中区 S->H"
+        },
+        {
+          "key": "b2ee328a85",
+          "ckt": 9.112552,
+          "daily": 125.4948,
+          "deltaCkt": 0.00555,
+          "deltaDaily": 3.7615,
+          "m": 24,
+          "d": 2,
+          "note": "原根未动，顶区 E->Y + 中区 S->J + 底区 X<->Z"
+        }
+      ]
+    },
+    "balanced": {
+      "title": "均衡路线（移手 126 ~ 130 分）",
+      "champion": {
+        "key": "acc852f430",
+        "fullKey": "acc852f43096472cb24cac669f5d3e274fe05a383cdb391aa07708919a39c59a",
+        "ckt": 9.122617,
+        "daily": 127.323,
+        "deltaCkt": 0.015615,
+        "deltaDaily": 5.5896,
+        "m": 24,
+        "d": 2,
+        "note": "原根未动，仅改 5 键，移手突破 127.3 分"
+      },
+      "runnerUps": [
+        {
+          "key": "c09bbf1108",
+          "ckt": 9.120967,
+          "daily": 126.7549,
+          "deltaCkt": 0.013965,
+          "deltaDaily": 5.0215,
+          "m": 24,
+          "d": 2,
+          "note": "原根未动改 4 键，移手破 126.7"
+        },
+        {
+          "key": "68d2cdd73d",
+          "ckt": 9.119823,
+          "daily": 126.5191,
+          "deltaCkt": 0.012821,
+          "deltaDaily": 4.7858,
+          "m": 24,
+          "d": 2
+        },
+        {
+          "key": "41d057044e",
+          "ckt": 9.127406,
+          "daily": 127.6794,
+          "deltaCkt": 0.020404,
+          "deltaDaily": 5.946,
+          "m": 24,
+          "d": 2
+        }
+      ]
+    },
+    "lightweightM22M23": {
+      "title": "轻量化记忆路线（M=22/23，移手 130 ~ 137 分）",
+      "champion": {
+        "key": "c3f11d1eca",
+        "fullKey": "c3f11d1ecacf429e1050e720343f3d54709d221f2c13f28537d8c41387468414",
+        "ckt": 9.172361,
+        "daily": 134.3819,
+        "deltaCkt": 0.065359,
+        "deltaDaily": 12.6486,
+        "m": 22,
+        "d": 2,
+        "note": "M=22 超轻记忆量，移手突破 134.38 分"
+      },
+      "runnerUps": [
+        {
+          "key": "0fbcb6c536",
+          "ckt": 9.147665,
+          "daily": 130.4348,
+          "deltaCkt": 0.040663,
+          "deltaDaily": 8.7014,
+          "m": 23,
+          "d": 2,
+          "note": "M=23 突破 130 移手分门槛"
+        },
+        {
+          "key": "580f84f1b6",
+          "ckt": 9.179892,
+          "daily": 135.3308,
+          "deltaCkt": 0.07289,
+          "deltaDaily": 13.5974,
+          "m": 23,
+          "d": 2,
+          "note": "M=23 突破 135 移手分门槛"
+        },
+        {
+          "key": "a41f73a163",
+          "ckt": 9.196624,
+          "daily": 137.7106,
+          "deltaCkt": 0.089622,
+          "deltaDaily": 15.9773,
+          "m": 23,
+          "d": 2,
+          "note": "CKT 压破 9.20 极限，移手达到 137.71"
+        }
+      ]
+    },
+    "extremeDaily": {
+      "title": "极致移手路线（移手突破 140 ~ 141 分）",
+      "champion": {
+        "key": "9da931208f",
+        "fullKey": "9da931208fbebf7239569e5b98874351a7570a7387cc366af07dbe60daca8aa0",
+        "ckt": 9.239733,
+        "daily": 140.4632,
+        "deltaCkt": 0.132731,
+        "deltaDaily": 18.7298,
+        "m": 22,
+        "d": 2,
+        "note": "历史首次跨越 140 大关，且 M=22 记忆更轻"
+      },
+      "runnerUps": [
+        {
+          "key": "b24e2ec07b",
+          "ckt": 9.249687,
+          "daily": 141.0669,
+          "deltaCkt": 0.142685,
+          "deltaDaily": 19.3335,
+          "m": 23,
+          "d": 2,
+          "note": "移手突破 141 大关"
+        },
+        {
+          "key": "a70797f90b",
+          "ckt": 9.254718,
+          "daily": 141.1049,
+          "deltaCkt": 0.147716,
+          "deltaDaily": 19.3715,
+          "m": 23,
+          "d": 2,
+          "note": "全池最高移手分新纪录（141.10）"
+        }
+      ]
+    }
+  },
+  "paretoFrontier": [
+    {
+      "key": "f19a0ad1dc8d077c5f2ea53b223e51010bb3096ff17b99bddd6d694fc029e578",
+      "shortKey": "f19a0ad1dc",
+      "ckt": 9.107001929844568,
+      "daily": 121.73336093086186,
+      "deltaCkt": 0.0,
+      "deltaDaily": 0.0,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc"
+    },
+    {
+      "key": "391c0afa9624b6b308a408d7e70fb5694cde5bcce8aeac9e6f60267ddfa2a011",
+      "shortKey": "391c0afa96",
+      "ckt": 9.107563709469563,
+      "daily": 123.69490075763186,
+      "deltaCkt": 0.0005617796249950402,
+      "deltaDaily": 1.961539826769993,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc-near"
+    },
+    {
+      "key": "ba0466ee5b5a5f6a6dc04b0f288a906a61e541ffeae3de669f3562e84331decb",
+      "shortKey": "ba0466ee5b",
+      "ckt": 9.108551878081476,
+      "daily": 124.48559049270322,
+      "deltaCkt": 0.0015499482369083495,
+      "deltaDaily": 2.752229561841361,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc-near"
+    },
+    {
+      "key": "a455e5bfbf9fa379b845b6c7e93106e0f5218aad39fbc497491c363034a06984",
+      "shortKey": "a455e5bfbf",
+      "ckt": 9.110170744979932,
+      "daily": 124.71382701361566,
+      "deltaCkt": 0.003168815135364156,
+      "deltaDaily": 2.980466082753793,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-92d87a31e4"
+    },
+    {
+      "key": "12773fa654349e60d7ed9d167498d57514dc29a335a8979192bbad42e6a77b99",
+      "shortKey": "12773fa654",
+      "ckt": 9.111059100833096,
+      "daily": 125.26371910827012,
+      "deltaCkt": 0.0040571709885277585,
+      "deltaDaily": 3.53035817740826,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc"
+    },
+    {
+      "key": "b2ee328a857b512ced3325a85736bde6919f5050269a7dd75b8cc5b4a3e467a6",
+      "shortKey": "b2ee328a85",
+      "ckt": 9.112551862740371,
+      "daily": 125.49482049533012,
+      "deltaCkt": 0.005549932895803522,
+      "deltaDaily": 3.761459564468254,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc-near"
+    },
+    {
+      "key": "d014bb2795cb87b45b3611b60bbb79524033ebf36b846b97aa6215c86db1b386",
+      "shortKey": "d014bb2795",
+      "ckt": 9.117227968459096,
+      "daily": 125.86291264809446,
+      "deltaCkt": 0.010226038614527866,
+      "deltaDaily": 4.1295517172326015,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc"
+    },
+    {
+      "key": "ef56540e710172544aedd0c9d60f5e3456c6564e2a203a599cf6bc99a9c025f4",
+      "shortKey": "ef56540e71",
+      "ckt": 9.119459554341034,
+      "daily": 126.0962323089787,
+      "deltaCkt": 0.01245762449646648,
+      "deltaDaily": 4.362871378116836,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-92d87a31e4"
+    },
+    {
+      "key": "68d2cdd73dc9d3e6c389250591a0163d3ad08013f7e9cc5b8610fcb5b2c2998a",
+      "shortKey": "68d2cdd73d",
+      "ckt": 9.11982325940718,
+      "daily": 126.5191426517307,
+      "deltaCkt": 0.012821329562612505,
+      "deltaDaily": 4.78578172086884,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc"
+    },
+    {
+      "key": "c09bbf1108a4c23ee557167a120811666d47d659612c9b8b1462fcc306d55877",
+      "shortKey": "c09bbf1108",
+      "ckt": 9.120966590662984,
+      "daily": 126.75490392006354,
+      "deltaCkt": 0.013964660818416519,
+      "deltaDaily": 5.021542989201677,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc-near"
+    },
+    {
+      "key": "acc852f43096472cb24cac669f5d3e274fe05a383cdb391aa07708919a39c59a",
+      "shortKey": "acc852f430",
+      "ckt": 9.122616741805352,
+      "daily": 127.32298345613621,
+      "deltaCkt": 0.01561481196078418,
+      "deltaDaily": 5.5896225252743506,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc-near"
+    },
+    {
+      "key": "c54c51e6250af4e62af6b1b1ab232c70a67a6586222682ac15a838c734b2553e",
+      "shortKey": "c54c51e625",
+      "ckt": 9.132404516653677,
+      "daily": 127.48489440904484,
+      "deltaCkt": 0.02540258680910945,
+      "deltaDaily": 5.751533478182978,
+      "m": 24,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-92d87a31e4"
+    },
+    {
+      "key": "735f187dd0ef5bb9e82e768c580f55df39b79464c903f88a685b2af2bdad3037",
+      "shortKey": "735f187dd0",
+      "ckt": 9.139755776988995,
+      "daily": 127.6355488731183,
+      "deltaCkt": 0.032753847144427084,
+      "deltaDaily": 5.9021879422564325,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-92d87a31e4"
+    },
+    {
+      "key": "5d14e7238ed37b91409e73e25262283f7033b9f271deae0547d7f1466d0c91c0",
+      "shortKey": "5d14e7238e",
+      "ckt": 9.141774638456248,
+      "daily": 128.2115673676243,
+      "deltaCkt": 0.0347727086116798,
+      "deltaDaily": 6.478206436762434,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-92d87a31e4"
+    },
+    {
+      "key": "0fbcb6c536ddccb40a2622905b834176a1554fdf652bbfa484b7b3f6fdae3d20",
+      "shortKey": "0fbcb6c536",
+      "ckt": 9.147664802675653,
+      "daily": 130.43479816765702,
+      "deltaCkt": 0.04066287283108494,
+      "deltaDaily": 8.701437236795158,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "b5b6ade86bfbbda1944f7f7a3853ab4bd4176e7109b1d040182a562d8ccb3ceb",
+      "shortKey": "b5b6ade86b",
+      "ckt": 9.158512940879364,
+      "daily": 132.66910734691945,
+      "deltaCkt": 0.05151101103479583,
+      "deltaDaily": 10.935746416057583,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "672b01866dfcdf4dc792a95855c90654ccacb14e247258720e68002e59ef1912",
+      "shortKey": "672b01866d",
+      "ckt": 9.15972377173519,
+      "daily": 132.67950148392865,
+      "deltaCkt": 0.052721841890621235,
+      "deltaDaily": 10.946140553066783,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "351a53958b6868eba46498fdbe1c9ba518f33949f5a5380aa03666a6556e2757",
+      "shortKey": "351a53958b",
+      "ckt": 9.162627036952461,
+      "daily": 133.32964204779321,
+      "deltaCkt": 0.05562510710789326,
+      "deltaDaily": 11.596281116931351,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "e09d7b0b433681ed72e785e92de6b423a8b4a35c8161db103007107dbc6d34a1",
+      "shortKey": "e09d7b0b43",
+      "ckt": 9.166243396402448,
+      "daily": 133.93444795012866,
+      "deltaCkt": 0.05924146655788043,
+      "deltaDaily": 12.201087019266794,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "721c8cbcf94c2e73826919e635c6420db00da80b2f455ba6e4cbf27f98ddfcfd",
+      "shortKey": "721c8cbcf9",
+      "ckt": 9.168816879723135,
+      "daily": 134.1681121180496,
+      "deltaCkt": 0.06181494987856695,
+      "deltaDaily": 12.434751187187743,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "c3f11d1ecacf429e1050e720343f3d54709d221f2c13f28537d8c41387468414",
+      "shortKey": "c3f11d1eca",
+      "ckt": 9.172360825807118,
+      "daily": 134.3819278145268,
+      "deltaCkt": 0.06535889596255018,
+      "deltaDaily": 12.648566883664927,
+      "m": 22,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "5e9b83c35355541ecb6195aceab2397909b595c2efae65c0f4beba136a3fee78",
+      "shortKey": "5e9b83c353",
+      "ckt": 9.175201725268746,
+      "daily": 134.82561371329464,
+      "deltaCkt": 0.06819979542417798,
+      "deltaDaily": 13.09225278243278,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "580f84f1b6a58a40a3d9c66b3d7477daef9b683631fb7111137a48fa1fea5e9e",
+      "shortKey": "580f84f1b6",
+      "ckt": 9.179892093633242,
+      "daily": 135.33077836896118,
+      "deltaCkt": 0.0728901637886743,
+      "deltaDaily": 13.597417438099313,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "aeb876f1b7f31abc566393264438709c2dc4c1afd04037cd9edfc9f8a4226803",
+      "shortKey": "aeb876f1b7",
+      "ckt": 9.183910419453582,
+      "daily": 135.33322059741496,
+      "deltaCkt": 0.0769084896090142,
+      "deltaDaily": 13.599859666553101,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "616bebe9df71c99fd6209442b049ae52d21f1ca3d557867d41af08fa9b6429c5",
+      "shortKey": "616bebe9df",
+      "ckt": 9.193203766148688,
+      "daily": 135.37553659269494,
+      "deltaCkt": 0.08620183630412015,
+      "deltaDaily": 13.642175661833079,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "a41f73a1630c94646cb7465c613c4f89e2847a6b587efc102e3b72e87d1a3d6e",
+      "shortKey": "a41f73a163",
+      "ckt": 9.196624237732662,
+      "daily": 137.71062281706457,
+      "deltaCkt": 0.089622307888094,
+      "deltaDaily": 15.977261886202712,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-41d057044e"
+    },
+    {
+      "key": "f4454f1ac76b771d8c406819a381ac20b473c7baff34672a970ade886a19d92d",
+      "shortKey": "f4454f1ac7",
+      "ckt": 9.224452683038583,
+      "daily": 138.10563409700595,
+      "deltaCkt": 0.11745075319401543,
+      "deltaDaily": 16.372273166144083,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-f19a0ad1dc-wide"
+    },
+    {
+      "key": "fc9dcf563762a4c76de4972f1580276939a5945de3dfc5ba21c8e8eb201e3c02",
+      "shortKey": "fc9dcf5637",
+      "ckt": 9.2267363990421,
+      "daily": 138.10700931247467,
+      "deltaCkt": 0.11973446919753172,
+      "deltaDaily": 16.37364838161281,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-d35c288748"
+    },
+    {
+      "key": "83de6ba0649ef31837d1b49bf6597293d1949c900fa9f8fed12ee008088fedb5",
+      "shortKey": "83de6ba064",
+      "ckt": 9.229832586407476,
+      "daily": 138.79852053197115,
+      "deltaCkt": 0.12283065656290759,
+      "deltaDaily": 17.065159601109286,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-07ddd2dd1a"
+    },
+    {
+      "key": "9da931208fbebf7239569e5b98874351a7570a7387cc366af07dbe60daca8aa0",
+      "shortKey": "9da931208f",
+      "ckt": 9.239732807551759,
+      "daily": 140.4631575479009,
+      "deltaCkt": 0.13273087770719094,
+      "deltaDaily": 18.729796617039028,
+      "m": 22,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-d35c288748"
+    },
+    {
+      "key": "b24e2ec07b2b40c35280a24b8ec6f3387623b8ccb9de4d4503c1505daade3d87",
+      "shortKey": "b24e2ec07b",
+      "ckt": 9.249686854823606,
+      "daily": 141.06688872116675,
+      "deltaCkt": 0.14268492497903829,
+      "deltaDaily": 19.333527790304885,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-d35c288748"
+    },
+    {
+      "key": "a70797f90b14b199f7d1857fcc1c6a8127c89b8ff3447348954682920a81e5d3",
+      "shortKey": "a70797f90b",
+      "ckt": 9.254718153613428,
+      "daily": 141.1048504494613,
+      "deltaCkt": 0.1477162237688603,
+      "deltaDaily": 19.371489518599446,
+      "m": 23,
+      "d": 2,
+      "guard": 25,
+      "origin": "LAN213-d35c288748"
+    }
+  ]
+}
