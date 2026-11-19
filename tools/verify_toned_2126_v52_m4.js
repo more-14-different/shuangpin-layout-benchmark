@@ -5,7 +5,7 @@ const exp=require('./explore_toned_2126'),toned=require('./score_toned_2121_ckt_
 const model=require('./ckt_v4_model'),native=require('./score_snow_jiandao_toned_benchmark');
 const {context}=require('./score_ckt_v52'),{toneKeysFromShapeKeys,auxiliarySemantics}=require('./auxiliary_semantics');
 const {tonedMemoryAudit}=require('./toned_memory_audit');
-const prefix='research/notes/2026-11-19-toned-2126-v52-m4-refine';
+const prefix=process.argv[2]||'research/notes/2026-11-19-toned-2126-v52-m4-refine';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const hash=p=>require('node:crypto').createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 function main(){
@@ -51,6 +51,7 @@ function main(){
   const doubleScore=10*(power/6)**.25;close(doubleScore,layout.doubleScore,'double cost',1e-9);
   const ergonomics=native.loadSummary(outcomes);
   for(const k of ['character','word2','word3','word4'])for(const [key,value] of Object.entries(layout.ergonomics[k].load))close(ergonomics.tracks[k].load[key],value,'load '+k+key,1e-12);
+  for(const k of ['character','word2','word3','word4'])close(ergonomics.tracks[k].differentKeySameFingerRate,layout.ergonomics[k].differentKeySameFingerRate,'same finger '+k,1e-12);
   assert.ok(ergonomics.leftPinkyQAZPeak4NativeTracks.value<=search.contract.leftPinkyMaximum+1e-12);
   const byToken=new Map(bundle.tokenKeys.map((t,i)=>[t,layout.tonedCodes[i]]));
   const memory=tonedMemoryAudit({publication:{rhymeGroups:layout.rhymeGroups,toneRowsByTone:layout.toneRowsByTone},tonedCodes:data.pinyin.map(p=>[1,2,3,4,5].map(t=>byToken.get(p+t)||null))},data.pinyin,inv.decomposition);
@@ -60,6 +61,9 @@ function main(){
   console.log(JSON.stringify({id:layout.id,score,doubleScore,leftPinky:ergonomics.leftPinkyQAZPeak4NativeTracks.value}));
  }
  const sources=[__filename,prefix+'.json',prefix+'-finalists.json',prefix+'-policies.json.gz','research/config/toned-2126-v52-onset-atoms.json','tools/search_toned_2126_v52_onsets.py','tools/search_toned_2126_v52_m19.py','tools/refine_toned_2126_v52_m4.py','tools/audit_toned_2126_v52_m4_policies.py','tools/report_toned_2126_v52_m4.py','tools/toned_2126_v52_load_kernel.py','tools/ckt_v4_model.js','tools/explore_toned_2126.js','tools/score_ckt_v52.js','tools/toned_memory_audit.js',payload,profile,path.join(snow,'snow_pinyin.base.dict.yaml')];
+ sources.push(...(search.extraSourcePaths||[]));
+ const scoresIndex=prefix+'-scores-index.json';
+ if(fs.existsSync(scoresIndex))sources.push(scoresIndex,'tools/toned_2126_v52_score_archives.py',...read(scoresIndex).parts.map(p=>p.file));
  fs.writeFileSync(prefix+'-verification.json',JSON.stringify({version:1,sourceHashes:Object.fromEntries(sources.map(p=>[path.resolve(p).replaceAll('\\','/'),hash(p)])),results},null,2)+'\n');
 }
 if(require.main===module)main();

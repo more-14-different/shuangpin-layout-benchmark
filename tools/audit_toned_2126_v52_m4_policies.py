@@ -1,4 +1,5 @@
 """Exhaust all 144 policies for each M4 finalist; no pinky screening."""
+import argparse
 import concurrent.futures
 import dataclasses
 import gzip
@@ -8,13 +9,18 @@ from pathlib import Path
 
 from refine_toned_2126_v52_m4 import Context,State,ROOT,PREFIX,ARCHIVES,M19
 from check_toned_2126_v52_seed_neighbors import read,write
+from toned_2126_v52_score_archives import score_archives
 
 
 def main():
-    search=read(str(PREFIX)+'.json');assert search['complete']
-    source=read(str(PREFIX)+'-finalists.json');ctx=Context(ROOT.parent/'shuangpin-layout-benchmark')
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--prefix',type=Path,default=PREFIX)
+    prefix=p.parse_args().prefix.resolve()
+    search=read(str(prefix)+'.json');assert search['complete']
+    source=read(str(prefix)+'-finalists.json');ctx=Context(ROOT.parent/'shuangpin-layout-benchmark')
     cache={}
-    for archive in ARCHIVES+[Path(str(PREFIX)+'-scores.jsonl.gz')]:
+    archives=ARCHIVES+[Path(str(PREFIX)+'-scores.jsonl.gz')]
+    if prefix!=PREFIX:archives.extend(score_archives(prefix))
+    for archive in archives:
         with gzip.open(archive,'rt',encoding='utf8') as stream:
             for line in stream:
                 row=json.loads(line);row['eligible']=True;cache[State.load(row['state'])]=row
@@ -40,7 +46,7 @@ def main():
                 defaultRegret=anchor['score']-default['score'],doubleRegret=anchor['doubleScore']-double['score']))
             print(layout['id'],layout['originRoutes'],default,double,flush=True)
     output=dict(version=1,complete=True,newFullEvaluations=new,results=results)
-    Path(str(PREFIX)+'-policies.json.gz').write_bytes(gzip.compress((json.dumps(output,separators=(',',':'))+'\n').encode(),mtime=0))
+    Path(str(prefix)+'-policies.json.gz').write_bytes(gzip.compress((json.dumps(output,separators=(',',':'))+'\n').encode(),mtime=0))
 
 
 if __name__=='__main__':main()
