@@ -140,6 +140,7 @@ def main():
         old_source=json.loads(gzip.decompress(old_bytes));old_rows={r['id']:r for r in old_source['results']}
         new_rows={r['id']:r for r in source['results']}
         for r in previous['results']:
+            if r['id'] not in new_rows:continue
             if old_rows[r['id']]['policies']!=new_rows[r['id']]['policies']:raise ValueError('resume policy changed')
             cached={**r,'oracleCaches':{name:str(WORK/(r['id']+'-'+name+'-oracle.npy')) for name in grids}}
             if all(Path(p).exists() for p in cached['oracleCaches'].values()):resume[r['id']]=cached

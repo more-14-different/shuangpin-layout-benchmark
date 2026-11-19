@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-1f9-remove-p-search:
+    python -X utf8 tools/search_1f9_remove_p.py
+    python -X utf8 tools/prepare_1f9_remove_p_controls.py
+    python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-1f9-remove-p
+
+cr-1f9-remove-p-audit:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/audit_f19_v52_robustness.py --prefix research/notes/2026-11-19-1f9-remove-p
+    python -X utf8 tools/f19_v52_ergonomics.py --prefix research/notes/2026-11-19-1f9-remove-p
+    node --max-old-space-size=6144 tools/verify_f19_v52_audit.js --prefix research/notes/2026-11-19-1f9-remove-p
+    python -X utf8 tools/report_1f9_remove_p.py
+
+cr-1f9-remove-p-test:
+    python -m unittest discover -s tests -p test_1f9_remove_p.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 lan213-v52-followup-prepare:
     python -X utf8 tools/prepare_lan213_v52_followup.py
     python -X utf8 tools/check_lan213_v52_recovery.py

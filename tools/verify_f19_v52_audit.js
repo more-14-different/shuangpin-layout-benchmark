@@ -38,7 +38,10 @@ function main(){
     historicalBaselineFrozen:!!bundle.productionBaselineFrozen};
   const checks=new Map(),key=p=>['word2','word3','word4'].map(k=>p[k]).join('/');
   function add(id,policy){checks.set(id+'#'+key(policy),{id,policy})}
-  for(const id of ['f19a0ad1dc','2eb6eb060e','current-production'])add(id,audit.results.find(r=>r.id===id).selected.policy);
+  for(const id of ['f19a0ad1dc','2eb6eb060e','current-production']){
+    const row=audit.results.find(r=>r.id===id);if(row)add(id,row.selected.policy);
+  }
+  if(bundle.auditAllLayouts)for(const row of audit.results)add(row.id,row.selected.policy);
   for(const recovered of bundle.representativeRecovery?.recovered||[])
     add(recovered.id,audit.results.find(r=>r.id===recovered.id).selected.policy);
   for(const g of Object.values(audit.crossLayoutComparisons))for(const mode of ['fixedPolicies','adaptiveRivals'])

@@ -149,8 +149,10 @@ def main():
             print(result['id'],result['defaultBest']['score'],result['defaultBest']['policy'],flush=True)
     native_path=Path(str(PREFIX)+'-native-policies.json.gz')
     native=json.loads(gzip.decompress(native_path.read_bytes())) if native_path.exists() else read(ROOT/'research/.cache/f19-v52-native-checks.json')
-    by_id={r['id']:r for r in results};maximum=0.
+    by_id={r['id']:r for r in results};maximum=0.;native_checked=0
     for independent in native['results']:
+        if independent['id'] not in by_id:continue
+        native_checked+=1
         actual=by_id[independent['id']]
         native_by_policy={tuple(r['policy'][k] for k in ['word2','word3','word4']):r for r in independent['policies']}
         for a in actual['policies']:
@@ -168,7 +170,7 @@ def main():
     if abs(actual-production_layout['expectedV52'])>1e-9:raise ValueError('production anchor mismatch')
     payload=dict(version='f19-v52-all-144-policies-v1',reference=dict(tracks=reference),cktVersion='v52',
         templateSha256=metadata['sha256'],elapsedSeconds=time.monotonic()-started,
-        independentNativeChecks=dict(layouts=len(native['results']),policies=144*len(native['results']),maximumScoreDifference=maximum),results=results)
+        independentNativeChecks=dict(layouts=native_checked,policies=144*native_checked,maximumScoreDifference=maximum),results=results)
     target=Path(str(prefix)+'-policies.json.gz')
     target.write_bytes(gzip.compress((json.dumps(payload,separators=(',',':'))+'\n').encode(),mtime=0))
     print('verified',payload['independentNativeChecks'],'seconds',payload['elapsedSeconds'],flush=True)
