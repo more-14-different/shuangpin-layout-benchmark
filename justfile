@@ -1,5 +1,22 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-coupled-search:
+    node --max-old-space-size=3072 tools/search_untoned_cr7e_coupled.js
+    node --max-old-space-size=3072 tools/extend_untoned_cr7e_coupled.js
+    node --max-old-space-size=3072 tools/complete_untoned_cr7e_final_pairs.js
+
+untoned-cr7e-coupled-verify:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_coupled.js
+
+untoned-cr7e-coupled-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_coupled.js --policies "{{id}}"
+
+untoned-cr7e-coupled-report:
+    python -X utf8 tools/report_untoned_cr7e_coupled.py
+
+untoned-cr7e-coupled-test:
+    node --test tests/untoned-cr7e-coupled.test.mjs tests/untoned-cr7e-v52.test.mjs tests/ckt-v52.test.mjs tests/auxiliary-semantics.test.mjs
+
 untoned-cr7e-zero-n-search:
     node --max-old-space-size=2048 tools/search_untoned_cr7e_zero_n.js
     node tools/polish_untoned_cr7e_zero_n_swaps.js
