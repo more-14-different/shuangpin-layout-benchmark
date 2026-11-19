@@ -4,7 +4,8 @@ const fs=require('node:fs'),path=require('node:path'),zlib=require('node:zlib'),
 const native=require('./score_toned_2121_ckt_v51'),corpus=require('./score_completion_ckt_v4'),model=require('./ckt_v4_model');
 const {blockErrorMotor}=require('./ckt_block_error'),{tonedMemoryAudit}=require('./toned_memory_audit');
 const {auxiliarySemantics}=require('./auxiliary_semantics');
-const prefix='research/notes/2026-11-19-f19-v52-production-audit',read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const option=process.argv.indexOf('--prefix');
+const prefix=option<0?'research/notes/2026-11-19-f19-v52-production-audit':process.argv[option+1],read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 function main(){
   const bundle=read(prefix+'-candidates.json'),audit=read(prefix+'-robustness.json'),ergo=read(prefix+'-ergonomics.json');
   const enumeration=JSON.parse(zlib.gunzipSync(fs.readFileSync(prefix+'-policies.json.gz')));
@@ -20,23 +21,33 @@ function main(){
   const splitByPinyin=new Map(decomposition.map(r=>[r.pinyin,r]));
   const productionLayout=bundle.layouts.find(r=>r.id==='current-production');
   const {marsFirstAtom}=require('./mars_toned_factorization');
+  const productionCodes=[];
   bundle.tokenKeys.forEach((token,i)=>{
     const py=token.slice(0,-1),tone=Number(token.at(-1));
     const group=production.rhymeGroups.find(g=>g.finals.includes(splitByPinyin.get(py).fullFinal));
     assert.ok(group,'production final missing '+py);
     const actual=production.firstKeys[marsFirstAtom(py)]+group.keys[production.toneRegions[tone]];
-    assert.equal(actual,productionLayout.tonedCodes[i],'current production mapping changed '+token);
+    productionCodes.push(actual);
+    if(!bundle.productionBaselineFrozen)assert.equal(actual,productionLayout.tonedCodes[i],'current production mapping changed '+token);
   });
+  const currentProductionMatch=bundle.layouts.find(r=>r.tonedCodes.every((code,i)=>code===productionCodes[i]));
+  if(bundle.productionBaselineFrozen)assert.ok(currentProductionMatch,'Current production does not match any audited layout');
+  const productionStatus={id:production.id,sourceCommit:production.sourceCommit,
+    matchesAuditedLayout:currentProductionMatch?.id||null,
+    historicalBaselineMatches:productionLayout.tonedCodes.every((code,i)=>code===productionCodes[i]),
+    historicalBaselineFrozen:!!bundle.productionBaselineFrozen};
   const checks=new Map(),key=p=>['word2','word3','word4'].map(k=>p[k]).join('/');
   function add(id,policy){checks.set(id+'#'+key(policy),{id,policy})}
   for(const id of ['f19a0ad1dc','2eb6eb060e','current-production'])add(id,audit.results.find(r=>r.id===id).selected.policy);
+  for(const recovered of bundle.representativeRecovery?.recovered||[])
+    add(recovered.id,audit.results.find(r=>r.id===recovered.id).selected.policy);
   for(const g of Object.values(audit.crossLayoutComparisons))for(const mode of ['fixedPolicies','adaptiveRivals'])
     for(const s of Object.values(g[mode]))add(s.worstCase.rivalId,s.worstCase.rivalPolicy);
   const close=(a,b,label,tol=1e-7)=>{if(!Number.isFinite(a)||Math.abs(a-b)>tol)throw Error(label+': '+a+' != '+b)};
   const memories=[];
   for(const layout of bundle.layouts){
     const codes=new Map(bundle.tokenKeys.map((t,i)=>[t,layout.tonedCodes[i]]));
-    const memory=tonedMemoryAudit({publication:{rhymeGroups:layout.id==='current-production'?production.rhymeGroups:layout.rhymeGroups},
+    const memory=tonedMemoryAudit({publication:{rhymeGroups:layout.rhymeGroups||(layout.id==='current-production'?production.rhymeGroups:undefined)},
       tonedCodes:pys.map(py=>[1,2,3,4,5].map(t=>codes.get(py+t)||null))},pys,decomposition);
     memories.push({id:layout.id,...memory});
   }
@@ -65,6 +76,6 @@ function main(){
     path.join(snow,'snow_pinyin.base.dict.yaml'),path.join(snow,'config/snow-jiandao-toned-mapping.json'),
     prefix+'-candidates.json',prefix+'-policies.json.gz',prefix+'-robustness.json'];
   const sourceHashes=Object.fromEntries(inputs.map(p=>[path.resolve(p).replaceAll('\\','/'),crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex')]));
-  fs.writeFileSync(prefix+'-verification.json',JSON.stringify({version:'f19-v52-full-native-verification-v1',sourceHashes,memories,results},null,2)+'\n');
+  fs.writeFileSync(prefix+'-verification.json',JSON.stringify({version:'f19-v52-full-native-verification-v1',productionStatus,sourceHashes,memories,results},null,2)+'\n');
 }
 if(require.main===module)main();

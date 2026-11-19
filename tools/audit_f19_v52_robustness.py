@@ -126,9 +126,11 @@ def cross_compare(source,optimized,grids,chunk):
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--workers',type=int,default=3)
     parser.add_argument('--chunk',type=int,default=4096)
+    parser.add_argument('--prefix',type=Path,default=PREFIX)
     parser.add_argument('--resume-report',type=Path);parser.add_argument('--resume-policies',type=Path)
     args=parser.parse_args()
-    path=Path(str(PREFIX)+'-policies.json.gz');source_bytes=path.read_bytes();source=json.loads(gzip.decompress(source_bytes))
+    prefix=args.prefix
+    path=Path(str(prefix)+'-policies.json.gz');source_bytes=path.read_bytes();source=json.loads(gzip.decompress(source_bytes))
     reference=vectors(source['reference'],COSTS)
     grids=dict(main=grid(0,5,.5),extreme=grid(0,10,1))
     started=time.monotonic();results=[];resume={}
@@ -163,7 +165,7 @@ def main():
         f19Selected=f19['selected'],crossLayoutComparisons=comparisons,
         productionGatePassed=gate,productionGate='f19 first at default under each own best policy, and strictly positive gap at every positive point in both grids against fixed robust rivals and pointwise best-policy rivals.',
         elapsedSeconds=time.monotonic()-started,results=[{k:v for k,v in r.items() if k!='oracleCaches'} for r in results])
-    Path(str(PREFIX)+'-robustness.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    Path(str(prefix)+'-robustness.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print('production gate',gate,'seconds',report['elapsedSeconds'],flush=True)
 
 

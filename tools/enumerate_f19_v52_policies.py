@@ -100,8 +100,10 @@ def physical_keys(layout,metadata):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--workers',type=int,default=4)
+    parser.add_argument('--prefix',type=Path,default=PREFIX)
     args=parser.parse_args()
-    candidates=read(str(PREFIX)+'-candidates.json');metadata=read(WORK/'policy-templates.json')
+    prefix=args.prefix
+    candidates=read(str(prefix)+'-candidates.json');metadata=read(WORK/'policy-templates.json')
     if metadata['tokenKeys']!=candidates['tokenKeys']:raise ValueError('template inventory differs')
     rows=np.fromfile(WORK/'policy-templates.bin',np.int32).reshape(-1,11)
     motor=load_tables(ROOT/'tools/ckt_v4_upstream_role_tables.json','tables')
@@ -160,13 +162,14 @@ def main():
                         raise ValueError(f'native component mismatch {actual["id"]}/{kind}/{field}')
         if abs(actual['defaultBest']['score']-independent['bestStandard']['score'])>1e-9:raise ValueError('native best mismatch')
     if maximum>1e-9:raise ValueError('native score mismatch')
-    production=by_id['current-production'];policy=candidates['layouts'][-1]['wordAuxiliaryPolicy']
+    production_layout=next(r for r in candidates['layouts'] if r['id']=='current-production')
+    production=by_id['current-production'];policy=production_layout['wordAuxiliaryPolicy']
     actual=next(r for r in production['policies'] if r['policy']==policy)['score']
-    if abs(actual-candidates['layouts'][-1]['expectedV52'])>1e-9:raise ValueError('production anchor mismatch')
+    if abs(actual-production_layout['expectedV52'])>1e-9:raise ValueError('production anchor mismatch')
     payload=dict(version='f19-v52-all-144-policies-v1',reference=dict(tracks=reference),cktVersion='v52',
         templateSha256=metadata['sha256'],elapsedSeconds=time.monotonic()-started,
         independentNativeChecks=dict(layouts=len(native['results']),policies=144*len(native['results']),maximumScoreDifference=maximum),results=results)
-    target=Path(str(PREFIX)+'-policies.json.gz')
+    target=Path(str(prefix)+'-policies.json.gz')
     target.write_bytes(gzip.compress((json.dumps(payload,separators=(',',':'))+'\n').encode(),mtime=0))
     print('verified',payload['independentNativeChecks'],'seconds',payload['elapsedSeconds'],flush=True)
 

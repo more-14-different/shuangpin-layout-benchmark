@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+lan213-v52-followup-prepare:
+    python -X utf8 tools/prepare_lan213_v52_followup.py
+    python -X utf8 tools/check_lan213_v52_recovery.py
+    python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-lan213-v52-followup
+
+lan213-v52-followup:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/audit_f19_v52_robustness.py --prefix research/notes/2026-11-19-lan213-v52-followup
+    python -X utf8 tools/f19_v52_ergonomics.py --prefix research/notes/2026-11-19-lan213-v52-followup
+    node --max-old-space-size=6144 tools/verify_f19_v52_audit.js --prefix research/notes/2026-11-19-lan213-v52-followup
+    $env:OPENBLAS_NUM_THREADS='1'; python -X utf8 tools/report_lan213_v52_followup.py
+
+lan213-v52-followup-test:
+    python -m unittest discover -s tests -p test_lan213_v52_followup.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 f19-v52-audit-prepare:
     python -X utf8 tools/prepare_f19_v52_audit.py
     node --max-old-space-size=2048 tools/export_f19_v52_policy_templates.js

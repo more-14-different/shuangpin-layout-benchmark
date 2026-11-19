@@ -1,5 +1,6 @@
 """Native terminal-code loads at each layout's fixed robust auxiliary policy."""
 import gzip
+import argparse
 import json
 from pathlib import Path
 
@@ -10,7 +11,9 @@ FINGER={k:i for i,keys in [(0,'QAZ'),(1,'WSX'),(2,'EDC'),(3,'RFVTGB'),(6,'YHNUJM
 
 
 def main():
-    candidates=read(str(PREFIX)+'-candidates.json');audit=read(str(PREFIX)+'-robustness.json')
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--prefix',type=Path,default=PREFIX)
+    prefix=parser.parse_args().prefix
+    candidates=read(str(prefix)+'-candidates.json');audit=read(str(prefix)+'-robustness.json')
     metadata=read(WORK/'policy-templates.json');rows=np.fromfile(WORK/'policy-templates.bin',np.int32).reshape(-1,11)
     motor=load_tables(ROOT/'tools/ckt_v4_upstream_role_tables.json','tables')
     errors=load_tables(ROOT/'research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json','errorTables')
@@ -34,7 +37,7 @@ def main():
             maxFingerPeak4NativeTracks=peak('maxFinger'),s2DifferentKeySameFingerRate=tracks['character']['differentKeySameFingerRate']))
     payload=dict(version='f19-v52-selected-policy-ergonomics-v1',
         contract='Frequency-weighted selected terminal codes in four native tracks, including shape completion; peaks are across tracks, not one mixed stream. No old moving-hand score.',results=results)
-    Path(str(PREFIX)+'-ergonomics.json').write_text(json.dumps(payload,indent=2)+'\n',encoding='utf-8')
+    Path(str(prefix)+'-ergonomics.json').write_text(json.dumps(payload,indent=2)+'\n',encoding='utf-8')
     print('ergonomics layouts',len(results))
 
 

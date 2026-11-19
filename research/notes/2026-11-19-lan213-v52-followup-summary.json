@@ -1,0 +1,2967 @@
+{
+  "version": "lan213-v52-representative-followup-report-v1",
+  "sourceCommit": "91e3605",
+  "totalLayouts": 72,
+  "hashRecoveredRepresentatives": 10,
+  "unrecoveredParetoKeys": [
+    "d014bb2795cb87b45b3611b60bbb79524033ebf36b846b97aa6215c86db1b386",
+    "ef56540e710172544aedd0c9d60f5e3456c6564e2a203a599cf6bc99a9c025f4",
+    "c54c51e6250af4e62af6b1b1ab232c70a67a6586222682ac15a838c734b2553e",
+    "735f187dd0ef5bb9e82e768c580f55df39b79464c903f88a685b2af2bdad3037",
+    "5d14e7238ed37b91409e73e25262283f7033b9f271deae0547d7f1466d0c91c0",
+    "0fbcb6c536ddccb40a2622905b834176a1554fdf652bbfa484b7b3f6fdae3d20",
+    "b5b6ade86bfbbda1944f7f7a3853ab4bd4176e7109b1d040182a562d8ccb3ceb",
+    "672b01866dfcdf4dc792a95855c90654ccacb14e247258720e68002e59ef1912",
+    "351a53958b6868eba46498fdbe1c9ba518f33949f5a5380aa03666a6556e2757",
+    "e09d7b0b433681ed72e785e92de6b423a8b4a35c8161db103007107dbc6d34a1",
+    "721c8cbcf94c2e73826919e635c6420db00da80b2f455ba6e4cbf27f98ddfcfd",
+    "c3f11d1ecacf429e1050e720343f3d54709d221f2c13f28537d8c41387468414",
+    "5e9b83c35355541ecb6195aceab2397909b595c2efae65c0f4beba136a3fee78",
+    "580f84f1b6a58a40a3d9c66b3d7477daef9b683631fb7111137a48fa1fea5e9e",
+    "aeb876f1b7f31abc566393264438709c2dc4c1afd04037cd9edfc9f8a4226803",
+    "616bebe9df71c99fd6209442b049ae52d21f1ca3d557867d41af08fa9b6429c5",
+    "a41f73a1630c94646cb7465c613c4f89e2847a6b587efc102e3b72e87d1a3d6e",
+    "f4454f1ac76b771d8c406819a381ac20b473c7baff34672a970ade886a19d92d",
+    "fc9dcf563762a4c76de4972f1580276939a5945de3dfc5ba21c8e8eb201e3c02",
+    "83de6ba0649ef31837d1b49bf6597293d1949c900fa9f8fed12ee008088fedb5",
+    "9da931208fbebf7239569e5b98874351a7570a7387cc366af07dbe60daca8aa0",
+    "b24e2ec07b2b40c35280a24b8ec6f3387623b8ccb9de4d4503c1505daade3d87",
+    "a70797f90b14b199f7d1857fcc1c6a8127c89b8ff3447348954682920a81e5d3"
+  ],
+  "representativeOnlyComparisons": {
+    "main": {
+      "fixedPolicies": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.947476265282426,
+          "ties": 0.0,
+          "losses": 0.05252373471757393,
+          "worstRank": 10,
+          "minGap": -0.01212763108798498,
+          "p05Gap": -9.021888980420556e-05,
+          "medianGap": 0.003792016933230613,
+          "p95Gap": 0.006522446622470923,
+          "maxGap": 0.009566556522761616,
+          "worstCase": {
+            "multipliers": [
+              0.0,
+              0.0,
+              5.0,
+              0.0,
+              0.0,
+              5.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 0.0,
+              "secondAuxMs": 0.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 0.0,
+              "scanPerCandidateMs": 0.0,
+              "pageActionMs": 1500.0
+            },
+            "f19Score": 9.432805399759822,
+            "rivalScore": 9.420677768671837,
+            "rivalId": "acc852f430",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 0.9936,
+          "ties": 0.0,
+          "losses": 0.0064,
+          "worstRank": 5,
+          "minGap": -0.0013884457036503761,
+          "p05Gap": 0.0014290345085647084,
+          "medianGap": 0.004227510025825332,
+          "p95Gap": 0.006544299200868941,
+          "maxGap": 0.008656463400889436,
+          "worstCase": {
+            "multipliers": [
+              0.5,
+              0.5,
+              5.0,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "costsMs": {
+              "firstAuxMs": 150.0,
+              "secondAuxMs": 150.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 300.0,
+              "scanPerCandidateMs": 25.0,
+              "pageActionMs": 150.0
+            },
+            "f19Score": 9.236101408783707,
+            "rivalScore": 9.234712963080057,
+            "rivalId": "12773fa654",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 4096,
+          "wins": 0.8671875,
+          "ties": 0.0,
+          "losses": 0.1328125,
+          "worstRank": 5,
+          "minGap": -0.0013770622552318201,
+          "p05Gap": -0.0004898339099823623,
+          "medianGap": 0.0011779696166511755,
+          "p95Gap": 0.0026250136337657715,
+          "maxGap": 0.003058548376863257,
+          "worstCase": {
+            "multipliers": [
+              0.5,
+              0.5,
+              2.0,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "costsMs": {
+              "firstAuxMs": 150.0,
+              "secondAuxMs": 150.0,
+              "thirdAuxMs": 600.0,
+              "selectionDecisionMs": 300.0,
+              "scanPerCandidateMs": 25.0,
+              "pageActionMs": 150.0
+            },
+            "f19Score": 9.261473998172596,
+            "rivalScore": 9.260096935917364,
+            "rivalId": "12773fa654",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        }
+      },
+      "adaptiveRivals": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.946699549154672,
+          "ties": 0.0,
+          "losses": 0.05330045084532793,
+          "worstRank": 10,
+          "minGap": -0.012510546819347823,
+          "p05Gap": -0.00010823384850944251,
+          "medianGap": 0.0037721727349335765,
+          "p95Gap": 0.006496903669289011,
+          "maxGap": 0.009566556522761616,
+          "worstCase": {
+            "multipliers": [
+              0.0,
+              0.0,
+              5.0,
+              0.0,
+              0.0,
+              5.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 0.0,
+              "secondAuxMs": 0.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 0.0,
+              "scanPerCandidateMs": 0.0,
+              "pageActionMs": 1500.0
+            },
+            "f19Score": 9.432805399759822,
+            "rivalScore": 9.420294852940474,
+            "rivalId": "acc852f430",
+            "rivalPolicy": {
+              "word2": "12",
+              "word3": "213",
+              "word4": "24"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 0.99359,
+          "ties": 0.0,
+          "losses": 0.00641,
+          "worstRank": 5,
+          "minGap": -0.001401405963529001,
+          "p05Gap": 0.0014256964432471267,
+          "medianGap": 0.004219958555884418,
+          "p95Gap": 0.006532715685471756,
+          "maxGap": 0.008656463400889436,
+          "worstCase": {
+            "multipliers": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "costsMs": {
+              "firstAuxMs": 150.0,
+              "secondAuxMs": 150.0,
+              "thirdAuxMs": 150.0,
+              "selectionDecisionMs": 300.0,
+              "scanPerCandidateMs": 25.0,
+              "pageActionMs": 150.0
+            },
+            "f19Score": 9.276579547183077,
+            "rivalScore": 9.275178141219548,
+            "rivalId": "12773fa654",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 4096,
+          "wins": 0.8662109375,
+          "ties": 0.0,
+          "losses": 0.1337890625,
+          "worstRank": 5,
+          "minGap": -0.001401405963529001,
+          "p05Gap": -0.0004904956137066208,
+          "medianGap": 0.0011738729799377623,
+          "p95Gap": 0.002602344375383314,
+          "maxGap": 0.003058548376863257,
+          "worstCase": {
+            "multipliers": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "costsMs": {
+              "firstAuxMs": 150.0,
+              "secondAuxMs": 150.0,
+              "thirdAuxMs": 150.0,
+              "selectionDecisionMs": 300.0,
+              "scanPerCandidateMs": 25.0,
+              "pageActionMs": 150.0
+            },
+            "f19Score": 9.276579547183077,
+            "rivalScore": 9.275178141219548,
+            "rivalId": "12773fa654",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        }
+      }
+    },
+    "extreme": {
+      "fixedPolicies": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.9877057578034287,
+          "ties": 0.0,
+          "losses": 0.012294242196571272,
+          "worstRank": 10,
+          "minGap": -0.012276993540504932,
+          "p05Gap": 0.002617000238345213,
+          "medianGap": 0.006871807882935954,
+          "p95Gap": 0.011236426073798711,
+          "maxGap": 0.015633620175405483,
+          "worstCase": {
+            "multipliers": [
+              0.0,
+              0.0,
+              10.0,
+              0.0,
+              0.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 0.0,
+              "secondAuxMs": 0.0,
+              "thirdAuxMs": 3000.0,
+              "selectionDecisionMs": 0.0,
+              "scanPerCandidateMs": 0.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 9.395201869740648,
+            "rivalScore": 9.382924876200143,
+            "rivalId": "acc852f430",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 1.0,
+          "ties": 0.0,
+          "losses": 0.0,
+          "worstRank": 1,
+          "minGap": 0.00044952007058540744,
+          "p05Gap": 0.003975445231046848,
+          "medianGap": 0.007232689690788163,
+          "p95Gap": 0.010656670240611543,
+          "maxGap": 0.01402197268527594,
+          "worstCase": {
+            "multipliers": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 300.0,
+              "secondAuxMs": 300.0,
+              "thirdAuxMs": 300.0,
+              "selectionDecisionMs": 600.0,
+              "scanPerCandidateMs": 50.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 9.111297394959056,
+            "rivalScore": 9.111746915029642,
+            "rivalId": "391c0afa96",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 64,
+          "wins": 1.0,
+          "ties": 0.0,
+          "losses": 0.0,
+          "worstRank": 1,
+          "minGap": 0.00044962284934513264,
+          "p05Gap": 0.0004633907217416855,
+          "medianGap": 0.0017041831046658018,
+          "p95Gap": 0.00273482842884416,
+          "maxGap": 0.0027444350445477994,
+          "worstCase": {
+            "multipliers": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              2.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 300.0,
+              "secondAuxMs": 300.0,
+              "thirdAuxMs": 300.0,
+              "selectionDecisionMs": 600.0,
+              "scanPerCandidateMs": 50.0,
+              "pageActionMs": 600.0
+            },
+            "f19Score": 9.111049942039747,
+            "rivalScore": 9.11149956488909,
+            "rivalId": "391c0afa96",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        }
+      },
+      "adaptiveRivals": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.9868573534865579,
+          "ties": 0.0,
+          "losses": 0.0131426465134421,
+          "worstRank": 10,
+          "minGap": -0.012914867778968997,
+          "p05Gap": 0.0025741453580376827,
+          "medianGap": 0.006845448207865701,
+          "p95Gap": 0.011202925335561886,
+          "maxGap": 0.015633620175405483,
+          "worstCase": {
+            "multipliers": [
+              0.0,
+              0.0,
+              10.0,
+              0.0,
+              0.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 0.0,
+              "secondAuxMs": 0.0,
+              "thirdAuxMs": 3000.0,
+              "selectionDecisionMs": 0.0,
+              "scanPerCandidateMs": 0.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 9.395201869740648,
+            "rivalScore": 9.382287001961679,
+            "rivalId": "acc852f430",
+            "rivalPolicy": {
+              "word2": "12",
+              "word3": "213",
+              "word4": "24"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 1.0,
+          "ties": 0.0,
+          "losses": 0.0,
+          "worstRank": 1,
+          "minGap": 0.00044952007058540744,
+          "p05Gap": 0.003974831112855881,
+          "medianGap": 0.007227122039745737,
+          "p95Gap": 0.010644658320133258,
+          "maxGap": 0.01402197268527594,
+          "worstCase": {
+            "multipliers": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 300.0,
+              "secondAuxMs": 300.0,
+              "thirdAuxMs": 300.0,
+              "selectionDecisionMs": 600.0,
+              "scanPerCandidateMs": 50.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 9.111297394959056,
+            "rivalScore": 9.111746915029642,
+            "rivalId": "391c0afa96",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 64,
+          "wins": 1.0,
+          "ties": 0.0,
+          "losses": 0.0,
+          "worstRank": 1,
+          "minGap": 0.00044962284934513264,
+          "p05Gap": 0.0004633907217416855,
+          "medianGap": 0.0017041831046658018,
+          "p95Gap": 0.00273482842884416,
+          "maxGap": 0.0027444350445477994,
+          "worstCase": {
+            "multipliers": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              2.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 300.0,
+              "secondAuxMs": 300.0,
+              "thirdAuxMs": 300.0,
+              "selectionDecisionMs": 600.0,
+              "scanPerCandidateMs": 50.0,
+              "pageActionMs": 600.0
+            },
+            "f19Score": 9.111049942039747,
+            "rivalScore": 9.11149956488909,
+            "rivalId": "391c0afa96",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "213",
+              "word4": "14"
+            }
+          }
+        }
+      }
+    }
+  },
+  "combinedComparisons": {
+    "main": {
+      "fixedPolicies": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.0957342140631906,
+          "ties": 0.0,
+          "losses": 0.9042657859368094,
+          "worstRank": 24,
+          "minGap": -0.021464607961101834,
+          "p05Gap": -0.016927063870985748,
+          "medianGap": -0.007877196226658612,
+          "p95Gap": 0.0006300259723470703,
+          "maxGap": 0.0024253998422683054,
+          "worstCase": {
+            "multipliers": [
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 1500.0,
+              "secondAuxMs": 1500.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 3000.0,
+              "scanPerCandidateMs": 250.0,
+              "pageActionMs": 1500.0
+            },
+            "f19Score": 8.449461013517919,
+            "rivalScore": 8.427996405556819,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 0.079336,
+          "ties": 0.0,
+          "losses": 0.920664,
+          "worstRank": 6,
+          "minGap": -0.021464607961101834,
+          "p05Gap": -0.01747628087403248,
+          "medianGap": -0.009449989937717618,
+          "p95Gap": 0.00044982924759855424,
+          "maxGap": 0.0020708930554338423,
+          "worstCase": {
+            "multipliers": [
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 1500.0,
+              "secondAuxMs": 1500.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 3000.0,
+              "scanPerCandidateMs": 250.0,
+              "pageActionMs": 1500.0
+            },
+            "f19Score": 8.449461013517919,
+            "rivalScore": 8.427996405556819,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 4096,
+          "wins": 0.6884765625,
+          "ties": 0.0,
+          "losses": 0.3115234375,
+          "worstRank": 6,
+          "minGap": -0.0035407460360001863,
+          "p05Gap": -0.0016260844936319963,
+          "medianGap": 0.0004290766142798219,
+          "p95Gap": 0.001440096682162384,
+          "maxGap": 0.0016294784070289836,
+          "worstCase": {
+            "multipliers": [
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 600.0,
+              "secondAuxMs": 600.0,
+              "thirdAuxMs": 600.0,
+              "selectionDecisionMs": 1200.0,
+              "scanPerCandidateMs": 100.0,
+              "pageActionMs": 600.0
+            },
+            "f19Score": 8.865528663938422,
+            "rivalScore": 8.861987917902422,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        }
+      },
+      "adaptiveRivals": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.09438173452678175,
+          "ties": 0.0,
+          "losses": 0.9056182654732182,
+          "worstRank": 27,
+          "minGap": -0.021464607961101834,
+          "p05Gap": -0.0169442066540757,
+          "medianGap": -0.007882020297152792,
+          "p95Gap": 0.0006122407185618073,
+          "maxGap": 0.0023004217295703455,
+          "worstCase": {
+            "multipliers": [
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 1500.0,
+              "secondAuxMs": 1500.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 3000.0,
+              "scanPerCandidateMs": 250.0,
+              "pageActionMs": 1500.0
+            },
+            "f19Score": 8.449461013517919,
+            "rivalScore": 8.427996405556819,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 0.078995,
+          "ties": 0.0,
+          "losses": 0.921005,
+          "worstRank": 6,
+          "minGap": -0.021464607961101834,
+          "p05Gap": -0.01747628087403248,
+          "medianGap": -0.009449989937717618,
+          "p95Gap": 0.00044398180267233293,
+          "maxGap": 0.002021893939433639,
+          "worstCase": {
+            "multipliers": [
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0,
+              5.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 1500.0,
+              "secondAuxMs": 1500.0,
+              "thirdAuxMs": 1500.0,
+              "selectionDecisionMs": 3000.0,
+              "scanPerCandidateMs": 250.0,
+              "pageActionMs": 1500.0
+            },
+            "f19Score": 8.449461013517919,
+            "rivalScore": 8.427996405556819,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 4096,
+          "wins": 0.6875,
+          "ties": 0.0,
+          "losses": 0.3125,
+          "worstRank": 6,
+          "minGap": -0.0035407460360001863,
+          "p05Gap": -0.0016260844936319963,
+          "medianGap": 0.0004233970086371386,
+          "p95Gap": 0.0014315818562260496,
+          "maxGap": 0.0016294784070289836,
+          "worstCase": {
+            "multipliers": [
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 600.0,
+              "secondAuxMs": 600.0,
+              "thirdAuxMs": 600.0,
+              "selectionDecisionMs": 1200.0,
+              "scanPerCandidateMs": 100.0,
+              "pageActionMs": 600.0
+            },
+            "f19Score": 8.865528663938422,
+            "rivalScore": 8.861987917902422,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        }
+      }
+    },
+    "extreme": {
+      "fixedPolicies": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.010961519247714303,
+          "ties": 0.0,
+          "losses": 0.9890384807522857,
+          "worstRank": 25,
+          "minGap": -0.03620343008742566,
+          "p05Gap": -0.03189024908270355,
+          "medianGap": -0.021484082965397278,
+          "p95Gap": -0.00431885895279116,
+          "maxGap": 0.0024253998422683054,
+          "worstCase": {
+            "multipliers": [
+              0.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 0.0,
+              "secondAuxMs": 3000.0,
+              "thirdAuxMs": 3000.0,
+              "selectionDecisionMs": 6000.0,
+              "scanPerCandidateMs": 500.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 8.311156576594895,
+            "rivalScore": 8.27495314650747,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 0.003708,
+          "ties": 0.0,
+          "losses": 0.996292,
+          "worstRank": 13,
+          "minGap": -0.036117155229760556,
+          "p05Gap": -0.032365177865925965,
+          "medianGap": -0.023418731271490856,
+          "p95Gap": -0.009281879006133063,
+          "maxGap": 0.0016300986664479211,
+          "worstCase": {
+            "multipliers": [
+              1.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 300.0,
+              "secondAuxMs": 3000.0,
+              "thirdAuxMs": 3000.0,
+              "selectionDecisionMs": 6000.0,
+              "scanPerCandidateMs": 500.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 8.279845295403382,
+            "rivalScore": 8.243728140173621,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 64,
+          "wins": 0.6875,
+          "ties": 0.0,
+          "losses": 0.3125,
+          "worstRank": 3,
+          "minGap": -0.0035407460360001863,
+          "p05Gap": -0.003373743875514901,
+          "medianGap": 0.0004927263199343557,
+          "p95Gap": 0.0015771816031002733,
+          "maxGap": 0.0016294784070289836,
+          "worstCase": {
+            "multipliers": [
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 600.0,
+              "secondAuxMs": 600.0,
+              "thirdAuxMs": 600.0,
+              "selectionDecisionMs": 1200.0,
+              "scanPerCandidateMs": 100.0,
+              "pageActionMs": 600.0
+            },
+            "f19Score": 8.865528663938422,
+            "rivalScore": 8.861987917902422,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        }
+      },
+      "adaptiveRivals": {
+        "all": {
+          "points": 1771561,
+          "wins": 0.010567516444536768,
+          "ties": 0.0,
+          "losses": 0.9894324835554632,
+          "worstRank": 30,
+          "minGap": -0.03620343008742566,
+          "p05Gap": -0.03189024908270355,
+          "medianGap": -0.02148832667891476,
+          "p95Gap": -0.004343076846195615,
+          "maxGap": 0.0023004217295703455,
+          "worstCase": {
+            "multipliers": [
+              0.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 0.0,
+              "secondAuxMs": 3000.0,
+              "thirdAuxMs": 3000.0,
+              "selectionDecisionMs": 6000.0,
+              "scanPerCandidateMs": 500.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 8.311156576594895,
+            "rivalScore": 8.27495314650747,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "positive": {
+          "points": 1000000,
+          "wins": 0.003708,
+          "ties": 0.0,
+          "losses": 0.996292,
+          "worstRank": 13,
+          "minGap": -0.036117155229760556,
+          "p05Gap": -0.032365177865925965,
+          "medianGap": -0.023418731271490856,
+          "p95Gap": -0.009281879006133063,
+          "maxGap": 0.0016300986664479211,
+          "worstCase": {
+            "multipliers": [
+              1.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0,
+              10.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 300.0,
+              "secondAuxMs": 3000.0,
+              "thirdAuxMs": 3000.0,
+              "selectionDecisionMs": 6000.0,
+              "scanPerCandidateMs": 500.0,
+              "pageActionMs": 3000.0
+            },
+            "f19Score": 8.279845295403382,
+            "rivalScore": 8.243728140173621,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        },
+        "moderate": {
+          "points": 64,
+          "wins": 0.6875,
+          "ties": 0.0,
+          "losses": 0.3125,
+          "worstRank": 3,
+          "minGap": -0.0035407460360001863,
+          "p05Gap": -0.003373743875514901,
+          "medianGap": 0.0004927263199343557,
+          "p95Gap": 0.0015771816031002733,
+          "maxGap": 0.0016294784070289836,
+          "worstCase": {
+            "multipliers": [
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0,
+              2.0
+            ],
+            "costsMs": {
+              "firstAuxMs": 600.0,
+              "secondAuxMs": 600.0,
+              "thirdAuxMs": 600.0,
+              "selectionDecisionMs": 1200.0,
+              "scanPerCandidateMs": 100.0,
+              "pageActionMs": 600.0
+            },
+            "f19Score": 8.865528663938422,
+            "rivalScore": 8.861987917902422,
+            "rivalId": "1f9e267cd2",
+            "rivalPolicy": {
+              "word2": "21",
+              "word3": "231",
+              "word4": "14"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultRankingEachOwnBest": [
+    {
+      "id": "f19a0ad1dc",
+      "score": 9.111019023167529,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "391c0afa96",
+      "score": 9.111468658857632,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "2eb6eb060e",
+      "score": 9.112170644793567,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "ba0466ee5b",
+      "score": 9.112821664982624,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "92d87a31e4",
+      "score": 9.114835783018568,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "a455e5bfbf",
+      "score": 9.114951802946633,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "12773fa654",
+      "score": 9.11501313373051,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "0ca4838ebd",
+      "score": 9.115206731320582,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "d58b863c9c",
+      "score": 9.11583726492996,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "53ab11598f",
+      "score": 9.115915691297173,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "124d92346d",
+      "score": 9.116015637098466,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "19ee6a14ed",
+      "score": 9.116392145414432,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "b2803c740e",
+      "score": 9.116691439345498,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "3dc9dd5bfc",
+      "score": 9.116696426351295,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "29ce221cfe",
+      "score": 9.11693428618001,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "b2ee328a85",
+      "score": 9.117025955228367,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "76f30871bf",
+      "score": 9.11726040764811,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "1f9e267cd2",
+      "score": 9.11746719363091,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "17983edeb8",
+      "score": 9.117735275903339,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "cce28986c8",
+      "score": 9.118009384579247,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "9c28f304ec",
+      "score": 9.118977093994994,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "66cd76ec04",
+      "score": 9.119432965189842,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "4dd984b9ea",
+      "score": 9.11984688967109,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "6011ffca65",
+      "score": 9.11994774494792,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "b07720cc65",
+      "score": 9.119949460296016,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "8d07ce54b5",
+      "score": 9.12003667025638,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "87de6cc69c",
+      "score": 9.122427142544288,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "906cbfe3cf",
+      "score": 9.122790237138375,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "0cfbd2058b",
+      "score": 9.123067017169255,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "0ca6c20900",
+      "score": 9.123586963905316,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "667610a3fc",
+      "score": 9.123903632463273,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "68d2cdd73d",
+      "score": 9.123993370932512,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "c42359003b",
+      "score": 9.12532085621218,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "c09bbf1108",
+      "score": 9.125644501442974,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "fab751bbbe",
+      "score": 9.12590505723595,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "f0ae939a38",
+      "score": 9.125969140595574,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "acc852f430",
+      "score": 9.126443311872249,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "e01427fb31",
+      "score": 9.127198575815495,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "41d057044e",
+      "score": 9.130665075473422,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "364bb80cf5",
+      "score": 9.132049643932733,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "e63c8224a7",
+      "score": 9.133760462368974,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "0a22946a59",
+      "score": 9.133768140355912,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "0e41ac089c",
+      "score": 9.134126143027036,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "7d020835e6",
+      "score": 9.135963665198151,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "57bb13d1ab",
+      "score": 9.138394208769174,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "d5e7b0722e",
+      "score": 9.139108334203812,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "42"
+      }
+    },
+    {
+      "id": "eb3e6d94a8",
+      "score": 9.141326540938078,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "3d1d0ad60a",
+      "score": 9.142026625308397,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "3c85b91f5a",
+      "score": 9.142311226514265,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "c2e49137b9",
+      "score": 9.145684769166401,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "8f36f50a09",
+      "score": 9.146092623834578,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "c833550516",
+      "score": 9.146805659720734,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "153b2cd3af",
+      "score": 9.147538897226848,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "5bd306d6ca",
+      "score": 9.148965355627324,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "41"
+      }
+    },
+    {
+      "id": "971fbdef9a",
+      "score": 9.151857646615973,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "135fb91d96",
+      "score": 9.155669118328898,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "6a384d9d0d",
+      "score": 9.158987508373995,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "41"
+      }
+    },
+    {
+      "id": "795c0eee49",
+      "score": 9.160195426878309,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "c6870dce78",
+      "score": 9.161139281196757,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "3dece6df75",
+      "score": 9.163834751691592,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "3d3dcbafc0",
+      "score": 9.16612080079994,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "41"
+      }
+    },
+    {
+      "id": "0a4ee7fb52",
+      "score": 9.167098623867924,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "ed9acee035",
+      "score": 9.167125759850634,
+      "policy": {
+        "word2": "21",
+        "word3": "213",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "579ec1d473",
+      "score": 9.169541313344437,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "CR1-1036",
+      "score": 9.172567057441212,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "CR1-0009",
+      "score": 9.177678023086761,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "CR0-0374",
+      "score": 9.178976579993169,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "CR1-0004",
+      "score": 9.181025745254242,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "current-production",
+      "score": 9.204360710217527,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "1495a8acb5",
+      "score": 9.216327229049718,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    },
+    {
+      "id": "1fd88b99bc",
+      "score": 9.219354829316154,
+      "policy": {
+        "word2": "12",
+        "word3": "231",
+        "word4": "24"
+      }
+    },
+    {
+      "id": "941ce20d80",
+      "score": 9.335465593876682,
+      "policy": {
+        "word2": "21",
+        "word3": "231",
+        "word4": "14"
+      }
+    }
+  ],
+  "rows": [
+    {
+      "id": "f19a0ad1dc",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.111019023167529,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.111019023167529,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.323576853835623,
+      "characterHomePct": 39.86580458442163,
+      "homeFloorPct": 39.86580458442163,
+      "maxFingerPeakPct": 27.480166706962315,
+      "characterSameFingerOtherPct": 5.750458337262892,
+      "ownPolicyWorstRegretPct": 0.011513302432497596
+    },
+    {
+      "id": "391c0afa96",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.111468658857632,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.111468658857632,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.322148178446803,
+      "characterHomePct": 39.889426890911636,
+      "homeFloorPct": 39.889426890911636,
+      "maxFingerPeakPct": 28.549803265272505,
+      "characterSameFingerOtherPct": 6.0210308490863795,
+      "ownPolicyWorstRegretPct": 0.009353050303606558
+    },
+    {
+      "id": "2eb6eb060e",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.112170644793567,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.112170644793567,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 9.002157453441999,
+      "rightPinkyPeakPct": 5.323250359695909,
+      "characterHomePct": 39.86580458442163,
+      "homeFloorPct": 39.86580458442163,
+      "maxFingerPeakPct": 27.480166706962315,
+      "characterSameFingerOtherPct": 5.715718097436959,
+      "ownPolicyWorstRegretPct": 0.022671258505013725
+    },
+    {
+      "id": "ba0466ee5b",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.112821664982624,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.112821664982624,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 9.012487268333675,
+      "rightPinkyPeakPct": 5.32182160354149,
+      "characterHomePct": 39.889426890911636,
+      "homeFloorPct": 39.889426890911636,
+      "maxFingerPeakPct": 28.549803265272505,
+      "characterSameFingerOtherPct": 5.986263285300449,
+      "ownPolicyWorstRegretPct": 0.02219757933485944
+    },
+    {
+      "id": "92d87a31e4",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.114835783018568,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.114835783018568,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.322914023281246,
+      "characterHomePct": 39.8591828561292,
+      "homeFloorPct": 39.8591828561292,
+      "maxFingerPeakPct": 27.475486400417847,
+      "characterSameFingerOtherPct": 5.736625815497877,
+      "ownPolicyWorstRegretPct": 0.010490625009240695
+    },
+    {
+      "id": "a455e5bfbf",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.114951802946633,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.114951802946633,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.988678146538858,
+      "rightPinkyPeakPct": 5.321708577263573,
+      "characterHomePct": 39.86710948951748,
+      "homeFloorPct": 39.86710948951748,
+      "maxFingerPeakPct": 28.540440723430777,
+      "characterSameFingerOtherPct": 5.932574691565873,
+      "ownPolicyWorstRegretPct": 0.023015614718269184
+    },
+    {
+      "id": "12773fa654",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.11501313373051,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.11501313373051,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 9.010769744405758,
+      "rightPinkyPeakPct": 5.320453176183794,
+      "characterHomePct": 39.88373283102196,
+      "homeFloorPct": 39.88373283102196,
+      "maxFingerPeakPct": 28.667574958044828,
+      "characterSameFingerOtherPct": 5.9858143441984115,
+      "ownPolicyWorstRegretPct": 0.020541820549091483
+    },
+    {
+      "id": "0ca4838ebd",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.115206731320582,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.115206731320582,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.321510009256063,
+      "characterHomePct": 39.88279838741974,
+      "homeFloorPct": 39.88279838741974,
+      "maxFingerPeakPct": 28.544943270676015,
+      "characterSameFingerOtherPct": 6.00710538563772,
+      "ownPolicyWorstRegretPct": 0.009339873385028064
+    },
+    {
+      "id": "d58b863c9c",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.11583726492996,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.11583726492996,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.32383878217226,
+      "characterHomePct": 39.86580458442163,
+      "homeFloorPct": 39.86580458442163,
+      "maxFingerPeakPct": 27.480166706962315,
+      "characterSameFingerOtherPct": 5.664848460548985,
+      "ownPolicyWorstRegretPct": 0.011211458047588607
+    },
+    {
+      "id": "53ab11598f",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.115915691297173,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.115915691297173,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.322581985849494,
+      "characterHomePct": 39.8591828561292,
+      "homeFloorPct": 39.8591828561292,
+      "maxFingerPeakPct": 27.475486400417847,
+      "characterSameFingerOtherPct": 5.701896104205736,
+      "ownPolicyWorstRegretPct": 0.021559749549227014
+    },
+    {
+      "id": "124d92346d",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.116015637098466,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.116015637098466,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.323240152108096,
+      "characterHomePct": 39.86580458442163,
+      "homeFloorPct": 39.86580458442163,
+      "maxFingerPeakPct": 27.480166706962315,
+      "characterSameFingerOtherPct": 5.809991309388171,
+      "ownPolicyWorstRegretPct": 0.009369795273639347
+    },
+    {
+      "id": "19ee6a14ed",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.116392145414432,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.116392145414432,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.323491244305182,
+      "characterHomePct": 39.88854028269244,
+      "homeFloorPct": 39.88854028269244,
+      "maxFingerPeakPct": 27.392123189509405,
+      "characterSameFingerOtherPct": 5.733541991890529,
+      "ownPolicyWorstRegretPct": 0.01580161333227803
+    },
+    {
+      "id": "b2803c740e",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.116691439345498,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.116691439345498,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.321615573741137,
+      "characterHomePct": 39.85349608479412,
+      "homeFloorPct": 39.85349608479412,
+      "maxFingerPeakPct": 27.593326131031166,
+      "characterSameFingerOtherPct": 5.736236005618271,
+      "ownPolicyWorstRegretPct": 0.0093888205142445
+    },
+    {
+      "id": "3dc9dd5bfc",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.116696426351295,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.116696426351295,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.323866032217199,
+      "characterHomePct": 39.86580458442163,
+      "homeFloorPct": 39.86580458442163,
+      "maxFingerPeakPct": 27.480166706962315,
+      "characterSameFingerOtherPct": 5.908812229220988,
+      "ownPolicyWorstRegretPct": 0.010924616714169666
+    },
+    {
+      "id": "29ce221cfe",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.11693428618001,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.11693428618001,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.4680303726809765,
+      "characterHomePct": 38.077904254557424,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 27.476097583194754,
+      "characterSameFingerOtherPct": 5.762567622135613,
+      "ownPolicyWorstRegretPct": 0.01310269149739085
+    },
+    {
+      "id": "b2ee328a85",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.117025955228367,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.117025955228367,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.98696360608884,
+      "rightPinkyPeakPct": 5.320371265519279,
+      "characterHomePct": 39.86141802889398,
+      "homeFloorPct": 39.86141802889398,
+      "maxFingerPeakPct": 28.658219311060407,
+      "characterSameFingerOtherPct": 5.932138337754725,
+      "ownPolicyWorstRegretPct": 0.021210708186636396
+    },
+    {
+      "id": "76f30871bf",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.11726040764811,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.11726040764811,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.320166422790936,
+      "characterHomePct": 39.877106126744295,
+      "homeFloorPct": 39.877106126744295,
+      "maxFingerPeakPct": 28.662696029224584,
+      "characterSameFingerOtherPct": 6.0066516807835475,
+      "ownPolicyWorstRegretPct": 0.009342823227864727
+    },
+    {
+      "id": "1f9e267cd2",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.11746719363091,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.11746719363091,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.468945720980742,
+      "characterHomePct": 38.106336563220836,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 27.392749356225092,
+      "characterSameFingerOtherPct": 5.759509251339061,
+      "ownPolicyWorstRegretPct": 0.012385295670624963
+    },
+    {
+      "id": "17983edeb8",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.117735275903339,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.117735275903339,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.973748691641994,
+      "rightPinkyPeakPct": 5.321086822524674,
+      "characterHomePct": 39.86224326824635,
+      "homeFloorPct": 39.86224326824635,
+      "maxFingerPeakPct": 28.492456500034624,
+      "characterSameFingerOtherPct": 5.835748107292265,
+      "ownPolicyWorstRegretPct": 0.008482480894000943
+    },
+    {
+      "id": "cce28986c8",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.118009384579247,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.118009384579247,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.322945821115502,
+      "characterHomePct": 39.854674768402695,
+      "homeFloorPct": 39.854674768402695,
+      "maxFingerPeakPct": 27.47237362562117,
+      "characterSameFingerOtherPct": 5.735431985145546,
+      "ownPolicyWorstRegretPct": 0.010527124678483268
+    },
+    {
+      "id": "9c28f304ec",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.118977093994994,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.118977093994994,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.323804346162646,
+      "characterHomePct": 39.86580458442163,
+      "homeFloorPct": 39.86580458442163,
+      "maxFingerPeakPct": 27.480166706962315,
+      "characterSameFingerOtherPct": 6.321625343072541,
+      "ownPolicyWorstRegretPct": 0.01698084869750094
+    },
+    {
+      "id": "66cd76ec04",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.119432965189842,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.119432965189842,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.4687149093537,
+      "characterHomePct": 38.039284328860425,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 27.04665288604359,
+      "characterSameFingerOtherPct": 5.453441931357958,
+      "ownPolicyWorstRegretPct": 0.025920200636320168
+    },
+    {
+      "id": "4dd984b9ea",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.11984688967109,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.11984688967109,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.973748691641994,
+      "rightPinkyPeakPct": 5.319754341607787,
+      "characterHomePct": 39.85655620825147,
+      "homeFloorPct": 39.85655620825147,
+      "maxFingerPeakPct": 28.61016315835105,
+      "characterSameFingerOtherPct": 5.835335026458488,
+      "ownPolicyWorstRegretPct": 0.008484538012032417
+    },
+    {
+      "id": "6011ffca65",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.11994774494792,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.11994774494792,
+      "M_lower": 24,
+      "M_guard": 26,
+      "D": 2,
+      "leftPinkyPeakPct": 9.042751011993131,
+      "rightPinkyPeakPct": 7.470830036761209,
+      "characterHomePct": 38.09136488769745,
+      "homeFloorPct": 34.972487294645724,
+      "maxFingerPeakPct": 29.080757313405993,
+      "characterSameFingerOtherPct": 5.387236609313761,
+      "ownPolicyWorstRegretPct": 0.03522280793888388
+    },
+    {
+      "id": "b07720cc65",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.119949460296016,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.119949460296016,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 9.042436063003757,
+      "rightPinkyPeakPct": 7.471190696109176,
+      "characterHomePct": 37.977224839184046,
+      "homeFloorPct": 34.95280150467319,
+      "maxFingerPeakPct": 29.07711232932199,
+      "characterSameFingerOtherPct": 5.375192428316384,
+      "ownPolicyWorstRegretPct": 0.03389669468931711
+    },
+    {
+      "id": "8d07ce54b5",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.12003667025638,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.12003667025638,
+      "M_lower": 23,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.973748691641994,
+      "rightPinkyPeakPct": 5.321114159564322,
+      "characterHomePct": 39.84726205166839,
+      "homeFloorPct": 39.84726205166839,
+      "maxFingerPeakPct": 28.474687493198346,
+      "characterSameFingerOtherPct": 5.8311384260487396,
+      "ownPolicyWorstRegretPct": 0.009714372073732491
+    },
+    {
+      "id": "87de6cc69c",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.122427142544288,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.122427142544288,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.465231417751044,
+      "characterHomePct": 38.026869217251594,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.207091660196404,
+      "characterSameFingerOtherPct": 5.400610147855625,
+      "ownPolicyWorstRegretPct": 0.02385061376748432
+    },
+    {
+      "id": "906cbfe3cf",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.122790237138375,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.122790237138375,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.973748691641994,
+      "rightPinkyPeakPct": 5.320160314068254,
+      "characterHomePct": 39.861008497448985,
+      "homeFloorPct": 39.861008497448985,
+      "maxFingerPeakPct": 28.6062957657539,
+      "characterSameFingerOtherPct": 5.906363408820596,
+      "ownPolicyWorstRegretPct": 0.008471825658262766
+    },
+    {
+      "id": "0cfbd2058b",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.123067017169255,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.123067017169255,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 9.032242331196652,
+      "rightPinkyPeakPct": 7.467865628001396,
+      "characterHomePct": 38.110924546882664,
+      "homeFloorPct": 34.95519186840234,
+      "maxFingerPeakPct": 28.091114429558207,
+      "characterSameFingerOtherPct": 5.363291963651981,
+      "ownPolicyWorstRegretPct": 0.03555141212909785
+    },
+    {
+      "id": "0ca6c20900",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/12",
+      "robustDefaultV52": 9.123844599453832,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.123586963905316,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.049055611253948,
+      "rightPinkyPeakPct": 6.389325856144988,
+      "characterHomePct": 37.83918673400472,
+      "homeFloorPct": 35.24076347234427,
+      "maxFingerPeakPct": 26.438014958249155,
+      "characterSameFingerOtherPct": 5.429513721877496,
+      "ownPolicyWorstRegretPct": 0.09409128881090467
+    },
+    {
+      "id": "667610a3fc",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.123903632463273,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.123903632463273,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.468205050495596,
+      "characterHomePct": 37.9949648995119,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.086134840512493,
+      "characterSameFingerOtherPct": 5.350782289797626,
+      "ownPolicyWorstRegretPct": 0.03406409360109386
+    },
+    {
+      "id": "68d2cdd73d",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.123993370932512,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.123993370932512,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.993459104420195,
+      "rightPinkyPeakPct": 6.20125689542927,
+      "characterHomePct": 39.81220118731622,
+      "homeFloorPct": 39.81220118731622,
+      "maxFingerPeakPct": 28.48191725892985,
+      "characterSameFingerOtherPct": 5.8222226726836,
+      "ownPolicyWorstRegretPct": 0.021683075037892685
+    },
+    {
+      "id": "c42359003b",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.12532085621218,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.12532085621218,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.462476511224716,
+      "characterHomePct": 38.06919995335435,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.225426743300773,
+      "characterSameFingerOtherPct": 5.599677938442206,
+      "ownPolicyWorstRegretPct": 0.0250743861775371
+    },
+    {
+      "id": "c09bbf1108",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.125644501442974,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.125644501442974,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.969693943197429,
+      "rightPinkyPeakPct": 6.201214428622963,
+      "characterHomePct": 39.78992212840291,
+      "homeFloorPct": 39.78992212840291,
+      "maxFingerPeakPct": 28.472569091152355,
+      "characterSameFingerOtherPct": 5.768704184982681,
+      "ownPolicyWorstRegretPct": 0.020261036241286945
+    },
+    {
+      "id": "fab751bbbe",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.12590505723595,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.12590505723595,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.465836569354721,
+      "characterHomePct": 37.99593540879565,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.336536704251643,
+      "characterSameFingerOtherPct": 5.2116459715218015,
+      "ownPolicyWorstRegretPct": 0.03458425790403563
+    },
+    {
+      "id": "f0ae939a38",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.125969140595574,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.125969140595574,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.4627298505564506,
+      "characterHomePct": 38.03289157874366,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.477464537034674,
+      "characterSameFingerOtherPct": 5.527691782437697,
+      "ownPolicyWorstRegretPct": 0.03028845949508696
+    },
+    {
+      "id": "acc852f430",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.126443311872249,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.126443311872249,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.99174726325746,
+      "rightPinkyPeakPct": 6.199637864778014,
+      "characterHomePct": 39.80652778522934,
+      "homeFloorPct": 39.80652778522934,
+      "maxFingerPeakPct": 28.59947572787234,
+      "characterSameFingerOtherPct": 5.821813718481899,
+      "ownPolicyWorstRegretPct": 0.022004880911152824
+    },
+    {
+      "id": "e01427fb31",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.127198575815495,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.127198575815495,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.461278784766673,
+      "characterHomePct": 38.03308521778882,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.611131429898705,
+      "characterSameFingerOtherPct": 5.590691264271496,
+      "ownPolicyWorstRegretPct": 0.031432801109643194
+    },
+    {
+      "id": "41d057044e",
+      "remoteRepresentative": true,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.130665075473422,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.130665075473422,
+      "M_lower": 24,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.96911549494506,
+      "rightPinkyPeakPct": 5.74398011287684,
+      "characterHomePct": 39.79188393619748,
+      "homeFloorPct": 39.79188393619748,
+      "maxFingerPeakPct": 28.255740707716235,
+      "characterSameFingerOtherPct": 5.677665010996221,
+      "ownPolicyWorstRegretPct": 0.031048739741912357
+    },
+    {
+      "id": "364bb80cf5",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.132049643932733,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.132049643932733,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 12.309677801470878,
+      "rightPinkyPeakPct": 7.45778353038884,
+      "characterHomePct": 39.38296447657683,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 26.076060532321556,
+      "characterSameFingerOtherPct": 5.926684307045541,
+      "ownPolicyWorstRegretPct": 0.01024088675296575
+    },
+    {
+      "id": "0a22946a59",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.133768140355912,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.133768140355912,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 10.617565168697572,
+      "rightPinkyPeakPct": 7.450525897152521,
+      "characterHomePct": 39.39182850317183,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 26.192104205725585,
+      "characterSameFingerOtherPct": 5.952734544166308,
+      "ownPolicyWorstRegretPct": 0.010215931844115289
+    },
+    {
+      "id": "0e41ac089c",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.134126143027036,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.134126143027036,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 12.204227347657817,
+      "rightPinkyPeakPct": 7.455518088125437,
+      "characterHomePct": 39.39182850317184,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 26.192104205725585,
+      "characterSameFingerOtherPct": 6.711888891165987,
+      "ownPolicyWorstRegretPct": 0.014130031131776022
+    },
+    {
+      "id": "e63c8224a7",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.135303948491142,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.133760462368974,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.4677965292486,
+      "characterHomePct": 37.96999450412677,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.05279686180907,
+      "characterSameFingerOtherPct": 5.716109324810029,
+      "ownPolicyWorstRegretPct": 0.07005871567398181
+    },
+    {
+      "id": "7d020835e6",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.135963665198151,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.135963665198151,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 12.283914472684385,
+      "rightPinkyPeakPct": 7.450011387451615,
+      "characterHomePct": 39.374041141993175,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 26.543933720886304,
+      "characterSameFingerOtherPct": 6.145774945902571,
+      "ownPolicyWorstRegretPct": 0.015310555166569983
+    },
+    {
+      "id": "57bb13d1ab",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.138394208769174,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.138394208769174,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 12.311811474867671,
+      "rightPinkyPeakPct": 7.449551486836746,
+      "characterHomePct": 39.358489426243956,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 26.269934910743093,
+      "characterSameFingerOtherPct": 6.2259431525540485,
+      "ownPolicyWorstRegretPct": 0.013876799587397848
+    },
+    {
+      "id": "d5e7b0722e",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.139121159011957,
+      "defaultBestPolicy": "12/231/42",
+      "defaultBestV52": 9.139108334203812,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 12.267098371078466,
+      "rightPinkyPeakPct": 7.449765513788707,
+      "characterHomePct": 39.312713389422356,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 26.273013112102618,
+      "characterSameFingerOtherPct": 5.973568853494856,
+      "ownPolicyWorstRegretPct": 0.06322298083007993
+    },
+    {
+      "id": "eb3e6d94a8",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.14136970446336,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.141326540938078,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.961252468340437,
+      "rightPinkyPeakPct": 5.743117985092954,
+      "characterHomePct": 39.782660833956044,
+      "homeFloorPct": 39.782660833956044,
+      "maxFingerPeakPct": 28.273791189224152,
+      "characterSameFingerOtherPct": 5.650334444846341,
+      "ownPolicyWorstRegretPct": 0.0339197956673587
+    },
+    {
+      "id": "3d1d0ad60a",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.142182323861729,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.142026625308397,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.961252468340437,
+      "rightPinkyPeakPct": 5.743951196534773,
+      "characterHomePct": 39.740609573921695,
+      "homeFloorPct": 39.740609573921695,
+      "maxFingerPeakPct": 28.273225381824897,
+      "characterSameFingerOtherPct": 5.604591142159324,
+      "ownPolicyWorstRegretPct": 0.04025547929860096
+    },
+    {
+      "id": "3c85b91f5a",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.142311226514265,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.142311226514265,
+      "M_lower": 20,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 12.372286376339725,
+      "rightPinkyPeakPct": 7.4561969516369215,
+      "characterHomePct": 39.43539639201011,
+      "homeFloorPct": 37.64500286098775,
+      "maxFingerPeakPct": 25.899046090006184,
+      "characterSameFingerOtherPct": 6.742346378748877,
+      "ownPolicyWorstRegretPct": 0.015010718601549122
+    },
+    {
+      "id": "c2e49137b9",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.145727871015024,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.145684769166401,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.961252468340437,
+      "rightPinkyPeakPct": 5.743157678875443,
+      "characterHomePct": 39.740609573921695,
+      "homeFloorPct": 39.740609573921695,
+      "maxFingerPeakPct": 28.273225381824897,
+      "characterSameFingerOtherPct": 5.763590891382328,
+      "ownPolicyWorstRegretPct": 0.03437717457279721
+    },
+    {
+      "id": "8f36f50a09",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.146135719917348,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.146092623834578,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.961252468340437,
+      "rightPinkyPeakPct": 5.321856852598892,
+      "characterHomePct": 39.79760321467792,
+      "homeFloorPct": 39.79760321467792,
+      "maxFingerPeakPct": 28.681248321084134,
+      "characterSameFingerOtherPct": 7.532181921516598,
+      "ownPolicyWorstRegretPct": 0.012306597660582952
+    },
+    {
+      "id": "c833550516",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.146805659720734,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.146805659720734,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 10.824024410698076,
+      "rightPinkyPeakPct": 6.578737659582452,
+      "characterHomePct": 37.965578963936444,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.010834204844127,
+      "characterSameFingerOtherPct": 5.474693972122074,
+      "ownPolicyWorstRegretPct": 0.045574507088885774
+    },
+    {
+      "id": "153b2cd3af",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.147538897226848,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.147538897226848,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 6.580431415574795,
+      "characterHomePct": 37.97652015287547,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.0287023657144,
+      "characterSameFingerOtherPct": 5.443196337627816,
+      "ownPolicyWorstRegretPct": 0.059454142501902396
+    },
+    {
+      "id": "5bd306d6ca",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/12",
+      "robustDefaultV52": 9.150610626536468,
+      "defaultBestPolicy": "12/231/41",
+      "defaultBestV52": 9.148965355627324,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 6.581086526715774,
+      "characterHomePct": 38.028978266860314,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.143086550536644,
+      "characterSameFingerOtherPct": 5.383928503439581,
+      "ownPolicyWorstRegretPct": 0.08283699375428721
+    },
+    {
+      "id": "971fbdef9a",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.152059864832617,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.151857646615973,
+      "M_lower": 24,
+      "M_guard": 26,
+      "D": 2,
+      "leftPinkyPeakPct": 9.032242331196652,
+      "rightPinkyPeakPct": 7.465992082593084,
+      "characterHomePct": 39.7157235868716,
+      "homeFloorPct": 37.36003410246923,
+      "maxFingerPeakPct": 28.091114429558207,
+      "characterSameFingerOtherPct": 6.844371828460376,
+      "ownPolicyWorstRegretPct": 0.03804271088472255
+    },
+    {
+      "id": "135fb91d96",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.155669118328898,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.155669118328898,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.053763904468662,
+      "rightPinkyPeakPct": 7.471186921302962,
+      "characterHomePct": 37.865510799783394,
+      "homeFloorPct": 34.94963948939743,
+      "maxFingerPeakPct": 29.61538628639935,
+      "characterSameFingerOtherPct": 5.40287763960497,
+      "ownPolicyWorstRegretPct": 0.03794481449463927
+    },
+    {
+      "id": "6a384d9d0d",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/14",
+      "robustDefaultV52": 9.15958327834517,
+      "defaultBestPolicy": "12/231/41",
+      "defaultBestV52": 9.158987508373995,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 6.5785214434339006,
+      "characterHomePct": 37.97652015287547,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 28.0287023657144,
+      "characterSameFingerOtherPct": 5.682939422372741,
+      "ownPolicyWorstRegretPct": 0.0698243071443283
+    },
+    {
+      "id": "795c0eee49",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/24",
+      "robustDefaultV52": 9.160195426878309,
+      "defaultBestPolicy": "21/231/24",
+      "defaultBestV52": 9.160195426878309,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 7.001856011581276,
+      "characterHomePct": 37.99996791883211,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 27.982534864459836,
+      "characterSameFingerOtherPct": 5.293332591785421,
+      "ownPolicyWorstRegretPct": 0.061674280214019106
+    },
+    {
+      "id": "c6870dce78",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/24",
+      "robustDefaultV52": 9.161139281196757,
+      "defaultBestPolicy": "21/231/24",
+      "defaultBestV52": 9.161139281196757,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.03242225637292,
+      "rightPinkyPeakPct": 6.957417504335677,
+      "characterHomePct": 38.010639450014736,
+      "homeFloorPct": 34.93491990591345,
+      "maxFingerPeakPct": 27.65753761282846,
+      "characterSameFingerOtherPct": 5.320782816893903,
+      "ownPolicyWorstRegretPct": 0.060041607795269236
+    },
+    {
+      "id": "3dece6df75",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/213/24",
+      "robustDefaultV52": 9.16387759794566,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.163834751691592,
+      "M_lower": 23,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 8.961252468340437,
+      "rightPinkyPeakPct": 5.543281605955365,
+      "characterHomePct": 39.75700265171142,
+      "homeFloorPct": 39.75700265171142,
+      "maxFingerPeakPct": 27.822479347541673,
+      "characterSameFingerOtherPct": 6.124855821941455,
+      "ownPolicyWorstRegretPct": 0.011103019028180228
+    },
+    {
+      "id": "0a4ee7fb52",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/24",
+      "robustDefaultV52": 9.167098623867924,
+      "defaultBestPolicy": "21/231/24",
+      "defaultBestV52": 9.167098623867924,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.051832782567477,
+      "rightPinkyPeakPct": 7.003304614154166,
+      "characterHomePct": 37.494272966625644,
+      "homeFloorPct": 34.09165265273353,
+      "maxFingerPeakPct": 28.517722207740714,
+      "characterSameFingerOtherPct": 5.811494143699856,
+      "ownPolicyWorstRegretPct": 0.059135032555546196
+    },
+    {
+      "id": "ed9acee035",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/14",
+      "robustDefaultV52": 9.167125759850634,
+      "defaultBestPolicy": "21/213/14",
+      "defaultBestV52": 9.167125759850634,
+      "M_lower": 24,
+      "M_guard": 26,
+      "D": 4,
+      "leftPinkyPeakPct": 8.973748691641994,
+      "rightPinkyPeakPct": 5.879624926433356,
+      "characterHomePct": 39.613825714484086,
+      "homeFloorPct": 39.613825714484086,
+      "maxFingerPeakPct": 27.038228648345207,
+      "characterSameFingerOtherPct": 5.507709298161586,
+      "ownPolicyWorstRegretPct": 0.04296693832808174
+    },
+    {
+      "id": "3d3dcbafc0",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/24",
+      "robustDefaultV52": 9.167316256384773,
+      "defaultBestPolicy": "12/231/41",
+      "defaultBestV52": 9.16612080079994,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.051832782567477,
+      "rightPinkyPeakPct": 6.579424084505506,
+      "characterHomePct": 37.46447422458704,
+      "homeFloorPct": 34.09165265273353,
+      "maxFingerPeakPct": 28.552729779084913,
+      "characterSameFingerOtherPct": 6.128261571923097,
+      "ownPolicyWorstRegretPct": 0.061588443373694624
+    },
+    {
+      "id": "579ec1d473",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/24",
+      "robustDefaultV52": 9.169541313344437,
+      "defaultBestPolicy": "21/231/24",
+      "defaultBestV52": 9.169541313344437,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 9.062219655968699,
+      "rightPinkyPeakPct": 7.003120305756032,
+      "characterHomePct": 37.893004890891696,
+      "homeFloorPct": 35.223766021054246,
+      "maxFingerPeakPct": 28.572628662608363,
+      "characterSameFingerOtherPct": 5.834006686871759,
+      "ownPolicyWorstRegretPct": 0.06519064886831849
+    },
+    {
+      "id": "CR1-1036",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.172567057441212,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.172567057441212,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 10.78560459836375,
+      "rightPinkyPeakPct": 7.453806137726088,
+      "characterHomePct": 37.99192154069639,
+      "homeFloorPct": 34.91127365678401,
+      "maxFingerPeakPct": 28.977592637986486,
+      "characterSameFingerOtherPct": 5.339943798616285,
+      "ownPolicyWorstRegretPct": 0.029007977970763044
+    },
+    {
+      "id": "CR1-0009",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.177678023086761,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.177678023086761,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 10.768996087803894,
+      "rightPinkyPeakPct": 7.453121478803501,
+      "characterHomePct": 37.97037586063804,
+      "homeFloorPct": 34.91127365678401,
+      "maxFingerPeakPct": 28.046712502403853,
+      "characterSameFingerOtherPct": 5.223294609053304,
+      "ownPolicyWorstRegretPct": 0.023031865311207156
+    },
+    {
+      "id": "CR0-0374",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/23",
+      "robustDefaultV52": 9.179036335765748,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.178976579993169,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 10.773086208488202,
+      "rightPinkyPeakPct": 7.451554703173288,
+      "characterHomePct": 37.974460250633044,
+      "homeFloorPct": 34.91127365678401,
+      "maxFingerPeakPct": 27.595920941092622,
+      "characterSameFingerOtherPct": 5.294118196616542,
+      "ownPolicyWorstRegretPct": 0.029228528036551182
+    },
+    {
+      "id": "CR1-0004",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/23",
+      "robustDefaultV52": 9.181061875782483,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.181025745254242,
+      "M_lower": 21,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 10.772334465679988,
+      "rightPinkyPeakPct": 7.45305937123882,
+      "characterHomePct": 37.97182037716546,
+      "homeFloorPct": 34.91127365678401,
+      "maxFingerPeakPct": 27.306909244143853,
+      "characterSameFingerOtherPct": 5.247835386914671,
+      "ownPolicyWorstRegretPct": 0.03310480775040592
+    },
+    {
+      "id": "current-production",
+      "remoteRepresentative": false,
+      "robustPolicy": "12/231/24",
+      "robustDefaultV52": 9.204360710217527,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.204360710217527,
+      "M_lower": 21,
+      "M_guard": 23,
+      "D": 1,
+      "leftPinkyPeakPct": 10.809114451245158,
+      "rightPinkyPeakPct": 7.449457049460138,
+      "characterHomePct": 38.442802018977176,
+      "homeFloorPct": 36.03700653119859,
+      "maxFingerPeakPct": 28.444951420031572,
+      "characterSameFingerOtherPct": 5.940308824431532,
+      "ownPolicyWorstRegretPct": 0.024295263665630173
+    },
+    {
+      "id": "1495a8acb5",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/24",
+      "robustDefaultV52": 9.216691299110325,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.216327229049718,
+      "M_lower": 23,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.983893479714991,
+      "rightPinkyPeakPct": 8.327929574418187,
+      "characterHomePct": 38.578457049651895,
+      "homeFloorPct": 36.09574894778334,
+      "maxFingerPeakPct": 29.516707909889394,
+      "characterSameFingerOtherPct": 6.133021289874463,
+      "ownPolicyWorstRegretPct": 0.05655435892453209
+    },
+    {
+      "id": "1fd88b99bc",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/213/24",
+      "robustDefaultV52": 9.220198322316776,
+      "defaultBestPolicy": "12/231/24",
+      "defaultBestV52": 9.219354829316154,
+      "M_lower": 22,
+      "M_guard": 25,
+      "D": 2,
+      "leftPinkyPeakPct": 8.983893479714991,
+      "rightPinkyPeakPct": 7.37482561411139,
+      "characterHomePct": 38.609230122101046,
+      "homeFloorPct": 36.09574894778334,
+      "maxFingerPeakPct": 29.498725813923627,
+      "characterSameFingerOtherPct": 6.077568336342191,
+      "ownPolicyWorstRegretPct": 0.07303405113077144
+    },
+    {
+      "id": "941ce20d80",
+      "remoteRepresentative": false,
+      "robustPolicy": "21/231/24",
+      "robustDefaultV52": 9.336231807190693,
+      "defaultBestPolicy": "21/231/14",
+      "defaultBestV52": 9.335465593876682,
+      "M_lower": 22,
+      "M_guard": 24,
+      "D": 2,
+      "leftPinkyPeakPct": 7.169424433308627,
+      "rightPinkyPeakPct": 6.347514726638604,
+      "characterHomePct": 37.728365598618744,
+      "homeFloorPct": 34.999694962976754,
+      "maxFingerPeakPct": 26.390944765786866,
+      "characterSameFingerOtherPct": 6.081774540322491,
+      "ownPolicyWorstRegretPct": 0.13250031611067303
+    }
+  ],
+  "witnesses": [
+    {
+      "multiplier": 0.5,
+      "scores": {
+        "f19a0ad1dc": 9.276579547183077,
+        "391c0afa96": 9.275677028090115,
+        "ba0466ee5b": 9.275548466968177,
+        "2eb6eb060e": 9.276315793497762,
+        "1f9e267cd2": 9.289313849979457
+      }
+    },
+    {
+      "multiplier": 1,
+      "scores": {
+        "f19a0ad1dc": 9.111019023167529,
+        "391c0afa96": 9.111468658857632,
+        "ba0466ee5b": 9.112821664982624,
+        "2eb6eb060e": 9.112170644793569,
+        "1f9e267cd2": 9.11746719363091
+      }
+    },
+    {
+      "multiplier": 2,
+      "scores": {
+        "f19a0ad1dc": 8.865528663938422,
+        "391c0afa96": 8.868244696179033,
+        "ba0466ee5b": 8.871605113174471,
+        "2eb6eb060e": 8.86858851893383,
+        "1f9e267cd2": 8.861987917902422
+      }
+    }
+  ],
+  "productionGatePassed": false,
+  "productionStatus": {
+    "id": "CR-LAN-f19a0ad1dc",
+    "sourceCommit": "82dbcb9b9558f78142615aa5efd6a0b3715c3cd1",
+    "matchesAuditedLayout": "f19a0ad1dc",
+    "historicalBaselineMatches": false,
+    "historicalBaselineFrozen": true
+  },
+  "sourceHashes": {
+    "research/notes/2026-11-19-lan213-v52-followup-candidates.json": "8444a207f6104bb5cb1d5ba2975af7f9ef635816c1e1e1f0acef9ad53b8a3990",
+    "research/notes/2026-11-19-lan213-v52-followup-policies.json.gz": "98d9f2f0eeb44bd4b81dda91cc53dd86a2e0a47c17f3f05479c87997dab135ef",
+    "research/notes/2026-11-19-lan213-v52-followup-robustness.json": "788b81bd12bc43d4f726a4f5c32e28da7d3db0f6259ff6e57c296ff414bc2dfb",
+    "research/notes/2026-11-19-lan213-v52-followup-verification.json": "482741e94efb6d84015277d2e01529d3dcef22cd0926f5bb1a4b15b81b2f3a04",
+    "research/notes/2026-11-19-lan213-v52-followup-recovery.json": "4a3fbe0e9df624881390c834a269206c6941bcababd5702b8cce0b74f97d6ffd",
+    "research/notes/2026-11-19-lan213-v52-followup-ergonomics.json": "59535cf268a2ac0909f86880e30a9b51ac53b6dfe3e7f10006b91fa0d781c9e8"
+  }
+}
