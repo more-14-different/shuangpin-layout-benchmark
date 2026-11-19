@@ -1,5 +1,30 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-v52-prepare:
+    cargo build --release --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-stream
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_v52.js --prepare
+
+untoned-cr7e-v52-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_v52.js
+
+untoned-cr7e-v52-verify:
+    node --expose-gc --max-old-space-size=6144 tools/verify_untoned_cr7e_v52.js
+    python -X utf8 tools/audit_untoned_cr7e_memory.py
+    python -X utf8 tools/report_untoned_cr7e_v52.py
+
+untoned-cr7e-v52-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/policy_untoned_cr7e_v52.js --id "{{id}}"
+
+untoned-cr7e-v52-finalize:
+    node tools/finalize_untoned_cr7e_v52.js
+    python -X utf8 tools/audit_untoned_cr7e_memory.py
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_optima.js
+    python -X utf8 tools/report_untoned_cr7e_v52.py
+
+untoned-cr7e-v52-test:
+    cargo test --release --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-stream
+    node --test tests/untoned-cr7e-v52.test.mjs tests/ckt-v52.test.mjs tests/auxiliary-semantics.test.mjs
+
 recent-cr-r11:
     python -X utf8 tools/integrate_recent_cr_r11.py
     node --max-old-space-size=8192 tools/verify_recent_cr_r11.js
