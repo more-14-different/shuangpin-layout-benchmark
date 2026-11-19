@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-blocks-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_blocks.js
+
+untoned-cr7e-blocks-verify:
+    node tools/verify_untoned_cr7e_blocks.js
+
+untoned-cr7e-blocks-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_blocks.js --policy "{{id}}"
+
+untoned-cr7e-blocks-report:
+    python -X utf8 tools/report_untoned_cr7e_blocks.py
+
+untoned-cr7e-blocks-test:
+    node --test tests/untoned-cr7e-blocks.test.mjs tests/untoned-cr7e-recovery.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 untoned-cr7e-recovery-search:
     node --max-old-space-size=4096 tools/anneal_untoned_cr7e_recovery.js
     node tools/polish_untoned_cr7e_recovery.js
