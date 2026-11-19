@@ -1,0 +1,2375 @@
+{
+  "complete": true,
+  "searchCompleted": true,
+  "exactlyScored": 5115,
+  "comparison": "Rust full eight-track outcomes versus independent JS full v5.2 replay; 1x/2x all six cognitive costs for both candidate and S005",
+  "sourceHashes": {
+    "a7_CKT_R11.html": "f3693deb465458b6c915a3f1e3f36405675c4687240e362d6823c377c5b4ae3e",
+    "C:\\Users\\Xcz\\.codex\\worktrees\\728f\\shuangpin-layout-benchmark\\research\\.cache\\ckt-long-code-audit-20261118\\error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "tools/ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+    "tools/score_ckt_v52.js": "b21363ce1e231ac1adcebf4e59bc4e5644742a06a48830c361658d05a51c4bbe",
+    "tools/ckt_block_error.js": "df5dd34ab64df5498423e9c8d02e67f433fe830006509176c66c616870223694",
+    "tools/score_completion_ckt_v4.js": "a0e76706a01d9e3fb235467b5ff426ae0d016574c43899d28b57343ff8d24e15",
+    "tools/export_untoned_r2_v52_templates.js": "02523318ea1e18c15dd22c381107a3b5d6be435a73cd3ec67e7e3f41e2a38884",
+    "tools/audit_untoned_r2_ergonomics.js": "5f1267c2ce629951c4e09cb20d86bcdefef9f4df26a72e60bdead584203e1a66",
+    "research/.cache/R11_integrated_replay/script1.js": "8fdf2e43e905ec98fe93b7244dc291d396ea278c137baba63b4e363eec36c470",
+    "research/.cache/R11_integrated_replay/script2.js": "f2c1fc0ffc95393123b45095c75ce67df199ecf3fc39c1db0393f6b60045a002",
+    "research/.cache/R11_integrated_replay/track_options.json": "0315132e54b495b42e66a56b52b49c9f9d54e30b9913b1a53ac8d141a058d9e3",
+    "research/ckt-v4-core/src/bin/score-untoned-r2-v52-stream.rs": "cfd4de36e090598e9db79401aede7d4450665b7dfe318cdcb66b825ed9a0216e",
+    "C:\\Users\\Xcz\\.codex\\worktrees\\728f\\shuangpin-layout-benchmark\\tools\\verify_untoned_r2_v52.js": "538756a18507a3483a0f08a2f24e09c36b48ca8e72db0bb6b1a18c92f6ccdd3e"
+  },
+  "independentBaseline": {
+    "a7eV4": 10.670635896300677,
+    "a7eV5": 10.258403898737619,
+    "tracks": {
+      "S2": {
+        "home": 0.4391204207421518,
+        "sfb": 0.05345632486277227,
+        "maxFinger": 0.2810114242032127,
+        "rightPinky": 0.026153485576957396,
+        "upperMs": 70.02261230047928,
+        "e34": 1.329390259361941,
+        "geometry": 1.3647133378842635
+      },
+      "C2": {
+        "home": 0.5162325955975374,
+        "sfb": 0.02111028646559015,
+        "maxFinger": 0.34438623462871315,
+        "rightPinky": 0.017213038931186028,
+        "upperMs": 68.27328999481274,
+        "e34": 1.3360674390890555,
+        "geometry": 1.370268872907388
+      },
+      "C3": {
+        "home": 0.4513834547779132,
+        "sfb": 0.042051856234810926,
+        "maxFinger": 0.3170593411786415,
+        "rightPinky": 0.01147535928745735,
+        "upperMs": 194.96911374333052,
+        "e34": 1.3330216696466035,
+        "geometry": 1.385700442603852
+      },
+      "C4-Snow": {
+        "home": 0.32555781432170683,
+        "sfb": 0.06940035024111069,
+        "maxFinger": 0.3073286757278044,
+        "rightPinky": 0.008635873272189419,
+        "upperMs": 327.4310347814138,
+        "e34": 1.3104459042457335,
+        "geometry": 1.3194664241616667
+      },
+      "C4-SBxh": {
+        "home": 0.34513558236084735,
+        "sfb": 0.06766711396304943,
+        "maxFinger": 0.3052392003414528,
+        "rightPinky": 0.008606519465593014,
+        "upperMs": 325.6074832329019,
+        "e34": 1.3013888587668159,
+        "geometry": 1.3238638255316566
+      },
+      "C4-SBzr": {
+        "home": 0.34513558236084735,
+        "sfb": 0.06766711396304943,
+        "maxFinger": 0.3052392003414528,
+        "rightPinky": 0.008606519465593014,
+        "upperMs": 325.6074832329019,
+        "e34": 1.3013888587668159,
+        "geometry": 1.3238638255316566
+      },
+      "C5-TX2": {
+        "home": 0.3247811742112551,
+        "sfb": 0.021097640152675443,
+        "maxFinger": 0.2983195534375696,
+        "rightPinky": 0.0069039892026480565,
+        "upperMs": 470.200825630031,
+        "e34": 1.2977667072392596,
+        "geometry": 1.3179796642565031
+      },
+      "W4-Snow": {
+        "home": 0.4132862094364226,
+        "sfb": 0.07869841198332365,
+        "maxFinger": 0.2756760171568697,
+        "rightPinky": 0.031498080493856884,
+        "upperMs": 363.2152883057105,
+        "e34": 1.3377276390821176,
+        "geometry": 1.3707172501697824
+      },
+      "W4-SBxh": {
+        "home": 0.4109536996692855,
+        "sfb": 0.07451395911363631,
+        "maxFinger": 0.2697746872946233,
+        "rightPinky": 0.021125503967149434,
+        "upperMs": 359.00253937301346,
+        "e34": 1.331603240933567,
+        "geometry": 1.3623563812624417
+      },
+      "W4-SBzr": {
+        "home": 0.40515605700979745,
+        "sfb": 0.07284829912383502,
+        "maxFinger": 0.26857512726961,
+        "rightPinky": 0.020888391924045832,
+        "upperMs": 359.78408402845673,
+        "e34": 1.3343301137189925,
+        "geometry": 1.3650742709257342
+      },
+      "W4-common": {
+        "home": 0.40603067207579574,
+        "sfb": 0.07261816782787685,
+        "maxFinger": 0.2697405724138466,
+        "rightPinky": 0.02072832264773127,
+        "upperMs": 357.44146851489444,
+        "e34": 1.3287393574983122,
+        "geometry": 1.360887724613887
+      },
+      "W4-union": {
+        "home": 0.4133958067113817,
+        "sfb": 0.07870803652334217,
+        "maxFinger": 0.27553851906698346,
+        "rightPinky": 0.03134638457485278,
+        "upperMs": 363.29321236234716,
+        "e34": 1.3379080047523193,
+        "geometry": 1.3707985823482065
+      },
+      "W6-Snow": {
+        "home": 0.39652079770132426,
+        "sfb": 0.06489461104158777,
+        "maxFinger": 0.24734608575496234,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 681.2389929549892,
+        "e34": 1.3236545945069849,
+        "geometry": 1.342700440909351
+      },
+      "W6-21": {
+        "home": 0.39652079770132426,
+        "sfb": 0.06416285575074177,
+        "maxFinger": 0.24734608575496234,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 680.3798830975596,
+        "e34": 1.322305329391685,
+        "geometry": 1.3430877730737611
+      },
+      "WX-Snow-12": {
+        "home": 0.3251879737912793,
+        "sfb": 0.06263468587375004,
+        "maxFinger": 0.24131009416028565,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 669.9572119416554,
+        "e34": 1.3165239346200297,
+        "geometry": 1.3302893016040753
+      },
+      "WX-Snow-21": {
+        "home": 0.3251879737912793,
+        "sfb": 0.06297315393134091,
+        "maxFinger": 0.24131009416028565,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 669.6866928361562,
+        "e34": 1.315959199557094,
+        "geometry": 1.330270759824879
+      },
+      "WX-SBxh-12": {
+        "home": 0.31284320948242345,
+        "sfb": 0.0645538728372586,
+        "maxFinger": 0.2644397819984892,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 670.6256236933797,
+        "e34": 1.3152894588625894,
+        "geometry": 1.3274412364579873
+      },
+      "WX-SBxh-21": {
+        "home": 0.31284320948242345,
+        "sfb": 0.06562399374214743,
+        "maxFinger": 0.2644397819984892,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 670.5247614163223,
+        "e34": 1.3149401357101134,
+        "geometry": 1.327734149271742
+      },
+      "WX-SBzr-12": {
+        "home": 0.31284320948242345,
+        "sfb": 0.0645538728372586,
+        "maxFinger": 0.2644397819984892,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 670.6256236933797,
+        "e34": 1.3152894588625894,
+        "geometry": 1.3274412364579873
+      },
+      "WX-SBzr-21": {
+        "home": 0.31284320948242345,
+        "sfb": 0.06562399374214743,
+        "maxFinger": 0.2644397819984892,
+        "rightPinky": 0.020998720329237924,
+        "upperMs": 670.5247614163223,
+        "e34": 1.3149401357101134,
+        "geometry": 1.327734149271742
+      }
+    }
+  },
+  "verified": [
+    {
+      "key": "AQ8MBQMTDRYGCgcJEBgXEhURGQISERERDwsLAA8JDQoHBAMLBAgBEgQXDhEQDBYODBgUEhATAgUGDgUTFQY=",
+      "id": "UR2-V52-7d0054122b68",
+      "score": 9.051065499588429,
+      "score2": 9.054715196081256,
+      "actualSoundKeys": 21,
+      "actualRhymeKeys": 25,
+      "audit": {
+        "valid": true,
+        "M": 39,
+        "D": 2,
+        "V": 1,
+        "branches": 0,
+        "unique": 357,
+        "qz": false,
+        "zq": false
+      },
+      "erg": {
+        "mx": 134.22905782397316,
+        "hits": 2149,
+        "homeS2": 0.4168894855657435,
+        "homeFloor": 0.27808940149912614,
+        "rpMax": 0.0897981405487019,
+        "wMax": 0.047804693092295715,
+        "yMax": 0.05982694463715872,
+        "motor": 66.89334967572539
+      },
+      "strictComfort": false,
+      "independent": {
+        "a7eV4": 10.650929725576342,
+        "a7eV5": 10.08303016653562,
+        "tracks": {
+          "S2": {
+            "home": 0.4168894855657435,
+            "sfb": 0.03078406438087769,
+            "maxFinger": 0.2710166383910263,
+            "rightPinky": 0.04416608648325057,
+            "upperMs": 67.8188746498897,
+            "e34": 1.3304955481810972,
+            "geometry": 1.3644096314880274
+          },
+          "C2": {
+            "home": 0.4216184654263635,
+            "sfb": 0.012505871851674101,
+            "maxFinger": 0.29099592915525135,
+            "rightPinky": 0.0897981405487019,
+            "upperMs": 66.39343043431955,
+            "e34": 1.3291571902453563,
+            "geometry": 1.3539153361147087
+          },
+          "C3": {
+            "home": 0.3883073679971305,
+            "sfb": 0.036384527693256286,
+            "maxFinger": 0.28146580419633355,
+            "rightPinky": 0.05986542703246794,
+            "upperMs": 193.05567191217392,
+            "e34": 1.331155744047638,
+            "geometry": 1.3693480867978824
+          },
+          "C4-Snow": {
+            "home": 0.27808940149912614,
+            "sfb": 0.0683560877957741,
+            "maxFinger": 0.28054247522738374,
+            "rightPinky": 0.04505220518916299,
+            "upperMs": 326.7883800875626,
+            "e34": 1.3079249956210617,
+            "geometry": 1.3120920966330478
+          },
+          "C4-SBxh": {
+            "home": 0.2978285172752604,
+            "sfb": 0.07021780174620876,
+            "maxFinger": 0.27854404760472196,
+            "rightPinky": 0.04489907027435095,
+            "upperMs": 325.551627798687,
+            "e34": 1.3009027334769967,
+            "geometry": 1.3167998631680973
+          },
+          "C4-SBzr": {
+            "home": 0.2978285172752604,
+            "sfb": 0.07021780174620876,
+            "maxFinger": 0.27854404760472196,
+            "rightPinky": 0.04489907027435095,
+            "upperMs": 325.551627798687,
+            "e34": 1.3009027334769967,
+            "geometry": 1.3167998631680973
+          },
+          "C5-TX2": {
+            "home": 0.2868323299815329,
+            "sfb": 0.018254311251114888,
+            "maxFinger": 0.2769052004004058,
+            "rightPinky": 0.03601719575750668,
+            "upperMs": 467.8063930441579,
+            "e34": 1.2960069873682531,
+            "geometry": 1.3088837959385253
+          },
+          "W4-Snow": {
+            "home": 0.3930134666494989,
+            "sfb": 0.061580194386196364,
+            "maxFinger": 0.2647157359271516,
+            "rightPinky": 0.046438598993264815,
+            "upperMs": 358.2597644470383,
+            "e34": 1.3409851195440232,
+            "geometry": 1.3681482250692656
+          },
+          "W4-SBxh": {
+            "home": 0.3876540960117631,
+            "sfb": 0.054360507980542046,
+            "maxFinger": 0.26898031293060437,
+            "rightPinky": 0.04168936148917613,
+            "upperMs": 352.78343329067854,
+            "e34": 1.334171868257048,
+            "geometry": 1.365511066844657
+          },
+          "W4-SBzr": {
+            "home": 0.3771240623364478,
+            "sfb": 0.05222782864756977,
+            "maxFinger": 0.26709860319784423,
+            "rightPinky": 0.04279231822423003,
+            "upperMs": 353.09122066975783,
+            "e34": 1.336549500910274,
+            "geometry": 1.366887559013243
+          },
+          "W4-common": {
+            "home": 0.3815942028336533,
+            "sfb": 0.052633234317100014,
+            "maxFinger": 0.26898683575904875,
+            "rightPinky": 0.040706365086627644,
+            "upperMs": 351.37038853089575,
+            "e34": 1.3326883082068497,
+            "geometry": 1.3649532517777336
+          },
+          "W4-union": {
+            "home": 0.3930139133887014,
+            "sfb": 0.06161838836010278,
+            "maxFinger": 0.2649092248502984,
+            "rightPinky": 0.0464291193663472,
+            "upperMs": 358.32003682968923,
+            "e34": 1.3410375830366095,
+            "geometry": 1.36820587482874
+          },
+          "W6-Snow": {
+            "home": 0.38300563584337516,
+            "sfb": 0.053240185907321554,
+            "maxFinger": 0.24003923160181695,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 676.8833121989262,
+            "e34": 1.3242200153386798,
+            "geometry": 1.34099695984839
+          },
+          "W6-21": {
+            "home": 0.38300563584337516,
+            "sfb": 0.05281750485635456,
+            "maxFinger": 0.24003923160181695,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 676.4284238783996,
+            "e34": 1.3230769830489324,
+            "geometry": 1.3412144289416603
+          },
+          "WX-Snow-12": {
+            "home": 0.31167281193333024,
+            "sfb": 0.05084156736507538,
+            "maxFinger": 0.2340032400071403,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 666.2724146975404,
+            "e34": 1.3188708540406464,
+            "geometry": 1.327888271519624
+          },
+          "WX-Snow-21": {
+            "home": 0.31167281193333024,
+            "sfb": 0.05057699759464405,
+            "maxFinger": 0.2340032400071403,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 665.7352794620243,
+            "e34": 1.319165530089565,
+            "geometry": 1.3291054542134115
+          },
+          "WX-SBxh-12": {
+            "home": 0.2993280476244743,
+            "sfb": 0.052722096336401,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 666.5008769443024,
+            "e34": 1.3170134018668018,
+            "geometry": 1.3250010664292753
+          },
+          "WX-SBxh-21": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05270839808082731,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 666.0709632032339,
+            "e34": 1.3172791478891956,
+            "geometry": 1.3265084775356935
+          },
+          "WX-SBzr-12": {
+            "home": 0.2993280476244743,
+            "sfb": 0.052722096336401,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 666.5008769443024,
+            "e34": 1.3170134018668018,
+            "geometry": 1.3250010664292753
+          },
+          "WX-SBzr-21": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05270839808082731,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 666.0709632032339,
+            "e34": 1.3172791478891956,
+            "geometry": 1.3265084775356935
+          }
+        }
+      },
+      "independentPass": false,
+      "productionAdmissible": false,
+      "semantics": {
+        "toneKeyClass": "AEUIO",
+        "toneKeySet": "AEIOU",
+        "shapeKeysByMeaning": "AEUIO",
+        "toneKeysByTone": "IEUAO",
+        "toneDigitsByShapeMeaning": "42310"
+      },
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "W",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "Q",
+        "x": "Y",
+        "zh": "X",
+        "ch": "S",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "S",
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "P",
+        "Y": "L",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "P",
+        "an": "J",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "E",
+        "en": "D",
+        "eng": "L",
+        "er": "E",
+        "i": "I",
+        "ia": "B",
+        "ian": "S",
+        "iang": "E",
+        "iao": "X",
+        "ie": "O",
+        "in": "R",
+        "ing": "Q",
+        "iong": "M",
+        "iu": "W",
+        "o": "O",
+        "ong": "M",
+        "ou": "Y",
+        "u": "U",
+        "ua": "S",
+        "uai": "Q",
+        "uan": "T",
+        "uang": "C",
+        "ui": "F",
+        "un": "G",
+        "uo": "O",
+        "v": "F",
+        "van": "T",
+        "ve": "V",
+        "vn": "G"
+      },
+      "modesV52": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 98.02445702747337,
+            "firstAuxRate": 0.21868105109749256,
+            "secondAuxRate": 0.04622565411145833,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005530093050938901,
+            "meanRejectedCandidates": 0.006746576099472028,
+            "meanPageActions": 0.000004122680202936448,
+            "meanKeys": 2.264906705208951,
+            "effectiveMs": 181.15309002975644
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 380.79874793156347,
+            "firstAuxRate": 0.1959333755649088,
+            "secondAuxRate": 0.03827241857943816,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0042788217744098075,
+            "meanRejectedCandidates": 0.005177302142039989,
+            "meanPageActions": 0.000001699479690100486,
+            "meanKeys": 4.234205794144347,
+            "effectiveMs": 453.88715419052244
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 334.77988576069475,
+            "firstAuxRate": 0.22107816318911522,
+            "secondAuxRate": 0.051961210262434665,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0070591652040800906,
+            "meanRejectedCandidates": 0.008724920319432332,
+            "meanPageActions": 0.000016357064872155597,
+            "meanKeys": 3.7637324568345756,
+            "effectiveMs": 421.36835005404106
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 428.2653319994276,
+            "firstAuxRate": 0.2001670518495721,
+            "secondAuxRate": 0.027208240010940514,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.00209219103236521,
+            "meanRejectedCandidates": 0.002378788756678333,
+            "meanPageActions": 0,
+            "meanKeys": 4.227375291860513,
+            "effectiveMs": 497.8521736148345
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 99.13642151156536,
+            "firstAuxRate": 0.22016287668617268,
+            "secondAuxRate": 0.05325592651822702,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.008523933969358792,
+            "meanRejectedCandidates": 0.010855956667180233,
+            "meanPageActions": 0.00004159482128723779,
+            "meanKeys": 2.2734188032044,
+            "effectiveMs": 186.83169913424572
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 381.94653402560476,
+            "firstAuxRate": 0.1959333755649088,
+            "secondAuxRate": 0.042098485368567674,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.006169259996879278,
+            "meanRejectedCandidates": 0.007723303070757222,
+            "meanPageActions": 0.000003211114849556396,
+            "meanKeys": 4.238031860933477,
+            "effectiveMs": 457.444776791768
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 337.3795699166367,
+            "firstAuxRate": 0.22107816318911522,
+            "secondAuxRate": 0.06279864955012025,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.010888398848563588,
+            "meanRejectedCandidates": 0.014443332767664746,
+            "meanPageActions": 0.000023501989140561244,
+            "meanKeys": 3.7745698961222613,
+            "effectiveMs": 429.80487028267083
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 429.5168748879346,
+            "firstAuxRate": 0.2001670518495721,
+            "secondAuxRate": 0.031547340445984964,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0034125684187225067,
+            "meanRejectedCandidates": 0.004433676102635813,
+            "meanPageActions": 0.000011051915765274992,
+            "meanKeys": 4.231714392295557,
+            "effectiveMs": 501.3037330076966
+          }
+        }
+      },
+      "description1": {
+        "score": 9.051065499588429,
+        "aggregate": {
+          "motorUpperMs": 334.6115322479364,
+          "effectiveMs": 412.692475755843,
+          "firstAuxRate": 0.20474455093754104,
+          "secondAuxRate": 0.0428424777285986,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005737549653158029,
+          "meanRejectedCandidates": 0.007190422195954593,
+          "meanPageActions": 0.000009280021240594726,
+          "meanKeys": 3.8293692092299776,
+          "cognitiveMs": 78.08094350790662
+        },
+        "modes": {
+          "keytao": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 98.02445702747337,
+              "firstAuxRate": 0.21868105109749256,
+              "secondAuxRate": 0.04622565411145833,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.005530093050938901,
+              "meanRejectedCandidates": 0.006746576099472028,
+              "meanPageActions": 0.000004122680202936448,
+              "meanKeys": 2.264906705208951,
+              "effectiveMs": 181.15309002975644
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 380.79874793156347,
+              "firstAuxRate": 0.1959333755649088,
+              "secondAuxRate": 0.03827241857943816,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0042788217744098075,
+              "meanRejectedCandidates": 0.005177302142039989,
+              "meanPageActions": 0.000001699479690100486,
+              "meanKeys": 4.234205794144347,
+              "effectiveMs": 453.88715419052244
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 334.77988576069475,
+              "firstAuxRate": 0.22107816318911522,
+              "secondAuxRate": 0.051961210262434665,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0070591652040800906,
+              "meanRejectedCandidates": 0.008724920319432332,
+              "meanPageActions": 0.000016357064872155597,
+              "meanKeys": 3.7637324568345756,
+              "effectiveMs": 421.36835005404106
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 428.2653319994276,
+              "firstAuxRate": 0.2001670518495721,
+              "secondAuxRate": 0.027208240010940514,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00209219103236521,
+              "meanRejectedCandidates": 0.002378788756678333,
+              "meanPageActions": 0,
+              "meanKeys": 4.227375291860513,
+              "effectiveMs": 497.8521736148345
+            }
+          },
+          "sanpin": {
+            "character": {
+              "count": 6238,
+              "totalWeight": 34283114,
+              "motorUpperMs": 99.13642151156536,
+              "firstAuxRate": 0.22016287668617268,
+              "secondAuxRate": 0.05325592651822702,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.008523933969358792,
+              "meanRejectedCandidates": 0.010855956667180233,
+              "meanPageActions": 0.00004159482128723779,
+              "meanKeys": 2.2734188032044,
+              "effectiveMs": 186.83169913424572
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 381.94653402560476,
+              "firstAuxRate": 0.1959333755649088,
+              "secondAuxRate": 0.042098485368567674,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.006169259996879278,
+              "meanRejectedCandidates": 0.007723303070757222,
+              "meanPageActions": 0.000003211114849556396,
+              "meanKeys": 4.238031860933477,
+              "effectiveMs": 457.444776791768
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 337.3795699166367,
+              "firstAuxRate": 0.22107816318911522,
+              "secondAuxRate": 0.06279864955012025,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.010888398848563588,
+              "meanRejectedCandidates": 0.014443332767664746,
+              "meanPageActions": 0.000023501989140561244,
+              "meanKeys": 3.7745698961222613,
+              "effectiveMs": 429.80487028267083
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 429.5168748879346,
+              "firstAuxRate": 0.2001670518495721,
+              "secondAuxRate": 0.031547340445984964,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0034125684187225067,
+              "meanRejectedCandidates": 0.004433676102635813,
+              "meanPageActions": 0.000011051915765274992,
+              "meanKeys": 4.231714392295557,
+              "effectiveMs": 501.3037330076966
+            }
+          }
+        },
+        "memberScores": {
+          "keytao": 9.066453587600297,
+          "sanpin": 9.035598523069421
+        },
+        "trackScores": {
+          "keytao": {
+            "character": 9.266883676198763,
+            "word2": 9.409245483982668,
+            "word3": 7.250351989295983,
+            "word4": 9.11042254984462
+          },
+          "sanpin": {
+            "character": 9.222950867998406,
+            "word2": 9.420851977555806,
+            "word3": 7.017222196836093,
+            "word4": 9.047679990440603
+          }
+        },
+        "equalTracks": {
+          "character": {
+            "score": 9.244995561155108,
+            "effectiveMs": 183.99239458200108
+          },
+          "word2": {
+            "score": 9.415054096271993,
+            "effectiveMs": 455.66596549114524
+          },
+          "word3": {
+            "score": 7.136642481946524,
+            "effectiveMs": 425.58661016835595
+          },
+          "word4": {
+            "score": 9.07921386412112,
+            "effectiveMs": 499.57795331126556
+          }
+        }
+      },
+      "description2": {
+        "score": 9.054715196081256,
+        "aggregate": {
+          "motorUpperMs": 334.6115322479364,
+          "effectiveMs": 490.7734192637496,
+          "firstAuxRate": 0.20474455093754104,
+          "secondAuxRate": 0.0428424777285986,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005737549653158029,
+          "meanRejectedCandidates": 0.007190422195954593,
+          "meanPageActions": 0.000009280021240594726,
+          "meanKeys": 3.8293692092299776,
+          "cognitiveMs": 156.1618870158132
+        },
+        "modes": {
+          "keytao": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 98.02445702747337,
+              "firstAuxRate": 0.21868105109749256,
+              "secondAuxRate": 0.04622565411145833,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.005530093050938901,
+              "meanRejectedCandidates": 0.006746576099472028,
+              "meanPageActions": 0.000004122680202936448,
+              "meanKeys": 2.264906705208951,
+              "effectiveMs": 264.2817230320395
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 380.79874793156347,
+              "firstAuxRate": 0.1959333755649088,
+              "secondAuxRate": 0.03827241857943816,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0042788217744098075,
+              "meanRejectedCandidates": 0.005177302142039989,
+              "meanPageActions": 0.000001699479690100486,
+              "meanKeys": 4.234205794144347,
+              "effectiveMs": 526.9755604494815
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 334.77988576069475,
+              "firstAuxRate": 0.22107816318911522,
+              "secondAuxRate": 0.051961210262434665,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0070591652040800906,
+              "meanRejectedCandidates": 0.008724920319432332,
+              "meanPageActions": 0.000016357064872155597,
+              "meanKeys": 3.7637324568345756,
+              "effectiveMs": 507.95681434738736
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 428.2653319994276,
+              "firstAuxRate": 0.2001670518495721,
+              "secondAuxRate": 0.027208240010940514,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00209219103236521,
+              "meanRejectedCandidates": 0.002378788756678333,
+              "meanPageActions": 0,
+              "meanKeys": 4.227375291860513,
+              "effectiveMs": 567.4390152302415
+            }
+          },
+          "sanpin": {
+            "character": {
+              "count": 6238,
+              "totalWeight": 34283114,
+              "motorUpperMs": 99.13642151156536,
+              "firstAuxRate": 0.22016287668617268,
+              "secondAuxRate": 0.05325592651822702,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.008523933969358792,
+              "meanRejectedCandidates": 0.010855956667180233,
+              "meanPageActions": 0.00004159482128723779,
+              "meanKeys": 2.2734188032044,
+              "effectiveMs": 274.5269767569261
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 381.94653402560476,
+              "firstAuxRate": 0.1959333755649088,
+              "secondAuxRate": 0.042098485368567674,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.006169259996879278,
+              "meanRejectedCandidates": 0.007723303070757222,
+              "meanPageActions": 0.000003211114849556396,
+              "meanKeys": 4.238031860933477,
+              "effectiveMs": 532.9430195579312
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 337.3795699166367,
+              "firstAuxRate": 0.22107816318911522,
+              "secondAuxRate": 0.06279864955012025,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.010888398848563588,
+              "meanRejectedCandidates": 0.014443332767664746,
+              "meanPageActions": 0.000023501989140561244,
+              "meanKeys": 3.7745698961222613,
+              "effectiveMs": 522.230170648705
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 429.5168748879346,
+              "firstAuxRate": 0.2001670518495721,
+              "secondAuxRate": 0.031547340445984964,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0034125684187225067,
+              "meanRejectedCandidates": 0.004433676102635813,
+              "meanPageActions": 0.000011051915765274992,
+              "meanKeys": 4.231714392295557,
+              "effectiveMs": 573.0905911274587
+            }
+          }
+        },
+        "memberScores": {
+          "keytao": 9.060886330425578,
+          "sanpin": 9.04853141828466
+        },
+        "trackScores": {
+          "keytao": {
+            "character": 9.487895752823423,
+            "word2": 9.545208183501598,
+            "word3": 6.200475538831941,
+            "word4": 8.78521997904709
+          },
+          "sanpin": {
+            "character": 9.481612472875241,
+            "word2": 9.560319121424925,
+            "word3": 6.0080345913581645,
+            "word4": 8.717473702025192
+          }
+        },
+        "equalTracks": {
+          "character": {
+            "score": 9.484755673759507,
+            "effectiveMs": 269.40434989448283
+          },
+          "word2": {
+            "score": 9.552772616105447,
+            "effectiveMs": 529.9592900037063
+          },
+          "word3": {
+            "score": 6.106528952167757,
+            "effectiveMs": 515.0934924980462
+          },
+          "word4": {
+            "score": 8.751543499471584,
+            "effectiveMs": 570.2648031788501
+          }
+        }
+      }
+    },
+    {
+      "key": "AQ8MBQMTDRYGCgcJEBgXEhURGQISERERDwsLAA8JDQoHBAMLBAgBEg4XAhEQDBYODBgUEhATAgUGDgUTFQY=",
+      "id": "UR2-V52-fd76f2989f7c",
+      "score": 9.054106258121646,
+      "score2": 9.045926138651106,
+      "actualSoundKeys": 21,
+      "actualRhymeKeys": 25,
+      "audit": {
+        "valid": true,
+        "M": 39,
+        "D": 2,
+        "V": 1,
+        "branches": 0,
+        "unique": 364,
+        "qz": false,
+        "zq": false
+      },
+      "erg": {
+        "mx": 134.74076558401168,
+        "hits": 2149,
+        "homeS2": 0.4168894855657435,
+        "homeFloor": 0.27808940149912614,
+        "rpMax": 0.0897981405487019,
+        "wMax": 0.047804693092295715,
+        "yMax": 0.05982694463715872,
+        "motor": 67.32163140901443
+      },
+      "strictComfort": false,
+      "independent": {
+        "a7eV4": 10.663354358098262,
+        "a7eV5": 10.113699454187843,
+        "tracks": {
+          "S2": {
+            "home": 0.4168894855657435,
+            "sfb": 0.030977861779089594,
+            "maxFinger": 0.2710166383910263,
+            "rightPinky": 0.04416608648325057,
+            "upperMs": 68.24911599046561,
+            "e34": 1.331148531551584,
+            "geometry": 1.3669397761186095
+          },
+          "C2": {
+            "home": 0.4216184654263635,
+            "sfb": 0.01279222751038541,
+            "maxFinger": 0.29099592915525135,
+            "rightPinky": 0.0897981405487019,
+            "upperMs": 66.58819622573088,
+            "e34": 1.3303142433645794,
+            "geometry": 1.3558554568146768
+          },
+          "C3": {
+            "home": 0.3883073679971305,
+            "sfb": 0.03723477140496227,
+            "maxFinger": 0.28146580419633355,
+            "rightPinky": 0.05986542703246794,
+            "upperMs": 193.3006191693892,
+            "e34": 1.3324117899289056,
+            "geometry": 1.3711839137004385
+          },
+          "C4-Snow": {
+            "home": 0.27808940149912614,
+            "sfb": 0.06859526070181401,
+            "maxFinger": 0.28054247522738374,
+            "rightPinky": 0.04505220518916299,
+            "upperMs": 326.2126624175272,
+            "e34": 1.3085068174631078,
+            "geometry": 1.3137709548934569
+          },
+          "C4-SBxh": {
+            "home": 0.2978285172752604,
+            "sfb": 0.07059399635335198,
+            "maxFinger": 0.27854404760472196,
+            "rightPinky": 0.04489907027435095,
+            "upperMs": 325.11695195201196,
+            "e34": 1.3013662536457267,
+            "geometry": 1.3185259960131233
+          },
+          "C4-SBzr": {
+            "home": 0.2978285172752604,
+            "sfb": 0.07059399635335198,
+            "maxFinger": 0.27854404760472196,
+            "rightPinky": 0.04489907027435095,
+            "upperMs": 325.11695195201196,
+            "e34": 1.3013662536457267,
+            "geometry": 1.3185259960131233
+          },
+          "C5-TX2": {
+            "home": 0.2868323299815329,
+            "sfb": 0.018680883047886107,
+            "maxFinger": 0.2769052004004058,
+            "rightPinky": 0.03601719575750668,
+            "upperMs": 467.8509693115809,
+            "e34": 1.2967626697817691,
+            "geometry": 1.3099882954836544
+          },
+          "W4-Snow": {
+            "home": 0.3930134666494989,
+            "sfb": 0.06173639947820255,
+            "maxFinger": 0.2647157359271516,
+            "rightPinky": 0.046438598993264815,
+            "upperMs": 359.9190996057522,
+            "e34": 1.3417792291300235,
+            "geometry": 1.3711950458417244
+          },
+          "W4-SBxh": {
+            "home": 0.3876540960117631,
+            "sfb": 0.05449251411937619,
+            "maxFinger": 0.26898031293060437,
+            "rightPinky": 0.04168936148917613,
+            "upperMs": 353.5189138991006,
+            "e34": 1.3336465295855435,
+            "geometry": 1.3688941550348515
+          },
+          "W4-SBzr": {
+            "home": 0.3771240623364478,
+            "sfb": 0.052480878458006225,
+            "maxFinger": 0.26709860319784423,
+            "rightPinky": 0.04279231822423003,
+            "upperMs": 354.4086257511651,
+            "e34": 1.336485041609085,
+            "geometry": 1.3705897409647825
+          },
+          "W4-common": {
+            "home": 0.3815942028336533,
+            "sfb": 0.05283191047924867,
+            "maxFinger": 0.26898683575904875,
+            "rightPinky": 0.040706365086627644,
+            "upperMs": 352.07791182418765,
+            "e34": 1.3321275445758016,
+            "geometry": 1.3684263965122456
+          },
+          "W4-union": {
+            "home": 0.3930139133887014,
+            "sfb": 0.06177917598025572,
+            "maxFinger": 0.2649092248502984,
+            "rightPinky": 0.0464291193663472,
+            "upperMs": 359.98043707313076,
+            "e34": 1.3418160029311135,
+            "geometry": 1.3712638583742613
+          },
+          "W6-Snow": {
+            "home": 0.38300563584337516,
+            "sfb": 0.05404073689440517,
+            "maxFinger": 0.24003923160181695,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 678.2886667587926,
+            "e34": 1.3251964464701458,
+            "geometry": 1.343610614879527
+          },
+          "W6-21": {
+            "home": 0.38300563584337516,
+            "sfb": 0.05384030141036618,
+            "maxFinger": 0.24003923160181695,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 677.9767388368932,
+            "e34": 1.3240199965459145,
+            "geometry": 1.34380564000663
+          },
+          "WX-Snow-12": {
+            "home": 0.31167281193333024,
+            "sfb": 0.0517728591036065,
+            "maxFinger": 0.2340032400071403,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 667.5532199409714,
+            "e34": 1.3200125061481305,
+            "geometry": 1.3305814339582303
+          },
+          "WX-Snow-21": {
+            "home": 0.31167281193333024,
+            "sfb": 0.05115537502222106,
+            "maxFinger": 0.2340032400071403,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 667.1938009654941,
+            "e34": 1.3200503422129737,
+            "geometry": 1.33151466717651
+          },
+          "WX-SBxh-12": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05383356657508833,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 667.9181147053426,
+            "e34": 1.3182623698102753,
+            "geometry": 1.3277941273797647
+          },
+          "WX-SBxh-21": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05381138594806186,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 667.7811022872585,
+            "e34": 1.318574138939204,
+            "geometry": 1.3291194095799805
+          },
+          "WX-SBzr-12": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05383356657508833,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 667.9181147053426,
+            "e34": 1.3182623698102753,
+            "geometry": 1.3277941273797647
+          },
+          "WX-SBzr-21": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05381138594806186,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 667.7811022872585,
+            "e34": 1.318574138939204,
+            "geometry": 1.3291194095799805
+          }
+        }
+      },
+      "independentPass": false,
+      "productionAdmissible": false,
+      "semantics": {
+        "toneKeyClass": "AEUIO",
+        "toneKeySet": "AEIOU",
+        "shapeKeysByMeaning": "AEUIO",
+        "toneKeysByTone": "IEUAO",
+        "toneDigitsByShapeMeaning": "42310"
+      },
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "W",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "Q",
+        "x": "Y",
+        "zh": "X",
+        "ch": "S",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "S",
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "P",
+        "Y": "L",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "P",
+        "an": "J",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "E",
+        "en": "D",
+        "eng": "L",
+        "er": "E",
+        "i": "I",
+        "ia": "B",
+        "ian": "S",
+        "iang": "O",
+        "iao": "X",
+        "ie": "C",
+        "in": "R",
+        "ing": "Q",
+        "iong": "M",
+        "iu": "W",
+        "o": "O",
+        "ong": "M",
+        "ou": "Y",
+        "u": "U",
+        "ua": "S",
+        "uai": "Q",
+        "uan": "T",
+        "uang": "C",
+        "ui": "F",
+        "un": "G",
+        "uo": "O",
+        "v": "F",
+        "van": "T",
+        "ve": "V",
+        "vn": "G"
+      },
+      "modesV52": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 98.28555599038079,
+            "firstAuxRate": 0.21700028408482874,
+            "secondAuxRate": 0.044955137637286716,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.00509282579962745,
+            "meanRejectedCandidates": 0.006275947301270148,
+            "meanPageActions": 0.000004093441336248955,
+            "meanKeys": 2.2619554217221154,
+            "effectiveMs": 180.2429033842563
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 382.1708337585806,
+            "firstAuxRate": 0.1945948168044231,
+            "secondAuxRate": 0.03798530168267382,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.004252526869712429,
+            "meanRejectedCandidates": 0.005149376014306186,
+            "meanPageActions": 0.000001699479690100486,
+            "meanKeys": 4.232580118487097,
+            "effectiveMs": 454.75436407115944
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 334.845803311769,
+            "firstAuxRate": 0.2209904612864244,
+            "secondAuxRate": 0.0519252768313618,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.007064238372671177,
+            "meanRejectedCandidates": 0.008729313494595587,
+            "meanPageActions": 0.000016357064872155597,
+            "meanKeys": 3.763608821500812,
+            "effectiveMs": 421.40044056489893
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 428.4298330874727,
+            "firstAuxRate": 0.20123716340204462,
+            "secondAuxRate": 0.02739316614621298,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0020955229042944465,
+            "meanRejectedCandidates": 0.002382808732592955,
+            "meanPageActions": 0,
+            "meanKeys": 4.228630329548258,
+            "effectiveMs": 498.3953861311563
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 99.28826869396389,
+            "firstAuxRate": 0.21848613285245908,
+            "secondAuxRate": 0.05225295461783314,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.007980167729220864,
+            "meanRejectedCandidates": 0.010215874788970453,
+            "meanPageActions": 0.00004092393707292751,
+            "meanKeys": 2.270739087470292,
+            "effectiveMs": 185.8211664931545
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 383.3294356698982,
+            "firstAuxRate": 0.1945948168044231,
+            "secondAuxRate": 0.04167152751385186,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.00611986076984476,
+            "meanRejectedCandidates": 0.00765123597551659,
+            "meanPageActions": 0.000003211114849556396,
+            "meanKeys": 4.236266344318275,
+            "effectiveMs": 458.26478056051826
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 337.47491466915045,
+            "firstAuxRate": 0.2209904612864244,
+            "secondAuxRate": 0.06270708739101405,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.010879912094807417,
+            "meanRejectedCandidates": 0.014439299108385898,
+            "meanPageActions": 0.000023501989140561244,
+            "meanKeys": 3.7743906320604643,
+            "effectiveMs": 429.8411420814279
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 429.67727182074543,
+            "firstAuxRate": 0.20123716340204462,
+            "secondAuxRate": 0.03171896444473995,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0034186394273935682,
+            "meanRejectedCandidates": 0.004440435215292261,
+            "meanPageActions": 0.000011051915765274992,
+            "meanKeys": 4.232956127846784,
+            "effectiveMs": 501.8406311667111
+          }
+        }
+      },
+      "description1": {
+        "score": 9.054106258121646,
+        "aggregate": {
+          "motorUpperMs": 335.3752046549099,
+          "effectiveMs": 413.0499253097198,
+          "firstAuxRate": 0.203959213928397,
+          "secondAuxRate": 0.042493589554835474,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005637372437223874,
+          "meanRejectedCandidates": 0.007073792884214636,
+          "meanPageActions": 0.000009221677650511578,
+          "meanKeys": 3.8282349840470706,
+          "cognitiveMs": 77.6747206548099
+        },
+        "modes": {
+          "keytao": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 98.28555599038079,
+              "firstAuxRate": 0.21700028408482874,
+              "secondAuxRate": 0.044955137637286716,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00509282579962745,
+              "meanRejectedCandidates": 0.006275947301270148,
+              "meanPageActions": 0.000004093441336248955,
+              "meanKeys": 2.2619554217221154,
+              "effectiveMs": 180.2429033842563
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 382.1708337585806,
+              "firstAuxRate": 0.1945948168044231,
+              "secondAuxRate": 0.03798530168267382,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.004252526869712429,
+              "meanRejectedCandidates": 0.005149376014306186,
+              "meanPageActions": 0.000001699479690100486,
+              "meanKeys": 4.232580118487097,
+              "effectiveMs": 454.75436407115944
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 334.845803311769,
+              "firstAuxRate": 0.2209904612864244,
+              "secondAuxRate": 0.0519252768313618,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.007064238372671177,
+              "meanRejectedCandidates": 0.008729313494595587,
+              "meanPageActions": 0.000016357064872155597,
+              "meanKeys": 3.763608821500812,
+              "effectiveMs": 421.40044056489893
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 428.4298330874727,
+              "firstAuxRate": 0.20123716340204462,
+              "secondAuxRate": 0.02739316614621298,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0020955229042944465,
+              "meanRejectedCandidates": 0.002382808732592955,
+              "meanPageActions": 0,
+              "meanKeys": 4.228630329548258,
+              "effectiveMs": 498.3953861311563
+            }
+          },
+          "sanpin": {
+            "character": {
+              "count": 6238,
+              "totalWeight": 34283114,
+              "motorUpperMs": 99.28826869396389,
+              "firstAuxRate": 0.21848613285245908,
+              "secondAuxRate": 0.05225295461783314,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.007980167729220864,
+              "meanRejectedCandidates": 0.010215874788970453,
+              "meanPageActions": 0.00004092393707292751,
+              "meanKeys": 2.270739087470292,
+              "effectiveMs": 185.8211664931545
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 383.3294356698982,
+              "firstAuxRate": 0.1945948168044231,
+              "secondAuxRate": 0.04167152751385186,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00611986076984476,
+              "meanRejectedCandidates": 0.00765123597551659,
+              "meanPageActions": 0.000003211114849556396,
+              "meanKeys": 4.236266344318275,
+              "effectiveMs": 458.26478056051826
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 337.47491466915045,
+              "firstAuxRate": 0.2209904612864244,
+              "secondAuxRate": 0.06270708739101405,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.010879912094807417,
+              "meanRejectedCandidates": 0.014439299108385898,
+              "meanPageActions": 0.000023501989140561244,
+              "meanKeys": 3.7743906320604643,
+              "effectiveMs": 429.8411420814279
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 429.67727182074543,
+              "firstAuxRate": 0.20123716340204462,
+              "secondAuxRate": 0.03171896444473995,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0034186394273935682,
+              "meanRejectedCandidates": 0.004440435215292261,
+              "meanPageActions": 0.000011051915765274992,
+              "meanKeys": 4.232956127846784,
+              "effectiveMs": 501.8406311667111
+            }
+          }
+        },
+        "memberScores": {
+          "keytao": 9.070034508266389,
+          "sanpin": 9.038093497177996
+        },
+        "trackScores": {
+          "keytao": {
+            "character": 9.220323091634107,
+            "word2": 9.42722305963713,
+            "word3": 7.25090416057132,
+            "word4": 9.120363041862808
+          },
+          "sanpin": {
+            "character": 9.173065902318164,
+            "word2": 9.437739555069783,
+            "word3": 7.017814389454083,
+            "word4": 9.057370089297587
+          }
+        },
+        "equalTracks": {
+          "character": {
+            "score": 9.196785557325246,
+            "effectiveMs": 183.0320349387054
+          },
+          "word2": {
+            "score": 9.43248570425872,
+            "effectiveMs": 456.50957231583885
+          },
+          "word3": {
+            "score": 7.137213455481782,
+            "effectiveMs": 425.6207913231634
+          },
+          "word4": {
+            "score": 9.089030282891851,
+            "effectiveMs": 500.1180086489337
+          }
+        }
+      },
+      "description2": {
+        "score": 9.045926138651106,
+        "aggregate": {
+          "motorUpperMs": 335.3752046549099,
+          "effectiveMs": 490.7246459645298,
+          "firstAuxRate": 0.203959213928397,
+          "secondAuxRate": 0.042493589554835474,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005637372437223874,
+          "meanRejectedCandidates": 0.007073792884214636,
+          "meanPageActions": 0.000009221677650511578,
+          "meanKeys": 3.8282349840470706,
+          "cognitiveMs": 155.34944130961992
+        },
+        "modes": {
+          "keytao": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 98.28555599038079,
+              "firstAuxRate": 0.21700028408482874,
+              "secondAuxRate": 0.044955137637286716,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00509282579962745,
+              "meanRejectedCandidates": 0.006275947301270148,
+              "meanPageActions": 0.000004093441336248955,
+              "meanKeys": 2.2619554217221154,
+              "effectiveMs": 262.2002507781318
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 382.1708337585806,
+              "firstAuxRate": 0.1945948168044231,
+              "secondAuxRate": 0.03798530168267382,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.004252526869712429,
+              "meanRejectedCandidates": 0.005149376014306186,
+              "meanPageActions": 0.000001699479690100486,
+              "meanKeys": 4.232580118487097,
+              "effectiveMs": 527.3378943837383
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 334.845803311769,
+              "firstAuxRate": 0.2209904612864244,
+              "secondAuxRate": 0.0519252768313618,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.007064238372671177,
+              "meanRejectedCandidates": 0.008729313494595587,
+              "meanPageActions": 0.000016357064872155597,
+              "meanKeys": 3.763608821500812,
+              "effectiveMs": 507.9550778180289
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 428.4298330874727,
+              "firstAuxRate": 0.20123716340204462,
+              "secondAuxRate": 0.02739316614621298,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0020955229042944465,
+              "meanRejectedCandidates": 0.002382808732592955,
+              "meanPageActions": 0,
+              "meanKeys": 4.228630329548258,
+              "effectiveMs": 568.3609391748398
+            }
+          },
+          "sanpin": {
+            "character": {
+              "count": 6238,
+              "totalWeight": 34283114,
+              "motorUpperMs": 99.28826869396389,
+              "firstAuxRate": 0.21848613285245908,
+              "secondAuxRate": 0.05225295461783314,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.007980167729220864,
+              "meanRejectedCandidates": 0.010215874788970453,
+              "meanPageActions": 0.00004092393707292751,
+              "meanKeys": 2.270739087470292,
+              "effectiveMs": 272.35406429234513
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 383.3294356698982,
+              "firstAuxRate": 0.1945948168044231,
+              "secondAuxRate": 0.04167152751385186,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.00611986076984476,
+              "meanRejectedCandidates": 0.00765123597551659,
+              "meanPageActions": 0.000003211114849556396,
+              "meanKeys": 4.236266344318275,
+              "effectiveMs": 533.2001254511383
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 337.47491466915045,
+              "firstAuxRate": 0.2209904612864244,
+              "secondAuxRate": 0.06270708739101405,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.010879912094807417,
+              "meanRejectedCandidates": 0.014439299108385898,
+              "meanPageActions": 0.000023501989140561244,
+              "meanKeys": 3.7743906320604643,
+              "effectiveMs": 522.2073694937053
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 429.67727182074543,
+              "firstAuxRate": 0.20123716340204462,
+              "secondAuxRate": 0.03171896444473995,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0034186394273935682,
+              "meanRejectedCandidates": 0.004440435215292261,
+              "meanPageActions": 0.000011051915765274992,
+              "meanKeys": 4.232956127846784,
+              "effectiveMs": 574.0039905126768
+            }
+          }
+        },
+        "memberScores": {
+          "keytao": 9.05275676227197,
+          "sanpin": 9.039080006370313
+        },
+        "trackScores": {
+          "keytao": {
+            "character": 9.413169466302746,
+            "word2": 9.551771206711782,
+            "word3": 6.200454341542121,
+            "word4": 8.799493415380967
+          },
+          "sanpin": {
+            "character": 9.406564424155135,
+            "word2": 9.564931273750512,
+            "word3": 6.007772273829112,
+            "word4": 8.731367727234051
+          }
+        },
+        "equalTracks": {
+          "character": {
+            "score": 9.409868683825678,
+            "effectiveMs": 267.2771575352385
+          },
+          "word2": {
+            "score": 9.558358034833681,
+            "effectiveMs": 530.2690099174383
+          },
+          "word3": {
+            "score": 6.106392946422895,
+            "effectiveMs": 515.0812236558671
+          },
+          "word4": {
+            "score": 8.765629119599325,
+            "effectiveMs": 571.1824648437582
+          }
+        }
+      }
+    },
+    {
+      "key": "AQ8MBQMTDRYGCgcJEBgXEhURGQISERERDwsLAA8JDQoHBAMLBAgBEgIXDhEQDBYODBgUEhkTAgUGDgUTFQY=",
+      "id": "UR2-V52-e6f0fecf5c89",
+      "score": 9.077765288120736,
+      "score2": 9.071302562189015,
+      "actualSoundKeys": 21,
+      "actualRhymeKeys": 26,
+      "audit": {
+        "valid": true,
+        "M": 39,
+        "D": 2,
+        "V": 1,
+        "branches": 0,
+        "unique": 359,
+        "qz": false,
+        "zq": false
+      },
+      "erg": {
+        "mx": 133.54521323794992,
+        "hits": 2149,
+        "homeS2": 0.4168894855657435,
+        "homeFloor": 0.27808940149912614,
+        "rpMax": 0.0897981405487019,
+        "wMax": 0.047804693092295715,
+        "yMax": 0.05982694463715872,
+        "motor": 67.5908435030073
+      },
+      "strictComfort": false,
+      "independent": {
+        "a7eV4": 10.663471795363723,
+        "a7eV5": 10.141492313881631,
+        "tracks": {
+          "S2": {
+            "home": 0.4168894855657435,
+            "sfb": 0.030784064380877694,
+            "maxFinger": 0.2710166383910263,
+            "rightPinky": 0.04416608648325057,
+            "upperMs": 68.51590443465487,
+            "e34": 1.331566768074731,
+            "geometry": 1.3666726305817962
+          },
+          "C2": {
+            "home": 0.4216184654263635,
+            "sfb": 0.0125058718516741,
+            "maxFinger": 0.29099592915525135,
+            "rightPinky": 0.0897981405487019,
+            "upperMs": 66.66133454880382,
+            "e34": 1.3291488384751424,
+            "geometry": 1.3553887735459613
+          },
+          "C3": {
+            "home": 0.3883073679971305,
+            "sfb": 0.036639368759705165,
+            "maxFinger": 0.28146580419633355,
+            "rightPinky": 0.05986542703246794,
+            "upperMs": 193.33720089078633,
+            "e34": 1.331487264689552,
+            "geometry": 1.3707335606589601
+          },
+          "C4-Snow": {
+            "home": 0.27808940149912614,
+            "sfb": 0.0705296530624955,
+            "maxFinger": 0.28054247522738374,
+            "rightPinky": 0.04505220518916299,
+            "upperMs": 327.0987106947865,
+            "e34": 1.3089891976934165,
+            "geometry": 1.3139765746299124
+          },
+          "C4-SBxh": {
+            "home": 0.2978285172752604,
+            "sfb": 0.07245140417701425,
+            "maxFinger": 0.27854404760472196,
+            "rightPinky": 0.04489907027435095,
+            "upperMs": 325.86404348593095,
+            "e34": 1.3019904578492227,
+            "geometry": 1.318714637650138
+          },
+          "C4-SBzr": {
+            "home": 0.2978285172752604,
+            "sfb": 0.07245140417701425,
+            "maxFinger": 0.27854404760472196,
+            "rightPinky": 0.04489907027435095,
+            "upperMs": 325.86404348593095,
+            "e34": 1.3019904578492227,
+            "geometry": 1.318714637650138
+          },
+          "C5-TX2": {
+            "home": 0.2868323299815329,
+            "sfb": 0.018382166370899393,
+            "maxFinger": 0.2769052004004058,
+            "rightPinky": 0.03601719575750668,
+            "upperMs": 468.1595761537778,
+            "e34": 1.2962064421195074,
+            "geometry": 1.3097173468834522
+          },
+          "W4-Snow": {
+            "home": 0.3930134666494989,
+            "sfb": 0.06144025130328915,
+            "maxFinger": 0.2647157359271516,
+            "rightPinky": 0.046438598993264815,
+            "upperMs": 361.09499791556624,
+            "e34": 1.342373156987913,
+            "geometry": 1.371012807333264
+          },
+          "W4-SBxh": {
+            "home": 0.3876540960117631,
+            "sfb": 0.05417502495200069,
+            "maxFinger": 0.26898031293060437,
+            "rightPinky": 0.04168936148917613,
+            "upperMs": 356.16869526693273,
+            "e34": 1.3356207609008295,
+            "geometry": 1.36897482072331
+          },
+          "W4-SBzr": {
+            "home": 0.3771240623364478,
+            "sfb": 0.051996612254427504,
+            "maxFinger": 0.26709860319784423,
+            "rightPinky": 0.04279231822423003,
+            "upperMs": 356.6409260076975,
+            "e34": 1.3380367301979277,
+            "geometry": 1.3705274882137723
+          },
+          "W4-common": {
+            "home": 0.3815942028336533,
+            "sfb": 0.05243703098174688,
+            "maxFinger": 0.26898683575904875,
+            "rightPinky": 0.040706365086627644,
+            "upperMs": 354.75016942239034,
+            "e34": 1.3340334085744987,
+            "geometry": 1.3684276094037724
+          },
+          "W4-union": {
+            "home": 0.3930139133887014,
+            "sfb": 0.06147883910603233,
+            "maxFinger": 0.2649092248502984,
+            "rightPinky": 0.0464291193663472,
+            "upperMs": 361.1776066649095,
+            "e34": 1.342438196138398,
+            "geometry": 1.3710903467714597
+          },
+          "W6-Snow": {
+            "home": 0.38300563584337516,
+            "sfb": 0.053850971414105324,
+            "maxFinger": 0.24003923160181695,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 679.3482244945614,
+            "e34": 1.3256885910990315,
+            "geometry": 1.3435840367520644
+          },
+          "W6-21": {
+            "home": 0.38300563584337516,
+            "sfb": 0.05322669173939577,
+            "maxFinger": 0.24003923160181695,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 678.9638699617752,
+            "e34": 1.3244581408242089,
+            "geometry": 1.3437440737655642
+          },
+          "WX-Snow-12": {
+            "home": 0.31167281193333024,
+            "sfb": 0.052018299397320125,
+            "maxFinger": 0.2340032400071403,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 668.7745735755334,
+            "e34": 1.3205916457113538,
+            "geometry": 1.3306770796318612
+          },
+          "WX-Snow-21": {
+            "home": 0.31167281193333024,
+            "sfb": 0.05148249799935932,
+            "maxFinger": 0.2340032400071403,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 668.2071757305947,
+            "e34": 1.320823206960396,
+            "geometry": 1.3317357501115048
+          },
+          "WX-SBxh-12": {
+            "home": 0.2993280476244743,
+            "sfb": 0.0540901866348335,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 669.009629760676,
+            "e34": 1.31880168662844,
+            "geometry": 1.3278724405234767
+          },
+          "WX-SBxh-21": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05362184231457573,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 668.517305889119,
+            "e34": 1.318885760329786,
+            "geometry": 1.3291299059586226
+          },
+          "WX-SBzr-12": {
+            "home": 0.2993280476244743,
+            "sfb": 0.0540901866348335,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 669.009629760676,
+            "e34": 1.31880168662844,
+            "geometry": 1.3278724405234767
+          },
+          "WX-SBzr-21": {
+            "home": 0.2993280476244743,
+            "sfb": 0.05362184231457573,
+            "maxFinger": 0.2571329278453438,
+            "rightPinky": 0.030959065995509877,
+            "upperMs": 668.517305889119,
+            "e34": 1.318885760329786,
+            "geometry": 1.3291299059586226
+          }
+        }
+      },
+      "independentPass": false,
+      "productionAdmissible": false,
+      "semantics": {
+        "toneKeyClass": "AEUIO",
+        "toneKeySet": "AEIOU",
+        "shapeKeysByMeaning": "AEUIO",
+        "toneKeysByTone": "IEUAO",
+        "toneDigitsByShapeMeaning": "42310"
+      },
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "W",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "Q",
+        "x": "Y",
+        "zh": "X",
+        "ch": "S",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "S",
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "P",
+        "Y": "L",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "P",
+        "an": "J",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "E",
+        "en": "D",
+        "eng": "L",
+        "er": "E",
+        "i": "I",
+        "ia": "B",
+        "ian": "S",
+        "iang": "C",
+        "iao": "X",
+        "ie": "O",
+        "in": "R",
+        "ing": "Q",
+        "iong": "M",
+        "iu": "W",
+        "o": "O",
+        "ong": "M",
+        "ou": "Y",
+        "u": "U",
+        "ua": "S",
+        "uai": "Z",
+        "uan": "T",
+        "uang": "C",
+        "ui": "F",
+        "un": "G",
+        "uo": "O",
+        "v": "F",
+        "van": "T",
+        "ve": "V",
+        "vn": "G"
+      },
+      "modesV52": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 98.51255759278445,
+            "firstAuxRate": 0.21812159462229408,
+            "secondAuxRate": 0.045701518187218335,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005228260230123916,
+            "meanRejectedCandidates": 0.006444100023589918,
+            "meanPageActions": 0.000004122680202936448,
+            "meanKeys": 2.2638231128095123,
+            "effectiveMs": 181.1198893789529
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 383.2976575373318,
+            "firstAuxRate": 0.1948586676161304,
+            "secondAuxRate": 0.03802522905041349,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.004243192078657075,
+            "meanRejectedCandidates": 0.005135591777322594,
+            "meanPageActions": 0.000001699479690100486,
+            "meanKeys": 4.232883896666544,
+            "effectiveMs": 455.9660312172624
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 335.35755717290635,
+            "firstAuxRate": 0.2209311139294453,
+            "secondAuxRate": 0.05185818808057877,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.007058205587186608,
+            "meanRejectedCandidates": 0.008723080978064126,
+            "meanPageActions": 0.000016357064872155597,
+            "meanKeys": 3.7634823853930497,
+            "effectiveMs": 421.8703322965904
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 428.418708902567,
+            "firstAuxRate": 0.20118762353669678,
+            "secondAuxRate": 0.027392054315036593,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.002113289266317117,
+            "meanRejectedCandidates": 0.00239988699063024,
+            "meanPageActions": 0,
+            "meanKeys": 4.228579677851734,
+            "effectiveMs": 498.3805801674088
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 99.7239854441487,
+            "firstAuxRate": 0.21960475935762427,
+            "secondAuxRate": 0.05274978813184823,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.008319401790630804,
+            "meanRejectedCandidates": 0.010646582454557657,
+            "meanPageActions": 0.00004159482128723779,
+            "meanKeys": 2.2723545474894724,
+            "effectiveMs": 186.966798334483
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 384.43532669580765,
+            "firstAuxRate": 0.1948586676161304,
+            "secondAuxRate": 0.041804928484275625,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.006108892258558334,
+            "meanRejectedCandidates": 0.007649183836449165,
+            "meanPageActions": 0.000003211114849556396,
+            "meanKeys": 4.236663596100406,
+            "effectiveMs": 459.48316340734186
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 337.9427084260135,
+            "firstAuxRate": 0.2209311139294453,
+            "secondAuxRate": 0.06264761202459124,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.010872529309019531,
+            "meanRejectedCandidates": 0.01442816682612679,
+            "meanPageActions": 0.000023501989140561244,
+            "meanKeys": 3.7742718093370624,
+            "effectiveMs": 430.2683027356847
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 429.67613147412027,
+            "firstAuxRate": 0.20118762353669678,
+            "secondAuxRate": 0.031734487829210255,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0034196727905716215,
+            "meanRejectedCandidates": 0.004440780474484928,
+            "meanPageActions": 0.000011051915765274992,
+            "meanKeys": 4.232922111365907,
+            "effectiveMs": 501.8299231566892
+          }
+        }
+      },
+      "description1": {
+        "score": 9.077765288120736,
+        "aggregate": {
+          "motorUpperMs": 336.0692168093299,
+          "effectiveMs": 413.89861749530183,
+          "firstAuxRate": 0.2042596528840821,
+          "secondAuxRate": 0.04263117676437923,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005672300998791319,
+          "meanRejectedCandidates": 0.007119743715730744,
+          "meanPageActions": 0.000009280021240594726,
+          "meanKeys": 3.8286730102122988,
+          "cognitiveMs": 77.82940068597196
+        },
+        "modes": {
+          "keytao": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 98.51255759278445,
+              "firstAuxRate": 0.21812159462229408,
+              "secondAuxRate": 0.045701518187218335,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.005228260230123916,
+              "meanRejectedCandidates": 0.006444100023589918,
+              "meanPageActions": 0.000004122680202936448,
+              "meanKeys": 2.2638231128095123,
+              "effectiveMs": 181.1198893789529
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 383.2976575373318,
+              "firstAuxRate": 0.1948586676161304,
+              "secondAuxRate": 0.03802522905041349,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.004243192078657075,
+              "meanRejectedCandidates": 0.005135591777322594,
+              "meanPageActions": 0.000001699479690100486,
+              "meanKeys": 4.232883896666544,
+              "effectiveMs": 455.9660312172624
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 335.35755717290635,
+              "firstAuxRate": 0.2209311139294453,
+              "secondAuxRate": 0.05185818808057877,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.007058205587186608,
+              "meanRejectedCandidates": 0.008723080978064126,
+              "meanPageActions": 0.000016357064872155597,
+              "meanKeys": 3.7634823853930497,
+              "effectiveMs": 421.8703322965904
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 428.418708902567,
+              "firstAuxRate": 0.20118762353669678,
+              "secondAuxRate": 0.027392054315036593,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.002113289266317117,
+              "meanRejectedCandidates": 0.00239988699063024,
+              "meanPageActions": 0,
+              "meanKeys": 4.228579677851734,
+              "effectiveMs": 498.3805801674088
+            }
+          },
+          "sanpin": {
+            "character": {
+              "count": 6238,
+              "totalWeight": 34283114,
+              "motorUpperMs": 99.7239854441487,
+              "firstAuxRate": 0.21960475935762427,
+              "secondAuxRate": 0.05274978813184823,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.008319401790630804,
+              "meanRejectedCandidates": 0.010646582454557657,
+              "meanPageActions": 0.00004159482128723779,
+              "meanKeys": 2.2723545474894724,
+              "effectiveMs": 186.966798334483
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 384.43532669580765,
+              "firstAuxRate": 0.1948586676161304,
+              "secondAuxRate": 0.041804928484275625,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.006108892258558334,
+              "meanRejectedCandidates": 0.007649183836449165,
+              "meanPageActions": 0.000003211114849556396,
+              "meanKeys": 4.236663596100406,
+              "effectiveMs": 459.48316340734186
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 337.9427084260135,
+              "firstAuxRate": 0.2209311139294453,
+              "secondAuxRate": 0.06264761202459124,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.010872529309019531,
+              "meanRejectedCandidates": 0.01442816682612679,
+              "meanPageActions": 0.000023501989140561244,
+              "meanKeys": 3.7742718093370624,
+              "effectiveMs": 430.2683027356847
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 429.67613147412027,
+              "firstAuxRate": 0.20118762353669678,
+              "secondAuxRate": 0.031734487829210255,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0034196727905716215,
+              "meanRejectedCandidates": 0.004440780474484928,
+              "meanPageActions": 0.000011051915765274992,
+              "meanKeys": 4.232922111365907,
+              "effectiveMs": 501.8299231566892
+            }
+          }
+        },
+        "memberScores": {
+          "keytao": 9.09266441279044,
+          "sanpin": 9.062792439354892
+        },
+        "trackScores": {
+          "keytao": {
+            "character": 9.265185297391534,
+            "word2": 9.45234135945527,
+            "word3": 7.258989439048419,
+            "word4": 9.12009210082218
+          },
+          "sanpin": {
+            "character": 9.22962004293964,
+            "word2": 9.46283155531606,
+            "word3": 7.024788440778104,
+            "word4": 9.057176827924025
+          }
+        },
+        "equalTracks": {
+          "character": {
+            "score": 9.247453963389137,
+            "effectiveMs": 184.04334385671797
+          },
+          "word2": {
+            "score": 9.457590820713687,
+            "effectiveMs": 457.72459731230214
+          },
+          "word3": {
+            "score": 7.144767349383333,
+            "effectiveMs": 426.0693175161375
+          },
+          "word4": {
+            "score": 9.088797782338682,
+            "effectiveMs": 500.105251662049
+          }
+        }
+      },
+      "description2": {
+        "score": 9.071302562189015,
+        "aggregate": {
+          "motorUpperMs": 336.0692168093299,
+          "effectiveMs": 491.72801818127374,
+          "firstAuxRate": 0.2042596528840821,
+          "secondAuxRate": 0.04263117676437923,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005672300998791319,
+          "meanRejectedCandidates": 0.007119743715730744,
+          "meanPageActions": 0.000009280021240594726,
+          "meanKeys": 3.8286730102122988,
+          "cognitiveMs": 155.65880137194387
+        },
+        "modes": {
+          "keytao": {
+            "character": {
+              "count": 6233,
+              "totalWeight": 34201052,
+              "motorUpperMs": 98.51255759278445,
+              "firstAuxRate": 0.21812159462229408,
+              "secondAuxRate": 0.045701518187218335,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.005228260230123916,
+              "meanRejectedCandidates": 0.006444100023589918,
+              "meanPageActions": 0.000004122680202936448,
+              "meanKeys": 2.2638231128095123,
+              "effectiveMs": 263.72722116512136
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 383.2976575373318,
+              "firstAuxRate": 0.1948586676161304,
+              "secondAuxRate": 0.03802522905041349,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.004243192078657075,
+              "meanRejectedCandidates": 0.005135591777322594,
+              "meanPageActions": 0.000001699479690100486,
+              "meanKeys": 4.232883896666544,
+              "effectiveMs": 528.634404897193
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 335.35755717290635,
+              "firstAuxRate": 0.2209311139294453,
+              "secondAuxRate": 0.05185818808057877,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.007058205587186608,
+              "meanRejectedCandidates": 0.008723080978064126,
+              "meanPageActions": 0.000016357064872155597,
+              "meanKeys": 3.7634823853930497,
+              "effectiveMs": 508.3831074202744
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 428.418708902567,
+              "firstAuxRate": 0.20118762353669678,
+              "secondAuxRate": 0.027392054315036593,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.002113289266317117,
+              "meanRejectedCandidates": 0.00239988699063024,
+              "meanPageActions": 0,
+              "meanKeys": 4.228579677851734,
+              "effectiveMs": 568.3424514322506
+            }
+          },
+          "sanpin": {
+            "character": {
+              "count": 6238,
+              "totalWeight": 34283114,
+              "motorUpperMs": 99.7239854441487,
+              "firstAuxRate": 0.21960475935762427,
+              "secondAuxRate": 0.05274978813184823,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.008319401790630804,
+              "meanRejectedCandidates": 0.010646582454557657,
+              "meanPageActions": 0.00004159482128723779,
+              "meanKeys": 2.2723545474894724,
+              "effectiveMs": 274.2096112248173
+            },
+            "word2": {
+              "count": 132814,
+              "totalWeight": 3604044247,
+              "motorUpperMs": 384.43532669580765,
+              "firstAuxRate": 0.1948586676161304,
+              "secondAuxRate": 0.041804928484275625,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.006108892258558334,
+              "meanRejectedCandidates": 0.007649183836449165,
+              "meanPageActions": 0.000003211114849556396,
+              "meanKeys": 4.236663596100406,
+              "effectiveMs": 534.5310001188761
+            },
+            "word3": {
+              "count": 72923,
+              "totalWeight": 1101481234,
+              "motorUpperMs": 337.9427084260135,
+              "firstAuxRate": 0.2209311139294453,
+              "secondAuxRate": 0.06264761202459124,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.010872529309019531,
+              "meanRejectedCandidates": 0.01442816682612679,
+              "meanPageActions": 0.000023501989140561244,
+              "meanKeys": 3.7742718093370624,
+              "effectiveMs": 522.5938970453559
+            },
+            "word4": {
+              "count": 77674,
+              "totalWeight": 828363172,
+              "motorUpperMs": 429.67613147412027,
+              "firstAuxRate": 0.20118762353669678,
+              "secondAuxRate": 0.031734487829210255,
+              "thirdAuxRate": 0,
+              "selectionRate": 0.0034196727905716215,
+              "meanRejectedCandidates": 0.004440780474484928,
+              "meanPageActions": 0.000011051915765274992,
+              "meanKeys": 4.232922111365907,
+              "effectiveMs": 573.983714839258
+            }
+          }
+        },
+        "memberScores": {
+          "keytao": 9.077100309231795,
+          "sanpin": 9.06549367723026
+        },
+        "trackScores": {
+          "keytao": {
+            "character": 9.467988754156597,
+            "word2": 9.575255147318948,
+            "word3": 6.205679169723685,
+            "word4": 8.799207183942517
+          },
+          "sanpin": {
+            "character": 9.47065130241669,
+            "word2": 9.58880547055442,
+            "word3": 6.012219107871552,
+            "word4": 8.731059307147323
+          }
+        },
+        "equalTracks": {
+          "character": {
+            "score": 9.46932030902867,
+            "effectiveMs": 268.96841619496934
+          },
+          "word2": {
+            "score": 9.582037494694656,
+            "effectiveMs": 531.5827025080346
+          },
+          "word3": {
+            "score": 6.111245396844758,
+            "effectiveMs": 515.4885022328151
+          },
+          "word4": {
+            "score": 8.765331929927738,
+            "effectiveMs": 571.1630831357543
+          }
+        }
+      }
+    }
+  ]
+}

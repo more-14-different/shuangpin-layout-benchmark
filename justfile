@@ -1,5 +1,19 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+r2-onsets-v52-search:
+    node --max-old-space-size=6144 tools/audit_untoned_r2_onsets_v52.js
+    node --max-old-space-size=6144 tools/export_untoned_r2_v52_templates.js
+    cargo build --release --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-r2-v52-stream
+    node --max-old-space-size=4096 tools/search_untoned_r2_v52.js
+    node --max-old-space-size=4096 tools/search_untoned_r2_v52_vowel_pairs.js
+
+r2-onsets-v52-verify:
+    node tools/finalize_untoned_r2_v52.js
+    node --max-old-space-size=6144 tools/verify_untoned_r2_v52.js
+    node --test --test-concurrency=1 tests/untoned-r2-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+    cargo test --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-r2-v52-stream
+    node tools/report_untoned_r2_v52.js
+
 recent-cr-r11:
     python -X utf8 tools/integrate_recent_cr_r11.py
     node --max-old-space-size=8192 tools/verify_recent_cr_r11.js

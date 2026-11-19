@@ -1,0 +1,30 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),zlib=require('node:zlib'),assert=require('node:assert/strict');
+const {HEADS,FINALS}=require('./ckt_v4_scheme_fixture');
+const ROOT=path.resolve(__dirname,'..'),read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const file=path.join(ROOT,'research/notes/2026-11-20-untoned-r2-onsets-v52-search.json'),r=read(file);
+assert.equal(r.completed,true,'finish the configured search before finalizing');
+const raw=fs.readFileSync(path.join(path.resolve(ROOT,process.env.R2_V52_CACHE||'research/.cache/r2-fixed-v52'),'scores.jsonl'));
+const rows=raw.toString('utf8').trim().split('\n').map(JSON.parse);
+assert.equal(rows.length,r.exactlyScored);
+assert.equal(new Set(rows.map(x=>x.key)).size,rows.length);
+for(const row of rows){assert.deepEqual(row.state.slice(0,27).map(i=>String.fromCharCode(65+i)),HEADS.map(h=>r.initialMap[h]));assert.ok(!row.audit.qz&&!row.audit.zq&&row.audit.unique<=367);}
+const actual=x=>new Set(x.state.slice(27)).size;
+const best=(field,filter=()=>true)=>rows.filter(filter).sort((a,b)=>a[field]-b[field])[0];
+const full=(x)=>({...x,actualSoundKeys:new Set(x.state.slice(0,27)).size,actualRhymeKeys:actual(x),initialMap:r.initialMap,finalMap:Object.fromEntries(FINALS.map((f,i)=>[f,String.fromCharCode(65+x.state[27+i])]))});
+const exact1=best('score',x=>actual(x)===26),exact2=best('score2',x=>actual(x)===26);
+for(const [field,row] of [['bestExact26_1',exact1],['bestExact26_2',exact2]])if(row){r[field]=row.key;if(!r.finalists.some(x=>x.key===row.key))r.finalists.push(full(row));}
+r.finalists=r.finalists.map(full);
+r.best26BudgetUnusedRhymeKeys=Object.fromEntries(['best1','best2'].map(field=>[field,[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].filter((k,i)=>!rows.find(x=>x.key===r[field]).state.slice(27).includes(i))]));
+const expanded=new Set(r.phases.filter(p=>p.kind!=='paired-vowel-budget').map(p=>p.center));r.oneHopStationary={multiplier1:expanded.has(r.best1),multiplier2:expanded.has(r.best2)};
+r.scope='bounded three-round multicenter rhyme-only descent, plus targeted two-step vowel-budget transfer; all legal one-hop endpoints only at ordinary descent centers; not a global or two/three-hop exhaustive proof';
+r.comfortableScored=rows.filter(x=>x.strictComfort).length;
+r.otherExploratoryScored=rows.length-r.historicalSeeds-r.phases.reduce((n,p)=>n+p.newScored,0);
+r.capacityMeaning='legacy 21x26 family guard permits at most 26 rhyme keys; additionally report minima using exactly 26 actual rhyme keys';
+r.rhymeKeyCounts=Object.fromEntries([...new Set(rows.map(actual))].sort().map(n=>[n,rows.filter(x=>actual(x)===n).length]));
+const files=['a7_CKT_R11.html','tools/ckt_v4_upstream_role_tables.json','research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json','research/.cache/untoned-r2-v52-templates.json','research/ckt-v4-core/target/release/score-untoned-r2-v52-stream.exe','research/config/untoned-r2-v52-historical-finals.json','research/.cache/ckt-v4-ergonomics.json'];
+r.inputHashes=Object.fromEntries(files.map(p=>[p,crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,p))).digest('hex')]));
+const target='research/notes/2026-11-20-untoned-r2-onsets-v52-scores.jsonl.gz';fs.writeFileSync(path.join(ROOT,target),zlib.gzipSync(raw,{level:9}));
+r.scoreArchive={path:target,rows:rows.length,sha256:crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,target))).digest('hex')};
+fs.writeFileSync(file,JSON.stringify(r,null,2)+'\n');
+console.log(JSON.stringify({scored:rows.length,best1:best('score').score,best2:best('score2').score2,exact26_1:exact1?.score,exact26_2:exact2?.score2,oneHopStationary:r.oneHopStationary}));
