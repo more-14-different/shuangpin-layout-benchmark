@@ -177,7 +177,40 @@ def construct_rhymes():
             (ROOT/'research/notes/2026-11-20-untoned-r2-399-rhyme-constructions.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
     return report
 
+def diverse_rhymes():
+    bounds=json.loads((ROOT/'research/notes/2026-11-20-untoned-r2-399-onset-lower-bounds.json').read_text(encoding='utf8'))
+    states=[s['state'] for s in bounds['solutions'] if s['audit']['families']==4 and s['audit']['entries']==6]
+    report={'version':1,'randomSeed':202611200399,'selection':'Eight reproducible linear MILP objectives per enumerated onset map: perturbed character motor, proximity to A/C, S2 home and minimum-home-track surrogates. Full CKT follows independently; no proxy score is reported as CKT.','attempts':[],'candidates':[]}
+    rng=np.random.default_rng(report['randomSeed']);seen=set();lm=INPUT['loadModel'];home=set(lm['homeKeys']);s2=lm['tracks'].index('S2')
+    masses=np.array(lm['masses'])[:,27:62]
+    for state in states:
+        exclusions=[]
+        for serial in range(8):
+            p,x=rhyme_problem(state,[])
+            for fset in exclusions:p.add({x[f,k]:1 for f,k in enumerate(fset)},hi=34)
+            original=np.array(p.cost);matrix=original.reshape(35,26)
+            spread=np.maximum(np.ptp(matrix,axis=1),.001)
+            noise=rng.normal(size=(35,26))*spread[:,None]*([.1,.4,1.2][serial%3])
+            home_weight=np.zeros(35)
+            if serial in [2,3]:home_weight=masses[s2]*[80,180][serial-2]
+            if serial in [4,5]:home_weight=masses[-1]*[150,300][serial-4]
+            anchor=INPUT['baselines'][serial%2]['finalMap']
+            for (f,k),v in x.items():
+                if serial>=6:p.cost[v]=float(LETTERS[k]!=anchor[FINALS[f]])*(.3 if serial==6 else 2)+float(original[v])*.1+noise[f,k]*.1
+                else:p.cost[v]=float(original[v])+noise[f,k]-home_weight[f]*(LETTERS[k] in home)
+            start=time.time();r=p.solve(4)
+            report['attempts'].append({'onsets':state,'objective':serial,'status':int(r.status),'seconds':time.time()-start})
+            if r.x is not None:
+                final=[next(k for k in range(26) if r.x[x[f,k]]>.5) for f in range(35)];exclusions.append(final)
+                codes=[26*state[h]+final[f] for h,f in PAIRS];assert len(set(codes))==399
+                key=tuple(state+final)
+                if key not in seen:seen.add(key);report['candidates'].append({'case':'full-26','state':list(key),'linearObjective':serial,'onsetChanges':counts(state)})
+        print(json.dumps({'onsetsFinished':len(report['attempts'])//8,'candidates':len(report['candidates'])}),flush=True)
+    path=ROOT/'research/notes/2026-11-20-untoned-r2-399-diverse-constructions.json'
+    path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf8');return report
+
 if __name__=='__main__':
     if '--certificate' in sys.argv:capacity_certificate()
+    elif '--diverse' in sys.argv:diverse_rhymes()
     elif '--rhymes' in sys.argv:construct_rhymes()
     else:initial_bounds()
