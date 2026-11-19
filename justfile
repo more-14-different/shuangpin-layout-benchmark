@@ -1,5 +1,19 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cr-7e-refine-search:
+    python -X utf8 tools/refine_7e_v52.py
+    python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-7e-refinement
+
+cr-7e-refine-audit:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/audit_f19_v52_robustness.py --prefix research/notes/2026-11-19-7e-refinement --resume-report research/notes/2026-11-19-9f-refinement-robustness.json --resume-policies research/notes/2026-11-19-9f-refinement-policies.json.gz
+    python -X utf8 tools/f19_v52_ergonomics.py --prefix research/notes/2026-11-19-7e-refinement
+    node --max-old-space-size=6144 tools/verify_f19_v52_audit.js --prefix research/notes/2026-11-19-7e-refinement
+    $env:OPENBLAS_NUM_THREADS='1'; python -X utf8 tools/report_7e_refinement.py
+
+cr-7e-refine-test:
+    python -m unittest discover -s tests -p test_7e_refinement.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 cr-9f-refine-search:
     python -X utf8 tools/refine_9f_v52.py
     python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-9f-refinement
