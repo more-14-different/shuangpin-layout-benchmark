@@ -1,5 +1,19 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+cd3-refine-search:
+    python -X utf8 tools/refine_cd3_v52.py
+    python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-cd3-refinement
+
+cd3-refine-audit:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/audit_f19_v52_robustness.py --prefix research/notes/2026-11-19-cd3-refinement
+    python -X utf8 tools/f19_v52_ergonomics.py --prefix research/notes/2026-11-19-cd3-refinement
+    node --max-old-space-size=6144 tools/verify_f19_v52_audit.js --prefix research/notes/2026-11-19-cd3-refinement
+    $env:OPENBLAS_NUM_THREADS='1'; python -X utf8 tools/report_cd3_refinement.py
+
+cd3-refine-test:
+    python -m unittest discover -s tests -p test_cd3_refinement.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 cr-1f9-remove-p-search:
     python -X utf8 tools/search_1f9_remove_p.py
     python -X utf8 tools/prepare_1f9_remove_p_controls.py
