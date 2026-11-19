@@ -1,5 +1,13 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+r2-empty-finals-v52-search:
+    node --max-old-space-size=4096 tools/search_untoned_r2_v52_empty_finals.js
+
+r2-empty-finals-v52-verify:
+    node --max-old-space-size=6144 tools/verify_untoned_r2_v52.js research/notes/2026-11-20-untoned-r2-empty-finals-v52-search.json
+    node --test --test-concurrency=1 tests/untoned-r2-empty-finals-v52.test.mjs tests/untoned-r2-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+    node tools/report_untoned_r2_v52_empty_finals.js
+
 r2-onsets-v52-search:
     node --max-old-space-size=6144 tools/audit_untoned_r2_onsets_v52.js
     node --max-old-space-size=6144 tools/export_untoned_r2_v52_templates.js

@@ -5,14 +5,14 @@ const {rebuild,audit}=require('./untoned_r2_search_metrics');
 const {HEADS,FINALS}=require('./ckt_v4_scheme_fixture');
 const {auxiliarySemantics}=require('./auxiliary_semantics');
 const ROOT=path.resolve(__dirname,'..');
-const reportFile=path.join(ROOT,'research/notes/2026-11-20-untoned-r2-onsets-v52-search.json');
+const reportFile=path.resolve(ROOT,process.argv[2]||'research/notes/2026-11-20-untoned-r2-onsets-v52-search.json');
 const report=JSON.parse(fs.readFileSync(reportFile,'utf8'));
 const data=scorer.loadPayload(path.join(ROOT,'a7_CKT_R11.html'));
 const profile=path.join(ROOT,'research/.cache/ckt-long-code-audit-20261118/error-profile-all-roles.json');
 const ctx=v52.context(data,'D:/C2D/Documents/rime-snow-pinyin',profile);
 const refs=v52.evaluateUntoned(data.entries.find(e=>e.id==='S005'),{keytao:{word2:'12',word3:'213',word4:'24'},sanpin:{word2:'12',word3:'213',word4:'23'}},null,ctx).v52;
 const scale=(m,x)=>Object.fromEntries(Object.entries(x).map(([mode,tracks])=>[mode,Object.fromEntries(Object.entries(tracks).map(([kind,t])=>[kind,{...t,effectiveMs:t.motorUpperMs+m*(t.effectiveMs-t.motorUpperMs)}]))]));
-const selected=[...new Set([report.best1,report.best2,report.bestExact26_1,report.bestExact26_2,report.bestComfort1,report.bestComfort2].filter(Boolean))];
+const selected=[...new Set([report.best1,report.best2,report.bestExact26_1,report.bestExact26_2,report.bestComfort1,report.bestComfort2,...(report.categories||[]).flatMap(c=>[c.best1,c.best2])].filter(Boolean))];
 const verified=[];
 const auditor=require('./audit_untoned_r2_ergonomics').independentAuditor(data);
 const independentBaseline=auditor(data.entries.find(e=>e.id==='SNOW-SHENYUN-21X26-D3V1-BALANCED'));
@@ -35,4 +35,5 @@ for(const key of selected){
 }
 const sources=['a7_CKT_R11.html',profile,'tools/ckt_v4_upstream_role_tables.json','tools/score_ckt_v52.js','tools/ckt_block_error.js','tools/score_completion_ckt_v4.js','tools/export_untoned_r2_v52_templates.js','tools/audit_untoned_r2_ergonomics.js','research/.cache/R11_integrated_replay/script1.js','research/.cache/R11_integrated_replay/script2.js','research/.cache/R11_integrated_replay/track_options.json','research/ckt-v4-core/src/bin/score-untoned-r2-v52-stream.rs',__filename];
 const sourceHashes=Object.fromEntries(sources.map(p=>[p,crypto.createHash('sha256').update(fs.readFileSync(path.resolve(ROOT,p))).digest('hex')]));
-fs.writeFileSync(path.join(ROOT,'research/notes/2026-11-20-untoned-r2-onsets-v52-verification.json'),JSON.stringify({complete:true,searchCompleted:report.completed,exactlyScored:report.exactlyScored,comparison:'Rust full eight-track outcomes versus independent JS full v5.2 replay; 1x/2x all six cognitive costs for both candidate and S005',sourceHashes,independentBaseline,verified},null,2)+'\n');
+assert.ok(reportFile.endsWith('-search.json'),'expected a search report filename');
+fs.writeFileSync(reportFile.replace(/-search\.json$/,'-verification.json'),JSON.stringify({complete:true,searchCompleted:report.completed,exactlyScored:report.exactlyScored,comparison:'Rust full eight-track outcomes versus independent JS full v5.2 replay; 1x/2x all six cognitive costs for both candidate and S005',sourceHashes,independentBaseline,verified},null,2)+'\n');
