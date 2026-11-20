@@ -1,5 +1,21 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-t2126-m4-prepare:
+    cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-2126-stream
+    node --max-old-space-size=8192 tools/search_untoned_t2126_m4_v52.js --prepare
+
+untoned-t2126-m4-search:
+    node --max-old-space-size=4096 tools/search_untoned_t2126_m4_v52.js --refine --rounds=12
+    node --max-old-space-size=4096 tools/search_untoned_t2126_m4_v52.js --cross
+    node --max-old-space-size=4096 tools/search_untoned_t2126_m4_v52.js --refine --prefer-ch --rounds=8
+
+untoned-t2126-m4-verify:
+    node --max-old-space-size=8192 tools/search_untoned_t2126_m4_v52.js --verify
+
+untoned-t2126-m4-test:
+    node --test tests/untoned-t2126-m4-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+    cargo test --locked --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-2126-stream
+
 cr-7e-carrier-search:
     python -X utf8 tools/search_7e_carrier_root_v52.py
     python -X utf8 tools/enumerate_f19_v52_policies.py --prefix research/notes/2026-11-19-7e-carrier-root

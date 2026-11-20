@@ -1,0 +1,153 @@
+{
+  "id": "UTM4-865426b68287",
+  "name": "21×26 无调 · T2126-M4 最小四组改动候选",
+  "sourceId": "T2126-V52-M4-ec60a3637a99",
+  "capacity": [
+    21,
+    26
+  ],
+  "tone": "IEUAO",
+  "toneKeysByTone": "IEUAO",
+  "shapeKeysByMeaning": "AEUIO",
+  "toneDigitsByShapeMeaning": "42310",
+  "initialMap": {
+    "b": "B",
+    "p": "P",
+    "m": "M",
+    "f": "F",
+    "d": "D",
+    "t": "T",
+    "n": "N",
+    "l": "W",
+    "g": "G",
+    "k": "K",
+    "h": "H",
+    "j": "J",
+    "q": "F",
+    "x": "Y",
+    "zh": "X",
+    "ch": "S",
+    "sh": "V",
+    "r": "R",
+    "z": "Z",
+    "c": "C",
+    "s": "Q",
+    "A": "Y",
+    "E": "Y",
+    "O": "Y",
+    "W": "J",
+    "Y": "L",
+    "YU": "L"
+  },
+  "finalMap": {
+    "a": "A",
+    "ai": "G",
+    "an": "L",
+    "ang": "N",
+    "ao": "K",
+    "e": "U",
+    "ei": "D",
+    "en": "Q",
+    "eng": "J",
+    "er": "O",
+    "i": "I",
+    "ia": "R",
+    "ian": "P",
+    "iang": "B",
+    "iao": "W",
+    "ie": "Z",
+    "in": "C",
+    "ing": "E",
+    "iong": "V",
+    "iu": "F",
+    "o": "T",
+    "ong": "R",
+    "ou": "Y",
+    "u": "O",
+    "ua": "E",
+    "uai": "C",
+    "uan": "M",
+    "uang": "P",
+    "ui": "S",
+    "un": "T",
+    "uo": "H",
+    "v": "S",
+    "van": "H",
+    "ve": "X",
+    "vn": "M"
+  },
+  "changesFromSource": [
+    {
+      "head": "q",
+      "from": "Q",
+      "to": "F"
+    },
+    {
+      "head": "s",
+      "from": "S",
+      "to": "Q"
+    },
+    {
+      "head": "A/E/O",
+      "from": "R",
+      "to": "Y"
+    },
+    {
+      "head": "W",
+      "from": "P",
+      "to": "J"
+    }
+  ],
+  "initialChangeMetric": "A/E/O together; Y/YU together; each other head individually",
+  "minimumChangedFamilies": 4,
+  "common399Unique": 399,
+  "cktV52": {
+    "defaultScore": 9.076306165171943,
+    "doubledCognitiveScore": 9.029178417865767,
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    },
+    "lengthBalance": {
+      "pageSize": 6,
+      "maximumCandidates": 120,
+      "minimumInputLength": 4
+    },
+    "reference": "S005, each member normalized separately at each comparison point"
+  },
+  "comparison": [
+    {
+      "id": "RC26-39a5bfdc045342cd",
+      "defaultScore": 9.086538431214596,
+      "doubledCognitiveScore": 9.043952097501606,
+      "defaultImprovement": 0.010232266042653038,
+      "doubledImprovement": 0.014773679635839088
+    },
+    {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "defaultScore": 9.083907769223146,
+      "doubledCognitiveScore": 9.034929863180544,
+      "defaultImprovement": 0.007601604051203026,
+      "doubledImprovement": 0.005751445314777115
+    }
+  ],
+  "audit": {
+    "commonCount": 399,
+    "unique": 399,
+    "collisionPairs": 0,
+    "collisions": [],
+    "initialKeys": 21,
+    "finalKeys": 26,
+    "reservedInitials": [],
+    "qz": false,
+    "zq": true
+  }
+}
