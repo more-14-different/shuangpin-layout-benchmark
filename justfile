@@ -1,5 +1,12 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+a-locked-rhymes-verify:
+    node --expose-gc --max-old-space-size=1536 tools/search_a_locked_rhymes_v52.js --verify
+    node --test tests/a-locked-rhymes-v52.test.mjs tests/ckt-v52.test.mjs
+
+a-locked-rhymes-six-hours:
+    pwsh -NoProfile -File tools/run_a_locked_rhymes_background.ps1 -Hours 6
+
 um40-v52-policy-grid:
     pwsh -NoProfile -File tools/run_um40_policy_grid.ps1
 

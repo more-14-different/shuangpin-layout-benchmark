@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "anchor": "RC26-39a5bfdc045342cd",
+  "anchorScore": 9.086538431214596,
+  "anchorDoubled": 9.043952097501606,
+  "constraints": {
+    "D": 3,
+    "V": 1,
+    "M": 40,
+    "unique399": true,
+    "fixed": {
+      "ei": "E",
+      "er": "E",
+      "o": "O",
+      "uo": "O"
+    },
+    "groups": [
+      [
+        "ei",
+        "er"
+      ],
+      [
+        "o",
+        "uo"
+      ],
+      [
+        "uan",
+        "van"
+      ],
+      [
+        "un",
+        "vn"
+      ],
+      [
+        "iang",
+        "uang"
+      ],
+      [
+        "iong",
+        "ong"
+      ],
+      [
+        "ing",
+        "uai"
+      ]
+    ],
+    "allowedInitials": {
+      "A": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "S",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "W",
+        "YU": "W"
+      },
+      "UM40": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      }
+    },
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    }
+  },
+  "findings": [
+    {
+      "initials": "A",
+      "anchorLegal": true,
+      "legalOneOperation": 188,
+      "doubleEmptyOneOperation": 166,
+      "seed": {
+        "finalMap": {
+          "a": "A",
+          "ai": "F",
+          "an": "L",
+          "ang": "N",
+          "ao": "K",
+          "e": "H",
+          "ei": "E",
+          "en": "D",
+          "eng": "J",
+          "er": "E",
+          "i": "I",
+          "ia": "B",
+          "ian": "S",
+          "iang": "C",
+          "iao": "X",
+          "ie": "Z",
+          "in": "R",
+          "ing": "Q",
+          "iong": "M",
+          "iu": "W",
+          "o": "O",
+          "ong": "M",
+          "ou": "Y",
+          "u": "U",
+          "ua": "S",
+          "uai": "Q",
+          "uan": "T",
+          "uang": "C",
+          "ui": "P",
+          "un": "G",
+          "uo": "O",
+          "v": "P",
+          "van": "T",
+          "ve": "V",
+          "vn": "G"
+        },
+        "mutation": "original A finals"
+      },
+      "jsNativeMaximumDifference": 5.684341886080802e-14,
+      "seedScores": {
+        "1": 9.086538431214596,
+        "2": 9.043952097501606,
+        "3": 9.039403855470775,
+        "5": 9.051556987700442
+      }
+    },
+    {
+      "initials": "UM40",
+      "anchorLegal": true,
+      "legalOneOperation": 188,
+      "doubleEmptyOneOperation": 166,
+      "seed": {
+        "finalMap": {
+          "a": "A",
+          "ai": "F",
+          "an": "L",
+          "ang": "N",
+          "ao": "K",
+          "e": "H",
+          "ei": "E",
+          "en": "D",
+          "eng": "J",
+          "er": "E",
+          "i": "I",
+          "ia": "B",
+          "ian": "S",
+          "iang": "C",
+          "iao": "X",
+          "ie": "Z",
+          "in": "R",
+          "ing": "Q",
+          "iong": "M",
+          "iu": "W",
+          "o": "O",
+          "ong": "M",
+          "ou": "Y",
+          "u": "U",
+          "ua": "S",
+          "uai": "Q",
+          "uan": "T",
+          "uang": "C",
+          "ui": "P",
+          "un": "G",
+          "uo": "O",
+          "v": "P",
+          "van": "T",
+          "ve": "V",
+          "vn": "G"
+        },
+        "mutation": "original A finals"
+      },
+      "jsNativeMaximumDifference": 1.1368683772161603e-13,
+      "seedScores": {
+        "1": 9.099792079828996,
+        "2": 9.060601762846295,
+        "3": 9.058450393321742,
+        "5": 9.073885680183508
+      }
+    }
+  ]
+}
