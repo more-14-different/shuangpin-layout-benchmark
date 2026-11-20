@@ -1,0 +1,207 @@
+{
+  "id": "UDE40-16eaea80873c",
+  "parentId": "UM40-dff81aa57dd2",
+  "name": "21×26 无调 · M40 D3 QZ/ZQ双空候选",
+  "capacity": [
+    21,
+    26
+  ],
+  "tone": "IEUAO",
+  "toneKeyClass": "AEUIO",
+  "toneKeySet": "AEIOU",
+  "shapeKeysByMeaning": "AEUIO",
+  "toneKeysByTone": "IEUAO",
+  "toneDigitsByShapeMeaning": "42310",
+  "initialMap": {
+    "b": "B",
+    "p": "P",
+    "m": "M",
+    "f": "F",
+    "d": "D",
+    "t": "T",
+    "n": "N",
+    "l": "L",
+    "g": "G",
+    "k": "K",
+    "h": "H",
+    "j": "J",
+    "q": "F",
+    "x": "Y",
+    "zh": "W",
+    "ch": "X",
+    "sh": "V",
+    "r": "R",
+    "z": "Z",
+    "c": "C",
+    "s": "Q",
+    "A": "Y",
+    "E": "Y",
+    "O": "Y",
+    "W": "J",
+    "Y": "S",
+    "YU": "S"
+  },
+  "finalMap": {
+    "a": "A",
+    "ai": "G",
+    "an": "L",
+    "ang": "N",
+    "ao": "K",
+    "e": "H",
+    "ei": "C",
+    "en": "W",
+    "eng": "J",
+    "er": "C",
+    "i": "I",
+    "ia": "R",
+    "ian": "Q",
+    "iang": "F",
+    "iao": "Z",
+    "ie": "S",
+    "in": "D",
+    "ing": "E",
+    "iong": "V",
+    "iu": "X",
+    "o": "O",
+    "ong": "R",
+    "ou": "Y",
+    "u": "U",
+    "ua": "Q",
+    "uai": "S",
+    "uan": "M",
+    "uang": "E",
+    "ui": "P",
+    "un": "T",
+    "uo": "O",
+    "v": "P",
+    "van": "M",
+    "ve": "B",
+    "vn": "T"
+  },
+  "memory": {
+    "M": 40,
+    "D": 3,
+    "firstLinks": 9,
+    "finalLinks": 31,
+    "branches": 0,
+    "ordinaryDisplaced": [
+      "q",
+      "x",
+      "s"
+    ]
+  },
+  "audit": {
+    "commonCount": 399,
+    "unique": 399,
+    "collisionPairs": 0,
+    "collisions": [],
+    "initialKeys": 21,
+    "finalKeys": 26,
+    "reservedInitials": [],
+    "qz": false,
+    "zq": false
+  },
+  "buckets": {
+    "QZ": [],
+    "ZQ": []
+  },
+  "changesFromParent": {
+    "initial": [],
+    "final": [
+      {
+        "name": "ai",
+        "from": "T",
+        "to": "G"
+      },
+      {
+        "name": "en",
+        "from": "Q",
+        "to": "W"
+      },
+      {
+        "name": "ian",
+        "from": "W",
+        "to": "Q"
+      },
+      {
+        "name": "ua",
+        "from": "W",
+        "to": "Q"
+      },
+      {
+        "name": "uai",
+        "from": "D",
+        "to": "S"
+      },
+      {
+        "name": "un",
+        "from": "G",
+        "to": "T"
+      },
+      {
+        "name": "vn",
+        "from": "G",
+        "to": "T"
+      }
+    ]
+  },
+  "cktV52": {
+    "defaultScore": 9.084218346350243,
+    "doubledCognitiveScore": 9.031984811409272,
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    },
+    "lengthBalance": {
+      "pageSize": 6,
+      "maximumCandidates": 120,
+      "minimumInputLength": 4
+    },
+    "reference": "S005 repriced at both cognitive multipliers; normalize each member separately"
+  },
+  "comparison": [
+    {
+      "id": "UM40-dff81aa57dd2",
+      "score": 9.07424087869118,
+      "doubledScore": 9.024695953965695,
+      "defaultGap": -0.009977467659062711,
+      "doubledGap": -0.007288857443576546
+    },
+    {
+      "id": "UM40-8acdbdac3fad",
+      "score": 9.07416072468381,
+      "doubledScore": 9.025609264761712,
+      "defaultGap": -0.01005762166643187,
+      "doubledGap": -0.00637554664755946
+    },
+    {
+      "id": "UM40-ac9707a932d1",
+      "score": 9.074551886863812,
+      "doubledScore": 9.02435378168035,
+      "defaultGap": -0.009666459486430412,
+      "doubledGap": -0.00763102972892149
+    },
+    {
+      "id": "RC26-39a5bfdc045342cd",
+      "score": 9.086538431214596,
+      "doubledScore": 9.043952097501606,
+      "defaultGap": 0.002320084864352978,
+      "doubledGap": 0.011967286092334106
+    },
+    {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "score": 9.083907769223146,
+      "doubledScore": 9.034929863180544,
+      "defaultGap": -0.00031057712709703367,
+      "doubledGap": 0.0029450517712721336
+    }
+  ]
+}

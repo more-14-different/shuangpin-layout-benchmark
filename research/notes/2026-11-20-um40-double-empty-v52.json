@@ -1,0 +1,2467 @@
+{
+  "version": 1,
+  "anchorId": "UM40-dff81aa57dd2",
+  "anchorSha256": "2a880c8f11b90c633987cd8a0921b374d491d0f871bfe60237eb882847425595",
+  "stages": [
+    {
+      "kind": "exact-single-repairs",
+      "center": "UM40-dff81aa57dd2",
+      "legalCandidates": 0,
+      "newScores": 0
+    },
+    {
+      "kind": "exact-single-repairs",
+      "center": "UM40-8acdbdac3fad",
+      "legalCandidates": 8,
+      "newScores": 8
+    },
+    {
+      "kind": "exact-single-repairs",
+      "center": "UM40-ac9707a932d1",
+      "legalCandidates": 7,
+      "newScores": 7
+    },
+    {
+      "kind": "two-operation-rhyme-repairs",
+      "center": "UM40-dff81aa57dd2",
+      "primitiveOperations": 2480,
+      "firstStates": 1875,
+      "pairsVisited": 4650000,
+      "legalBeforeDedup": 6749,
+      "uniqueNewEndpoints": 2017,
+      "proxyCandidates": 414,
+      "newScores": 32
+    },
+    {
+      "kind": "two-operation-rhyme-repairs",
+      "center": "UM40-8acdbdac3fad",
+      "primitiveOperations": 2480,
+      "firstStates": 1875,
+      "pairsVisited": 4650000,
+      "legalBeforeDedup": 6751,
+      "uniqueNewEndpoints": 2084,
+      "proxyCandidates": 416,
+      "newScores": 30
+    },
+    {
+      "kind": "two-operation-rhyme-repairs",
+      "center": "UM40-ac9707a932d1",
+      "primitiveOperations": 2480,
+      "firstStates": 1875,
+      "pairsVisited": 4650000,
+      "legalBeforeDedup": 7054,
+      "uniqueNewEndpoints": 2065,
+      "proxyCandidates": 406,
+      "newScores": 32
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-16eaea80873c",
+      "legalCandidates": 443,
+      "newScores": 21
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-f725b1e4ba45",
+      "legalCandidates": 436,
+      "newScores": 22
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": false,
+      "center": "UDE40-16eaea80873c",
+      "legalCandidates": 603,
+      "newScores": 22
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UM40-15a9c6eedb5c",
+      "legalCandidates": 425,
+      "newScores": 21
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-98235c7c2e99",
+      "legalCandidates": 447,
+      "newScores": 21
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": false,
+      "center": "UDE40-f725b1e4ba45",
+      "legalCandidates": 593,
+      "newScores": 23
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-6d0966553a11",
+      "legalCandidates": 440,
+      "newScores": 20
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-589a99133a69",
+      "legalCandidates": 437,
+      "newScores": 22
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": false,
+      "center": "UM40-15a9c6eedb5c",
+      "legalCandidates": 564,
+      "newScores": 23
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-6ae5eca00e12",
+      "legalCandidates": 447,
+      "newScores": 20
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": true,
+      "center": "UDE40-42e07c01aa4a",
+      "legalCandidates": 432,
+      "newScores": 21
+    },
+    {
+      "kind": "local-refinement",
+      "fixed": false,
+      "center": "UDE40-98235c7c2e99",
+      "legalCandidates": 602,
+      "newScores": 22
+    },
+    {
+      "kind": "exact-polish",
+      "center": "UDE40-16eaea80873c",
+      "newScores": 243
+    },
+    {
+      "kind": "repaired-center-twohop",
+      "center": "UDE40-16eaea80873c",
+      "pairsVisited": 4650000,
+      "legalBeforeDedup": 109931,
+      "uniqueNewEndpoints": 34218,
+      "proxyCandidates": 595,
+      "newScores": 44
+    }
+  ],
+  "completed": true,
+  "best": [
+    {
+      "id": "UDE40-16eaea80873c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.084218346350243,
+      "doubledScore": 9.031984811409272,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-8acdbdac3fad",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.65971
+    },
+    {
+      "id": "UDE40-f725b1e4ba45",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.08425503238347,
+      "doubledScore": 9.031509781680917,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→D",
+      "stage": "local-refinement",
+      "seconds": 0.6106791
+    },
+    {
+      "id": "UM40-15a9c6eedb5c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "score": 9.08454032242731,
+      "doubledScore": 9.031480171169354,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "parent": "UM40-dff81aa57dd2",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-final-neighborhood",
+      "seconds": 1.8436721999999999,
+      "finalState": "ATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "imported": true
+    },
+    {
+      "id": "UDE40-98235c7c2e99",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQSMEPGOPMBG",
+      "score": 9.084678821612483,
+      "doubledScore": 9.032270971061674,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final key groups G↔T",
+      "stage": "local-refinement",
+      "seconds": 0.6489187
+    },
+    {
+      "id": "UDE40-6d0966553a11",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQZMEPTOPMBT",
+      "score": 9.08476339235062,
+      "doubledScore": 9.031454225653627,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→Z",
+      "stage": "local-refinement",
+      "seconds": 0.6831191
+    },
+    {
+      "id": "UDE40-589a99133a69",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQZMEPGOPMBG",
+      "score": 9.08498630551136,
+      "doubledScore": 9.031332698095488,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-ac9707a932d1",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.707656
+    },
+    {
+      "id": "UDE40-6ae5eca00e12",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.085180533875262,
+      "doubledScore": 9.033086017603958,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.632759
+    },
+    {
+      "id": "UDE40-42e07c01aa4a",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.085308377255515,
+      "doubledScore": 9.032752676227739,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-f725b1e4ba45",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.5595777
+    },
+    {
+      "id": "UDE40-b352b8478bbf",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQSMEPFOPMBF",
+      "score": 9.085348267980732,
+      "doubledScore": 9.031386548804075,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-98235c7c2e99",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.5890383
+    },
+    {
+      "id": "UDE40-598f26f11170",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQDMEPFOPMBF",
+      "score": 9.085415404441857,
+      "doubledScore": 9.030950263833212,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-15a9c6eedb5c",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.6701682
+    },
+    {
+      "id": "UDE40-d4143ef7376f",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQXMEPTOPMBT",
+      "score": 9.085435655761614,
+      "doubledScore": 9.032301981787445,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→X",
+      "stage": "local-refinement",
+      "seconds": 0.639825
+    },
+    {
+      "id": "UDE40-2e63141e26c5",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQDZSFEVXORYUQDMEPTOPMBT",
+      "score": 9.085650585450677,
+      "doubledScore": 9.032776511965523,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-f725b1e4ba45",
+      "mutation": "final iang↔in",
+      "stage": "local-refinement",
+      "seconds": 0.6222944
+    },
+    {
+      "id": "UDE40-505d6a1423f0",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQXMEPGOPMBG",
+      "score": 9.085676402347021,
+      "doubledScore": 9.032214563364299,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-589a99133a69",
+      "mutation": "final uai→X",
+      "stage": "local-refinement",
+      "seconds": 0.6089246
+    },
+    {
+      "id": "UDE40-ed6bd37b5344",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQZMEPTOPMBT",
+      "score": 9.085803382753685,
+      "doubledScore": 9.032674993519889,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-6d0966553a11",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.5874259
+    },
+    {
+      "id": "UDE40-4b0373ffe065",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUESMQPTOPMBT",
+      "score": 9.08580630026567,
+      "doubledScore": 9.033997254270062,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final ua↔uang",
+      "stage": "local-refinement",
+      "seconds": 0.5631214
+    }
+  ],
+  "bestFixed": [
+    {
+      "id": "UDE40-16eaea80873c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.084218346350243,
+      "doubledScore": 9.031984811409272,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-8acdbdac3fad",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.65971
+    },
+    {
+      "id": "UDE40-f725b1e4ba45",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.08425503238347,
+      "doubledScore": 9.031509781680917,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→D",
+      "stage": "local-refinement",
+      "seconds": 0.6106791
+    },
+    {
+      "id": "UM40-15a9c6eedb5c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "score": 9.08454032242731,
+      "doubledScore": 9.031480171169354,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "parent": "UM40-dff81aa57dd2",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-final-neighborhood",
+      "seconds": 1.8436721999999999,
+      "finalState": "ATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "imported": true
+    },
+    {
+      "id": "UDE40-98235c7c2e99",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQSMEPGOPMBG",
+      "score": 9.084678821612483,
+      "doubledScore": 9.032270971061674,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final key groups G↔T",
+      "stage": "local-refinement",
+      "seconds": 0.6489187
+    },
+    {
+      "id": "UDE40-6d0966553a11",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQZMEPTOPMBT",
+      "score": 9.08476339235062,
+      "doubledScore": 9.031454225653627,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→Z",
+      "stage": "local-refinement",
+      "seconds": 0.6831191
+    },
+    {
+      "id": "UDE40-589a99133a69",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQZMEPGOPMBG",
+      "score": 9.08498630551136,
+      "doubledScore": 9.031332698095488,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-ac9707a932d1",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.707656
+    },
+    {
+      "id": "UDE40-6ae5eca00e12",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.085180533875262,
+      "doubledScore": 9.033086017603958,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.632759
+    },
+    {
+      "id": "UDE40-42e07c01aa4a",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.085308377255515,
+      "doubledScore": 9.032752676227739,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-f725b1e4ba45",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.5595777
+    },
+    {
+      "id": "UDE40-b352b8478bbf",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQSMEPFOPMBF",
+      "score": 9.085348267980732,
+      "doubledScore": 9.031386548804075,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-98235c7c2e99",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.5890383
+    },
+    {
+      "id": "UDE40-598f26f11170",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQDMEPFOPMBF",
+      "score": 9.085415404441857,
+      "doubledScore": 9.030950263833212,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-15a9c6eedb5c",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.6701682
+    },
+    {
+      "id": "UDE40-d4143ef7376f",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQXMEPTOPMBT",
+      "score": 9.085435655761614,
+      "doubledScore": 9.032301981787445,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→X",
+      "stage": "local-refinement",
+      "seconds": 0.639825
+    },
+    {
+      "id": "UDE40-2e63141e26c5",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQDZSFEVXORYUQDMEPTOPMBT",
+      "score": 9.085650585450677,
+      "doubledScore": 9.032776511965523,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-f725b1e4ba45",
+      "mutation": "final iang↔in",
+      "stage": "local-refinement",
+      "seconds": 0.6222944
+    },
+    {
+      "id": "UDE40-505d6a1423f0",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQXMEPGOPMBG",
+      "score": 9.085676402347021,
+      "doubledScore": 9.032214563364299,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-589a99133a69",
+      "mutation": "final uai→X",
+      "stage": "local-refinement",
+      "seconds": 0.6089246
+    },
+    {
+      "id": "UDE40-ed6bd37b5344",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQZMEPTOPMBT",
+      "score": 9.085803382753685,
+      "doubledScore": 9.032674993519889,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-6d0966553a11",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.5874259
+    },
+    {
+      "id": "UDE40-4b0373ffe065",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUESMQPTOPMBT",
+      "score": 9.08580630026567,
+      "doubledScore": 9.033997254270062,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final ua↔uang",
+      "stage": "local-refinement",
+      "seconds": 0.5631214
+    }
+  ],
+  "anchors": [
+    {
+      "id": "UM40-dff81aa57dd2",
+      "name": "21×26 无调 · M40 D3 CKT v5.2 候选",
+      "capacity": [
+        21,
+        26
+      ],
+      "tone": "IEUAO",
+      "toneKeyClass": "AEUIO",
+      "toneKeySet": "AEIOU",
+      "shapeKeysByMeaning": "AEUIO",
+      "toneKeysByTone": "IEUAO",
+      "toneDigitsByShapeMeaning": "42310",
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "T",
+        "an": "L",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "C",
+        "en": "Q",
+        "eng": "J",
+        "er": "C",
+        "i": "I",
+        "ia": "R",
+        "ian": "W",
+        "iang": "F",
+        "iao": "Z",
+        "ie": "S",
+        "in": "D",
+        "ing": "E",
+        "iong": "V",
+        "iu": "X",
+        "o": "O",
+        "ong": "R",
+        "ou": "Y",
+        "u": "U",
+        "ua": "W",
+        "uai": "D",
+        "uan": "M",
+        "uang": "E",
+        "ui": "P",
+        "un": "G",
+        "uo": "O",
+        "v": "P",
+        "van": "M",
+        "ve": "B",
+        "vn": "G"
+      },
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "audit": {
+        "commonCount": 399,
+        "unique": 399,
+        "collisionPairs": 0,
+        "collisions": [],
+        "initialKeys": 21,
+        "finalKeys": 26,
+        "reservedInitials": [],
+        "qz": false,
+        "zq": true
+      },
+      "cktV52": {
+        "defaultScore": 9.07424087869118,
+        "doubledCognitiveScore": 9.024695953965695,
+        "policies": {
+          "keytao": {
+            "word2": "12",
+            "word3": "12",
+            "word4": "24"
+          },
+          "sanpin": {
+            "word2": "12",
+            "word3": "21",
+            "word4": "13"
+          }
+        },
+        "lengthBalance": {
+          "pageSize": 6,
+          "maximumCandidates": 120,
+          "minimumInputLength": 4
+        },
+        "reference": "S005 each member normalized separately; cognitive costs repriced at both endpoints"
+      },
+      "comparison": [
+        {
+          "id": "RC26-39a5bfdc045342cd",
+          "M": 40,
+          "D": 3,
+          "defaultScore": 9.086538431214596,
+          "doubledScore": 9.043952097501606,
+          "defaultGap": 0.012297552523415689,
+          "doubledGap": 0.019256143535910653
+        },
+        {
+          "id": "RC26-eeb7b9a25a90cadd",
+          "M": 40,
+          "D": 3,
+          "defaultScore": 9.083907769223146,
+          "doubledScore": 9.034929863180544,
+          "defaultGap": 0.009666890531965677,
+          "doubledGap": 0.01023390921484868
+        }
+      ],
+      "changesFromControls": [
+        {
+          "id": "RC26-39a5bfdc045342cd",
+          "initial": [
+            {
+              "name": "zh",
+              "from": "S",
+              "to": "W"
+            },
+            {
+              "name": "Y/YU",
+              "from": "W",
+              "to": "S"
+            }
+          ],
+          "final": [
+            {
+              "name": "ai",
+              "from": "F",
+              "to": "T"
+            },
+            {
+              "name": "ei",
+              "from": "E",
+              "to": "C"
+            },
+            {
+              "name": "en",
+              "from": "D",
+              "to": "Q"
+            },
+            {
+              "name": "er",
+              "from": "E",
+              "to": "C"
+            },
+            {
+              "name": "ia",
+              "from": "B",
+              "to": "R"
+            },
+            {
+              "name": "ian",
+              "from": "S",
+              "to": "W"
+            },
+            {
+              "name": "iang",
+              "from": "C",
+              "to": "F"
+            },
+            {
+              "name": "iao",
+              "from": "X",
+              "to": "Z"
+            },
+            {
+              "name": "ie",
+              "from": "Z",
+              "to": "S"
+            },
+            {
+              "name": "in",
+              "from": "R",
+              "to": "D"
+            },
+            {
+              "name": "ing",
+              "from": "Q",
+              "to": "E"
+            },
+            {
+              "name": "iong",
+              "from": "M",
+              "to": "V"
+            },
+            {
+              "name": "iu",
+              "from": "W",
+              "to": "X"
+            },
+            {
+              "name": "ong",
+              "from": "M",
+              "to": "R"
+            },
+            {
+              "name": "ua",
+              "from": "S",
+              "to": "W"
+            },
+            {
+              "name": "uai",
+              "from": "Q",
+              "to": "D"
+            },
+            {
+              "name": "uan",
+              "from": "T",
+              "to": "M"
+            },
+            {
+              "name": "uang",
+              "from": "C",
+              "to": "E"
+            },
+            {
+              "name": "van",
+              "from": "T",
+              "to": "M"
+            },
+            {
+              "name": "ve",
+              "from": "V",
+              "to": "B"
+            }
+          ]
+        },
+        {
+          "id": "RC26-eeb7b9a25a90cadd",
+          "initial": [
+            {
+              "name": "zh",
+              "from": "S",
+              "to": "W"
+            },
+            {
+              "name": "ch",
+              "from": "Q",
+              "to": "X"
+            },
+            {
+              "name": "s",
+              "from": "X",
+              "to": "Q"
+            },
+            {
+              "name": "Y/YU",
+              "from": "W",
+              "to": "S"
+            }
+          ],
+          "final": [
+            {
+              "name": "ai",
+              "from": "G",
+              "to": "T"
+            },
+            {
+              "name": "en",
+              "from": "D",
+              "to": "Q"
+            },
+            {
+              "name": "ian",
+              "from": "S",
+              "to": "W"
+            },
+            {
+              "name": "iang",
+              "from": "B",
+              "to": "F"
+            },
+            {
+              "name": "iao",
+              "from": "X",
+              "to": "Z"
+            },
+            {
+              "name": "ie",
+              "from": "Z",
+              "to": "S"
+            },
+            {
+              "name": "in",
+              "from": "F",
+              "to": "D"
+            },
+            {
+              "name": "iu",
+              "from": "W",
+              "to": "X"
+            },
+            {
+              "name": "ua",
+              "from": "S",
+              "to": "W"
+            },
+            {
+              "name": "uai",
+              "from": "Q",
+              "to": "D"
+            },
+            {
+              "name": "un",
+              "from": "T",
+              "to": "G"
+            },
+            {
+              "name": "ve",
+              "from": "Q",
+              "to": "B"
+            },
+            {
+              "name": "vn",
+              "from": "T",
+              "to": "G"
+            }
+          ]
+        }
+      ],
+      "score": 9.07424087869118,
+      "doubledScore": 9.024695953965695
+    },
+    {
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "G",
+        "an": "L",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "C",
+        "en": "Q",
+        "eng": "J",
+        "er": "C",
+        "i": "I",
+        "ia": "R",
+        "ian": "W",
+        "iang": "F",
+        "iao": "Z",
+        "ie": "S",
+        "in": "D",
+        "ing": "E",
+        "iong": "V",
+        "iu": "X",
+        "o": "O",
+        "ong": "R",
+        "ou": "Y",
+        "u": "U",
+        "ua": "W",
+        "uai": "S",
+        "uan": "M",
+        "uang": "E",
+        "ui": "P",
+        "un": "T",
+        "uo": "O",
+        "v": "P",
+        "van": "M",
+        "ve": "B",
+        "vn": "T"
+      },
+      "id": "UM40-8acdbdac3fad",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCQJCIRWFZSDEVXORYUWSMEPTOPMBT",
+      "score": 9.07416072468381,
+      "doubledScore": 9.025609264761712,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "parent": "UM40-af4b361f3172",
+      "mutation": "final token uai→S",
+      "stage": "joint-neighborhood",
+      "seconds": 1.0546325,
+      "finalState": "AGLNKHCQJCIRWFZSDEVXORYUWSMEPTOPMBT",
+      "imported": true
+    },
+    {
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "T",
+        "an": "L",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "C",
+        "en": "Q",
+        "eng": "J",
+        "er": "C",
+        "i": "I",
+        "ia": "R",
+        "ian": "W",
+        "iang": "F",
+        "iao": "Z",
+        "ie": "S",
+        "in": "D",
+        "ing": "E",
+        "iong": "V",
+        "iu": "X",
+        "o": "O",
+        "ong": "R",
+        "ou": "Y",
+        "u": "U",
+        "ua": "W",
+        "uai": "Z",
+        "uan": "M",
+        "uang": "E",
+        "ui": "P",
+        "un": "G",
+        "uo": "O",
+        "v": "P",
+        "van": "M",
+        "ve": "B",
+        "vn": "G"
+      },
+      "id": "UM40-ac9707a932d1",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCQJCIRWFZSDEVXORYUWZMEPGOPMBG",
+      "score": 9.074551886863812,
+      "doubledScore": 9.02435378168035,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "parent": "UM40-b47a5d81001c",
+      "mutation": "final key groups G↔T",
+      "stage": "joint-neighborhood",
+      "seconds": 1.6534639,
+      "finalState": "ATLNKHCQJCIRWFZSDEVXORYUWZMEPGOPMBG",
+      "imported": true
+    }
+  ],
+  "controls": [
+    {
+      "id": "RC26-39a5bfdc045342cd",
+      "score": 9.086538431214596,
+      "doubledScore": 9.043952097501606,
+      "modes": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 97.52018577473312,
+            "firstAuxRate": 0.20850873242144716,
+            "secondAuxRate": 0.040974002787984416,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0044320858902234936,
+            "meanRejectedCandidates": 0.005505941747055032,
+            "meanPageActions": 0.000004005724736186477,
+            "meanKeys": 2.2494827352094315,
+            "effectiveMs": 175.3007566764703
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 379.850173165769,
+            "firstAuxRate": 0.18536334662264206,
+            "secondAuxRate": 0.03550595587346572,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003962722991508267,
+            "meanRejectedCandidates": 0.004797871173305825,
+            "meanPageActions": 9.850045550786491e-7,
+            "meanKeys": 4.220869302496108,
+            "effectiveMs": 448.7287867695381
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 347.0558621999728,
+            "firstAuxRate": 0.24868686142318788,
+            "secondAuxRate": 0.06293807180740403,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.008782380218018313,
+            "meanRejectedCandidates": 0.011153586298865623,
+            "meanPageActions": 0.000024123878991114977,
+            "meanKeys": 3.8342696049962846,
+            "effectiveMs": 446.377686778602
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 441.6667628687178,
+            "firstAuxRate": 0.24366179451541334,
+            "secondAuxRate": 0.03973259690014321,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003556896418857211,
+            "meanRejectedCandidates": 0.0041945756613139245,
+            "meanPageActions": 0,
+            "meanKeys": 4.283394391415556,
+            "effectiveMs": 529.0289469277648
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 98.26363389312698,
+            "firstAuxRate": 0.21001490704724196,
+            "secondAuxRate": 0.047479030055437785,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.00702191172015471,
+            "meanRejectedCandidates": 0.009130996676672953,
+            "meanPageActions": 0.00004025305285861722,
+            "meanKeys": 2.2574939371026796,
+            "effectiveMs": 180.19358780571494
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 381.0999455360707,
+            "firstAuxRate": 0.18536334662264206,
+            "secondAuxRate": 0.03960368469915736,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005669766684193542,
+            "meanRejectedCandidates": 0.007221568109676984,
+            "meanPageActions": 0.00001172294153579519,
+            "meanKeys": 4.2249670313218,
+            "effectiveMs": 452.3565102310713
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 349.506460204329,
+            "firstAuxRate": 0.24868686142318788,
+            "secondAuxRate": 0.07555632491147825,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.014393637867460935,
+            "meanRejectedCandidates": 0.020155053317957843,
+            "meanPageActions": 0.0001017357323402207,
+            "meanKeys": 3.8468878581003585,
+            "effectiveMs": 456.45387221080534
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 443.8392332104339,
+            "firstAuxRate": 0.24366179451541334,
+            "secondAuxRate": 0.046102438267257975,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005770919279834908,
+            "meanRejectedCandidates": 0.007479170017954395,
+            "meanPageActions": 0.000019846367578494907,
+            "meanKeys": 4.289764232782671,
+            "effectiveMs": 534.6109670243076
+          }
+        }
+      }
+    },
+    {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "score": 9.083907769223146,
+      "doubledScore": 9.034929863180544,
+      "modes": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 98.51811855396193,
+            "firstAuxRate": 0.20850873242144716,
+            "secondAuxRate": 0.040974002787984416,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.0044320858902234936,
+            "meanRejectedCandidates": 0.005505941747055032,
+            "meanPageActions": 0.000004005724736186477,
+            "meanKeys": 2.2494827352094315,
+            "effectiveMs": 176.2986894556991
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 380.49852135031347,
+            "firstAuxRate": 0.18426042453634725,
+            "secondAuxRate": 0.03533053072419729,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.004019459808812941,
+            "meanRejectedCandidates": 0.004860133172499311,
+            "meanPageActions": 0,
+            "meanKeys": 4.219590955260545,
+            "effectiveMs": 449.03049047238954
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 346.3705305994487,
+            "firstAuxRate": 0.24467260510767813,
+            "secondAuxRate": 0.06201487314671763,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.008731911813941989,
+            "meanRejectedCandidates": 0.011057459377469521,
+            "meanPageActions": 0.000021536454065453465,
+            "meanKeys": 3.8293321500200883,
+            "effectiveMs": 444.1752550692258
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 440.3552430428877,
+            "firstAuxRate": 0.2414431553217337,
+            "secondAuxRate": 0.03898722817677365,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003626311624582943,
+            "meanRejectedCandidates": 0.004279382666712759,
+            "meanPageActions": 0,
+            "meanKeys": 4.280430383498508,
+            "effectiveMs": 526.8741142005252
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 99.06166177077958,
+            "firstAuxRate": 0.21001490704724196,
+            "secondAuxRate": 0.047479030055437785,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.00702191172015471,
+            "meanRejectedCandidates": 0.009130996676672953,
+            "meanPageActions": 0.00004025305285861722,
+            "meanKeys": 2.2574939371026796,
+            "effectiveMs": 180.99161568336754
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 381.58720827692497,
+            "firstAuxRate": 0.18426042453634725,
+            "secondAuxRate": 0.039310817040587795,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005646643494163516,
+            "meanRejectedCandidates": 0.007188209473722369,
+            "meanPageActions": 0.000011922439641457598,
+            "meanKeys": 4.223571241576935,
+            "effectiveMs": 452.40955405208217
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 348.5381890100183,
+            "firstAuxRate": 0.24467260510767813,
+            "secondAuxRate": 0.07481720473868736,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.014157497666455932,
+            "meanRejectedCandidates": 0.01979197314223149,
+            "meanPageActions": 0.00010090775636400901,
+            "meanKeys": 3.842134481612058,
+            "effectiveMs": 453.8995015478223
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 442.53753101969687,
+            "firstAuxRate": 0.2414431553217337,
+            "secondAuxRate": 0.045448056205956,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005584981510983929,
+            "meanRejectedCandidates": 0.007338661598538569,
+            "meanPageActions": 0.00002001537557490545,
+            "meanKeys": 4.286891211527689,
+            "effectiveMs": 532.3288210771935
+          }
+        }
+      }
+    }
+  ],
+  "selected": [
+    {
+      "kind": "fixed-initials",
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "G",
+        "an": "L",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "C",
+        "en": "W",
+        "eng": "J",
+        "er": "C",
+        "i": "I",
+        "ia": "R",
+        "ian": "Q",
+        "iang": "F",
+        "iao": "Z",
+        "ie": "S",
+        "in": "D",
+        "ing": "E",
+        "iong": "V",
+        "iu": "X",
+        "o": "O",
+        "ong": "R",
+        "ou": "Y",
+        "u": "U",
+        "ua": "Q",
+        "uai": "S",
+        "uan": "M",
+        "uang": "E",
+        "ui": "P",
+        "un": "T",
+        "uo": "O",
+        "v": "P",
+        "van": "M",
+        "ve": "B",
+        "vn": "T"
+      },
+      "id": "UDE40-16eaea80873c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.084218346350243,
+      "doubledScore": 9.031984811409272,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-8acdbdac3fad",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.65971
+    },
+    {
+      "kind": "up-to-two-initial-families",
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      },
+      "finalMap": {
+        "a": "A",
+        "ai": "G",
+        "an": "L",
+        "ang": "N",
+        "ao": "K",
+        "e": "H",
+        "ei": "C",
+        "en": "W",
+        "eng": "J",
+        "er": "C",
+        "i": "I",
+        "ia": "R",
+        "ian": "Q",
+        "iang": "F",
+        "iao": "Z",
+        "ie": "S",
+        "in": "D",
+        "ing": "E",
+        "iong": "V",
+        "iu": "X",
+        "o": "O",
+        "ong": "R",
+        "ou": "Y",
+        "u": "U",
+        "ua": "Q",
+        "uai": "S",
+        "uan": "M",
+        "uang": "E",
+        "ui": "P",
+        "un": "T",
+        "uo": "O",
+        "v": "P",
+        "van": "M",
+        "ve": "B",
+        "vn": "T"
+      },
+      "id": "UDE40-16eaea80873c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.084218346350243,
+      "doubledScore": 9.031984811409272,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-8acdbdac3fad",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.65971
+    }
+  ],
+  "bestDefault": [
+    {
+      "id": "UDE40-16eaea80873c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.084218346350243,
+      "doubledScore": 9.031984811409272,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-8acdbdac3fad",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.65971
+    },
+    {
+      "id": "UDE40-f725b1e4ba45",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.08425503238347,
+      "doubledScore": 9.031509781680917,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→D",
+      "stage": "local-refinement",
+      "seconds": 0.6106791
+    },
+    {
+      "id": "UM40-15a9c6eedb5c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "score": 9.08454032242731,
+      "doubledScore": 9.031480171169354,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "parent": "UM40-dff81aa57dd2",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-final-neighborhood",
+      "seconds": 1.8436721999999999,
+      "finalState": "ATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "imported": true
+    },
+    {
+      "id": "UDE40-98235c7c2e99",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQSMEPGOPMBG",
+      "score": 9.084678821612483,
+      "doubledScore": 9.032270971061674,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final key groups G↔T",
+      "stage": "local-refinement",
+      "seconds": 0.6489187
+    },
+    {
+      "id": "UDE40-6d0966553a11",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQZMEPTOPMBT",
+      "score": 9.08476339235062,
+      "doubledScore": 9.031454225653627,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→Z",
+      "stage": "local-refinement",
+      "seconds": 0.6831191
+    },
+    {
+      "id": "UDE40-589a99133a69",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQZMEPGOPMBG",
+      "score": 9.08498630551136,
+      "doubledScore": 9.031332698095488,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-ac9707a932d1",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.707656
+    },
+    {
+      "id": "UDE40-6ae5eca00e12",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQSMEPTOPMBT",
+      "score": 9.085180533875262,
+      "doubledScore": 9.033086017603958,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.632759
+    },
+    {
+      "id": "UDE40-42e07c01aa4a",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAFLNKHCWJCIRQGZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.085308377255515,
+      "doubledScore": 9.032752676227739,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-f725b1e4ba45",
+      "mutation": "final ai↔iang",
+      "stage": "local-refinement",
+      "seconds": 0.5595777
+    },
+    {
+      "id": "UDE40-b352b8478bbf",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQSMEPFOPMBF",
+      "score": 9.085348267980732,
+      "doubledScore": 9.031386548804075,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-98235c7c2e99",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.5890383
+    },
+    {
+      "id": "UDE40-598f26f11170",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQDMEPFOPMBF",
+      "score": 9.085415404441857,
+      "doubledScore": 9.030950263833212,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-15a9c6eedb5c",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.6701682
+    }
+  ],
+  "bestDoubled": [
+    {
+      "id": "UDE40-598f26f11170",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQDMEPFOPMBF",
+      "score": 9.085415404441857,
+      "doubledScore": 9.030950263833212,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-15a9c6eedb5c",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.6701682
+    },
+    {
+      "id": "UDE40-589a99133a69",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQZMEPGOPMBG",
+      "score": 9.08498630551136,
+      "doubledScore": 9.031332698095488,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-ac9707a932d1",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-single-repairs",
+      "seconds": 0.707656
+    },
+    {
+      "id": "UDE40-c0e4445e6622",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQBZSDEVXORYUQDMEPGOPMFG",
+      "score": 9.086272935168331,
+      "doubledScore": 9.031340358507524,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UM40-15a9c6eedb5c",
+      "mutation": "final iang↔ve",
+      "stage": "local-refinement",
+      "seconds": 0.6463883
+    },
+    {
+      "id": "UDE40-b352b8478bbf",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQGZSDEVXORYUQSMEPFOPMBF",
+      "score": 9.085348267980732,
+      "doubledScore": 9.031386548804075,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-98235c7c2e99",
+      "mutation": "final key groups F↔G",
+      "stage": "local-refinement",
+      "seconds": 0.5890383
+    },
+    {
+      "id": "UDE40-cbfae4f13da0",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQBZSDEVXORYUQDMEPTOPMFT",
+      "score": 9.08598165998101,
+      "doubledScore": 9.031411369178553,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-f725b1e4ba45",
+      "mutation": "final iang↔ve",
+      "stage": "local-refinement",
+      "seconds": 0.5867343
+    },
+    {
+      "id": "UDE40-6d0966553a11",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQZMEPTOPMBT",
+      "score": 9.08476339235062,
+      "doubledScore": 9.031454225653627,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→Z",
+      "stage": "local-refinement",
+      "seconds": 0.6831191
+    },
+    {
+      "id": "UM40-15a9c6eedb5c",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "score": 9.08454032242731,
+      "doubledScore": 9.031480171169354,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "parent": "UM40-dff81aa57dd2",
+      "mutation": "final key groups Q↔W",
+      "stage": "exact-final-neighborhood",
+      "seconds": 1.8436721999999999,
+      "finalState": "ATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+      "imported": true
+    },
+    {
+      "id": "UDE40-f725b1e4ba45",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQDMEPTOPMBT",
+      "score": 9.08425503238347,
+      "doubledScore": 9.031509781680917,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final uai→D",
+      "stage": "local-refinement",
+      "seconds": 0.6106791
+    },
+    {
+      "id": "UDE40-63bddbe7670a",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQXZSDEVFORYUQSMEPTOPMBT",
+      "score": 9.086343802625171,
+      "doubledScore": 9.031944117736739,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final tokens iang↔iu",
+      "stage": "exact-polish",
+      "seconds": 0.5571772
+    },
+    {
+      "id": "UDE40-84a6f7112370",
+      "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQBZSDEVXORYUQSMEPTOPMFT",
+      "score": 9.086004629837351,
+      "doubledScore": 9.031967566403099,
+      "memory": {
+        "M": 40,
+        "D": 3,
+        "firstLinks": 9,
+        "finalLinks": 31,
+        "branches": 0,
+        "ordinaryDisplaced": [
+          "q",
+          "x",
+          "s"
+        ]
+      },
+      "initialDistance": 0,
+      "parent": "UDE40-16eaea80873c",
+      "mutation": "final iang↔ve",
+      "stage": "local-refinement",
+      "seconds": 0.6612703
+    }
+  ],
+  "contract": {
+    "capacity": [
+      21,
+      26
+    ],
+    "maximumM": 40,
+    "maximumD": 3,
+    "common399Unique": true,
+    "qzEmpty": true,
+    "zqEmpty": true,
+    "maximumInitialFamilyDistance": 2,
+    "initialFamilyReference": "UM40-dff81aa57dd2",
+    "cognitiveMultipliers": [
+      1,
+      2
+    ],
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    },
+    "lengthBalance": {
+      "pageSize": 6,
+      "maximumCandidates": 120,
+      "minimumInputLength": 4
+    },
+    "semantics": {
+      "toneKeyClass": "AEUIO",
+      "toneKeySet": "AEIOU",
+      "shapeKeysByMeaning": "AEUIO",
+      "toneKeysByTone": "IEUAO",
+      "toneDigitsByShapeMeaning": "42310"
+    }
+  },
+  "selectionRule": "Minimize max(score / best A/C score, doubledScore / best A/C doubledScore); fixed-initial alternative ranked separately.",
+  "searchScope": "Exact single-operation repairs of three anchors; enumerate two-final-operation legal endpoints and screen a subset; bounded local final and initial perturbations. General two-operation space not fully scored; no global optimality claim.",
+  "sourceHashes": {
+    "a7_CKT_R11.html": "f3693deb465458b6c915a3f1e3f36405675c4687240e362d6823c377c5b4ae3e",
+    "tools/score_ckt_v52.js": "6a376b3cdb0ddbc982761797ec0bc6233b3ebfbad6c6f61535e25111948faf32",
+    "tools/ckt_block_error.js": "7cad8b13d0ddfdd64370d73fc943530b05d0920ab558c23c0dd2f4105a815fde",
+    "tools/auxiliary_semantics.js": "06f4c8a269869b4e3f14cedf094a39190912fcf3a60d1b13a58bb1757fbc5899",
+    "tools/ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\search_untoned_t2126_m4_v52.js": "51ec94bd64c38cf27fb9a2f6b21bdece19c6b2b0bab1ad7bb4b0b848282ba099",
+    "research/ckt-v4-core/src/bin/score-untoned-v52-2126-stream.rs": "4ff35ffb88e4b3bda3e83dd3e3691642a869e9e3cc03d764602311a1d77ccc20",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\ckt-long-code-audit-20261118\\error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+    "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+    "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-20-untoned-m40d3-v52-scores.jsonl.gz": "336d7c75539f06ec6fce7f86b5c3831712617f7f8fceff0a69a8ffec2ac35193",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-20-um40-fixed-initial-rhymes-scores.jsonl.gz": "eccbbbb7a390ccacd92b7d9dec50d58bdb74f49637a1a0b1f592f5a8710be050",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-20-um40-fixed-initial-rhymes.json": "2a880c8f11b90c633987cd8a0921b374d491d0f871bfe60237eb882847425595",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\search_um40_double_empty_v52.js": "2c120db3f58d3d968baf71987ace0a1f07fbbde09f619d295299b62e04d35e95",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\refine_um40_rhymes_v52.js": "94c7b59678b7fb7c66d69dce4d89c46ad37639bad66900c333758c87d0295e70",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\search_untoned_m40d3_v52.js": "4d4cc200e824fafc384fb49d7c1acbd1ea53537e72273e4200cb2f021276c527",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\refine_untoned_t2126_m4_v52.js": "61d150bad41d762a2cd814b3d8f5b1b3ef27dbb2e4d613f1863640fa6f0ad328"
+  },
+  "scoreCounts": {
+    "total": 733,
+    "imported": 79,
+    "newFullDictionary": 654
+  },
+  "singleRepairByAnchor": [
+    {
+      "anchorId": "UM40-dff81aa57dd2",
+      "legalScoredSingleRhymeRepairs": 8,
+      "best": {
+        "id": "UM40-15a9c6eedb5c",
+        "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+        "score": 9.08454032242731,
+        "doubledScore": 9.031480171169354,
+        "memory": {
+          "M": 40,
+          "D": 3,
+          "firstLinks": 9,
+          "finalLinks": 31,
+          "branches": 0,
+          "ordinaryDisplaced": [
+            "q",
+            "x",
+            "s"
+          ]
+        },
+        "parent": "UM40-dff81aa57dd2",
+        "mutation": "final key groups Q↔W",
+        "stage": "exact-final-neighborhood",
+        "seconds": 1.8436721999999999,
+        "finalState": "ATLNKHCWJCIRQFZSDEVXORYUQDMEPGOPMBG",
+        "imported": true,
+        "repairOf": "UM40-dff81aa57dd2",
+        "repairMutation": "final key groups Q↔W"
+      }
+    },
+    {
+      "anchorId": "UM40-8acdbdac3fad",
+      "legalScoredSingleRhymeRepairs": 8,
+      "best": {
+        "id": "UDE40-16eaea80873c",
+        "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSAGLNKHCWJCIRQFZSDEVXORYUQSMEPTOPMBT",
+        "score": 9.084218346350243,
+        "doubledScore": 9.031984811409272,
+        "memory": {
+          "M": 40,
+          "D": 3,
+          "firstLinks": 9,
+          "finalLinks": 31,
+          "branches": 0,
+          "ordinaryDisplaced": [
+            "q",
+            "x",
+            "s"
+          ]
+        },
+        "initialDistance": 0,
+        "parent": "UM40-8acdbdac3fad",
+        "mutation": "final key groups Q↔W",
+        "stage": "exact-single-repairs",
+        "seconds": 0.65971,
+        "repairOf": "UM40-8acdbdac3fad",
+        "repairMutation": "final key groups Q↔W"
+      }
+    },
+    {
+      "anchorId": "UM40-ac9707a932d1",
+      "legalScoredSingleRhymeRepairs": 8,
+      "best": {
+        "id": "UDE40-589a99133a69",
+        "state": "BPMFDTNLGKHJFYWXVRZCQYYYJSSATLNKHCWJCIRQFZSDEVXORYUQZMEPGOPMBG",
+        "score": 9.08498630551136,
+        "doubledScore": 9.031332698095488,
+        "memory": {
+          "M": 40,
+          "D": 3,
+          "firstLinks": 9,
+          "finalLinks": 31,
+          "branches": 0,
+          "ordinaryDisplaced": [
+            "q",
+            "x",
+            "s"
+          ]
+        },
+        "initialDistance": 0,
+        "parent": "UM40-ac9707a932d1",
+        "mutation": "final key groups Q↔W",
+        "stage": "exact-single-repairs",
+        "seconds": 0.707656,
+        "repairOf": "UM40-ac9707a932d1",
+        "repairMutation": "final key groups Q↔W"
+      }
+    }
+  ],
+  "resultsVersusControls": [
+    {
+      "kind": "fixed-initials",
+      "id": "UDE40-16eaea80873c",
+      "beatsBothAtBothPoints": false,
+      "comparisons": [
+        {
+          "id": "RC26-39a5bfdc045342cd",
+          "defaultGap": 0.002320084864352978,
+          "doubledGap": 0.011967286092334106
+        },
+        {
+          "id": "RC26-eeb7b9a25a90cadd",
+          "defaultGap": -0.00031057712709703367,
+          "doubledGap": 0.0029450517712721336
+        }
+      ]
+    },
+    {
+      "kind": "up-to-two-initial-families",
+      "id": "UDE40-16eaea80873c",
+      "beatsBothAtBothPoints": false,
+      "comparisons": [
+        {
+          "id": "RC26-39a5bfdc045342cd",
+          "defaultGap": 0.002320084864352978,
+          "doubledGap": 0.011967286092334106
+        },
+        {
+          "id": "RC26-eeb7b9a25a90cadd",
+          "defaultGap": -0.00031057712709703367,
+          "doubledGap": 0.0029450517712721336
+        }
+      ]
+    }
+  ]
+}

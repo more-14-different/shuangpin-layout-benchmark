@@ -1,5 +1,17 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+um40-double-empty-v52:
+    node --max-old-space-size=4096 tools/search_um40_double_empty_v52.js --rounds=12
+    node --max-old-space-size=4096 tools/search_um40_double_empty_v52.js --rounds=0 --polish
+    node --max-old-space-size=4096 tools/search_um40_double_empty_v52.js --rounds=0 --twohop --polish
+
+um40-double-empty-v52-verify:
+    node --max-old-space-size=8192 tools/search_um40_double_empty_v52.js --verify
+    python tools/verify_um40_double_empty_memory.py
+
+um40-double-empty-v52-test:
+    node --test tests/um40-double-empty-v52.test.mjs tests/um40-fixed-initial-rhymes.test.mjs tests/untoned-m40d3-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 um40-ergonomics-collisions:
     node --max-old-space-size=8192 tools/compare_um40_ergonomics_collisions.js
 
