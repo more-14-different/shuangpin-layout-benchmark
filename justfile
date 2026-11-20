@@ -1,5 +1,18 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+ued-robust-grid:
+    python -X utf8 tools/robust_untoned_v52_policy.py --input research/notes/2026-11-20-untoned-frontiers-r11-components-UED-18c004bd1f31.json.gz --output research/notes/2026-11-21-ued-robust-review-grid.json
+
+ued-robust-margins:
+    python -X utf8 tools/review_ued_robustness.py
+
+ued-robust-html:
+    node tools/audit_ued_robust_html.js
+    node tests/ued-robust-html.browser.mjs
+
+ued-robust-verify:
+    node tools/verify_ued_robustness.js
+
 u7e-competing-score id:
     node --expose-gc --max-old-space-size=4096 tools/compare_u7e_competing_performance.js "{{id}}"
 

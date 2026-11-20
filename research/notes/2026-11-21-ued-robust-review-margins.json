@@ -1,0 +1,344 @@
+{
+  "completed": true,
+  "id": "UED-18c004bd1f31",
+  "criterion": "main positive 50%-500% six independent cognitive-cost multipliers; minimum mean competition rank, then Top3, Top1, worst rank, policy key",
+  "scenarioAxes": [
+    "firstAuxRate",
+    "secondAuxRate",
+    "thirdAuxRate",
+    "selectionRate",
+    "meanRejectedCandidates",
+    "meanPageActions"
+  ],
+  "baselineCostsMs": [
+    300,
+    300,
+    300,
+    600,
+    50,
+    300
+  ],
+  "scenariosPerGrid": 1000000,
+  "selectedPolicies": {
+    "keytao": "12/231/24",
+    "sanpin": "12/213/23"
+  },
+  "grids": {
+    "mainPositive50To500": {
+      "keytao": {
+        "winner": {
+          "policy": "12/231/24",
+          "meanRank": 1.0,
+          "top1Rate": 1.0,
+          "top3Rate": 1.0,
+          "worstRank": 1
+        },
+        "runnerUp": {
+          "policy": "12/231/23",
+          "meanRank": 2.0,
+          "top1Rate": 0.0,
+          "top3Rate": 1.0,
+          "worstRank": 2
+        },
+        "meanRankGap": 1.0,
+        "pairwiseWinnerRate": 1.0,
+        "pairwiseTieRate": 0.0,
+        "pairwiseLossRate": 0.0,
+        "cktGapQuantiles": {
+          "minimum": 5.719163480044642e-05,
+          "p05": 7.452890417303237e-05,
+          "median": 0.00011330942350706863,
+          "p95": 0.00019113461316786482,
+          "maximum": 0.0002314594351542354
+        },
+        "meanCktGap": 0.0001213938761449253,
+        "worstPairwisePoint": {
+          "gap": 5.719163480044642e-05,
+          "multipliers": [
+            5.0,
+            5.0,
+            0.5,
+            5.0,
+            5.0,
+            5.0
+          ],
+          "winnerScore": 9.526592814515443,
+          "runnerScore": 9.526650006150243
+        },
+        "uniformCostPoints": [
+          {
+            "multiplier": 1,
+            "winnerScore": 9.574596648325022,
+            "runnerScore": 9.574789933699591,
+            "gap": 0.00019328537456964057,
+            "relativePercent": 0.00201873124967049
+          },
+          {
+            "multiplier": 2,
+            "winnerScore": 9.548760530027922,
+            "runnerScore": 9.548901882213425,
+            "gap": 0.00014135218550315187,
+            "relativePercent": 0.001480319723786586
+          },
+          {
+            "multiplier": 3,
+            "winnerScore": 9.532949083458531,
+            "runnerScore": 9.53305407908062,
+            "gap": 0.0001049956220882109,
+            "relativePercent": 0.001101397072081274
+          }
+        ]
+      },
+      "sanpin": {
+        "winner": {
+          "policy": "12/213/23",
+          "meanRank": 1.007422,
+          "top1Rate": 0.99601,
+          "top3Rate": 0.99844,
+          "worstRank": 5
+        },
+        "runnerUp": {
+          "policy": "12/213/21",
+          "meanRank": 2.101307,
+          "top1Rate": 0.0,
+          "top3Rate": 0.989523,
+          "worstRank": 6
+        },
+        "meanRankGap": 1.0938849999999998,
+        "pairwiseWinnerRate": 1.0,
+        "pairwiseTieRate": 0.0,
+        "pairwiseLossRate": 0.0,
+        "cktGapQuantiles": {
+          "minimum": 4.3601618020971955e-05,
+          "p05": 8.133153787657222e-05,
+          "median": 0.00024509049105514435,
+          "p95": 0.0005308067563754902,
+          "maximum": 0.000789039624967458
+        },
+        "meanCktGap": 0.00026441607800375207,
+        "worstPairwisePoint": {
+          "gap": 4.3601618020971955e-05,
+          "multipliers": [
+            5.0,
+            5.0,
+            0.5,
+            0.5,
+            5.0,
+            0.5
+          ],
+          "winnerScore": 9.531616029045697,
+          "runnerScore": 9.531659630663718
+        },
+        "uniformCostPoints": [
+          {
+            "multiplier": 1,
+            "winnerScore": 9.558426903203836,
+            "runnerScore": 9.558632450887648,
+            "gap": 0.0002055476838123127,
+            "relativePercent": 0.0021504342282872542
+          },
+          {
+            "multiplier": 2,
+            "winnerScore": 9.533955930444858,
+            "runnerScore": 9.53419456172173,
+            "gap": 0.00023863127687206998,
+            "relativePercent": 0.002502961819972828
+          },
+          {
+            "multiplier": 3,
+            "winnerScore": 9.51887196507903,
+            "runnerScore": 9.51912202850012,
+            "gap": 0.0002500634210900188,
+            "relativePercent": 0.0026270278874156766
+          }
+        ]
+      }
+    },
+    "extremePositive100To1000": {
+      "keytao": {
+        "winner": {
+          "policy": "12/231/24",
+          "meanRank": 1.00004,
+          "top1Rate": 0.99996,
+          "top3Rate": 1.0,
+          "worstRank": 2
+        },
+        "runnerUp": {
+          "policy": "12/231/23",
+          "meanRank": 1.99996,
+          "top1Rate": 4e-05,
+          "top3Rate": 1.0,
+          "worstRank": 2
+        },
+        "meanRankGap": 0.9999199999999999,
+        "pairwiseWinnerRate": 0.99996,
+        "pairwiseTieRate": 0.0,
+        "pairwiseLossRate": 4e-05,
+        "cktGapQuantiles": {
+          "minimum": -9.874063522374854e-07,
+          "p05": 1.546943167864967e-05,
+          "median": 5.086724031411194e-05,
+          "p95": 0.00012939695030640406,
+          "maximum": 0.00019654654958500828
+        },
+        "meanCktGap": 5.9219482120478316e-05,
+        "worstPairwisePoint": {
+          "gap": -9.874063522374854e-07,
+          "multipliers": [
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0,
+            10.0
+          ],
+          "winnerScore": 9.4995145559357,
+          "runnerScore": 9.499513568529348
+        },
+        "uniformCostPoints": [
+          {
+            "multiplier": 1,
+            "winnerScore": 9.574596648325022,
+            "runnerScore": 9.574789933699591,
+            "gap": 0.00019328537456964057,
+            "relativePercent": 0.00201873124967049
+          },
+          {
+            "multiplier": 2,
+            "winnerScore": 9.548760530027922,
+            "runnerScore": 9.548901882213425,
+            "gap": 0.00014135218550315187,
+            "relativePercent": 0.001480319723786586
+          },
+          {
+            "multiplier": 3,
+            "winnerScore": 9.532949083458531,
+            "runnerScore": 9.53305407908062,
+            "gap": 0.0001049956220882109,
+            "relativePercent": 0.001101397072081274
+          }
+        ]
+      },
+      "sanpin": {
+        "winner": {
+          "policy": "12/213/23",
+          "meanRank": 1.0,
+          "top1Rate": 1.0,
+          "top3Rate": 1.0,
+          "worstRank": 1
+        },
+        "runnerUp": {
+          "policy": "12/213/21",
+          "meanRank": 2.032487,
+          "top1Rate": 0.0,
+          "top3Rate": 1.0,
+          "worstRank": 3
+        },
+        "meanRankGap": 1.0324870000000002,
+        "pairwiseWinnerRate": 1.0,
+        "pairwiseTieRate": 0.0,
+        "pairwiseLossRate": 0.0,
+        "cktGapQuantiles": {
+          "minimum": 1.7087104216884086e-05,
+          "p05": 5.793770942608134e-05,
+          "median": 0.00024241486872167428,
+          "p95": 0.0006559272933309933,
+          "maximum": 0.0011583009001281397
+        },
+        "meanCktGap": 0.00028098589559804406,
+        "worstPairwisePoint": {
+          "gap": 1.7087104216884086e-05,
+          "multipliers": [
+            10.0,
+            10.0,
+            1.0,
+            1.0,
+            10.0,
+            1.0
+          ],
+          "winnerScore": 9.519162126208977,
+          "runnerScore": 9.519179213313194
+        },
+        "uniformCostPoints": [
+          {
+            "multiplier": 1,
+            "winnerScore": 9.558426903203836,
+            "runnerScore": 9.558632450887648,
+            "gap": 0.0002055476838123127,
+            "relativePercent": 0.0021504342282872542
+          },
+          {
+            "multiplier": 2,
+            "winnerScore": 9.533955930444858,
+            "runnerScore": 9.53419456172173,
+            "gap": 0.00023863127687206998,
+            "relativePercent": 0.002502961819972828
+          },
+          {
+            "multiplier": 3,
+            "winnerScore": 9.51887196507903,
+            "runnerScore": 9.51912202850012,
+            "gap": 0.0002500634210900188,
+            "relativePercent": 0.0026270278874156766
+          }
+        ]
+      }
+    }
+  },
+  "jointUniformPointTop2": [
+    {
+      "multiplier": 1,
+      "winner": {
+        "score": 9.566522024808478,
+        "keytao": "12/231/24",
+        "sanpin": "12/213/23"
+      },
+      "runnerUp": {
+        "score": 9.566618913878122,
+        "keytao": "12/231/23",
+        "sanpin": "12/213/23"
+      },
+      "gap": 9.688906964377964e-05,
+      "relativePercent": 0.0010127930442486944
+    },
+    {
+      "multiplier": 2,
+      "winner": {
+        "score": 9.541366844414608,
+        "keytao": "12/231/24",
+        "sanpin": "12/213/23"
+      },
+      "runnerUp": {
+        "score": 9.541437685721267,
+        "keytao": "12/231/23",
+        "sanpin": "12/213/23"
+      },
+      "gap": 7.084130665901966e-05,
+      "relativePercent": 0.0007424649718870127
+    },
+    {
+      "multiplier": 3,
+      "winner": {
+        "score": 9.525918325296146,
+        "keytao": "12/231/24",
+        "sanpin": "12/213/23"
+      },
+      "runnerUp": {
+        "score": 9.525970939866914,
+        "keytao": "12/231/23",
+        "sanpin": "12/213/23"
+      },
+      "gap": 5.261457076777276e-05,
+      "relativePercent": 0.000552330693703875
+    }
+  ],
+  "interpretation": "Robust winners/runners ranked separately per member. CKT gaps here are member-normalized scores unless explicitly in jointUniformPointTop2; joint table enumerates all 144x144 policies only at uniform 1/2/3 cost points. Gaps positive favor robust winner. Grid competitor is its fixed robust runner, not every scenario own second-best.",
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\review_ued_robustness.py": "be4be260ce5051db804df240657d84ba5e57a14c79150a5363943370e7f06d3d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-frontiers-r11-components-UED-18c004bd1f31.json.gz": "5860b65136c2dc80259124ca1ea6c9441bc1f3643277169aaef81f89bb80cc6d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-frontiers-r11-robustness-UED-18c004bd1f31.json": "790e9a07832a315245db7d12098d73d9c6bc5a97323aaa98f66960d2198e8fab",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-ued-robust-review-grid.json": "790e9a07832a315245db7d12098d73d9c6bc5a97323aaa98f66960d2198e8fab",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\robust_untoned_v52_policy.py": "8e2c914ddb5ef169f8497463049866879f506c40d27fd227daa62d13f921071b",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\analyze_single_ckt_v51_aux_order.py": "b4c1d5c5f91a74525896b4d5cecce19c452cf1fc4901fe15b9b16df91b8895b0"
+  }
+}
