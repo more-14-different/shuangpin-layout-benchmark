@@ -1,5 +1,8 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-gpu-close-review:
+    node --expose-gc --max-old-space-size=4096 tools/review_u7e_gpu_frontier.js
+
 u7e-openqz:
     node tools/explore_u7e_openqz_v52.js
 

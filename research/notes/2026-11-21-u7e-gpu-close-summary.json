@@ -1,0 +1,276 @@
+{
+  "completed": true,
+  "searchStopped": true,
+  "stoppedAt": "2026-11-21 03:09:32",
+  "runHours": 4.483663333333334,
+  "totalBatches": 8020,
+  "uniqueNewEvaluations": 15909,
+  "retainedStates": 15910,
+  "allRetainedLayoutsChecked": true,
+  "allScoredModesRepriced": 15909,
+  "databaseIntegrity": "ok",
+  "checkpointUncompressedSha256": "591b08e0ff6c22296738845f1e50852de28becc7b4b351d041b4f9b9546e3fdb",
+  "frontier": [
+    {
+      "finals": [
+        11,
+        10,
+        13,
+        24,
+        25,
+        18,
+        3,
+        4,
+        17,
+        9,
+        5,
+        11,
+        9,
+        15,
+        16,
+        2,
+        1,
+        6,
+        13,
+        4,
+        15,
+        15,
+        22,
+        7,
+        16,
+        2,
+        19,
+        9,
+        23,
+        1,
+        12,
+        19,
+        17,
+        10,
+        3
+      ],
+      "scores": [
+        9.566522024808478,
+        9.54136684441461,
+        9.525918325296148
+      ],
+      "id": "UED-18c004bd1f31",
+      "verified": true
+    },
+    {
+      "id": "U7G-87a5d1a954d2",
+      "scores": [
+        9.570549251488234,
+        9.542774739209896,
+        9.525416269296656
+      ],
+      "verified": true,
+      "finals": [
+        11,
+        10,
+        13,
+        24,
+        25,
+        18,
+        3,
+        4,
+        17,
+        9,
+        5,
+        11,
+        9,
+        15,
+        16,
+        2,
+        1,
+        6,
+        13,
+        4,
+        15,
+        15,
+        22,
+        7,
+        16,
+        2,
+        19,
+        9,
+        1,
+        23,
+        12,
+        19,
+        17,
+        10,
+        3
+      ]
+    }
+  ],
+  "independentMemoryAudit": [
+    {
+      "id": "UED-18c004bd1f31",
+      "M": 41,
+      "D": 2,
+      "coverage": 399,
+      "unique": 351,
+      "branches": 0
+    },
+    {
+      "id": "U7G-87a5d1a954d2",
+      "M": 41,
+      "D": 2,
+      "coverage": 399,
+      "unique": 352,
+      "branches": 0
+    }
+  ],
+  "seedPointOptimalScores": [
+    9.566522024808478,
+    9.54136684441461,
+    9.525918325296148
+  ],
+  "newGpuPointOptimalScores": [
+    9.570549251488234,
+    9.542774739209896,
+    9.525416269296658
+  ],
+  "gpuFrontierPointEnvelope": [
+    9.566522024808478,
+    9.54136684441461,
+    9.525416269296658
+  ],
+  "referencePointEnvelope": [
+    9.556976748024438,
+    9.54136684441461,
+    9.525918325296148
+  ],
+  "openBucketCandidates": [
+    {
+      "id": "UQO-f32062502583",
+      "audit": {
+        "valid": true,
+        "M": 41,
+        "D": 2,
+        "V": 5,
+        "branches": 0,
+        "actual": [
+          21,
+          21
+        ],
+        "unique": 348,
+        "qz": true,
+        "zq": true
+      },
+      "pointOptimal": [
+        9.551867157130337,
+        9.541258721439855,
+        9.536362541705834
+      ],
+      "pointPolicies": [
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/23"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        }
+      ],
+      "robustScores": [
+        9.551869116497233,
+        9.541258721439855,
+        9.536362541705836
+      ],
+      "robustPolicies": {
+        "keytao": "12/231/24",
+        "sanpin": "12/213/21"
+      },
+      "robustAggregate": {
+        "motorUpperMs": 345.7770943428231,
+        "effectiveMs": 444.84641248817974,
+        "firstAuxRate": 0.248819637935389,
+        "secondAuxRate": 0.06218221935167062,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.005052521518868975,
+        "meanRejectedCandidates": 0.006344510836950361,
+        "meanPageActions": 7.228603386771942e-06
+      }
+    },
+    {
+      "id": "UQO-61c93a2c344c",
+      "audit": {
+        "valid": true,
+        "M": 41,
+        "D": 2,
+        "V": 5,
+        "branches": 0,
+        "actual": [
+          21,
+          21
+        ],
+        "unique": 351,
+        "qz": true,
+        "zq": true
+      },
+      "pointOptimal": [
+        9.562287563556811,
+        9.538033876201965,
+        9.52315835216741
+      ],
+      "pointPolicies": [
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        }
+      ],
+      "robustScores": [
+        9.562287563556811,
+        9.538033876201965,
+        9.52315835216741
+      ],
+      "robustPolicies": {
+        "keytao": "12/231/24",
+        "sanpin": "12/213/21"
+      },
+      "robustAggregate": {
+        "motorUpperMs": 347.0565007829983,
+        "effectiveMs": 445.47392475993814,
+        "firstAuxRate": 0.2471588835861579,
+        "secondAuxRate": 0.06176994796088087,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.005006684626437564,
+        "meanRejectedCandidates": 0.0062950098090495425,
+        "meanPageActions": 7.1977381980564865e-06
+      }
+    }
+  ],
+  "dominatingStableCandidate": "UQO-61c93a2c344c",
+  "gapsGpuEnvelopeVersusDominatingStable": [
+    0.004234461251666488,
+    0.003332968212644616,
+    0.0022579171292473887
+  ],
+  "decision": "Stop per explicit user condition: neither fixed-policy GPU Pareto finalist becomes competitive after 144-policy point optimization; UQO-61c93a2c344c robust policy strictly dominates both across 1/2/3 cognitive costs. This does not claim all retained dominated GPU layouts have individually reoptimized policies or prove optimality.",
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-gpu-close-checkpoint.sqlite.gz": "1e83cd4c2092ad65a902578cdfc9c16ab7310c1a09e62e191fa60e437dbf0c96",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-gpu-close-snapshot.json.gz": "244d41f16f06386c4e92fdff2751aed24419841e229c871299582071bab84d01",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-gpu-close-policy.json": "05fd0c0472ccd1332101e56d5176bb8499495c578045ecc8a63ef41e11b90d8d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-summary.json": "4e192c3bb62757604cc0c123493868fa8d21eb5f6fda1768ba9526ef16ed9feb",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-u7e-deeper-v52-policy-UED-18c004bd1f31.json": "cdf56fa608a88b52d3aa3a63c8e2fa0e8b51c312f5243911fda47c46e9071fb5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\review_u7e_gpu_frontier.js": "a564360de4b8e2553ef11f63ca11b8b6342570b79f912600c200221ec8b9dcb2",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\run_u7e_gpu_anneal.py": "fbe66a015d5880d1652ccc44fb9ca8ce8cd8e159373500ae6aa183714d5507b5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\config\\u7e-fixed-gpu.json": "1db76f4c731ae249f7f60413ea03aa13b382a9924e44b09a705cec8f95c2ed71",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\memory_r2.py": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\audit.py": "fa9bfe87218ea8d2013abd9b83aa936b15d1b7dc2f6c560a4e9e93dfd1838267"
+  }
+}
