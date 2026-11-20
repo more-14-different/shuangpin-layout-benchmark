@@ -1,5 +1,29 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-frontiers-r11-prepare:
+    python -X utf8 tools/publish_untoned_frontiers_r11.py prepare
+
+untoned-frontiers-r11-robust:
+    python -X utf8 tools/publish_untoned_frontiers_r11.py robust
+
+untoned-frontiers-r11-columns:
+    python -X utf8 tools/publish_untoned_frontiers_r11.py columns
+
+untoned-frontiers-r11-score id:
+    node --expose-gc --max-old-space-size=4096 tools/finalize_untoned_frontiers_r11.js --score "{{id}}"
+
+untoned-frontiers-r11-install:
+    node --max-old-space-size=12288 tools/finalize_untoned_frontiers_r11.js --install
+
+untoned-frontiers-r11-test:
+    node --test tests/untoned-frontiers-r11.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+untoned-frontiers-r11-browser:
+    node tests/untoned-frontiers-r11.browser.mjs
+
+untoned-frontiers-r11-validate:
+    python -X utf8 tools/validate_untoned_frontiers_r11.py
+
 untoned-cr7e-joint-search:
     node --max-old-space-size=4096 tools/search_untoned_cr7e_joint.js
 

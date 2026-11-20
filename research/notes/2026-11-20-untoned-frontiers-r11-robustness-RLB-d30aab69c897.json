@@ -1,0 +1,480 @@
+{
+  "version": "untoned-v52-mean-rank-robustness-1",
+  "id": "RLB-d30aab69c897",
+  "inputSha256": "8a26aee76bf448590afc883ca468dcccaee1c671728c5a685763b79352a3099d",
+  "criterion": "main positive 50%-500% six independent cognitive-cost multipliers; minimum mean competition rank, then Top3, Top1, worst rank, policy key",
+  "scenariosPerGrid": 1000000,
+  "grids": {
+    "mainPositive50To500": {
+      "keytao": {
+        "winner": {
+          "policy": "12/213/24",
+          "meanRank": 1.16,
+          "top1Rate": 0.84,
+          "top3Rate": 1.0,
+          "worstRank": 2
+        },
+        "runnerUp": {
+          "policy": "12/231/24",
+          "meanRank": 1.961762,
+          "top1Rate": 0.16,
+          "top3Rate": 0.982868,
+          "worstRank": 4
+        },
+        "top10": [
+          {
+            "policy": "12/213/24",
+            "meanRank": 1.16,
+            "top1Rate": 0.84,
+            "top3Rate": 1.0,
+            "worstRank": 2
+          },
+          {
+            "policy": "12/231/24",
+            "meanRank": 1.961762,
+            "top1Rate": 0.16,
+            "top3Rate": 0.982868,
+            "worstRank": 4
+          },
+          {
+            "policy": "12/213/23",
+            "meanRank": 3.058916,
+            "top1Rate": 0.0,
+            "top3Rate": 0.84,
+            "worstRank": 5
+          },
+          {
+            "policy": "12/231/23",
+            "meanRank": 4.232418,
+            "top1Rate": 0.0,
+            "top3Rate": 0.16,
+            "worstRank": 5
+          },
+          {
+            "policy": "12/213/21",
+            "meanRank": 4.750445,
+            "top1Rate": 0.0,
+            "top3Rate": 0.017132,
+            "worstRank": 6
+          },
+          {
+            "policy": "12/231/21",
+            "meanRank": 5.837064,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 7
+          },
+          {
+            "policy": "12/213/41",
+            "meanRank": 8.717114,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 16
+          },
+          {
+            "policy": "12/213/14",
+            "meanRank": 8.992499,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 12
+          },
+          {
+            "policy": "12/213/42",
+            "meanRank": 9.871756,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 16
+          },
+          {
+            "policy": "12/231/14",
+            "meanRank": 10.136004,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 15
+          }
+        ]
+      },
+      "sanpin": {
+        "winner": {
+          "policy": "12/213/23",
+          "meanRank": 1.038587,
+          "top1Rate": 0.961633,
+          "top3Rate": 0.999937,
+          "worstRank": 4
+        },
+        "runnerUp": {
+          "policy": "12/213/21",
+          "meanRank": 2.849297,
+          "top1Rate": 0.0,
+          "top3Rate": 0.772902,
+          "worstRank": 10
+        },
+        "top10": [
+          {
+            "policy": "12/213/23",
+            "meanRank": 1.038587,
+            "top1Rate": 0.961633,
+            "top3Rate": 0.999937,
+            "worstRank": 4
+          },
+          {
+            "policy": "12/213/21",
+            "meanRank": 2.849297,
+            "top1Rate": 0.0,
+            "top3Rate": 0.772902,
+            "worstRank": 10
+          },
+          {
+            "policy": "12/231/23",
+            "meanRank": 3.022763,
+            "top1Rate": 0.037737,
+            "top3Rate": 0.548025,
+            "worstRank": 10
+          },
+          {
+            "policy": "12/213/24",
+            "meanRank": 3.417887,
+            "top1Rate": 0.0,
+            "top3Rate": 0.62148,
+            "worstRank": 12
+          },
+          {
+            "policy": "12/231/21",
+            "meanRank": 5.394605,
+            "top1Rate": 0.0,
+            "top3Rate": 0.036415,
+            "worstRank": 14
+          },
+          {
+            "policy": "12/231/24",
+            "meanRank": 5.952719,
+            "top1Rate": 0.0,
+            "top3Rate": 1.4e-05,
+            "worstRank": 16
+          },
+          {
+            "policy": "12/213/13",
+            "meanRank": 6.982374,
+            "top1Rate": 0.000567,
+            "top3Rate": 0.019235,
+            "worstRank": 14
+          },
+          {
+            "policy": "12/213/12",
+            "meanRank": 8.334659,
+            "top1Rate": 0.0,
+            "top3Rate": 0.00034,
+            "worstRank": 16
+          },
+          {
+            "policy": "12/213/14",
+            "meanRank": 9.992147,
+            "top1Rate": 0.0,
+            "top3Rate": 0.000161,
+            "worstRank": 19
+          },
+          {
+            "policy": "12/231/13",
+            "meanRank": 10.040603,
+            "top1Rate": 6.3e-05,
+            "top3Rate": 0.001491,
+            "worstRank": 16
+          }
+        ]
+      }
+    },
+    "extremePositive100To1000": {
+      "keytao": {
+        "winner": {
+          "policy": "12/213/24",
+          "meanRank": 1.096,
+          "top1Rate": 0.904,
+          "top3Rate": 1.0,
+          "worstRank": 2
+        },
+        "runnerUp": {
+          "policy": "12/231/24",
+          "meanRank": 2.152184,
+          "top1Rate": 0.096,
+          "top3Rate": 0.907839,
+          "worstRank": 4
+        },
+        "top10": [
+          {
+            "policy": "12/213/24",
+            "meanRank": 1.096,
+            "top1Rate": 0.904,
+            "top3Rate": 1.0,
+            "worstRank": 2
+          },
+          {
+            "policy": "12/231/24",
+            "meanRank": 2.152184,
+            "top1Rate": 0.096,
+            "top3Rate": 0.907839,
+            "worstRank": 4
+          },
+          {
+            "policy": "12/213/23",
+            "meanRank": 3.382879,
+            "top1Rate": 0.0,
+            "top3Rate": 0.633718,
+            "worstRank": 6
+          },
+          {
+            "policy": "12/213/21",
+            "meanRank": 3.889613,
+            "top1Rate": 0.0,
+            "top3Rate": 0.362445,
+            "worstRank": 6
+          },
+          {
+            "policy": "12/231/23",
+            "meanRank": 5.013341,
+            "top1Rate": 0.0,
+            "top3Rate": 0.048977,
+            "worstRank": 6
+          },
+          {
+            "policy": "12/231/21",
+            "meanRank": 5.465971,
+            "top1Rate": 0.0,
+            "top3Rate": 0.047023,
+            "worstRank": 7
+          },
+          {
+            "policy": "12/213/41",
+            "meanRank": 8.20617,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 16
+          },
+          {
+            "policy": "12/213/14",
+            "meanRank": 9.27846,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 12
+          },
+          {
+            "policy": "12/213/42",
+            "meanRank": 9.486739,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 16
+          },
+          {
+            "policy": "12/231/41",
+            "meanRank": 9.845764,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 16
+          }
+        ]
+      },
+      "sanpin": {
+        "winner": {
+          "policy": "12/213/23",
+          "meanRank": 1.0,
+          "top1Rate": 1.0,
+          "top3Rate": 1.0,
+          "worstRank": 1
+        },
+        "runnerUp": {
+          "policy": "12/213/21",
+          "meanRank": 2.666819,
+          "top1Rate": 0.0,
+          "top3Rate": 0.847419,
+          "worstRank": 5
+        },
+        "top10": [
+          {
+            "policy": "12/213/23",
+            "meanRank": 1.0,
+            "top1Rate": 1.0,
+            "top3Rate": 1.0,
+            "worstRank": 1
+          },
+          {
+            "policy": "12/213/21",
+            "meanRank": 2.666819,
+            "top1Rate": 0.0,
+            "top3Rate": 0.847419,
+            "worstRank": 5
+          },
+          {
+            "policy": "12/213/24",
+            "meanRank": 3.052058,
+            "top1Rate": 0.0,
+            "top3Rate": 0.774394,
+            "worstRank": 5
+          },
+          {
+            "policy": "12/231/23",
+            "meanRank": 3.333035,
+            "top1Rate": 0.0,
+            "top3Rate": 0.378188,
+            "worstRank": 11
+          },
+          {
+            "policy": "12/231/21",
+            "meanRank": 5.368566,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 12
+          },
+          {
+            "policy": "12/231/24",
+            "meanRank": 5.752598,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 13
+          },
+          {
+            "policy": "12/213/12",
+            "meanRank": 10.003666,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 19
+          },
+          {
+            "policy": "12/213/13",
+            "meanRank": 10.403871,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 19
+          },
+          {
+            "policy": "12/312/23",
+            "meanRank": 10.804635,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 25
+          },
+          {
+            "policy": "12/213/41",
+            "meanRank": 11.29087,
+            "top1Rate": 0.0,
+            "top3Rate": 0.0,
+            "worstRank": 19
+          }
+        ]
+      }
+    }
+  },
+  "selectedPolicies": {
+    "keytao": "12/213/24",
+    "sanpin": "12/213/23"
+  },
+  "selectedTracks": {
+    "keytao": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 101.61137854769987,
+        "firstAuxRate": 0.21786642703271233,
+        "secondAuxRate": 0.04489078289170754,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.0050300499528494035,
+        "meanRejectedCandidates": 0.006269719422665712,
+        "meanPageActions": 4.093441336248955e-06,
+        "meanKeys": 2.2627572099244198,
+        "effectiveMs": 183.7712855002696
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 398.50524758106496,
+        "firstAuxRate": 0.19222012759045906,
+        "secondAuxRate": 0.03484691180041442,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003699709849871885,
+        "meanRejectedCandidates": 0.004417383891236117,
+        "meanPageActions": 5.549321437062812e-10,
+        "meanKeys": 4.227067039390874,
+        "effectiveMs": 469.06605466929165
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 428.252262927904,
+        "firstAuxRate": 0.21729365462423045,
+        "secondAuxRate": 0.0272017054374793,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.0020884028388456653,
+        "meanRejectedCandidates": 0.002416051398286934,
+        "meanPageActions": 0,
+        "meanKeys": 4.24449536006171,
+        "effectiveMs": 502.97471521963865
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 331.23111443708933,
+        "firstAuxRate": 0.486548010494748,
+        "secondAuxRate": 0.1771289378135697,
+        "thirdAuxRate": 0.0410958340484991,
+        "selectionRate": 0.005359668251960432,
+        "meanRejectedCandidates": 0.006516430583146912,
+        "meanPageActions": 1.758541081054859e-06,
+        "meanKeys": 3.704772782356817,
+        "effectiveMs": 546.2050991867923
+      }
+    },
+    "sanpin": {
+      "character": {
+        "count": 6238,
+        "totalWeight": 34283114,
+        "motorUpperMs": 103.92153457738556,
+        "firstAuxRate": 0.21935020255161186,
+        "secondAuxRate": 0.051284256150126856,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.007623315664965557,
+        "meanRejectedCandidates": 0.009873811346308856,
+        "meanPageActions": 4.095310595181056e-05,
+        "meanKeys": 2.2706344587017386,
+        "effectiveMs": 190.1918380859875
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 399.6423624622528,
+        "firstAuxRate": 0.19222012759045906,
+        "secondAuxRate": 0.03881976341340961,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.0052999038554811615,
+        "meanRejectedCandidates": 0.006582481893708005,
+        "meanPageActions": 2.718057639873365e-06,
+        "meanKeys": 4.231039891003869,
+        "effectiveMs": 472.46421158867946
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 430.22195794465745,
+        "firstAuxRate": 0.21729365462423045,
+        "secondAuxRate": 0.03207388727320195,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.0032085480014555742,
+        "meanRejectedCandidates": 0.0038212551052426557,
+        "meanPageActions": 1.0019759787196335e-06,
+        "meanKeys": 4.249367541897432,
+        "effectiveMs": 507.14871266281625
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 340.2267647198442,
+        "firstAuxRate": 0.486548010494748,
+        "secondAuxRate": 0.20001909356178826,
+        "thirdAuxRate": 0.05798984224909637,
+        "selectionRate": 0.010817006801588414,
+        "meanRejectedCandidates": 0.014629996864749127,
+        "meanPageActions": 2.2426165092523038e-05,
+        "meanKeys": 3.7445569463056327,
+        "effectiveMs": 570.8222803852523
+      }
+    }
+  },
+  "completed": true
+}

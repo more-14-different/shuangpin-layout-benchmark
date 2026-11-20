@@ -1,0 +1,1316 @@
+{
+  "id": "UED-18c004bd1f31",
+  "initialMap": {
+    "b": "B",
+    "p": "P",
+    "m": "M",
+    "f": "F",
+    "d": "D",
+    "t": "T",
+    "n": "N",
+    "l": "L",
+    "g": "G",
+    "k": "P",
+    "h": "H",
+    "j": "J",
+    "q": "Q",
+    "x": "X",
+    "zh": "E",
+    "ch": "S",
+    "sh": "K",
+    "r": "R",
+    "z": "Z",
+    "c": "C",
+    "s": "C",
+    "A": "R",
+    "E": "R",
+    "O": "R",
+    "W": "W",
+    "Y": "Y",
+    "YU": "Y"
+  },
+  "finalMap": {
+    "a": "L",
+    "ai": "K",
+    "an": "N",
+    "ang": "Y",
+    "ao": "Z",
+    "e": "S",
+    "ei": "D",
+    "en": "E",
+    "eng": "R",
+    "er": "J",
+    "i": "F",
+    "ia": "L",
+    "ian": "J",
+    "iang": "P",
+    "iao": "Q",
+    "ie": "C",
+    "in": "B",
+    "ing": "G",
+    "iong": "N",
+    "iu": "E",
+    "o": "P",
+    "ong": "P",
+    "ou": "W",
+    "u": "H",
+    "ua": "Q",
+    "uai": "C",
+    "uan": "T",
+    "uang": "J",
+    "ui": "X",
+    "un": "B",
+    "uo": "M",
+    "v": "T",
+    "van": "R",
+    "ve": "K",
+    "vn": "D"
+  },
+  "codeListSha256": "c99506f366e6cc4dd098b73d9a4e5405dfbae15496c714fc7ccd97166a8de630",
+  "audit": {
+    "valid": true,
+    "M": 41,
+    "D": 2,
+    "V": 5,
+    "branches": 0,
+    "actual": [
+      21,
+      21
+    ],
+    "unique": 351,
+    "qz": false,
+    "zq": false
+  },
+  "auxiliarySemantics": {
+    "toneKeyClass": "AVUIO",
+    "toneKeySet": "AIOUV",
+    "shapeKeysByMeaning": "AVUIO",
+    "toneKeysByTone": "IVUAO",
+    "toneDigitsByShapeMeaning": "42310"
+  },
+  "policies": {
+    "keytao": {
+      "word2": "12",
+      "word3": "231",
+      "word4": "24"
+    },
+    "sanpin": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "23"
+    }
+  },
+  "referencePolicies": {
+    "keytao": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "24"
+    },
+    "sanpin": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "23"
+    }
+  },
+  "referenceModes": {
+    "keytao": {
+      "character": {
+        "count": 6233,
+        "totalWeight": 34201052,
+        "motorUpperMs": 112.42254451086282,
+        "firstAuxRate": 0.22060613808019708,
+        "secondAuxRate": 0.04566821511806128,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.004804384379755336,
+        "meanRejectedCandidates": 0.0059137069818788034,
+        "meanPageActions": 0.000004005724736186477,
+        "meanKeys": 2.2662743531982583,
+        "effectiveMs": 195.4843681647083
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 412.68455596274487,
+        "firstAuxRate": 0.1892694210310565,
+        "secondAuxRate": 0.034756806080910474,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003775437554998475,
+        "meanRejectedCandidates": 0.004530663854527311,
+        "meanPageActions": 0,
+        "meanKeys": 4.224026227111967,
+        "effectiveMs": 482.3842198220604
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 343.1166663464035,
+        "firstAuxRate": 0.5172872168968791,
+        "secondAuxRate": 0.20701254452783532,
+        "thirdAuxRate": 0.052980406019336686,
+        "selectionRate": 0.007349652222944726,
+        "meanRejectedCandidates": 0.00913989969982548,
+        "meanPageActions": 0.00000668463499215639,
+        "meanKeys": 3.7772801674440513,
+        "effectiveMs": 581.1695082888747
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 447.02694567046973,
+        "firstAuxRate": 0.27835105638906893,
+        "secondAuxRate": 0.04469433486596384,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.003829566677066131,
+        "meanRejectedCandidates": 0.004522254400754552,
+        "meanPageActions": 0,
+        "meanKeys": 4.323045391255032,
+        "effectiveMs": 546.4644157732569
+      }
+    },
+    "sanpin": {
+      "character": {
+        "count": 6238,
+        "totalWeight": 34283114,
+        "motorUpperMs": 115.60899770175781,
+        "firstAuxRate": 0.22208335567183307,
+        "secondAuxRate": 0.050615092899670665,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.007739728660587833,
+        "meanRejectedCandidates": 0.009962251387082281,
+        "meanPageActions": 0.000040340559495266384,
+        "meanKeys": 2.2726984485715036,
+        "effectiveMs": 202.5725842067643
+      },
+      "word2": {
+        "count": 132814,
+        "totalWeight": 3604044247,
+        "motorUpperMs": 413.6793308004818,
+        "firstAuxRate": 0.1892694210310565,
+        "secondAuxRate": 0.03861064444917177,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.005321292050163889,
+        "meanRejectedCandidates": 0.006588676601228198,
+        "meanPageActions": 0.0000023021359981655076,
+        "meanKeys": 4.227880065480228,
+        "effectiveMs": 485.56625014550946
+      },
+      "word3": {
+        "count": 72923,
+        "totalWeight": 1101481234,
+        "motorUpperMs": 355.7803836012869,
+        "firstAuxRate": 0.5172872168968791,
+        "secondAuxRate": 0.23041229679270234,
+        "thirdAuxRate": 0.07419980792882033,
+        "selectionRate": 0.015120375623212843,
+        "meanRejectedCandidates": 0.02117838713900413,
+        "meanPageActions": 0.00006230156073634932,
+        "meanKeys": 3.821899321618402,
+        "effectiveMs": 612.5000152859063
+      },
+      "word4": {
+        "count": 77674,
+        "totalWeight": 828363172,
+        "motorUpperMs": 450.73319053015825,
+        "firstAuxRate": 0.27835105638906893,
+        "secondAuxRate": 0.05199034971100815,
+        "thirdAuxRate": 0,
+        "selectionRate": 0.006382420390847603,
+        "meanRejectedCandidates": 0.007997649127742729,
+        "meanPageActions": 0.000012892895726175523,
+        "meanKeys": 4.330341406100077,
+        "effectiveMs": 554.0688149197949
+      }
+    }
+  },
+  "v51": {
+    "score": 9.565871764350813,
+    "aggregate": {
+      "motorUpperMs": 348.6061260341188,
+      "effectiveMs": 447.02586153575504,
+      "firstAuxRate": 0.2471971724979722,
+      "secondAuxRate": 0.061753645235515756,
+      "thirdAuxRate": 0.008059513083512658,
+      "selectionRate": 0.00499966173636851,
+      "meanRejectedCandidates": 0.006295366695731571,
+      "meanPageActions": 0.000006902933094334615,
+      "meanKeys": 3.8170103308170003,
+      "cognitiveMs": 98.41973550163624
+    },
+    "modes": {
+      "keytao": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 102.03614119110368,
+          "firstAuxRate": 0.2172785796179603,
+          "secondAuxRate": 0.0448544097415483,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005003120956630223,
+          "meanRejectedCandidates": 0.006282730718341646,
+          "meanPageActions": 0.00000415191906962394,
+          "meanKeys": 2.262132989359509,
+          "effectiveMs": 183.99329268457237
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 404.455769939636,
+          "firstAuxRate": 0.1897535821235438,
+          "secondAuxRate": 0.034426373123270924,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0037046099007008114,
+          "meanRejectedCandidates": 0.004460074821051441,
+          "meanPageActions": 6.761848171061036e-7,
+          "meanKeys": 4.224179955246814,
+          "effectiveMs": 474.1557290505986
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 332.2157733633419,
+          "firstAuxRate": 0.4841593697092437,
+          "secondAuxRate": 0.17418680144304666,
+          "thirdAuxRate": 0.039976776399624075,
+          "selectionRate": 0.0050367403717383715,
+          "meanRejectedCandidates": 0.006230129745451478,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6983229475519144,
+          "effectiveMs": 545.0467359015562
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 433.87101605938886,
+          "firstAuxRate": 0.21174174797814405,
+          "secondAuxRate": 0.025440242531689954,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0019002558940416053,
+          "meanRejectedCandidates": 0.002236143593307888,
+          "meanPageActions": 0.000004285559908981565,
+          "meanKeys": 4.237181990509834,
+          "effectiveMs": 506.2788595964021
+        }
+      },
+      "sanpin": {
+        "character": {
+          "count": 6238,
+          "totalWeight": 34283114,
+          "motorUpperMs": 104.44255102180716,
+          "firstAuxRate": 0.21876376224166802,
+          "secondAuxRate": 0.050698107528971845,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.007463236857655346,
+          "meanRejectedCandidates": 0.009680305003798663,
+          "meanPageActions": 0.00004051557276856472,
+          "meanKeys": 2.2694618697706397,
+          "effectiveMs": 190.25522398961283
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 406.24842653470296,
+          "firstAuxRate": 0.1897535821235438,
+          "secondAuxRate": 0.03801558821428088,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005252991834314736,
+          "meanRejectedCandidates": 0.006545179355008069,
+          "meanPageActions": 0.000002556294919982984,
+          "meanKeys": 4.227769170337825,
+          "effectiveMs": 478.05899859286563
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 341.4658230126598,
+          "firstAuxRate": 0.4841593697092437,
+          "secondAuxRate": 0.1979023375717357,
+          "thirdAuxRate": 0.056737380602527816,
+          "selectionRate": 0.010587546696233591,
+          "meanRejectedCandidates": 0.014329640408562784,
+          "meanPageActions": 0.000022426165092523038,
+          "meanKeys": 3.7387990878835073,
+          "effectiveMs": 570.181287265408
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 437.1296183381074,
+          "firstAuxRate": 0.21174174797814405,
+          "secondAuxRate": 0.03063595999654123,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031322348550763433,
+          "meanRejectedCandidates": 0.0037696883511378508,
+          "meanPageActions": 0,
+          "meanKeys": 4.242377707974685,
+          "effectiveMs": 511.91075606111565
+        }
+      }
+    },
+    "memberScores": {
+      "keytao": 9.573370804476967,
+      "sanpin": 9.558355046307952
+    },
+    "trackScores": {
+      "keytao": {
+        "character": 9.41217420154772,
+        "word2": 9.793892612707646,
+        "word3": 9.359950599226607,
+        "word4": 9.23459093661675
+      },
+      "sanpin": {
+        "character": 9.391953246517346,
+        "word2": 9.802940777135744,
+        "word3": 9.295664441437003,
+        "word4": 9.189284533212579
+      }
+    },
+    "equalTracks": {
+      "character": {
+        "score": 9.402080032395087,
+        "effectiveMs": 187.1242583370926
+      },
+      "word2": {
+        "score": 9.798419828179561,
+        "effectiveMs": 476.1073638217321
+      },
+      "word3": {
+        "score": 9.3279736609753,
+        "effectiveMs": 557.6140115834821
+      },
+      "word4": {
+        "score": 9.21202129405778,
+        "effectiveMs": 509.0948078287589
+      }
+    }
+  },
+  "v52": {
+    "score": 9.566522024808478,
+    "aggregate": {
+      "motorUpperMs": 347.1765706245645,
+      "effectiveMs": 445.59630612620066,
+      "firstAuxRate": 0.2471971724979722,
+      "secondAuxRate": 0.061753645235515756,
+      "thirdAuxRate": 0.008059513083512658,
+      "selectionRate": 0.00499966173636851,
+      "meanRejectedCandidates": 0.006295366695731571,
+      "meanPageActions": 0.000006902933094334615,
+      "meanKeys": 3.8170103308170003,
+      "cognitiveMs": 98.41973550163618
+    },
+    "modes": {
+      "keytao": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 102.03614119110368,
+          "firstAuxRate": 0.2172785796179603,
+          "secondAuxRate": 0.0448544097415483,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005003120956630223,
+          "meanRejectedCandidates": 0.006282730718341646,
+          "meanPageActions": 0.00000415191906962394,
+          "meanKeys": 2.262132989359509,
+          "effectiveMs": 183.99329268457237
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 402.81068386244436,
+          "firstAuxRate": 0.1897535821235438,
+          "secondAuxRate": 0.034426373123270924,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0037046099007008114,
+          "meanRejectedCandidates": 0.004460074821051441,
+          "meanPageActions": 6.761848171061036e-7,
+          "meanKeys": 4.224179955246814,
+          "effectiveMs": 472.51064297340696
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 331.3136743849061,
+          "firstAuxRate": 0.4841593697092437,
+          "secondAuxRate": 0.17418680144304666,
+          "thirdAuxRate": 0.039976776399624075,
+          "selectionRate": 0.0050367403717383715,
+          "meanRejectedCandidates": 0.006230129745451478,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6983229475519144,
+          "effectiveMs": 544.1446369231204
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 432.2296093341261,
+          "firstAuxRate": 0.21174174797814405,
+          "secondAuxRate": 0.025440242531689954,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0019002558940416053,
+          "meanRejectedCandidates": 0.002236143593307888,
+          "meanPageActions": 0.000004285559908981565,
+          "meanKeys": 4.237181990509834,
+          "effectiveMs": 504.6374528711394
+        }
+      },
+      "sanpin": {
+        "character": {
+          "count": 6238,
+          "totalWeight": 34283114,
+          "motorUpperMs": 104.44255102180716,
+          "firstAuxRate": 0.21876376224166802,
+          "secondAuxRate": 0.050698107528971845,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.007463236857655346,
+          "meanRejectedCandidates": 0.009680305003798663,
+          "meanPageActions": 0.00004051557276856472,
+          "meanKeys": 2.2694618697706397,
+          "effectiveMs": 190.25522398961283
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 404.13560845768717,
+          "firstAuxRate": 0.1897535821235438,
+          "secondAuxRate": 0.03801558821428088,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005252991834314736,
+          "meanRejectedCandidates": 0.006545179355008069,
+          "meanPageActions": 0.000002556294919982984,
+          "meanKeys": 4.227769170337825,
+          "effectiveMs": 475.94618051584985
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.71631141482754,
+          "firstAuxRate": 0.4841593697092437,
+          "secondAuxRate": 0.1979023375717357,
+          "thirdAuxRate": 0.056737380602527816,
+          "selectionRate": 0.010587546696233591,
+          "meanRejectedCandidates": 0.014329640408562784,
+          "meanPageActions": 0.000022426165092523038,
+          "meanKeys": 3.7387990878835073,
+          "effectiveMs": 569.4317756675757
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 434.5416831876083,
+          "firstAuxRate": 0.21174174797814405,
+          "secondAuxRate": 0.03063595999654123,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031322348550763433,
+          "meanRejectedCandidates": 0.0037696883511378508,
+          "meanPageActions": 0,
+          "meanKeys": 4.242377707974685,
+          "effectiveMs": 509.3228209106166
+        }
+      }
+    },
+    "memberScores": {
+      "keytao": 9.574596648325022,
+      "sanpin": 9.558426903203836
+    },
+    "trackScores": {
+      "keytao": {
+        "character": 9.41217420154772,
+        "word2": 9.795317167458432,
+        "word3": 9.36292474333752,
+        "word4": 9.234589450020609
+      },
+      "sanpin": {
+        "character": 9.391953246517346,
+        "word2": 9.801879359885973,
+        "word3": 9.296845085004168,
+        "word4": 9.192410891855452
+      }
+    },
+    "equalTracks": {
+      "character": {
+        "score": 9.402080032395087,
+        "effectiveMs": 187.1242583370926
+      },
+      "word2": {
+        "score": 9.798599911702292,
+        "effectiveMs": 474.2284117446284
+      },
+      "word3": {
+        "score": 9.33006041501605,
+        "effectiveMs": 556.7882062953481
+      },
+      "word4": {
+        "score": 9.213572578735734,
+        "effectiveMs": 506.980136890878
+      }
+    }
+  },
+  "doubledScore": 9.54136684441461,
+  "terminalLoad": {
+    "scope": "Resolved terminal letter codes incl auxiliaries; members equal and event weights 1:3:1:1; excludes space, selection/page keys and corrected-error repeats; standard touch fingering right pinky P[]\\;'/; not a physiological strain estimate.",
+    "meanKeys": 3.8170103308170003,
+    "keys": {
+      "N": 0.03248847539962014,
+      "F": 0.06415824505485297,
+      "D": 0.055993007098997356,
+      "W": 0.034697153639861714,
+      "J": 0.0642477020686391,
+      "E": 0.05361718824183851,
+      "Y": 0.06544169194025277,
+      "S": 0.03765700442181437,
+      "H": 0.048134021180313506,
+      "Z": 0.034405653560483654,
+      "K": 0.060418169977736864,
+      "M": 0.02913878398067071,
+      "Q": 0.02931200390481557,
+      "T": 0.03291479199026668,
+      "P": 0.04242313548089507,
+      "X": 0.04542895074360218,
+      "R": 0.034051487139254905,
+      "L": 0.0471151353674455,
+      "B": 0.03792279819582759,
+      "G": 0.043109148054778515,
+      "I": 0.018788116063381592,
+      "O": 0.010573632863920851,
+      "C": 0.02427345548650574,
+      "U": 0.01499034789996926,
+      "V": 0.017639394584864285,
+      "A": 0.021060505659390702
+    },
+    "rightPinky": 0.04242313548089507,
+    "rightPinkyPeak": 0.051249303301306635,
+    "byTrack": {
+      "keytao": {
+        "character": {
+          "meanKeys": 2.262132989359509,
+          "rightPinky": 0.03767640779839262,
+          "P": 0.03767640779839262
+        },
+        "word2": {
+          "meanKeys": 4.224179955246814,
+          "rightPinky": 0.051249303301306635,
+          "P": 0.051249303301306635
+        },
+        "word3": {
+          "meanKeys": 3.6983229475519144,
+          "rightPinky": 0.025145850608718167,
+          "P": 0.025145850608718167
+        },
+        "word4": {
+          "meanKeys": 4.237181990509834,
+          "rightPinky": 0.03395793230499877,
+          "P": 0.03395793230499877
+        }
+      },
+      "sanpin": {
+        "character": {
+          "meanKeys": 2.2694618697706397,
+          "rightPinky": 0.03756000638525777,
+          "P": 0.03756000638525777
+        },
+        "word2": {
+          "meanKeys": 4.227769170337825,
+          "rightPinky": 0.051205794593663985,
+          "P": 0.051205794593663985
+        },
+        "word3": {
+          "meanKeys": 3.7387990878835073,
+          "rightPinky": 0.02487362229313571,
+          "P": 0.02487362229313571
+        },
+        "word4": {
+          "meanKeys": 4.242377707974685,
+          "rightPinky": 0.03391634340507228,
+          "P": 0.03391634340507228
+        }
+      }
+    }
+  },
+  "common399P": {
+    "initial": 0.030107811191837384,
+    "final": 0.06622405297803793,
+    "bareTwoKey": 0.048165932084937656
+  },
+  "routes": {
+    "keytao": {
+      "character": [
+        {
+          "baseLength": 2,
+          "stages": [
+            {
+              "length": 2,
+              "pool": "char:base"
+            },
+            {
+              "length": 3,
+              "pool": "char:aux1"
+            },
+            {
+              "length": 4,
+              "pool": "char:aux2"
+            }
+          ]
+        }
+      ],
+      "word2": [
+        {
+          "baseLength": 4,
+          "stages": [
+            {
+              "length": 4,
+              "pool": "word:four"
+            },
+            {
+              "length": 5,
+              "pool": "word:five"
+            },
+            {
+              "length": 6,
+              "pool": "word:six"
+            }
+          ]
+        }
+      ],
+      "word3": [
+        {
+          "baseLength": 3,
+          "stages": [
+            {
+              "length": 3,
+              "pool": "word3:three"
+            },
+            {
+              "length": 4,
+              "pool": "word3:four-b"
+            },
+            {
+              "length": 5,
+              "pool": "word3:five-bb"
+            },
+            {
+              "length": 6,
+              "pool": "word3:six-bbb"
+            }
+          ]
+        }
+      ],
+      "word4": [
+        {
+          "baseLength": 4,
+          "stages": [
+            {
+              "length": 4,
+              "pool": "word:four"
+            },
+            {
+              "length": 5,
+              "pool": "word:five"
+            },
+            {
+              "length": 6,
+              "pool": "word:six"
+            }
+          ]
+        }
+      ]
+    },
+    "sanpin": {
+      "character": [
+        {
+          "baseLength": 2,
+          "stages": [
+            {
+              "length": 2,
+              "pool": "char:base"
+            },
+            {
+              "length": 3,
+              "pool": "char:aux1"
+            },
+            {
+              "length": 4,
+              "pool": "char:aux2"
+            }
+          ]
+        }
+      ],
+      "word2": [
+        {
+          "baseLength": 4,
+          "stages": [
+            {
+              "length": 4,
+              "pool": "word:four"
+            },
+            {
+              "length": 5,
+              "pool": "word:five"
+            },
+            {
+              "length": 6,
+              "pool": "word:six"
+            }
+          ]
+        }
+      ],
+      "word3": [
+        {
+          "baseLength": 3,
+          "stages": [
+            {
+              "length": 3,
+              "pool": "word3:three"
+            },
+            {
+              "length": 4,
+              "pool": "word3:four-b"
+            },
+            {
+              "length": 5,
+              "pool": "word3:five-bb"
+            },
+            {
+              "length": 6,
+              "pool": "word3:six-bbb"
+            }
+          ]
+        }
+      ],
+      "word4": [
+        {
+          "baseLength": 4,
+          "stages": [
+            {
+              "length": 4,
+              "pool": "word:four"
+            },
+            {
+              "length": 5,
+              "pool": "word:five"
+            },
+            {
+              "length": 6,
+              "pool": "word:six"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "optimal1x": {
+    "score": 9.566522024808478,
+    "policy": {
+      "keytao": "12/231/24",
+      "sanpin": "12/213/23"
+    },
+    "memberRunnerUpGaps": {
+      "keytao": 0.00019328537456897443,
+      "sanpin": 0.00020554768381253474
+    }
+  },
+  "optimal2x": {
+    "score": 9.54136684441461,
+    "policy": {
+      "keytao": "12/231/24",
+      "sanpin": "12/213/23"
+    },
+    "memberRunnerUpGaps": {
+      "keytao": 0.0001413521855042621,
+      "sanpin": 0.00023863127687206998
+    }
+  },
+  "robustSelection": {
+    "version": "untoned-v52-mean-rank-robustness-1",
+    "id": "UED-18c004bd1f31",
+    "inputSha256": "5860b65136c2dc80259124ca1ea6c9441bc1f3643277169aaef81f89bb80cc6d",
+    "criterion": "main positive 50%-500% six independent cognitive-cost multipliers; minimum mean competition rank, then Top3, Top1, worst rank, policy key",
+    "scenariosPerGrid": 1000000,
+    "grids": {
+      "mainPositive50To500": {
+        "keytao": {
+          "winner": {
+            "policy": "12/231/24",
+            "meanRank": 1,
+            "top1Rate": 1,
+            "top3Rate": 1,
+            "worstRank": 1
+          },
+          "runnerUp": {
+            "policy": "12/231/23",
+            "meanRank": 2,
+            "top1Rate": 0,
+            "top3Rate": 1,
+            "worstRank": 2
+          },
+          "top10": [
+            {
+              "policy": "12/231/24",
+              "meanRank": 1,
+              "top1Rate": 1,
+              "top3Rate": 1,
+              "worstRank": 1
+            },
+            {
+              "policy": "12/231/23",
+              "meanRank": 2,
+              "top1Rate": 0,
+              "top3Rate": 1,
+              "worstRank": 2
+            },
+            {
+              "policy": "12/231/21",
+              "meanRank": 3.546519,
+              "top1Rate": 0,
+              "top3Rate": 0.647501,
+              "worstRank": 6
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 3.715464,
+              "top1Rate": 0,
+              "top3Rate": 0.352493,
+              "worstRank": 6
+            },
+            {
+              "policy": "12/213/23",
+              "meanRank": 4.910557,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 7
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 6.332696,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 11
+            },
+            {
+              "policy": "12/231/14",
+              "meanRank": 7.83258,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 13
+            },
+            {
+              "policy": "12/231/12",
+              "meanRank": 9.151893,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 13
+            },
+            {
+              "policy": "12/231/42",
+              "meanRank": 9.576957,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/231/41",
+              "meanRank": 9.730284,
+              "top1Rate": 0,
+              "top3Rate": 0.000009,
+              "worstRank": 14
+            }
+          ]
+        },
+        "sanpin": {
+          "winner": {
+            "policy": "12/213/23",
+            "meanRank": 1.007422,
+            "top1Rate": 0.99601,
+            "top3Rate": 0.99844,
+            "worstRank": 5
+          },
+          "runnerUp": {
+            "policy": "12/213/21",
+            "meanRank": 2.101307,
+            "top1Rate": 0,
+            "top3Rate": 0.989523,
+            "worstRank": 6
+          },
+          "top10": [
+            {
+              "policy": "12/213/23",
+              "meanRank": 1.007422,
+              "top1Rate": 0.99601,
+              "top3Rate": 0.99844,
+              "worstRank": 5
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 2.101307,
+              "top1Rate": 0,
+              "top3Rate": 0.989523,
+              "worstRank": 6
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 3.582019,
+              "top1Rate": 0,
+              "top3Rate": 0.706,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/231/23",
+              "meanRank": 4.59603,
+              "top1Rate": 0,
+              "top3Rate": 0.216478,
+              "worstRank": 16
+            },
+            {
+              "policy": "12/231/21",
+              "meanRank": 6.007476,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 17
+            },
+            {
+              "policy": "12/213/14",
+              "meanRank": 6.583315,
+              "top1Rate": 0.00175,
+              "top3Rate": 0.060237,
+              "worstRank": 9
+            },
+            {
+              "policy": "12/213/12",
+              "meanRank": 6.847582,
+              "top1Rate": 0,
+              "top3Rate": 0.021196,
+              "worstRank": 9
+            },
+            {
+              "policy": "12/231/24",
+              "meanRank": 7.668838,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 20
+            },
+            {
+              "policy": "12/213/13",
+              "meanRank": 9.289398,
+              "top1Rate": 0.00224,
+              "top3Rate": 0.008127,
+              "worstRank": 17
+            },
+            {
+              "policy": "12/213/32",
+              "meanRank": 9.657298,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 14
+            }
+          ]
+        }
+      },
+      "extremePositive100To1000": {
+        "keytao": {
+          "winner": {
+            "policy": "12/231/24",
+            "meanRank": 1.00004,
+            "top1Rate": 0.99996,
+            "top3Rate": 1,
+            "worstRank": 2
+          },
+          "runnerUp": {
+            "policy": "12/231/23",
+            "meanRank": 1.99996,
+            "top1Rate": 0.00004,
+            "top3Rate": 1,
+            "worstRank": 2
+          },
+          "top10": [
+            {
+              "policy": "12/231/24",
+              "meanRank": 1.00004,
+              "top1Rate": 0.99996,
+              "top3Rate": 1,
+              "worstRank": 2
+            },
+            {
+              "policy": "12/231/23",
+              "meanRank": 1.99996,
+              "top1Rate": 0.00004,
+              "top3Rate": 1,
+              "worstRank": 2
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 3.222439,
+              "top1Rate": 0,
+              "top3Rate": 0.777561,
+              "worstRank": 4
+            },
+            {
+              "policy": "12/213/23",
+              "meanRank": 4.306103,
+              "top1Rate": 0,
+              "top3Rate": 0.00004,
+              "worstRank": 5
+            },
+            {
+              "policy": "12/231/21",
+              "meanRank": 4.471456,
+              "top1Rate": 0,
+              "top3Rate": 0.2224,
+              "worstRank": 5
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 6.072845,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 9
+            },
+            {
+              "policy": "12/231/14",
+              "meanRank": 7.554606,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 12
+            },
+            {
+              "policy": "12/231/12",
+              "meanRank": 8.924045,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/231/13",
+              "meanRank": 10.635727,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 15
+            },
+            {
+              "policy": "12/231/41",
+              "meanRank": 10.757344,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 15
+            }
+          ]
+        },
+        "sanpin": {
+          "winner": {
+            "policy": "12/213/23",
+            "meanRank": 1,
+            "top1Rate": 1,
+            "top3Rate": 1,
+            "worstRank": 1
+          },
+          "runnerUp": {
+            "policy": "12/213/21",
+            "meanRank": 2.032487,
+            "top1Rate": 0,
+            "top3Rate": 1,
+            "worstRank": 3
+          },
+          "top10": [
+            {
+              "policy": "12/213/23",
+              "meanRank": 1,
+              "top1Rate": 1,
+              "top3Rate": 1,
+              "worstRank": 1
+            },
+            {
+              "policy": "12/213/21",
+              "meanRank": 2.032487,
+              "top1Rate": 0,
+              "top3Rate": 1,
+              "worstRank": 3
+            },
+            {
+              "policy": "12/213/24",
+              "meanRank": 3.235633,
+              "top1Rate": 0,
+              "top3Rate": 0.843791,
+              "worstRank": 5
+            },
+            {
+              "policy": "12/231/23",
+              "meanRank": 4.350827,
+              "top1Rate": 0,
+              "top3Rate": 0.15621,
+              "worstRank": 13
+            },
+            {
+              "policy": "12/231/21",
+              "meanRank": 5.590089,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/231/24",
+              "meanRank": 6.882892,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 15
+            },
+            {
+              "policy": "12/213/12",
+              "meanRank": 6.897394,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 9
+            },
+            {
+              "policy": "12/213/14",
+              "meanRank": 7.743752,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 14
+            },
+            {
+              "policy": "12/213/32",
+              "meanRank": 8.559348,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 19
+            },
+            {
+              "policy": "12/213/31",
+              "meanRank": 11.236125,
+              "top1Rate": 0,
+              "top3Rate": 0,
+              "worstRank": 22
+            }
+          ]
+        }
+      }
+    },
+    "selectedPolicies": {
+      "keytao": "12/231/24",
+      "sanpin": "12/213/23"
+    },
+    "selectedTracks": {
+      "keytao": {
+        "character": {
+          "count": 6233,
+          "totalWeight": 34201052,
+          "motorUpperMs": 102.03614119110368,
+          "firstAuxRate": 0.2172785796179603,
+          "secondAuxRate": 0.0448544097415483,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005003120956630223,
+          "meanRejectedCandidates": 0.006282730718341646,
+          "meanPageActions": 0.00000415191906962394,
+          "meanKeys": 2.262132989359509,
+          "effectiveMs": 183.99329268457237
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 402.81068386244436,
+          "firstAuxRate": 0.1897535821235438,
+          "secondAuxRate": 0.034426373123270924,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0037046099007008114,
+          "meanRejectedCandidates": 0.004460074821051441,
+          "meanPageActions": 6.761848171061036e-7,
+          "meanKeys": 4.224179955246814,
+          "effectiveMs": 472.51064297340696
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 432.2296093341261,
+          "firstAuxRate": 0.21174174797814405,
+          "secondAuxRate": 0.025440242531689954,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0019002558940416053,
+          "meanRejectedCandidates": 0.002236143593307888,
+          "meanPageActions": 0.000004285559908981565,
+          "meanKeys": 4.237181990509834,
+          "effectiveMs": 504.6374528711394
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 331.3136743849061,
+          "firstAuxRate": 0.4841593697092437,
+          "secondAuxRate": 0.17418680144304666,
+          "thirdAuxRate": 0.039976776399624075,
+          "selectionRate": 0.0050367403717383715,
+          "meanRejectedCandidates": 0.006230129745451478,
+          "meanPageActions": 0.000001758541081054859,
+          "meanKeys": 3.6983229475519144,
+          "effectiveMs": 544.1446369231204
+        }
+      },
+      "sanpin": {
+        "character": {
+          "count": 6238,
+          "totalWeight": 34283114,
+          "motorUpperMs": 104.44255102180716,
+          "firstAuxRate": 0.21876376224166802,
+          "secondAuxRate": 0.050698107528971845,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.007463236857655346,
+          "meanRejectedCandidates": 0.009680305003798663,
+          "meanPageActions": 0.00004051557276856472,
+          "meanKeys": 2.2694618697706397,
+          "effectiveMs": 190.25522398961283
+        },
+        "word2": {
+          "count": 132814,
+          "totalWeight": 3604044247,
+          "motorUpperMs": 404.13560845768717,
+          "firstAuxRate": 0.1897535821235438,
+          "secondAuxRate": 0.03801558821428088,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.005252991834314736,
+          "meanRejectedCandidates": 0.006545179355008069,
+          "meanPageActions": 0.000002556294919982984,
+          "meanKeys": 4.227769170337825,
+          "effectiveMs": 475.94618051584985
+        },
+        "word4": {
+          "count": 77674,
+          "totalWeight": 828363172,
+          "motorUpperMs": 434.5416831876083,
+          "firstAuxRate": 0.21174174797814405,
+          "secondAuxRate": 0.03063595999654123,
+          "thirdAuxRate": 0,
+          "selectionRate": 0.0031322348550763433,
+          "meanRejectedCandidates": 0.0037696883511378508,
+          "meanPageActions": 0,
+          "meanKeys": 4.242377707974685,
+          "effectiveMs": 509.3228209106166
+        },
+        "word3": {
+          "count": 72923,
+          "totalWeight": 1101481234,
+          "motorUpperMs": 340.71631141482754,
+          "firstAuxRate": 0.4841593697092437,
+          "secondAuxRate": 0.1979023375717357,
+          "thirdAuxRate": 0.056737380602527816,
+          "selectionRate": 0.010587546696233591,
+          "meanRejectedCandidates": 0.014329640408562784,
+          "meanPageActions": 0.000022426165092523038,
+          "meanKeys": 3.7387990878835073,
+          "effectiveMs": 569.4317756675757
+        }
+      }
+    },
+    "completed": true
+  },
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\finalize_untoned_frontiers_r11.js": "b0633454a75cb1efdbe8318218a73032b9a4d445c4975f36e4886349bb1a6381",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-frontiers-r11-candidates.json": "9cc74d6b72790fef8528da6376176bf53151357e678c128811975f94fccf71c7",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-u7e-deeper-v52-policy-UED-18c004bd1f31.json": "cdf56fa608a88b52d3aa3a63c8e2fa0e8b51c312f5243911fda47c46e9071fb5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-u7e-deeper-v52-replay-UED-18c004bd1f31.json": "52073935d8f32c3c2f7e5686e6f2581369d5beeb621ce2ca68bba35b9f1d95d6",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-frontiers-r11-components-UED-18c004bd1f31.json.gz": "5860b65136c2dc80259124ca1ea6c9441bc1f3643277169aaef81f89bb80cc6d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-frontiers-r11-robustness-UED-18c004bd1f31.json": "790e9a07832a315245db7d12098d73d9c6bc5a97323aaa98f66960d2198e8fab",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\untoned-frontiers-r11\\main-before.html": "d5eacab8bdc343343449edc27f37079603f378fa89477143602a3948f6c65132",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\ckt-long-code-audit-20261118\\error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\score_ckt_v52.js": "b21363ce1e231ac1adcebf4e59bc4e5644742a06a48830c361658d05a51c4bbe",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\score_completion_ckt_v4.js": "a0e76706a01d9e3fb235467b5ff426ae0d016574c43899d28b57343ff8d24e15",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\ckt_v4_model.js": "871f5edfed2b1a39549a2c6c241f6c09e98b678690bba4d295b4ad11738278f4",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\ckt_block_error.js": "df5dd34ab64df5498423e9c8d02e67f433fe830006509176c66c616870223694",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\auxiliary_semantics.js": "cbb19fd34dce5082efdf4e43837e8a8670178be92b4398f233d29a4f21cb911b"
+  }
+}
