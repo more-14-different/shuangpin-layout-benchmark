@@ -1,5 +1,33 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-grouped-cpu-prepare:
+    python -X utf8 tools/prepare_u7e_grouped_cpu.py
+
+u7e-grouped-cpu-start hours='24' duty='0.65':
+    & './tools/start_u7e_grouped_cpu.ps1' -Hours {{hours}} -Duty {{duty}}
+
+u7e-grouped-cpu-status:
+    python -X utf8 tools/run_u7e_grouped_cpu.py --status
+
+u7e-grouped-cpu-audit:
+    python -X utf8 tools/audit_u7e_grouped_cpu.py
+
+u7e-grouped-cpu-pause:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/PAUSE' -Force | Out-Null
+
+u7e-grouped-cpu-unpause:
+    if (Test-Path -LiteralPath 'research/.cache/u7e-grouped-cpu-20261121/PAUSE') { Remove-Item -LiteralPath 'research/.cache/u7e-grouped-cpu-20261121/PAUSE' }
+
+u7e-grouped-cpu-stop:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/STOP' -Force | Out-Null
+
+u7e-grouped-cpu-review-now:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/REVIEW_NOW' -Force | Out-Null
+
+u7e-grouped-cpu-test:
+    python -X utf8 -m unittest discover -s tests -p test_u7e_grouped_cpu.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 u7e-pinky-r11-prepare:
     python -X utf8 tools/publish_u7e_pinky_r11.py prepare
 
