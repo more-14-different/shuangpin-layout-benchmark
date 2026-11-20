@@ -1,5 +1,32 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-switch-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_switch.js
+
+untoned-cr7e-switch-open-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_switch_open.js
+
+untoned-cr7e-switch-open-verify:
+    node --max-old-space-size=4096 tools/verify_untoned_cr7e_switch_open.js
+
+untoned-cr7e-switch-open-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_switch_open.js --policy "{{id}}"
+
+untoned-cr7e-switch-open-report:
+    python -X utf8 tools/report_untoned_cr7e_switch.py --open
+
+untoned-cr7e-switch-test:
+    node --test tests/untoned-cr7e-switch.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+untoned-cr7e-switch-verify:
+    node --max-old-space-size=4096 tools/verify_untoned_cr7e_switch.js
+
+untoned-cr7e-switch-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_switch.js --policy "{{id}}"
+
+untoned-cr7e-switch-report:
+    python -X utf8 tools/report_untoned_cr7e_switch.py
+
 untoned-cr7e-transfer-search:
     node --max-old-space-size=4096 tools/search_untoned_cr7e_transfer.js
 
