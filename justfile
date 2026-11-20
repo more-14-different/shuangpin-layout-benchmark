@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-transfer-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_transfer.js
+
+untoned-cr7e-transfer-test:
+    node --test tests/untoned-cr7e-transfer.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+untoned-cr7e-transfer-verify:
+    node --max-old-space-size=4096 tools/verify_untoned_cr7e_transfer.js
+
+untoned-cr7e-transfer-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_transfer.js --policy "{{id}}"
+
+untoned-cr7e-transfer-report:
+    python -X utf8 tools/report_untoned_cr7e_transfer.py
+
 untoned-cr7e-onsets-home-search:
     node --max-old-space-size=4096 tools/search_untoned_cr7e_onsets_home.js
 

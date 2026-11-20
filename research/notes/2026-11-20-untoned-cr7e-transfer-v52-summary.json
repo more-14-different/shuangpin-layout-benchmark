@@ -1,0 +1,5819 @@
+{
+  "version": "untoned-cr7e-transfer-summary-1",
+  "completed": true,
+  "contract": {
+    "capacity": [
+      21,
+      21
+    ],
+    "D": 2,
+    "allowedM": [
+      41,
+      42
+    ],
+    "V": 5,
+    "branches": 0,
+    "qzEmpty": true,
+    "zqEmpty": true,
+    "toneKeyClass": "AVUIO",
+    "toneKeySet": "AIOUV",
+    "shapeKeysByMeaning": "AVUIO",
+    "toneKeysByTone": "IVUAO",
+    "toneDigitsByShapeMeaning": "42310",
+    "costMultipliers": [
+      1,
+      2
+    ],
+    "foreignCandidates": 160,
+    "foreignExactPerFamily": 24,
+    "proxyPenalties": [
+      0,
+      150,
+      300,
+      600,
+      1200
+    ],
+    "proxyTop": 3,
+    "primaryNewPerChain": 350,
+    "secondaryNewPerChain": 100,
+    "annealing": "One chain per family and cost axis, 100-new-score coarse/fine cycles; far restarts after each complete cycle; initials fixed per family; pin e->E for P8/U8.",
+    "primaryRings": 4,
+    "secondaryRings": 1,
+    "neighborhood": "Final single moves, pair swaps and whole-key group swaps. Strict D2, M41/M42 and pin-e constraint checked after every atomic proposal. Finite search, not global optimality."
+  },
+  "families": [
+    {
+      "id": "P7",
+      "lane": "primary",
+      "pinE": false,
+      "initialMap": {
+        "b": "B",
+        "c": "C",
+        "ch": "S",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "W",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "Y",
+        "z": "Z",
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "W",
+        "Y": "L",
+        "zh": "X",
+        "YU": "L"
+      }
+    },
+    {
+      "id": "P8",
+      "lane": "primary",
+      "pinE": true,
+      "initialMap": {
+        "b": "B",
+        "c": "C",
+        "ch": "S",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "W",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "Y",
+        "z": "Z",
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "P",
+        "Y": "L",
+        "zh": "X",
+        "YU": "L"
+      }
+    },
+    {
+      "id": "U7",
+      "lane": "secondary",
+      "pinE": false,
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "Q",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "E",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "W",
+        "Y": "S",
+        "YU": "S"
+      }
+    },
+    {
+      "id": "U8",
+      "lane": "secondary",
+      "pinE": true,
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "Q",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "E",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      }
+    }
+  ],
+  "searchAuxiliaryPolicy": {
+    "keytao": {
+      "word2": "12",
+      "word3": "231",
+      "word4": "24"
+    },
+    "sanpin": {
+      "word2": "12",
+      "word3": "213",
+      "word4": "23"
+    }
+  },
+  "newExactStates": 7532,
+  "newByM": {
+    "41": 26,
+    "42": 7506
+  },
+  "newByFamily": {
+    "P7": 729,
+    "P8": 5239,
+    "U7": 229,
+    "U8": 1335
+  },
+  "chains": [
+    {
+      "index": 0,
+      "family": "P7",
+      "objective": "score",
+      "newScores": 350,
+      "transitions": 350,
+      "accepted": 89,
+      "restarts": 3,
+      "bestId": "TRF-a898f9279930"
+    },
+    {
+      "index": 1,
+      "family": "P7",
+      "objective": "doubledScore",
+      "newScores": 350,
+      "transitions": 348,
+      "accepted": 81,
+      "restarts": 3,
+      "bestId": "TRF-bb4c096ac7a0"
+    },
+    {
+      "index": 2,
+      "family": "P8",
+      "objective": "score",
+      "newScores": 350,
+      "transitions": 349,
+      "accepted": 86,
+      "restarts": 3,
+      "bestId": "TRF-a9be93f91ff5"
+    },
+    {
+      "index": 3,
+      "family": "P8",
+      "objective": "doubledScore",
+      "newScores": 350,
+      "transitions": 349,
+      "accepted": 90,
+      "restarts": 3,
+      "bestId": "TRF-7375d15defa3"
+    },
+    {
+      "index": 4,
+      "family": "U7",
+      "objective": "score",
+      "newScores": 100,
+      "transitions": 100,
+      "accepted": 15,
+      "restarts": 0,
+      "bestId": "TRF-38884365bf58"
+    },
+    {
+      "index": 5,
+      "family": "U7",
+      "objective": "doubledScore",
+      "newScores": 100,
+      "transitions": 101,
+      "accepted": 20,
+      "restarts": 0,
+      "bestId": "TRF-7eb30ca0088d"
+    },
+    {
+      "index": 6,
+      "family": "U8",
+      "objective": "score",
+      "newScores": 100,
+      "transitions": 101,
+      "accepted": 16,
+      "restarts": 0,
+      "bestId": "TRF-38e539e363e1"
+    },
+    {
+      "index": 7,
+      "family": "U8",
+      "objective": "doubledScore",
+      "newScores": 100,
+      "transitions": 100,
+      "accepted": 21,
+      "restarts": 0,
+      "bestId": "TRF-e925defbdc4e"
+    }
+  ],
+  "uniqueCoveredLayouts": 7532,
+  "coverage": [
+    {
+      "name": "seed transplants",
+      "family": "P7",
+      "exactLayouts": 5,
+      "missing": 0
+    },
+    {
+      "name": "foreign final centers",
+      "family": "P7",
+      "exactLayouts": 24,
+      "missing": 0
+    },
+    {
+      "name": "seed transplants",
+      "family": "P8",
+      "exactLayouts": 15,
+      "missing": 0
+    },
+    {
+      "name": "foreign final centers",
+      "family": "P8",
+      "exactLayouts": 24,
+      "missing": 0
+    },
+    {
+      "name": "seed transplants",
+      "family": "U7",
+      "exactLayouts": 5,
+      "missing": 0
+    },
+    {
+      "name": "foreign final centers",
+      "family": "U7",
+      "exactLayouts": 24,
+      "missing": 0
+    },
+    {
+      "name": "seed transplants",
+      "family": "U8",
+      "exactLayouts": 15,
+      "missing": 0
+    },
+    {
+      "name": "foreign final centers",
+      "family": "U8",
+      "exactLayouts": 24,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "P7",
+      "chain": 0,
+      "exactLayouts": 351,
+      "newScores": 350,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "P7",
+      "chain": 1,
+      "exactLayouts": 351,
+      "newScores": 350,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "P8",
+      "chain": 2,
+      "exactLayouts": 351,
+      "newScores": 350,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "P8",
+      "chain": 3,
+      "exactLayouts": 351,
+      "newScores": 350,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "U7",
+      "chain": 4,
+      "exactLayouts": 101,
+      "newScores": 100,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "U7",
+      "chain": 5,
+      "exactLayouts": 101,
+      "newScores": 100,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "U8",
+      "chain": 6,
+      "exactLayouts": 101,
+      "newScores": 100,
+      "missing": 0
+    },
+    {
+      "name": "anneal trajectory and restarts",
+      "family": "U8",
+      "chain": 7,
+      "exactLayouts": 101,
+      "newScores": 100,
+      "missing": 0
+    },
+    {
+      "name": "complete final leader ring",
+      "lane": "primary",
+      "center": "TRF-a9be93f91ff5",
+      "exactLayouts": 1134,
+      "missing": 0
+    },
+    {
+      "name": "complete final leader ring",
+      "lane": "primary",
+      "center": "TRF-c143bc7287d8",
+      "exactLayouts": 1134,
+      "missing": 0
+    },
+    {
+      "name": "complete final leader ring",
+      "lane": "primary",
+      "center": "TRF-9081f2a34249",
+      "exactLayouts": 1134,
+      "missing": 0
+    },
+    {
+      "name": "complete final leader ring",
+      "lane": "primary",
+      "center": "TRF-944886412da4",
+      "exactLayouts": 1134,
+      "missing": 0
+    },
+    {
+      "name": "complete final leader ring",
+      "lane": "secondary",
+      "center": "TRF-e925defbdc4e",
+      "exactLayouts": 1109,
+      "missing": 0
+    }
+  ],
+  "closure": [
+    {
+      "lane": "primary",
+      "axis": "score",
+      "leader": "TRF-7e50a1d12f60",
+      "score": 9.612828042186182,
+      "completeNeighborhoodScored": false,
+      "fixedPolicyFinalOneStepClosed": false
+    },
+    {
+      "lane": "primary",
+      "axis": "doubledScore",
+      "leader": "TRF-7e50a1d12f60",
+      "score": 9.619355839281054,
+      "completeNeighborhoodScored": false,
+      "fixedPolicyFinalOneStepClosed": false
+    },
+    {
+      "lane": "secondary",
+      "axis": "score",
+      "leader": "TRF-1df2703604ff",
+      "score": 9.953799882599514,
+      "completeNeighborhoodScored": false,
+      "fixedPolicyFinalOneStepClosed": false
+    },
+    {
+      "lane": "secondary",
+      "axis": "doubledScore",
+      "leader": "TRF-1df2703604ff",
+      "score": 10.020021286403335,
+      "completeNeighborhoodScored": false,
+      "fixedPolicyFinalOneStepClosed": false
+    }
+  ],
+  "results": [
+    {
+      "id": "TRF-7e50a1d12f60",
+      "family": "P8",
+      "lane": "primary",
+      "audit": {
+        "valid": true,
+        "M": 42,
+        "D": 2,
+        "V": 4,
+        "branches": 0,
+        "actual": [
+          21,
+          21
+        ],
+        "unique": 352,
+        "qz": false,
+        "zq": false
+      },
+      "independentMemory": {
+        "version": "M-R2-explicit",
+        "formula": "M = ordinary_displacement_links + retroflex_links + YW_nonidentity_links + AEO_carriers + nonidentity_final_links + initial_extra_routes + final_extra_routes",
+        "scope": "common399; normalized written tails with j/q/x/Y-u restored as v; er explicit; iu/ui/un retained",
+        "policy": "Each nonidentity mapping costs one. An ordinary displaced initial is already charged; no second default fee. A/E/O shared physical carrier counted once. Every additional key within a head/final costs one routing item. Optional aliases included only where authoritative source is supplied.",
+        "sourceM_R1": 42,
+        "canonicalM": 42,
+        "M": 42,
+        "firstLinks": 8,
+        "finalLinks": 34,
+        "Mmap": 42,
+        "branchI": 0,
+        "branchR": 0,
+        "branchCount": 0,
+        "firstCategoryCounts": {
+          "YW-carrier": 2,
+          "retroflex": 3,
+          "ordinary-displacement": 2,
+          "AOE-carrier": 1
+        },
+        "ordinaryDisplacedCount": 2,
+        "ordinaryDisplaced": [
+          "l",
+          "x"
+        ],
+        "ordinaryDisplacementLinks": 2,
+        "firstItems": [
+          {
+            "label": "W",
+            "key": "P",
+            "category": "YW-carrier",
+            "syllables": [
+              "wa",
+              "wai",
+              "wan",
+              "wang",
+              "wei",
+              "wen",
+              "weng",
+              "wo",
+              "wu"
+            ],
+            "cost": 1,
+            "index": 1
+          },
+          {
+            "label": "Y",
+            "key": "L",
+            "category": "YW-carrier",
+            "syllables": [
+              "ya",
+              "yan",
+              "yang",
+              "yao",
+              "ye",
+              "yi",
+              "yin",
+              "ying",
+              "yo",
+              "yong",
+              "you",
+              "yu",
+              "yuan",
+              "yue",
+              "yun"
+            ],
+            "cost": 1,
+            "index": 2
+          },
+          {
+            "label": "ch",
+            "key": "S",
+            "category": "retroflex",
+            "syllables": [
+              "cha",
+              "chai",
+              "chan",
+              "chang",
+              "chao",
+              "che",
+              "chen",
+              "cheng",
+              "chi",
+              "chong",
+              "chou",
+              "chu",
+              "chuai",
+              "chuan",
+              "chuang",
+              "chui",
+              "chun",
+              "chuo"
+            ],
+            "cost": 1,
+            "index": 3
+          },
+          {
+            "label": "l",
+            "key": "W",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "la",
+              "lai",
+              "lan",
+              "lang",
+              "lao",
+              "le",
+              "lei",
+              "leng",
+              "li",
+              "lian",
+              "liang",
+              "liao",
+              "lie",
+              "lin",
+              "ling",
+              "liu",
+              "long",
+              "lou",
+              "lu",
+              "luan",
+              "lun",
+              "luo",
+              "lv",
+              "lve"
+            ],
+            "cost": 1,
+            "index": 4
+          },
+          {
+            "label": "sh",
+            "key": "E",
+            "category": "retroflex",
+            "syllables": [
+              "sha",
+              "shai",
+              "shan",
+              "shang",
+              "shao",
+              "she",
+              "shei",
+              "shen",
+              "sheng",
+              "shi",
+              "shou",
+              "shu",
+              "shua",
+              "shuai",
+              "shuan",
+              "shuang",
+              "shui",
+              "shun",
+              "shuo"
+            ],
+            "cost": 1,
+            "index": 5
+          },
+          {
+            "label": "x",
+            "key": "Y",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "xi",
+              "xia",
+              "xian",
+              "xiang",
+              "xiao",
+              "xie",
+              "xin",
+              "xing",
+              "xiong",
+              "xiu",
+              "xu",
+              "xuan",
+              "xue",
+              "xun"
+            ],
+            "cost": 1,
+            "index": 6
+          },
+          {
+            "label": "zh",
+            "key": "X",
+            "category": "retroflex",
+            "syllables": [
+              "zha",
+              "zhai",
+              "zhan",
+              "zhang",
+              "zhao",
+              "zhe",
+              "zhen",
+              "zheng",
+              "zhi",
+              "zhong",
+              "zhou",
+              "zhu",
+              "zhua",
+              "zhuai",
+              "zhuan",
+              "zhuang",
+              "zhui",
+              "zhun",
+              "zhuo"
+            ],
+            "cost": 1,
+            "index": 7
+          },
+          {
+            "label": "A/E/O",
+            "key": "R",
+            "category": "AOE-carrier",
+            "syllables": [
+              "a",
+              "ai",
+              "an",
+              "ang",
+              "ao",
+              "e",
+              "en",
+              "eng",
+              "er",
+              "o",
+              "ou"
+            ],
+            "cost": 1,
+            "index": 8
+          }
+        ],
+        "finalItems": [
+          {
+            "label": "a",
+            "key": "L",
+            "syllables": [
+              "a",
+              "ba",
+              "ca",
+              "cha",
+              "da",
+              "fa",
+              "ga",
+              "ha",
+              "ka",
+              "la",
+              "ma",
+              "na",
+              "pa",
+              "sa",
+              "sha",
+              "ta",
+              "wa",
+              "ya",
+              "za",
+              "zha"
+            ],
+            "cost": 1,
+            "index": 1
+          },
+          {
+            "label": "ai",
+            "key": "F",
+            "syllables": [
+              "ai",
+              "bai",
+              "cai",
+              "chai",
+              "dai",
+              "gai",
+              "hai",
+              "kai",
+              "lai",
+              "mai",
+              "nai",
+              "pai",
+              "sai",
+              "shai",
+              "tai",
+              "wai",
+              "zai",
+              "zhai"
+            ],
+            "cost": 1,
+            "index": 2
+          },
+          {
+            "label": "an",
+            "key": "N",
+            "syllables": [
+              "an",
+              "ban",
+              "can",
+              "chan",
+              "dan",
+              "fan",
+              "gan",
+              "han",
+              "kan",
+              "lan",
+              "man",
+              "nan",
+              "pan",
+              "ran",
+              "san",
+              "shan",
+              "tan",
+              "wan",
+              "yan",
+              "zan",
+              "zhan"
+            ],
+            "cost": 1,
+            "index": 3
+          },
+          {
+            "label": "ang",
+            "key": "Y",
+            "syllables": [
+              "ang",
+              "bang",
+              "cang",
+              "chang",
+              "dang",
+              "fang",
+              "gang",
+              "hang",
+              "kang",
+              "lang",
+              "mang",
+              "nang",
+              "pang",
+              "rang",
+              "sang",
+              "shang",
+              "tang",
+              "wang",
+              "yang",
+              "zang",
+              "zhang"
+            ],
+            "cost": 1,
+            "index": 4
+          },
+          {
+            "label": "ao",
+            "key": "Z",
+            "syllables": [
+              "ao",
+              "bao",
+              "cao",
+              "chao",
+              "dao",
+              "gao",
+              "hao",
+              "kao",
+              "lao",
+              "mao",
+              "nao",
+              "pao",
+              "rao",
+              "sao",
+              "shao",
+              "tao",
+              "yao",
+              "zao",
+              "zhao"
+            ],
+            "cost": 1,
+            "index": 5
+          },
+          {
+            "label": "ei",
+            "key": "D",
+            "syllables": [
+              "bei",
+              "fei",
+              "gei",
+              "hei",
+              "lei",
+              "mei",
+              "nei",
+              "pei",
+              "shei",
+              "wei",
+              "zei"
+            ],
+            "cost": 1,
+            "index": 6
+          },
+          {
+            "label": "en",
+            "key": "S",
+            "syllables": [
+              "ben",
+              "cen",
+              "chen",
+              "en",
+              "fen",
+              "gen",
+              "hen",
+              "ken",
+              "men",
+              "nen",
+              "pen",
+              "ren",
+              "sen",
+              "shen",
+              "wen",
+              "zen",
+              "zhen"
+            ],
+            "cost": 1,
+            "index": 7
+          },
+          {
+            "label": "eng",
+            "key": "R",
+            "syllables": [
+              "beng",
+              "ceng",
+              "cheng",
+              "deng",
+              "eng",
+              "feng",
+              "geng",
+              "heng",
+              "keng",
+              "leng",
+              "meng",
+              "neng",
+              "peng",
+              "reng",
+              "seng",
+              "sheng",
+              "teng",
+              "weng",
+              "zeng",
+              "zheng"
+            ],
+            "cost": 1,
+            "index": 8
+          },
+          {
+            "label": "er",
+            "key": "W",
+            "syllables": [
+              "er"
+            ],
+            "cost": 1,
+            "index": 9
+          },
+          {
+            "label": "i",
+            "key": "K",
+            "syllables": [
+              "bi",
+              "chi",
+              "ci",
+              "di",
+              "ji",
+              "li",
+              "mi",
+              "ni",
+              "pi",
+              "qi",
+              "ri",
+              "shi",
+              "si",
+              "ti",
+              "xi",
+              "yi",
+              "zhi",
+              "zi"
+            ],
+            "cost": 1,
+            "index": 10
+          },
+          {
+            "label": "ia",
+            "key": "P",
+            "syllables": [
+              "jia",
+              "qia",
+              "xia"
+            ],
+            "cost": 1,
+            "index": 11
+          },
+          {
+            "label": "ian",
+            "key": "W",
+            "syllables": [
+              "bian",
+              "dian",
+              "jian",
+              "lian",
+              "mian",
+              "nian",
+              "pian",
+              "qian",
+              "tian",
+              "xian"
+            ],
+            "cost": 1,
+            "index": 12
+          },
+          {
+            "label": "iang",
+            "key": "L",
+            "syllables": [
+              "jiang",
+              "liang",
+              "niang",
+              "qiang",
+              "xiang"
+            ],
+            "cost": 1,
+            "index": 13
+          },
+          {
+            "label": "iao",
+            "key": "Q",
+            "syllables": [
+              "biao",
+              "diao",
+              "jiao",
+              "liao",
+              "miao",
+              "niao",
+              "piao",
+              "qiao",
+              "tiao",
+              "xiao"
+            ],
+            "cost": 1,
+            "index": 14
+          },
+          {
+            "label": "ie",
+            "key": "C",
+            "syllables": [
+              "bie",
+              "die",
+              "jie",
+              "lie",
+              "mie",
+              "nie",
+              "pie",
+              "qie",
+              "tie",
+              "xie"
+            ],
+            "cost": 1,
+            "index": 15
+          },
+          {
+            "label": "in",
+            "key": "B",
+            "syllables": [
+              "bin",
+              "jin",
+              "lin",
+              "min",
+              "nin",
+              "pin",
+              "qin",
+              "xin",
+              "yin"
+            ],
+            "cost": 1,
+            "index": 16
+          },
+          {
+            "label": "ing",
+            "key": "T",
+            "syllables": [
+              "bing",
+              "ding",
+              "jing",
+              "ling",
+              "ming",
+              "ning",
+              "ping",
+              "qing",
+              "ting",
+              "xing",
+              "ying"
+            ],
+            "cost": 1,
+            "index": 17
+          },
+          {
+            "label": "iong",
+            "key": "N",
+            "syllables": [
+              "jiong",
+              "qiong",
+              "xiong"
+            ],
+            "cost": 1,
+            "index": 18
+          },
+          {
+            "label": "iu",
+            "key": "G",
+            "syllables": [
+              "diu",
+              "jiu",
+              "liu",
+              "miu",
+              "niu",
+              "qiu",
+              "xiu"
+            ],
+            "cost": 1,
+            "index": 19
+          },
+          {
+            "label": "o",
+            "key": "G",
+            "syllables": [
+              "bo",
+              "fo",
+              "mo",
+              "o",
+              "po",
+              "wo",
+              "yo"
+            ],
+            "cost": 1,
+            "index": 20
+          },
+          {
+            "label": "ong",
+            "key": "M",
+            "syllables": [
+              "chong",
+              "cong",
+              "dong",
+              "gong",
+              "hong",
+              "kong",
+              "long",
+              "nong",
+              "rong",
+              "song",
+              "tong",
+              "yong",
+              "zhong",
+              "zong"
+            ],
+            "cost": 1,
+            "index": 21
+          },
+          {
+            "label": "ou",
+            "key": "J",
+            "syllables": [
+              "chou",
+              "cou",
+              "dou",
+              "fou",
+              "gou",
+              "hou",
+              "kou",
+              "lou",
+              "mou",
+              "ou",
+              "pou",
+              "rou",
+              "shou",
+              "sou",
+              "tou",
+              "you",
+              "zhou",
+              "zou"
+            ],
+            "cost": 1,
+            "index": 22
+          },
+          {
+            "label": "u",
+            "key": "H",
+            "syllables": [
+              "bu",
+              "chu",
+              "cu",
+              "du",
+              "fu",
+              "gu",
+              "hu",
+              "ku",
+              "lu",
+              "mu",
+              "nu",
+              "pu",
+              "ru",
+              "shu",
+              "su",
+              "tu",
+              "wu",
+              "zhu",
+              "zu"
+            ],
+            "cost": 1,
+            "index": 23
+          },
+          {
+            "label": "ua",
+            "key": "Q",
+            "syllables": [
+              "gua",
+              "hua",
+              "kua",
+              "shua",
+              "zhua"
+            ],
+            "cost": 1,
+            "index": 24
+          },
+          {
+            "label": "uai",
+            "key": "X",
+            "syllables": [
+              "chuai",
+              "guai",
+              "huai",
+              "kuai",
+              "shuai",
+              "zhuai"
+            ],
+            "cost": 1,
+            "index": 25
+          },
+          {
+            "label": "uan",
+            "key": "D",
+            "syllables": [
+              "chuan",
+              "cuan",
+              "duan",
+              "guan",
+              "huan",
+              "kuan",
+              "luan",
+              "nuan",
+              "ruan",
+              "shuan",
+              "suan",
+              "tuan",
+              "zhuan",
+              "zuan"
+            ],
+            "cost": 1,
+            "index": 26
+          },
+          {
+            "label": "uang",
+            "key": "C",
+            "syllables": [
+              "chuang",
+              "guang",
+              "huang",
+              "kuang",
+              "shuang",
+              "zhuang"
+            ],
+            "cost": 1,
+            "index": 27
+          },
+          {
+            "label": "ui",
+            "key": "G",
+            "syllables": [
+              "chui",
+              "cui",
+              "dui",
+              "gui",
+              "hui",
+              "kui",
+              "rui",
+              "shui",
+              "sui",
+              "tui",
+              "zhui",
+              "zui"
+            ],
+            "cost": 1,
+            "index": 28
+          },
+          {
+            "label": "un",
+            "key": "B",
+            "syllables": [
+              "chun",
+              "cun",
+              "dun",
+              "gun",
+              "hun",
+              "kun",
+              "lun",
+              "run",
+              "shun",
+              "sun",
+              "tun",
+              "zhun",
+              "zun"
+            ],
+            "cost": 1,
+            "index": 29
+          },
+          {
+            "label": "uo",
+            "key": "P",
+            "syllables": [
+              "chuo",
+              "cuo",
+              "duo",
+              "guo",
+              "huo",
+              "kuo",
+              "luo",
+              "nuo",
+              "ruo",
+              "shuo",
+              "suo",
+              "tuo",
+              "zhuo",
+              "zuo"
+            ],
+            "cost": 1,
+            "index": 30
+          },
+          {
+            "label": "v",
+            "key": "R",
+            "syllables": [
+              "ju",
+              "lv",
+              "nv",
+              "qu",
+              "xu",
+              "yu"
+            ],
+            "cost": 1,
+            "index": 31
+          },
+          {
+            "label": "van",
+            "key": "F",
+            "syllables": [
+              "juan",
+              "quan",
+              "xuan",
+              "yuan"
+            ],
+            "cost": 1,
+            "index": 32
+          },
+          {
+            "label": "ve",
+            "key": "S",
+            "syllables": [
+              "jue",
+              "lve",
+              "nve",
+              "que",
+              "xue",
+              "yue"
+            ],
+            "cost": 1,
+            "index": 33
+          },
+          {
+            "label": "vn",
+            "key": "D",
+            "syllables": [
+              "jun",
+              "qun",
+              "xun",
+              "yun"
+            ],
+            "cost": 1,
+            "index": 34
+          }
+        ],
+        "initialRouteItems": [],
+        "finalRouteItems": [],
+        "freeInitialMappings": [
+          {
+            "label": "b",
+            "key": "B",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ba",
+              "bai",
+              "ban",
+              "bang",
+              "bao",
+              "bei",
+              "ben",
+              "beng",
+              "bi",
+              "bian",
+              "biao",
+              "bie",
+              "bin",
+              "bing",
+              "bo",
+              "bu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "c",
+            "key": "C",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ca",
+              "cai",
+              "can",
+              "cang",
+              "cao",
+              "ce",
+              "cen",
+              "ceng",
+              "ci",
+              "cong",
+              "cou",
+              "cu",
+              "cuan",
+              "cui",
+              "cun",
+              "cuo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "d",
+            "key": "D",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "da",
+              "dai",
+              "dan",
+              "dang",
+              "dao",
+              "de",
+              "deng",
+              "di",
+              "dian",
+              "diao",
+              "die",
+              "ding",
+              "diu",
+              "dong",
+              "dou",
+              "du",
+              "duan",
+              "dui",
+              "dun",
+              "duo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "f",
+            "key": "F",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "fa",
+              "fan",
+              "fang",
+              "fei",
+              "fen",
+              "feng",
+              "fo",
+              "fou",
+              "fu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "g",
+            "key": "G",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ga",
+              "gai",
+              "gan",
+              "gang",
+              "gao",
+              "ge",
+              "gei",
+              "gen",
+              "geng",
+              "gong",
+              "gou",
+              "gu",
+              "gua",
+              "guai",
+              "guan",
+              "guang",
+              "gui",
+              "gun",
+              "guo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "h",
+            "key": "H",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ha",
+              "hai",
+              "han",
+              "hang",
+              "hao",
+              "he",
+              "hei",
+              "hen",
+              "heng",
+              "hong",
+              "hou",
+              "hu",
+              "hua",
+              "huai",
+              "huan",
+              "huang",
+              "hui",
+              "hun",
+              "huo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "j",
+            "key": "J",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ji",
+              "jia",
+              "jian",
+              "jiang",
+              "jiao",
+              "jie",
+              "jin",
+              "jing",
+              "jiong",
+              "jiu",
+              "ju",
+              "juan",
+              "jue",
+              "jun"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "k",
+            "key": "K",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ka",
+              "kai",
+              "kan",
+              "kang",
+              "kao",
+              "ke",
+              "ken",
+              "keng",
+              "kong",
+              "kou",
+              "ku",
+              "kua",
+              "kuai",
+              "kuan",
+              "kuang",
+              "kui",
+              "kun",
+              "kuo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "m",
+            "key": "M",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ma",
+              "mai",
+              "man",
+              "mang",
+              "mao",
+              "me",
+              "mei",
+              "men",
+              "meng",
+              "mi",
+              "mian",
+              "miao",
+              "mie",
+              "min",
+              "ming",
+              "miu",
+              "mo",
+              "mou",
+              "mu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "n",
+            "key": "N",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "na",
+              "nai",
+              "nan",
+              "nang",
+              "nao",
+              "ne",
+              "nei",
+              "nen",
+              "neng",
+              "ni",
+              "nian",
+              "niang",
+              "niao",
+              "nie",
+              "nin",
+              "ning",
+              "niu",
+              "nong",
+              "nu",
+              "nuan",
+              "nuo",
+              "nv",
+              "nve"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "p",
+            "key": "P",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "pa",
+              "pai",
+              "pan",
+              "pang",
+              "pao",
+              "pei",
+              "pen",
+              "peng",
+              "pi",
+              "pian",
+              "piao",
+              "pie",
+              "pin",
+              "ping",
+              "po",
+              "pou",
+              "pu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "q",
+            "key": "Q",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "qi",
+              "qia",
+              "qian",
+              "qiang",
+              "qiao",
+              "qie",
+              "qin",
+              "qing",
+              "qiong",
+              "qiu",
+              "qu",
+              "quan",
+              "que",
+              "qun"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "r",
+            "key": "R",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ran",
+              "rang",
+              "rao",
+              "re",
+              "ren",
+              "reng",
+              "ri",
+              "rong",
+              "rou",
+              "ru",
+              "ruan",
+              "rui",
+              "run",
+              "ruo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "s",
+            "key": "S",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "sa",
+              "sai",
+              "san",
+              "sang",
+              "sao",
+              "se",
+              "sen",
+              "seng",
+              "si",
+              "song",
+              "sou",
+              "su",
+              "suan",
+              "sui",
+              "sun",
+              "suo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "t",
+            "key": "T",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ta",
+              "tai",
+              "tan",
+              "tang",
+              "tao",
+              "te",
+              "teng",
+              "ti",
+              "tian",
+              "tiao",
+              "tie",
+              "ting",
+              "tong",
+              "tou",
+              "tu",
+              "tuan",
+              "tui",
+              "tun",
+              "tuo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "z",
+            "key": "Z",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "za",
+              "zai",
+              "zan",
+              "zang",
+              "zao",
+              "ze",
+              "zei",
+              "zen",
+              "zeng",
+              "zi",
+              "zong",
+              "zou",
+              "zu",
+              "zuan",
+              "zui",
+              "zun",
+              "zuo"
+            ],
+            "cost": 0
+          }
+        ],
+        "freeFinalMappings": [
+          {
+            "label": "e",
+            "key": "E",
+            "syllables": [
+              "ce",
+              "che",
+              "de",
+              "e",
+              "ge",
+              "he",
+              "ke",
+              "le",
+              "me",
+              "ne",
+              "re",
+              "se",
+              "she",
+              "te",
+              "ye",
+              "ze",
+              "zhe"
+            ],
+            "cost": 0
+          }
+        ],
+        "finalInventory": [
+          "a",
+          "ai",
+          "an",
+          "ang",
+          "ao",
+          "e",
+          "ei",
+          "en",
+          "eng",
+          "er",
+          "i",
+          "ia",
+          "ian",
+          "iang",
+          "iao",
+          "ie",
+          "in",
+          "ing",
+          "iong",
+          "iu",
+          "o",
+          "ong",
+          "ou",
+          "u",
+          "ua",
+          "uai",
+          "uan",
+          "uang",
+          "ui",
+          "un",
+          "uo",
+          "v",
+          "van",
+          "ve",
+          "vn"
+        ],
+        "finalInventoryCount": 35,
+        "finalLinkCount": 35,
+        "extraFinalLinks": 0,
+        "usedFinalKeys": 21,
+        "coKeyGroups": [
+          {
+            "key": "B",
+            "finals": [
+              "in",
+              "un"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "in": [
+                "bin",
+                "jin",
+                "lin",
+                "min",
+                "nin",
+                "pin",
+                "qin",
+                "xin",
+                "yin"
+              ],
+              "un": [
+                "chun",
+                "cun",
+                "dun",
+                "gun",
+                "hun",
+                "kun",
+                "lun",
+                "run",
+                "shun",
+                "sun",
+                "tun",
+                "zhun",
+                "zun"
+              ]
+            }
+          },
+          {
+            "key": "C",
+            "finals": [
+              "ie",
+              "uang"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ie": [
+                "bie",
+                "die",
+                "jie",
+                "lie",
+                "mie",
+                "nie",
+                "pie",
+                "qie",
+                "tie",
+                "xie"
+              ],
+              "uang": [
+                "chuang",
+                "guang",
+                "huang",
+                "kuang",
+                "shuang",
+                "zhuang"
+              ]
+            }
+          },
+          {
+            "key": "D",
+            "finals": [
+              "ei",
+              "uan",
+              "vn"
+            ],
+            "sameKey": true,
+            "mergeLinks": 2,
+            "syllablesByFinal": {
+              "ei": [
+                "bei",
+                "fei",
+                "gei",
+                "hei",
+                "lei",
+                "mei",
+                "nei",
+                "pei",
+                "shei",
+                "wei",
+                "zei"
+              ],
+              "uan": [
+                "chuan",
+                "cuan",
+                "duan",
+                "guan",
+                "huan",
+                "kuan",
+                "luan",
+                "nuan",
+                "ruan",
+                "shuan",
+                "suan",
+                "tuan",
+                "zhuan",
+                "zuan"
+              ],
+              "vn": [
+                "jun",
+                "qun",
+                "xun",
+                "yun"
+              ]
+            }
+          },
+          {
+            "key": "E",
+            "finals": [
+              "e"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "e": [
+                "ce",
+                "che",
+                "de",
+                "e",
+                "ge",
+                "he",
+                "ke",
+                "le",
+                "me",
+                "ne",
+                "re",
+                "se",
+                "she",
+                "te",
+                "ye",
+                "ze",
+                "zhe"
+              ]
+            }
+          },
+          {
+            "key": "F",
+            "finals": [
+              "ai",
+              "van"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ai": [
+                "ai",
+                "bai",
+                "cai",
+                "chai",
+                "dai",
+                "gai",
+                "hai",
+                "kai",
+                "lai",
+                "mai",
+                "nai",
+                "pai",
+                "sai",
+                "shai",
+                "tai",
+                "wai",
+                "zai",
+                "zhai"
+              ],
+              "van": [
+                "juan",
+                "quan",
+                "xuan",
+                "yuan"
+              ]
+            }
+          },
+          {
+            "key": "G",
+            "finals": [
+              "iu",
+              "o",
+              "ui"
+            ],
+            "sameKey": true,
+            "mergeLinks": 2,
+            "syllablesByFinal": {
+              "iu": [
+                "diu",
+                "jiu",
+                "liu",
+                "miu",
+                "niu",
+                "qiu",
+                "xiu"
+              ],
+              "o": [
+                "bo",
+                "fo",
+                "mo",
+                "o",
+                "po",
+                "wo",
+                "yo"
+              ],
+              "ui": [
+                "chui",
+                "cui",
+                "dui",
+                "gui",
+                "hui",
+                "kui",
+                "rui",
+                "shui",
+                "sui",
+                "tui",
+                "zhui",
+                "zui"
+              ]
+            }
+          },
+          {
+            "key": "H",
+            "finals": [
+              "u"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "u": [
+                "bu",
+                "chu",
+                "cu",
+                "du",
+                "fu",
+                "gu",
+                "hu",
+                "ku",
+                "lu",
+                "mu",
+                "nu",
+                "pu",
+                "ru",
+                "shu",
+                "su",
+                "tu",
+                "wu",
+                "zhu",
+                "zu"
+              ]
+            }
+          },
+          {
+            "key": "J",
+            "finals": [
+              "ou"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ou": [
+                "chou",
+                "cou",
+                "dou",
+                "fou",
+                "gou",
+                "hou",
+                "kou",
+                "lou",
+                "mou",
+                "ou",
+                "pou",
+                "rou",
+                "shou",
+                "sou",
+                "tou",
+                "you",
+                "zhou",
+                "zou"
+              ]
+            }
+          },
+          {
+            "key": "K",
+            "finals": [
+              "i"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "i": [
+                "bi",
+                "chi",
+                "ci",
+                "di",
+                "ji",
+                "li",
+                "mi",
+                "ni",
+                "pi",
+                "qi",
+                "ri",
+                "shi",
+                "si",
+                "ti",
+                "xi",
+                "yi",
+                "zhi",
+                "zi"
+              ]
+            }
+          },
+          {
+            "key": "L",
+            "finals": [
+              "a",
+              "iang"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "a": [
+                "a",
+                "ba",
+                "ca",
+                "cha",
+                "da",
+                "fa",
+                "ga",
+                "ha",
+                "ka",
+                "la",
+                "ma",
+                "na",
+                "pa",
+                "sa",
+                "sha",
+                "ta",
+                "wa",
+                "ya",
+                "za",
+                "zha"
+              ],
+              "iang": [
+                "jiang",
+                "liang",
+                "niang",
+                "qiang",
+                "xiang"
+              ]
+            }
+          },
+          {
+            "key": "M",
+            "finals": [
+              "ong"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ong": [
+                "chong",
+                "cong",
+                "dong",
+                "gong",
+                "hong",
+                "kong",
+                "long",
+                "nong",
+                "rong",
+                "song",
+                "tong",
+                "yong",
+                "zhong",
+                "zong"
+              ]
+            }
+          },
+          {
+            "key": "N",
+            "finals": [
+              "an",
+              "iong"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "an": [
+                "an",
+                "ban",
+                "can",
+                "chan",
+                "dan",
+                "fan",
+                "gan",
+                "han",
+                "kan",
+                "lan",
+                "man",
+                "nan",
+                "pan",
+                "ran",
+                "san",
+                "shan",
+                "tan",
+                "wan",
+                "yan",
+                "zan",
+                "zhan"
+              ],
+              "iong": [
+                "jiong",
+                "qiong",
+                "xiong"
+              ]
+            }
+          },
+          {
+            "key": "P",
+            "finals": [
+              "ia",
+              "uo"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ia": [
+                "jia",
+                "qia",
+                "xia"
+              ],
+              "uo": [
+                "chuo",
+                "cuo",
+                "duo",
+                "guo",
+                "huo",
+                "kuo",
+                "luo",
+                "nuo",
+                "ruo",
+                "shuo",
+                "suo",
+                "tuo",
+                "zhuo",
+                "zuo"
+              ]
+            }
+          },
+          {
+            "key": "Q",
+            "finals": [
+              "iao",
+              "ua"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "iao": [
+                "biao",
+                "diao",
+                "jiao",
+                "liao",
+                "miao",
+                "niao",
+                "piao",
+                "qiao",
+                "tiao",
+                "xiao"
+              ],
+              "ua": [
+                "gua",
+                "hua",
+                "kua",
+                "shua",
+                "zhua"
+              ]
+            }
+          },
+          {
+            "key": "R",
+            "finals": [
+              "eng",
+              "v"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "eng": [
+                "beng",
+                "ceng",
+                "cheng",
+                "deng",
+                "eng",
+                "feng",
+                "geng",
+                "heng",
+                "keng",
+                "leng",
+                "meng",
+                "neng",
+                "peng",
+                "reng",
+                "seng",
+                "sheng",
+                "teng",
+                "weng",
+                "zeng",
+                "zheng"
+              ],
+              "v": [
+                "ju",
+                "lv",
+                "nv",
+                "qu",
+                "xu",
+                "yu"
+              ]
+            }
+          },
+          {
+            "key": "S",
+            "finals": [
+              "en",
+              "ve"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "en": [
+                "ben",
+                "cen",
+                "chen",
+                "en",
+                "fen",
+                "gen",
+                "hen",
+                "ken",
+                "men",
+                "nen",
+                "pen",
+                "ren",
+                "sen",
+                "shen",
+                "wen",
+                "zen",
+                "zhen"
+              ],
+              "ve": [
+                "jue",
+                "lve",
+                "nve",
+                "que",
+                "xue",
+                "yue"
+              ]
+            }
+          },
+          {
+            "key": "T",
+            "finals": [
+              "ing"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ing": [
+                "bing",
+                "ding",
+                "jing",
+                "ling",
+                "ming",
+                "ning",
+                "ping",
+                "qing",
+                "ting",
+                "xing",
+                "ying"
+              ]
+            }
+          },
+          {
+            "key": "W",
+            "finals": [
+              "er",
+              "ian"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "er": [
+                "er"
+              ],
+              "ian": [
+                "bian",
+                "dian",
+                "jian",
+                "lian",
+                "mian",
+                "nian",
+                "pian",
+                "qian",
+                "tian",
+                "xian"
+              ]
+            }
+          },
+          {
+            "key": "X",
+            "finals": [
+              "uai"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "uai": [
+                "chuai",
+                "guai",
+                "huai",
+                "kuai",
+                "shuai",
+                "zhuai"
+              ]
+            }
+          },
+          {
+            "key": "Y",
+            "finals": [
+              "ang"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ang": [
+                "ang",
+                "bang",
+                "cang",
+                "chang",
+                "dang",
+                "fang",
+                "gang",
+                "hang",
+                "kang",
+                "lang",
+                "mang",
+                "nang",
+                "pang",
+                "rang",
+                "sang",
+                "shang",
+                "tang",
+                "wang",
+                "yang",
+                "zang",
+                "zhang"
+              ]
+            }
+          },
+          {
+            "key": "Z",
+            "finals": [
+              "ao"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ao": [
+                "ao",
+                "bao",
+                "cao",
+                "chao",
+                "dao",
+                "gao",
+                "hao",
+                "kao",
+                "lao",
+                "mao",
+                "nao",
+                "pao",
+                "rao",
+                "sao",
+                "shao",
+                "tao",
+                "yao",
+                "zao",
+                "zhao"
+              ]
+            }
+          }
+        ],
+        "coKeyLinkReduction": 14,
+        "initialLinks": {
+          "A": [
+            "R"
+          ],
+          "b": [
+            "B"
+          ],
+          "c": [
+            "C"
+          ],
+          "ch": [
+            "S"
+          ],
+          "d": [
+            "D"
+          ],
+          "E": [
+            "R"
+          ],
+          "f": [
+            "F"
+          ],
+          "g": [
+            "G"
+          ],
+          "h": [
+            "H"
+          ],
+          "j": [
+            "J"
+          ],
+          "k": [
+            "K"
+          ],
+          "l": [
+            "W"
+          ],
+          "m": [
+            "M"
+          ],
+          "n": [
+            "N"
+          ],
+          "O": [
+            "R"
+          ],
+          "p": [
+            "P"
+          ],
+          "q": [
+            "Q"
+          ],
+          "r": [
+            "R"
+          ],
+          "s": [
+            "S"
+          ],
+          "sh": [
+            "E"
+          ],
+          "t": [
+            "T"
+          ],
+          "W": [
+            "P"
+          ],
+          "x": [
+            "Y"
+          ],
+          "Y": [
+            "L"
+          ],
+          "z": [
+            "Z"
+          ],
+          "zh": [
+            "X"
+          ]
+        },
+        "finalLinkKeys": {
+          "a": [
+            "L"
+          ],
+          "ai": [
+            "F"
+          ],
+          "an": [
+            "N"
+          ],
+          "ang": [
+            "Y"
+          ],
+          "ao": [
+            "Z"
+          ],
+          "ei": [
+            "D"
+          ],
+          "en": [
+            "S"
+          ],
+          "eng": [
+            "R"
+          ],
+          "i": [
+            "K"
+          ],
+          "ian": [
+            "W"
+          ],
+          "iao": [
+            "Q"
+          ],
+          "ie": [
+            "C"
+          ],
+          "in": [
+            "B"
+          ],
+          "ing": [
+            "T"
+          ],
+          "o": [
+            "G"
+          ],
+          "u": [
+            "H"
+          ],
+          "e": [
+            "E"
+          ],
+          "ong": [
+            "M"
+          ],
+          "ou": [
+            "J"
+          ],
+          "uai": [
+            "X"
+          ],
+          "uan": [
+            "D"
+          ],
+          "uang": [
+            "C"
+          ],
+          "ui": [
+            "G"
+          ],
+          "un": [
+            "B"
+          ],
+          "uo": [
+            "P"
+          ],
+          "iu": [
+            "G"
+          ],
+          "er": [
+            "W"
+          ],
+          "ua": [
+            "Q"
+          ],
+          "ia": [
+            "P"
+          ],
+          "iang": [
+            "L"
+          ],
+          "iong": [
+            "N"
+          ],
+          "v": [
+            "R"
+          ],
+          "van": [
+            "F"
+          ],
+          "ve": [
+            "S"
+          ],
+          "vn": [
+            "D"
+          ]
+        },
+        "initialBranches": {},
+        "finalBranches": {},
+        "zeroRules": {
+          "A": {
+            "R": [
+              "a",
+              "ai",
+              "an",
+              "ang",
+              "ao"
+            ]
+          },
+          "E": {
+            "R": [
+              "e",
+              "en",
+              "eng",
+              "er"
+            ]
+          },
+          "O": {
+            "R": [
+              "o",
+              "ou"
+            ]
+          },
+          "Y": {
+            "L": [
+              "ya",
+              "yan",
+              "yang",
+              "yao",
+              "ye",
+              "yi",
+              "yin",
+              "ying",
+              "yo",
+              "yong",
+              "you",
+              "yu",
+              "yuan",
+              "yue",
+              "yun"
+            ]
+          },
+          "W": {
+            "P": [
+              "wa",
+              "wai",
+              "wan",
+              "wang",
+              "wei",
+              "wen",
+              "weng",
+              "wo",
+              "wu"
+            ]
+          }
+        },
+        "AEOKeys": [
+          "R"
+        ],
+        "coverage": 399,
+        "unique": 352,
+        "collisionExcess": 47,
+        "collisionPairs": 47,
+        "collisionBuckets": {
+          "RN": [
+            "an",
+            "ran"
+          ],
+          "RY": [
+            "ang",
+            "rang"
+          ],
+          "RZ": [
+            "ao",
+            "rao"
+          ],
+          "SL": [
+            "cha",
+            "sa"
+          ],
+          "SF": [
+            "chai",
+            "sai"
+          ],
+          "SN": [
+            "chan",
+            "san"
+          ],
+          "SY": [
+            "chang",
+            "sang"
+          ],
+          "SZ": [
+            "chao",
+            "sao"
+          ],
+          "SE": [
+            "che",
+            "se"
+          ],
+          "SS": [
+            "chen",
+            "sen"
+          ],
+          "SR": [
+            "cheng",
+            "seng"
+          ],
+          "SK": [
+            "chi",
+            "si"
+          ],
+          "SM": [
+            "chong",
+            "song"
+          ],
+          "SJ": [
+            "chou",
+            "sou"
+          ],
+          "SH": [
+            "chu",
+            "su"
+          ],
+          "SD": [
+            "chuan",
+            "suan"
+          ],
+          "SG": [
+            "chui",
+            "sui"
+          ],
+          "SB": [
+            "chun",
+            "sun"
+          ],
+          "SP": [
+            "chuo",
+            "suo"
+          ],
+          "DG": [
+            "diu",
+            "dui"
+          ],
+          "RE": [
+            "e",
+            "re"
+          ],
+          "RS": [
+            "en",
+            "ren"
+          ],
+          "RR": [
+            "eng",
+            "reng"
+          ],
+          "GD": [
+            "gei",
+            "guan"
+          ],
+          "HD": [
+            "hei",
+            "huan"
+          ],
+          "WL": [
+            "la",
+            "liang"
+          ],
+          "WD": [
+            "lei",
+            "luan"
+          ],
+          "WR": [
+            "leng",
+            "lv"
+          ],
+          "WB": [
+            "lin",
+            "lun"
+          ],
+          "MG": [
+            "miu",
+            "mo"
+          ],
+          "NL": [
+            "na",
+            "niang"
+          ],
+          "ND": [
+            "nei",
+            "nuan"
+          ],
+          "NS": [
+            "nen",
+            "nve"
+          ],
+          "NR": [
+            "neng",
+            "nv"
+          ],
+          "RG": [
+            "o",
+            "rui"
+          ],
+          "RJ": [
+            "ou",
+            "rou"
+          ],
+          "PL": [
+            "pa",
+            "wa"
+          ],
+          "PF": [
+            "pai",
+            "wai"
+          ],
+          "PN": [
+            "pan",
+            "wan"
+          ],
+          "PY": [
+            "pang",
+            "wang"
+          ],
+          "PD": [
+            "pei",
+            "wei"
+          ],
+          "PS": [
+            "pen",
+            "wen"
+          ],
+          "PR": [
+            "peng",
+            "weng"
+          ],
+          "PG": [
+            "po",
+            "wo"
+          ],
+          "PH": [
+            "pu",
+            "wu"
+          ],
+          "ED": [
+            "shei",
+            "shuan"
+          ],
+          "ZD": [
+            "zei",
+            "zuan"
+          ]
+        },
+        "strictNoFly": true,
+        "simpleYuSplit": false,
+        "allowedStructure": true,
+        "acceptedAliasesAudited": false,
+        "routeSensitivity": {
+          "0": 42,
+          "0.5": 42.0,
+          "1": 42,
+          "2": 42
+        },
+        "additionalDisplacementSensitivity": {
+          "0": 42,
+          "0.5": 43.0,
+          "1": 44,
+          "2": 46
+        }
+      },
+      "initialMap": {
+        "b": "B",
+        "c": "C",
+        "ch": "S",
+        "d": "D",
+        "f": "F",
+        "g": "G",
+        "h": "H",
+        "j": "J",
+        "k": "K",
+        "l": "W",
+        "m": "M",
+        "n": "N",
+        "p": "P",
+        "q": "Q",
+        "r": "R",
+        "s": "S",
+        "sh": "E",
+        "t": "T",
+        "x": "Y",
+        "z": "Z",
+        "A": "R",
+        "E": "R",
+        "O": "R",
+        "W": "P",
+        "Y": "L",
+        "zh": "X",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "L",
+        "ai": "F",
+        "an": "N",
+        "ang": "Y",
+        "ao": "Z",
+        "e": "E",
+        "ei": "D",
+        "en": "S",
+        "eng": "R",
+        "er": "W",
+        "i": "K",
+        "ia": "P",
+        "ian": "W",
+        "iang": "L",
+        "iao": "Q",
+        "ie": "C",
+        "in": "B",
+        "ing": "T",
+        "iong": "N",
+        "iu": "G",
+        "o": "G",
+        "ong": "M",
+        "ou": "J",
+        "u": "H",
+        "ua": "Q",
+        "uai": "X",
+        "uan": "D",
+        "uang": "C",
+        "ui": "G",
+        "un": "B",
+        "uo": "P",
+        "v": "R",
+        "van": "F",
+        "ve": "S",
+        "vn": "D"
+      },
+      "common399InitialHomeShare": 0.44577653512690113,
+      "optimal1x": {
+        "score": 9.609711728125683,
+        "policy": {
+          "keytao": "12/231/23",
+          "sanpin": "12/312/23"
+        },
+        "memberRunnerUpGaps": {
+          "keytao": 0.0001528391614702418,
+          "sanpin": 0.0005441784475468392
+        }
+      },
+      "optimal2x": {
+        "score": 9.618631393369153,
+        "policy": {
+          "keytao": "12/213/23",
+          "sanpin": "12/312/23"
+        },
+        "memberRunnerUpGaps": {
+          "keytao": 3.523322427367859e-05,
+          "sanpin": 0.0006445328578008613
+        }
+      },
+      "maxTrackDifference": 0,
+      "differenceFromU7EM42": {
+        "1": 0.05799781649051994,
+        "2": 0.08195005811758094
+      },
+      "differenceFromU7RM42": {
+        "1": 0.08025236938972213,
+        "2": 0.09143420053455031
+      }
+    },
+    {
+      "id": "TRF-1df2703604ff",
+      "family": "U8",
+      "lane": "secondary",
+      "audit": {
+        "valid": true,
+        "M": 42,
+        "D": 2,
+        "V": 4,
+        "branches": 0,
+        "actual": [
+          21,
+          21
+        ],
+        "unique": 348,
+        "qz": false,
+        "zq": false
+      },
+      "independentMemory": {
+        "version": "M-R2-explicit",
+        "formula": "M = ordinary_displacement_links + retroflex_links + YW_nonidentity_links + AEO_carriers + nonidentity_final_links + initial_extra_routes + final_extra_routes",
+        "scope": "common399; normalized written tails with j/q/x/Y-u restored as v; er explicit; iu/ui/un retained",
+        "policy": "Each nonidentity mapping costs one. An ordinary displaced initial is already charged; no second default fee. A/E/O shared physical carrier counted once. Every additional key within a head/final costs one routing item. Optional aliases included only where authoritative source is supplied.",
+        "sourceM_R1": 42,
+        "canonicalM": 42,
+        "M": 42,
+        "firstLinks": 8,
+        "finalLinks": 34,
+        "Mmap": 42,
+        "branchI": 0,
+        "branchR": 0,
+        "branchCount": 0,
+        "firstCategoryCounts": {
+          "YW-carrier": 2,
+          "retroflex": 3,
+          "ordinary-displacement": 2,
+          "AOE-carrier": 1
+        },
+        "ordinaryDisplacedCount": 2,
+        "ordinaryDisplaced": [
+          "x",
+          "s"
+        ],
+        "ordinaryDisplacementLinks": 2,
+        "firstItems": [
+          {
+            "label": "W",
+            "key": "J",
+            "category": "YW-carrier",
+            "syllables": [
+              "wa",
+              "wai",
+              "wan",
+              "wang",
+              "wei",
+              "wen",
+              "weng",
+              "wo",
+              "wu"
+            ],
+            "cost": 1,
+            "index": 1
+          },
+          {
+            "label": "Y",
+            "key": "S",
+            "category": "YW-carrier",
+            "syllables": [
+              "ya",
+              "yan",
+              "yang",
+              "yao",
+              "ye",
+              "yi",
+              "yin",
+              "ying",
+              "yo",
+              "yong",
+              "you",
+              "yu",
+              "yuan",
+              "yue",
+              "yun"
+            ],
+            "cost": 1,
+            "index": 2
+          },
+          {
+            "label": "ch",
+            "key": "X",
+            "category": "retroflex",
+            "syllables": [
+              "cha",
+              "chai",
+              "chan",
+              "chang",
+              "chao",
+              "che",
+              "chen",
+              "cheng",
+              "chi",
+              "chong",
+              "chou",
+              "chu",
+              "chuai",
+              "chuan",
+              "chuang",
+              "chui",
+              "chun",
+              "chuo"
+            ],
+            "cost": 1,
+            "index": 3
+          },
+          {
+            "label": "s",
+            "key": "Q",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "sa",
+              "sai",
+              "san",
+              "sang",
+              "sao",
+              "se",
+              "sen",
+              "seng",
+              "si",
+              "song",
+              "sou",
+              "su",
+              "suan",
+              "sui",
+              "sun",
+              "suo"
+            ],
+            "cost": 1,
+            "index": 4
+          },
+          {
+            "label": "sh",
+            "key": "E",
+            "category": "retroflex",
+            "syllables": [
+              "sha",
+              "shai",
+              "shan",
+              "shang",
+              "shao",
+              "she",
+              "shei",
+              "shen",
+              "sheng",
+              "shi",
+              "shou",
+              "shu",
+              "shua",
+              "shuai",
+              "shuan",
+              "shuang",
+              "shui",
+              "shun",
+              "shuo"
+            ],
+            "cost": 1,
+            "index": 5
+          },
+          {
+            "label": "x",
+            "key": "Y",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "xi",
+              "xia",
+              "xian",
+              "xiang",
+              "xiao",
+              "xie",
+              "xin",
+              "xing",
+              "xiong",
+              "xiu",
+              "xu",
+              "xuan",
+              "xue",
+              "xun"
+            ],
+            "cost": 1,
+            "index": 6
+          },
+          {
+            "label": "zh",
+            "key": "W",
+            "category": "retroflex",
+            "syllables": [
+              "zha",
+              "zhai",
+              "zhan",
+              "zhang",
+              "zhao",
+              "zhe",
+              "zhen",
+              "zheng",
+              "zhi",
+              "zhong",
+              "zhou",
+              "zhu",
+              "zhua",
+              "zhuai",
+              "zhuan",
+              "zhuang",
+              "zhui",
+              "zhun",
+              "zhuo"
+            ],
+            "cost": 1,
+            "index": 7
+          },
+          {
+            "label": "A/E/O",
+            "key": "Y",
+            "category": "AOE-carrier",
+            "syllables": [
+              "a",
+              "ai",
+              "an",
+              "ang",
+              "ao",
+              "e",
+              "en",
+              "eng",
+              "er",
+              "o",
+              "ou"
+            ],
+            "cost": 1,
+            "index": 8
+          }
+        ],
+        "finalItems": [
+          {
+            "label": "a",
+            "key": "H",
+            "syllables": [
+              "a",
+              "ba",
+              "ca",
+              "cha",
+              "da",
+              "fa",
+              "ga",
+              "ha",
+              "ka",
+              "la",
+              "ma",
+              "na",
+              "pa",
+              "sa",
+              "sha",
+              "ta",
+              "wa",
+              "ya",
+              "za",
+              "zha"
+            ],
+            "cost": 1,
+            "index": 1
+          },
+          {
+            "label": "ai",
+            "key": "X",
+            "syllables": [
+              "ai",
+              "bai",
+              "cai",
+              "chai",
+              "dai",
+              "gai",
+              "hai",
+              "kai",
+              "lai",
+              "mai",
+              "nai",
+              "pai",
+              "sai",
+              "shai",
+              "tai",
+              "wai",
+              "zai",
+              "zhai"
+            ],
+            "cost": 1,
+            "index": 2
+          },
+          {
+            "label": "an",
+            "key": "W",
+            "syllables": [
+              "an",
+              "ban",
+              "can",
+              "chan",
+              "dan",
+              "fan",
+              "gan",
+              "han",
+              "kan",
+              "lan",
+              "man",
+              "nan",
+              "pan",
+              "ran",
+              "san",
+              "shan",
+              "tan",
+              "wan",
+              "yan",
+              "zan",
+              "zhan"
+            ],
+            "cost": 1,
+            "index": 3
+          },
+          {
+            "label": "ang",
+            "key": "M",
+            "syllables": [
+              "ang",
+              "bang",
+              "cang",
+              "chang",
+              "dang",
+              "fang",
+              "gang",
+              "hang",
+              "kang",
+              "lang",
+              "mang",
+              "nang",
+              "pang",
+              "rang",
+              "sang",
+              "shang",
+              "tang",
+              "wang",
+              "yang",
+              "zang",
+              "zhang"
+            ],
+            "cost": 1,
+            "index": 4
+          },
+          {
+            "label": "ao",
+            "key": "K",
+            "syllables": [
+              "ao",
+              "bao",
+              "cao",
+              "chao",
+              "dao",
+              "gao",
+              "hao",
+              "kao",
+              "lao",
+              "mao",
+              "nao",
+              "pao",
+              "rao",
+              "sao",
+              "shao",
+              "tao",
+              "yao",
+              "zao",
+              "zhao"
+            ],
+            "cost": 1,
+            "index": 5
+          },
+          {
+            "label": "ei",
+            "key": "S",
+            "syllables": [
+              "bei",
+              "fei",
+              "gei",
+              "hei",
+              "lei",
+              "mei",
+              "nei",
+              "pei",
+              "shei",
+              "wei",
+              "zei"
+            ],
+            "cost": 1,
+            "index": 6
+          },
+          {
+            "label": "en",
+            "key": "J",
+            "syllables": [
+              "ben",
+              "cen",
+              "chen",
+              "en",
+              "fen",
+              "gen",
+              "hen",
+              "ken",
+              "men",
+              "nen",
+              "pen",
+              "ren",
+              "sen",
+              "shen",
+              "wen",
+              "zen",
+              "zhen"
+            ],
+            "cost": 1,
+            "index": 7
+          },
+          {
+            "label": "eng",
+            "key": "D",
+            "syllables": [
+              "beng",
+              "ceng",
+              "cheng",
+              "deng",
+              "eng",
+              "feng",
+              "geng",
+              "heng",
+              "keng",
+              "leng",
+              "meng",
+              "neng",
+              "peng",
+              "reng",
+              "seng",
+              "sheng",
+              "teng",
+              "weng",
+              "zeng",
+              "zheng"
+            ],
+            "cost": 1,
+            "index": 8
+          },
+          {
+            "label": "er",
+            "key": "T",
+            "syllables": [
+              "er"
+            ],
+            "cost": 1,
+            "index": 9
+          },
+          {
+            "label": "i",
+            "key": "L",
+            "syllables": [
+              "bi",
+              "chi",
+              "ci",
+              "di",
+              "ji",
+              "li",
+              "mi",
+              "ni",
+              "pi",
+              "qi",
+              "ri",
+              "shi",
+              "si",
+              "ti",
+              "xi",
+              "yi",
+              "zhi",
+              "zi"
+            ],
+            "cost": 1,
+            "index": 10
+          },
+          {
+            "label": "ia",
+            "key": "R",
+            "syllables": [
+              "jia",
+              "qia",
+              "xia"
+            ],
+            "cost": 1,
+            "index": 11
+          },
+          {
+            "label": "ian",
+            "key": "F",
+            "syllables": [
+              "bian",
+              "dian",
+              "jian",
+              "lian",
+              "mian",
+              "nian",
+              "pian",
+              "qian",
+              "tian",
+              "xian"
+            ],
+            "cost": 1,
+            "index": 12
+          },
+          {
+            "label": "iang",
+            "key": "P",
+            "syllables": [
+              "jiang",
+              "liang",
+              "niang",
+              "qiang",
+              "xiang"
+            ],
+            "cost": 1,
+            "index": 13
+          },
+          {
+            "label": "iao",
+            "key": "Q",
+            "syllables": [
+              "biao",
+              "diao",
+              "jiao",
+              "liao",
+              "miao",
+              "niao",
+              "piao",
+              "qiao",
+              "tiao",
+              "xiao"
+            ],
+            "cost": 1,
+            "index": 14
+          },
+          {
+            "label": "ie",
+            "key": "C",
+            "syllables": [
+              "bie",
+              "die",
+              "jie",
+              "lie",
+              "mie",
+              "nie",
+              "pie",
+              "qie",
+              "tie",
+              "xie"
+            ],
+            "cost": 1,
+            "index": 15
+          },
+          {
+            "label": "in",
+            "key": "D",
+            "syllables": [
+              "bin",
+              "jin",
+              "lin",
+              "min",
+              "nin",
+              "pin",
+              "qin",
+              "xin",
+              "yin"
+            ],
+            "cost": 1,
+            "index": 16
+          },
+          {
+            "label": "ing",
+            "key": "B",
+            "syllables": [
+              "bing",
+              "ding",
+              "jing",
+              "ling",
+              "ming",
+              "ning",
+              "ping",
+              "qing",
+              "ting",
+              "xing",
+              "ying"
+            ],
+            "cost": 1,
+            "index": 17
+          },
+          {
+            "label": "iong",
+            "key": "B",
+            "syllables": [
+              "jiong",
+              "qiong",
+              "xiong"
+            ],
+            "cost": 1,
+            "index": 18
+          },
+          {
+            "label": "iu",
+            "key": "E",
+            "syllables": [
+              "diu",
+              "jiu",
+              "liu",
+              "miu",
+              "niu",
+              "qiu",
+              "xiu"
+            ],
+            "cost": 1,
+            "index": 19
+          },
+          {
+            "label": "o",
+            "key": "P",
+            "syllables": [
+              "bo",
+              "fo",
+              "mo",
+              "o",
+              "po",
+              "wo",
+              "yo"
+            ],
+            "cost": 1,
+            "index": 20
+          },
+          {
+            "label": "ong",
+            "key": "P",
+            "syllables": [
+              "chong",
+              "cong",
+              "dong",
+              "gong",
+              "hong",
+              "kong",
+              "long",
+              "nong",
+              "rong",
+              "song",
+              "tong",
+              "yong",
+              "zhong",
+              "zong"
+            ],
+            "cost": 1,
+            "index": 21
+          },
+          {
+            "label": "ou",
+            "key": "R",
+            "syllables": [
+              "chou",
+              "cou",
+              "dou",
+              "fou",
+              "gou",
+              "hou",
+              "kou",
+              "lou",
+              "mou",
+              "ou",
+              "pou",
+              "rou",
+              "shou",
+              "sou",
+              "tou",
+              "you",
+              "zhou",
+              "zou"
+            ],
+            "cost": 1,
+            "index": 22
+          },
+          {
+            "label": "u",
+            "key": "N",
+            "syllables": [
+              "bu",
+              "chu",
+              "cu",
+              "du",
+              "fu",
+              "gu",
+              "hu",
+              "ku",
+              "lu",
+              "mu",
+              "nu",
+              "pu",
+              "ru",
+              "shu",
+              "su",
+              "tu",
+              "wu",
+              "zhu",
+              "zu"
+            ],
+            "cost": 1,
+            "index": 23
+          },
+          {
+            "label": "ua",
+            "key": "Q",
+            "syllables": [
+              "gua",
+              "hua",
+              "kua",
+              "shua",
+              "zhua"
+            ],
+            "cost": 1,
+            "index": 24
+          },
+          {
+            "label": "uai",
+            "key": "Z",
+            "syllables": [
+              "chuai",
+              "guai",
+              "huai",
+              "kuai",
+              "shuai",
+              "zhuai"
+            ],
+            "cost": 1,
+            "index": 25
+          },
+          {
+            "label": "uan",
+            "key": "T",
+            "syllables": [
+              "chuan",
+              "cuan",
+              "duan",
+              "guan",
+              "huan",
+              "kuan",
+              "luan",
+              "nuan",
+              "ruan",
+              "shuan",
+              "suan",
+              "tuan",
+              "zhuan",
+              "zuan"
+            ],
+            "cost": 1,
+            "index": 26
+          },
+          {
+            "label": "uang",
+            "key": "G",
+            "syllables": [
+              "chuang",
+              "guang",
+              "huang",
+              "kuang",
+              "shuang",
+              "zhuang"
+            ],
+            "cost": 1,
+            "index": 27
+          },
+          {
+            "label": "ui",
+            "key": "G",
+            "syllables": [
+              "chui",
+              "cui",
+              "dui",
+              "gui",
+              "hui",
+              "kui",
+              "rui",
+              "shui",
+              "sui",
+              "tui",
+              "zhui",
+              "zui"
+            ],
+            "cost": 1,
+            "index": 28
+          },
+          {
+            "label": "un",
+            "key": "C",
+            "syllables": [
+              "chun",
+              "cun",
+              "dun",
+              "gun",
+              "hun",
+              "kun",
+              "lun",
+              "run",
+              "shun",
+              "sun",
+              "tun",
+              "zhun",
+              "zun"
+            ],
+            "cost": 1,
+            "index": 29
+          },
+          {
+            "label": "uo",
+            "key": "Y",
+            "syllables": [
+              "chuo",
+              "cuo",
+              "duo",
+              "guo",
+              "huo",
+              "kuo",
+              "luo",
+              "nuo",
+              "ruo",
+              "shuo",
+              "suo",
+              "tuo",
+              "zhuo",
+              "zuo"
+            ],
+            "cost": 1,
+            "index": 30
+          },
+          {
+            "label": "v",
+            "key": "H",
+            "syllables": [
+              "ju",
+              "lv",
+              "nv",
+              "qu",
+              "xu",
+              "yu"
+            ],
+            "cost": 1,
+            "index": 31
+          },
+          {
+            "label": "van",
+            "key": "J",
+            "syllables": [
+              "juan",
+              "quan",
+              "xuan",
+              "yuan"
+            ],
+            "cost": 1,
+            "index": 32
+          },
+          {
+            "label": "ve",
+            "key": "K",
+            "syllables": [
+              "jue",
+              "lve",
+              "nve",
+              "que",
+              "xue",
+              "yue"
+            ],
+            "cost": 1,
+            "index": 33
+          },
+          {
+            "label": "vn",
+            "key": "S",
+            "syllables": [
+              "jun",
+              "qun",
+              "xun",
+              "yun"
+            ],
+            "cost": 1,
+            "index": 34
+          }
+        ],
+        "initialRouteItems": [],
+        "finalRouteItems": [],
+        "freeInitialMappings": [
+          {
+            "label": "b",
+            "key": "B",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ba",
+              "bai",
+              "ban",
+              "bang",
+              "bao",
+              "bei",
+              "ben",
+              "beng",
+              "bi",
+              "bian",
+              "biao",
+              "bie",
+              "bin",
+              "bing",
+              "bo",
+              "bu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "c",
+            "key": "C",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ca",
+              "cai",
+              "can",
+              "cang",
+              "cao",
+              "ce",
+              "cen",
+              "ceng",
+              "ci",
+              "cong",
+              "cou",
+              "cu",
+              "cuan",
+              "cui",
+              "cun",
+              "cuo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "d",
+            "key": "D",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "da",
+              "dai",
+              "dan",
+              "dang",
+              "dao",
+              "de",
+              "deng",
+              "di",
+              "dian",
+              "diao",
+              "die",
+              "ding",
+              "diu",
+              "dong",
+              "dou",
+              "du",
+              "duan",
+              "dui",
+              "dun",
+              "duo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "f",
+            "key": "F",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "fa",
+              "fan",
+              "fang",
+              "fei",
+              "fen",
+              "feng",
+              "fo",
+              "fou",
+              "fu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "g",
+            "key": "G",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ga",
+              "gai",
+              "gan",
+              "gang",
+              "gao",
+              "ge",
+              "gei",
+              "gen",
+              "geng",
+              "gong",
+              "gou",
+              "gu",
+              "gua",
+              "guai",
+              "guan",
+              "guang",
+              "gui",
+              "gun",
+              "guo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "h",
+            "key": "H",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ha",
+              "hai",
+              "han",
+              "hang",
+              "hao",
+              "he",
+              "hei",
+              "hen",
+              "heng",
+              "hong",
+              "hou",
+              "hu",
+              "hua",
+              "huai",
+              "huan",
+              "huang",
+              "hui",
+              "hun",
+              "huo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "j",
+            "key": "J",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ji",
+              "jia",
+              "jian",
+              "jiang",
+              "jiao",
+              "jie",
+              "jin",
+              "jing",
+              "jiong",
+              "jiu",
+              "ju",
+              "juan",
+              "jue",
+              "jun"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "k",
+            "key": "K",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ka",
+              "kai",
+              "kan",
+              "kang",
+              "kao",
+              "ke",
+              "ken",
+              "keng",
+              "kong",
+              "kou",
+              "ku",
+              "kua",
+              "kuai",
+              "kuan",
+              "kuang",
+              "kui",
+              "kun",
+              "kuo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "l",
+            "key": "L",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "la",
+              "lai",
+              "lan",
+              "lang",
+              "lao",
+              "le",
+              "lei",
+              "leng",
+              "li",
+              "lian",
+              "liang",
+              "liao",
+              "lie",
+              "lin",
+              "ling",
+              "liu",
+              "long",
+              "lou",
+              "lu",
+              "luan",
+              "lun",
+              "luo",
+              "lv",
+              "lve"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "m",
+            "key": "M",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ma",
+              "mai",
+              "man",
+              "mang",
+              "mao",
+              "me",
+              "mei",
+              "men",
+              "meng",
+              "mi",
+              "mian",
+              "miao",
+              "mie",
+              "min",
+              "ming",
+              "miu",
+              "mo",
+              "mou",
+              "mu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "n",
+            "key": "N",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "na",
+              "nai",
+              "nan",
+              "nang",
+              "nao",
+              "ne",
+              "nei",
+              "nen",
+              "neng",
+              "ni",
+              "nian",
+              "niang",
+              "niao",
+              "nie",
+              "nin",
+              "ning",
+              "niu",
+              "nong",
+              "nu",
+              "nuan",
+              "nuo",
+              "nv",
+              "nve"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "p",
+            "key": "P",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "pa",
+              "pai",
+              "pan",
+              "pang",
+              "pao",
+              "pei",
+              "pen",
+              "peng",
+              "pi",
+              "pian",
+              "piao",
+              "pie",
+              "pin",
+              "ping",
+              "po",
+              "pou",
+              "pu"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "q",
+            "key": "Q",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "qi",
+              "qia",
+              "qian",
+              "qiang",
+              "qiao",
+              "qie",
+              "qin",
+              "qing",
+              "qiong",
+              "qiu",
+              "qu",
+              "quan",
+              "que",
+              "qun"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "r",
+            "key": "R",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ran",
+              "rang",
+              "rao",
+              "re",
+              "ren",
+              "reng",
+              "ri",
+              "rong",
+              "rou",
+              "ru",
+              "ruan",
+              "rui",
+              "run",
+              "ruo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "t",
+            "key": "T",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "ta",
+              "tai",
+              "tan",
+              "tang",
+              "tao",
+              "te",
+              "teng",
+              "ti",
+              "tian",
+              "tiao",
+              "tie",
+              "ting",
+              "tong",
+              "tou",
+              "tu",
+              "tuan",
+              "tui",
+              "tun",
+              "tuo"
+            ],
+            "cost": 0
+          },
+          {
+            "label": "z",
+            "key": "Z",
+            "category": "ordinary-displacement",
+            "syllables": [
+              "za",
+              "zai",
+              "zan",
+              "zang",
+              "zao",
+              "ze",
+              "zei",
+              "zen",
+              "zeng",
+              "zi",
+              "zong",
+              "zou",
+              "zu",
+              "zuan",
+              "zui",
+              "zun",
+              "zuo"
+            ],
+            "cost": 0
+          }
+        ],
+        "freeFinalMappings": [
+          {
+            "label": "e",
+            "key": "E",
+            "syllables": [
+              "ce",
+              "che",
+              "de",
+              "e",
+              "ge",
+              "he",
+              "ke",
+              "le",
+              "me",
+              "ne",
+              "re",
+              "se",
+              "she",
+              "te",
+              "ye",
+              "ze",
+              "zhe"
+            ],
+            "cost": 0
+          }
+        ],
+        "finalInventory": [
+          "a",
+          "ai",
+          "an",
+          "ang",
+          "ao",
+          "e",
+          "ei",
+          "en",
+          "eng",
+          "er",
+          "i",
+          "ia",
+          "ian",
+          "iang",
+          "iao",
+          "ie",
+          "in",
+          "ing",
+          "iong",
+          "iu",
+          "o",
+          "ong",
+          "ou",
+          "u",
+          "ua",
+          "uai",
+          "uan",
+          "uang",
+          "ui",
+          "un",
+          "uo",
+          "v",
+          "van",
+          "ve",
+          "vn"
+        ],
+        "finalInventoryCount": 35,
+        "finalLinkCount": 35,
+        "extraFinalLinks": 0,
+        "usedFinalKeys": 21,
+        "coKeyGroups": [
+          {
+            "key": "B",
+            "finals": [
+              "ing",
+              "iong"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ing": [
+                "bing",
+                "ding",
+                "jing",
+                "ling",
+                "ming",
+                "ning",
+                "ping",
+                "qing",
+                "ting",
+                "xing",
+                "ying"
+              ],
+              "iong": [
+                "jiong",
+                "qiong",
+                "xiong"
+              ]
+            }
+          },
+          {
+            "key": "C",
+            "finals": [
+              "ie",
+              "un"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ie": [
+                "bie",
+                "die",
+                "jie",
+                "lie",
+                "mie",
+                "nie",
+                "pie",
+                "qie",
+                "tie",
+                "xie"
+              ],
+              "un": [
+                "chun",
+                "cun",
+                "dun",
+                "gun",
+                "hun",
+                "kun",
+                "lun",
+                "run",
+                "shun",
+                "sun",
+                "tun",
+                "zhun",
+                "zun"
+              ]
+            }
+          },
+          {
+            "key": "D",
+            "finals": [
+              "eng",
+              "in"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "eng": [
+                "beng",
+                "ceng",
+                "cheng",
+                "deng",
+                "eng",
+                "feng",
+                "geng",
+                "heng",
+                "keng",
+                "leng",
+                "meng",
+                "neng",
+                "peng",
+                "reng",
+                "seng",
+                "sheng",
+                "teng",
+                "weng",
+                "zeng",
+                "zheng"
+              ],
+              "in": [
+                "bin",
+                "jin",
+                "lin",
+                "min",
+                "nin",
+                "pin",
+                "qin",
+                "xin",
+                "yin"
+              ]
+            }
+          },
+          {
+            "key": "E",
+            "finals": [
+              "e",
+              "iu"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "e": [
+                "ce",
+                "che",
+                "de",
+                "e",
+                "ge",
+                "he",
+                "ke",
+                "le",
+                "me",
+                "ne",
+                "re",
+                "se",
+                "she",
+                "te",
+                "ye",
+                "ze",
+                "zhe"
+              ],
+              "iu": [
+                "diu",
+                "jiu",
+                "liu",
+                "miu",
+                "niu",
+                "qiu",
+                "xiu"
+              ]
+            }
+          },
+          {
+            "key": "F",
+            "finals": [
+              "ian"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ian": [
+                "bian",
+                "dian",
+                "jian",
+                "lian",
+                "mian",
+                "nian",
+                "pian",
+                "qian",
+                "tian",
+                "xian"
+              ]
+            }
+          },
+          {
+            "key": "G",
+            "finals": [
+              "uang",
+              "ui"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "uang": [
+                "chuang",
+                "guang",
+                "huang",
+                "kuang",
+                "shuang",
+                "zhuang"
+              ],
+              "ui": [
+                "chui",
+                "cui",
+                "dui",
+                "gui",
+                "hui",
+                "kui",
+                "rui",
+                "shui",
+                "sui",
+                "tui",
+                "zhui",
+                "zui"
+              ]
+            }
+          },
+          {
+            "key": "H",
+            "finals": [
+              "a",
+              "v"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "a": [
+                "a",
+                "ba",
+                "ca",
+                "cha",
+                "da",
+                "fa",
+                "ga",
+                "ha",
+                "ka",
+                "la",
+                "ma",
+                "na",
+                "pa",
+                "sa",
+                "sha",
+                "ta",
+                "wa",
+                "ya",
+                "za",
+                "zha"
+              ],
+              "v": [
+                "ju",
+                "lv",
+                "nv",
+                "qu",
+                "xu",
+                "yu"
+              ]
+            }
+          },
+          {
+            "key": "J",
+            "finals": [
+              "en",
+              "van"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "en": [
+                "ben",
+                "cen",
+                "chen",
+                "en",
+                "fen",
+                "gen",
+                "hen",
+                "ken",
+                "men",
+                "nen",
+                "pen",
+                "ren",
+                "sen",
+                "shen",
+                "wen",
+                "zen",
+                "zhen"
+              ],
+              "van": [
+                "juan",
+                "quan",
+                "xuan",
+                "yuan"
+              ]
+            }
+          },
+          {
+            "key": "K",
+            "finals": [
+              "ao",
+              "ve"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ao": [
+                "ao",
+                "bao",
+                "cao",
+                "chao",
+                "dao",
+                "gao",
+                "hao",
+                "kao",
+                "lao",
+                "mao",
+                "nao",
+                "pao",
+                "rao",
+                "sao",
+                "shao",
+                "tao",
+                "yao",
+                "zao",
+                "zhao"
+              ],
+              "ve": [
+                "jue",
+                "lve",
+                "nve",
+                "que",
+                "xue",
+                "yue"
+              ]
+            }
+          },
+          {
+            "key": "L",
+            "finals": [
+              "i"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "i": [
+                "bi",
+                "chi",
+                "ci",
+                "di",
+                "ji",
+                "li",
+                "mi",
+                "ni",
+                "pi",
+                "qi",
+                "ri",
+                "shi",
+                "si",
+                "ti",
+                "xi",
+                "yi",
+                "zhi",
+                "zi"
+              ]
+            }
+          },
+          {
+            "key": "M",
+            "finals": [
+              "ang"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ang": [
+                "ang",
+                "bang",
+                "cang",
+                "chang",
+                "dang",
+                "fang",
+                "gang",
+                "hang",
+                "kang",
+                "lang",
+                "mang",
+                "nang",
+                "pang",
+                "rang",
+                "sang",
+                "shang",
+                "tang",
+                "wang",
+                "yang",
+                "zang",
+                "zhang"
+              ]
+            }
+          },
+          {
+            "key": "N",
+            "finals": [
+              "u"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "u": [
+                "bu",
+                "chu",
+                "cu",
+                "du",
+                "fu",
+                "gu",
+                "hu",
+                "ku",
+                "lu",
+                "mu",
+                "nu",
+                "pu",
+                "ru",
+                "shu",
+                "su",
+                "tu",
+                "wu",
+                "zhu",
+                "zu"
+              ]
+            }
+          },
+          {
+            "key": "P",
+            "finals": [
+              "iang",
+              "o",
+              "ong"
+            ],
+            "sameKey": true,
+            "mergeLinks": 2,
+            "syllablesByFinal": {
+              "iang": [
+                "jiang",
+                "liang",
+                "niang",
+                "qiang",
+                "xiang"
+              ],
+              "o": [
+                "bo",
+                "fo",
+                "mo",
+                "o",
+                "po",
+                "wo",
+                "yo"
+              ],
+              "ong": [
+                "chong",
+                "cong",
+                "dong",
+                "gong",
+                "hong",
+                "kong",
+                "long",
+                "nong",
+                "rong",
+                "song",
+                "tong",
+                "yong",
+                "zhong",
+                "zong"
+              ]
+            }
+          },
+          {
+            "key": "Q",
+            "finals": [
+              "iao",
+              "ua"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "iao": [
+                "biao",
+                "diao",
+                "jiao",
+                "liao",
+                "miao",
+                "niao",
+                "piao",
+                "qiao",
+                "tiao",
+                "xiao"
+              ],
+              "ua": [
+                "gua",
+                "hua",
+                "kua",
+                "shua",
+                "zhua"
+              ]
+            }
+          },
+          {
+            "key": "R",
+            "finals": [
+              "ia",
+              "ou"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ia": [
+                "jia",
+                "qia",
+                "xia"
+              ],
+              "ou": [
+                "chou",
+                "cou",
+                "dou",
+                "fou",
+                "gou",
+                "hou",
+                "kou",
+                "lou",
+                "mou",
+                "ou",
+                "pou",
+                "rou",
+                "shou",
+                "sou",
+                "tou",
+                "you",
+                "zhou",
+                "zou"
+              ]
+            }
+          },
+          {
+            "key": "S",
+            "finals": [
+              "ei",
+              "vn"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "ei": [
+                "bei",
+                "fei",
+                "gei",
+                "hei",
+                "lei",
+                "mei",
+                "nei",
+                "pei",
+                "shei",
+                "wei",
+                "zei"
+              ],
+              "vn": [
+                "jun",
+                "qun",
+                "xun",
+                "yun"
+              ]
+            }
+          },
+          {
+            "key": "T",
+            "finals": [
+              "er",
+              "uan"
+            ],
+            "sameKey": true,
+            "mergeLinks": 1,
+            "syllablesByFinal": {
+              "er": [
+                "er"
+              ],
+              "uan": [
+                "chuan",
+                "cuan",
+                "duan",
+                "guan",
+                "huan",
+                "kuan",
+                "luan",
+                "nuan",
+                "ruan",
+                "shuan",
+                "suan",
+                "tuan",
+                "zhuan",
+                "zuan"
+              ]
+            }
+          },
+          {
+            "key": "W",
+            "finals": [
+              "an"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "an": [
+                "an",
+                "ban",
+                "can",
+                "chan",
+                "dan",
+                "fan",
+                "gan",
+                "han",
+                "kan",
+                "lan",
+                "man",
+                "nan",
+                "pan",
+                "ran",
+                "san",
+                "shan",
+                "tan",
+                "wan",
+                "yan",
+                "zan",
+                "zhan"
+              ]
+            }
+          },
+          {
+            "key": "X",
+            "finals": [
+              "ai"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "ai": [
+                "ai",
+                "bai",
+                "cai",
+                "chai",
+                "dai",
+                "gai",
+                "hai",
+                "kai",
+                "lai",
+                "mai",
+                "nai",
+                "pai",
+                "sai",
+                "shai",
+                "tai",
+                "wai",
+                "zai",
+                "zhai"
+              ]
+            }
+          },
+          {
+            "key": "Y",
+            "finals": [
+              "uo"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "uo": [
+                "chuo",
+                "cuo",
+                "duo",
+                "guo",
+                "huo",
+                "kuo",
+                "luo",
+                "nuo",
+                "ruo",
+                "shuo",
+                "suo",
+                "tuo",
+                "zhuo",
+                "zuo"
+              ]
+            }
+          },
+          {
+            "key": "Z",
+            "finals": [
+              "uai"
+            ],
+            "sameKey": false,
+            "mergeLinks": 0,
+            "syllablesByFinal": {
+              "uai": [
+                "chuai",
+                "guai",
+                "huai",
+                "kuai",
+                "shuai",
+                "zhuai"
+              ]
+            }
+          }
+        ],
+        "coKeyLinkReduction": 14,
+        "initialLinks": {
+          "A": [
+            "Y"
+          ],
+          "b": [
+            "B"
+          ],
+          "c": [
+            "C"
+          ],
+          "ch": [
+            "X"
+          ],
+          "d": [
+            "D"
+          ],
+          "E": [
+            "Y"
+          ],
+          "f": [
+            "F"
+          ],
+          "g": [
+            "G"
+          ],
+          "h": [
+            "H"
+          ],
+          "j": [
+            "J"
+          ],
+          "k": [
+            "K"
+          ],
+          "l": [
+            "L"
+          ],
+          "m": [
+            "M"
+          ],
+          "n": [
+            "N"
+          ],
+          "O": [
+            "Y"
+          ],
+          "p": [
+            "P"
+          ],
+          "q": [
+            "Q"
+          ],
+          "r": [
+            "R"
+          ],
+          "s": [
+            "Q"
+          ],
+          "sh": [
+            "E"
+          ],
+          "t": [
+            "T"
+          ],
+          "W": [
+            "J"
+          ],
+          "x": [
+            "Y"
+          ],
+          "Y": [
+            "S"
+          ],
+          "z": [
+            "Z"
+          ],
+          "zh": [
+            "W"
+          ]
+        },
+        "finalLinkKeys": {
+          "a": [
+            "H"
+          ],
+          "ai": [
+            "X"
+          ],
+          "an": [
+            "W"
+          ],
+          "ang": [
+            "M"
+          ],
+          "ao": [
+            "K"
+          ],
+          "ei": [
+            "S"
+          ],
+          "en": [
+            "J"
+          ],
+          "eng": [
+            "D"
+          ],
+          "i": [
+            "L"
+          ],
+          "ian": [
+            "F"
+          ],
+          "iao": [
+            "Q"
+          ],
+          "ie": [
+            "C"
+          ],
+          "in": [
+            "D"
+          ],
+          "ing": [
+            "B"
+          ],
+          "o": [
+            "P"
+          ],
+          "u": [
+            "N"
+          ],
+          "e": [
+            "E"
+          ],
+          "ong": [
+            "P"
+          ],
+          "ou": [
+            "R"
+          ],
+          "uai": [
+            "Z"
+          ],
+          "uan": [
+            "T"
+          ],
+          "uang": [
+            "G"
+          ],
+          "ui": [
+            "G"
+          ],
+          "un": [
+            "C"
+          ],
+          "uo": [
+            "Y"
+          ],
+          "iu": [
+            "E"
+          ],
+          "er": [
+            "T"
+          ],
+          "ua": [
+            "Q"
+          ],
+          "ia": [
+            "R"
+          ],
+          "iang": [
+            "P"
+          ],
+          "iong": [
+            "B"
+          ],
+          "v": [
+            "H"
+          ],
+          "van": [
+            "J"
+          ],
+          "ve": [
+            "K"
+          ],
+          "vn": [
+            "S"
+          ]
+        },
+        "initialBranches": {},
+        "finalBranches": {},
+        "zeroRules": {
+          "A": {
+            "Y": [
+              "a",
+              "ai",
+              "an",
+              "ang",
+              "ao"
+            ]
+          },
+          "E": {
+            "Y": [
+              "e",
+              "en",
+              "eng",
+              "er"
+            ]
+          },
+          "O": {
+            "Y": [
+              "o",
+              "ou"
+            ]
+          },
+          "Y": {
+            "S": [
+              "ya",
+              "yan",
+              "yang",
+              "yao",
+              "ye",
+              "yi",
+              "yin",
+              "ying",
+              "yo",
+              "yong",
+              "you",
+              "yu",
+              "yuan",
+              "yue",
+              "yun"
+            ]
+          },
+          "W": {
+            "J": [
+              "wa",
+              "wai",
+              "wan",
+              "wang",
+              "wei",
+              "wen",
+              "weng",
+              "wo",
+              "wu"
+            ]
+          }
+        },
+        "AEOKeys": [
+          "Y"
+        ],
+        "coverage": 399,
+        "unique": 348,
+        "collisionExcess": 51,
+        "collisionPairs": 51,
+        "collisionBuckets": {
+          "YH": [
+            "a",
+            "xu"
+          ],
+          "YK": [
+            "ao",
+            "xue"
+          ],
+          "BD": [
+            "beng",
+            "bin"
+          ],
+          "XG": [
+            "chuang",
+            "chui"
+          ],
+          "DE": [
+            "de",
+            "diu"
+          ],
+          "DC": [
+            "die",
+            "dun"
+          ],
+          "YE": [
+            "e",
+            "xiu"
+          ],
+          "YJ": [
+            "en",
+            "xuan"
+          ],
+          "YD": [
+            "eng",
+            "xin"
+          ],
+          "GG": [
+            "guang",
+            "gui"
+          ],
+          "HG": [
+            "huang",
+            "hui"
+          ],
+          "JP": [
+            "jiang",
+            "wo"
+          ],
+          "JD": [
+            "jin",
+            "weng"
+          ],
+          "JB": [
+            "jing",
+            "jiong"
+          ],
+          "JH": [
+            "ju",
+            "wa"
+          ],
+          "JJ": [
+            "juan",
+            "wen"
+          ],
+          "JS": [
+            "jun",
+            "wei"
+          ],
+          "KG": [
+            "kuang",
+            "kui"
+          ],
+          "LH": [
+            "la",
+            "lv"
+          ],
+          "LK": [
+            "lao",
+            "lve"
+          ],
+          "LE": [
+            "le",
+            "liu"
+          ],
+          "LD": [
+            "leng",
+            "lin"
+          ],
+          "LP": [
+            "liang",
+            "long"
+          ],
+          "LC": [
+            "lie",
+            "lun"
+          ],
+          "ME": [
+            "me",
+            "miu"
+          ],
+          "MD": [
+            "meng",
+            "min"
+          ],
+          "NH": [
+            "na",
+            "nv"
+          ],
+          "NK": [
+            "nao",
+            "nve"
+          ],
+          "NE": [
+            "ne",
+            "niu"
+          ],
+          "ND": [
+            "neng",
+            "nin"
+          ],
+          "NP": [
+            "niang",
+            "nong"
+          ],
+          "YP": [
+            "o",
+            "xiang"
+          ],
+          "YR": [
+            "ou",
+            "xia"
+          ],
+          "PD": [
+            "peng",
+            "pin"
+          ],
+          "QL": [
+            "qi",
+            "si"
+          ],
+          "QR": [
+            "qia",
+            "sou"
+          ],
+          "QP": [
+            "qiang",
+            "song"
+          ],
+          "QC": [
+            "qie",
+            "sun"
+          ],
+          "QD": [
+            "qin",
+            "seng"
+          ],
+          "QB": [
+            "qing",
+            "qiong"
+          ],
+          "QE": [
+            "qiu",
+            "se"
+          ],
+          "QH": [
+            "qu",
+            "sa"
+          ],
+          "QJ": [
+            "quan",
+            "sen"
+          ],
+          "QK": [
+            "que",
+            "sao"
+          ],
+          "EG": [
+            "shuang",
+            "shui"
+          ],
+          "TC": [
+            "tie",
+            "tun"
+          ],
+          "YB": [
+            "xing",
+            "xiong"
+          ],
+          "SH": [
+            "ya",
+            "yu"
+          ],
+          "SK": [
+            "yao",
+            "yue"
+          ],
+          "SP": [
+            "yo",
+            "yong"
+          ],
+          "WG": [
+            "zhuang",
+            "zhui"
+          ]
+        },
+        "strictNoFly": true,
+        "simpleYuSplit": false,
+        "allowedStructure": true,
+        "acceptedAliasesAudited": false,
+        "routeSensitivity": {
+          "0": 42,
+          "0.5": 42.0,
+          "1": 42,
+          "2": 42
+        },
+        "additionalDisplacementSensitivity": {
+          "0": 42,
+          "0.5": 43.0,
+          "1": 44,
+          "2": 46
+        }
+      },
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "Q",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "E",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      },
+      "finalMap": {
+        "a": "H",
+        "ai": "X",
+        "an": "W",
+        "ang": "M",
+        "ao": "K",
+        "e": "E",
+        "ei": "S",
+        "en": "J",
+        "eng": "D",
+        "er": "T",
+        "i": "L",
+        "ia": "R",
+        "ian": "F",
+        "iang": "P",
+        "iao": "Q",
+        "ie": "C",
+        "in": "D",
+        "ing": "B",
+        "iong": "B",
+        "iu": "E",
+        "o": "P",
+        "ong": "P",
+        "ou": "R",
+        "u": "N",
+        "ua": "Q",
+        "uai": "Z",
+        "uan": "T",
+        "uang": "G",
+        "ui": "G",
+        "un": "C",
+        "uo": "Y",
+        "v": "H",
+        "van": "J",
+        "ve": "K",
+        "vn": "S"
+      },
+      "common399InitialHomeShare": 0.4936798265443459,
+      "optimal1x": {
+        "score": 9.952511687307645,
+        "policy": {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/31"
+        },
+        "memberRunnerUpGaps": {
+          "keytao": 0.00017059085849480127,
+          "sanpin": 0.0011416813583531304
+        }
+      },
+      "optimal2x": {
+        "score": 10.019400577796961,
+        "policy": {
+          "keytao": "12/213/24",
+          "sanpin": "12/213/31"
+        },
+        "memberRunnerUpGaps": {
+          "keytao": 0.00036010696377264395,
+          "sanpin": 0.0008818482384898019
+        }
+      },
+      "maxTrackDifference": 0,
+      "differenceFromU7EM42": {
+        "1": 0.40079777567248165,
+        "2": 0.48271924254538945
+      },
+      "differenceFromU7RM42": {
+        "1": 0.42305232857168384,
+        "2": 0.4922033849623588
+      }
+    }
+  ],
+  "best1x": "TRF-7e50a1d12f60",
+  "best2x": "TRF-7e50a1d12f60",
+  "U7EM42Baseline": {
+    "1": 9.551713911635163,
+    "2": 9.536681335251572
+  },
+  "U7RM42Comparison": {
+    "1": 9.529459358735961,
+    "2": 9.527197192834603
+  },
+  "baselineCommon399InitialHomeShares": {
+    "U7E": {
+      "id": "A42-4dd4e76ccb2a",
+      "common399InitialHomeShare": 0.4539635446062774
+    },
+    "U7R": {
+      "id": "U7R-143cf16e1fa2",
+      "common399InitialHomeShare": 0.47397176966502497
+    }
+  },
+  "fixedPolicyFamilyBest": {
+    "P7": {
+      "score": {
+        "id": "TRF-a898f9279930",
+        "score": 9.835762975702682
+      },
+      "doubledScore": {
+        "id": "TRF-bb4c096ac7a0",
+        "score": 9.854565091510494
+      }
+    },
+    "P8": {
+      "score": {
+        "id": "TRF-7e50a1d12f60",
+        "score": 9.612828042186182
+      },
+      "doubledScore": {
+        "id": "TRF-7e50a1d12f60",
+        "score": 9.619355839281054
+      }
+    },
+    "U7": {
+      "score": {
+        "id": "TRF-38884365bf58",
+        "score": 10.08943983879728
+      },
+      "doubledScore": {
+        "id": "TRF-38884365bf58",
+        "score": 10.220352434569113
+      }
+    },
+    "U8": {
+      "score": {
+        "id": "TRF-1df2703604ff",
+        "score": 9.953799882599514
+      },
+      "doubledScore": {
+        "id": "TRF-1df2703604ff",
+        "score": 10.020021286403335
+      }
+    }
+  },
+  "scope": "Fixed production-inspired and UM-inspired initial families, actual 21x21, D exactly two, M41/M42. Pin e->E for P8/U8. Seed transplants and deterministic foreign final-group screening, finite alternating coarse/fine anneals and recorded complete final neighborhoods. No global optimality, complete initial perturbation, or robust auxiliary-policy claim. Point-optimal enumeration covers lane leaders; Common399 initial-home share is not full CKT home share.",
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\report_untoned_cr7e_transfer.py": "0aecadd0ebd4d866ad7343b9f5c2fe24438e38a81a70809827c35043439c0bf6",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-transfer-v52.json": "4a18912313c409807acca3168549eaada1bf9124ef138302335af4d46ab9e8c8",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-transfer-v52-verification.json": "96804ae955bf3c6be5c476d61e3f4fb836f1f09a3cd7ee270fb322bace417c74",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-aeo42-v52-summary.json": "7b6b207958aeaa707d4e0f6d9458b3d71a35f567d6d55adc4d29b9b132ee68f3",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-restored21-v52-summary.json": "e6d538f630f8eebf1551638d3509b6f07174a72bfaf5001e313dbaa83c5e1ef3",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-aeo42-v52-replay-A42-4dd4e76ccb2a.json": "867f540181f2e61cfec252f07798b6a6ae1eedd11edf81b7523a43e46bf6e144",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-restored21-v52-replay-U7R-143cf16e1fa2.json": "dcd8aa2b674e44de414aad34527b9010fdd9f4aac0999aa3821c157a795146e2",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-transfer-v52-policy-TRF-7e50a1d12f60.json": "a48d6de51e88048eab393ba52a31f0da8dc1cc2daa0280761c85297bddd918e9",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-transfer-v52-components-TRF-7e50a1d12f60.json.gz": "c5d024b1b4a428eabcadb2520112401fa51b230d72e93c4bd76d712f1f0433b9",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-transfer-v52-policy-TRF-1df2703604ff.json": "1a8064e1b2b99dc34ca548091c62bed316d3ac8d4c35a4e051dc51aa0f14cf37",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-transfer-v52-components-TRF-1df2703604ff.json.gz": "6f2e8f18c68ad038506570618dc17aae441aca998e43ed521922fdfd28eb30b6"
+  }
+}
