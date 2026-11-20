@@ -1,5 +1,17 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-cr7e-onsets-search:
+    node --max-old-space-size=4096 tools/search_untoned_cr7e_onsets.js
+
+untoned-cr7e-onsets-test:
+    node --test tests/untoned-cr7e-onsets.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+untoned-cr7e-onsets-verify:
+    node --max-old-space-size=4096 tools/verify_untoned_cr7e_onsets.js
+
+untoned-cr7e-onsets-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/verify_untoned_cr7e_onsets.js --policy "{{id}}"
+
 untoned-cr7e-aeo3-search:
     node --max-old-space-size=4096 tools/search_untoned_cr7e_aeo3.js
 
