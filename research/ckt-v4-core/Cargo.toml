@@ -28,6 +28,11 @@ required-features = ["cuda"]
 [dev-dependencies]
 approx = "0.5"
 
+[[bin]]
+name = "score-untoned-v52-cuda-stream"
+path = "src/bin/score-untoned-v52-cuda-stream.rs"
+required-features = ["cuda"]
+
 [profile.release]
 codegen-units = 1
 lto = "thin"

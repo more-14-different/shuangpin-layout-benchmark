@@ -1,5 +1,24 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-fixed-gpu-build:
+    cargo build --locked --release --features cuda --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-cuda-stream
+
+u7e-fixed-gpu-test:
+    python -m unittest discover -s tests -p test_u7e_gpu_anneal.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+u7e-fixed-gpu-audit output:
+    python -X utf8 tools/run_u7e_gpu_anneal.py --audit-only --output "{{output}}"
+
+u7e-fixed-gpu-smoke output rounds='16':
+    python -X utf8 tools/run_u7e_gpu_anneal.py --output "{{output}}" --rounds {{rounds}} --hours 1
+
+u7e-fixed-gpu-verify output:
+    node --expose-gc --max-old-space-size=4096 tools/verify_u7e_fixed_gpu.js "{{output}}"
+
+u7e-fixed-gpu-start output='research/.cache/u7e-fixed-gpu-20261120' hours='12':
+    pwsh -NoProfile -File tools/start_u7e_gpu_anneal.ps1 -Output "{{output}}" -Hours {{hours}}
+
 untoned-u7r-cost3:
     python -X utf8 tools/compare_untoned_u7r_cost3.py
 
