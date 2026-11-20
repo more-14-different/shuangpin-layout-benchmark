@@ -1,5 +1,35 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-pinky-descent-prepare:
+    node --expose-gc --max-old-space-size=4096 tools/explore_u7e_pinky_descent.js --prepare
+
+u7e-pinky-descent:
+    node tools/explore_u7e_pinky_descent.js
+
+u7e-pinky-descent-link:
+    node tools/link_u7e_pinky_descent.js
+
+u7e-pinky-descent-rescue:
+    node tools/rescue_u7e_pinky_descent.js
+
+u7e-pinky-descent-compose:
+    node tools/compose_u7e_pinky_descent.js
+
+u7e-pinky-descent-audit-search:
+    python -X utf8 tools/summarize_u7e_pinky_descent.py --audit-search-only
+
+u7e-pinky-descent-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/review_u7e_pinky_descent.js --policy "{{id}}"
+
+u7e-pinky-descent-robust id:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/robust_untoned_v52_policy.py --input "research/notes/2026-11-21-u7e-pinky-descent-components-{{id}}.json.gz" --output "research/notes/2026-11-21-u7e-pinky-descent-robustness-{{id}}.json"
+
+u7e-pinky-descent-score id:
+    node --expose-gc --max-old-space-size=4096 tools/review_u7e_pinky_descent.js --score "{{id}}"
+
+u7e-pinky-descent-test:
+    node --test tests/u7e-pinky-descent.test.mjs tests/u7e-competing-performance.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 u7e-low-pinky-screen:
     python -X utf8 tools/screen_u7e_low_pinky.py
 

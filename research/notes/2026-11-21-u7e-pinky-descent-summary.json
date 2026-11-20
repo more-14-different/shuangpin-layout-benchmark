@@ -1,0 +1,815 @@
+{
+  "completed": true,
+  "costMultipliers": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "rows": [
+    {
+      "id": "UED-3158ce08b5bc",
+      "ckt": [
+        9.56635901445011,
+        9.543307183603055,
+        9.529307673296982,
+        9.513961511911488
+      ],
+      "rightPinkyMixed": 0.038974235342708864,
+      "rightPinkyPeak8": 0.04600310908952298,
+      "rightPinky20": 0.04840735448660556,
+      "ergonomics": {
+        "meanKeys": 3.8176847581600803,
+        "home": 0.4453374076200357,
+        "upper": 0.33332790115498595,
+        "lower": 0.22133469122497837,
+        "leftPinky": 0.08484431358278348,
+        "rightPinky": 0.038974235342708864,
+        "fingers": [
+          0.08484431358278348,
+          0.11776230139079455,
+          0.13385999911154284,
+          0.2298315429849841,
+          0.25783483245029554,
+          0.07923537322073039,
+          0.05765740191616038,
+          0.038974235342708864
+        ],
+        "maxFinger": 0.25783483245029554,
+        "leftShare": 0.5662981570701049,
+        "rightShare": 0.4337018429298951,
+        "differentKeySameFinger": 0.08795901022099967,
+        "sameFinger": 0.12913856975387472,
+        "sameHand": 0.4789335004527041,
+        "alternation": 0.5210664995472959,
+        "peaks": {
+          "leftPinky": {
+            "value": 0.1349242797423008,
+            "track": "sanpin/word3"
+          },
+          "rightPinky": {
+            "value": 0.04600310908952298,
+            "track": "keytao/word2"
+          },
+          "maxFinger": {
+            "value": 0.27501312910790704,
+            "track": "sanpin/character"
+          },
+          "differentKeySameFinger": {
+            "value": 0.11489749267618551,
+            "track": "keytao/word4"
+          }
+        },
+        "homeFloor": 0.3902603205923696
+      },
+      "aggregate": {
+        "motorUpperMs": 347.0230459351596,
+        "effectiveMs": 445.64404545578907,
+        "firstAuxRate": 0.24771852214020162,
+        "secondAuxRate": 0.06190672293636632,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.004998263824440229,
+        "meanRejectedCandidates": 0.006292252460959047,
+        "meanPageActions": 6.670516310842638e-06,
+        "meanKeys": 3.8176847581600803,
+        "cognitiveMs": 98.62099952062948
+      },
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "231",
+          "word4": "23"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "213",
+          "word4": "23"
+        }
+      },
+      "feasible": true,
+      "finalMap": {
+        "a": "L",
+        "ai": "K",
+        "an": "N",
+        "ang": "Y",
+        "ao": "Z",
+        "e": "S",
+        "ei": "D",
+        "en": "E",
+        "eng": "R",
+        "er": "P",
+        "i": "F",
+        "ia": "L",
+        "ian": "P",
+        "iang": "J",
+        "iao": "Q",
+        "ie": "C",
+        "in": "B",
+        "ing": "G",
+        "iong": "N",
+        "iu": "E",
+        "o": "J",
+        "ong": "J",
+        "ou": "W",
+        "u": "H",
+        "ua": "Q",
+        "uai": "C",
+        "uan": "T",
+        "uang": "P",
+        "ui": "X",
+        "un": "B",
+        "uo": "M",
+        "v": "T",
+        "van": "R",
+        "ve": "K",
+        "vn": "D"
+      }
+    },
+    {
+      "id": "UPD-f1c2bb5b0657",
+      "ckt": [
+        9.571123884899771,
+        9.545847047348332,
+        9.530173731675093,
+        9.512471026171156
+      ],
+      "rightPinkyMixed": 0.03860288569275314,
+      "rightPinkyPeak8": 0.04502786890721523,
+      "rightPinky20": 0.047366971947230864,
+      "feasible": true,
+      "changes": {
+        "o": {
+          "from": "J",
+          "to": "M"
+        },
+        "ua": {
+          "from": "Q",
+          "to": "P"
+        },
+        "uang": {
+          "from": "P",
+          "to": "Q"
+        }
+      },
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "231",
+          "word4": "23"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "213",
+          "word4": "23"
+        }
+      },
+      "finalMap": {
+        "a": "L",
+        "ai": "K",
+        "an": "N",
+        "ang": "Y",
+        "ao": "Z",
+        "e": "S",
+        "ei": "D",
+        "en": "E",
+        "eng": "R",
+        "er": "P",
+        "i": "F",
+        "ia": "L",
+        "ian": "P",
+        "iang": "J",
+        "iao": "Q",
+        "ie": "C",
+        "in": "B",
+        "ing": "G",
+        "iong": "N",
+        "iu": "E",
+        "o": "M",
+        "ong": "J",
+        "ou": "W",
+        "u": "H",
+        "ua": "P",
+        "uai": "C",
+        "uan": "T",
+        "uang": "Q",
+        "ui": "X",
+        "un": "B",
+        "uo": "M",
+        "v": "T",
+        "van": "R",
+        "ve": "K",
+        "vn": "D"
+      },
+      "ergonomics": {
+        "meanKeys": 3.817252781441005,
+        "home": 0.44233714204375996,
+        "upper": 0.333305513136442,
+        "lower": 0.22435734481979816,
+        "leftPinky": 0.08519985772655395,
+        "rightPinky": 0.03860288569275314,
+        "fingers": [
+          0.08519985772655395,
+          0.11777562787858516,
+          0.1338751472839439,
+          0.22983431359504253,
+          0.2578535308964929,
+          0.07920650522949185,
+          0.05765213169713675,
+          0.03860288569275314
+        ],
+        "maxFinger": 0.2578535308964929,
+        "leftShare": 0.5666849464841255,
+        "rightShare": 0.4333150535158745,
+        "differentKeySameFinger": 0.08700396426307094,
+        "sameFinger": 0.12890653268505892,
+        "sameHand": 0.4820324360837892,
+        "alternation": 0.5179675639162108,
+        "peaks": {
+          "leftPinky": {
+            "value": 0.1349242797423008,
+            "track": "sanpin/word3"
+          },
+          "rightPinky": {
+            "value": 0.04502786890721523,
+            "track": "keytao/word2"
+          },
+          "maxFinger": {
+            "value": 0.2749180230219087,
+            "track": "sanpin/character"
+          },
+          "differentKeySameFinger": {
+            "value": 0.11495664499952947,
+            "track": "keytao/word4"
+          }
+        },
+        "homeFloor": 0.3902603205923696
+      },
+      "aggregate": {
+        "motorUpperMs": 347.2949968843454,
+        "effectiveMs": 445.7840213815105,
+        "firstAuxRate": 0.24734417965645614,
+        "secondAuxRate": 0.06184908870103671,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.004994732823932901,
+        "meanRejectedCandidates": 0.006287013481088717,
+        "meanPageActions": 6.6656548310287954e-06,
+        "meanKeys": 3.817252781441005,
+        "cognitiveMs": 98.48902449716513
+      },
+      "pointOptima": [
+        {
+          "multiplier": 1,
+          "score": 9.571104488235418,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 3.871940494004633e-05,
+            "sanpin": 8.956247277702722e-05
+          }
+        },
+        {
+          "multiplier": 2,
+          "score": 9.545847047348333,
+          "policy": {
+            "keytao": "12/231/23",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 0.00010105830982709563,
+            "sanpin": 0.00026545461653815217
+          }
+        },
+        {
+          "multiplier": 3,
+          "score": 9.530173731675095,
+          "policy": {
+            "keytao": "12/231/23",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 0.00019525011962340244,
+            "sanpin": 0.00029528151925695134
+          }
+        },
+        {
+          "multiplier": 5,
+          "score": 9.512471026171156,
+          "policy": {
+            "keytao": "12/231/23",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 0.0003138535814628529,
+            "sanpin": 0.0003354739997085687
+          }
+        }
+      ],
+      "deltaFromBaseline": [
+        0.004764870449660563,
+        0.0025398637452767048,
+        0.0008660583781114894,
+        -0.0014904857403319483
+      ]
+    },
+    {
+      "id": "UPD-6a731d7b831b",
+      "ckt": [
+        9.572399862692805,
+        9.545793213879058,
+        9.529228918918818,
+        9.510398760405806
+      ],
+      "rightPinkyMixed": 0.03860630007168785,
+      "rightPinkyPeak8": 0.04502877196825683,
+      "rightPinky20": 0.047366971947230864,
+      "feasible": true,
+      "changes": {
+        "eng": {
+          "from": "R",
+          "to": "T"
+        },
+        "o": {
+          "from": "J",
+          "to": "M"
+        },
+        "ua": {
+          "from": "Q",
+          "to": "P"
+        },
+        "uan": {
+          "from": "T",
+          "to": "R"
+        },
+        "uang": {
+          "from": "P",
+          "to": "Q"
+        },
+        "v": {
+          "from": "T",
+          "to": "R"
+        },
+        "van": {
+          "from": "R",
+          "to": "T"
+        }
+      },
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "231",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "213",
+          "word4": "23"
+        }
+      },
+      "finalMap": {
+        "a": "L",
+        "ai": "K",
+        "an": "N",
+        "ang": "Y",
+        "ao": "Z",
+        "e": "S",
+        "ei": "D",
+        "en": "E",
+        "eng": "T",
+        "er": "P",
+        "i": "F",
+        "ia": "L",
+        "ian": "P",
+        "iang": "J",
+        "iao": "Q",
+        "ie": "C",
+        "in": "B",
+        "ing": "G",
+        "iong": "N",
+        "iu": "E",
+        "o": "M",
+        "ong": "J",
+        "ou": "W",
+        "u": "H",
+        "ua": "P",
+        "uai": "C",
+        "uan": "R",
+        "uang": "Q",
+        "ui": "X",
+        "un": "B",
+        "uo": "M",
+        "v": "R",
+        "van": "T",
+        "ve": "K",
+        "vn": "D"
+      },
+      "ergonomics": {
+        "meanKeys": 3.8169151798717995,
+        "home": 0.442336131354642,
+        "upper": 0.33333656090779745,
+        "lower": 0.2243273077375605,
+        "leftPinky": 0.08516725867303031,
+        "rightPinky": 0.03860630007168785,
+        "fingers": [
+          0.08516725867303031,
+          0.11778604499159717,
+          0.13388698838013566,
+          0.22980476094412333,
+          0.25787224833352235,
+          0.07919385694394865,
+          0.05768254166195458,
+          0.03860630007168785
+        ],
+        "maxFinger": 0.25787224833352235,
+        "leftShare": 0.5666450529888865,
+        "rightShare": 0.43335494701111354,
+        "differentKeySameFinger": 0.08708847348661676,
+        "sameFinger": 0.12890422197409848,
+        "sameHand": 0.4820482439853963,
+        "alternation": 0.5179517560146036,
+        "peaks": {
+          "leftPinky": {
+            "value": 0.1349242797423008,
+            "track": "sanpin/word3"
+          },
+          "rightPinky": {
+            "value": 0.04502877196825683,
+            "track": "keytao/word2"
+          },
+          "maxFinger": {
+            "value": 0.2749180230219087,
+            "track": "sanpin/character"
+          },
+          "differentKeySameFinger": {
+            "value": 0.1150553888901569,
+            "track": "keytao/word4"
+          }
+        },
+        "homeFloor": 0.3902603205923696
+      },
+      "aggregate": {
+        "motorUpperMs": 347.3989487327335,
+        "effectiveMs": 445.78800213403457,
+        "firstAuxRate": 0.24705835766640005,
+        "secondAuxRate": 0.06179730912188632,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.00499642514307069,
+        "meanRejectedCandidates": 0.006291124601428782,
+        "meanPageActions": 6.960412824768607e-06,
+        "meanKeys": 3.8169151798717995,
+        "cognitiveMs": 98.38905340130106
+      },
+      "pointOptima": [
+        {
+          "multiplier": 1,
+          "score": 9.572399862692805,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 0.00013396635571871762,
+            "sanpin": 0.0003182168339543878
+          }
+        },
+        {
+          "multiplier": 2,
+          "score": 9.545793213879058,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 7.409399825131224e-05,
+            "sanpin": 0.0004222583799795565
+          }
+        },
+        {
+          "multiplier": 3,
+          "score": 9.529228918918818,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 3.8369226322831906e-05,
+            "sanpin": 0.0004718872981990252
+          }
+        },
+        {
+          "multiplier": 5,
+          "score": 9.510398760405808,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 1.958605089225074e-07,
+            "sanpin": 0.0005338375704255771
+          }
+        }
+      ],
+      "deltaFromBaseline": [
+        0.006040848242694352,
+        0.0024860302760032482,
+        -7.875437816373676e-05,
+        -0.0035627515056813053
+      ]
+    },
+    {
+      "id": "UPD-f254581a6f2d",
+      "ckt": [
+        9.589470904281303,
+        9.554719482897703,
+        9.532291101227393,
+        9.505451211917492
+      ],
+      "rightPinkyMixed": 0.03861887752273427,
+      "rightPinkyPeak8": 0.04503843143216315,
+      "rightPinky20": 0.047366971947230864,
+      "feasible": true,
+      "changes": {
+        "iang": {
+          "from": "J",
+          "to": "M"
+        },
+        "o": {
+          "from": "J",
+          "to": "M"
+        },
+        "ong": {
+          "from": "J",
+          "to": "M"
+        },
+        "ua": {
+          "from": "Q",
+          "to": "P"
+        },
+        "uang": {
+          "from": "P",
+          "to": "Q"
+        },
+        "ui": {
+          "from": "X",
+          "to": "B"
+        },
+        "un": {
+          "from": "B",
+          "to": "X"
+        },
+        "uo": {
+          "from": "M",
+          "to": "J"
+        },
+        "ve": {
+          "from": "K",
+          "to": "H"
+        }
+      },
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "231",
+          "word4": "23"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "213",
+          "word4": "23"
+        }
+      },
+      "finalMap": {
+        "a": "L",
+        "ai": "K",
+        "an": "N",
+        "ang": "Y",
+        "ao": "Z",
+        "e": "S",
+        "ei": "D",
+        "en": "E",
+        "eng": "R",
+        "er": "P",
+        "i": "F",
+        "ia": "L",
+        "ian": "P",
+        "iang": "M",
+        "iao": "Q",
+        "ie": "C",
+        "in": "B",
+        "ing": "G",
+        "iong": "N",
+        "iu": "E",
+        "o": "M",
+        "ong": "M",
+        "ou": "W",
+        "u": "H",
+        "ua": "P",
+        "uai": "C",
+        "uan": "T",
+        "uang": "Q",
+        "ui": "B",
+        "un": "X",
+        "uo": "J",
+        "v": "T",
+        "van": "R",
+        "ve": "H",
+        "vn": "D"
+      },
+      "ergonomics": {
+        "meanKeys": 3.8156720814986036,
+        "home": 0.43475740072970764,
+        "upper": 0.3332552705200657,
+        "lower": 0.23198732875022673,
+        "leftPinky": 0.08509889600038699,
+        "rightPinky": 0.03861887752273427,
+        "fingers": [
+          0.08509889600038699,
+          0.11254758868039427,
+          0.13393060709104493,
+          0.23511666686207858,
+          0.2609286430121137,
+          0.07613059423603054,
+          0.05762812659521665,
+          0.03861887752273427
+        ],
+        "maxFinger": 0.2609286430121137,
+        "leftShare": 0.5666937586339048,
+        "rightShare": 0.4333062413660952,
+        "differentKeySameFinger": 0.09349938074350712,
+        "sameFinger": 0.13309948668625513,
+        "sameHand": 0.4820177431562563,
+        "alternation": 0.5179822568437438,
+        "peaks": {
+          "leftPinky": {
+            "value": 0.1349242797423008,
+            "track": "sanpin/word3"
+          },
+          "rightPinky": {
+            "value": 0.04503843143216315,
+            "track": "keytao/word2"
+          },
+          "maxFinger": {
+            "value": 0.27829485112719543,
+            "track": "sanpin/character"
+          },
+          "differentKeySameFinger": {
+            "value": 0.115040380457024,
+            "track": "keytao/word4"
+          }
+        },
+        "homeFloor": 0.3902603205923696
+      },
+      "aggregate": {
+        "motorUpperMs": 348.4414889925088,
+        "effectiveMs": 446.4354901675599,
+        "firstAuxRate": 0.24617936988442285,
+        "secondAuxRate": 0.06143319853066798,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.004962913020709146,
+        "meanRejectedCandidates": 0.006252555163025759,
+        "meanPageActions": 6.670516310842638e-06,
+        "meanKeys": 3.8156720814986036,
+        "cognitiveMs": 97.9940011750511
+      },
+      "pointOptima": [
+        {
+          "multiplier": 1,
+          "score": 9.589400694007198,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 0.00014009721895580363,
+            "sanpin": 0.00010170209181925571
+          }
+        },
+        {
+          "multiplier": 2,
+          "score": 9.554695823778061,
+          "policy": {
+            "keytao": "12/231/24",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 4.722079088081976e-05,
+            "sanpin": 0.0006647541615167896
+          }
+        },
+        {
+          "multiplier": 3,
+          "score": 9.532291101227393,
+          "policy": {
+            "keytao": "12/231/23",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 1.5318298660638163e-05,
+            "sanpin": 0.0007601511317245624
+          }
+        },
+        {
+          "multiplier": 5,
+          "score": 9.505451211917492,
+          "policy": {
+            "keytao": "12/231/23",
+            "sanpin": "12/213/23"
+          },
+          "memberRunnerUpGaps": {
+            "keytao": 9.390325295233204e-05,
+            "sanpin": 0.0008859415158379846
+          }
+        }
+      ],
+      "deltaFromBaseline": [
+        0.023111889831191945,
+        0.01141229929464771,
+        0.0029834279304115086,
+        -0.008510299993995218
+      ]
+    }
+  ],
+  "bestVerifiedByMultiplier": {
+    "1": "UED-3158ce08b5bc",
+    "2": "UED-3158ce08b5bc",
+    "3": "UPD-6a731d7b831b",
+    "5": "UPD-f254581a6f2d"
+  },
+  "exploredStates": 10150,
+  "fixedPolicyFeasibleStates": 8680,
+  "scope": "Fixed original U7E initials, M41 D2 V5 actual21x21, QZ/ZQ empty. Mixed actual terminal right-pinky, eight-track peak, historical20 peak all capped at seed. Finite final-only perturbation, no global/local closure claim. Final rows use each own robust policy under 1e6 independent six-cost scenarios 0.5..5x; 1..10x retained separately. 1,2,3,5x columns uniformly scale six cognitive costs, reference also repriced. Letter loads include auxiliaries; exclude selection/page/space/errors.",
+  "verification": {
+    "allSearchScoresIndependentlyRepriced": true,
+    "allSearchPinkyConstraintsIndependentlyRecomputed": true,
+    "finalistIndependentMemory": [
+      {
+        "id": "UPD-f1c2bb5b0657",
+        "M": 41,
+        "D": 2,
+        "coverage": 399,
+        "branches": 0,
+        "qzEmpty": true,
+        "zqEmpty": true,
+        "robustPolicyFeasible": true
+      },
+      {
+        "id": "UPD-6a731d7b831b",
+        "M": 41,
+        "D": 2,
+        "coverage": 399,
+        "branches": 0,
+        "qzEmpty": true,
+        "zqEmpty": true,
+        "robustPolicyFeasible": true
+      },
+      {
+        "id": "UPD-f254581a6f2d",
+        "M": 41,
+        "D": 2,
+        "coverage": 399,
+        "branches": 0,
+        "qzEmpty": true,
+        "zqEmpty": true,
+        "robustPolicyFeasible": true
+      }
+    ],
+    "finalistExpectedKeysAggregation": true,
+    "finalistCanonicalReplayMaxDifferenceBelow1eMinus8": true,
+    "allSourceHashesMatch": true
+  },
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent.json": "af1c90f2981ea5f6bdae4dcdf520f39ce76cb8cf474e2e9ed9513d23a864ed87",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-linked.json": "b4ef27c870e36fd8325648b5844d757298f6639f5449ce8bb58741bf2d840616",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-rescue.json": "56a7431d964b4139ac5df190a49966cd183366d0594134334048358fb643cee5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-composed.json": "2904285ede43860e29ecbccdb3730b5bfd65313df14e5fa8e7d58f62e0505d2e",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-low-pinky-score-UED-3158ce08b5bc.json": "a8cacf52e51ed467dbd389ccfb60faffb6be8bc41abf670b85ac80e1b4378ad5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-19-untoned-cr7e-v52-verification.json": "7a42e827a1119ed02e7083ad3fd2b8c50b6fd52e35662113761f647af0ff88c0",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\u7e-pinky-descent-20261121\\contract.json": "c56511f75e5f57af8843c32eade6a01a5d74f4dc238a3d2ae919f0f54bcc6e7c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-contract.json.gz": "dc1350eed62709f771d7ea7ea8f7cbe4edc68a1d513c38f7a4db685dec9f46be",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\model_meta.json": "d491d561372450e5d550c2d0949f31c3da16a1e78bddf4a2680517a8c460a9fc",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\r4_token_loads.json": "7126b1e101d5a2b0ceecaa095392de58a77add1e25369cb965b9d0adb190a90d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-score-UPD-f1c2bb5b0657.json": "09b4f84767f0d0fe7d7e2995ed77ff1929326d46f57a390778a503ba9da278c8",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-policy-UPD-f1c2bb5b0657.json": "b03fe785f8574f9a7669d14e30018a9a93d467d4c9a85424af13c6ee817ea5d3",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-robustness-UPD-f1c2bb5b0657.json": "1ce4cfa022ccd2e36cae49459457a0ef4c9f10b08c75726b91659ffa8f361a8d",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-components-UPD-f1c2bb5b0657.json.gz": "9eea8e74fe31ea9e526d30724dfd0f9ac2effce5f37e329532c9e89786a4c02a",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-score-UPD-6a731d7b831b.json": "a1a06b9879b235c76e1cf22a41bec1520467fa55ce0403166167833bb703bbfa",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-policy-UPD-6a731d7b831b.json": "ba1082288d8a90ae9738eeaa292e89b3fab6451ec8d4aef079beffd5944dbfcc",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-robustness-UPD-6a731d7b831b.json": "ce42c3b575c5f7f325d7ee0b1d3623a2987165caed316b4f7d3abbc7dc5467d7",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-components-UPD-6a731d7b831b.json.gz": "d32c195cc763ebc612fc52feb9fe358d31dfea0ce99f2e45d8c2307decb8a07c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-score-UPD-f254581a6f2d.json": "5112322c0401e951269b687b16f1e0ab18b08988d04307eb46321091453c7460",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-policy-UPD-f254581a6f2d.json": "3df4f26000b24b1d745c09672cc4f0b8052abfe2c40bd5c3fa48fb7d6e81644a",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-robustness-UPD-f254581a6f2d.json": "d499bb56a6236ae534d7a4c57023ebb712341d381c14b6ed5bf74c0f447a97a6",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-components-UPD-f254581a6f2d.json.gz": "441226c8262b02a8f6c7ec6773f366e8c874827de4d69a1d4dcffaff6d121848",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\summarize_u7e_pinky_descent.py": "4871c61afd6c11b3b1a6bc65e4e4b9cd346a203907f920cd268abeb520892230",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\summarize_u7e_low_pinky.py": "9ef48444561e6a26397b96cb82b8c882fca5b7df73f77da1e365b7305b0d7f59",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\memory_r2.py": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\audit.py": "fa9bfe87218ea8d2013abd9b83aa936b15d1b7dc2f6c560a4e9e93dfd1838267",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\robust_untoned_v52_policy.py": "8e2c914ddb5ef169f8497463049866879f506c40d27fd227daa62d13f921071b",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\u7e_pinky_descent_io.js": "4b91e474e7f0d093b7878b45bfd3fcbb09afe99f2eee4d8bbeacb52c9ca0119a",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\analyze_single_ckt_v51_aux_order.py": "b4c1d5c5f91a74525896b4d5cecce19c452cf1fc4901fe15b9b16df91b8895b0",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent.json.gz": "a91b49bbee2494880b6c212e166a1e411057bf2091fa0c918f12f9ba1ec7cf62",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-linked.json.gz": "a7601fe502952fab4bdab7bc56897d929707926b48e1e18250999f6497a1889b",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-pinky-descent-rescue.json.gz": "118af335b5043aa3389401ebbb9adc6784eb0a74e5b3d9fc10f4df34e4f69b12"
+  }
+}
