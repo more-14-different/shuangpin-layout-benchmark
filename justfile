@@ -1,5 +1,12 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+um40-v52-policy-grid:
+    pwsh -NoProfile -File tools/run_um40_policy_grid.ps1
+
+um40-v52-policy-grid-test:
+    python -X utf8 -m unittest discover -s tests -p test_um40_v52_policies.py
+    node --max-old-space-size=3072 --test --test-concurrency=1 tests/um40-v52-policies.test.mjs tests/ckt-v52.test.mjs tests/auxiliary-semantics.test.mjs
+
 um40-r11:
     python -X utf8 tools/integrate_um40_r11.py
     node tools/sync_keymap_link_colors.js --check
