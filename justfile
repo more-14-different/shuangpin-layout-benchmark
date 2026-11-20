@@ -1,5 +1,26 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-pinky-r11-prepare:
+    python -X utf8 tools/publish_u7e_pinky_r11.py prepare
+
+u7e-pinky-r11-columns:
+    python -X utf8 tools/publish_u7e_pinky_r11.py columns
+
+u7e-pinky-r11-score id:
+    node --expose-gc --max-old-space-size=4096 tools/finalize_u7e_pinky_r11.js --score "{{id}}"
+
+u7e-pinky-r11-install:
+    node --max-old-space-size=12288 tools/finalize_u7e_pinky_r11.js --install
+
+u7e-pinky-r11-browser:
+    node tests/u7e-pinky-r11.browser.mjs
+
+u7e-pinky-r11-validate:
+    python -X utf8 tools/validate_u7e_pinky_r11.py
+
+u7e-pinky-r11-test:
+    node --test tests/u7e-pinky-r11.test.mjs tests/untoned-frontiers-r11.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs tests/keymap-link-colors.test.mjs
+
 u7e-pinky-collisions:
     python -X utf8 tools/report_u7e_pinky_collisions.py
 
