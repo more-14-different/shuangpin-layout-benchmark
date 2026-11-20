@@ -1,5 +1,13 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+um40-r11:
+    python -X utf8 tools/integrate_um40_r11.py
+    node tools/sync_keymap_link_colors.js --check
+
+um40-r11-test:
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+    node --max-old-space-size=8192 tests/um40-r11.browser.mjs
+
 um40-double-empty-v52:
     node --max-old-space-size=4096 tools/search_um40_double_empty_v52.js --rounds=12
     node --max-old-space-size=4096 tools/search_um40_double_empty_v52.js --rounds=0 --polish
