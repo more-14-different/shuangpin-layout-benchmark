@@ -1,5 +1,8 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-pinky-collisions:
+    python -X utf8 tools/report_u7e_pinky_collisions.py
+
 u7e-pinky-descent-prepare:
     node --expose-gc --max-old-space-size=4096 tools/explore_u7e_pinky_descent.js --prepare
 
