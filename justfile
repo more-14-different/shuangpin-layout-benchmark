@@ -7,6 +7,13 @@ a-locked-rhymes-verify:
 a-locked-rhymes-six-hours:
     pwsh -NoProfile -File tools/run_a_locked_rhymes_background.ps1 -Hours 6
 
+a-locked-rhymes-hourly-review:
+    pwsh -NoProfile -File tools/run_a_locked_rhyme_reviews.ps1
+
+a-locked-rhymes-review-test:
+    node --test tests/a-locked-rhyme-review.test.mjs tests/a-locked-rhymes-v52.test.mjs
+    pwsh -NoProfile -File tests/a-locked-rhyme-review-time.ps1
+
 um40-v52-policy-grid:
     pwsh -NoProfile -File tools/run_um40_policy_grid.ps1
 

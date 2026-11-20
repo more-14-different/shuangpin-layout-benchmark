@@ -1,0 +1,26 @@
+{
+  "type":"object","additionalProperties":false,
+  "required":["summary","strategies","transfers"],
+  "properties":{
+    "summary":{"type":"string"},
+    "strategies":{"type":"array","items":{
+      "type":"object","additionalProperties":false,
+      "required":["lane","explorationProbability","temperature","minSteps","maxSteps","seedPool"],
+      "properties":{
+        "lane":{"type":"string","enum":["A-regular","A-double-empty","UM40-regular","UM40-double-empty"]},
+        "explorationProbability":{"type":"number"},"temperature":{"type":"number"},
+        "minSteps":{"type":"integer"},"maxSteps":{"type":"integer"},"seedPool":{"type":"integer"}
+      }
+    }},
+    "transfers":{"type":"array","items":{
+      "type":"object","additionalProperties":false,
+      "required":["sourceLane","sourceId","targetLane","repairOneStep"],
+      "properties":{
+        "sourceLane":{"type":"string","enum":["A-regular","A-double-empty","UM40-regular","UM40-double-empty"]},
+        "sourceId":{"type":"string"},
+        "targetLane":{"type":"string","enum":["A-regular","A-double-empty","UM40-regular","UM40-double-empty"]},
+        "repairOneStep":{"type":"boolean"}
+      }
+    }}
+  }
+}

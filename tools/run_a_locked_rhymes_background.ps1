@@ -9,8 +9,8 @@ $alrResourceLog = Join-Path $alrWork 'resource-monitor.jsonl'
 $alrDeadline = [datetime]::UtcNow.AddHours($Hours)
 $alrCheckpoint = Join-Path $alrWork 'checkpoint.json'
 if (Test-Path -LiteralPath $alrCheckpoint) {
-    $alrSaved = [IO.File]::ReadAllText($alrCheckpoint) | ConvertFrom-Json
-    $alrDeadline = [datetime]::Parse($alrSaved.deadline).ToUniversalTime()
+    $alrSaved = [IO.File]::ReadAllText($alrCheckpoint) | ConvertFrom-Json -DateKind String
+    $alrDeadline = [datetimeoffset]::Parse($alrSaved.deadline).UtcDateTime
 }
 $alrOther = @(Get-CimInstance Win32_Process -Filter "Name='node.exe'" | Where-Object { $_.CommandLine -like '*search_a_locked_rhymes_v52.js*' })
 if ($alrOther.Count) { throw 'A locked-rhyme search is already running' }

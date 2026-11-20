@@ -98,6 +98,23 @@ async function run(){
  }
  const random=n=>{state.rng=(Math.imul(state.rng,1664525)+1013904223)>>>0;return state.rng%n;};
  const legal=(lane,k)=>check(initials[lane.initials],decode(k),c.inputs,lane.doubleEmpty);
+ function consumeReview(){
+  const inbox=path.join(WORK,'review-inbox.json');if(!fs.existsSync(inbox))return;
+  const review=read(inbox);if(state.lastReviewId===review.id)return;
+  const {settings}=require('./a_locked_rhyme_review');
+  const applied={id:review.id,at:new Date().toISOString(),strategies:[],accepted:0,rejected:0};
+  for(const raw of review.strategies||[]){const strategy=settings(raw),lane=state.lanes.find(l=>l.name===strategy.lane);if(lane){lane.strategy=strategy;applied.strategies.push(strategy);}}
+  const incoming=new Map(state.lanes.map(l=>[l.name,[]]));
+  for(const p of review.proposals||[]){
+   const lane=state.lanes.find(l=>l.name===p.targetLane);
+   if(!lane||typeof p.state!=='string'||p.state.length!==35||!/^[A-Z]+$/.test(p.state)||!legal(lane,p.state)){applied.rejected++;continue;}
+   const old=seen.get(lane.initials+':'+p.state);if(old){register(lane,old);continue;}
+   incoming.get(lane.name).push({state:p.state,parent:p.parent,mutation:p.mutation});applied.accepted++;
+  }
+  for(const lane of state.lanes)lane.queue=[...incoming.get(lane.name),...lane.queue];
+  state.lastReviewId=review.id;state.lastReview=applied;
+  fs.appendFileSync(path.join(WORK,'review-applied.jsonl'),JSON.stringify(applied)+'\n');
+ }
  function register(lane,row){
   if(!legal(lane,row.state))return;
   if(!lane.best||row.scores['1']<lane.best.scores['1']){lane.best=row;console.log(JSON.stringify({best:lane.name,id:row.id,scores:row.scores,scored:state.scored}));}
@@ -110,7 +127,7 @@ async function run(){
   const temp=checkpoint+'.tmp';fs.writeFileSync(temp,JSON.stringify(state));fs.renameSync(temp,checkpoint);
   const report={status:state.status,startedAt:state.startedAt,deadline:state.deadline,updatedAt:state.updatedAt,
     exactScores:state.scored,baseline:c.controls.find(r=>r.id===a.id),constraints:verification.constraints,memory:state.memory,
-    lanes:state.lanes.map(l=>({name:l.name,spentSeconds:l.spentSeconds,evaluations:l.evaluations,expandedNeighborhoods:l.expanded.length,
+    lastReview:state.lastReview||null,lanes:state.lanes.map(l=>({name:l.name,strategy:l.strategy||null,spentSeconds:l.spentSeconds,evaluations:l.evaluations,expandedNeighborhoods:l.expanded.length,
       pending:l.queue.length,best:l.best,top:l.top.slice(0,5)})),scope:'All legal one-atom moves/swaps at A, followed by exact neighborhood expansion and stochastic coupled atom moves; not globally exhaustive.'};
   fs.writeFileSync(path.join(WORK,'live-report.json'),JSON.stringify(report,null,2)+'\n');
   for(const l of state.lanes)if(l.best)fs.writeFileSync(path.join(WORK,l.name+'-best.json'),JSON.stringify({...l.best,initialMap:initials[l.initials],finalMap:decode(l.best.state),constraints:verification.constraints},null,2)+'\n');
@@ -125,6 +142,7 @@ async function run(){
  try{
   state.status='running';save();
   while(Date.now()<Date.parse(state.deadline)&&!fs.existsSync(path.join(WORK,'STOP'))){
+   if(state.scored%5===0)consumeReview();
    if(os.freemem()<6*2**30){state.status='waiting-for-memory';save();await new Promise(r=>setTimeout(r,10000));continue;}
    state.status='running';
    const lane=[...state.lanes].sort((a,b)=>a.spentSeconds-b.spentSeconds)[0];
@@ -132,10 +150,12 @@ async function run(){
    for(let attempt=0;attempt<20000&&!proposal;attempt++){
     if(!lane.queue.length){
      const center=lane.top.find(r=>!lane.expanded.includes(r.state));
-     if(center){lane.expanded.push(center.state);lane.queue=neighbors(decode(center.state)).filter(r=>legal(lane,key(r.finalMap))).map(r=>({state:key(r.finalMap),mutation:r.mutation,parent:center.id}));}
+     const strategy=lane.strategy||{},explore=center&&(random(1000000)/1000000<(strategy.explorationProbability||0));
+     if(center&&!explore){lane.expanded.push(center.state);lane.queue=neighbors(decode(center.state)).filter(r=>legal(lane,key(r.finalMap))).map(r=>({state:key(r.finalMap),mutation:r.mutation,parent:center.id}));}
      else{
-      const seed=lane.top[random(Math.min(12,lane.top.length))]||lane.current;
-      const map=decode(seed.state),steps=2+random(5);
+      const seed=lane.top[random(Math.min(strategy.seedPool||12,lane.top.length))]||lane.current;
+      const min=strategy.minSteps||2,max=strategy.maxSteps||6;
+      const map=decode(seed.state),steps=min+random(max-min+1);
       for(let j=0;j<steps;j++){
        const a=MOVABLE[random(MOVABLE.length)],b=MOVABLE[random(MOVABLE.length)],ka=map[a[0]],kb=map[b[0]];
        if(random(3)){for(const f of a)map[f]=kb;for(const f of b)map[f]=ka;}
@@ -162,7 +182,7 @@ async function run(){
    fs.appendFileSync(log,JSON.stringify(row)+'\n');seen.set(lane.initials+':'+row.state,row);
    state.scored++;lane.evaluations++;lane.spentSeconds+=elapsed;
    for(const other of state.lanes)if(other.initials===row.initials)register(other,row);
-   const temperature=.0005*(1+(lane.attempts%1000)/1000);
+   const temperature=(lane.strategy?.temperature||.0005)*(1+(lane.attempts%1000)/1000);
    if(!lane.current||row.scores['1']<=lane.current.scores['1']||random(1000000)/1000000<Math.exp((lane.current.scores['1']-row.scores['1'])/temperature))lane.current=row;
    if(state.scored%5===0)save();
    if(state.scored%25===0)console.log(JSON.stringify({scored:state.scored,lanes:state.lanes.map(l=>({name:l.name,seconds:l.spentSeconds,best:l.best?.scores})),availableGB:os.freemem()/2**30}));
