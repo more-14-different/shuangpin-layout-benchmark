@@ -1,5 +1,14 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-openqz:
+    node tools/explore_u7e_openqz_v52.js
+
+u7e-openqz-verify id:
+    node --expose-gc --max-old-space-size=4096 tools/explore_u7e_openqz_v52.js --verify "{{id}}"
+
+u7e-openqz-audit:
+    python -X utf8 tools/audit_u7e_openqz_v52.py
+
 u7e-fixed-gpu-build:
     cargo build --locked --release --features cuda --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-cuda-stream
 

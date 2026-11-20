@@ -1,0 +1,141 @@
+{
+  "completed": true,
+  "searchStates": 7065,
+  "newlyOccupiedStates": 4424,
+  "baselinePointFrontier": [
+    9.556976748024438,
+    9.54136684441461,
+    9.525918325296148
+  ],
+  "rows": [
+    {
+      "id": "UQO-f32062502583",
+      "audit": {
+        "valid": true,
+        "M": 41,
+        "D": 2,
+        "V": 5,
+        "branches": 0,
+        "actual": [
+          21,
+          21
+        ],
+        "unique": 348,
+        "qz": true,
+        "zq": true
+      },
+      "pointOptimal": [
+        9.551867157130337,
+        9.541258721439855,
+        9.536362541705834
+      ],
+      "pointPolicies": [
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/23"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        }
+      ],
+      "robustScores": [
+        9.551869116497233,
+        9.541258721439855,
+        9.536362541705836
+      ],
+      "robustPolicies": {
+        "keytao": "12/231/24",
+        "sanpin": "12/213/21"
+      },
+      "robustAggregate": {
+        "motorUpperMs": 345.7770943428231,
+        "effectiveMs": 444.84641248817974,
+        "firstAuxRate": 0.248819637935389,
+        "secondAuxRate": 0.06218221935167062,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.005052521518868975,
+        "meanRejectedCandidates": 0.006344510836950361,
+        "meanPageActions": 7.228603386771942e-06
+      }
+    },
+    {
+      "id": "UQO-61c93a2c344c",
+      "audit": {
+        "valid": true,
+        "M": 41,
+        "D": 2,
+        "V": 5,
+        "branches": 0,
+        "actual": [
+          21,
+          21
+        ],
+        "unique": 351,
+        "qz": true,
+        "zq": true
+      },
+      "pointOptimal": [
+        9.562287563556811,
+        9.538033876201965,
+        9.52315835216741
+      ],
+      "pointPolicies": [
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        },
+        {
+          "keytao": "12/231/24",
+          "sanpin": "12/213/21"
+        }
+      ],
+      "robustScores": [
+        9.562287563556811,
+        9.538033876201965,
+        9.52315835216741
+      ],
+      "robustPolicies": {
+        "keytao": "12/231/24",
+        "sanpin": "12/213/21"
+      },
+      "robustAggregate": {
+        "motorUpperMs": 347.0565007829983,
+        "effectiveMs": 445.47392475993814,
+        "firstAuxRate": 0.2471588835861579,
+        "secondAuxRate": 0.06176994796088087,
+        "thirdAuxRate": 0.008059513083512658,
+        "selectionRate": 0.005006684626437564,
+        "meanRejectedCandidates": 0.0062950098090495425,
+        "meanPageActions": 7.1977381980564865e-06
+      }
+    }
+  ],
+  "pointFrontierImprovement": [
+    0.005109590894100791,
+    0.003332968212644616,
+    0.0027599731287377693
+  ],
+  "robustDefinition": "Same six independent 0.5..5x grid, 1 million scenes per member, mean competition rank; 1..10x separate audit. All 6 cognition costs multiplied equally only for 1/2/3 displayed scoring and reference; fixed original U7E initials and M41.",
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-policy-UQO-f32062502583.json": "249b550007bc63c1d105fa7232273cea16a811c11202094149f07da5d1b986ff",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-robust-components-UQO-f32062502583.json.gz": "69182f47326e025180f72548ae1a5790537d7e2399615fe59df4454af2435d89",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-robustness-UQO-f32062502583.json": "a1b919e58d8ca678b6a92913460db633eae761f19811d0efb4de1f45f2c66b0a",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-policy-UQO-61c93a2c344c.json": "dbff8cde60f086baba051f7a0e9b006ee38e5a6eb56ad4bf09ae13b093a3cf61",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-robust-components-UQO-61c93a2c344c.json.gz": "f8c2ba50afcdc6f0bf3998816c68861139d342168e0c916ee470b2e2cb63e7df",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-robustness-UQO-61c93a2c344c.json": "7152b61318bbbc6fb91014878b4df26f8d30b6f0db79987ff93d937e7e6de584",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52.json": "f97d05f2c12150e30e4306fe54465fd5c1af11057af7dd7a6c0ee2d24aa30155",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-verification.json": "63c98e7c8ba7556c22c6aab5c234d216b017507676b190dd5538b5120104156b",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\robust_untoned_v52_policy.py": "8e2c914ddb5ef169f8497463049866879f506c40d27fd227daa62d13f921071b",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\analyze_single_ckt_v51_aux_order.py": "b4c1d5c5f91a74525896b4d5cecce19c452cf1fc4901fe15b9b16df91b8895b0",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-u7r-cost3-comparison.json": "c83cf1343fe3fcd0db71acc084a2281feb0c4e8b6bfc4be7e56d6b59efd33f95"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "completed": true,
+  "states": 7065,
+  "occupiedStates": 4424,
+  "coverage": [
+    {
+      "center": "UQO-ba54b6e08e04",
+      "legalUnique": 1270,
+      "newlyAdmitted": 95,
+      "missing": 0
+    },
+    {
+      "center": "UQO-18c004bd1f31",
+      "legalUnique": 1270,
+      "newlyAdmitted": 96,
+      "missing": 0
+    },
+    {
+      "center": "UQO-f32062502583",
+      "legalUnique": 1270,
+      "newlyAdmitted": 1268,
+      "missing": 0
+    },
+    {
+      "center": "UQO-f5103bc1c63e",
+      "legalUnique": 1270,
+      "newlyAdmitted": 1268,
+      "missing": 0
+    }
+  ],
+  "annealingChains": [
+    {
+      "index": 0,
+      "steps": 500,
+      "accepted": 164
+    },
+    {
+      "index": 1,
+      "steps": 500,
+      "accepted": 157
+    },
+    {
+      "index": 2,
+      "steps": 500,
+      "accepted": 146
+    },
+    {
+      "index": 3,
+      "steps": 500,
+      "accepted": 136
+    }
+  ],
+  "independentMemoryAudit": [
+    {
+      "id": "UQO-f32062502583",
+      "M": 41,
+      "D": 2,
+      "coverage": 399,
+      "unique": 348,
+      "branches": 0,
+      "optimalScores": [
+        9.551867157130337,
+        9.541258721439855,
+        9.536362541705834
+      ]
+    },
+    {
+      "id": "UQO-61c93a2c344c",
+      "M": 41,
+      "D": 2,
+      "coverage": 399,
+      "unique": 351,
+      "branches": 0,
+      "optimalScores": [
+        9.562287563556811,
+        9.538033876201965,
+        9.52315835216741
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\audit_u7e_openqz_v52.py": "33145cd1171206210f5edbd06784223f67bc0f83df835fdc9e48d0df8ac35c7e",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52.json": "f97d05f2c12150e30e4306fe54465fd5c1af11057af7dd7a6c0ee2d24aa30155",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\config\\u7e-fixed-gpu.json": "1db76f4c731ae249f7f60413ea03aa13b382a9924e44b09a705cec8f95c2ed71",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\memory_r2.py": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\audit.py": "fa9bfe87218ea8d2013abd9b83aa936b15d1b7dc2f6c560a4e9e93dfd1838267",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-policy-UQO-f32062502583.json": "249b550007bc63c1d105fa7232273cea16a811c11202094149f07da5d1b986ff",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-21-u7e-openqz-v52-policy-UQO-61c93a2c344c.json": "dbff8cde60f086baba051f7a0e9b006ee38e5a6eb56ad4bf09ae13b093a3cf61"
+  }
+}
