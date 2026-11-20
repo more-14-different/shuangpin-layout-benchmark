@@ -1,0 +1,356 @@
+{
+  "id": "UM40-dff81aa57dd2",
+  "name": "21×26 无调 · M40 D3 CKT v5.2 候选",
+  "capacity": [
+    21,
+    26
+  ],
+  "tone": "IEUAO",
+  "toneKeyClass": "AEUIO",
+  "toneKeySet": "AEIOU",
+  "shapeKeysByMeaning": "AEUIO",
+  "toneKeysByTone": "IEUAO",
+  "toneDigitsByShapeMeaning": "42310",
+  "initialMap": {
+    "b": "B",
+    "p": "P",
+    "m": "M",
+    "f": "F",
+    "d": "D",
+    "t": "T",
+    "n": "N",
+    "l": "L",
+    "g": "G",
+    "k": "K",
+    "h": "H",
+    "j": "J",
+    "q": "F",
+    "x": "Y",
+    "zh": "W",
+    "ch": "X",
+    "sh": "V",
+    "r": "R",
+    "z": "Z",
+    "c": "C",
+    "s": "Q",
+    "A": "Y",
+    "E": "Y",
+    "O": "Y",
+    "W": "J",
+    "Y": "S",
+    "YU": "S"
+  },
+  "finalMap": {
+    "a": "A",
+    "ai": "T",
+    "an": "L",
+    "ang": "N",
+    "ao": "K",
+    "e": "H",
+    "ei": "C",
+    "en": "Q",
+    "eng": "J",
+    "er": "C",
+    "i": "I",
+    "ia": "R",
+    "ian": "W",
+    "iang": "F",
+    "iao": "Z",
+    "ie": "S",
+    "in": "D",
+    "ing": "E",
+    "iong": "V",
+    "iu": "X",
+    "o": "O",
+    "ong": "R",
+    "ou": "Y",
+    "u": "U",
+    "ua": "W",
+    "uai": "D",
+    "uan": "M",
+    "uang": "E",
+    "ui": "P",
+    "un": "G",
+    "uo": "O",
+    "v": "P",
+    "van": "M",
+    "ve": "B",
+    "vn": "G"
+  },
+  "memory": {
+    "M": 40,
+    "D": 3,
+    "firstLinks": 9,
+    "finalLinks": 31,
+    "branches": 0,
+    "ordinaryDisplaced": [
+      "q",
+      "x",
+      "s"
+    ]
+  },
+  "audit": {
+    "commonCount": 399,
+    "unique": 399,
+    "collisionPairs": 0,
+    "collisions": [],
+    "initialKeys": 21,
+    "finalKeys": 26,
+    "reservedInitials": [],
+    "qz": false,
+    "zq": true
+  },
+  "cktV52": {
+    "defaultScore": 9.07424087869118,
+    "doubledCognitiveScore": 9.024695953965695,
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    },
+    "lengthBalance": {
+      "pageSize": 6,
+      "maximumCandidates": 120,
+      "minimumInputLength": 4
+    },
+    "reference": "S005 each member normalized separately; cognitive costs repriced at both endpoints"
+  },
+  "comparison": [
+    {
+      "id": "RC26-39a5bfdc045342cd",
+      "M": 40,
+      "D": 3,
+      "defaultScore": 9.086538431214596,
+      "doubledScore": 9.043952097501606,
+      "defaultGap": 0.012297552523415689,
+      "doubledGap": 0.019256143535910653
+    },
+    {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "M": 40,
+      "D": 3,
+      "defaultScore": 9.083907769223146,
+      "doubledScore": 9.034929863180544,
+      "defaultGap": 0.009666890531965677,
+      "doubledGap": 0.01023390921484868
+    }
+  ],
+  "changesFromControls": [
+    {
+      "id": "RC26-39a5bfdc045342cd",
+      "initial": [
+        {
+          "name": "zh",
+          "from": "S",
+          "to": "W"
+        },
+        {
+          "name": "Y/YU",
+          "from": "W",
+          "to": "S"
+        }
+      ],
+      "final": [
+        {
+          "name": "ai",
+          "from": "F",
+          "to": "T"
+        },
+        {
+          "name": "ei",
+          "from": "E",
+          "to": "C"
+        },
+        {
+          "name": "en",
+          "from": "D",
+          "to": "Q"
+        },
+        {
+          "name": "er",
+          "from": "E",
+          "to": "C"
+        },
+        {
+          "name": "ia",
+          "from": "B",
+          "to": "R"
+        },
+        {
+          "name": "ian",
+          "from": "S",
+          "to": "W"
+        },
+        {
+          "name": "iang",
+          "from": "C",
+          "to": "F"
+        },
+        {
+          "name": "iao",
+          "from": "X",
+          "to": "Z"
+        },
+        {
+          "name": "ie",
+          "from": "Z",
+          "to": "S"
+        },
+        {
+          "name": "in",
+          "from": "R",
+          "to": "D"
+        },
+        {
+          "name": "ing",
+          "from": "Q",
+          "to": "E"
+        },
+        {
+          "name": "iong",
+          "from": "M",
+          "to": "V"
+        },
+        {
+          "name": "iu",
+          "from": "W",
+          "to": "X"
+        },
+        {
+          "name": "ong",
+          "from": "M",
+          "to": "R"
+        },
+        {
+          "name": "ua",
+          "from": "S",
+          "to": "W"
+        },
+        {
+          "name": "uai",
+          "from": "Q",
+          "to": "D"
+        },
+        {
+          "name": "uan",
+          "from": "T",
+          "to": "M"
+        },
+        {
+          "name": "uang",
+          "from": "C",
+          "to": "E"
+        },
+        {
+          "name": "van",
+          "from": "T",
+          "to": "M"
+        },
+        {
+          "name": "ve",
+          "from": "V",
+          "to": "B"
+        }
+      ]
+    },
+    {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "initial": [
+        {
+          "name": "zh",
+          "from": "S",
+          "to": "W"
+        },
+        {
+          "name": "ch",
+          "from": "Q",
+          "to": "X"
+        },
+        {
+          "name": "s",
+          "from": "X",
+          "to": "Q"
+        },
+        {
+          "name": "Y/YU",
+          "from": "W",
+          "to": "S"
+        }
+      ],
+      "final": [
+        {
+          "name": "ai",
+          "from": "G",
+          "to": "T"
+        },
+        {
+          "name": "en",
+          "from": "D",
+          "to": "Q"
+        },
+        {
+          "name": "ian",
+          "from": "S",
+          "to": "W"
+        },
+        {
+          "name": "iang",
+          "from": "B",
+          "to": "F"
+        },
+        {
+          "name": "iao",
+          "from": "X",
+          "to": "Z"
+        },
+        {
+          "name": "ie",
+          "from": "Z",
+          "to": "S"
+        },
+        {
+          "name": "in",
+          "from": "F",
+          "to": "D"
+        },
+        {
+          "name": "iu",
+          "from": "W",
+          "to": "X"
+        },
+        {
+          "name": "ua",
+          "from": "S",
+          "to": "W"
+        },
+        {
+          "name": "uai",
+          "from": "Q",
+          "to": "D"
+        },
+        {
+          "name": "un",
+          "from": "T",
+          "to": "G"
+        },
+        {
+          "name": "ve",
+          "from": "Q",
+          "to": "B"
+        },
+        {
+          "name": "vn",
+          "from": "T",
+          "to": "G"
+        }
+      ]
+    }
+  ]
+}

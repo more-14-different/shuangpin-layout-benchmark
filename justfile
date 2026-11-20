@@ -1,5 +1,16 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-m40d3-v52:
+    node --max-old-space-size=4096 tools/search_untoned_m40d3_v52.js --rounds=14
+    node --max-old-space-size=4096 tools/search_untoned_m40d3_v52.js --rounds=0 --polish
+
+untoned-m40d3-v52-verify:
+    node --max-old-space-size=8192 tools/search_untoned_m40d3_v52.js --verify
+    python tools/verify_untoned_m40d3_memory.py
+
+untoned-m40d3-v52-test:
+    node --test tests/untoned-m40d3-v52.test.mjs tests/untoned-t2126-m4-followup.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 untoned-t2126-m4-followup:
     node --max-old-space-size=4096 tools/refine_untoned_t2126_m4_v52.js --refine --rounds=12 --polish --polish-rounds=3
 
