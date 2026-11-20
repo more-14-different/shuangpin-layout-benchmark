@@ -1,0 +1,196 @@
+{
+  "id": "UTM4P-96aff659c662",
+  "name": "21×26 无调 · T2126-M4 声韵联合改良",
+  "sourceId": "T2126-V52-M4-ec60a3637a99",
+  "parentId": "UTM4-865426b68287",
+  "capacity": [
+    21,
+    26
+  ],
+  "tone": "IEUAO",
+  "toneKeyClass": "AEUIO",
+  "toneKeySet": "AEIOU",
+  "shapeKeysByMeaning": "AEUIO",
+  "toneKeysByTone": "IEUAO",
+  "toneDigitsByShapeMeaning": "42310",
+  "initialMap": {
+    "b": "N",
+    "p": "P",
+    "m": "M",
+    "f": "F",
+    "d": "D",
+    "t": "T",
+    "n": "B",
+    "l": "W",
+    "g": "G",
+    "k": "K",
+    "h": "H",
+    "j": "J",
+    "q": "F",
+    "x": "Y",
+    "zh": "X",
+    "ch": "S",
+    "sh": "V",
+    "r": "R",
+    "z": "Z",
+    "c": "C",
+    "s": "Q",
+    "A": "Y",
+    "E": "Y",
+    "O": "Y",
+    "W": "J",
+    "Y": "L",
+    "YU": "L"
+  },
+  "finalMap": {
+    "a": "L",
+    "ai": "G",
+    "an": "P",
+    "ang": "N",
+    "ao": "R",
+    "e": "U",
+    "ei": "D",
+    "en": "Q",
+    "eng": "J",
+    "er": "O",
+    "i": "I",
+    "ia": "K",
+    "ian": "A",
+    "iang": "B",
+    "iao": "W",
+    "ie": "Z",
+    "in": "C",
+    "ing": "E",
+    "iong": "V",
+    "iu": "F",
+    "o": "T",
+    "ong": "K",
+    "ou": "Y",
+    "u": "O",
+    "ua": "A",
+    "uai": "C",
+    "uan": "M",
+    "uang": "E",
+    "ui": "S",
+    "un": "T",
+    "uo": "H",
+    "v": "S",
+    "van": "H",
+    "ve": "X",
+    "vn": "M"
+  },
+  "changesFromParent": {
+    "initial": [
+      {
+        "name": "b",
+        "from": "B",
+        "to": "N"
+      },
+      {
+        "name": "n",
+        "from": "N",
+        "to": "B"
+      }
+    ],
+    "final": [
+      {
+        "name": "a",
+        "from": "A",
+        "to": "L"
+      },
+      {
+        "name": "an",
+        "from": "L",
+        "to": "P"
+      },
+      {
+        "name": "ao",
+        "from": "K",
+        "to": "R"
+      },
+      {
+        "name": "ia",
+        "from": "R",
+        "to": "K"
+      },
+      {
+        "name": "ian",
+        "from": "P",
+        "to": "A"
+      },
+      {
+        "name": "ong",
+        "from": "R",
+        "to": "K"
+      },
+      {
+        "name": "ua",
+        "from": "E",
+        "to": "A"
+      },
+      {
+        "name": "uang",
+        "from": "P",
+        "to": "E"
+      }
+    ]
+  },
+  "initialFamilyDistance": 2,
+  "common399Unique": 399,
+  "audit": {
+    "commonCount": 399,
+    "unique": 399,
+    "collisionPairs": 0,
+    "collisions": [],
+    "initialKeys": 21,
+    "finalKeys": 26,
+    "reservedInitials": [],
+    "qz": false,
+    "zq": true
+  },
+  "cktV52": {
+    "defaultScore": 9.017804507684776,
+    "doubledCognitiveScore": 8.979047151022534,
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    },
+    "lengthBalance": {
+      "pageSize": 6,
+      "maximumCandidates": 120,
+      "minimumInputLength": 4
+    },
+    "reference": "S005 each member separately; same cognitive multiplier as candidate"
+  },
+  "comparison": [
+    {
+      "id": "UTM4-865426b68287",
+      "defaultScore": 9.076306165171943,
+      "doubledScore": 9.029178417865767,
+      "defaultGap": 0.058501657487166625,
+      "doubledGap": 0.050131266843232325
+    },
+    {
+      "id": "RC26-39a5bfdc045342cd",
+      "defaultScore": 9.086538431214596,
+      "doubledScore": 9.043952097501606,
+      "defaultGap": 0.06873392352981966,
+      "doubledGap": 0.06490494647907141
+    },
+    {
+      "id": "RC26-eeb7b9a25a90cadd",
+      "defaultScore": 9.083907769223146,
+      "doubledScore": 9.034929863180544,
+      "defaultGap": 0.06610326153836965,
+      "doubledGap": 0.05588271215800944
+    }
+  ]
+}

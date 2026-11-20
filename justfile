@@ -1,5 +1,14 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-t2126-m4-followup:
+    node --max-old-space-size=4096 tools/refine_untoned_t2126_m4_v52.js --refine --rounds=12 --polish --polish-rounds=3
+
+untoned-t2126-m4-followup-verify:
+    node --max-old-space-size=8192 tools/refine_untoned_t2126_m4_v52.js --verify
+
+untoned-t2126-m4-followup-test:
+    node --test tests/untoned-t2126-m4-followup.test.mjs tests/untoned-t2126-m4-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 untoned-t2126-m4-prepare:
     cargo build --locked --release --jobs 2 --manifest-path research/ckt-v4-core/Cargo.toml --bin score-untoned-v52-2126-stream
     node --max-old-space-size=8192 tools/search_untoned_t2126_m4_v52.js --prepare

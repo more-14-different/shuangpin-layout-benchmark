@@ -1,0 +1,1377 @@
+{
+  "version": "untoned-t2126-m4-followup-v1",
+  "anchor": {
+    "id": "UTM4-865426b68287",
+    "name": "21×26 无调 · T2126-M4 最小四组改动候选",
+    "sourceId": "T2126-V52-M4-ec60a3637a99",
+    "capacity": [
+      21,
+      26
+    ],
+    "tone": "IEUAO",
+    "toneKeysByTone": "IEUAO",
+    "shapeKeysByMeaning": "AEUIO",
+    "toneDigitsByShapeMeaning": "42310",
+    "initialMap": {
+      "b": "B",
+      "p": "P",
+      "m": "M",
+      "f": "F",
+      "d": "D",
+      "t": "T",
+      "n": "N",
+      "l": "W",
+      "g": "G",
+      "k": "K",
+      "h": "H",
+      "j": "J",
+      "q": "F",
+      "x": "Y",
+      "zh": "X",
+      "ch": "S",
+      "sh": "V",
+      "r": "R",
+      "z": "Z",
+      "c": "C",
+      "s": "Q",
+      "A": "Y",
+      "E": "Y",
+      "O": "Y",
+      "W": "J",
+      "Y": "L",
+      "YU": "L"
+    },
+    "finalMap": {
+      "a": "A",
+      "ai": "G",
+      "an": "L",
+      "ang": "N",
+      "ao": "K",
+      "e": "U",
+      "ei": "D",
+      "en": "Q",
+      "eng": "J",
+      "er": "O",
+      "i": "I",
+      "ia": "R",
+      "ian": "P",
+      "iang": "B",
+      "iao": "W",
+      "ie": "Z",
+      "in": "C",
+      "ing": "E",
+      "iong": "V",
+      "iu": "F",
+      "o": "T",
+      "ong": "R",
+      "ou": "Y",
+      "u": "O",
+      "ua": "E",
+      "uai": "C",
+      "uan": "M",
+      "uang": "P",
+      "ui": "S",
+      "un": "T",
+      "uo": "H",
+      "v": "S",
+      "van": "H",
+      "ve": "X",
+      "vn": "M"
+    },
+    "changesFromSource": [
+      {
+        "head": "q",
+        "from": "Q",
+        "to": "F"
+      },
+      {
+        "head": "s",
+        "from": "S",
+        "to": "Q"
+      },
+      {
+        "head": "A/E/O",
+        "from": "R",
+        "to": "Y"
+      },
+      {
+        "head": "W",
+        "from": "P",
+        "to": "J"
+      }
+    ],
+    "initialChangeMetric": "A/E/O together; Y/YU together; each other head individually",
+    "minimumChangedFamilies": 4,
+    "common399Unique": 399,
+    "cktV52": {
+      "defaultScore": 9.076306165171943,
+      "doubledCognitiveScore": 9.029178417865767,
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "12",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "21",
+          "word4": "13"
+        }
+      },
+      "lengthBalance": {
+        "pageSize": 6,
+        "maximumCandidates": 120,
+        "minimumInputLength": 4
+      },
+      "reference": "S005, each member normalized separately at each comparison point"
+    },
+    "comparison": [
+      {
+        "id": "RC26-39a5bfdc045342cd",
+        "defaultScore": 9.086538431214596,
+        "doubledCognitiveScore": 9.043952097501606,
+        "defaultImprovement": 0.010232266042653038,
+        "doubledImprovement": 0.014773679635839088
+      },
+      {
+        "id": "RC26-eeb7b9a25a90cadd",
+        "defaultScore": 9.083907769223146,
+        "doubledCognitiveScore": 9.034929863180544,
+        "defaultImprovement": 0.007601604051203026,
+        "doubledImprovement": 0.005751445314777115
+      }
+    ],
+    "audit": {
+      "commonCount": 399,
+      "unique": 399,
+      "collisionPairs": 0,
+      "collisions": [],
+      "initialKeys": 21,
+      "finalKeys": 26,
+      "reservedInitials": [],
+      "qz": false,
+      "zq": true
+    }
+  },
+  "sourceHashes": {
+    "a7_CKT_R11.html": "f3693deb465458b6c915a3f1e3f36405675c4687240e362d6823c377c5b4ae3e",
+    "tools/score_ckt_v52.js": "6a376b3cdb0ddbc982761797ec0bc6233b3ebfbad6c6f61535e25111948faf32",
+    "tools/ckt_block_error.js": "7cad8b13d0ddfdd64370d73fc943530b05d0920ab558c23c0dd2f4105a815fde",
+    "tools/auxiliary_semantics.js": "06f4c8a269869b4e3f14cedf094a39190912fcf3a60d1b13a58bb1757fbc5899",
+    "tools/ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\search_untoned_t2126_m4_v52.js": "51ec94bd64c38cf27fb9a2f6b21bdece19c6b2b0bab1ad7bb4b0b848282ba099",
+    "research/ckt-v4-core/src/bin/score-untoned-v52-2126-stream.rs": "4ff35ffb88e4b3bda3e83dd3e3691642a869e9e3cc03d764602311a1d77ccc20",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\ckt-long-code-audit-20261118\\error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+    "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+    "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810"
+  },
+  "searchSourceSha256": "61d150bad41d762a2cd814b3d8f5b1b3ef27dbb2e4d613f1863640fa6f0ad328",
+  "semantics": {
+    "toneKeyClass": "AEUIO",
+    "toneKeySet": "AEIOU",
+    "shapeKeysByMeaning": "AEUIO",
+    "toneKeysByTone": "IEUAO",
+    "toneDigitsByShapeMeaning": "42310"
+  },
+  "contract": {
+    "capacity": [
+      21,
+      26
+    ],
+    "branching": false,
+    "maxInitialFamilyDistance": 3,
+    "initialFamilies": [
+      [
+        "b"
+      ],
+      [
+        "p"
+      ],
+      [
+        "m"
+      ],
+      [
+        "f"
+      ],
+      [
+        "d"
+      ],
+      [
+        "t"
+      ],
+      [
+        "n"
+      ],
+      [
+        "l"
+      ],
+      [
+        "g"
+      ],
+      [
+        "k"
+      ],
+      [
+        "h"
+      ],
+      [
+        "j"
+      ],
+      [
+        "q"
+      ],
+      [
+        "x"
+      ],
+      [
+        "zh"
+      ],
+      [
+        "ch"
+      ],
+      [
+        "sh"
+      ],
+      [
+        "r"
+      ],
+      [
+        "z"
+      ],
+      [
+        "c"
+      ],
+      [
+        "s"
+      ],
+      [
+        "A",
+        "E",
+        "O"
+      ],
+      [
+        "W"
+      ],
+      [
+        "Y",
+        "YU"
+      ]
+    ],
+    "comparisonMultipliers": [
+      1,
+      2
+    ],
+    "selectionRule": "Minimize max(defaultScore/anchorDefaultScore, doubledScore/anchorDoubledScore); ties prefer fewer changed initial families, then ID",
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    },
+    "lengthBalance": {
+      "pageSize": 6,
+      "maximumCandidates": 120,
+      "minimumInputLength": 4
+    },
+    "reference": "S005 each member separately; same cognitive multiplier as candidate"
+  },
+  "newScores": 2028,
+  "importedScores": 331,
+  "stages": [
+    {
+      "kind": "exact-anchor-neighborhood",
+      "initialCandidates": 212,
+      "finalCandidates": 389,
+      "newScores": 601,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-384074365ae0",
+      "radius": 0,
+      "legalCandidates": 501,
+      "newScores": 17,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-6e9dfc0fbd02",
+      "radius": 2,
+      "legalCandidates": 591,
+      "newScores": 17,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-ff1166e32866",
+      "radius": 3,
+      "legalCandidates": 693,
+      "newScores": 15,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-5ea8f156686a",
+      "radius": 0,
+      "legalCandidates": 522,
+      "newScores": 16,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-ff1166e32866",
+      "radius": 2,
+      "legalCandidates": 578,
+      "newScores": 15,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-0d28ca5f8eb6",
+      "radius": 3,
+      "legalCandidates": 681,
+      "newScores": 17,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-aeca515b133d",
+      "radius": 0,
+      "legalCandidates": 511,
+      "newScores": 17,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-0d28ca5f8eb6",
+      "radius": 2,
+      "legalCandidates": 597,
+      "newScores": 15,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-cbbf5dd965ac",
+      "radius": 3,
+      "legalCandidates": 667,
+      "newScores": 15,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-fe18965a7ee8",
+      "radius": 0,
+      "legalCandidates": 508,
+      "newScores": 15,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-cbbf5dd965ac",
+      "radius": 2,
+      "legalCandidates": 571,
+      "newScores": 15,
+      "completed": true
+    },
+    {
+      "kind": "screened-coupled-neighborhood",
+      "center": "UTM4P-c606be3b5aff",
+      "radius": 3,
+      "legalCandidates": 680,
+      "newScores": 16,
+      "completed": true
+    },
+    {
+      "kind": "exact-polish-neighborhood",
+      "center": "UTM4P-ff1166e32866",
+      "radius": 3,
+      "newScores": 393,
+      "completed": true
+    },
+    {
+      "kind": "exact-polish-neighborhood",
+      "center": "UTM4P-735c273a6d17",
+      "radius": 3,
+      "newScores": 423,
+      "objectiveGain": 0.00042368917550028584,
+      "completed": true
+    },
+    {
+      "kind": "exact-polish-neighborhood",
+      "center": "UTM4P-422a9649a5b5",
+      "radius": 3,
+      "newScores": 421,
+      "objectiveGain": 0.00003542508680343115,
+      "completed": true
+    }
+  ],
+  "selected": [
+    {
+      "radius": 0,
+      "initialMap": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "W",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "X",
+        "ch": "S",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "L",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "Q",
+        "ai": "G",
+        "an": "P",
+        "ang": "N",
+        "ao": "K",
+        "e": "U",
+        "ei": "D",
+        "en": "L",
+        "eng": "J",
+        "er": "O",
+        "i": "I",
+        "ia": "R",
+        "ian": "A",
+        "iang": "B",
+        "iao": "W",
+        "ie": "Z",
+        "in": "C",
+        "ing": "E",
+        "iong": "V",
+        "iu": "F",
+        "o": "T",
+        "ong": "R",
+        "ou": "Y",
+        "u": "O",
+        "ua": "A",
+        "uai": "C",
+        "uan": "M",
+        "uang": "E",
+        "ui": "S",
+        "un": "T",
+        "uo": "H",
+        "v": "S",
+        "van": "H",
+        "ve": "X",
+        "vn": "M"
+      },
+      "id": "UTM4P-fe18965a7ee8",
+      "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOACMESTHSHXM",
+      "score": 9.060724487873678,
+      "doubledScore": 9.00958425133633,
+      "initialDistance": 0,
+      "parent": "UTM4P-aeca515b133d",
+      "mutation": "final tokens a↔en",
+      "stage": "screened-coupled-neighborhood",
+      "seconds": 1.9198749,
+      "changesFromAnchor": {
+        "initial": [],
+        "final": [
+          {
+            "name": "a",
+            "from": "A",
+            "to": "Q"
+          },
+          {
+            "name": "an",
+            "from": "L",
+            "to": "P"
+          },
+          {
+            "name": "en",
+            "from": "Q",
+            "to": "L"
+          },
+          {
+            "name": "ian",
+            "from": "P",
+            "to": "A"
+          },
+          {
+            "name": "ua",
+            "from": "E",
+            "to": "A"
+          },
+          {
+            "name": "uang",
+            "from": "P",
+            "to": "E"
+          }
+        ]
+      },
+      "audit": {
+        "commonCount": 399,
+        "unique": 399,
+        "collisionPairs": 0,
+        "collisions": [],
+        "initialKeys": 21,
+        "finalKeys": 26,
+        "reservedInitials": [],
+        "qz": false,
+        "zq": true
+      }
+    },
+    {
+      "radius": 2,
+      "initialMap": {
+        "b": "N",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "B",
+        "l": "W",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "X",
+        "ch": "S",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "L",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "L",
+        "ai": "G",
+        "an": "P",
+        "ang": "N",
+        "ao": "R",
+        "e": "U",
+        "ei": "D",
+        "en": "Q",
+        "eng": "J",
+        "er": "O",
+        "i": "I",
+        "ia": "K",
+        "ian": "A",
+        "iang": "B",
+        "iao": "W",
+        "ie": "Z",
+        "in": "C",
+        "ing": "E",
+        "iong": "V",
+        "iu": "F",
+        "o": "T",
+        "ong": "K",
+        "ou": "Y",
+        "u": "O",
+        "ua": "A",
+        "uai": "C",
+        "uan": "M",
+        "uang": "E",
+        "ui": "S",
+        "un": "T",
+        "uo": "H",
+        "v": "S",
+        "van": "H",
+        "ve": "X",
+        "vn": "M"
+      },
+      "id": "UTM4P-96aff659c662",
+      "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOACMESTHSHXM",
+      "score": 9.017804507684776,
+      "doubledScore": 8.979047151022534,
+      "initialDistance": 2,
+      "parent": "UTM4P-422a9649a5b5",
+      "mutation": "final tokens ua↔uang",
+      "stage": "exact-polish-neighborhood",
+      "seconds": 0.7994217,
+      "changesFromAnchor": {
+        "initial": [
+          {
+            "name": "b",
+            "from": "B",
+            "to": "N"
+          },
+          {
+            "name": "n",
+            "from": "N",
+            "to": "B"
+          }
+        ],
+        "final": [
+          {
+            "name": "a",
+            "from": "A",
+            "to": "L"
+          },
+          {
+            "name": "an",
+            "from": "L",
+            "to": "P"
+          },
+          {
+            "name": "ao",
+            "from": "K",
+            "to": "R"
+          },
+          {
+            "name": "ia",
+            "from": "R",
+            "to": "K"
+          },
+          {
+            "name": "ian",
+            "from": "P",
+            "to": "A"
+          },
+          {
+            "name": "ong",
+            "from": "R",
+            "to": "K"
+          },
+          {
+            "name": "ua",
+            "from": "E",
+            "to": "A"
+          },
+          {
+            "name": "uang",
+            "from": "P",
+            "to": "E"
+          }
+        ]
+      },
+      "audit": {
+        "commonCount": 399,
+        "unique": 399,
+        "collisionPairs": 0,
+        "collisions": [],
+        "initialKeys": 21,
+        "finalKeys": 26,
+        "reservedInitials": [],
+        "qz": false,
+        "zq": true
+      }
+    },
+    {
+      "radius": 3,
+      "initialMap": {
+        "b": "N",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "B",
+        "l": "W",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "X",
+        "ch": "S",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "L",
+        "YU": "L"
+      },
+      "finalMap": {
+        "a": "L",
+        "ai": "G",
+        "an": "P",
+        "ang": "N",
+        "ao": "R",
+        "e": "U",
+        "ei": "D",
+        "en": "Q",
+        "eng": "J",
+        "er": "O",
+        "i": "I",
+        "ia": "K",
+        "ian": "A",
+        "iang": "B",
+        "iao": "W",
+        "ie": "Z",
+        "in": "C",
+        "ing": "E",
+        "iong": "V",
+        "iu": "F",
+        "o": "T",
+        "ong": "K",
+        "ou": "Y",
+        "u": "O",
+        "ua": "A",
+        "uai": "C",
+        "uan": "M",
+        "uang": "E",
+        "ui": "S",
+        "un": "T",
+        "uo": "H",
+        "v": "S",
+        "van": "H",
+        "ve": "X",
+        "vn": "M"
+      },
+      "id": "UTM4P-96aff659c662",
+      "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOACMESTHSHXM",
+      "score": 9.017804507684776,
+      "doubledScore": 8.979047151022534,
+      "initialDistance": 2,
+      "parent": "UTM4P-422a9649a5b5",
+      "mutation": "final tokens ua↔uang",
+      "stage": "exact-polish-neighborhood",
+      "seconds": 0.7994217,
+      "changesFromAnchor": {
+        "initial": [
+          {
+            "name": "b",
+            "from": "B",
+            "to": "N"
+          },
+          {
+            "name": "n",
+            "from": "N",
+            "to": "B"
+          }
+        ],
+        "final": [
+          {
+            "name": "a",
+            "from": "A",
+            "to": "L"
+          },
+          {
+            "name": "an",
+            "from": "L",
+            "to": "P"
+          },
+          {
+            "name": "ao",
+            "from": "K",
+            "to": "R"
+          },
+          {
+            "name": "ia",
+            "from": "R",
+            "to": "K"
+          },
+          {
+            "name": "ian",
+            "from": "P",
+            "to": "A"
+          },
+          {
+            "name": "ong",
+            "from": "R",
+            "to": "K"
+          },
+          {
+            "name": "ua",
+            "from": "E",
+            "to": "A"
+          },
+          {
+            "name": "uang",
+            "from": "P",
+            "to": "E"
+          }
+        ]
+      },
+      "audit": {
+        "commonCount": 399,
+        "unique": 399,
+        "collisionPairs": 0,
+        "collisions": [],
+        "initialKeys": 21,
+        "finalKeys": 26,
+        "reservedInitials": [],
+        "qz": false,
+        "zq": true
+      }
+    }
+  ],
+  "bestByRadius": {
+    "0": [
+      {
+        "id": "UTM4P-fe18965a7ee8",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOACMESTHSHXM",
+        "score": 9.060724487873678,
+        "doubledScore": 9.00958425133633,
+        "initialDistance": 0,
+        "parent": "UTM4P-aeca515b133d",
+        "mutation": "final tokens a↔en",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.9198749
+      },
+      {
+        "id": "UTM4P-4481ef48d5ad",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOECMASTHSHXM",
+        "score": 9.061081818502549,
+        "doubledScore": 9.00998951335498,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final tokens ua↔uang",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.6560629
+      },
+      {
+        "id": "UTM4P-89dee21b07bf",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOAWMESTHSHXM",
+        "score": 9.061288985704945,
+        "doubledScore": 9.011334378653245,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final token uai→W",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.7218407999999998
+      },
+      {
+        "id": "UTM4P-aeca515b133d",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOACMESTHSHXM",
+        "score": 9.061310231005791,
+        "doubledScore": 9.008338991385529,
+        "initialDistance": 0,
+        "parent": "UTM4P-5ea8f156686a",
+        "mutation": "final tokens ua↔uang",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 0.766515
+      },
+      {
+        "id": "UTM4P-5ea8f156686a",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOECMASTHSHXM",
+        "score": 9.061583576754092,
+        "doubledScore": 9.008669447348833,
+        "initialDistance": 0,
+        "parent": "UTM4P-384074365ae0",
+        "mutation": "final key groups A↔P",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 0.9131352
+      },
+      {
+        "id": "UTM4P-2ba610565319",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOAZMESTHSHXM",
+        "score": 9.061585499951324,
+        "doubledScore": 9.010790468550814,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final token uai→Z",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.6856337
+      },
+      {
+        "id": "UTM4P-a268d5b3f5bd",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLAGPNKUDLJOIRQBWZCEVFTRYOQCMESTHSHXM",
+        "score": 9.061705328084747,
+        "doubledScore": 9.01118649420652,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final key groups Q↔A",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 0.8192457
+      },
+      {
+        "id": "UTM4P-c70f06c565bc",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOAWMESTHSHXM",
+        "score": 9.061756513093671,
+        "doubledScore": 9.009920952631358,
+        "initialDistance": 0,
+        "parent": "UTM4P-aeca515b133d",
+        "mutation": "final token uai→W",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.2826367
+      },
+      {
+        "id": "UTM4P-71bf9d3e47da",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOEWMASTHSHXM",
+        "score": 9.062033339098566,
+        "doubledScore": 9.010254506846586,
+        "initialDistance": 0,
+        "parent": "UTM4P-5ea8f156686a",
+        "mutation": "final token uai→W",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.2022369
+      },
+      {
+        "id": "UTM4P-8bfeea92a441",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRAFWZCEVBTRYOACMESTHSHXM",
+        "score": 9.062143921471517,
+        "doubledScore": 9.014095410866199,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final tokens iang↔iu",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.6267374000000001
+      },
+      {
+        "id": "UTM4P-0e10107eaa07",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOAZMESTHSHXM",
+        "score": 9.062236457889757,
+        "doubledScore": 9.009622343923237,
+        "initialDistance": 0,
+        "parent": "UTM4P-aeca515b133d",
+        "mutation": "final token uai→Z",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.2647268
+      },
+      {
+        "id": "UTM4P-5e487e308b92",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEMFTRYOACMESTHSHXV",
+        "score": 9.062466321029545,
+        "doubledScore": 9.014729072094122,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final tokens iong↔vn",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.5972046
+      }
+    ],
+    "1": [
+      {
+        "id": "UTM4P-fe18965a7ee8",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOACMESTHSHXM",
+        "score": 9.060724487873678,
+        "doubledScore": 9.00958425133633,
+        "initialDistance": 0,
+        "parent": "UTM4P-aeca515b133d",
+        "mutation": "final tokens a↔en",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.9198749
+      },
+      {
+        "id": "UTM4P-4481ef48d5ad",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOECMASTHSHXM",
+        "score": 9.061081818502549,
+        "doubledScore": 9.00998951335498,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final tokens ua↔uang",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.6560629
+      },
+      {
+        "id": "UTM4P-89dee21b07bf",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOAWMESTHSHXM",
+        "score": 9.061288985704945,
+        "doubledScore": 9.011334378653245,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final token uai→W",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.7218407999999998
+      },
+      {
+        "id": "UTM4P-aeca515b133d",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOACMESTHSHXM",
+        "score": 9.061310231005791,
+        "doubledScore": 9.008338991385529,
+        "initialDistance": 0,
+        "parent": "UTM4P-5ea8f156686a",
+        "mutation": "final tokens ua↔uang",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 0.766515
+      },
+      {
+        "id": "UTM4P-5ea8f156686a",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOECMASTHSHXM",
+        "score": 9.061583576754092,
+        "doubledScore": 9.008669447348833,
+        "initialDistance": 0,
+        "parent": "UTM4P-384074365ae0",
+        "mutation": "final key groups A↔P",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 0.9131352
+      },
+      {
+        "id": "UTM4P-2ba610565319",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEVFTRYOAZMESTHSHXM",
+        "score": 9.061585499951324,
+        "doubledScore": 9.010790468550814,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final token uai→Z",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.6856337
+      },
+      {
+        "id": "UTM4P-a268d5b3f5bd",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLAGPNKUDLJOIRQBWZCEVFTRYOQCMESTHSHXM",
+        "score": 9.061705328084747,
+        "doubledScore": 9.01118649420652,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final key groups Q↔A",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 0.8192457
+      },
+      {
+        "id": "UTM4P-c70f06c565bc",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOAWMESTHSHXM",
+        "score": 9.061756513093671,
+        "doubledScore": 9.009920952631358,
+        "initialDistance": 0,
+        "parent": "UTM4P-aeca515b133d",
+        "mutation": "final token uai→W",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.2826367
+      },
+      {
+        "id": "UTM4P-71bf9d3e47da",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOEWMASTHSHXM",
+        "score": 9.062033339098566,
+        "doubledScore": 9.010254506846586,
+        "initialDistance": 0,
+        "parent": "UTM4P-5ea8f156686a",
+        "mutation": "final token uai→W",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.2022369
+      },
+      {
+        "id": "UTM4P-8bfeea92a441",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRAFWZCEVBTRYOACMESTHSHXM",
+        "score": 9.062143921471517,
+        "doubledScore": 9.014095410866199,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final tokens iang↔iu",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.6267374000000001
+      },
+      {
+        "id": "UTM4P-0e10107eaa07",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLLGPNKUDQJOIRABWZCEVFTRYOAZMESTHSHXM",
+        "score": 9.062236457889757,
+        "doubledScore": 9.009622343923237,
+        "initialDistance": 0,
+        "parent": "UTM4P-aeca515b133d",
+        "mutation": "final token uai→Z",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.2647268
+      },
+      {
+        "id": "UTM4P-5e487e308b92",
+        "state": "BPMFDTNWGKHJFYXSVRZCQYYYJLLQGPNKUDLJOIRABWZCEMFTRYOACMESTHSHXV",
+        "score": 9.062466321029545,
+        "doubledScore": 9.014729072094122,
+        "initialDistance": 0,
+        "parent": "UTM4P-fe18965a7ee8",
+        "mutation": "final tokens iong↔vn",
+        "stage": "screened-coupled-neighborhood",
+        "seconds": 1.5972046
+      }
+    ],
+    "2": [
+      {
+        "id": "UTM4P-96aff659c662",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOACMESTHSHXM",
+        "score": 9.017804507684776,
+        "doubledScore": 8.979047151022534,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens ua↔uang",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.7994217
+      },
+      {
+        "id": "UTM4P-422a9649a5b5",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOECMASTHSHXM",
+        "score": 9.018068226932092,
+        "doubledScore": 8.979367010451751,
+        "initialDistance": 2,
+        "parent": "UTM4P-735c273a6d17",
+        "mutation": "final key groups A↔P",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.9748997
+      },
+      {
+        "id": "UTM4P-1280c85b1861",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLTPNRUDQJOIKABWZCEVFGKYOECMASGHSHXM",
+        "score": 9.018849552831954,
+        "doubledScore": 8.979655546221121,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final key groups G↔T",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8560299
+      },
+      {
+        "id": "UTM4P-611cf5c42996",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABZWCEVFTKYOECMASTHSHXM",
+        "score": 9.019706085459587,
+        "doubledScore": 8.980089764524523,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens iao↔ie",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.7620861
+      },
+      {
+        "id": "UTM4P-0db5ab9fb9e1",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOEZMASTHSHXM",
+        "score": 9.018966941055268,
+        "doubledScore": 8.980621915288726,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final token uai→Z",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.6027214
+      },
+      {
+        "id": "UTM4P-52bd03387639",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLQGPNRUDLJOIKABWZCEVFTKYOECMASTHSHXM",
+        "score": 9.017568683210406,
+        "doubledScore": 8.980756821214694,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens a↔en",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8203163
+      },
+      {
+        "id": "UTM4P-1700a7322de7",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOEWMASTHSHXM",
+        "score": 9.018460843400486,
+        "doubledScore": 8.980869890379658,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final token uai→W",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.5568803
+      },
+      {
+        "id": "UTM4P-e6805080e2f9",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABCZWEVFTKYOECMASTHSHXM",
+        "score": 9.020338657079403,
+        "doubledScore": 8.980929247525673,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens iao↔in",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8218598
+      },
+      {
+        "id": "UTM4P-611f266c3689",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPMRUDQJOIKABWZCEVFTKYOECNASTHSHXN",
+        "score": 9.020013065807447,
+        "doubledScore": 8.981081627631085,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final key groups N↔M",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.6361791
+      },
+      {
+        "id": "UTM4P-927192216db1",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQMOIKABWZCEVFTKYOECJASTHSHXJ",
+        "score": 9.021438849230258,
+        "doubledScore": 8.981441600228186,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final key groups J↔M",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.6060772
+      },
+      {
+        "id": "UTM4P-c84dadfead81",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKAFWZCEVBTKYOECMASTHSHXM",
+        "score": 9.01770725618013,
+        "doubledScore": 8.981675117275561,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens iang↔iu",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8231513
+      },
+      {
+        "id": "UTM4P-f2bb5996d8cd",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOECHASTMSHXM",
+        "score": 9.022173670295885,
+        "doubledScore": 8.98178474160517,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens uan↔uo",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.7645956
+      }
+    ],
+    "3": [
+      {
+        "id": "UTM4P-96aff659c662",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOACMESTHSHXM",
+        "score": 9.017804507684776,
+        "doubledScore": 8.979047151022534,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens ua↔uang",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.7994217
+      },
+      {
+        "id": "UTM4P-422a9649a5b5",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOECMASTHSHXM",
+        "score": 9.018068226932092,
+        "doubledScore": 8.979367010451751,
+        "initialDistance": 2,
+        "parent": "UTM4P-735c273a6d17",
+        "mutation": "final key groups A↔P",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.9748997
+      },
+      {
+        "id": "UTM4P-1280c85b1861",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLTPNRUDQJOIKABWZCEVFGKYOECMASGHSHXM",
+        "score": 9.018849552831954,
+        "doubledScore": 8.979655546221121,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final key groups G↔T",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8560299
+      },
+      {
+        "id": "UTM4P-ffc1c1f2bcb9",
+        "state": "MPNFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOECMASTHSHXM",
+        "score": 9.0182860467206,
+        "doubledScore": 8.97980813478786,
+        "initialDistance": 3,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "initial families b↔m",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8470018
+      },
+      {
+        "id": "UTM4P-611cf5c42996",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABZWCEVFTKYOECMASTHSHXM",
+        "score": 9.019706085459587,
+        "doubledScore": 8.980089764524523,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens iao↔ie",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.7620861
+      },
+      {
+        "id": "UTM4P-0db5ab9fb9e1",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOEZMASTHSHXM",
+        "score": 9.018966941055268,
+        "doubledScore": 8.980621915288726,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final token uai→Z",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.6027214
+      },
+      {
+        "id": "UTM4P-52bd03387639",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLQGPNRUDLJOIKABWZCEVFTKYOECMASTHSHXM",
+        "score": 9.017568683210406,
+        "doubledScore": 8.980756821214694,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens a↔en",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8203163
+      },
+      {
+        "id": "UTM4P-1700a7322de7",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABWZCEVFTKYOEWMASTHSHXM",
+        "score": 9.018460843400486,
+        "doubledScore": 8.980869890379658,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final token uai→W",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.5568803
+      },
+      {
+        "id": "UTM4P-e6805080e2f9",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKABCZWEVFTKYOECMASTHSHXM",
+        "score": 9.020338657079403,
+        "doubledScore": 8.980929247525673,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens iao↔in",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8218598
+      },
+      {
+        "id": "UTM4P-611f266c3689",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPMRUDQJOIKABWZCEVFTKYOECNASTHSHXN",
+        "score": 9.020013065807447,
+        "doubledScore": 8.981081627631085,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final key groups N↔M",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.6361791
+      },
+      {
+        "id": "UTM4P-927192216db1",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQMOIKABWZCEVFTKYOECJASTHSHXJ",
+        "score": 9.021438849230258,
+        "doubledScore": 8.981441600228186,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final key groups J↔M",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.6060772
+      },
+      {
+        "id": "UTM4P-c84dadfead81",
+        "state": "NPMFDTBWGKHJFYXSVRZCQYYYJLLLGPNRUDQJOIKAFWZCEVBTKYOECMASTHSHXM",
+        "score": 9.01770725618013,
+        "doubledScore": 8.981675117275561,
+        "initialDistance": 2,
+        "parent": "UTM4P-422a9649a5b5",
+        "mutation": "final tokens iang↔iu",
+        "stage": "exact-polish-neighborhood",
+        "seconds": 0.8231513
+      }
+    ]
+  },
+  "completed": true,
+  "followupInputs": {
+    "anchorSha256": "f01186404a9cf265512c9179e173f6dc4422df6e22d12da1fe26e56da3c595ef",
+    "historicalScoresSha256": "166df5ee00abf46e3ffb843a741343252974f0ece02103aa90e4e7a5895cd758",
+    "templatesSha256": "6ed92993f66a41d7aa73c49c7cb9119ed980db2b512e8dafbee2581df3f8fe93",
+    "kernelBinarySha256": "f4250bba4f18c566849958b72dfdd800325483bd450a865015cbfa3aae863232"
+  },
+  "searchScope": "Bounded heuristic search within three changed initial families of the anchor. Exact initial/final one-operation neighborhoods at the anchor and reported polish centers; proxy screening for sampled coupled endpoints. No global optimality claim."
+}
