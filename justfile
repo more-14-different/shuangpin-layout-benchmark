@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-low-pinky-screen:
+    python -X utf8 tools/screen_u7e_low_pinky.py
+
+u7e-low-pinky-policy id:
+    node --expose-gc --max-old-space-size=4096 tools/review_u7e_low_pinky.js --policy "{{id}}"
+
+u7e-low-pinky-robust id:
+    $env:OPENBLAS_NUM_THREADS='1'; $env:OMP_NUM_THREADS='1'; python -X utf8 tools/robust_untoned_v52_policy.py --input "research/notes/2026-11-21-u7e-low-pinky-components-{{id}}.json.gz" --output "research/notes/2026-11-21-u7e-low-pinky-robustness-{{id}}.json"
+
+u7e-low-pinky-score id:
+    node --expose-gc --max-old-space-size=4096 tools/review_u7e_low_pinky.js --score "{{id}}"
+
+u7e-low-pinky-summary:
+    python -X utf8 tools/summarize_u7e_low_pinky.py
+
 ued-robust-grid:
     python -X utf8 tools/robust_untoned_v52_policy.py --input research/notes/2026-11-20-untoned-frontiers-r11-components-UED-18c004bd1f31.json.gz --output research/notes/2026-11-21-ued-robust-review-grid.json
 
