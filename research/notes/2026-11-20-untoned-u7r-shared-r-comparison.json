@@ -1,0 +1,89 @@
+{
+  "completed": true,
+  "sourceCommit": "e135c86412114267248e1853e1910ef6a79627dd",
+  "contract": "Only E/O carriers C -> R; original finals fixed; all 144 policies per member; own optimum at each cost point; not a new annealing search or robust-policy selection",
+  "rows": [
+    {
+      "id": "U7R-143cf16e1fa2",
+      "M": 41,
+      "original1x": 9.529459358735961,
+      "original2x": 9.527744913952986,
+      "score": 9.540617389588355,
+      "two": 9.543297963272376,
+      "delta1x": 0.011158030852394418,
+      "delta2x": 0.015553049319390055,
+      "policy1x": {
+        "keytao": "12/231/24",
+        "sanpin": "12/213/23"
+      },
+      "policy2x": {
+        "keytao": "12/213/24",
+        "sanpin": "12/213/23"
+      },
+      "vsU7EBest1x": -0.01635935843608216,
+      "vsU7EBest2x": 0.001931118857767089
+    },
+    {
+      "id": "U7R-9a7d2e90a161",
+      "M": 41,
+      "original1x": 9.531151042184167,
+      "original2x": 9.527197192834603,
+      "score": 9.541530848100324,
+      "two": 9.541668604126311,
+      "delta1x": 0.010379805916157281,
+      "delta2x": 0.014471411291708591,
+      "policy1x": {
+        "keytao": "12/231/24",
+        "sanpin": "12/213/23"
+      },
+      "policy2x": {
+        "keytao": "12/213/24",
+        "sanpin": "12/213/23"
+      },
+      "vsU7EBest1x": -0.015445899924113604,
+      "vsU7EBest2x": 0.00030175971170187665
+    }
+  ],
+  "u7eFrontier": {
+    "one": {
+      "id": "U7R-ba54b6e08e04",
+      "score": 9.556976748024438,
+      "two": 9.544919538756023
+    },
+    "two": {
+      "id": "UED-18c004bd1f31",
+      "score": 9.566522024808478,
+      "two": 9.54136684441461
+    }
+  },
+  "independentPythonAudit": [
+    {
+      "id": "U7R-143cf16e1fa2",
+      "M": 41,
+      "D": 2,
+      "coverage": 399,
+      "unique": 348,
+      "branches": 0,
+      "qzEmpty": true,
+      "zqEmpty": true
+    },
+    {
+      "id": "U7R-9a7d2e90a161",
+      "M": 41,
+      "D": 2,
+      "coverage": 399,
+      "unique": 348,
+      "branches": 0,
+      "qzEmpty": true,
+      "zqEmpty": true
+    }
+  ],
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-u7r-shared-r-U7R-143cf16e1fa2.json": "23dd340fe328fdf8ca7233381785ad6b32fea6bcbc59bd5f98224577edc2041c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-u7r-shared-r-U7R-9a7d2e90a161.json": "74ef259c92a98e2b7ec9394ff1a9eb362052b19e4ee28eaf064ee628b28886ad",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-u7e-deeper-v52-policy-U7R-ba54b6e08e04.json": "7eaf64e6bb455a442179610f237a0dd24bf3069124a69ecf3a3e827f95a28b15",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\notes\\2026-11-20-untoned-cr7e-u7e-deeper-v52-policy-UED-18c004bd1f31.json": "cdf56fa608a88b52d3aa3a63c8e2fa0e8b51c312f5243911fda47c46e9071fb5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\memory_r2.py": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\R11_integrated_replay\\audit.py": "fa9bfe87218ea8d2013abd9b83aa936b15d1b7dc2f6c560a4e9e93dfd1838267"
+  }
+}

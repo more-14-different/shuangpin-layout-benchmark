@@ -1,5 +1,8 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+untoned-u7r-shared-r id:
+    node --expose-gc --max-old-space-size=4096 tools/compare_untoned_u7r_shared_r.js "{{id}}"
+
 untoned-frontiers-r11-prepare:
     python -X utf8 tools/publish_untoned_frontiers_r11.py prepare
 
