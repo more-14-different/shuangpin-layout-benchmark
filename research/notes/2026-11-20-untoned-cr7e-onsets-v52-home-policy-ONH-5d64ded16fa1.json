@@ -1,0 +1,248 @@
+{
+  "id": "ONH-5d64ded16fa1",
+  "family": "onset-perturbation",
+  "domain": 21,
+  "initialMap": {
+    "b": "B",
+    "p": "P",
+    "m": "M",
+    "f": "W",
+    "d": "D",
+    "t": "T",
+    "n": "N",
+    "l": "L",
+    "g": "G",
+    "k": "P",
+    "h": "H",
+    "j": "J",
+    "q": "Q",
+    "x": "X",
+    "zh": "K",
+    "ch": "S",
+    "sh": "E",
+    "r": "R",
+    "z": "Z",
+    "c": "C",
+    "s": "S",
+    "A": "R",
+    "E": "R",
+    "O": "R",
+    "W": "F",
+    "Y": "Y",
+    "YU": "Y"
+  },
+  "finalMap": {
+    "a": "L",
+    "ai": "K",
+    "an": "N",
+    "ang": "Y",
+    "ao": "Z",
+    "e": "S",
+    "ei": "P",
+    "en": "E",
+    "eng": "R",
+    "er": "J",
+    "i": "F",
+    "ia": "P",
+    "ian": "J",
+    "iang": "L",
+    "iao": "C",
+    "ie": "Q",
+    "in": "G",
+    "ing": "D",
+    "iong": "N",
+    "iu": "E",
+    "o": "M",
+    "ong": "P",
+    "ou": "W",
+    "u": "H",
+    "ua": "Q",
+    "uai": "X",
+    "uan": "T",
+    "uang": "C",
+    "ui": "G",
+    "un": "B",
+    "uo": "M",
+    "v": "T",
+    "van": "R",
+    "ve": "K",
+    "vn": "B"
+  },
+  "activePhysicalKeys": [
+    21,
+    21
+  ],
+  "auxiliarySemantics": {
+    "toneKeyClass": "AVUIO",
+    "toneKeySet": "AIOUV",
+    "shapeKeysByMeaning": "AVUIO",
+    "toneKeysByTone": "IVUAO",
+    "toneDigitsByShapeMeaning": "42310"
+  },
+  "optimal1x": {
+    "score": 9.56802629220967,
+    "policy": {
+      "keytao": "12/231/24",
+      "sanpin": "12/213/23"
+    },
+    "memberRunnerUpGaps": {
+      "keytao": 0.0002758110110567813,
+      "sanpin": 0.0005536620199730891
+    }
+  },
+  "optimal2x": {
+    "score": 9.56889382917531,
+    "policy": {
+      "keytao": "12/231/24",
+      "sanpin": "12/213/23"
+    },
+    "memberRunnerUpGaps": {
+      "keytao": 0.00030378498190541947,
+      "sanpin": 0.0006199017212438207
+    }
+  },
+  "canonicalReplays": [
+    {
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "231",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "213",
+          "word4": "23"
+        }
+      },
+      "score": 9.56802629220967,
+      "doubledScore": 9.56889382917531,
+      "modes": {
+        "keytao": {
+          "character": {
+            "count": 6233,
+            "totalWeight": 34201052,
+            "motorUpperMs": 101.51290786361378,
+            "firstAuxRate": 0.21858912410062709,
+            "secondAuxRate": 0.04508431495031205,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005009465790701409,
+            "meanRejectedCandidates": 0.006247176256449655,
+            "meanPageActions": 0.00000415191906962394,
+            "meanKeys": 2.263673439050939,
+            "effectiveMs": 183.93422344185973
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 401.56461060903035,
+            "firstAuxRate": 0.19274548185090581,
+            "secondAuxRate": 0.03508139532561072,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003706756655698739,
+            "meanRejectedCandidates": 0.004455079321893797,
+            "meanPageActions": 8.1103332802673e-7,
+            "meanKeys": 4.227826877176517,
+            "effectiveMs": 472.35972503149765
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 329.8798526720151,
+            "firstAuxRate": 0.4888949338196351,
+            "secondAuxRate": 0.17899402905306327,
+            "thirdAuxRate": 0.04165456531055163,
+            "selectionRate": 0.005349113374000523,
+            "meanRejectedCandidates": 0.006644331082630138,
+            "meanPageActions": 0.000001758541081054859,
+            "meanKeys": 3.70954352818325,
+            "effectiveMs": 546.2851232678462
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 428.24983382771103,
+            "firstAuxRate": 0.21805987048395725,
+            "secondAuxRate": 0.02804813732110244,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.002240889096407101,
+            "meanRejectedCandidates": 0.0026629346578435284,
+            "meanPageActions": 7.122479848729924e-7,
+            "meanKeys": 4.246108007805059,
+            "effectiveMs": 503.56013003436084
+          }
+        },
+        "sanpin": {
+          "character": {
+            "count": 6238,
+            "totalWeight": 34283114,
+            "motorUpperMs": 103.64240095302081,
+            "firstAuxRate": 0.22007116973096436,
+            "secondAuxRate": 0.05161293107738113,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.007567282248631207,
+            "meanRejectedCandidates": 0.009795259555476787,
+            "meanPageActions": 0.00004092393707292751,
+            "meanKeys": 2.2716841008083453,
+            "effectiveMs": 190.1900407035989
+          },
+          "word2": {
+            "count": 132814,
+            "totalWeight": 3604044247,
+            "motorUpperMs": 402.7769301915638,
+            "firstAuxRate": 0.19274548185090581,
+            "secondAuxRate": 0.03888846068320759,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.005346159946853727,
+            "meanRejectedCandidates": 0.006641080785820885,
+            "meanPageActions": 0.0000026334304879581575,
+            "meanKeys": 4.231633942534113,
+            "effectiveMs": 475.8076529883475
+          },
+          "word3": {
+            "count": 72923,
+            "totalWeight": 1101481234,
+            "motorUpperMs": 340.43908683855426,
+            "firstAuxRate": 0.4888949338196351,
+            "secondAuxRate": 0.20214629276198817,
+            "thirdAuxRate": 0.058758157653732664,
+            "selectionRate": 0.010982180745895485,
+            "meanRejectedCandidates": 0.014861762047958776,
+            "meanPageActions": 0.000022426165092523038,
+            "meanKeys": 3.749799384235356,
+            "effectiveMs": 572.718026508624
+          },
+          "word4": {
+            "count": 77674,
+            "totalWeight": 828363172,
+            "motorUpperMs": 430.3321499028864,
+            "firstAuxRate": 0.21805987048395725,
+            "secondAuxRate": 0.03277911901182396,
+            "thirdAuxRate": 0,
+            "selectionRate": 0.003421838507325625,
+            "meanRejectedCandidates": 0.004220462857564122,
+            "meanPageActions": 0.0000071599030479351155,
+            "meanKeys": 4.250838989495781,
+            "effectiveMs": 507.8501209698087
+          }
+        }
+      }
+    }
+  ],
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\verify_untoned_cr7e_onsets_home.js": "929ca3b08853429547d724d73d265c1095bae4a033addacc9b6f0f0c1f330b1f",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\search_untoned_cr7e_onsets_home.js": "a4fff9c45c233066a5c6fa7c222a3c87953d7c0fb3967f857350d9e77fa67609",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\a7_CKT_R11.html": "3f533665636434bca5104c542cdceda8f12f1c0c29804b5a451820911f3b8126",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\ckt-long-code-audit-20261118\\error-profile-all-roles.json": "4a1b9a67327915c2dd74ec6251867d80c7ac410a71c3e247d0f30c7e1fcbd70c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\score_ckt_v52.js": "b21363ce1e231ac1adcebf4e59bc4e5644742a06a48830c361658d05a51c4bbe",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\score_completion_ckt_v4.js": "a0e76706a01d9e3fb235467b5ff426ae0d016574c43899d28b57343ff8d24e15",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\verify_untoned_cr7e_v52.js": "e9c36f08ea258471674bb290cd1e97cd9c1adbd1e5dc82ed274bad3a5c166539",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\ckt_v4_model.js": "871f5edfed2b1a39549a2c6c241f6c09e98b678690bba4d295b4ad11738278f4",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\ckt_block_error.js": "df5dd34ab64df5498423e9c8d02e67f433fe830006509176c66c616870223694",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\auxiliary_semantics.js": "cbb19fd34dce5082efdf4e43837e8a8670178be92b4398f233d29a4f21cb911b",
+    "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+    "D:/C2D/Documents/rime-snow-pinyin/rime-stroke/stroke.dict.yaml": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+    "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+    "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810"
+  }
+}
