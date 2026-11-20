@@ -1,5 +1,14 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-competing-score id:
+    node --expose-gc --max-old-space-size=4096 tools/compare_u7e_competing_performance.js "{{id}}"
+
+u7e-competing-summary:
+    python -X utf8 tools/summarize_u7e_competing_performance.py
+
+u7e-competing-test:
+    node --test tests/u7e-competing-performance.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 u7e-gpu-close-review:
     node --expose-gc --max-old-space-size=4096 tools/review_u7e_gpu_frontier.js
 
