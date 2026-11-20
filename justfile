@@ -1,5 +1,22 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+um40-ergonomics-collisions:
+    node --max-old-space-size=8192 tools/compare_um40_ergonomics_collisions.js
+
+um40-ergonomics-collisions-test:
+    node --test tests/um40-ergonomics-collisions.test.mjs tests/um40-fixed-initial-rhymes.test.mjs tests/untoned-m40d3-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+um40-rhymes-v52:
+    node --max-old-space-size=4096 tools/refine_um40_rhymes_v52.js --rounds=6
+    node --max-old-space-size=4096 tools/refine_um40_rhymes_v52.js --boundary --rounds=0
+
+um40-rhymes-v52-verify:
+    node --max-old-space-size=8192 tools/refine_um40_rhymes_v52.js --verify
+    python tools/verify_um40_rhyme_memory.py
+
+um40-rhymes-v52-test:
+    node --test tests/um40-fixed-initial-rhymes.test.mjs tests/untoned-m40d3-v52.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
 untoned-m40d3-v52:
     node --max-old-space-size=4096 tools/search_untoned_m40d3_v52.js --rounds=14
     node --max-old-space-size=4096 tools/search_untoned_m40d3_v52.js --rounds=0 --polish
