@@ -56,7 +56,16 @@ function main(){
   const byToken=new Map(bundle.tokenKeys.map((t,i)=>[t,layout.tonedCodes[i]]));
   const memory=tonedMemoryAudit({publication:{rhymeGroups:layout.rhymeGroups,toneRowsByTone:layout.toneRowsByTone},tonedCodes:data.pinyin.map(p=>[1,2,3,4,5].map(t=>byToken.get(p+t)||null))},data.pinyin,inv.decomposition);
   assert.equal(memory.lower,layout.memoryLower);assert.equal(memory.guard,layout.memoryGuard);
-  assert.equal(memory.D,layout.D);assert.ok(memory.D<=2);assert.equal(memory.F,0);assert.ok(memory.lower<=18&&memory.guard<=21);
+  assert.equal(memory.D,layout.D);assert.ok(memory.D<=search.contract.Dmaximum);assert.equal(memory.F,0);
+  assert.ok(memory.lower<=search.contract.MlowerMaximum&&memory.guard<=search.contract.MguardMaximum);
+  if(search.contract.fixedInitialMap){
+   const {marsFirstAtom}=require('./mars_toned_factorization');
+   for(let i=0;i<bundle.tokenKeys.length;i++){
+    const atom=marsFirstAtom(bundle.tokenKeys[i].slice(0,-1));
+    const name=atom.startsWith('zero-')?atom.slice(-1):atom;
+    assert.equal(layout.tonedCodes[i][0],search.contract.fixedInitialMap[name],'frozen onset '+bundle.tokenKeys[i]);
+   }
+  }
   results.push({id:layout.id,originRoutes:layout.originRoutes,policy,score,doubleScore,tracks,ergonomics,memory});
   console.log(JSON.stringify({id:layout.id,score,doubleScore,leftPinky:ergonomics.leftPinkyQAZPeak4NativeTracks.value}));
  }
