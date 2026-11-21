@@ -1,5 +1,17 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-hourly-ai-start:
+    & './tools/start_u7e_hourly_review.ps1'
+
+u7e-hourly-ai-status:
+    Get-Content -LiteralPath 'research/.cache/u7e-grouped-cpu-20261121/ai-reviews/timer-status.json' -Raw
+
+u7e-hourly-ai-stop:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/ai-reviews/STOP' -Force | Out-Null
+
+u7e-hourly-ai-test:
+    python -X utf8 -m unittest discover -s tests -p test_u7e_hourly_review.py
+
 u7e-grouped-cpu-prepare:
     python -X utf8 tools/prepare_u7e_grouped_cpu.py
 
