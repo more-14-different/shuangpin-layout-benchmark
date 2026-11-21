@@ -2057,14 +2057,11 @@
   },
   "archives": {
     "research/notes/2026-11-21-a-locked-rhymes-v52-results-scores.jsonl.gz": {
-      "sha256": "79e1d0eb87b371d9a5b630764dbb2a08d7abba37831ec4dce06ec2e7bc1f87cc",
-      "bytes": 25887605,
-      "uncompressedSha256": "4c07e64bc8b45cdc97080d5e13d8e9be75d68d3f78a48c45b11b7c639e55cdbf"
-    },
-    "research/notes/2026-11-21-a-locked-rhymes-v52-results-checkpoint.json.gz": {
-      "sha256": "7b5cecea242dbb55a7b34dad8423eb892fe9f5d052db67f3b7c308d3c4fda80a",
-      "bytes": 59250,
-      "uncompressedSha256": "6bcbc5ced7d485fc7a4a8757fcadd11969558b4612b99d2b6a88d9b79096b0b9"
+      "sha256": "6762def71d9c6b0f95510a1ce1ec0ad83e27841cab7133dfd95a170610fc6ef7",
+      "bytes": 16515,
+      "uncompressedSha256": "37325efbdf9e2b834c033cfe792618ea33bfdcffad7e35a2c0d7686baac3eda3",
+      "records": 27,
+      "scope": "retained representatives only"
     },
     "research/notes/2026-11-21-a-locked-rhymes-v52-results-resources.jsonl.gz": {
       "sha256": "cc55fd682f578bde480500ab600e901dedd28c4573f7ef736dd5ee4184c86cf6",
@@ -2262,5 +2259,43 @@
     "Finite neighborhood and stochastic search; no global optimality claim.",
     "Default-cost improvement does not imply improvement at 2x/3x/5x.",
     "UM40 initial lanes retain original A final constraints and policies; they are not the earlier unrestricted UM40 layouts."
-  ]
+  ],
+  "retention": {
+    "mode": "final-pareto-representatives-only",
+    "retainedRecords": 27,
+    "historicalExactEvaluations": 43088,
+    "discardedRecords": 43061,
+    "resumeOriginalTrajectoryAvailable": false,
+    "compactedAt": "2026-11-21T03:31:36.036608+00:00",
+    "selection": "Union of per-lane nondominated 1x/2x/3x/5x representatives and per-multiplier bests; all 27 independently replayed.",
+    "previousFullScoreArchive": {
+      "sha256": "79e1d0eb87b371d9a5b630764dbb2a08d7abba37831ec4dce06ec2e7bc1f87cc",
+      "bytes": 25887605,
+      "uncompressedSha256": "4c07e64bc8b45cdc97080d5e13d8e9be75d68d3f78a48c45b11b7c639e55cdbf"
+    },
+    "removedFiles": [
+      {
+        "path": "research/.cache/a-locked-rhymes-v52-6h-20261121/scores.jsonl",
+        "bytes": 148797505,
+        "sha256": "4c07e64bc8b45cdc97080d5e13d8e9be75d68d3f78a48c45b11b7c639e55cdbf"
+      },
+      {
+        "path": "research/.cache/a-locked-rhymes-v52-6h-20261121/checkpoint.json",
+        "bytes": 365447,
+        "sha256": "6bcbc5ced7d485fc7a4a8757fcadd11969558b4612b99d2b6a88d9b79096b0b9"
+      },
+      {
+        "path": "research/.cache/a-locked-rhymes-v52-6h-20261121/checkpoint-before-hourly-review.json",
+        "bytes": 423073,
+        "sha256": "ce64372a2e2c939061045f672a7942095fb2578dedd93ea3752b3695f22f55fc"
+      },
+      {
+        "path": "research/notes/2026-11-21-a-locked-rhymes-v52-results-checkpoint.json.gz",
+        "bytes": 59250,
+        "sha256": "7b5cecea242dbb55a7b34dad8423eb892fe9f5d052db67f3b7c308d3c4fda80a"
+      }
+    ],
+    "gitHistoryRewritten": false,
+    "historicalAllRowAuditPreserved": true
+  }
 }

@@ -52,6 +52,18 @@ def normalize(modes, refs, m):
 
 
 def main():
+    saved_summary=Path(str(PREFIX)+'.json')
+    if saved_summary.exists():
+        saved=read(saved_summary)
+        if saved.get('retention',{}).get('mode')=='final-pareto-representatives-only':
+            archive=Path(str(PREFIX)+'-scores.jsonl.gz')
+            with gzip.open(archive,'rt',encoding='utf-8') as stream:
+                retained=[json.loads(line) for line in stream if line.strip()]
+            assert len(retained)==saved['retention']['retainedRecords']
+            assert {r['id'] for r in retained}=={e['id'] for e in read(CONFIG)['entries']}
+            assert sha(archive)==saved['archives'][archive.relative_to(ROOT).as_posix()]['sha256']
+            print(json.dumps({'status':'already-compacted','historicalEvaluations':saved['exactEvaluations'],'retained':len(retained),'report':str(PREFIX)+'.md'}))
+            return
     contract = read(ROOT / 'research/.cache/untoned-t2126-m4-20261120/contract.json')
     baseline = next(e for e in contract['inputs']['entries'] if e['id'] == 'RC26-39a5bfdc045342cd')
     verified = read(ROOT / 'research/notes/2026-11-21-a-locked-rhymes-v52-verification.json')

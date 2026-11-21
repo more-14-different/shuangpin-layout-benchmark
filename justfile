@@ -8,6 +8,10 @@ a-locked-rhymes-report:
 a-locked-rhymes-results-test:
     node --max-old-space-size=1536 --test --test-concurrency=1 tests/a-locked-rhyme-results.test.mjs tests/a-locked-rhyme-review.test.mjs tests/a-locked-rhymes-v52.test.mjs tests/ckt-v52.test.mjs
 
+a-locked-rhymes-compact:
+    python -X utf8 tools/compact_a_locked_rhyme_results.py
+    just a-locked-rhymes-results-test
+
 a-locked-rhymes-verify:
     node --expose-gc --max-old-space-size=1536 tools/search_a_locked_rhymes_v52.js --verify
     node --test tests/a-locked-rhymes-v52.test.mjs tests/ckt-v52.test.mjs

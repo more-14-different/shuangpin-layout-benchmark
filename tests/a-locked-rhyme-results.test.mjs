@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,createReadStream} from 'node:fs';
+import {readFileSync,createReadStream,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {createGunzip} from 'node:zlib';
+import {createGunzip,gunzipSync} from 'node:zlib';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 const search=require('../tools/search_a_locked_rhymes_v52');
@@ -49,7 +49,7 @@ test('archived best and Pareto sets retain actual score tradeoffs',()=>{
  assert.ok(best.scores['1']<result.baseline.scores['1']);
  for(const k of ['2','3','5'])assert.ok(best.scores[k]>result.baseline.scores[k]);
 });
-test('full archives are intact and recover all exact score records',async()=>{
+test('retained archives are intact and distinguish historical evaluations from retained records',async()=>{
  for(const [file,record]of Object.entries(result.archives)){
   const compressedHash=createHash('sha256');for await(const chunk of createReadStream(file))compressedHash.update(chunk);
   assert.equal(compressedHash.digest('hex'),record.sha256,file);
@@ -59,8 +59,21 @@ test('full archives are intact and recover all exact score records',async()=>{
    if(file.endsWith('-scores.jsonl.gz'))for(const byte of chunk)if(byte===10)lines++;
   }
   assert.equal(originalHash.digest('hex'),record.uncompressedSha256,file);
-  if(file.endsWith('-scores.jsonl.gz'))assert.equal(lines,result.exactEvaluations);
+  if(file.endsWith('-scores.jsonl.gz'))assert.equal(lines,result.retention?.retainedRecords??result.exactEvaluations);
  }
+});
+test('compaction keeps every selected layout and drops the original resumable journal',()=>{
+ if(!result.retention)return;
+ assert.equal(result.retention.mode,'final-pareto-representatives-only');
+ assert.equal(result.retention.retainedRecords,config.entries.length);
+ assert.equal(result.retention.retainedRecords+result.retention.discardedRecords,result.exactEvaluations);
+ assert.equal(result.retention.resumeOriginalTrajectoryAvailable,false);
+ assert.equal(result.retention.historicalAllRowAuditPreserved,true);
+ assert.ok(!Object.keys(result.archives).some(p=>p.endsWith('-checkpoint.json.gz')));
+ const rows=gunzipSync(readFileSync(prefix+'-scores.jsonl.gz')).toString('utf8').trim().split('\n').map(JSON.parse);
+ assert.deepEqual(rows.map(r=>r.id).sort(),config.entries.map(e=>e.id).sort());
+ for(const row of rows){const e=config.entries.find(e=>e.id===row.id);assert.equal(row.state,e.state);assert.deepEqual(row.scores,e.scores);}
+ for(const file of ['scores.jsonl','checkpoint.json','checkpoint-before-hourly-review.json'])assert.equal(existsSync('research/.cache/a-locked-rhymes-v52-6h-20261121/'+file),false,file);
 });
 test('all final representatives passed independent full JS versus native v5.2 replay',()=>{
  const replay=read(prefix+'-replay.json');assert.equal(replay.passed,true);

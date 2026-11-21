@@ -80,6 +80,7 @@ async function verify(){
  }finally{worker.child.stdin.end();}
 }
 async function run(){
+ if(fs.existsSync(path.join(WORK,'retention.json')))throw Error('This stopped run was compacted at user request; its original trajectory cannot be resumed. Use a separately authorized new run.');
  fs.mkdirSync(WORK,{recursive:true});const {c,a,initials}=setup(),verification=read(path.join(ROOT,'research/notes/2026-11-21-a-locked-rhymes-v52-verification.json'));
  assert.deepEqual(verification.constraints.allowedInitials,initials);
  const hours=Number(process.argv.find(s=>s.startsWith('--hours='))?.split('=')[1]||6);
