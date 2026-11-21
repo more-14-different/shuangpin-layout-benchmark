@@ -1,5 +1,13 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+a-locked-rhymes-report:
+    python -X utf8 tools/report_a_locked_rhymes.py
+    node --expose-gc --max-old-space-size=1536 tools/verify_a_locked_rhyme_finalists.js
+    python -X utf8 tools/report_a_locked_rhymes.py
+
+a-locked-rhymes-results-test:
+    node --max-old-space-size=1536 --test --test-concurrency=1 tests/a-locked-rhyme-results.test.mjs tests/a-locked-rhyme-review.test.mjs tests/a-locked-rhymes-v52.test.mjs tests/ckt-v52.test.mjs
+
 a-locked-rhymes-verify:
     node --expose-gc --max-old-space-size=1536 tools/search_a_locked_rhymes_v52.js --verify
     node --test tests/a-locked-rhymes-v52.test.mjs tests/ckt-v52.test.mjs

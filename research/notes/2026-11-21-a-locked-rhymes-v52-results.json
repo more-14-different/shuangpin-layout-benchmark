@@ -1,0 +1,2266 @@
+{
+  "version": "a-locked-rhymes-stopped-results-v1",
+  "status": "stopped-by-request",
+  "startedAt": "2026-11-20T21:30:36.997Z",
+  "stoppedAt": "2026-11-21T03:08:36.574Z",
+  "plannedDeadline": "2026-11-21T03:30:36.998Z",
+  "exactEvaluations": 43088,
+  "baseline": {
+    "id": "RC26-39a5bfdc045342cd",
+    "scores": {
+      "1": 9.086538431214596,
+      "2": 9.043952097501606,
+      "3": 9.039403855470775,
+      "5": 9.051556987700442
+    }
+  },
+  "constraints": {
+    "D": 3,
+    "V": 1,
+    "M": 40,
+    "unique399": true,
+    "fixed": {
+      "ei": "E",
+      "er": "E",
+      "o": "O",
+      "uo": "O"
+    },
+    "groups": [
+      [
+        "ei",
+        "er"
+      ],
+      [
+        "o",
+        "uo"
+      ],
+      [
+        "uan",
+        "van"
+      ],
+      [
+        "un",
+        "vn"
+      ],
+      [
+        "iang",
+        "uang"
+      ],
+      [
+        "iong",
+        "ong"
+      ],
+      [
+        "ing",
+        "uai"
+      ]
+    ],
+    "allowedInitials": {
+      "A": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "S",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "W",
+        "YU": "W"
+      },
+      "UM40": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      }
+    },
+    "policies": {
+      "keytao": {
+        "word2": "12",
+        "word3": "12",
+        "word4": "24"
+      },
+      "sanpin": {
+        "word2": "12",
+        "word3": "21",
+        "word4": "13"
+      }
+    }
+  },
+  "lanes": {
+    "A-regular": {
+      "evaluations": 10773,
+      "seconds": 5022.795000000015,
+      "best": {
+        "id": "ALR-b51f239b896d",
+        "initials": "A",
+        "state": "ARLNKHEDJEIBSCZWFQMXOMYUSQTCPGOPTVG",
+        "scores": {
+          "1": 9.086190322523255,
+          "2": 9.045148053478846,
+          "3": 9.04165172723898,
+          "5": 9.055167560218337
+        },
+        "mutation": "ai↔in",
+        "assignedLane": "A-regular",
+        "scoredAt": "2026-11-20T21:41:27.503Z"
+      },
+      "pareto": [
+        {
+          "id": "ALR-b51f239b896d",
+          "initials": "A",
+          "state": "ARLNKHEDJEIBSCZWFQMXOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086190322523255,
+            "2": 9.045148053478846,
+            "3": 9.04165172723898,
+            "5": 9.055167560218337
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:41:27.503Z"
+        },
+        {
+          "id": "ALR-d5c83137d5a2",
+          "initials": "A",
+          "state": "AFLNKHEDJEIBSCZWRQMXOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086245689220076,
+            "2": 9.045010503494732,
+            "3": 9.041427403746987,
+            "5": 9.054899890726727
+          },
+          "mutation": "iao↔iu",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:39:42.396Z"
+        },
+        {
+          "id": "ALR-4dabbbaff075",
+          "initials": "A",
+          "state": "AFLNKHEDJEIBSCXZRQMWOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086538431214596,
+            "2": 9.043952097501606,
+            "3": 9.039403855470775,
+            "5": 9.051556987700442
+          },
+          "mutation": "original A finals",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:30:38.358Z"
+        },
+        {
+          "id": "ALR-c88217c58611",
+          "initials": "A",
+          "state": "ATLNKHEDJEIBSCXZFQMWOMYUSQRCPGOPRVG",
+          "scores": {
+            "1": 9.087444384797742,
+            "2": 9.044390035177246,
+            "3": 9.03947234695368,
+            "5": 9.051057947584326
+          },
+          "mutation": "uan/van↔ai",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:33:55.468Z"
+        },
+        {
+          "id": "ALR-2502dc98c490",
+          "initials": "A",
+          "state": "AGLNKREDJEIBSCZWFQMXOMYUSQHCPTOPHVT",
+          "scores": {
+            "1": 9.087611495341697,
+            "2": 9.043770110133915,
+            "3": 9.039009410185123,
+            "5": 9.051393108234285
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:01:54.152Z"
+        },
+        {
+          "id": "ALR-8a9ae613cad1",
+          "initials": "A",
+          "state": "ATLNKREDJEIBSCZWFQMXOMYUSQHCPGOPHVG",
+          "scores": {
+            "1": 9.087958103179552,
+            "2": 9.043351943071793,
+            "3": 9.038037771731592,
+            "5": 9.04966755862752
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:59:04.000Z"
+        },
+        {
+          "id": "ALR-06edd3dc50a4",
+          "initials": "A",
+          "state": "AFLNKHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.088083292265267,
+            "2": 9.04410472967158,
+            "3": 9.038525914011405,
+            "5": 9.049233351858847
+          },
+          "mutation": "ua→R",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:33:44.742Z"
+        },
+        {
+          "id": "ALR-84c50828356a",
+          "initials": "A",
+          "state": "ATLNKREDJEIBSCXZFQMWOMYUSQHCPGOPHVG",
+          "scores": {
+            "1": 9.088614824936572,
+            "2": 9.042706622864387,
+            "3": 9.036444156442531,
+            "5": 9.046751614562702
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T22:10:21.975Z"
+        },
+        {
+          "id": "ALR-98f5c1c01e0b",
+          "initials": "A",
+          "state": "AGKNLHEDJEIBSCZWRQMXOMYUSQTCPVOPTFV",
+          "scores": {
+            "1": 9.090973330716045,
+            "2": 9.044498096128551,
+            "3": 9.037288115459585,
+            "5": 9.046052949160952
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:51:52.254Z"
+        },
+        {
+          "id": "ALR-9328fc559eb9",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.091356795904595,
+            "2": 9.044433126705139,
+            "3": 9.036831054089626,
+            "5": 9.044936927989498
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:32:20.104Z"
+        },
+        {
+          "id": "ALR-8b741e7ea562",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.0928786816167,
+            "2": 9.044548206851799,
+            "3": 9.035908656579686,
+            "5": 9.042563173499666
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:37:01.952Z"
+        }
+      ],
+      "bestByMultiplier": {
+        "1": {
+          "id": "ALR-b51f239b896d",
+          "initials": "A",
+          "state": "ARLNKHEDJEIBSCZWFQMXOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086190322523255,
+            "2": 9.045148053478846,
+            "3": 9.04165172723898,
+            "5": 9.055167560218337
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:41:27.503Z"
+        },
+        "2": {
+          "id": "ALR-84c50828356a",
+          "initials": "A",
+          "state": "ATLNKREDJEIBSCXZFQMWOMYUSQHCPGOPHVG",
+          "scores": {
+            "1": 9.088614824936572,
+            "2": 9.042706622864387,
+            "3": 9.036444156442531,
+            "5": 9.046751614562702
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T22:10:21.975Z"
+        },
+        "3": {
+          "id": "ALR-8b741e7ea562",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.0928786816167,
+            "2": 9.044548206851799,
+            "3": 9.035908656579686,
+            "5": 9.042563173499666
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:37:01.952Z"
+        },
+        "5": {
+          "id": "ALR-8b741e7ea562",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.0928786816167,
+            "2": 9.044548206851799,
+            "3": 9.035908656579686,
+            "5": 9.042563173499666
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:37:01.952Z"
+        }
+      },
+      "lastAssignedImprovementAt": "2026-11-20T21:41:27.503Z"
+    },
+    "A-double-empty": {
+      "evaluations": 10768,
+      "seconds": 5022.5190000000175,
+      "best": {
+        "id": "ALR-b51f239b896d",
+        "initials": "A",
+        "state": "ARLNKHEDJEIBSCZWFQMXOMYUSQTCPGOPTVG",
+        "scores": {
+          "1": 9.086190322523255,
+          "2": 9.045148053478846,
+          "3": 9.04165172723898,
+          "5": 9.055167560218337
+        },
+        "mutation": "ai↔in",
+        "assignedLane": "A-regular",
+        "scoredAt": "2026-11-20T21:41:27.503Z"
+      },
+      "pareto": [
+        {
+          "id": "ALR-b51f239b896d",
+          "initials": "A",
+          "state": "ARLNKHEDJEIBSCZWFQMXOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086190322523255,
+            "2": 9.045148053478846,
+            "3": 9.04165172723898,
+            "5": 9.055167560218337
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:41:27.503Z"
+        },
+        {
+          "id": "ALR-d5c83137d5a2",
+          "initials": "A",
+          "state": "AFLNKHEDJEIBSCZWRQMXOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086245689220076,
+            "2": 9.045010503494732,
+            "3": 9.041427403746987,
+            "5": 9.054899890726727
+          },
+          "mutation": "iao↔iu",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:39:42.396Z"
+        },
+        {
+          "id": "ALR-4dabbbaff075",
+          "initials": "A",
+          "state": "AFLNKHEDJEIBSCXZRQMWOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086538431214596,
+            "2": 9.043952097501606,
+            "3": 9.039403855470775,
+            "5": 9.051556987700442
+          },
+          "mutation": "original A finals",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:30:38.358Z"
+        },
+        {
+          "id": "ALR-c88217c58611",
+          "initials": "A",
+          "state": "ATLNKHEDJEIBSCXZFQMWOMYUSQRCPGOPRVG",
+          "scores": {
+            "1": 9.087444384797742,
+            "2": 9.044390035177246,
+            "3": 9.03947234695368,
+            "5": 9.051057947584326
+          },
+          "mutation": "uan/van↔ai",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:33:55.468Z"
+        },
+        {
+          "id": "ALR-2502dc98c490",
+          "initials": "A",
+          "state": "AGLNKREDJEIBSCZWFQMXOMYUSQHCPTOPHVT",
+          "scores": {
+            "1": 9.087611495341697,
+            "2": 9.043770110133915,
+            "3": 9.039009410185123,
+            "5": 9.051393108234285
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:01:54.152Z"
+        },
+        {
+          "id": "ALR-8a9ae613cad1",
+          "initials": "A",
+          "state": "ATLNKREDJEIBSCZWFQMXOMYUSQHCPGOPHVG",
+          "scores": {
+            "1": 9.087958103179552,
+            "2": 9.043351943071793,
+            "3": 9.038037771731592,
+            "5": 9.04966755862752
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:59:04.000Z"
+        },
+        {
+          "id": "ALR-06edd3dc50a4",
+          "initials": "A",
+          "state": "AFLNKHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.088083292265267,
+            "2": 9.04410472967158,
+            "3": 9.038525914011405,
+            "5": 9.049233351858847
+          },
+          "mutation": "ua→R",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:33:44.742Z"
+        },
+        {
+          "id": "ALR-84c50828356a",
+          "initials": "A",
+          "state": "ATLNKREDJEIBSCXZFQMWOMYUSQHCPGOPHVG",
+          "scores": {
+            "1": 9.088614824936572,
+            "2": 9.042706622864387,
+            "3": 9.036444156442531,
+            "5": 9.046751614562702
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T22:10:21.975Z"
+        },
+        {
+          "id": "ALR-98f5c1c01e0b",
+          "initials": "A",
+          "state": "AGKNLHEDJEIBSCZWRQMXOMYUSQTCPVOPTFV",
+          "scores": {
+            "1": 9.090973330716045,
+            "2": 9.044498096128551,
+            "3": 9.037288115459585,
+            "5": 9.046052949160952
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T21:51:52.254Z"
+        },
+        {
+          "id": "ALR-9328fc559eb9",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.091356795904595,
+            "2": 9.044433126705139,
+            "3": 9.036831054089626,
+            "5": 9.044936927989498
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:32:20.104Z"
+        },
+        {
+          "id": "ALR-8b741e7ea562",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.0928786816167,
+            "2": 9.044548206851799,
+            "3": 9.035908656579686,
+            "5": 9.042563173499666
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:37:01.952Z"
+        }
+      ],
+      "bestByMultiplier": {
+        "1": {
+          "id": "ALR-b51f239b896d",
+          "initials": "A",
+          "state": "ARLNKHEDJEIBSCZWFQMXOMYUSQTCPGOPTVG",
+          "scores": {
+            "1": 9.086190322523255,
+            "2": 9.045148053478846,
+            "3": 9.04165172723898,
+            "5": 9.055167560218337
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T21:41:27.503Z"
+        },
+        "2": {
+          "id": "ALR-84c50828356a",
+          "initials": "A",
+          "state": "ATLNKREDJEIBSCXZFQMWOMYUSQHCPGOPHVG",
+          "scores": {
+            "1": 9.088614824936572,
+            "2": 9.042706622864387,
+            "3": 9.036444156442531,
+            "5": 9.046751614562702
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "A-double-empty",
+          "scoredAt": "2026-11-20T22:10:21.975Z"
+        },
+        "3": {
+          "id": "ALR-8b741e7ea562",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.0928786816167,
+            "2": 9.044548206851799,
+            "3": 9.035908656579686,
+            "5": 9.042563173499666
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:37:01.952Z"
+        },
+        "5": {
+          "id": "ALR-8b741e7ea562",
+          "initials": "A",
+          "state": "AFKNLHEDJEIBSCXZRQMWOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.0928786816167,
+            "2": 9.044548206851799,
+            "3": 9.035908656579686,
+            "5": 9.042563173499666
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "A-regular",
+          "scoredAt": "2026-11-20T22:37:01.952Z"
+        }
+      },
+      "lastAssignedImprovementAt": "2026-11-20T21:41:27.503Z"
+    },
+    "UM40-regular": {
+      "evaluations": 10776,
+      "seconds": 5022.416999999997,
+      "best": {
+        "id": "ALR-75bbb76a0b67",
+        "initials": "UM40",
+        "state": "ARLNKHEQJEIBWCZSFDMXOMYUWDTCPGOPTVG",
+        "scores": {
+          "1": 9.092907057599508,
+          "2": 9.055534314816413,
+          "3": 9.054776503850114,
+          "5": 9.072186596275259
+        },
+        "mutation": "ing/uai↔en",
+        "assignedLane": "UM40-regular",
+        "scoredAt": "2026-11-20T21:53:50.509Z"
+      },
+      "pareto": [
+        {
+          "id": "ALR-75bbb76a0b67",
+          "initials": "UM40",
+          "state": "ARLNKHEQJEIBWCZSFDMXOMYUWDTCPGOPTVG",
+          "scores": {
+            "1": 9.092907057599508,
+            "2": 9.055534314816413,
+            "3": 9.054776503850114,
+            "5": 9.072186596275259
+          },
+          "mutation": "ing/uai↔en",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T21:53:50.509Z"
+        },
+        {
+          "id": "ALR-88b6b0d67da3",
+          "initials": "UM40",
+          "state": "ARLNKHEDJEIBWCZSFQMXOMYUWQTCPGOPTVG",
+          "scores": {
+            "1": 9.093200165791194,
+            "2": 9.050945190071166,
+            "3": 9.046596778015923,
+            "5": 9.059005634984718
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:49:51.109Z"
+        },
+        {
+          "id": "ALR-e16536147557",
+          "initials": "UM40",
+          "state": "ATLNKHEDJEIBWCZSFQMXOMYUWQRCPGOPRVG",
+          "scores": {
+            "1": 9.093841230494276,
+            "2": 9.050977492546968,
+            "3": 9.046222966959684,
+            "5": 9.058109306855965
+          },
+          "mutation": "uan/van↔ai",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:52:31.365Z"
+        },
+        {
+          "id": "ALR-aa413abf6ec7",
+          "initials": "UM40",
+          "state": "AFLNKHEDJEIBWCZSRQMXOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.093880172897332,
+            "2": 9.050299827484725,
+            "3": 9.044988923290187,
+            "5": 9.056092649430617
+          },
+          "mutation": "iao↔iu",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T21:42:30.768Z"
+        },
+        {
+          "id": "ALR-f48b5c877acf",
+          "initials": "UM40",
+          "state": "AFLNKHEQJEIBWCZSDRMXOMYUWRTCPGOPTVG",
+          "scores": {
+            "1": 9.0941213640141,
+            "2": 9.04961957266005,
+            "3": 9.043576046835124,
+            "5": 9.053687028287179
+          },
+          "mutation": "ing/uai↔in",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T22:20:32.108Z"
+        },
+        {
+          "id": "ALR-304c23719347",
+          "initials": "UM40",
+          "state": "AGLNKHEDJEIBWCZSRQMXOMYURQTCPFOPTVF",
+          "scores": {
+            "1": 9.094674416418222,
+            "2": 9.049894664369969,
+            "3": 9.043710587589183,
+            "5": 9.053626000813178
+          },
+          "mutation": "un/vn↔ai",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:43:10.047Z"
+        },
+        {
+          "id": "ALR-1cf2bea220b0",
+          "initials": "UM40",
+          "state": "AGLNKHEQJEIBWCZSFRMXOMYUWRTCPVOPTDV",
+          "scores": {
+            "1": 9.095197581112377,
+            "2": 9.049501636243708,
+            "3": 9.04247879526714,
+            "5": 9.051131681285131
+          },
+          "mutation": "coupled 3 atom operations",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T23:48:41.438Z"
+        },
+        {
+          "id": "ALR-ccce73a87db8",
+          "initials": "UM40",
+          "state": "AGLNKHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.095212654232688,
+            "2": 9.049472883826883,
+            "3": 9.042682937766696,
+            "5": 9.05187388868465
+          },
+          "mutation": "coupled 2 atom operations",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:54:05.926Z"
+        },
+        {
+          "id": "ALR-7c5ffbf54a23",
+          "initials": "UM40",
+          "state": "ATLNKREDJEIBWCZSFQMXOMYUWQHCPGOPHVG",
+          "scores": {
+            "1": 9.095349393832935,
+            "2": 9.049416584507291,
+            "3": 9.043203646125859,
+            "5": 9.053679953798916
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:55:43.645Z"
+        },
+        {
+          "id": "ALR-7a7efcaa87d7",
+          "initials": "UM40",
+          "state": "AGLNKHEDJEISWCZXRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.097608154374843,
+            "2": 9.050003990513773,
+            "3": 9.04178407229235,
+            "5": 9.048951654307858
+          },
+          "mutation": "ia↔ie",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:58:11.516Z"
+        },
+        {
+          "id": "ALR-186e15b965e5",
+          "initials": "UM40",
+          "state": "AFKNLHEQJEIBWCZSDRMXOMYUWRTCPGOPTVG",
+          "scores": {
+            "1": 9.098375543280254,
+            "2": 9.049238897521414,
+            "3": 9.039945656393746,
+            "5": 9.045763941528831
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T22:50:47.165Z"
+        },
+        {
+          "id": "ALR-e5fe8f9f9425",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.099524055107903,
+            "2": 9.049179497423358,
+            "3": 9.03918821204418,
+            "5": 9.044190523691238
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:56:34.164Z"
+        },
+        {
+          "id": "ALR-3a0bf7c4818b",
+          "initials": "UM40",
+          "state": "AFQNKHELJEIBWCZSDRMXOMYUWRTCPGOPTVG",
+          "scores": {
+            "1": 9.106139072046982,
+            "2": 9.05405692835244,
+            "3": 9.042202876737445,
+            "5": 9.044022424399344
+          },
+          "mutation": "an↔en",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T22:50:50.991Z"
+        },
+        {
+          "id": "ALR-33c6dfb3d9a8",
+          "initials": "UM40",
+          "state": "ATKNLHEDJEIBZCXSFQMWOMYUWQRCPGOPRVG",
+          "scores": {
+            "1": 9.109529777681903,
+            "2": 9.055512195387571,
+            "3": 9.0426251912505,
+            "5": 9.043290345232482
+          },
+          "mutation": "coupled 2 atom operations",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-21T00:51:18.939Z"
+        }
+      ],
+      "bestByMultiplier": {
+        "1": {
+          "id": "ALR-75bbb76a0b67",
+          "initials": "UM40",
+          "state": "ARLNKHEQJEIBWCZSFDMXOMYUWDTCPGOPTVG",
+          "scores": {
+            "1": 9.092907057599508,
+            "2": 9.055534314816413,
+            "3": 9.054776503850114,
+            "5": 9.072186596275259
+          },
+          "mutation": "ing/uai↔en",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T21:53:50.509Z"
+        },
+        "2": {
+          "id": "ALR-e5fe8f9f9425",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.099524055107903,
+            "2": 9.049179497423358,
+            "3": 9.03918821204418,
+            "5": 9.044190523691238
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:56:34.164Z"
+        },
+        "3": {
+          "id": "ALR-e5fe8f9f9425",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.099524055107903,
+            "2": 9.049179497423358,
+            "3": 9.03918821204418,
+            "5": 9.044190523691238
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:56:34.164Z"
+        },
+        "5": {
+          "id": "ALR-33c6dfb3d9a8",
+          "initials": "UM40",
+          "state": "ATKNLHEDJEIBZCXSFQMWOMYUWQRCPGOPRVG",
+          "scores": {
+            "1": 9.109529777681903,
+            "2": 9.055512195387571,
+            "3": 9.0426251912505,
+            "5": 9.043290345232482
+          },
+          "mutation": "coupled 2 atom operations",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-21T00:51:18.939Z"
+        }
+      },
+      "lastAssignedImprovementAt": "2026-11-20T21:53:50.509Z"
+    },
+    "UM40-double-empty": {
+      "evaluations": 10771,
+      "seconds": 5022.216000000055,
+      "best": {
+        "id": "ALR-88b6b0d67da3",
+        "initials": "UM40",
+        "state": "ARLNKHEDJEIBWCZSFQMXOMYUWQTCPGOPTVG",
+        "scores": {
+          "1": 9.093200165791194,
+          "2": 9.050945190071166,
+          "3": 9.046596778015923,
+          "5": 9.059005634984718
+        },
+        "mutation": "ai↔in",
+        "assignedLane": "UM40-double-empty",
+        "scoredAt": "2026-11-20T21:49:51.109Z"
+      },
+      "pareto": [
+        {
+          "id": "ALR-88b6b0d67da3",
+          "initials": "UM40",
+          "state": "ARLNKHEDJEIBWCZSFQMXOMYUWQTCPGOPTVG",
+          "scores": {
+            "1": 9.093200165791194,
+            "2": 9.050945190071166,
+            "3": 9.046596778015923,
+            "5": 9.059005634984718
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:49:51.109Z"
+        },
+        {
+          "id": "ALR-e16536147557",
+          "initials": "UM40",
+          "state": "ATLNKHEDJEIBWCZSFQMXOMYUWQRCPGOPRVG",
+          "scores": {
+            "1": 9.093841230494276,
+            "2": 9.050977492546968,
+            "3": 9.046222966959684,
+            "5": 9.058109306855965
+          },
+          "mutation": "uan/van↔ai",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:52:31.365Z"
+        },
+        {
+          "id": "ALR-aa413abf6ec7",
+          "initials": "UM40",
+          "state": "AFLNKHEDJEIBWCZSRQMXOMYURQTCPGOPTVG",
+          "scores": {
+            "1": 9.093880172897332,
+            "2": 9.050299827484725,
+            "3": 9.044988923290187,
+            "5": 9.056092649430617
+          },
+          "mutation": "iao↔iu",
+          "assignedLane": "UM40-regular",
+          "scoredAt": "2026-11-20T21:42:30.768Z"
+        },
+        {
+          "id": "ALR-304c23719347",
+          "initials": "UM40",
+          "state": "AGLNKHEDJEIBWCZSRQMXOMYURQTCPFOPTVF",
+          "scores": {
+            "1": 9.094674416418222,
+            "2": 9.049894664369969,
+            "3": 9.043710587589183,
+            "5": 9.053626000813178
+          },
+          "mutation": "un/vn↔ai",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:43:10.047Z"
+        },
+        {
+          "id": "ALR-ccce73a87db8",
+          "initials": "UM40",
+          "state": "AGLNKHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.095212654232688,
+            "2": 9.049472883826883,
+            "3": 9.042682937766696,
+            "5": 9.05187388868465
+          },
+          "mutation": "coupled 2 atom operations",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:54:05.926Z"
+        },
+        {
+          "id": "ALR-7c5ffbf54a23",
+          "initials": "UM40",
+          "state": "ATLNKREDJEIBWCZSFQMXOMYUWQHCPGOPHVG",
+          "scores": {
+            "1": 9.095349393832935,
+            "2": 9.049416584507291,
+            "3": 9.043203646125859,
+            "5": 9.053679953798916
+          },
+          "mutation": "uan/van↔e",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:55:43.645Z"
+        },
+        {
+          "id": "ALR-7a7efcaa87d7",
+          "initials": "UM40",
+          "state": "AGLNKHEDJEISWCZXRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.097608154374843,
+            "2": 9.050003990513773,
+            "3": 9.04178407229235,
+            "5": 9.048951654307858
+          },
+          "mutation": "ia↔ie",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:58:11.516Z"
+        },
+        {
+          "id": "ALR-ff69ea93a4a3",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIBWCZSRQMXOMYURQTCPVOPTFV",
+          "scores": {
+            "1": 9.09896990882186,
+            "2": 9.050095284376493,
+            "3": 9.041117970280645,
+            "5": 9.047458757066956
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T22:27:36.992Z"
+        },
+        {
+          "id": "ALR-ff67353b2575",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIBWCZSRQMXOMYURQTCPFOPTVF",
+          "scores": {
+            "1": 9.09947132670598,
+            "2": 9.050318852756545,
+            "3": 9.041113896729518,
+            "5": 9.047102683825653
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T22:17:57.968Z"
+        },
+        {
+          "id": "ALR-e5fe8f9f9425",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.099524055107903,
+            "2": 9.049179497423358,
+            "3": 9.03918821204418,
+            "5": 9.044190523691238
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:56:34.164Z"
+        },
+        {
+          "id": "ALR-33c6dfb3d9a8",
+          "initials": "UM40",
+          "state": "ATKNLHEDJEIBZCXSFQMWOMYUWQRCPGOPRVG",
+          "scores": {
+            "1": 9.109529777681903,
+            "2": 9.055512195387571,
+            "3": 9.0426251912505,
+            "5": 9.043290345232482
+          },
+          "mutation": "coupled 2 atom operations",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-21T00:51:18.939Z"
+        }
+      ],
+      "bestByMultiplier": {
+        "1": {
+          "id": "ALR-88b6b0d67da3",
+          "initials": "UM40",
+          "state": "ARLNKHEDJEIBWCZSFQMXOMYUWQTCPGOPTVG",
+          "scores": {
+            "1": 9.093200165791194,
+            "2": 9.050945190071166,
+            "3": 9.046596778015923,
+            "5": 9.059005634984718
+          },
+          "mutation": "ai↔in",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T21:49:51.109Z"
+        },
+        "2": {
+          "id": "ALR-e5fe8f9f9425",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.099524055107903,
+            "2": 9.049179497423358,
+            "3": 9.03918821204418,
+            "5": 9.044190523691238
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:56:34.164Z"
+        },
+        "3": {
+          "id": "ALR-e5fe8f9f9425",
+          "initials": "UM40",
+          "state": "AGKNLHEDJEIXWCZSRQMFOMYURQTCPVOPTBV",
+          "scores": {
+            "1": 9.099524055107903,
+            "2": 9.049179497423358,
+            "3": 9.03918821204418,
+            "5": 9.044190523691238
+          },
+          "mutation": "an↔ao",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-20T23:56:34.164Z"
+        },
+        "5": {
+          "id": "ALR-33c6dfb3d9a8",
+          "initials": "UM40",
+          "state": "ATKNLHEDJEIBZCXSFQMWOMYUWQRCPGOPRVG",
+          "scores": {
+            "1": 9.109529777681903,
+            "2": 9.055512195387571,
+            "3": 9.0426251912505,
+            "5": 9.043290345232482
+          },
+          "mutation": "coupled 2 atom operations",
+          "assignedLane": "UM40-double-empty",
+          "scoredAt": "2026-11-21T00:51:18.939Z"
+        }
+      },
+      "lastAssignedImprovementAt": "2026-11-20T21:49:51.109Z"
+    }
+  },
+  "doubleEmptyExactTimeShare": 0.49998812839078327,
+  "allRowConstraintAuditPassed": true,
+  "allRowScoreMaximumDifference": 1.7763568394002505e-15,
+  "representativeCount": 27,
+  "independentPythonMemoryAuditPassed": true,
+  "nativeReplay": {
+    "path": "research/notes/2026-11-21-a-locked-rhymes-v52-results-replay.json",
+    "passed": true
+  },
+  "reviews": [
+    {
+      "slot": "initial",
+      "time": "2026-11-20T21:45:24.9974412Z",
+      "summary": "快照仅覆盖约14分钟、1700次精确评分，尚无长期停滞证据。A当前默认最优9.086190，比基线降低约0.000348，但2x/3x/5x分别恶化约0.001196/0.002248/0.003611，应保留原始布局作为权衡参照。UM40普通线仍持续改善，采用较低探索率、保留局部搜索；A两线采用略高探索率增加邻域多样性。UM40普通线最优相对其iao↔iu候选仅改善默认约0.000210，却使2x/3x/5x恶化约0.004750/0.008415/0.013540，需保留后者及un/vn↔ai候选。双空线best/top与history存在不同步，以当前best/top为候选依据，不据此判定停滞。迁移检验ai↔in、iao↔iu及ing/uai↔en等变化的跨声母适用性；供体分数不能沿用，所有新布局均须在目标声母映射下重新精确评分。审计显示UM40普通线最优不能直接进入双空线，但各有7个合法单步修复，可有限尝试；其余迁移同样须验证。严格保持双空线合计占总精确评分时间50%，所有硬约束、评分政策、期限及资源限制不变。",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.24,
+          "temperature": 0.0008,
+          "minSteps": 2,
+          "maxSteps": 5,
+          "seedPool": 8
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.26,
+          "temperature": 0.001,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 10
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.16,
+          "temperature": 0.0006,
+          "minSteps": 2,
+          "maxSteps": 5,
+          "seedPool": 8
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.18,
+          "temperature": 0.0007,
+          "minSteps": 2,
+          "maxSteps": 5,
+          "seedPool": 10
+        }
+      ],
+      "transfers": [
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-aeeab0dab747",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-aeeab0dab747",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-aeeab0dab747",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-304c23719347",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-304c23719347",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        }
+      ]
+    },
+    {
+      "slot": "hour-1",
+      "time": "2026-11-20T22:31:39.4201831Z",
+      "summary": "A两道当前最优均为9.086190323，较基线仅降低约0.000348109，2x/3x/5x却分别增加约0.001196/0.002248/0.003611；默认目标的小幅收益伴随高认知成本下的退步。A历史约49–51分钟未改善，UM40约37–41分钟未改善，因此适度提高探索概率、温度和步长上限，仍保留66%–76%的局部搜索。各道尚有待评邻域，不能据此认定局部搜索已经穷尽。A双空道历史最佳落后于当前best，以当前best为准。UM40普通道比双空道默认分低约0.000293，但2x/3x/5x分别高约0.004589/0.008180/0.013181，故同时迁移默认优胜种子及高倍权衡较好的iao↔iu种子。优先检验跨声母映射迁移；UM40普通道最优进入两个双空道须修复，审计各有7个合法一步修复。所有迁移须通过目标约束验证，并在目标声母映射下重新精确评分，供体分数不能沿用，也不保证收益。不重复迁移A两道已有的相同最优。保持全部硬约束、评分政策、期限与资源限制，双空道合计精确评分时间仍严格占50%。",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.32,
+          "temperature": 0.001,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 12
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.34,
+          "temperature": 0.0012,
+          "minSteps": 2,
+          "maxSteps": 7,
+          "seedPool": 14
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.24,
+          "temperature": 0.0008,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 10
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.28,
+          "temperature": 0.001,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 12
+        }
+      ],
+      "transfers": [
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-double-empty",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-double-empty",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        }
+      ]
+    },
+    {
+      "slot": "hour-2",
+      "time": "2026-11-20T23:31:35.2951021Z",
+      "summary": "搜索已运行约2小时，尚余约4小时。四道历史记录距上次改进约97–111分钟，支持适度提高探索率、步长上限和种子多样性，同时保留58%–66%的局部搜索。A两道已累计较多耦合尝试仍停滞，探索增幅稍大；UM40两道尚有87/113项待评估，调整更温和。A双空当前best优于history.best，故不能把历史时间直接视为当前种子的停滞时间。\nA当前最佳默认分9.086190323，比基线降低约0.000348109，但2x/3x/5x分别恶化约0.001195956/0.002247872/0.003610573。UM40常规最佳比其双空最佳默认分低约0.000293108，却在2x/3x/5x分别高约0.004589125/0.008179726/0.013180961；应保留较高认知成本下更好的替代种子，避免将默认分改善解释为全面改善。\n迁移覆盖ai↔in、iao↔iu及UM40的ing/uai↔en相关候选，检验不同声母图下的邻域价值；跳过目标top中已有的同布局。审计确认UM40常规最佳进入两条双空道需修复，各有7个合法一步修复，允许有界验证。其余未审计候选也须先验证硬约束；所有迁移或修复布局均须在目标声母图下重新精确评分，供体分数不沿用。维持双空道合计恰好50%的精确评分时间，以及全部硬约束、评分政策、截止时间和资源限制。当前搜索并非全局穷举。",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.4,
+          "temperature": 0.0014,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 16
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.42,
+          "temperature": 0.0016,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 18
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.34,
+          "temperature": 0.0012,
+          "minSteps": 2,
+          "maxSteps": 7,
+          "seedPool": 14
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.36,
+          "temperature": 0.0013,
+          "minSteps": 2,
+          "maxSteps": 7,
+          "seedPool": 16
+        }
+      ],
+      "transfers": [
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        }
+      ]
+    },
+    {
+      "slot": "hour-3",
+      "time": "2026-11-21T00:32:04.0956742Z",
+      "summary": "搜索约过半，四路按历史记录已约157–171分钟未改善；上轮调整后仍无新最佳，适度提高探索概率、温度和种子多样性，同时保留至少52%的局部搜索。A两路当前最佳相同，无需重复同声母互传；其默认分较基线降低约0.000348，但2x/3x/5x分别升高约0.001196/0.002248/0.003611。UM40常规最佳比双空最佳默认分低约0.000293，却在2x/3x/5x分别高约0.004589/0.008180/0.013181，高认知成本代价明显，因此UM40保持较低温度，并引入iao↔iu等权衡种子。迁移优先检验跨声母收益，同时尝试修复UM40常规最佳进入双空；审计显示该种子直接进入双空不合法，但有7个合法一步修复。所有迁移均须目标路硬约束验证，并在目标声母图下重新精确评分，供体分数不能沿用。A双空的history.best与当前best不一致，当前排名以best/top为依据，历史仅作停滞信号。维持双空两路合计精确评分时间严格50%，所有约束、评分政策、期限与资源限制不变；现有探索不能证明全局最优。",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.46,
+          "temperature": 0.0018,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 20
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.48,
+          "temperature": 0.002,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 22
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.42,
+          "temperature": 0.0016,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 18
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.44,
+          "temperature": 0.0015,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 20
+        }
+      ],
+      "transfers": [
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-double-empty",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "A-double-empty",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        }
+      ]
+    },
+    {
+      "slot": "hour-4",
+      "time": "2026-11-21T01:32:00.5774508Z",
+      "summary": "当前仍在运行，距截止约2小时；四路按历史记录已停滞约3小时37分至3小时51分，邻域扩展仅24至28次，不能推断全局最优。适度提高探索率、温度和种子多样性，同时保留约一半局部搜索。A当前最佳默认分9.086190323，比基线降低约0.000348109，但2x/3x/5x分别升高约0.001196、0.002248、0.003611。UM40普通路最佳比双空最佳默认分低约0.000293，却在2x/3x/5x分别差约0.004589、0.008180、0.013181，因此同时测试默认分优先与高认知成本较低的供体。迁移选择跨声母映射的不同韵母配置，避免重复注入目标top已有布局；UM40普通路最佳进入双空路需修复，审计显示各有7个合法一步修复。所有迁移及修复布局均须通过目标硬约束验证，并在目标声母映射下重新精确评分，供体分数不可沿用。A双空历史最佳与当前best不一致，本次以当前best/top为准；上次accepted/rejected均为0，不视为迁移有效性证据。双空两路合计精确评分时间继续严格预留50%，其余约束、策略计分规则、期限及资源限制不变。",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.5,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 24
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.52,
+          "temperature": 0.0024,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.48,
+          "temperature": 0.0019,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 22
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.5,
+          "temperature": 0.0018,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 24
+        }
+      ],
+      "transfers": [
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-b51f239b896d",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-88b6b0d67da3",
+          "targetLane": "A-double-empty",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-aa413abf6ec7",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        }
+      ]
+    },
+    {
+      "slot": "hour-5",
+      "time": "2026-11-21T02:31:57.2925792Z",
+      "summary": "快照距截止约60分钟，四道历史均逾4.5小时未记录改进；A双空当前best与history.best不一致，不能据历史断言当前最佳的发现时间。A最佳默认分9.086190，相对原始方案改善约0.000348，但2x/3x/5x分别恶化约0.001196/0.002248/0.003611。UM40常规比双空默认分低约0.000293，却在2x/3x/5x分别高约0.004589/0.008180/0.013181，高认知成本取舍明显。保留A策略，小幅扩大UM40探索，仍保留接近半数局部搜索，避免末小时剧烈升温。迁移重点检验ing/uai↔en及其他前列韵母组合的跨声母收益；UM40常规最佳进入双空须修复，审计显示各有7个合法一步修复。其余未审计候选也须验证，可能重复或无收益；跨声母供体分数不可沿用，所有新布局均须在目标声母表下重新精确评分。继续跟踪2x/3x/5x，不改变评分、硬约束、截止时间或资源限制，双空两道合计仍严格占精确评分时间的50%。现有搜索不能证明全局最优。",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.5,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 24
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.52,
+          "temperature": 0.0024,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.52,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.54,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        }
+      ],
+      "transfers": [
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-regular",
+          "repairOneStep": false
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-regular",
+          "sourceId": "ALR-75bbb76a0b67",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-d5c83137d5a2",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-9b6242bbfcad",
+          "targetLane": "UM40-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "A-regular",
+          "sourceId": "ALR-9b6242bbfcad",
+          "targetLane": "UM40-double-empty",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-e16536147557",
+          "targetLane": "A-regular",
+          "repairOneStep": true
+        },
+        {
+          "sourceLane": "UM40-double-empty",
+          "sourceId": "ALR-e16536147557",
+          "targetLane": "A-double-empty",
+          "repairOneStep": true
+        }
+      ]
+    }
+  ],
+  "appliedReviews": [
+    {
+      "id": "2026-11-20T21:45:24.927Z",
+      "at": "2026-11-20T21:47:44.260Z",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.24,
+          "temperature": 0.0008,
+          "minSteps": 2,
+          "maxSteps": 5,
+          "seedPool": 8
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.26,
+          "temperature": 0.001,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 10
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.16,
+          "temperature": 0.0006,
+          "minSteps": 2,
+          "maxSteps": 5,
+          "seedPool": 8
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.18,
+          "temperature": 0.0007,
+          "minSteps": 2,
+          "maxSteps": 5,
+          "seedPool": 10
+        }
+      ],
+      "accepted": 21,
+      "rejected": 0
+    },
+    {
+      "id": "2026-11-20T22:31:39.355Z",
+      "at": "2026-11-20T22:31:41.437Z",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.32,
+          "temperature": 0.001,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 12
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.34,
+          "temperature": 0.0012,
+          "minSteps": 2,
+          "maxSteps": 7,
+          "seedPool": 14
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.24,
+          "temperature": 0.0008,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 10
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.28,
+          "temperature": 0.001,
+          "minSteps": 2,
+          "maxSteps": 6,
+          "seedPool": 12
+        }
+      ],
+      "accepted": 9,
+      "rejected": 0
+    },
+    {
+      "id": "2026-11-20T23:31:35.225Z",
+      "at": "2026-11-20T23:31:36.413Z",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.4,
+          "temperature": 0.0014,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 16
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.42,
+          "temperature": 0.0016,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 18
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.34,
+          "temperature": 0.0012,
+          "minSteps": 2,
+          "maxSteps": 7,
+          "seedPool": 14
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.36,
+          "temperature": 0.0013,
+          "minSteps": 2,
+          "maxSteps": 7,
+          "seedPool": 16
+        }
+      ],
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "id": "2026-11-21T00:32:04.019Z",
+      "at": "2026-11-21T00:32:06.233Z",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.46,
+          "temperature": 0.0018,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 20
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.48,
+          "temperature": 0.002,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 22
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.42,
+          "temperature": 0.0016,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 18
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.44,
+          "temperature": 0.0015,
+          "minSteps": 2,
+          "maxSteps": 8,
+          "seedPool": 20
+        }
+      ],
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "id": "2026-11-21T01:32:00.539Z",
+      "at": "2026-11-21T01:32:02.080Z",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.5,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 24
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.52,
+          "temperature": 0.0024,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.48,
+          "temperature": 0.0019,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 22
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.5,
+          "temperature": 0.0018,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 24
+        }
+      ],
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "id": "2026-11-21T02:31:57.175Z",
+      "at": "2026-11-21T02:31:58.915Z",
+      "strategies": [
+        {
+          "lane": "A-regular",
+          "explorationProbability": 0.5,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 9,
+          "seedPool": 24
+        },
+        {
+          "lane": "A-double-empty",
+          "explorationProbability": 0.52,
+          "temperature": 0.0024,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        },
+        {
+          "lane": "UM40-regular",
+          "explorationProbability": 0.52,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        },
+        {
+          "lane": "UM40-double-empty",
+          "explorationProbability": 0.54,
+          "temperature": 0.0022,
+          "minSteps": 2,
+          "maxSteps": 10,
+          "seedPool": 24
+        }
+      ],
+      "accepted": 4,
+      "rejected": 0
+    }
+  ],
+  "reviewSchedule": {
+    "startedAt": "2026-11-20T21:44:38.0406902Z",
+    "currentSlot": "hour-5",
+    "status": "stopped-by-user",
+    "slots": [
+      {
+        "name": "hour-1",
+        "at": "2026-11-20T22:30:36.9970000Z"
+      },
+      {
+        "name": "hour-2",
+        "at": "2026-11-20T23:30:36.9970000Z"
+      },
+      {
+        "name": "hour-3",
+        "at": "2026-11-21T00:30:36.9970000Z"
+      },
+      {
+        "name": "hour-4",
+        "at": "2026-11-21T01:30:36.9970000Z"
+      },
+      {
+        "name": "hour-5",
+        "at": "2026-11-21T02:30:36.9970000Z"
+      },
+      {
+        "name": "hour-6",
+        "at": "2026-11-21T03:30:36.9970000Z"
+      }
+    ],
+    "runs": [
+      {
+        "status": "success",
+        "time": "2026-11-20T21:45:24.9974412Z",
+        "decision": [
+          "{\"snapshot\":\"D:\\\\C2D\\\\Desktop\\\\Code\\\\Lua\\\\inputMethod\\\\shuangpin-layout-benchmark\\\\research\\\\.cache\\\\a-locked-rhymes-v52-6h-20261121\\\\reviews\\\\20261120T214438Z-initial-snapshot.json\",\"exactScores\":1700,\"status\":\"running\"}",
+          "{\"id\":\"2026-11-20T21:45:24.927Z\",\"strategies\":4,\"proposals\":22,\"decisions\":[{\"sourceLane\":\"A-regular\",\"sourceId\":\"ALR-b51f239b896d\",\"targetLane\":\"UM40-regular\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"A-regular\",\"sourceId\":\"ALR-b51f239b896d\",\"targetLane\":\"UM40-double-empty\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"A-regular\",\"sourceId\":\"ALR-d5c83137d5a2\",\"targetLane\":\"UM40-regular\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"A-regular\",\"sourceId\":\"ALR-d5c83137d5a2\",\"targetLane\":\"UM40-double-empty\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"UM40-regular\",\"sourceId\":\"ALR-aeeab0dab747\",\"targetLane\":\"A-regular\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"UM40-regular\",\"sourceId\":\"ALR-aeeab0dab747\",\"targetLane\":\"A-double-empty\",\"repairOneStep\":true,\"directLegal\":false,\"accepted\":7},{\"sourceLane\":\"UM40-regular\",\"sourceId\":\"ALR-aeeab0dab747\",\"targetLane\":\"UM40-double-empty\",\"repairOneStep\":true,\"directLegal\":false,\"accepted\":7},{\"sourceLane\":\"UM40-double-empty\",\"sourceId\":\"ALR-aa413abf6ec7\",\"targetLane\":\"A-regular\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"UM40-double-empty\",\"sourceId\":\"ALR-aa413abf6ec7\",\"targetLane\":\"A-double-empty\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":0},{\"sourceLane\":\"UM40-double-empty\",\"sourceId\":\"ALR-304c23719347\",\"targetLane\":\"A-regular\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1},{\"sourceLane\":\"UM40-double-empty\",\"sourceId\":\"ALR-304c23719347\",\"targetLane\":\"A-double-empty\",\"repairOneStep\":false,\"directLegal\":true,\"accepted\":1}]}",
+          "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\a-locked-rhymes-v52-6h-20261121\\reviews\\20261120T214438Z-initial-decision.json"
+        ],
+        "slot": "initial"
+      },
+      {
+        "slot": "hour-1",
+        "decision": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\a-locked-rhymes-v52-6h-20261121\\reviews\\20261120T223042Z-hour-1-decision.json",
+        "time": "2026-11-20T22:31:39.4201831Z",
+        "status": "success"
+      },
+      {
+        "slot": "hour-2",
+        "decision": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\a-locked-rhymes-v52-6h-20261121\\reviews\\20261120T233040Z-hour-2-decision.json",
+        "time": "2026-11-20T23:31:35.2951021Z",
+        "status": "success"
+      },
+      {
+        "slot": "hour-3",
+        "decision": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\a-locked-rhymes-v52-6h-20261121\\reviews\\20261121T003106Z-hour-3-decision.json",
+        "time": "2026-11-21T00:32:04.0956742Z",
+        "status": "success"
+      },
+      {
+        "slot": "hour-4",
+        "decision": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\a-locked-rhymes-v52-6h-20261121\\reviews\\20261121T013105Z-hour-4-decision.json",
+        "time": "2026-11-21T01:32:00.5774508Z",
+        "status": "success"
+      },
+      {
+        "slot": "hour-5",
+        "decision": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\a-locked-rhymes-v52-6h-20261121\\reviews\\20261121T023101Z-hour-5-decision.json",
+        "time": "2026-11-21T02:31:57.2925792Z",
+        "status": "success"
+      }
+    ],
+    "completed": [
+      "initial",
+      "hour-1",
+      "hour-2",
+      "hour-3",
+      "hour-4",
+      "hour-5"
+    ],
+    "stoppedAt": "2026-11-21T03:08:52.0585830Z"
+  },
+  "resourceSummary": {
+    "peakCombinedRssGB": 0.4017982482910156,
+    "minimumAvailableGB": 15.65048599243164
+  },
+  "archives": {
+    "research/notes/2026-11-21-a-locked-rhymes-v52-results-scores.jsonl.gz": {
+      "sha256": "79e1d0eb87b371d9a5b630764dbb2a08d7abba37831ec4dce06ec2e7bc1f87cc",
+      "bytes": 25887605,
+      "uncompressedSha256": "4c07e64bc8b45cdc97080d5e13d8e9be75d68d3f78a48c45b11b7c639e55cdbf"
+    },
+    "research/notes/2026-11-21-a-locked-rhymes-v52-results-checkpoint.json.gz": {
+      "sha256": "7b5cecea242dbb55a7b34dad8423eb892fe9f5d052db67f3b7c308d3c4fda80a",
+      "bytes": 59250,
+      "uncompressedSha256": "6bcbc5ced7d485fc7a4a8757fcadd11969558b4612b99d2b6a88d9b79096b0b9"
+    },
+    "research/notes/2026-11-21-a-locked-rhymes-v52-results-resources.jsonl.gz": {
+      "sha256": "cc55fd682f578bde480500ab600e901dedd28c4573f7ef736dd5ee4184c86cf6",
+      "bytes": 24284,
+      "uncompressedSha256": "27c5976ac2af9676534d3e8b38f47224863bc415ec04d6c03fcdffc7c0f7c1ed"
+    }
+  },
+  "searchManifest": {
+    "anchor": "RC26-39a5bfdc045342cd",
+    "initials": {
+      "A": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "S",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "W",
+        "YU": "W"
+      },
+      "UM40": {
+        "b": "B",
+        "p": "P",
+        "m": "M",
+        "f": "F",
+        "d": "D",
+        "t": "T",
+        "n": "N",
+        "l": "L",
+        "g": "G",
+        "k": "K",
+        "h": "H",
+        "j": "J",
+        "q": "F",
+        "x": "Y",
+        "zh": "W",
+        "ch": "X",
+        "sh": "V",
+        "r": "R",
+        "z": "Z",
+        "c": "C",
+        "s": "Q",
+        "A": "Y",
+        "E": "Y",
+        "O": "Y",
+        "W": "J",
+        "Y": "S",
+        "YU": "S"
+      }
+    },
+    "constraints": {
+      "D": 3,
+      "V": 1,
+      "M": 40,
+      "unique399": true,
+      "fixed": {
+        "ei": "E",
+        "er": "E",
+        "o": "O",
+        "uo": "O"
+      },
+      "groups": [
+        [
+          "ei",
+          "er"
+        ],
+        [
+          "o",
+          "uo"
+        ],
+        [
+          "uan",
+          "van"
+        ],
+        [
+          "un",
+          "vn"
+        ],
+        [
+          "iang",
+          "uang"
+        ],
+        [
+          "iong",
+          "ong"
+        ],
+        [
+          "ing",
+          "uai"
+        ]
+      ],
+      "allowedInitials": {
+        "A": {
+          "b": "B",
+          "p": "P",
+          "m": "M",
+          "f": "F",
+          "d": "D",
+          "t": "T",
+          "n": "N",
+          "l": "L",
+          "g": "G",
+          "k": "K",
+          "h": "H",
+          "j": "J",
+          "q": "F",
+          "x": "Y",
+          "zh": "S",
+          "ch": "X",
+          "sh": "V",
+          "r": "R",
+          "z": "Z",
+          "c": "C",
+          "s": "Q",
+          "A": "Y",
+          "E": "Y",
+          "O": "Y",
+          "W": "J",
+          "Y": "W",
+          "YU": "W"
+        },
+        "UM40": {
+          "b": "B",
+          "p": "P",
+          "m": "M",
+          "f": "F",
+          "d": "D",
+          "t": "T",
+          "n": "N",
+          "l": "L",
+          "g": "G",
+          "k": "K",
+          "h": "H",
+          "j": "J",
+          "q": "F",
+          "x": "Y",
+          "zh": "W",
+          "ch": "X",
+          "sh": "V",
+          "r": "R",
+          "z": "Z",
+          "c": "C",
+          "s": "Q",
+          "A": "Y",
+          "E": "Y",
+          "O": "Y",
+          "W": "J",
+          "Y": "S",
+          "YU": "S"
+        }
+      },
+      "policies": {
+        "keytao": {
+          "word2": "12",
+          "word3": "12",
+          "word4": "24"
+        },
+        "sanpin": {
+          "word2": "12",
+          "word3": "21",
+          "word4": "13"
+        }
+      }
+    },
+    "templateSha256": "6ed92993f66a41d7aa73c49c7cb9119ed980db2b512e8dafbee2581df3f8fe93",
+    "scorerSha256": "f4250bba4f18c566849958b72dfdd800325483bd450a865015cbfa3aae863232",
+    "sourceSha256": "10723bd355a1eec182ec7c9afd15b089b115920d545f8717c307a54a6a1bf845"
+  },
+  "runtimeUpgrade": {
+    "reason": "user-authorized hourly adaptive review mailbox",
+    "previousSourceSha256": "79deba276a6d75d3f0155f1f36b70e8bbc7af2978000d8c0384d5dfdcdc0fa75",
+    "sourceSha256": "10723bd355a1eec182ec7c9afd15b089b115920d545f8717c307a54a6a1bf845",
+    "preservedDeadline": "2026-11-21T03:30:36.998Z"
+  },
+  "limitations": [
+    "Finite neighborhood and stochastic search; no global optimality claim.",
+    "Default-cost improvement does not imply improvement at 2x/3x/5x.",
+    "UM40 initial lanes retain original A final constraints and policies; they are not the earlier unrestricted UM40 layouts."
+  ]
+}
