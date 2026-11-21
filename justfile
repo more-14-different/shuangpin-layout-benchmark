@@ -1,5 +1,20 @@
 set shell := ["pwsh", "-NoLogo", "-NoProfile", "-Command"]
 
+u7e-aux-final-prepare:
+    node tools/finalize_u7e_aux_final.js --prepare
+
+u7e-aux-final-score id:
+    node --expose-gc --max-old-space-size=4096 tools/finalize_u7e_aux_final.js --score "{{id}}"
+
+u7e-aux-final-install:
+    node --max-old-space-size=12288 tools/finalize_u7e_aux_final.js --install
+
+u7e-aux-final-browser:
+    node tests/u7e-aux-final.browser.mjs
+
+u7e-aux-final-validate:
+    python -X utf8 tools/validate_u7e_aux_final.py
+
 u7e-hourly-ai-start:
     & './tools/start_u7e_hourly_review.ps1'
 
