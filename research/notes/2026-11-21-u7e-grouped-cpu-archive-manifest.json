@@ -1,0 +1,311 @@
+{
+  "completed": true,
+  "archivedAt": "2026-11-21T11:25:35+08:00",
+  "targetRepository": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark",
+  "targetBranch": "research/cr-frontier-gpu-anneal",
+  "targetParentCommit": "51a6d4322f565e7830907678952e1f7181c29a83",
+  "researchSource": {
+    "branch": "research/untoned-cr7e-v52-20261119",
+    "commit": "e5256af179fbe477ffc37065847cb6922ae994e5",
+    "sessionCommits": [
+      "ff8a7c6",
+      "cf21fc6",
+      "aca1022",
+      "e5256af"
+    ]
+  },
+  "scope": "Only current U7E grouped-CPU run, UED3158/f254 final auxiliary/publication results, and required local code/input dependencies. Earlier untracked files left unmodified; no branch-wide merge.",
+  "files": {
+    ".gitattributes": {
+      "bytes": 4559,
+      "sha256": "c4de209466462751b62c6be7aa12e5c266b209b36df26afd15022c6160a21a1d"
+    },
+    "justfile": {
+      "bytes": 79525,
+      "sha256": "b3b5145bee5137c39336a421094207746eeb7f214878b73896f63d75b46dcfaa"
+    },
+    "research/config/u7e-fixed-gpu.json": {
+      "bytes": 23577,
+      "sha256": "1db76f4c731ae249f7f60413ea03aa13b382a9924e44b09a705cec8f95c2ed71"
+    },
+    "research/config/u7e-grouped-cpu-templates.json.gz": {
+      "bytes": 9100581,
+      "sha256": "c9808324f95ae7304960cf650e9edd64ec3cb0df82f92204fe31b256e76a7cc9"
+    },
+    "research/config/u7e-grouped-cpu.json": {
+      "bytes": 38679,
+      "sha256": "2b908611ec5e9968297e5366f5f0dba6de7c79be0bde416cd0cd213f5521c116"
+    },
+    "research/config/u7x-02d-r11-candidate.json": {
+      "bytes": 1896,
+      "sha256": "98df86accc2e2ce05d7f36315b5a5113a298aed9aeada4b01cf83cd888bb7b17"
+    },
+    "research/config/untoned-2121-reviewed-integrator.py.gz": {
+      "bytes": 11793,
+      "sha256": "55e84cf51106d9e693efa31c789b9c6481f5b1e37485e07c91553b3c376b3d8b"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu-final-hourly-reviews.json": {
+      "bytes": 99338,
+      "sha256": "71a04696a7e10716bfd14b6f7d245f491aece29ab73f9a8482721edd35b7183b"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu-final.json": {
+      "bytes": 160323,
+      "sha256": "e4507f5c0d8fa51cd88b901e2bc57e139e2f7b3c26c374e77dac24ea6d333d53"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu-final.md": {
+      "bytes": 2979,
+      "sha256": "8b7cc935c1dd69a93f6faee18a8d116fe85bfe5725cb11395b26f30f8179f2c9"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu-launch.json": {
+      "bytes": 3343,
+      "sha256": "a1a027b0f0ba05389acbb1915ddd992d9a55bc00a96d9d97549db8370e9d7e26"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu-review-01.json": {
+      "bytes": 16020,
+      "sha256": "0d1f94181100fe42154da83102c0bca9cc9fdbf738c50559a983130d8f8ae59e"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu-stop.json": {
+      "bytes": 30049,
+      "sha256": "1d83e7a0c0fdac5c9123a2d34b9f3746ac19f3d76d476f6c8f190d7dbfadd823"
+    },
+    "research/notes/2026-11-21-u7e-grouped-cpu.md": {
+      "bytes": 5753,
+      "sha256": "1b5dd445910c3d86e2fd64ac4a2b3e74095c2e8a4b5eba52e1756389a0aacc6a"
+    },
+    "research/notes/2026-11-21-u7e-low-pinky-components-UED-3158ce08b5bc.json.gz": {
+      "bytes": 12861,
+      "sha256": "a58a751740cba445fca3c78b73921cdb5be6be84c495d942404f8e9f8bbb581b"
+    },
+    "research/notes/2026-11-21-u7e-low-pinky-policy-UED-3158ce08b5bc.json": {
+      "bytes": 9661,
+      "sha256": "e0726d8b29cbcfdb885999b0857416823c3b01a57bcfc1e11615238d79b05941"
+    },
+    "research/notes/2026-11-21-u7e-low-pinky-robustness-UED-3158ce08b5bc.json": {
+      "bytes": 13444,
+      "sha256": "93ef4eb8f7dd9f7b22ed676904796d494b3b6d2ec179a3eee3beea4b9368f32c"
+    },
+    "research/notes/2026-11-21-u7e-low-pinky-score-UED-3158ce08b5bc.json": {
+      "bytes": 234638,
+      "sha256": "a8cacf52e51ed467dbd389ccfb60faffb6be8bc41abf670b85ac80e1b4378ad5"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-browser.json": {
+      "bytes": 1126,
+      "sha256": "c638c87ea4b218243d7aad8a1ed54a133d03818fc97f3386910976fed2df4c35"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-patch.json.gz": {
+      "bytes": 134276,
+      "sha256": "84f79f5b31a1ee29ebce6d9ff31a4fe19f75cfb9a5e353e57fd443cb730cc1fa"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-publication.json": {
+      "bytes": 7921,
+      "sha256": "ac047af3f3d8a1c90bd50b962579d51fcb30439c399192d9686ff853f65b9649"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-robustness-UED-3158ce08b5bc.json": {
+      "bytes": 13444,
+      "sha256": "93ef4eb8f7dd9f7b22ed676904796d494b3b6d2ec179a3eee3beea4b9368f32c"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-robustness-UPD-f254581a6f2d.json": {
+      "bytes": 13430,
+      "sha256": "d499bb56a6236ae534d7a4c57023ebb712341d381c14b6ed5bf74c0f447a97a6"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-scores-UED-3158ce08b5bc.json": {
+      "bytes": 68225,
+      "sha256": "5142cf2a725ca58677605ab23d63f42eb8868a62f488cc2658742a636d2a3d6d"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-scores-UPD-f254581a6f2d.json": {
+      "bytes": 68202,
+      "sha256": "a7027a0ff5d8cb7f27149978f7364f022a171751bcb5c649dc3f96dac5cf9bc2"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final-validation.json": {
+      "bytes": 6836,
+      "sha256": "fc6609c3f5eac06bf20cd3dc769651d10940488402c0d9faf3c2bb60befab011"
+    },
+    "research/notes/2026-11-21-u7e-pinky-aux-final.md": {
+      "bytes": 1959,
+      "sha256": "4ff94f8674acf585a1e18d73ca97b505798aab8185e23553b54b4cf1555c56ba"
+    },
+    "research/notes/2026-11-21-u7e-pinky-collisions.json": {
+      "bytes": 63988,
+      "sha256": "7013c39e588c1f2a8c69fec78feff98ccd155509a055cc6ce744cb5929020081"
+    },
+    "research/notes/2026-11-21-u7e-pinky-collisions.md": {
+      "bytes": 4156,
+      "sha256": "a2455b5b236f630367218e1e82739d9c739797b980fb08d48d93c94e264b881b"
+    },
+    "research/notes/2026-11-21-u7e-pinky-descent-components-UPD-f254581a6f2d.json.gz": {
+      "bytes": 12789,
+      "sha256": "441226c8262b02a8f6c7ec6773f366e8c874827de4d69a1d4dcffaff6d121848"
+    },
+    "research/notes/2026-11-21-u7e-pinky-descent-contract.json.gz": {
+      "bytes": 4556,
+      "sha256": "dc1350eed62709f771d7ea7ea8f7cbe4edc68a1d513c38f7a4db685dec9f46be"
+    },
+    "research/notes/2026-11-21-u7e-pinky-descent-policy-UPD-f254581a6f2d.json": {
+      "bytes": 11060,
+      "sha256": "3df4f26000b24b1d745c09672cc4f0b8052abfe2c40bd5c3fa48fb7d6e81644a"
+    },
+    "research/notes/2026-11-21-u7e-pinky-descent-robustness-UPD-f254581a6f2d.json": {
+      "bytes": 13430,
+      "sha256": "d499bb56a6236ae534d7a4c57023ebb712341d381c14b6ed5bf74c0f447a97a6"
+    },
+    "research/notes/2026-11-21-u7e-pinky-descent-score-UPD-f254581a6f2d.json": {
+      "bytes": 234459,
+      "sha256": "5112322c0401e951269b687b16f1e0ab18b08988d04307eb46321091453c7460"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-browser.json": {
+      "bytes": 12109,
+      "sha256": "d74518da30d6f03fad6e13b3085b9e3f73189b46a5054a070bf27f1e43251c3b"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-candidates.json": {
+      "bytes": 7432,
+      "sha256": "650abd732da44290e8193c60f0fe7dab4eb5be273ec9351b13b9b08ecc305d12"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-columns.json": {
+      "bytes": 635148,
+      "sha256": "836506606a24d7c65910de8c4944f70c4beee2bb8b90f4973a2cc886f5fad03d"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-patch.json.gz": {
+      "bytes": 133613,
+      "sha256": "4b4d43ebc1585d2f604f6c0131dffdf1ec88a766010e9b7789f0bea0d83253d0"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-publication.json": {
+      "bytes": 90336,
+      "sha256": "4a77a1c96c777117a76a426dc620706c64cb035daf0ff8b9a79eef4c479a9b46"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-scores-UED-3158ce08b5bc.json": {
+      "bytes": 99267,
+      "sha256": "2aa8d32b41b0a9dfcc276bc8188bc825ff9e522ef61c3334e05c8519e5313f6a"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-scores-UPD-f254581a6f2d.json": {
+      "bytes": 99036,
+      "sha256": "84783d7f6a93be8308e1312f81a1609ad0172a46c5830f94244ca3e08c236297"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11-validation.json": {
+      "bytes": 9509,
+      "sha256": "5c5b02e7c6d33c1d44b784efa382cf22e445fb416c0dbf69c4fa0704c254ff2d"
+    },
+    "research/notes/2026-11-21-u7e-pinky-r11.md": {
+      "bytes": 2456,
+      "sha256": "9bc787fddbcfce599eb6e67269d67d28d519127f321750e5756cee9aeff269ce"
+    },
+    "tests/test_u7e_grouped_cpu.py": {
+      "bytes": 4315,
+      "sha256": "c918702ed6fde1efb9189681400d88d4162bf7a3f38de821684c9d573aed6d9c"
+    },
+    "tests/test_u7e_hourly_review.py": {
+      "bytes": 1225,
+      "sha256": "0db915289e33820ce8a3943a6eea2367d4e62eee5b775f7884711a7a87380de8"
+    },
+    "tests/u7e-aux-final.browser.mjs": {
+      "bytes": 3532,
+      "sha256": "01d41c03e0831b36fec007722085d4487d23f45b6c8d2c2d708b8619f7587266"
+    },
+    "tests/u7e-pinky-r11.browser.mjs": {
+      "bytes": 4453,
+      "sha256": "bc8ed9982825d2ed44e6accef40295656af4ef90d04a7da56768b49c6398a390"
+    },
+    "tests/u7e-pinky-r11.test.mjs": {
+      "bytes": 1702,
+      "sha256": "90a23fc54c9f3205feeb62bacf69e047ae10f1635e5b7e25754ea7a6130d67a7"
+    },
+    "tests/untoned-frontiers-r11.test.mjs": {
+      "bytes": 2065,
+      "sha256": "6f5df69dfadea3f811c245e58f606af0adf801dc9f97d7ecf480b9695880df48"
+    },
+    "tools/audit_u7e_grouped_cpu.py": {
+      "bytes": 5174,
+      "sha256": "63eed58257791fc4d71c665df4014c67272370b27dd955dac730fde59dadc161"
+    },
+    "tools/compare_u7e_competing_performance.js": {
+      "bytes": 11355,
+      "sha256": "0777139cb60859aa4c708fd8fac9e2de64f317ff06fefa0bc424c8b8f54be5c5"
+    },
+    "tools/finalize_u7e_aux_final.js": {
+      "bytes": 11148,
+      "sha256": "179782ffbc1e55ba070cbc94a7e2bfbe117faa5e5549350adf0dd422f63b31db"
+    },
+    "tools/finalize_u7e_pinky_r11.js": {
+      "bytes": 15006,
+      "sha256": "a49e1e6011f7ce2b2fc5143663205de30d92d4af4c0738a3b20db467b7480683"
+    },
+    "tools/finalize_u7x_02d_r11.js": {
+      "bytes": 9572,
+      "sha256": "469f249143d1abdca24a7159f2e3623d4b52da87a0bb98af07aa1ffa284391c5"
+    },
+    "tools/finalize_untoned_frontiers_r11.js": {
+      "bytes": 14515,
+      "sha256": "b0633454a75cb1efdbe8318218a73032b9a4d445c4975f36e4886349bb1a6381"
+    },
+    "tools/prepare_u7e_grouped_cpu.py": {
+      "bytes": 5383,
+      "sha256": "640d36e5caa92fec910f15cb9a0f4970d3d19e0d981a80e3cdfb98d69f451d71"
+    },
+    "tools/publish_u7e_pinky_r11.py": {
+      "bytes": 4315,
+      "sha256": "a27e81c388c164c525b3f8bd2d535c2e5088e1f0ae0fbdcf451c270416f690a3"
+    },
+    "tools/publish_untoned_frontiers_r11.py": {
+      "bytes": 7690,
+      "sha256": "44468dd444b7df7f848c61366e4a0018a6e05afe090e0785fc88e77bf8febc21"
+    },
+    "tools/report_u7e_grouped_cpu_final.py": {
+      "bytes": 11565,
+      "sha256": "e5134b5709e1256e73b404485133fd81d4e6af1fc607f4435588509f9f1daf9d"
+    },
+    "tools/robust_untoned_v52_policy.py": {
+      "bytes": 3675,
+      "sha256": "8e2c914ddb5ef169f8497463049866879f506c40d27fd227daa62d13f921071b"
+    },
+    "tools/run_u7e_grouped_cpu.py": {
+      "bytes": 30471,
+      "sha256": "dd098b3795a7c0b0dcb359da450e4b64c8fdda72ca76d8a8989962846a3c38b4"
+    },
+    "tools/schedule_u7e_hourly_review.py": {
+      "bytes": 6480,
+      "sha256": "2540f9b46237aac77e323d1211a48d81be89004f56c807817f9f8f1160e85929"
+    },
+    "tools/search_untoned_cr7e_v52.js": {
+      "bytes": 14672,
+      "sha256": "d9bc0c67e4d75eb5e1d293f88d1d49aefb9a44d6a97e0960c7167e556a1f7bcd"
+    },
+    "tools/start_u7e_grouped_cpu.ps1": {
+      "bytes": 1850,
+      "sha256": "bd91128db67d872328c93801a37f6467b44052c3100a075e084cf27920048286"
+    },
+    "tools/start_u7e_hourly_review.ps1": {
+      "bytes": 1638,
+      "sha256": "9fe5b6c5f1d90e5cfb667d7ec6e99e7eb1bde80ae6e6e597224349ce41dab676"
+    },
+    "tools/summarize_u7e_low_pinky.py": {
+      "bytes": 16604,
+      "sha256": "9ef48444561e6a26397b96cb82b8c882fca5b7df73f77da1e365b7305b0d7f59"
+    },
+    "tools/validate_u7e_aux_final.py": {
+      "bytes": 7498,
+      "sha256": "982365cf28f553141f3f3d324522f74a47ff43645e20caecd99bab3c58f41dea"
+    },
+    "tools/validate_u7e_pinky_r11.py": {
+      "bytes": 10599,
+      "sha256": "788d134d7cc5c185f77415f5919761fda5a23be0d4dea7495faa1d29c201c2f0"
+    },
+    "tools/verify_untoned_cr7e_v52.js": {
+      "bytes": 9307,
+      "sha256": "e9c36f08ea258471674bb290cd1e97cd9c1adbd1e5dc82ed274bad3a5c166539"
+    },
+    "tools/wake_u7e_review.ps1": {
+      "bytes": 287,
+      "sha256": "545f1ce512363d22dbc104987763c1373a21841a3ea7f664bab9cd19111a5aaf"
+    }
+  },
+  "totalBytes": 11813878,
+  "databaseIncluded": false,
+  "largeDatabase": "research/.cache/u7e-grouped-cpu-20261121/search.sqlite stays local",
+  "html": "Ignored build artifact; final publication candidate patch and reports are included.",
+  "validation": {
+    "all34758CachedStatesRepriced": true,
+    "maxCktDifference": 1.0658141036401503e-14,
+    "pythonCampaignTests": 6,
+    "pythonHourlyTimerTests": 3,
+    "nodePublicationAndSemanticsTests": 19
+  }
+}

@@ -914,3 +914,83 @@ ckt-v51-toned-regroup-combine-refine:
     cargo run --release --manifest-path research/ckt-v4-core/Cargo.toml --bin audit-toned-rhyme-neighbors -- research/.cache/ckt-v51-toned-native-corpus.bin tools/ckt_v4_upstream_role_tables.json research/.cache/toned-regroup-combine-refine-job.json research/.cache/toned-regroup-combine-refine-results.json
     python tools/export_toned_rhyme_neighbors.py --job research/.cache/toned-regroup-combine-refine-job.json --results research/.cache/toned-regroup-combine-refine-results.json --prefix research/notes/2026-11-12-toned-regroup-combine-refine
     node tools/score_toned_2121_ckt_v51.js --layouts research/notes/2026-11-12-toned-regroup-combine-refine-finalists.json --policy 12/213/24 --shape AVUIO --output research/notes/2026-11-12-toned-regroup-combine-refine-js-verify.json
+
+
+u7e-aux-final-prepare:
+    node tools/finalize_u7e_aux_final.js --prepare
+
+u7e-aux-final-score id:
+    node --expose-gc --max-old-space-size=4096 tools/finalize_u7e_aux_final.js --score "{{id}}"
+
+u7e-aux-final-install:
+    node --max-old-space-size=12288 tools/finalize_u7e_aux_final.js --install
+
+u7e-aux-final-browser:
+    node tests/u7e-aux-final.browser.mjs
+
+u7e-aux-final-validate:
+    python -X utf8 tools/validate_u7e_aux_final.py
+
+u7e-hourly-ai-start:
+    & './tools/start_u7e_hourly_review.ps1'
+
+u7e-hourly-ai-status:
+    Get-Content -LiteralPath 'research/.cache/u7e-grouped-cpu-20261121/ai-reviews/timer-status.json' -Raw
+
+u7e-hourly-ai-stop:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/ai-reviews/STOP' -Force | Out-Null
+
+u7e-hourly-ai-test:
+    python -X utf8 -m unittest discover -s tests -p test_u7e_hourly_review.py
+
+u7e-grouped-cpu-prepare:
+    python -X utf8 tools/prepare_u7e_grouped_cpu.py
+
+u7e-grouped-cpu-start hours='24' duty='0.65':
+    & './tools/start_u7e_grouped_cpu.ps1' -Hours {{hours}} -Duty {{duty}}
+
+u7e-grouped-cpu-status:
+    python -X utf8 tools/run_u7e_grouped_cpu.py --status
+
+u7e-grouped-cpu-audit:
+    python -X utf8 tools/audit_u7e_grouped_cpu.py
+
+u7e-grouped-cpu-pause:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/PAUSE' -Force | Out-Null
+
+u7e-grouped-cpu-unpause:
+    if (Test-Path -LiteralPath 'research/.cache/u7e-grouped-cpu-20261121/PAUSE') { Remove-Item -LiteralPath 'research/.cache/u7e-grouped-cpu-20261121/PAUSE' }
+
+u7e-grouped-cpu-stop:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/STOP' -Force | Out-Null
+
+u7e-grouped-cpu-review-now:
+    New-Item -ItemType File -Path 'research/.cache/u7e-grouped-cpu-20261121/REVIEW_NOW' -Force | Out-Null
+
+u7e-grouped-cpu-test:
+    python -X utf8 -m unittest discover -s tests -p test_u7e_grouped_cpu.py
+    node --test tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs
+
+u7e-pinky-r11-prepare:
+    python -X utf8 tools/publish_u7e_pinky_r11.py prepare
+
+u7e-pinky-r11-columns:
+    python -X utf8 tools/publish_u7e_pinky_r11.py columns
+
+u7e-pinky-r11-score id:
+    node --expose-gc --max-old-space-size=4096 tools/finalize_u7e_pinky_r11.js --score "{{id}}"
+
+u7e-pinky-r11-install:
+    node --max-old-space-size=12288 tools/finalize_u7e_pinky_r11.js --install
+
+u7e-pinky-r11-browser:
+    node tests/u7e-pinky-r11.browser.mjs
+
+u7e-pinky-r11-validate:
+    python -X utf8 tools/validate_u7e_pinky_r11.py
+
+u7e-pinky-r11-test:
+    node --test tests/u7e-pinky-r11.test.mjs tests/untoned-frontiers-r11.test.mjs tests/auxiliary-semantics.test.mjs tests/ckt-v52.test.mjs tests/keymap-link-colors.test.mjs
+
+u7e-grouped-cpu-final-report:
+    python -X utf8 tools/report_u7e_grouped_cpu_final.py

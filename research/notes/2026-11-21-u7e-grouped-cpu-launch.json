@@ -1,0 +1,100 @@
+{
+  "completed": true,
+  "campaignRunning": true,
+  "pid": 52584,
+  "nativePid": 9244,
+  "work": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\u7e-grouped-cpu-20261121",
+  "startedLocal": "2026-11-21T05:58:23+08:00",
+  "nextReviewLocal": "2026-11-21T06:58:23+08:00",
+  "expectedFirstRunEndLocal": "2026-11-22T05:58:23+08:00",
+  "config": {
+    "seed": "UED-3158ce08b5bc",
+    "maxMemory": 41,
+    "maxD": 2,
+    "maxV": 5,
+    "preferredPairs": [
+      [
+        "o",
+        "uo"
+      ],
+      [
+        "uan",
+        "van"
+      ],
+      [
+        "un",
+        "vn"
+      ],
+      [
+        "iang",
+        "uang"
+      ],
+      [
+        "iong",
+        "ong"
+      ],
+      [
+        "ing",
+        "uai"
+      ],
+      [
+        "ei",
+        "er"
+      ]
+    ],
+    "initialBrokenPairsAllowed": {
+      "strict": 0,
+      "open": 0
+    },
+    "cpuOnly": true,
+    "duty": 0.65,
+    "nativeLogicalCpuAffinity": [
+      31
+    ],
+    "priority": "BelowNormal",
+    "parentMemoryMiB": 27.73,
+    "nativeMemoryMiB": 143.29,
+    "hardPinkyCap": false
+  },
+  "snapshot": {
+    "cachedStates": 169,
+    "auditedRecentStates": 169,
+    "evaluations": {
+      "strict": 84,
+      "open": 84
+    },
+    "exactSeconds": {
+      "strict": 29.085821699998633,
+      "open": 28.955844600008277
+    },
+    "strictExactFraction": 0.5011196878749011
+  },
+  "smoke": {
+    "completed": true,
+    "resumedExactEvaluations": 64,
+    "exactSeconds": {
+      "strict": 11.220595599988883,
+      "open": 11.312968199978059
+    },
+    "strictExactFraction": 0.4979503330940197
+  },
+  "checks": {
+    "seedCanonicalReplay": true,
+    "allSevenPairsProtectedInitially": true,
+    "resumeContractPinned": true,
+    "nativeCpuSingleWorker": true,
+    "recentScoreAndPinkyRepricing": true,
+    "hourlyRuleSimulationAndCrossLaneMigrationCoveredByTests": true,
+    "noModelOrApiCalls": true,
+    "htmlOrProductionChanged": false
+  },
+  "sourceHashes": {
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\audit_u7e_grouped_cpu.py": "63eed58257791fc4d71c665df4014c67272370b27dd955dac730fde59dadc161",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\config\\u7e-grouped-cpu.json": "2b908611ec5e9968297e5366f5f0dba6de7c79be0bde416cd0cd213f5521c116",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\run_u7e_grouped_cpu.py": "dd098b3795a7c0b0dcb359da450e4b64c8fdda72ca76d8a8989962846a3c38b4",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tools\\start_u7e_grouped_cpu.ps1": "bd91128db67d872328c93801a37f6467b44052c3100a075e084cf27920048286",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\tests\\test_u7e_grouped_cpu.py": "c918702ed6fde1efb9189681400d88d4162bf7a3f38de821684c9d573aed6d9c",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\u7e-grouped-cpu-20261121\\baseline-audit.json": "187f8644e22ac4b071870dba0afee8286743a68c34ecfe133934db97819879c5",
+    "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-cr7e-v52\\research\\.cache\\u7e-grouped-cpu-smoke-v2-20261121\\status.json": "9e46ec117d54b651e8436c6629fdab81e90758e2e20764e356698c972c8c18aa"
+  }
+}
