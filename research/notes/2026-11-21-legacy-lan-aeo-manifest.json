@@ -1,0 +1,636 @@
+{
+  "version": 1,
+  "route": "LAN-AEO-finite-carrier-enumeration-v5.1",
+  "archivedAt": "2026-11-21T12:03:02.427389+08:00",
+  "archiveParentCommit": "3d8cb5ab1d3563ac0eb5b43cf3511eb66f032c1b",
+  "archiveCommitResolution": "git log --diff-filter=A --format=%H -- <this manifest path>",
+  "gitHistoryRewritten": false,
+  "searchRestarted": false,
+  "relatedCommits": [
+    {
+      "commit": "302234592ea08959fcd9578ebc06df42b85b5682",
+      "authorTime": "2026-11-18T01:19:13+08:00",
+      "committerTime": "2026-11-18T01:19:13+08:00",
+      "subject": "feat(research): compare unified AEO carriers for fixed Lan f19",
+      "ancestorOfArchiveParent": true
+    },
+    {
+      "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+      "authorTime": "2026-11-18T01:39:19+08:00",
+      "committerTime": "2026-11-18T01:39:19+08:00",
+      "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+      "ancestorOfArchiveParent": true
+    }
+  ],
+  "timeConvention": "ISO 8601; run times retain UTC Z; author/committer and archive times include offset. File mtime is not a run timestamp.",
+  "duplicateSnapshot": {
+    "path": "research/notes/2026-11-18-lan-aeo-all.json",
+    "bytes": 354612,
+    "sha256": "41931d8bd3b7a36bcfc53bdee2daee0a8dc2aaff93099de11ed825ff48c66447",
+    "fileMtime": "2026-11-18T01:27:37.754714+08:00",
+    "fileMtimeIsExperimentTime": false,
+    "match": "no-matching-historical-blob",
+    "canonicalFile": "research/notes/2026-11-18-lan-aeo-toned.json",
+    "familiesExactlyEqual": true,
+    "objectEqualExceptCompletionAndSourceHashes": true,
+    "missingCanonicalFields": [
+      "completed",
+      "htmlUnchanged"
+    ],
+    "originalSourceHashes": {
+      "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\enumerate_lan_aeo.js": "c26a25b62ed401e03084cbf7fcd46275f25ed23b511c7958f8c155fc7b2b4305",
+      "D:/C2D/Documents/rime-snow-pinyin/config/shenyun-21x21-mapping.json": "ecb3c669c1e28c95eb4f12bb10fd9c53dc01d31d9d499b44db7aed12ba12f5b5",
+      "D:/C2D/Documents/rime-snow-pinyin/snow_sanpin.schema.yaml": "bde17a52b7a3f7ea1af43901fca8efb2595a6cd2c49cd672c087b8ae9b2d1eae",
+      "D:/C2D/Documents/rime-snow-pinyin/snow_jiandao.schema.yaml": "9b097d410b6272f6569e18f1def9debc3d5aac01aa291b64a09ebac35da28a0d",
+      "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+      "D:/C2D/Documents/rime-snow-pinyin/rime-stroke/stroke.dict.yaml": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+      "tools/score_toned_2121_ckt_v51.js": "0f5e9cced8d7b871ee0d2fce1de06c81387f92385e20193d4b0e4ccbfb5257bc",
+      "tools/score_completion_ckt_v4.js": "8b9e9c7a574f9285f3819f880a95d23485e917f9158125410817df5df64427dd",
+      "tools/ckt_v4_model.js": "dc6b252c946743087b53497cdfe36ba8a7249236d2aec07f68ee8727aee2081e",
+      "tools/search_untoned_production_v51.js": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+      "tools/ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+      "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+      "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810"
+    },
+    "sourceHashDifferences": [
+      {
+        "path": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\enumerate_lan_aeo.js",
+        "intermediate": "c26a25b62ed401e03084cbf7fcd46275f25ed23b511c7958f8c155fc7b2b4305",
+        "completed": "95c61321acacc9878b5ee4bf16a7b43e6a1e0351a80da49716cc7a96a53457ea"
+      },
+      {
+        "path": "tools/ckt_v4_scheme_fixture.js",
+        "intermediate": null,
+        "completed": "b6e6b068da159031fa32538b42b5fe0120e5d7eea233d62eb993984e4994150c"
+      },
+      {
+        "path": "tools/search_untoned_production_v51.js",
+        "intermediate": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+        "completed": null
+      }
+    ]
+  },
+  "canonicalFiles": [
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-toned.json",
+      "bytes": 364836,
+      "sha256": "3fdea3a9a4cd6982ac0efd144c05706c4a2afc787f5a9118ad3e3de77bb8df92",
+      "fileMtime": "2026-11-18T05:16:14.070825+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "6a39ca447613f8909662fd16a705716b8a396a513c01864078ea1f3b114cc66e",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-untoned.json",
+      "bytes": 542257,
+      "sha256": "1b91c945b2dcc99f3ca95de7c657e52543e1221143ff876fb54cb761a031c947",
+      "fileMtime": "2026-11-18T05:16:14.075488+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "4f0dedc672c977fe48dacd5660c1e292d4e69f6960a413e2077f73f7ef433e09",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-comparison.json",
+      "bytes": 3773669,
+      "sha256": "95bf0afd7ad4e10a2c54881daf804007a3bfe2fa704ad0113757526f64d0f42e",
+      "fileMtime": "2026-11-18T03:19:44.426197+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "4993e9ccbdd45b0054392ae59b0bc6cbb8996beb2f5d3c67070eae4cc1d87ff0",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-comparison.csv",
+      "bytes": 7018,
+      "sha256": "97c7f97d114d959ee5914bc7b5c31c0355c1b1ff28d3925e4245398e14534631",
+      "fileMtime": "2026-11-18T03:19:44.419086+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "c4abff1e3c7c58510b11396ab380295bd222de321a471b4f403e0bf87a3ca920",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-toned-columns.json",
+      "bytes": 552297,
+      "sha256": "5ce17fab954fafe1e755257af38adc968b2d18e7f2a3b8f7958e0b563a4e1b40",
+      "fileMtime": "2026-11-18T03:19:44.428283+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "5b2041c2f04fc38f923551709276e56d029c4d2c6826ea95b81fef14c7d4f4a7",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-untoned-columns.json",
+      "bytes": 270706,
+      "sha256": "1b65c06a72e46739d6be16434dd313f6045bd056f5104783e7bebc5f16f48900",
+      "fileMtime": "2026-11-18T05:16:14.073450+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "97d0df643bbd2114eed1065bc6af6363b7b03250436461d14ee11e23456c8293",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-18-cr-lan-zero-carriers.json",
+      "bytes": 412017,
+      "sha256": "d8e4cf3efe8b0f3492f04b668d41b21b891f6fc8f63e4093921bfee766847ccc",
+      "fileMtime": "2026-11-18T03:19:44.418567+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a2a9e2ff700a5f08430c7aa6655e5b7125e0ae18",
+        "authorTime": "2026-11-18T01:39:19+08:00",
+        "committerTime": "2026-11-18T01:39:19+08:00",
+        "subject": "feat(research): exhaust AEO carriers for toned and production Lan layouts",
+        "ancestorOfArchiveParent": true
+      },
+      "gitBlobSha256": "1562bcef203ad97da51dfa83e8763ab560b03654050b6ff49f2c596fc186db4a",
+      "match": "CRLF/LF-only"
+    }
+  ],
+  "sourceHashProofs": [
+    {
+      "source": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\enumerate_lan_aeo.js",
+      "recordedSha256": "95c61321acacc9878b5ee4bf16a7b43e6a1e0351a80da49716cc7a96a53457ea",
+      "currentSha256": "620d357ef8af2009e8b86b50b3eaa4986354a6ae5f1398efcb5386a3493eb237",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/config/shenyun-21x21-mapping.json",
+      "recordedSha256": "ecb3c669c1e28c95eb4f12bb10fd9c53dc01d31d9d499b44db7aed12ba12f5b5",
+      "currentSha256": "e5e7fcb2abd92423a7ab4b8ccd406e7b9ea8e7b8c191e9b8c3d19a43d257f442",
+      "status": "historical-git-source",
+      "repository": "D:\\C2D\\Documents\\rime-snow-pinyin",
+      "path": "config/shenyun-21x21-mapping.json",
+      "commit": "16fe5e0d0f269e5572e33f9d54f6ac2cb0ea45d3",
+      "authorTime": "2026-11-16T03:37:04+08:00",
+      "committerTime": "2026-11-16T03:37:04+08:00",
+      "subject": "替换生产双拼布局为 OC21 与 RC26",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/snow_sanpin.schema.yaml",
+      "recordedSha256": "bde17a52b7a3f7ea1af43901fca8efb2595a6cd2c49cd672c087b8ae9b2d1eae",
+      "currentSha256": "86060f698954d377b51db7ccff6ba8a2faebcfc11dbb5a0e1e3834083b92dd1f",
+      "status": "historical-git-source",
+      "repository": "D:\\C2D\\Documents\\rime-snow-pinyin",
+      "path": "snow_sanpin.schema.yaml",
+      "commit": "c1f397834b458fdd8d127e9153ea29f94738d7f7",
+      "authorTime": "2026-11-17T01:56:46+08:00",
+      "committerTime": "2026-11-17T01:56:46+08:00",
+      "subject": "按各方案二字词辅序反转扩展声声空桶四辅",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/snow_jiandao.schema.yaml",
+      "recordedSha256": "9b097d410b6272f6569e18f1def9debc3d5aac01aa291b64a09ebac35da28a0d",
+      "currentSha256": "da358115b90c5c171d525d45050f6733a05439d154eec93d7a62cee4c8ab1d65",
+      "status": "historical-source-unavailable",
+      "limitation": "Recorded raw input hash cannot be reproduced from the current file or available Git history. Fixed effective policies and output tracks remain in the canonical report; this is not a fresh full source replay.",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml",
+      "recordedSha256": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+      "currentSha256": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/rime-stroke/stroke.dict.yaml",
+      "recordedSha256": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+      "currentSha256": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "tools/score_toned_2121_ckt_v51.js",
+      "recordedSha256": "0f5e9cced8d7b871ee0d2fce1de06c81387f92385e20193d4b0e4ccbfb5257bc",
+      "currentSha256": "0f5e9cced8d7b871ee0d2fce1de06c81387f92385e20193d4b0e4ccbfb5257bc",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "tools/score_completion_ckt_v4.js",
+      "recordedSha256": "8b9e9c7a574f9285f3819f880a95d23485e917f9158125410817df5df64427dd",
+      "currentSha256": "8b9e9c7a574f9285f3819f880a95d23485e917f9158125410817df5df64427dd",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "tools/ckt_v4_model.js",
+      "recordedSha256": "dc6b252c946743087b53497cdfe36ba8a7249236d2aec07f68ee8727aee2081e",
+      "currentSha256": "dc6b252c946743087b53497cdfe36ba8a7249236d2aec07f68ee8727aee2081e",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "tools/ckt_v4_scheme_fixture.js",
+      "recordedSha256": "b6e6b068da159031fa32538b42b5fe0120e5d7eea233d62eb993984e4994150c",
+      "currentSha256": "b6e6b068da159031fa32538b42b5fe0120e5d7eea233d62eb993984e4994150c",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "tools/ckt_v4_upstream_role_tables.json",
+      "recordedSha256": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+      "currentSha256": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt_v4_word_aux_order.js",
+      "recordedSha256": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+      "currentSha256": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt51_aux_order.js",
+      "recordedSha256": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810",
+      "currentSha256": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    },
+    {
+      "source": "research/notes/2026-11-18-lan-aeo-toned.json",
+      "recordedSha256": "6a39ca447613f8909662fd16a705716b8a396a513c01864078ea1f3b114cc66e",
+      "currentSha256": "3fdea3a9a4cd6982ac0efd144c05706c4a2afc787f5a9118ad3e3de77bb8df92",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/notes/2026-11-18-lan-aeo-untoned.json",
+      "recordedSha256": "4f0dedc672c977fe48dacd5660c1e292d4e69f6960a413e2077f73f7ef433e09",
+      "currentSha256": "1b91c945b2dcc99f3ca95de7c657e52543e1221143ff876fb54cb761a031c947",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/notes/2026-11-18-lan-aeo-toned-columns.json",
+      "recordedSha256": "5ce17fab954fafe1e755257af38adc968b2d18e7f2a3b8f7958e0b563a4e1b40",
+      "currentSha256": "5ce17fab954fafe1e755257af38adc968b2d18e7f2a3b8f7958e0b563a4e1b40",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/notes/2026-11-18-lan-aeo-untoned-columns.json",
+      "recordedSha256": "97d0df643bbd2114eed1065bc6af6363b7b03250436461d14ee11e23456c8293",
+      "currentSha256": "1b65c06a72e46739d6be16434dd313f6045bd056f5104783e7bebc5f16f48900",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/notes/2026-11-18-cr-lan-zero-carriers.json",
+      "recordedSha256": "d8e4cf3efe8b0f3492f04b668d41b21b891f6fc8f63e4093921bfee766847ccc",
+      "currentSha256": "d8e4cf3efe8b0f3492f04b668d41b21b891f6fc8f63e4093921bfee766847ccc",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "tools/complete_lan_aeo_comparison.py",
+      "recordedSha256": "74280c9a1c685e4a9a9e037c362f91315427d5bb8520cfdae5f66dca0ee957d4",
+      "currentSha256": "5f8141365af5338d17779c8925dcbfe38f15ca0e75a7aef724283321b493a0c6",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "tools/enumerate_lan_aeo.js",
+      "recordedSha256": "95c61321acacc9878b5ee4bf16a7b43e6a1e0351a80da49716cc7a96a53457ea",
+      "currentSha256": "620d357ef8af2009e8b86b50b3eaa4986354a6ae5f1398efcb5386a3493eb237",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "tools/score_lan_aeo_untoned_columns.js",
+      "recordedSha256": "09249b36f10439ca737cafe509907cc857eaa97807714c3fe86e0692ded96129",
+      "currentSha256": "878aaa1fe9ba0a7923104a2f3d7e45d4a36384eff0c697297aff5deee2f0fb28",
+      "status": "current-source",
+      "byteForm": "LF",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/.cache/R11_integrated_replay/logic.py",
+      "recordedSha256": "bc9e75729fcb6183de3d9674b20346fb63739893e796a8202412782abb07ce99",
+      "currentSha256": "bc9e75729fcb6183de3d9674b20346fb63739893e796a8202412782abb07ce99",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/.cache/R11_integrated_replay/memory_r2.py",
+      "recordedSha256": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+      "currentSha256": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    },
+    {
+      "source": "research/.cache/R11_integrated_replay/source.json",
+      "recordedSha256": "4f6a099fd4be49a38c4b711bfe53c74a1a3225427b7ebb0b6f7311b7ab6943c4",
+      "currentSha256": "4f6a099fd4be49a38c4b711bfe53c74a1a3225427b7ebb0b6f7311b7ab6943c4",
+      "status": "current-source",
+      "byteForm": "bytes",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-comparison.json"
+      ]
+    }
+  ],
+  "unavailableHistoricalSources": [
+    {
+      "source": "D:/C2D/Documents/rime-snow-pinyin/snow_jiandao.schema.yaml",
+      "recordedSha256": "9b097d410b6272f6569e18f1def9debc3d5aac01aa291b64a09ebac35da28a0d",
+      "currentSha256": "da358115b90c5c171d525d45050f6733a05439d154eec93d7a62cee4c8ab1d65",
+      "status": "historical-source-unavailable",
+      "limitation": "Recorded raw input hash cannot be reproduced from the current file or available Git history. Fixed effective policies and output tracks remain in the canonical report; this is not a fresh full source replay.",
+      "reportedIn": [
+        "research/notes/2026-11-18-lan-aeo-toned.json",
+        "research/notes/2026-11-18-lan-aeo-untoned.json"
+      ]
+    }
+  ],
+  "frozenPayload": {
+    "path": "research/.cache/lan-aeo-all-20261118/toned-full/payload-input.json.gz",
+    "bytes": 116460156,
+    "sha256": "d1bf93dc8b067f18794b896a0ce9b80d23fc7059333d79ebd61c9187e63dc5c9",
+    "uncompressedSha256": "5447521d10486a875032263e284d7b6eca9956675981c83af833816cb1b9b76b",
+    "uncompressedBytes": 413275083,
+    "tracked": false,
+    "purpose": "Full old payload input retained compressed in this run cache, not reconstructed from current HTML."
+  },
+  "retainedEnumerationRows": 44,
+  "retainedSelectedNativeOutputs": 3,
+  "selectedNativeFile": "research/notes/2026-11-21-legacy-lan-aeo-selected-native.json.gz",
+  "selectedNativeSha256": "dfed6cf58d09a1a18a3fd32658adb36323ac2b96b1d98e6ae890b5e8f0a7aa2d",
+  "selectedNativeBytes": 26545,
+  "removedFiles": [
+    {
+      "path": "research/notes/2026-11-18-lan-aeo-all.json",
+      "bytes": 354612,
+      "sha256": "41931d8bd3b7a36bcfc53bdee2daee0a8dc2aaff93099de11ed825ff48c66447",
+      "fileMtime": "2026-11-18T01:27:37.754714+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "match": "no-matching-historical-blob",
+      "canonicalFile": "research/notes/2026-11-18-lan-aeo-toned.json",
+      "familiesExactlyEqual": true,
+      "objectEqualExceptCompletionAndSourceHashes": true,
+      "missingCanonicalFields": [
+        "completed",
+        "htmlUnchanged"
+      ],
+      "originalSourceHashes": {
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\enumerate_lan_aeo.js": "c26a25b62ed401e03084cbf7fcd46275f25ed23b511c7958f8c155fc7b2b4305",
+        "D:/C2D/Documents/rime-snow-pinyin/config/shenyun-21x21-mapping.json": "ecb3c669c1e28c95eb4f12bb10fd9c53dc01d31d9d499b44db7aed12ba12f5b5",
+        "D:/C2D/Documents/rime-snow-pinyin/snow_sanpin.schema.yaml": "bde17a52b7a3f7ea1af43901fca8efb2595a6cd2c49cd672c087b8ae9b2d1eae",
+        "D:/C2D/Documents/rime-snow-pinyin/snow_jiandao.schema.yaml": "9b097d410b6272f6569e18f1def9debc3d5aac01aa291b64a09ebac35da28a0d",
+        "D:/C2D/Documents/rime-snow-pinyin/snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+        "D:/C2D/Documents/rime-snow-pinyin/rime-stroke/stroke.dict.yaml": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+        "tools/score_toned_2121_ckt_v51.js": "0f5e9cced8d7b871ee0d2fce1de06c81387f92385e20193d4b0e4ccbfb5257bc",
+        "tools/score_completion_ckt_v4.js": "8b9e9c7a574f9285f3819f880a95d23485e917f9158125410817df5df64427dd",
+        "tools/ckt_v4_model.js": "dc6b252c946743087b53497cdfe36ba8a7249236d2aec07f68ee8727aee2081e",
+        "tools/search_untoned_production_v51.js": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+        "tools/ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+        "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+        "D:/C2D/Documents/rime-snow-pinyin/scripts/research/evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810"
+      },
+      "sourceHashDifferences": [
+        {
+          "path": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\enumerate_lan_aeo.js",
+          "intermediate": "c26a25b62ed401e03084cbf7fcd46275f25ed23b511c7958f8c155fc7b2b4305",
+          "completed": "95c61321acacc9878b5ee4bf16a7b43e6a1e0351a80da49716cc7a96a53457ea"
+        },
+        {
+          "path": "tools/ckt_v4_scheme_fixture.js",
+          "intermediate": null,
+          "completed": "b6e6b068da159031fa32538b42b5fe0120e5d7eea233d62eb993984e4994150c"
+        },
+        {
+          "path": "tools/search_untoned_production_v51.js",
+          "intermediate": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+          "completed": null
+        }
+      ]
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/CR-LAN-f19a0ad1dc-AEO-to-E.native.json",
+      "bytes": 31577389,
+      "sha256": "7afdc11103529d051e340ea8142b6e3fd4375a7fb564fdf7eb3fc1132bd49ee2"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/CR-LAN-f19a0ad1dc-AEO-to-F.native.json",
+      "bytes": 31575115,
+      "sha256": "9c99f23865998dadbdf3fe682a49be52e530b72d1c08a4d4bd441a7ea855af1e"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/CR-LAN-f19a0ad1dc-AEO-to-N.native.json",
+      "bytes": 31573680,
+      "sha256": "b1464b41d7f192bc3f3e5013c21d9c3bc77a3b23288e7ef0125e8d68142a0bd6"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/payload-input.json",
+      "bytes": 413275083,
+      "sha256": "5447521d10486a875032263e284d7b6eca9956675981c83af833816cb1b9b76b"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-inputs/corpus.bin",
+      "bytes": 5603287,
+      "sha256": "f4c2d85727544fa2e75210a5693122b72655f727e7a4a5bd31520e4ff6bcf910",
+      "recovery": "research/config/cr-anneal-inputs.zip::corpus.bin"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-inputs/fixture.json",
+      "bytes": 28965,
+      "sha256": "8e23672936fe4ca6ad4c465893939f06d96146cfb4cbbf8654d590c542776b54",
+      "recovery": "research/config/cr-anneal-inputs.zip::fixture.json"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-inputs/moving_hand.py",
+      "bytes": 3329,
+      "sha256": "6af1ac19aa4f20f1e8e440a734fa0fd13b8e6e7b1e4a982bfe7a94a5904e08de",
+      "recovery": "research/config/cr-anneal-inputs.zip::moving_hand.py"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-inputs/MOVING_HAND_LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "recovery": "research/config/cr-anneal-inputs.zip::MOVING_HAND_LICENSE"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-inputs/seeds.json",
+      "bytes": 15516,
+      "sha256": "c7097828e4d18d79e0cdb430adbfbffaf0751db10dc03572eea3e51fe4d57228",
+      "recovery": "research/config/cr-anneal-inputs.zip::seeds.json"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-inputs/snapshot.json",
+      "bytes": 4901876,
+      "sha256": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+      "recovery": "research/config/cr-anneal-inputs.zip::snapshot.json"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/inputs/corpus.bin",
+      "bytes": 5603287,
+      "sha256": "f4c2d85727544fa2e75210a5693122b72655f727e7a4a5bd31520e4ff6bcf910",
+      "recovery": "research/config/cr-anneal-inputs.zip::corpus.bin"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/inputs/fixture.json",
+      "bytes": 28965,
+      "sha256": "8e23672936fe4ca6ad4c465893939f06d96146cfb4cbbf8654d590c542776b54",
+      "recovery": "research/config/cr-anneal-inputs.zip::fixture.json"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/inputs/moving_hand.py",
+      "bytes": 3329,
+      "sha256": "6af1ac19aa4f20f1e8e440a734fa0fd13b8e6e7b1e4a982bfe7a94a5904e08de",
+      "recovery": "research/config/cr-anneal-inputs.zip::moving_hand.py"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/inputs/MOVING_HAND_LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "recovery": "research/config/cr-anneal-inputs.zip::MOVING_HAND_LICENSE"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/inputs/seeds.json",
+      "bytes": 15516,
+      "sha256": "c7097828e4d18d79e0cdb430adbfbffaf0751db10dc03572eea3e51fe4d57228",
+      "recovery": "research/config/cr-anneal-inputs.zip::seeds.json"
+    },
+    {
+      "path": "research/.cache/lan-aeo-all-20261118/toned-full/inputs/snapshot.json",
+      "bytes": 4901876,
+      "sha256": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+      "recovery": "research/config/cr-anneal-inputs.zip::snapshot.json"
+    }
+  ],
+  "cacheBytesFreed": 413071967,
+  "selection": "Keep all 21 carrier endpoints plus original for both families; selected full-column audits and compact native outputs. A finite complete enumeration is more useful than discarding losing endpoints.",
+  "runTimes": "No started/updated fields in canonical enumeration. Artifact date is 2026-11-18; related commit author/committer times are recorded independently.",
+  "resumeOriginalTrajectoryAvailable": false,
+  "testAdaptation": "Historical source hash assertions accept verified Git originals and explicitly record unavailable raw input; original hashes are not changed. Output/cohort/winner/selected-column assertions remain.",
+  "validationResults": {
+    "pythonTestsPassed": 3,
+    "pythonTestsFailed": 0,
+    "enumerationRows": 44,
+    "canonicalDuplicateEquality": true,
+    "selectedNativeContractsEqual": true,
+    "frozenPayloadLosslessCompressionVerified": true,
+    "unavailableHistoricalSourceCount": 1
+  }
+}

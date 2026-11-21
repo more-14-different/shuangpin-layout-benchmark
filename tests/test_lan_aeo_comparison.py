@@ -3,6 +3,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+import subprocess
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -12,6 +13,30 @@ FILE=ROOT/'research/notes/2026-11-18-lan-aeo-comparison.json'
 class AeoEnumerationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):cls.report=json.loads(FILE.read_text(encoding='utf8'))
+
+    def assert_historical_source(self,path,expected):
+        """The source was frozen in November; live checkouts may have moved on."""
+        archive=ROOT/'research/notes/2026-11-21-legacy-lan-aeo-manifest.json'
+        if not archive.exists():
+            self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),expected)
+            return
+        manifest=json.loads(archive.read_text(encoding='utf8'))
+        proof=next(p for p in manifest['sourceHashProofs'] if p['source']==path and p['recordedSha256']==expected)
+        if proof['status']=='historical-source-unavailable':
+            # An explicit, bounded reproducibility gap, not a successful input replay.
+            self.assertEqual(Path(path).name,'snow_jiandao.schema.yaml')
+            self.assertIn(proof,manifest['unavailableHistoricalSources'])
+            # The recorded hash itself must be present in the immutable old report.
+            old=json.loads(subprocess.check_output(['git','show','a2a9e2f:research/notes/2026-11-18-lan-aeo-toned.json'],cwd=ROOT))
+            self.assertEqual(old['sourceHashes'][path],expected)
+            return
+        if proof['status']=='historical-git-source':
+            data=subprocess.check_output(['git','-C',proof['repository'],'show',proof['commit']+':'+proof['path']])
+        else:
+            self.assertEqual(proof['status'],'current-source');data=(ROOT/path).read_bytes()
+        if proof['byteForm']=='LF':data=data.replace(b'\r\n',b'\n')
+        elif proof['byteForm']=='CRLF':data=data.replace(b'\r\n',b'\n').replace(b'\n',b'\r\n')
+        self.assertEqual(hashlib.sha256(data).hexdigest(),expected)
 
     def test_complete_domains_actual_production_policy_and_equal_cohorts(self):
         r=self.report
@@ -62,7 +87,7 @@ class AeoEnumerationTests(unittest.TestCase):
             self.assertEqual(float(row['cktV51']),score)
             self.assertAlmostEqual(float(row['deltaCKT']),score-f['rows'][0]['score'],places=12)
         for file,sha in self.report['sourceHashes'].items():
-            self.assertEqual(hashlib.sha256((ROOT/file).read_bytes()).hexdigest(),sha)
+            self.assert_historical_source(file,sha)
 
     def test_selected_full_replays_match_enumeration_and_recorded_coverage(self):
         r=self.report;f=next(f for f in r['families'] if f['family']=='toned')
@@ -84,7 +109,7 @@ class AeoEnumerationTests(unittest.TestCase):
             enumeration=json.loads((ROOT/'research/notes'/source).read_text(encoding='utf8'))
             self.assertTrue(enumeration['completed'])
             for path,sha in enumeration['sourceHashes'].items():
-                self.assertEqual(hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),sha)
+                self.assert_historical_source(path,sha)
 
 
 if __name__=='__main__':unittest.main()
