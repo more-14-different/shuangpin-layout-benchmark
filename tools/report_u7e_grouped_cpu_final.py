@@ -46,6 +46,18 @@ def main():
     db.execute('BEGIN')
     state=read_state=json.loads(db.execute("SELECT v FROM meta WHERE k='state'").fetchone()[0])
     count=db.execute('SELECT COUNT(*) FROM states').fetchone()[0]
+    compacted=db.execute("SELECT v FROM meta WHERE k='compaction'").fetchone()
+    if compacted:
+        metadata=json.loads(compacted[0])
+        archived=Path(metadata['historicalFinalReport'])
+        assert sha(archived)==metadata['historicalFinalReportSha256']
+        assert count==metadata['retainedRows'], 'new run after compaction needs a separate final audit'
+        assert db.execute('PRAGMA integrity_check').fetchall()==[('ok',)]
+        db.close()
+        print(json.dumps(dict(completed=True,usingArchivedFullRunReport=str(archived),
+                              historicalCachedStates=metadata['originalRows'],currentRetainedStates=count,
+                              note='Database was deliberately pruned; existing historical result/audit files were preserved and not overwritten.'),ensure_ascii=False))
+        return
     assert count==state['samples']+1==sum(state['evaluations'].values())+1
     assert all(cap==0 for cap in state['maxBroken'].values()), 'this report describes the protected full-pair run'
     pairs=[(cfg['finalNames'].index(a),cfg['finalNames'].index(b)) for a,b in cfg['preferredPairs']]

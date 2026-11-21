@@ -998,3 +998,12 @@ u7e-pinky-r11-test:
 
 u7e-grouped-cpu-final-report:
     python -X utf8 tools/report_u7e_grouped_cpu_final.py
+
+u7e-grouped-cpu-prune-plan:
+    python -X utf8 tools/prune_u7e_grouped_cpu.py
+
+u7e-grouped-cpu-prune:
+    python -X utf8 tools/prune_u7e_grouped_cpu.py --apply
+
+u7e-grouped-cpu-prune-test:
+    python -X utf8 -m unittest discover -s tests -p test_u7e_cpu_pruning.py
