@@ -1,0 +1,2684 @@
+{
+  "version": 1,
+  "route": "untoned-21x26-v5.1-continuous-descent",
+  "archivedAt": "2026-11-21T11:50:48.396589+08:00",
+  "archiveParentCommit": "5f24b30dfb1395d6f1add8035aec6dc2433319ce",
+  "archiveCommitResolution": "git log --diff-filter=A --format=%H -- <this manifest path>",
+  "gitHistoryRewritten": false,
+  "searchRestarted": false,
+  "relatedCommits": [
+    {
+      "commit": "494df3cb7c596dd0d5ab8644451034819b4e1bf6",
+      "authorTime": "2026-11-14T04:17:09+08:00",
+      "committerTime": "2026-11-14T04:17:09+08:00",
+      "subject": "research: improve untoned 21x26 under production v5.1 constraints",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "a61e2fef3a3ecfe36a5a485918355438c1f8efff",
+      "authorTime": "2026-11-14T18:03:49+08:00",
+      "committerTime": "2026-11-14T18:03:49+08:00",
+      "subject": "research: close complete 21x26 double-empty neighborhoods",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "c723e5308174181783a6036596ce0e4e09a9a396",
+      "authorTime": "2026-11-14T19:32:44+08:00",
+      "committerTime": "2026-11-14T19:32:44+08:00",
+      "subject": "research: probe double-empty 21x26 coupled moves and distant layouts",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+      "authorTime": "2026-11-14T20:14:52+08:00",
+      "committerTime": "2026-11-14T20:14:52+08:00",
+      "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+      "authorTime": "2026-11-15T01:35:31+08:00",
+      "committerTime": "2026-11-15T01:35:31+08:00",
+      "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+      "authorTime": "2026-11-15T03:18:43+08:00",
+      "committerTime": "2026-11-15T03:18:43+08:00",
+      "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "95996193fb01449319ce1bd741bff0c242cf9bf7",
+      "authorTime": "2026-11-15T03:40:16+08:00",
+      "committerTime": "2026-11-15T03:40:16+08:00",
+      "subject": "research: verify three-hop tradeoffs and improve alternate 21x21 centers",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "b031079d620a3fe541e46c030fad44364c293691",
+      "authorTime": "2026-11-15T06:35:35+08:00",
+      "committerTime": "2026-11-15T06:35:35+08:00",
+      "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+      "ancestorOfArchiveParent": false
+    }
+  ],
+  "timeConvention": "ISO 8601; run times retain UTC Z; author/committer and archive times include offset. File mtime is not a run timestamp.",
+  "originalFiles": [
+    {
+      "path": "research/ckt-v4-core/src/bin/score-untoned-v51-stream.rs",
+      "bytes": 14143,
+      "sha256": "d9657de38ebd412174b25b7f15974ef6d4e5acfb3709ae5deba8e0c652730990",
+      "fileMtime": "2026-11-15T05:57:11.855350+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "d9657de38ebd412174b25b7f15974ef6d4e5acfb3709ae5deba8e0c652730990",
+      "match": "bytes"
+    },
+    {
+      "path": "research/config/untoned-2126-anneal-100k-contract.json",
+      "bytes": 2671,
+      "sha256": "08a9d6cf879d5bba5a29ab0d09b8fc27a8ae2d03c16e3ea0081c4e112c39fb00",
+      "fileMtime": "2026-11-15T04:08:36.364954+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "08a9d6cf879d5bba5a29ab0d09b8fc27a8ae2d03c16e3ea0081c4e112c39fb00",
+      "match": "bytes"
+    },
+    {
+      "path": "research/config/untoned-2126-anneal-100k-finalist.json",
+      "bytes": 16130,
+      "sha256": "2efba1d79b79ecedf077b9a5e4b7036b6130f6af29490f0c273a7f0c0f8c84de",
+      "fileMtime": "2026-11-15T06:34:09.349855+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "578f87d1a14de09ff888eceb1011d778b66d3df491498ba3c9866dd2d0bfe5b3",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/config/untoned-2126-double-empty-closure-finalist.json",
+      "bytes": 11617,
+      "sha256": "7c8f118a75e40ae627fbb630a1fa37d73572453cf32c1c2ae88a01b9a12ddf9b",
+      "fileMtime": "2026-11-15T06:03:25.638701+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a61e2fef3a3ecfe36a5a485918355438c1f8efff",
+        "authorTime": "2026-11-14T18:03:49+08:00",
+        "committerTime": "2026-11-14T18:03:49+08:00",
+        "subject": "research: close complete 21x26 double-empty neighborhoods",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "7c013132812f0efd7f1a66001460d6629dd01ad8d38090102e63b7b3d750fb03",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/config/untoned-2126-recenter-finalist.json",
+      "bytes": 14087,
+      "sha256": "060e8004c9545caefa45a4dd08be88a8ecbaac5d8402dfbadac688356221d577",
+      "fileMtime": "2026-11-15T05:57:11.993515+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "a128d3c9463ece43f5fd29a56c248ef1e5065fd1307fbccc856ef7381b463a86",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/config/untoned-2126-twohop-finalist.json",
+      "bytes": 13255,
+      "sha256": "9efcc405001d732086f7af291348a2c9794f97ab46239bf8760bcb57575c86da",
+      "fileMtime": "2026-11-15T05:57:11.817955+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "dab7339171703b5648ff6a0255cb8186bc980587082320d318503f783d4964c0",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/config/untoned-2126-v51-research-finalist-20261114.json",
+      "bytes": 3811,
+      "sha256": "2a784f6197ac9ce2d1b64a4fa6d70824c1b3b6277ba1a154e8221fa56543c8ca",
+      "fileMtime": "2026-11-15T06:03:25.457533+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "494df3cb7c596dd0d5ab8644451034819b4e1bf6",
+        "authorTime": "2026-11-14T04:17:09+08:00",
+        "committerTime": "2026-11-14T04:17:09+08:00",
+        "subject": "research: improve untoned 21x26 under production v5.1 constraints",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "edf99b83003c594fbf166f7ff8197f5c57dcf5b2e71695e5a8ceda6f3a2f24ac",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-14-untoned-2126-coupled-basin.json",
+      "bytes": 3195414,
+      "sha256": "c626721da026c938b516bc1b86decb3f9431dc721072845bfd8b2aafdbdceaec",
+      "fileMtime": "2026-11-15T05:57:11.931372+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "c723e5308174181783a6036596ce0e4e09a9a396",
+        "authorTime": "2026-11-14T19:32:44+08:00",
+        "committerTime": "2026-11-14T19:32:44+08:00",
+        "subject": "research: probe double-empty 21x26 coupled moves and distant layouts",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "70b5eb89e0afd6bb6baf4166733d86e00a760f8194ada7a009b823da9b65e275",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-14-untoned-2126-double-empty-closure-verification.json",
+      "bytes": 39674,
+      "sha256": "3cc0678f7c278689f1d72c82c42fbfbfddd599a0be3f3282c5151ad83bfd28ba",
+      "fileMtime": "2026-11-15T05:57:12.012050+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a61e2fef3a3ecfe36a5a485918355438c1f8efff",
+        "authorTime": "2026-11-14T18:03:49+08:00",
+        "committerTime": "2026-11-14T18:03:49+08:00",
+        "subject": "research: close complete 21x26 double-empty neighborhoods",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "3cc0678f7c278689f1d72c82c42fbfbfddd599a0be3f3282c5151ad83bfd28ba",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-14-untoned-2126-double-empty-closure.json",
+      "bytes": 6139025,
+      "sha256": "4a60a394449fc645ce0324f3dd45b4e041c0d9d561978d37ce0eaa2e80fc066c",
+      "fileMtime": "2026-11-15T05:57:11.919350+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a61e2fef3a3ecfe36a5a485918355438c1f8efff",
+        "authorTime": "2026-11-14T18:03:49+08:00",
+        "committerTime": "2026-11-14T18:03:49+08:00",
+        "subject": "research: close complete 21x26 double-empty neighborhoods",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "9df98a059fb84246319872519e3ee756424a7db4148598d648efd5384d862fce",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-14-untoned-2126-twohop-scores.jsonl.gz",
+      "bytes": 3902186,
+      "sha256": "6f8293c5e8494f650dd9ac8e4f9385016de58d4e6f2603776542fc8b45299419",
+      "fileMtime": "2026-11-15T05:57:11.941503+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "6f8293c5e8494f650dd9ac8e4f9385016de58d4e6f2603776542fc8b45299419",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-14-untoned-2126-twohop-summary.json",
+      "bytes": 24330,
+      "sha256": "5df67464d0b88dbd80d6e21ff898aa1f4750cbde4394148e7022d8f9ccca5cbb",
+      "fileMtime": "2026-11-15T05:57:11.947670+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "93563098a0896d7a354e2357a017146b44780de4f2967ad88ea1f2fbf6d35506",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-14-untoned-v51-stream-verification.json",
+      "bytes": 12835,
+      "sha256": "7ec2fa3f7f5b4f6e21d24155f3bd20c92be284fba5d930b5b905f9d029b1dd76",
+      "fileMtime": "2026-11-15T05:57:11.908626+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "7ec2fa3f7f5b4f6e21d24155f3bd20c92be284fba5d930b5b905f9d029b1dd76",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-fine-manifests.json.gz",
+      "bytes": 541767,
+      "sha256": "a13a1f5e95c4d1873bb401894f2d3a3508f3a5bb57c6c36ab29171060f26c904",
+      "fileMtime": "2026-11-15T06:34:09.348830+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "a13a1f5e95c4d1873bb401894f2d3a3508f3a5bb57c6c36ab29171060f26c904",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-frontier.json.gz",
+      "bytes": 304672,
+      "sha256": "76f8c22ae5aa6ec4d87c4d5bb720e3098799ad0ccf011499f4a9d43f34c36724",
+      "fileMtime": "2026-11-15T06:34:09.493683+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "76f8c22ae5aa6ec4d87c4d5bb720e3098799ad0ccf011499f4a9d43f34c36724",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-memory-verification.json",
+      "bytes": 619,
+      "sha256": "c95cfe21ac7f4a59dd3c00f64f64d347d767c8b1bdea8e5c5dced4570acd3bcc",
+      "fileMtime": "2026-11-15T06:29:32.134890+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b40cdf232ef566f6a28c047fd319ee693e2120d014170f0c1b66854745013b97",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-00.jsonl.gz",
+      "bytes": 7038514,
+      "sha256": "e0dcb874f401ca84f58e2c2de86adf84e6447c5b54e92e62b8c6aad1977b4a4a",
+      "fileMtime": "2026-11-15T06:34:00.018489+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "e0dcb874f401ca84f58e2c2de86adf84e6447c5b54e92e62b8c6aad1977b4a4a",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-01.jsonl.gz",
+      "bytes": 7054100,
+      "sha256": "f2ed2e2353add1c8a2dfda0195b1493aef6c3fe838c7277483d1a5c462385883",
+      "fileMtime": "2026-11-15T06:34:00.976160+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "f2ed2e2353add1c8a2dfda0195b1493aef6c3fe838c7277483d1a5c462385883",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-02.jsonl.gz",
+      "bytes": 7021072,
+      "sha256": "7be03b037ad3be2d040ebaad12ce6d6b186268e1a876203f2c3b6e0f9453764b",
+      "fileMtime": "2026-11-15T06:34:01.943203+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "7be03b037ad3be2d040ebaad12ce6d6b186268e1a876203f2c3b6e0f9453764b",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-03.jsonl.gz",
+      "bytes": 7047500,
+      "sha256": "5766b07ebead45ce77167c8372ef4944e5d4c535cfeb38b1234bc4a682dd5382",
+      "fileMtime": "2026-11-15T06:34:02.910028+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "5766b07ebead45ce77167c8372ef4944e5d4c535cfeb38b1234bc4a682dd5382",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-04.jsonl.gz",
+      "bytes": 7028612,
+      "sha256": "b124190954fb9ddc06658c02f7e8a82ef15729a726f2753458f4ca7041cf436c",
+      "fileMtime": "2026-11-15T06:34:03.872483+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b124190954fb9ddc06658c02f7e8a82ef15729a726f2753458f4ca7041cf436c",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-05.jsonl.gz",
+      "bytes": 7012991,
+      "sha256": "86f79a7acdc60f9098cb302cd650fc47e5610d79d44a4e01934dde180ebdfd85",
+      "fileMtime": "2026-11-15T06:34:04.842510+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "86f79a7acdc60f9098cb302cd650fc47e5610d79d44a4e01934dde180ebdfd85",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-06.jsonl.gz",
+      "bytes": 7026636,
+      "sha256": "2148eb309e5935b1ac97fd539583089a1a1cd37a7c4666886256c1b8c72f9811",
+      "fileMtime": "2026-11-15T06:34:05.801257+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "2148eb309e5935b1ac97fd539583089a1a1cd37a7c4666886256c1b8c72f9811",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-07.jsonl.gz",
+      "bytes": 7010071,
+      "sha256": "566f4e6ed5fd57a2ffa9064462bf8b8eaad882bc262743f694b2927fd566ef46",
+      "fileMtime": "2026-11-15T06:34:06.783246+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "566f4e6ed5fd57a2ffa9064462bf8b8eaad882bc262743f694b2927fd566ef46",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-08.jsonl.gz",
+      "bytes": 7032752,
+      "sha256": "182dfa4d623fa0d5828228e67c7aada2b93a5ee5511709254060b1d9ce3dfe46",
+      "fileMtime": "2026-11-15T06:34:07.749963+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "182dfa4d623fa0d5828228e67c7aada2b93a5ee5511709254060b1d9ce3dfe46",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-09.jsonl.gz",
+      "bytes": 7032849,
+      "sha256": "1d663b536178e0d3b6bb2b70b6ec87815a0d80f94df6bca57d2b4eda69890133",
+      "fileMtime": "2026-11-15T06:34:08.741037+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "1d663b536178e0d3b6bb2b70b6ec87815a0d80f94df6bca57d2b4eda69890133",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-summary.json",
+      "bytes": 1720893,
+      "sha256": "961c52017878a61834bd54eefd5a36773c9e2d10971d7f840de9534c39263481",
+      "fileMtime": "2026-11-15T06:34:09.938519+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "0a994ad11c7f963e33dd448650ed3ef0f2f691c2f32d3dc76e7e26484be6d94a",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-verification.json",
+      "bytes": 120650,
+      "sha256": "85e3be7448e5aafdcc5a25197dab3a181d3795565ae401fafa594879cce45e9b",
+      "fileMtime": "2026-11-15T06:32:22.377866+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "85e3be7448e5aafdcc5a25197dab3a181d3795565ae401fafa594879cce45e9b",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k.md",
+      "bytes": 7932,
+      "sha256": "06e6c0856d603cf4d4ed205d03212eacff789a009bab2484c44c98b8bde2723b",
+      "fileMtime": "2026-11-15T06:34:10.086573+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "355b9a926ce371632f7ebd29444f61c50c33b1bf11207916df5f6d70dae9b53f",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-recenter-scores.jsonl.gz",
+      "bytes": 11292944,
+      "sha256": "1ef6815b0d4162cfa61c5bd7a226aa338fd5c6cb984241d50f47c7db2f525089",
+      "fileMtime": "2026-11-15T05:57:11.970814+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "1ef6815b0d4162cfa61c5bd7a226aa338fd5c6cb984241d50f47c7db2f525089",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-recenter-stage-7-manifest.json.gz",
+      "bytes": 1874423,
+      "sha256": "5b41aabe4e4963c667239116aef1d596b7036461b60c310c0e2fd1ec9d26dcbc",
+      "fileMtime": "2026-11-15T05:57:11.988510+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "5b41aabe4e4963c667239116aef1d596b7036461b60c310c0e2fd1ec9d26dcbc",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-recenter-summary.json",
+      "bytes": 63302,
+      "sha256": "1e596d22f2fb0985e4886d5cfd8ea330598bb65efa57213fee4ce4b867b8fa02",
+      "fileMtime": "2026-11-15T05:57:11.950357+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b7025a8f7cdec8aa61dc1dd5f66529c962ce0370f10803226d362b973462b229",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-threehop-scores.jsonl.gz",
+      "bytes": 4216250,
+      "sha256": "b8b884ff1c420bfc5959267a9bb502a2040b9577e2e3ebef788e1eb2b99b7c61",
+      "fileMtime": "2026-11-15T05:57:12.005830+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+        "authorTime": "2026-11-15T03:18:43+08:00",
+        "committerTime": "2026-11-15T03:18:43+08:00",
+        "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b8b884ff1c420bfc5959267a9bb502a2040b9577e2e3ebef788e1eb2b99b7c61",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-threehop-summary.json",
+      "bytes": 297114,
+      "sha256": "34061f12b68f6189a02deee9b0730bdc3632c209b176c46480efb9aaed550608",
+      "fileMtime": "2026-11-15T05:57:11.997813+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+        "authorTime": "2026-11-15T03:18:43+08:00",
+        "committerTime": "2026-11-15T03:18:43+08:00",
+        "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "d58d0e8a5828ffa92a8f4c3b84434194598a68c1b57ce48a4e8f9eb0311d9bee",
+      "match": "CRLF/LF-only"
+    },
+    {
+      "path": "tests/untoned-2126-anneal.test.mjs",
+      "bytes": 6678,
+      "sha256": "2c24dd89cfba81b2341a8960af1768905cf4382fe5d9f5b008df238c651d188f",
+      "fileMtime": "2026-11-15T05:01:44.664530+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "2c24dd89cfba81b2341a8960af1768905cf4382fe5d9f5b008df238c651d188f",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-2126-coupled-search.test.mjs",
+      "bytes": 2318,
+      "sha256": "72a7b9a3b71aa39740f098a46ce6cc0b483be64e9c01150c99fdb204e4731028",
+      "fileMtime": "2026-11-15T06:02:30.538840+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "c723e5308174181783a6036596ce0e4e09a9a396",
+        "authorTime": "2026-11-14T19:32:44+08:00",
+        "committerTime": "2026-11-14T19:32:44+08:00",
+        "subject": "research: probe double-empty 21x26 coupled moves and distant layouts",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "72a7b9a3b71aa39740f098a46ce6cc0b483be64e9c01150c99fdb204e4731028",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-2126-recenter.test.mjs",
+      "bytes": 3969,
+      "sha256": "1c2df2d01e4233979ad5752b230b299b7166711a78963fa7f5fd8e062538396c",
+      "fileMtime": "2026-11-15T06:02:30.423674+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "1c2df2d01e4233979ad5752b230b299b7166711a78963fa7f5fd8e062538396c",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-2126-threehop.test.mjs",
+      "bytes": 2610,
+      "sha256": "ff1b67c83ccd170fb99bf5ff4e7f2d39ddff3a630d8fdc383d3088390c66d656",
+      "fileMtime": "2026-11-15T06:02:30.371732+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+        "authorTime": "2026-11-15T03:18:43+08:00",
+        "committerTime": "2026-11-15T03:18:43+08:00",
+        "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "ff1b67c83ccd170fb99bf5ff4e7f2d39ddff3a630d8fdc383d3088390c66d656",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-2126-twohop.test.mjs",
+      "bytes": 3378,
+      "sha256": "af2a1b9f6388cf0a9f87db614ab98d5c9fc9a68962b3e692646fb9925fe68ca2",
+      "fileMtime": "2026-11-15T06:02:30.482218+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "af2a1b9f6388cf0a9f87db614ab98d5c9fc9a68962b3e692646fb9925fe68ca2",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-double-empty-closure.test.mjs",
+      "bytes": 2733,
+      "sha256": "23f3d46a20bc4bf1473058606b048940451fed892360d65065cf6eb7f5062e39",
+      "fileMtime": "2026-11-15T06:02:30.637379+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a61e2fef3a3ecfe36a5a485918355438c1f8efff",
+        "authorTime": "2026-11-14T18:03:49+08:00",
+        "committerTime": "2026-11-14T18:03:49+08:00",
+        "subject": "research: close complete 21x26 double-empty neighborhoods",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "23f3d46a20bc4bf1473058606b048940451fed892360d65065cf6eb7f5062e39",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-production-v51.test.mjs",
+      "bytes": 2613,
+      "sha256": "b5467186d6422cb794e99ee935a0b2c7210e3d511a976cfc57c29e835efd5f2e",
+      "fileMtime": "2026-11-15T06:02:30.735738+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "494df3cb7c596dd0d5ab8644451034819b4e1bf6",
+        "authorTime": "2026-11-14T04:17:09+08:00",
+        "committerTime": "2026-11-14T04:17:09+08:00",
+        "subject": "research: improve untoned 21x26 under production v5.1 constraints",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b5467186d6422cb794e99ee935a0b2c7210e3d511a976cfc57c29e835efd5f2e",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/anneal_untoned_2126_v51.js",
+      "bytes": 20021,
+      "sha256": "a4f9b23091260e5f9fbe6c68c721fd7334530ab37fc85c45550163715129392e",
+      "fileMtime": "2026-11-15T03:58:12.981663+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "a4f9b23091260e5f9fbe6c68c721fd7334530ab37fc85c45550163715129392e",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/close_untoned_2126_double_empty.js",
+      "bytes": 13605,
+      "sha256": "1996ed8ca602d79b8643423d92c02aac8606693b98b3d36bc75e4e2331baa1cd",
+      "fileMtime": "2026-11-15T05:57:11.818493+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a61e2fef3a3ecfe36a5a485918355438c1f8efff",
+        "authorTime": "2026-11-14T18:03:49+08:00",
+        "committerTime": "2026-11-14T18:03:49+08:00",
+        "subject": "research: close complete 21x26 double-empty neighborhoods",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "1996ed8ca602d79b8643423d92c02aac8606693b98b3d36bc75e4e2331baa1cd",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/exhaust_untoned_2126_twohop.js",
+      "bytes": 10687,
+      "sha256": "0658cdddb8e57a6652fafa15945cefb04e4581db98a6dd64cea3d48768715b70",
+      "fileMtime": "2026-11-15T05:57:11.851977+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "0658cdddb8e57a6652fafa15945cefb04e4581db98a6dd64cea3d48768715b70",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/explore_untoned_2126_threehop.js",
+      "bytes": 18298,
+      "sha256": "c727b4baa91c94446d5252762b0be3a52d269276272f9960b15fbb2beeb06b85",
+      "fileMtime": "2026-11-15T05:57:11.949275+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+        "authorTime": "2026-11-15T03:18:43+08:00",
+        "committerTime": "2026-11-15T03:18:43+08:00",
+        "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "c727b4baa91c94446d5252762b0be3a52d269276272f9960b15fbb2beeb06b85",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/export_untoned_v51_templates.js",
+      "bytes": 5397,
+      "sha256": "331da0e3f63da15089bd91fe0ddcd26e7600d3a7e02779a12d0c340a0ce51829",
+      "fileMtime": "2026-11-15T06:03:25.554166+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "331da0e3f63da15089bd91fe0ddcd26e7600d3a7e02779a12d0c340a0ce51829",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/recenter_untoned_2126.js",
+      "bytes": 13381,
+      "sha256": "5a8edd2c4845fd471ae68eaba28a98a80bce07eae4b9210221d70e9bf59df44f",
+      "fileMtime": "2026-11-15T05:57:11.850411+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "5a8edd2c4845fd471ae68eaba28a98a80bce07eae4b9210221d70e9bf59df44f",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/refine_untoned_2126_far.js",
+      "bytes": 7537,
+      "sha256": "2d05d27a6e776b8992a588967c6b799ef788b14a3818beb2a8f053b3e6accd0c",
+      "fileMtime": "2026-11-15T06:03:25.767926+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "c723e5308174181783a6036596ce0e4e09a9a396",
+        "authorTime": "2026-11-14T19:32:44+08:00",
+        "committerTime": "2026-11-14T19:32:44+08:00",
+        "subject": "research: probe double-empty 21x26 coupled moves and distant layouts",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "2d05d27a6e776b8992a588967c6b799ef788b14a3818beb2a8f053b3e6accd0c",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/report_untoned_2126_anneal.py",
+      "bytes": 15516,
+      "sha256": "b3f473d1da159991ad19df9eefef5d4fc3ffc3939bcaf693ab743c058328753c",
+      "fileMtime": "2026-11-15T06:33:53.057711+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b3f473d1da159991ad19df9eefef5d4fc3ffc3939bcaf693ab743c058328753c",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/search_untoned_2126_coupled.js",
+      "bytes": 16056,
+      "sha256": "0e3d0772f62bdf8be961e52040b004b38d698aa45327db1d80f84095250f3a78",
+      "fileMtime": "2026-11-15T05:57:11.850921+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "c723e5308174181783a6036596ce0e4e09a9a396",
+        "authorTime": "2026-11-14T19:32:44+08:00",
+        "committerTime": "2026-11-14T19:32:44+08:00",
+        "subject": "research: probe double-empty 21x26 coupled moves and distant layouts",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "0e3d0772f62bdf8be961e52040b004b38d698aa45327db1d80f84095250f3a78",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/search_untoned_production_v51.js",
+      "bytes": 15225,
+      "sha256": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+      "fileMtime": "2026-11-15T05:57:11.820005+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "494df3cb7c596dd0d5ab8644451034819b4e1bf6",
+        "authorTime": "2026-11-14T04:17:09+08:00",
+        "committerTime": "2026-11-14T04:17:09+08:00",
+        "subject": "research: improve untoned 21x26 under production v5.1 constraints",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/untoned_v51_stream.js",
+      "bytes": 2752,
+      "sha256": "8a6647d266c2afb8bd475c1138fd23f6ceaee0e5c57abccbb88c5751cf9cccef",
+      "fileMtime": "2026-11-15T05:57:11.853050+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "8a6647d266c2afb8bd475c1138fd23f6ceaee0e5c57abccbb88c5751cf9cccef",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2126_anneal.js",
+      "bytes": 16274,
+      "sha256": "4e73a4058ec4588c015a56ad5f5e5ed758761bee59888f3547cfbf61ce8b99b2",
+      "fileMtime": "2026-11-15T06:05:55.004178+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "4e73a4058ec4588c015a56ad5f5e5ed758761bee59888f3547cfbf61ce8b99b2",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2126_anneal_memory.py",
+      "bytes": 3856,
+      "sha256": "25942e418922cf90d59f4860f547e298b821c3666f8c30d41c5f3a9f72df3966",
+      "fileMtime": "2026-11-15T04:00:01.152973+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "25942e418922cf90d59f4860f547e298b821c3666f8c30d41c5f3a9f72df3966",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2126_recenter.js",
+      "bytes": 11404,
+      "sha256": "9903b01a5b54fc4dece229eaee00379be48c980b83a0acae22efcc56600efb66",
+      "fileMtime": "2026-11-15T05:57:11.995144+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "9903b01a5b54fc4dece229eaee00379be48c980b83a0acae22efcc56600efb66",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2126_recenter_memory.py",
+      "bytes": 4397,
+      "sha256": "08a779ec64deab1839b4aa2218e596d9a8b371890c3d332a0dfae666bd00a709",
+      "fileMtime": "2026-11-15T05:57:38.486304+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "08a779ec64deab1839b4aa2218e596d9a8b371890c3d332a0dfae666bd00a709",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2126_threehop.js",
+      "bytes": 11533,
+      "sha256": "501fc145bbd48f3fc802c589c8225bd411e55466179dcd47e12729faeb04930c",
+      "fileMtime": "2026-11-21T11:48:08.096288+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+        "authorTime": "2026-11-15T03:18:43+08:00",
+        "committerTime": "2026-11-15T03:18:43+08:00",
+        "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "501fc145bbd48f3fc802c589c8225bd411e55466179dcd47e12729faeb04930c",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2126_twohop.js",
+      "bytes": 6642,
+      "sha256": "ba12b1644da971c16e283caaa594c5d1df9220ce4dffb1386c4f67c377f4b3c3",
+      "fileMtime": "2026-11-21T11:48:08.066919+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "ba12b1644da971c16e283caaa594c5d1df9220ce4dffb1386c4f67c377f4b3c3",
+      "match": "bytes"
+    }
+  ],
+  "stages": [
+    {
+      "started": "2026-11-14T09:16:42.655Z",
+      "updated": "2026-11-14T10:00:58.316Z",
+      "bestId": "DE26-e53e454ffc9a",
+      "bestScore": 9.083773105022795,
+      "completed": true,
+      "scope": "complete finite one-hop operators at each closed center; no global-optimality claim",
+      "file": "2026-11-14-untoned-2126-double-empty-closure.json",
+      "historicalRecords": 840
+    },
+    {
+      "started": "2026-11-14T11:06:46.540Z",
+      "updated": "2026-11-14T11:29:07.141Z",
+      "bestId": "DE26-e53e454ffc9a",
+      "bestScore": 9.083773105022795,
+      "completed": true,
+      "scope": "selected native-scored two-operation endpoints and selected distant legal-walk endpoints; not exhaustive CKT search",
+      "file": "2026-11-14-untoned-2126-coupled-basin.json",
+      "historicalRecords": 326
+    },
+    {
+      "bestId": "E2-8416c6b217de91f1",
+      "bestScore": 9.083156124582864,
+      "completed": true,
+      "scope": "Exhaustive endpoints of two operations from one frozen anchor, with exact hard and comfort gates; not a global or unrestricted two-token optimum.",
+      "scoresVerified": 7621,
+      "file": "2026-11-14-untoned-2126-twohop-summary.json"
+    },
+    {
+      "started": "2026-11-14T16:58:40.291Z",
+      "updated": "2026-11-14T17:31:58.505Z",
+      "bestId": "RC26-885412fb398bd67f",
+      "bestScore": 9.078652093288046,
+      "completed": true,
+      "scope": "One/two-step closure at final center for the frozen operation set and all existing gates; no global or other-basin optimum claim.",
+      "newScores": 23455,
+      "file": "2026-11-15-untoned-2126-recenter-summary.json"
+    },
+    {
+      "started": "2026-11-14T18:42:00.793Z",
+      "updated": "2026-11-14T18:54:02.660Z",
+      "bestId": "RC26-885412fb398bd67f",
+      "bestScore": 9.078652093288046,
+      "completed": true,
+      "scope": "Complete third-operation extensions of 40 selected two-operation bridges plus 1,000,000 deterministic sampled triples, six bounded alternative-center one-hop descents, and final one-hop closure; not exhaustive three-hop or global optimization.",
+      "newScores": 7610,
+      "file": "2026-11-15-untoned-2126-threehop-summary.json"
+    },
+    {
+      "started": "2026-11-14T19:58:33.134Z",
+      "updated": "2026-11-14T22:28:50.775Z",
+      "bestId": "RC26-885412fb398bd67f",
+      "bestScore": 9.078652093288046,
+      "completed": true,
+      "scope": "Exactly 100000 novel full native scores under a bounded heuristic annealing schedule; not exhaustive closure or a global-optimum proof.",
+      "totalNew": 100000,
+      "file": "2026-11-15-untoned-2126-anneal-100k-summary.json"
+    }
+  ],
+  "historicalScoreArchiveRows": {
+    "2026-11-14-untoned-2126-twohop-scores.jsonl.gz": 7621,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-00.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-01.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-02.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-03.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-04.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-05.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-06.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-07.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-08.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-anneal-100k-scores-part-09.jsonl.gz": 10000,
+    "2026-11-15-untoned-2126-recenter-scores.jsonl.gz": 23465,
+    "2026-11-15-untoned-2126-threehop-scores.jsonl.gz": 8626
+  },
+  "retainedRecords": 3442,
+  "retainedFinalParetoRecords": 3169,
+  "selection": "All saved final eight-axis Pareto rows; head-layout Pareto rows; top 20 per stage/archive; ergonomic extrema; independent-audit and fresh-replay representatives; stage seeds.",
+  "scoreVersion": "v5.1, not v5.2",
+  "historicalVerification": "research/notes/2026-11-15-untoned-2126-anneal-100k-verification.json",
+  "removedBulkSources": [
+    {
+      "path": "research/notes/2026-11-14-untoned-2126-twohop-scores.jsonl.gz",
+      "bytes": 3902186,
+      "sha256": "6f8293c5e8494f650dd9ac8e4f9385016de58d4e6f2603776542fc8b45299419",
+      "fileMtime": "2026-11-15T05:57:11.941503+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "a4223f0c3575cfaa1e1badcc1475b0b3ef775cba",
+        "authorTime": "2026-11-14T20:14:52+08:00",
+        "committerTime": "2026-11-14T20:14:52+08:00",
+        "subject": "research: exhaust double-empty 21x26 two-hop endpoints and audit onset tradeoffs",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "6f8293c5e8494f650dd9ac8e4f9385016de58d4e6f2603776542fc8b45299419",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-fine-manifests.json.gz",
+      "bytes": 541767,
+      "sha256": "a13a1f5e95c4d1873bb401894f2d3a3508f3a5bb57c6c36ab29171060f26c904",
+      "fileMtime": "2026-11-15T06:34:09.348830+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "a13a1f5e95c4d1873bb401894f2d3a3508f3a5bb57c6c36ab29171060f26c904",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-frontier.json.gz",
+      "bytes": 304672,
+      "sha256": "76f8c22ae5aa6ec4d87c4d5bb720e3098799ad0ccf011499f4a9d43f34c36724",
+      "fileMtime": "2026-11-15T06:34:09.493683+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "76f8c22ae5aa6ec4d87c4d5bb720e3098799ad0ccf011499f4a9d43f34c36724",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-00.jsonl.gz",
+      "bytes": 7038514,
+      "sha256": "e0dcb874f401ca84f58e2c2de86adf84e6447c5b54e92e62b8c6aad1977b4a4a",
+      "fileMtime": "2026-11-15T06:34:00.018489+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "e0dcb874f401ca84f58e2c2de86adf84e6447c5b54e92e62b8c6aad1977b4a4a",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-01.jsonl.gz",
+      "bytes": 7054100,
+      "sha256": "f2ed2e2353add1c8a2dfda0195b1493aef6c3fe838c7277483d1a5c462385883",
+      "fileMtime": "2026-11-15T06:34:00.976160+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "f2ed2e2353add1c8a2dfda0195b1493aef6c3fe838c7277483d1a5c462385883",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-02.jsonl.gz",
+      "bytes": 7021072,
+      "sha256": "7be03b037ad3be2d040ebaad12ce6d6b186268e1a876203f2c3b6e0f9453764b",
+      "fileMtime": "2026-11-15T06:34:01.943203+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "7be03b037ad3be2d040ebaad12ce6d6b186268e1a876203f2c3b6e0f9453764b",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-03.jsonl.gz",
+      "bytes": 7047500,
+      "sha256": "5766b07ebead45ce77167c8372ef4944e5d4c535cfeb38b1234bc4a682dd5382",
+      "fileMtime": "2026-11-15T06:34:02.910028+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "5766b07ebead45ce77167c8372ef4944e5d4c535cfeb38b1234bc4a682dd5382",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-04.jsonl.gz",
+      "bytes": 7028612,
+      "sha256": "b124190954fb9ddc06658c02f7e8a82ef15729a726f2753458f4ca7041cf436c",
+      "fileMtime": "2026-11-15T06:34:03.872483+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b124190954fb9ddc06658c02f7e8a82ef15729a726f2753458f4ca7041cf436c",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-05.jsonl.gz",
+      "bytes": 7012991,
+      "sha256": "86f79a7acdc60f9098cb302cd650fc47e5610d79d44a4e01934dde180ebdfd85",
+      "fileMtime": "2026-11-15T06:34:04.842510+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "86f79a7acdc60f9098cb302cd650fc47e5610d79d44a4e01934dde180ebdfd85",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-06.jsonl.gz",
+      "bytes": 7026636,
+      "sha256": "2148eb309e5935b1ac97fd539583089a1a1cd37a7c4666886256c1b8c72f9811",
+      "fileMtime": "2026-11-15T06:34:05.801257+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "2148eb309e5935b1ac97fd539583089a1a1cd37a7c4666886256c1b8c72f9811",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-07.jsonl.gz",
+      "bytes": 7010071,
+      "sha256": "566f4e6ed5fd57a2ffa9064462bf8b8eaad882bc262743f694b2927fd566ef46",
+      "fileMtime": "2026-11-15T06:34:06.783246+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "566f4e6ed5fd57a2ffa9064462bf8b8eaad882bc262743f694b2927fd566ef46",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-08.jsonl.gz",
+      "bytes": 7032752,
+      "sha256": "182dfa4d623fa0d5828228e67c7aada2b93a5ee5511709254060b1d9ce3dfe46",
+      "fileMtime": "2026-11-15T06:34:07.749963+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "182dfa4d623fa0d5828228e67c7aada2b93a5ee5511709254060b1d9ce3dfe46",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-anneal-100k-scores-part-09.jsonl.gz",
+      "bytes": 7032849,
+      "sha256": "1d663b536178e0d3b6bb2b70b6ec87815a0d80f94df6bca57d2b4eda69890133",
+      "fileMtime": "2026-11-15T06:34:08.741037+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "b031079d620a3fe541e46c030fad44364c293691",
+        "authorTime": "2026-11-15T06:35:35+08:00",
+        "committerTime": "2026-11-15T06:35:35+08:00",
+        "subject": "research: complete 100k unique native 21x26 coarse-fine annealing trial",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "1d663b536178e0d3b6bb2b70b6ec87815a0d80f94df6bca57d2b4eda69890133",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-recenter-scores.jsonl.gz",
+      "bytes": 11292944,
+      "sha256": "1ef6815b0d4162cfa61c5bd7a226aa338fd5c6cb984241d50f47c7db2f525089",
+      "fileMtime": "2026-11-15T05:57:11.970814+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "1ef6815b0d4162cfa61c5bd7a226aa338fd5c6cb984241d50f47c7db2f525089",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-recenter-stage-7-manifest.json.gz",
+      "bytes": 1874423,
+      "sha256": "5b41aabe4e4963c667239116aef1d596b7036461b60c310c0e2fd1ec9d26dcbc",
+      "fileMtime": "2026-11-15T05:57:11.988510+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2f19302b704180f5f0403a5b66b513705a70402b",
+        "authorTime": "2026-11-15T01:35:31+08:00",
+        "committerTime": "2026-11-15T01:35:31+08:00",
+        "subject": "research: close recentered double-empty 21x26 one and two-hop descent",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "5b41aabe4e4963c667239116aef1d596b7036461b60c310c0e2fd1ec9d26dcbc",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2126-threehop-scores.jsonl.gz",
+      "bytes": 4216250,
+      "sha256": "b8b884ff1c420bfc5959267a9bb502a2040b9577e2e3ebef788e1eb2b99b7c61",
+      "fileMtime": "2026-11-15T05:57:12.005830+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "2b1aaf1210fbf12c418f3f3558934bb8e4defd21",
+        "authorTime": "2026-11-15T03:18:43+08:00",
+        "committerTime": "2026-11-15T03:18:43+08:00",
+        "subject": "research: evaluate bounded 21x26 three-hop coupling and six alternative centers",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b8b884ff1c420bfc5959267a9bb502a2040b9577e2e3ebef788e1eb2b99b7c61",
+      "match": "bytes"
+    }
+  ],
+  "removedCacheFiles": [
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/checkpoint.json",
+      "bytes": 1667084,
+      "sha256": "32faf6a1f3361d1437b069a29fe199c1cc0d0a9500f9bb8daccef0f2aca00f9b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-0-manifest.json",
+      "bytes": 30720,
+      "sha256": "cd07a910fabc77dd6cc7a6323de59ec218f33551407b1c249585983043b9148b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-1-manifest.json",
+      "bytes": 31159,
+      "sha256": "46f472dc594dd8f5912c401d2903d08453c4141c9adecadfbd18d7eaa09faa21"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-10-manifest.json",
+      "bytes": 30720,
+      "sha256": "dead73fe122c45776901df8d3f2bb7d32430051454157a4ca5abfacc725cca63"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-100-manifest.json",
+      "bytes": 30506,
+      "sha256": "f0731be6b9de76e54e5783c153e4587cb366175440c4b43bce61efbcc317a33b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-101-manifest.json",
+      "bytes": 30503,
+      "sha256": "995fa5b0bdbe4a0a3ceefadb4346314aec5d19f17caab2d92bc3a19686ed7de2"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-102-manifest.json",
+      "bytes": 31052,
+      "sha256": "632390578cbf7cf3039d1168579d66dcfd3f8dd0a9470d5a11c3fb6872b82593"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-103-manifest.json",
+      "bytes": 30507,
+      "sha256": "2aa17a7ea6425cb64694678765dd4bdbc9f0eeeeff935f0c39793d42887389bd"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-104-manifest.json",
+      "bytes": 30507,
+      "sha256": "1c86fb960b9c859bb096aec20d9a76f0ea3bc4e3d1f99fe285883089308788ba"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-105-manifest.json",
+      "bytes": 30503,
+      "sha256": "ed0551d09652f90b0d613bfb583200491a00f5580c1985f28acf6d0b487b5531"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-106-manifest.json",
+      "bytes": 31048,
+      "sha256": "001b8477aef077b5184f48114847979df69d6023e4d77b84eea076979d0cf09b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-107-manifest.json",
+      "bytes": 30503,
+      "sha256": "7017207c1090f40766545265a203b112c4fc7196fc36478fae32db183ebd266c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-108-manifest.json",
+      "bytes": 31049,
+      "sha256": "ed591360f4ffc31d236509dc1cb6b2332a2610d8a936ae9e0dfcdcccda776020"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-109-manifest.json",
+      "bytes": 31052,
+      "sha256": "fd8c3e7e18039823927e647b0bd7d49195eecea514dddb280c60afac1222dc5a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-11-manifest.json",
+      "bytes": 31156,
+      "sha256": "d2cb4693dd36a68a3ac5a93260c88fe8811fee1306b8a3101377883dfe433a0b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-110-manifest.json",
+      "bytes": 30504,
+      "sha256": "935718cf0be1a496c423e410a20cede71c41b721494c513a80229e567616de9f"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-111-manifest.json",
+      "bytes": 31052,
+      "sha256": "87ab5ed26d37b938f6805e8c9a7725bc7bc50c6c39ae240120c1fded82be2daf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-112-manifest.json",
+      "bytes": 30504,
+      "sha256": "a1b20fd23b116dd4b651b7e7e9ee2b83429b1b725a2fb31f638b1b6bea6358f2"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-113-manifest.json",
+      "bytes": 31052,
+      "sha256": "c4fc2ecbc6bffd0913d06d38714be9f05bd980491c87e077547d70ee9791bd92"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-114-manifest.json",
+      "bytes": 30504,
+      "sha256": "9105ef11f60d39fb30eb5bb1caa297c6a21555a6b538fcea91a439a4e22c8326"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-115-manifest.json",
+      "bytes": 30503,
+      "sha256": "173aff6b21e76db2cc5e0074a560c21083b8e428304d9509652d886ece23537b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-116-manifest.json",
+      "bytes": 31048,
+      "sha256": "ff988e73be0146503a820621e22868d94794a3348eba90498d13dac008e5642e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-117-manifest.json",
+      "bytes": 30503,
+      "sha256": "5d26ed4d0a74298e8883681298c69669a2c1828b19e5be3112403959024d8206"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-118-manifest.json",
+      "bytes": 31052,
+      "sha256": "5a0ba48ff23447ced27789f880de46dd2b72352f5fcead773194e900d541d010"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-119-manifest.json",
+      "bytes": 30504,
+      "sha256": "6c02d13a2b8e6cfba3699708ad4ff015c1550746fe792295fd98ced9957961aa"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-12-manifest.json",
+      "bytes": 30612,
+      "sha256": "951513a5ef5ad91a0878293cf20494b0373ec92aaacdfa9bd6279d1c146f976e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-120-manifest.json",
+      "bytes": 31052,
+      "sha256": "20b9f8dea8d5490184537e2268be99cf20c6402a72362bc8c4c6191ca9121ad8"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-121-manifest.json",
+      "bytes": 30503,
+      "sha256": "ff0e8b00e34c1157bc600cb148f57d6fadf39d144f8193839fca3f8342f810db"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-122-manifest.json",
+      "bytes": 31048,
+      "sha256": "52c4cb17ae707afbe3b5d96bc58f0328dea8ce562e305ba37d0e7690a7dcf9a3"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-123-manifest.json",
+      "bytes": 30503,
+      "sha256": "f69d449f4e9a560ff2b8f9640e7db4954a56b2a50ebee98791f3f9487ed8d81f"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-124-manifest.json",
+      "bytes": 30504,
+      "sha256": "1d61ed70a0b8288146f9676ff940f2f91214880764e67848e611155563502026"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-125-manifest.json",
+      "bytes": 30725,
+      "sha256": "eb4f77865085d64e9aa7dec6f52f441463cfebb6eb6cd758f61fcd3b858e574a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-126-manifest.json",
+      "bytes": 30504,
+      "sha256": "39245922d6888840635e6cfc6acf302d26f835ca76efd8f52d623ed22c858192"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-127-manifest.json",
+      "bytes": 31052,
+      "sha256": "bb8e0b11edc3e9e5c1e37a73e40fb82bbb932d43d40fecd7c01fe1b525f8440b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-128-manifest.json",
+      "bytes": 30504,
+      "sha256": "ecdcd4b942b39d195a5233e18a26cd3033465dd49340abf75168898fe283db42"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-129-manifest.json",
+      "bytes": 31052,
+      "sha256": "8b28b7b1beb2ea1d04ff3c2e94dd3bd07787999c6592a9544533dc0b12f0108b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-13-manifest.json",
+      "bytes": 31160,
+      "sha256": "b888dd302498d5eef96469608a016d441b377a38f3769e6d4ec26185e834f270"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-130-manifest.json",
+      "bytes": 31049,
+      "sha256": "2896cd6ab292e845e341960fe18d0ed069700c36a27368abaf11f80ce0f79921"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-131-manifest.json",
+      "bytes": 30503,
+      "sha256": "7653a276ff7bb0b768df8ccd4708c36f28f5b33f64554b4c573382780c839d55"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-132-manifest.json",
+      "bytes": 30503,
+      "sha256": "ecb05da79fa0ea37ff5e731bc6b60f1a45fae6bdd4224ddb98de713accc373be"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-133-manifest.json",
+      "bytes": 30503,
+      "sha256": "216b351a88818ed17fcdba4a2762253619588702ac0b8adc4a4569107b5f7b68"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-134-manifest.json",
+      "bytes": 31052,
+      "sha256": "eddaca0bdb4465288258316ab5a80bbde160d64f51ebd77e942b70ace5d956c9"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-135-manifest.json",
+      "bytes": 30504,
+      "sha256": "5ff8034cf7e682165270ad920e4d91b5d801b690a94d9d6ac4a2eb1a86bb1f8a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-136-manifest.json",
+      "bytes": 31052,
+      "sha256": "df2274e87257f69295bf4b9f69adb7073041c37732768328ff5984eb39a02957"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-137-manifest.json",
+      "bytes": 30722,
+      "sha256": "c7146af9cf1a1e0d356b53f912393bf8f60d2020503022e5b72e81b775c294cc"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-138-manifest.json",
+      "bytes": 30503,
+      "sha256": "84751d7c0a9ef0a43c6fa4607103c8eaa789b8a33bffb2d9b1f742f3b0c056f7"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-139-manifest.json",
+      "bytes": 31048,
+      "sha256": "d08f488570b006ac9db8f0f1f5fed48b457b8a99c36af80c181a7df4275f27e4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-14-manifest.json",
+      "bytes": 30503,
+      "sha256": "dc1561577e2d9a742a14239e6fc8ea50d53dcef0f773e474efa21e3c0d9a617c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-140-manifest.json",
+      "bytes": 30504,
+      "sha256": "4b130f92b281707946d08e8c928f7a74f733ed4f4d2316074a3ccd1311734195"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-141-manifest.json",
+      "bytes": 31052,
+      "sha256": "e91237ef555727b11ab17b2d2ec55a8c87cc41131fcd4c84637b5e1b0691691a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-142-manifest.json",
+      "bytes": 31049,
+      "sha256": "9b16c4f0b0f6cd024d00e0c063b5291a050d70d481c20b00e7ab5a0fefd4cf76"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-143-manifest.json",
+      "bytes": 31052,
+      "sha256": "f29091f64cfc11eedc3b98d1dcc598e4a9d5f585d820417d2bd31d7210a7d3c2"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-144-manifest.json",
+      "bytes": 30504,
+      "sha256": "6a5cb9221109d8e4b6bd6b9334a2e27b4ec1689142272df061cca9f1b71aa94d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-145-manifest.json",
+      "bytes": 31052,
+      "sha256": "3bae76052af48256037f84699c8619d6b34e939565d80fc8ff9c2ec0f62eb261"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-146-manifest.json",
+      "bytes": 31049,
+      "sha256": "a9077d8623c5b875bae020578fe34e4a01c940ccc1cf065c12af2ab7b3980a71"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-147-manifest.json",
+      "bytes": 30503,
+      "sha256": "0dca340934a9d888252cea68c550ae1406e8c87b2810777d42b97f5950e0bee8"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-148-manifest.json",
+      "bytes": 30503,
+      "sha256": "c5ebc4b7a42685402a13f12722a0f4400be93a112a32f870948c8d6bc4778222"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-149-manifest.json",
+      "bytes": 30503,
+      "sha256": "11896b8b9e17bc93a8c8feda52f5484128463b9125e8716dd326c08b2a1fb91f"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-15-manifest.json",
+      "bytes": 30615,
+      "sha256": "54c8638aa66693ea7931d35f398c5cdc54d76edb43e280abf63df5867ad870dd"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-150-manifest.json",
+      "bytes": 31052,
+      "sha256": "4da774118856fdce347c9897a80213fd9ec953f4596b77e088512af2cbdd3714"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-151-manifest.json",
+      "bytes": 31049,
+      "sha256": "c7f368bae02f6163228833ad26d779e6d76355fb9a4c8320024ee363a90f33be"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-152-manifest.json",
+      "bytes": 30725,
+      "sha256": "175cb1ee39be72b599e8cd7e1458849a57bbed219d0ee3737a8171da53436d99"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-153-manifest.json",
+      "bytes": 30503,
+      "sha256": "885ebba980fac9d9ec00168c7a62bcfdff3f3bbc6d301c0aef40fc27b827408c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-154-manifest.json",
+      "bytes": 31048,
+      "sha256": "45cec76aeed023464f4a77ac3ef5f971a8337dffa62387e6d34b23c527e8a1ec"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-155-manifest.json",
+      "bytes": 31048,
+      "sha256": "deff652a07eed0331ddafb18af0f3f5bca032fb807853da9c85604e75c5f320e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-156-manifest.json",
+      "bytes": 30504,
+      "sha256": "28acf235ca3e575c21062efc694251f105c204a4feb30dedaac2c5b7584b4eb6"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-157-manifest.json",
+      "bytes": 31052,
+      "sha256": "53027efb5f3284d379f3a3fa61a5de55d568d114cf66c8c4a9c4c86508e4cc5d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-158-manifest.json",
+      "bytes": 30504,
+      "sha256": "6aeab5bfe312955a5d0b0751eff8ce72ae717eff98c8593d06547ead38f076bb"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-159-manifest.json",
+      "bytes": 31052,
+      "sha256": "cd2f78305780c2e8c520f094d47aaa3f31c51674d48ac1356ed34b0b9ac7ba77"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-16-manifest.json",
+      "bytes": 31157,
+      "sha256": "7ade6e44309ac87d4a440edd99844f4188ab2f0a2e7a22128444861fdd14a6e1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-160-manifest.json",
+      "bytes": 30504,
+      "sha256": "58961a20a7205e23805d59d069dea94293307f0063ebbd4142f2c1af1bba9ac4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-161-manifest.json",
+      "bytes": 31052,
+      "sha256": "38eb0aec081db2dd361fd5964313d1aa9746fb97490df8103c6d720bd872827a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-162-manifest.json",
+      "bytes": 30504,
+      "sha256": "acfd122e226ac816fe720050adde8e4817901241646aa4e725e233ffba54c431"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-163-manifest.json",
+      "bytes": 30721,
+      "sha256": "a803e11f998120b753cd909dfce3a8ba46fbadfad722321065fcf8e629115e05"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-164-manifest.json",
+      "bytes": 30394,
+      "sha256": "a3b10f46a0ba842df726169e3cfc44aa228334a1b3eeebe900e1cbba19ece22a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-165-manifest.json",
+      "bytes": 31048,
+      "sha256": "7924cdaa0d60d2b504baadf7ab9460239bd51e61c590d3a8e9157a8b0e8c4596"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-166-manifest.json",
+      "bytes": 31052,
+      "sha256": "c0c6d39aefc4888c63832fc6cd59bf7ac65c180c0b09f50602ae6171b580891f"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-167-manifest.json",
+      "bytes": 30504,
+      "sha256": "848bd0b865afcbc17d1730e41eddda937559147b5dbc545f98821e04eccbf2be"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-168-manifest.json",
+      "bytes": 31052,
+      "sha256": "633e6705743b54af0cdf7894bbd616e68620c9c190fe6a178be1d9d2d2470d90"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-169-manifest.json",
+      "bytes": 30503,
+      "sha256": "ea442ab468043118c2c82e8d7974b1891449d55e4f05f96ac3d280d025237924"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-17-manifest.json",
+      "bytes": 30397,
+      "sha256": "6a5f0b8de4a791e8c70159ae4f14d46a9c56ab237bba4bf07f3ed8c415382ca5"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-170-manifest.json",
+      "bytes": 30503,
+      "sha256": "4002df496d3061acac59ab461fb3db6b65653aad0575a430ee8d86ea75523840"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-171-manifest.json",
+      "bytes": 31048,
+      "sha256": "3c46564f850eaa1c02780309222d63d1ac13af555120604bb325f5b241baff3d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-172-manifest.json",
+      "bytes": 31049,
+      "sha256": "c95c72dbb1f0c233a98e380aa9d869eda417932dbab0ff08c15df1fea2b30e9a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-173-manifest.json",
+      "bytes": 31052,
+      "sha256": "e040803031715ad2314283d1a85ddece770b7e8a23cfd97cee97707ce743ea59"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-174-manifest.json",
+      "bytes": 30832,
+      "sha256": "d3d1156b53a5f52ecc1cdb10d1aaa5db869d75816ed422136543fbf841e0d54d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-175-manifest.json",
+      "bytes": 30725,
+      "sha256": "42056c4261ead978b499ecbdeb774de7aacf8e0893baf227b51534acfc3771b9"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-176-manifest.json",
+      "bytes": 30504,
+      "sha256": "c32b55bf00fe1ce2b8127701db31c355c3625069b4e349c35ea8f3530c05f051"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-177-manifest.json",
+      "bytes": 30725,
+      "sha256": "a11f9472e821b3130fd96a095e5de3bad576957b6cec4099225d14a847abd5f9"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-178-manifest.json",
+      "bytes": 30722,
+      "sha256": "9031a5099dd438d10ec60c0d0f66e0793a1d7d58902de527e09652d70c315f26"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-179-manifest.json",
+      "bytes": 30394,
+      "sha256": "59d8d2353f543fca01e34c4974552b8d01cef5b2900a2e9acbe7cd51d15fe851"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-18-manifest.json",
+      "bytes": 30503,
+      "sha256": "4933022738f76c17381c8c34f396786436a38b5b9db683d70c1e4e88e9a395e2"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-180-manifest.json",
+      "bytes": 30721,
+      "sha256": "f2207a780a4f57e7aa20c656de4b5c8447ca0889ed236ec072c73e8ea918b12e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-181-manifest.json",
+      "bytes": 30721,
+      "sha256": "0dcf2c0ea813391f70f5edeaad907bf37d5659c0efbd232ecedecae0f6f15fe5"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-182-manifest.json",
+      "bytes": 31052,
+      "sha256": "083d51e1ac5c0c0b9a02c8f2b8d0242212ee5cef37bbbd4b52d8b8edbc753fa4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-183-manifest.json",
+      "bytes": 30722,
+      "sha256": "ee933598948453c61722dc4f880b4441592874a909e725398173c81e1d087b2b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-184-manifest.json",
+      "bytes": 30725,
+      "sha256": "4e54d54ef355ca429f914103716cb0d0fbe45942cd21c5ced0c3eb1fe8f42784"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-185-manifest.json",
+      "bytes": 30503,
+      "sha256": "726c27574af911f37a7908b060cf570611e8f3629a689f833b8659c4ba2bc922"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-186-manifest.json",
+      "bytes": 30721,
+      "sha256": "8b47a0ac6ac96d9d068fff477bbc4867d4355e5153cb50a2f01514ed09712983"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-187-manifest.json",
+      "bytes": 30721,
+      "sha256": "16e26d88276841f6cbb01b4ddfad9b1f7e4f2249152159ac98ff3a9d84b004ae"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-188-manifest.json",
+      "bytes": 30504,
+      "sha256": "026a7268032f64832e6788edacfba24691f73e64d0caa6cbe6c837103df10a0c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-189-manifest.json",
+      "bytes": 30725,
+      "sha256": "2d61066f562be06e93b880b5e309713bfda16961c3f7499aa6d9bb0b8f73e7bf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-19-manifest.json",
+      "bytes": 30502,
+      "sha256": "3e5d41b1200ac7eacdd1877d4057645eb9e87b2b0c85b95e272535261bf67b7f"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-190-manifest.json",
+      "bytes": 30722,
+      "sha256": "a674c79d66a4a94a0ffb1f406e11df56e41eb976a487b1c94f69fb6c10464cfc"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-191-manifest.json",
+      "bytes": 30725,
+      "sha256": "cdee343a7045ab9d7a1fe55a8002354c8cd289d74c131db2d25415f63f64aa71"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-192-manifest.json",
+      "bytes": 30722,
+      "sha256": "f136eb0eed56e4fcd68bfbcdd5a054bce93a9c3c5ca49aa52d2fc1ad2df759d3"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-193-manifest.json",
+      "bytes": 30725,
+      "sha256": "cc7d47b13c7984e80668fdea79ff8c0485c398bb0b6772d41c5c50d18ed54920"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-194-manifest.json",
+      "bytes": 30287,
+      "sha256": "989d494659b062b64ac55645c4f198cafe6cb600795812409cc2123ca6acf4b0"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-195-manifest.json",
+      "bytes": 30503,
+      "sha256": "8655028eb95b861720564e05f35f8aad1660a4dca8afaddd0f842f269c5d8fce"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-196-manifest.json",
+      "bytes": 30721,
+      "sha256": "b9f678c30092eabb247782bc8437a4dd3cd9408d0c4f085b2d7766af7c3ce2cf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-197-manifest.json",
+      "bytes": 30721,
+      "sha256": "1f9927fa6a9f3bd75a8d5ac2aa183e21af3742234db91cdc97f26662979da436"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-198-manifest.json",
+      "bytes": 30725,
+      "sha256": "da8c196f9649d2039d9b01cb34528ec1319c9e5b7582ba09acf17549edafda65"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-199-manifest.json",
+      "bytes": 30722,
+      "sha256": "f5d2be40fb9a6e53a86a873bb6462db7bb2840816bfc263177772455ec3253c4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-2-manifest.json",
+      "bytes": 31156,
+      "sha256": "5dcc8bcf5d98d0f74228d0a579ba6808eae39b616b60999a3b61bbad7404a6b8"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-20-manifest.json",
+      "bytes": 30502,
+      "sha256": "5d179d27ecba85af2265e27e67c96c342b345823a59fe11e419d128700635f7a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-200-manifest.json",
+      "bytes": 30507,
+      "sha256": "b22833d34beda602a3afa43b00f4949c05e928f38f7364ffff7de11762629ed0"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-201-manifest.json",
+      "bytes": 30286,
+      "sha256": "fa43df9d1c68502f89994e13c1b266b92bcd98d8e1095467c909f428a6d667f3"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-202-manifest.json",
+      "bytes": 30721,
+      "sha256": "b8839268c68299afcc333570794fea6148c3d6e4446dee9cdad8f99ab96c83bf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-203-manifest.json",
+      "bytes": 30503,
+      "sha256": "18afa5c4e0a788ca3f292abe4cbdaf8d0fb572b81e9f71a167c4b13bccb77f4c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-204-manifest.json",
+      "bytes": 30722,
+      "sha256": "bcbc11244dc2e0f49eda1cabe4de9bc57bcfb2e1f40cdf5a96363c75a75d6729"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-205-manifest.json",
+      "bytes": 30944,
+      "sha256": "b411358b1a5dbf617604c64dd6772e72e8e305da9cb46ef159107af8ac47f82c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-21-manifest.json",
+      "bytes": 30611,
+      "sha256": "ecc02751f6984607ea5035eef158c786ac72514f8d13bf8db796e054f7195ff5"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-22-manifest.json",
+      "bytes": 31051,
+      "sha256": "3425cea5e11a91e4572e9efb0312b1217dd4a5d09e8f62e48f5077241f9309a0"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-23-manifest.json",
+      "bytes": 31157,
+      "sha256": "be5fc928311fea7526d4e2746e88d429ba1e378d40569c8704bda8915222a26a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-24-manifest.json",
+      "bytes": 31051,
+      "sha256": "144201e23993f82cf126c1edc8cb4a7de8db088830313a4a75bcc4d34f59ce5e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-25-manifest.json",
+      "bytes": 30720,
+      "sha256": "fb738042287783548173445416cad288034043d1560e000d8a80551d84449226"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-26-manifest.json",
+      "bytes": 30502,
+      "sha256": "9c9fd3ae07a2f2c6234170c2fa1791ee4aec48765b20d891d0d70c4325beab6d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-27-manifest.json",
+      "bytes": 30720,
+      "sha256": "76d3be745aa734fbc2d61888879b7d06218080bc15db3a635d273db2f5f11ad4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-28-manifest.json",
+      "bytes": 31048,
+      "sha256": "3bea4beacf4084fb6d987eee98ae5083cf44dcf3ff1d249a6e2f907720e09e0e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-29-manifest.json",
+      "bytes": 30506,
+      "sha256": "d21adcc7065fb86bd3a5a774461b372696053b17a9a5f745d37d42bec3d595ad"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-3-manifest.json",
+      "bytes": 30501,
+      "sha256": "fe3efe53df9dcac0142c1eed214cc01af79268979cacfe3eb6f452961236f725"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-30-manifest.json",
+      "bytes": 30503,
+      "sha256": "a54b1e5646fb4d5056914978b07b6a67a995dad9d1a245ea6dd85436460c3096"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-31-manifest.json",
+      "bytes": 30724,
+      "sha256": "9f81716c64eb85b222f4a303fe6b2fbd49567f4cdbb3b1415e19122f33c6d179"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-32-manifest.json",
+      "bytes": 30832,
+      "sha256": "85a3312e42f7b95d2daa828035d4c40c79f1a63fa1943e6bfba5d0c6621dfe28"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-33-manifest.json",
+      "bytes": 31051,
+      "sha256": "fc6de4f2f7ca50e993f06bd533a2018f670b4b5cea7289c4ebabcdf00d9ff2bb"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-34-manifest.json",
+      "bytes": 30503,
+      "sha256": "193a9640dfc65b56815449b7482105594607297d587d7b320b3a84769d65ebf1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-35-manifest.json",
+      "bytes": 30502,
+      "sha256": "8be0fc41466d0be7d13ab9c3017ed31d94eee865d055f88e671108d5cf3292a8"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-36-manifest.json",
+      "bytes": 30611,
+      "sha256": "26ed55a54c6441f957b074d6249ae946fa5e33dab8359e74dfbb2c80cbfaa0be"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-37-manifest.json",
+      "bytes": 30720,
+      "sha256": "6c0f08796e379046477d339148651b827e6e2adbce70b738a58d4f0352b36a01"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-38-manifest.json",
+      "bytes": 30615,
+      "sha256": "0bfa7e87b6b0fd4bac663a56db4e87c2274f6b3137aa97199f50429c79a689bf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-39-manifest.json",
+      "bytes": 31048,
+      "sha256": "a2596a44ab6c7a29523b6496b80f53c8006399fdcc4b588fc603ad9ab727e370"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-4-manifest.json",
+      "bytes": 30719,
+      "sha256": "a4bf48136f37413b1d01827b39d7422363356870c2373edb90c6450bf25a3784"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-40-manifest.json",
+      "bytes": 31051,
+      "sha256": "aa4a06b7347f173d9ed2bf21cc3924652fc2852e2c64e34b4274e93eba136a03"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-41-manifest.json",
+      "bytes": 30502,
+      "sha256": "5e3175626be3e3a358097cc50e9d0c7099ef9b25362b33168aeb1bea155f229b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-42-manifest.json",
+      "bytes": 31047,
+      "sha256": "7aa5a5e09ffa38d5049440d275572571e6275854a69a12e880f0e6c80fd09df6"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-43-manifest.json",
+      "bytes": 31047,
+      "sha256": "fffaf7d7a5a2be7ead5579977c2b148acd1946d4916a4a5080dd02745e95e724"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-44-manifest.json",
+      "bytes": 30503,
+      "sha256": "380252b0414850f696336a3a55abf119ae25ea12ebf418cd3defecdb607b72d4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-45-manifest.json",
+      "bytes": 31051,
+      "sha256": "4c449202ac01f03e31bff653e22d44739020a0fe5f97f620f4d872e4eb292c2a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-46-manifest.json",
+      "bytes": 31157,
+      "sha256": "6eba691c157361e8c6d935ac08b702a24f37e7e48e248f1271e56dd6b52a00b4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-47-manifest.json",
+      "bytes": 30835,
+      "sha256": "cc6e40f73ad91030469a788e43efbf9b17530fb99dfc7aced0c8cfe852859191"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-48-manifest.json",
+      "bytes": 31048,
+      "sha256": "0540c6f52d7263541671b8de4b7eb15066da54eb09f2be5f4432af24623607a9"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-49-manifest.json",
+      "bytes": 31051,
+      "sha256": "f30823aa24b76f4a8033276bf86a45b2ce64fa5c22eef0a0a2e1b180b5720c01"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-5-manifest.json",
+      "bytes": 30719,
+      "sha256": "34e5756fbe4bb58e1f369499af9edc870c416d6c6951f7a32df35d95c7fe951b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-50-manifest.json",
+      "bytes": 30503,
+      "sha256": "271759f70cc5567f77eaea76850aeae98fe19b3fed7405a9769788aa8f67fd6b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-51-manifest.json",
+      "bytes": 30502,
+      "sha256": "d738046b98161d9fedf01630b79fff24a14a03768e23d574a82b15cbda04f81c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-52-manifest.json",
+      "bytes": 30502,
+      "sha256": "4fc7b5d4a607e30daeac46965b93e5c615440729afa8b7b8bda18cecc68c366e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-53-manifest.json",
+      "bytes": 30502,
+      "sha256": "ef97bc55cec47ebace6a78da9adacf2600b0a3b227183f749bc5a0b1fdbc0aa1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-54-manifest.json",
+      "bytes": 31051,
+      "sha256": "3042a3ebdfb09a6a394907a2bb58eab5c2c42d92d829064e87995896222c0fb1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-55-manifest.json",
+      "bytes": 30503,
+      "sha256": "f4c69a8d1304b3e14cf6a187cd2cd64681fc2de5b57724e02692a76eefaf8a73"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-56-manifest.json",
+      "bytes": 31051,
+      "sha256": "e5469de30af73f63e0cabf0cd047888a280dc0db152a40721b112562eb250d7c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-57-manifest.json",
+      "bytes": 30502,
+      "sha256": "4b79f89d81ee86edf2a80faf4375ffeeff71b3d271ee9f227e7a5b198fe60df0"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-58-manifest.json",
+      "bytes": 30502,
+      "sha256": "8e4dbefdafcaa9b9dfde6b5d972815b804fdd11c0a038aa3a059caa8c741af92"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-59-manifest.json",
+      "bytes": 30502,
+      "sha256": "387e0a8161c01211cbf3518cc88e0e22a8fdee4b780ba42003310191d981ae54"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-6-manifest.json",
+      "bytes": 30723,
+      "sha256": "de891be82ecc45ef75709ed6cba426713a8a2d7b72e6fe9b8b33703e2e1793da"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-60-manifest.json",
+      "bytes": 30503,
+      "sha256": "d13f21636e9b5b8c1351117b317af557122b9303686ca7a6fdb56fe771180c51"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-61-manifest.json",
+      "bytes": 31051,
+      "sha256": "8cca12c8d1982f1a0118d1078069c76ec43222fd568faee6cb8bdba21d83289b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-62-manifest.json",
+      "bytes": 30503,
+      "sha256": "3ab4691e6ca026776ea85639071a00ba81432bfc74b6fc709e8173285408c6ea"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-63-manifest.json",
+      "bytes": 31051,
+      "sha256": "561bb60adf054d006c476da766d4d918a8f126ddc61e604b9f7aeccdf1f43e50"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-64-manifest.json",
+      "bytes": 31048,
+      "sha256": "11f5201772c8a97eb6d083d38fcecfafd9c37e57093b68290b158c2ef1f8a781"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-65-manifest.json",
+      "bytes": 30506,
+      "sha256": "55cda884b80b26c1e28dea547c0098e1115eb1b56955a5a49853113c23febd45"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-66-manifest.json",
+      "bytes": 31048,
+      "sha256": "b3b86b00edcc8a1690d1a05337dbfad396ca803d616fea524d34a8d66a4ab0a9"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-67-manifest.json",
+      "bytes": 30502,
+      "sha256": "b6ce255772998e8797e20cdb0cc6cd09466ad0f2e2654622350aee370b29893e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-68-manifest.json",
+      "bytes": 31047,
+      "sha256": "6fe324f7fa4dea3e894e28ac49830ce0d9090d65bc6d531c8ed149283c245f70"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-69-manifest.json",
+      "bytes": 31047,
+      "sha256": "44062008a05bf82cd13d5d0a5f312978df2ef530d9a334458adf277321161811"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-7-manifest.json",
+      "bytes": 30720,
+      "sha256": "7c6ea201eea6d638fc557965a59a389d6a2b168ad79044d50d793a27b216f588"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-70-manifest.json",
+      "bytes": 31051,
+      "sha256": "c4b24a2a1b2aec4f56fdcb928dca4f48f31a497ba4f2871f0e1a78a45eeadb51"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-71-manifest.json",
+      "bytes": 30503,
+      "sha256": "380ea0c87fa9f068850539f35c1ee45504aaf480821fc94769f6b26c02022cf1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-72-manifest.json",
+      "bytes": 31051,
+      "sha256": "1fb63f666fdf7bc802b2d2acecfbb1e51f71d55ba46cf708efa4302af7d22f72"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-73-manifest.json",
+      "bytes": 30502,
+      "sha256": "0917a526e9f161637bfe5510887bf3fd676a908fa0ced3c0643216308d1ad399"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-74-manifest.json",
+      "bytes": 30502,
+      "sha256": "0d9c8b7674d4c7533534ebd546a5e1ff3a38ba981e8740172b05e096c1216c93"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-75-manifest.json",
+      "bytes": 31047,
+      "sha256": "eecaca454f0f7dd8d94d2ddf5d4732e8217d6280c8b6a8b2d840d9617a90fff8"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-76-manifest.json",
+      "bytes": 31048,
+      "sha256": "400bff230d1409d1d2a0d05d1302164af0b46900a9cde2cb9edb5675c1006ffd"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-77-manifest.json",
+      "bytes": 31051,
+      "sha256": "da74583ba35d5dc60ffbcb29f1757c4149865af0d6aa8bba7b48628ef22e0b96"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-78-manifest.json",
+      "bytes": 30503,
+      "sha256": "9e36d9849142841ae347ad5878d21c7a57cbb10d014741eab5f781a690f18f85"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-79-manifest.json",
+      "bytes": 31051,
+      "sha256": "89def5cc0afe721bc8d9fa8be6a4fa0a3b8d3267fe5d52be7802b178ab31b209"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-8-manifest.json",
+      "bytes": 31159,
+      "sha256": "6df6fb4c8d86a4b5fe0fdc9d5718fa4ca4735cd77914b70819b826a6d225b5b4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-80-manifest.json",
+      "bytes": 31048,
+      "sha256": "e1c695ebe2e83bbeb365674f3097f72d16944ae2717b52cbd7cef157010f68e3"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-81-manifest.json",
+      "bytes": 31051,
+      "sha256": "1e55dd695f8b2687e307fa17ad2dae0517b950068caa5cd19207e9c6c205101a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-82-manifest.json",
+      "bytes": 30503,
+      "sha256": "f7c5d2ad5e4b96a56922ee63cea5aab125c49809d100114a247a46f362a479f4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-83-manifest.json",
+      "bytes": 31047,
+      "sha256": "829bf8fbb122cd56059cf6a14a8cf0e3f27c568f5caae4b47c8dfb92da2b20fb"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-84-manifest.json",
+      "bytes": 31047,
+      "sha256": "e12cd6a6e7f2e91f7e80079b3073ea4c2a168b796899a1434fe1deb7bd4a9982"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-85-manifest.json",
+      "bytes": 30502,
+      "sha256": "b88dd32071e0ef237e7342231064b60d39c98a819d4902c51055c1b81decfc19"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-86-manifest.json",
+      "bytes": 31051,
+      "sha256": "c69aee482c997163f6521128993b9a0511c6b17af3ad4e55523d7312a3db7b2d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-87-manifest.json",
+      "bytes": 31048,
+      "sha256": "bcfe997cc3c0781eff11bc2f09c57581802a53a9bccae9fb7e0bb5785cf79918"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-88-manifest.json",
+      "bytes": 30509,
+      "sha256": "8485df90608fa685ee81a83bbf058650f8057f20d1440994f5600387ed82f24d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-89-manifest.json",
+      "bytes": 30502,
+      "sha256": "1e294a0161551760d45e6dfd98c1d3b608c5c42bc4c2feb75907d63be3e92c75"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-9-manifest.json",
+      "bytes": 30501,
+      "sha256": "2d760b14202ce8dbc4367e82fb7d4f34450339065e50c5fd61aded7368e64c98"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-90-manifest.json",
+      "bytes": 31047,
+      "sha256": "b5a9622c152e3959f4cab5d30b8f9723cb3e027ad8e1c64b20f1392b0e1e1e73"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-91-manifest.json",
+      "bytes": 31047,
+      "sha256": "a66612b0e6a2cdc1f591de2412a99829b7335b16613d1dfb87403600f378552e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-92-manifest.json",
+      "bytes": 30721,
+      "sha256": "db7d77821220137a97cdc7455a2ec657668042c6da148e25a366db88e251f4cb"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-93-manifest.json",
+      "bytes": 31051,
+      "sha256": "837726e7ad72621795f2deb1a2a8bd5e7950aa15cbaf2fe8eda03fe3949e70a7"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-94-manifest.json",
+      "bytes": 31048,
+      "sha256": "b23c95f198dea7872ab490c87ec9f3cbcba66d1f804e4274790cf8ad260c56bf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-95-manifest.json",
+      "bytes": 31051,
+      "sha256": "300bbb84d36d71ed415c7edcb9884175499d007773e603db85b0b501b78d69ec"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-96-manifest.json",
+      "bytes": 30506,
+      "sha256": "c84f2f2bf05df424c808e73ef5f2d36a6f2fd56627213cc5a0ebb346737a34df"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-97-manifest.json",
+      "bytes": 30509,
+      "sha256": "5c5fd04176942ef60688c7bff725f3c136683c94eabada61757b49bea17dcaef"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-98-manifest.json",
+      "bytes": 31048,
+      "sha256": "a6d23b06b642c800d7d73e337a9d44001ba23759bdbee243f863d4f59b9093e0"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/fine-99-manifest.json",
+      "bytes": 30502,
+      "sha256": "459f1bf9dbfc44fbbadeebb76ba8ca56739fc8e51aa8496926a2173f1b4435ea"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/frozen-inputs/research/.cache/untoned-2126-coupled-basin/checkpoint.json",
+      "bytes": 1851232,
+      "sha256": "fe0d3c1c8e9babaaadde153bc926ae5ae96cefdc63a27295892fb7e9a2f64031"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/frozen-inputs/research/notes/2026-11-14-untoned-2126-twohop-scores.jsonl.gz",
+      "bytes": 3902186,
+      "sha256": "6f8293c5e8494f650dd9ac8e4f9385016de58d4e6f2603776542fc8b45299419"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/frozen-inputs/research/notes/2026-11-15-untoned-2126-recenter-scores.jsonl.gz",
+      "bytes": 11292944,
+      "sha256": "1ef6815b0d4162cfa61c5bd7a226aa338fd5c6cb984241d50f47c7db2f525089"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/frozen-inputs/research/notes/2026-11-15-untoned-2126-recenter-stage-7-manifest.json.gz",
+      "bytes": 1874423,
+      "sha256": "5b41aabe4e4963c667239116aef1d596b7036461b60c310c0e2fd1ec9d26dcbc"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/frozen-inputs/research/notes/2026-11-15-untoned-2126-threehop-scores.jsonl.gz",
+      "bytes": 4216250,
+      "sha256": "b8b884ff1c420bfc5959267a9bb502a2040b9577e2e3ebef788e1eb2b99b7c61"
+    },
+    {
+      "path": "research/.cache/untoned-2126-anneal-100k-20261115/scores.jsonl",
+      "bytes": 379011402,
+      "sha256": "382545c0f29d3ebcb96830b6d7f0c5e828b41d4715d7ebf343a67af77f1f4e7e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-coupled-basin/checkpoint.json",
+      "bytes": 1851232,
+      "sha256": "fe0d3c1c8e9babaaadde153bc926ae5ae96cefdc63a27295892fb7e9a2f64031"
+    },
+    {
+      "path": "research/.cache/untoned-2126-coupled-basin/refined-before-cache-bridge-fix.json",
+      "bytes": 2095884,
+      "sha256": "5d2cc3086cfe163023e9bbfea396c642222f0e90f16c0c1e650253c6c80b9a89"
+    },
+    {
+      "path": "research/.cache/untoned-2126-coupled-basin/refined.json",
+      "bytes": 3065333,
+      "sha256": "cf3f4e7fd19e246594fb6ae04a5979751f02a685418af004aa214b3001a1b982"
+    },
+    {
+      "path": "research/.cache/untoned-2126-double-empty-closure/checkpoint.json",
+      "bytes": 5978615,
+      "sha256": "7efb38134ef958846711846cfd8dae217c0138cce674d49545ae2a691c513073"
+    },
+    {
+      "path": "research/.cache/untoned-2126-double-empty-closure/checkpoint.json.31528.tmp",
+      "bytes": 4563012,
+      "sha256": "192fb9aaa8938794a7fdf56f46283d683c9d65b5fb90e57f8e1a2a482808311b"
+    },
+    {
+      "path": "research/.cache/untoned-2126-double-empty-closure-incomplete-v1/checkpoint.json",
+      "bytes": 569565,
+      "sha256": "d1658142c6383575e145e645fe69cde454b4dd4ab1e8ce3642826497d012069a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/all-scores.jsonl.gz",
+      "bytes": 11292944,
+      "sha256": "1ef6815b0d4162cfa61c5bd7a226aa338fd5c6cb984241d50f47c7db2f525089"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/checkpoint.json",
+      "bytes": 57984,
+      "sha256": "d980107cc4d03785d26be8506f6b5b96ba5757643cb47424ee3b563f1f5ec7d1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/new-scores.jsonl",
+      "bytes": 72747677,
+      "sha256": "4d7c3a11394aec4828f500d4b05ce2e24d5d018d0494b00679ca25883e5ba929"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-0-manifest.json",
+      "bytes": 132202,
+      "sha256": "22ecc29bba20c9eda4b43b0015d87e2b99fa54b84c1ff2dfb57fb516507f00c4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-1-manifest.json",
+      "bytes": 130334,
+      "sha256": "0e1eb9c2b823e6a8c8d119476ede65bc13746a12aa5e2db26970fc2528835cba"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-2-manifest.json",
+      "bytes": 130799,
+      "sha256": "55ff92adf76c27fa187eff0e70e7a345d831c4cf6d77574fd9f60be64ee3b4fa"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-3-manifest.json",
+      "bytes": 20051168,
+      "sha256": "84fa30bad235e09b7f5835c746989a00e7f93e74d49dab0c4069ca66a874cb11"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-4-manifest.json",
+      "bytes": 130815,
+      "sha256": "e2e701174ad74960fc086e6601d8fea4dbbd53d8c649764d6d41877bac9eed57"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-5-manifest.json",
+      "bytes": 20050899,
+      "sha256": "e7805d4e82849b025afef23648942e98965e23f204efa6585609c0bda68b68a1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-6-manifest.json",
+      "bytes": 131012,
+      "sha256": "cf16751a8613129ecf8cd0db4ab01fa543a8ec590e1f9de5fe5fb3d923d53d0e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-recenter-20261115/stage-7-manifest.json",
+      "bytes": 20077743,
+      "sha256": "c7cd989e8d30268a1184e7db1c59e8e85f7b46a8088a04b1bc99db08b05928b0"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/all-scores.jsonl.gz",
+      "bytes": 4216250,
+      "sha256": "b8b884ff1c420bfc5959267a9bb502a2040b9577e2e3ebef788e1eb2b99b7c61"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/checkpoint.json",
+      "bytes": 281140,
+      "sha256": "e0fe3f742510136e5f87e870b170067e5d2352351241b2d9a1c44372aad8f240"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/new-scores.jsonl",
+      "bytes": 23658588,
+      "sha256": "24c499f1d9af1dcb1b7dbe71da1a49af0c8297c0c3d588af8460deb59d727e1c"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-0-manifest.json",
+      "bytes": 8900274,
+      "sha256": "2f9422a713fb1594d79bccc1e04ecf354e9e726f289e9aa69729f705861a7247"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-1-manifest.json",
+      "bytes": 131771,
+      "sha256": "62adedbaa9560d834799aab1ad7edca82e401df2997bddf30677e06a656929ca"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-10-manifest.json",
+      "bytes": 130152,
+      "sha256": "bc807d70f58e296b2dbc9e2e6349f53404ab72b877218859f3d05bb072db4778"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-11-manifest.json",
+      "bytes": 131529,
+      "sha256": "47fbe5790574cd2ad027797aea409652d2a0a556c0f3df2a148294320a6b6088"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-12-manifest.json",
+      "bytes": 131505,
+      "sha256": "5e46e6da7e2b996f0b43a25da87edf91f8c087132ecb3886c269c3b114da87bc"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-13-manifest.json",
+      "bytes": 131531,
+      "sha256": "8e69715c500f7d38bbc623e19ff58269779a011636e88bb6d834fb176dcb7cd8"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-14-manifest.json",
+      "bytes": 131522,
+      "sha256": "e26fa1eca9d4da8b746e362af11426d613575c1e3783ee127866a91d03910673"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-15-manifest.json",
+      "bytes": 129740,
+      "sha256": "6324bc8e99c178c95d5a6e5a625faa12deab6fe858fd563472be6d5058025cec"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-16-manifest.json",
+      "bytes": 129896,
+      "sha256": "b4e1c046bf50d15f0dd4551bd8fc6111cda628bd2f548d9124fd17a2baebb76a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-17-manifest.json",
+      "bytes": 129571,
+      "sha256": "397af6456428bc68d83e18a522b410b9583250bd7557b4687c0efed1e9a5b653"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-18-manifest.json",
+      "bytes": 129719,
+      "sha256": "67a2e9cdf5b34eb5cf514516f789bb4da83579161f7c4e9a01d0c80be2659ea3"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-19-manifest.json",
+      "bytes": 129709,
+      "sha256": "51027671f31da9b1ac171289fd71678f4be46724096ba8cf401d36c8f8770b53"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-2-manifest.json",
+      "bytes": 129939,
+      "sha256": "b39cff226408dbf7de8959f7b4e13af2d41b8a14b7d49964af419835db201bab"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-20-manifest.json",
+      "bytes": 131553,
+      "sha256": "68f9a1940bfc02ab1777666ee3d36aa52dce16a8fa2d64a806c0ea814c78917a"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-21-manifest.json",
+      "bytes": 131564,
+      "sha256": "7fe5677d12bde777820af9b2ab879140fd7cbdad2781688b52c77c7b7d14e517"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-22-manifest.json",
+      "bytes": 131566,
+      "sha256": "1434ceb62ce5ca645ae3e4c25f90b6cfcc073b1853652c24c9bd573e2bad2aa1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-23-manifest.json",
+      "bytes": 131916,
+      "sha256": "4e4d224dfe6fa9c8f388a59cc341412d98177fc38818e4a0593edb404c40de10"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-24-manifest.json",
+      "bytes": 131935,
+      "sha256": "58ba4cda875d4774266a5b066e549fd2237e6e7bb9c8cd6ca7c3b3c90d48a73d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-25-manifest.json",
+      "bytes": 131775,
+      "sha256": "3ef480e94218bdc1c2a720243e6a91411c9751c262320fd0cab6a9146293cfdb"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-26-manifest.json",
+      "bytes": 131784,
+      "sha256": "4c5dbcb28eaba8155b23d3eb909946d52c88442821fc4b28d0c54f97e09d5138"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-27-manifest.json",
+      "bytes": 131809,
+      "sha256": "69a5028f34566eb5fb6d7a05ceb94ae3acc89ded8993d3abb4f20080cbfc502e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-28-manifest.json",
+      "bytes": 129903,
+      "sha256": "e83e384386d69c6a665b6d4a1e305c2e5f955393469a77c239564a0b8c6acfb1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-3-manifest.json",
+      "bytes": 129693,
+      "sha256": "d5b29e7414303c22b9a968b584aa4d5e3e5a2fe9474920a270d4ea06d3289856"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-4-manifest.json",
+      "bytes": 129704,
+      "sha256": "7c0587fd58c0daf63f7399f0159ee0d511f3130ff80bbb02f88849431ba3241e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-5-manifest.json",
+      "bytes": 129704,
+      "sha256": "8870e708a131663ac5b32da77827a19e54f150b04daa9dcad787d3864493c96e"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-6-manifest.json",
+      "bytes": 129693,
+      "sha256": "3b1d3ba5ebd28f02d3f4dd394fd56b58e5a0a729280a07f73a6a7b436515aeb1"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-7-manifest.json",
+      "bytes": 127544,
+      "sha256": "b35415a39f6ca2cde2fc3ca34a0bf790108523ef06d9be1d128362ecee1e37e4"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-8-manifest.json",
+      "bytes": 129864,
+      "sha256": "d3883a46d7350ae7762a6adf2eebd66f6eb58f5c3dd47e794b5fdccdfa29503d"
+    },
+    {
+      "path": "research/.cache/untoned-2126-threehop-20261115/stage-9-manifest.json",
+      "bytes": 129900,
+      "sha256": "a4158a5e4d6a20209df036a6125c51fd243362aa4d9969b6a23a45c8702c4bb9"
+    },
+    {
+      "path": "research/.cache/untoned-2126-twohop-exhaustive/manifest.json",
+      "bytes": 20537576,
+      "sha256": "ce30db29292a0e4921b1ec550001e583cb0331b74151e95a91e0b3ab8878deb7"
+    },
+    {
+      "path": "research/.cache/untoned-2126-twohop-exhaustive/progress.json",
+      "bytes": 18520,
+      "sha256": "6f1c5fa7b9697dd941173a8ddbe4cdc1810cb48af2c0c7b18515440b0a0ac1cf"
+    },
+    {
+      "path": "research/.cache/untoned-2126-twohop-exhaustive/scores.jsonl",
+      "bytes": 23611905,
+      "sha256": "352eac474d1ea5c05c9935d52a6bc8719f3041d7ce694ee2202c27a2b07128c1"
+    }
+  ],
+  "resumeOriginalTrajectoryAvailable": false,
+  "sourceRecovery": "git show <originalFiles.matchingCommit.commit>:<path>; text may differ only in CRLF/LF when marked.",
+  "database": "research/notes/2026-11-21-legacy-untoned-2126-selected-results.json.gz",
+  "validation": "Run node tools/verify_legacy_untoned_archive.js <manifest>; old all-row verification is preserved separately and is not claimed as a new full replay.",
+  "databaseSha256": "7667d9f2f2d86c9c3dec1eb9221882a797f2bdb09bc875c875c8bbaa291f768b",
+  "databaseBytes": 2507300,
+  "archiveCodeAdjustments": [
+    "Restored missing two-hop/three-hop verifier dependencies from b031079.",
+    "Adapted anneal startup test to the stopped compact archive; compact guard test uses frozen Common399 data instead of loading live HTML."
+  ],
+  "newArchiveTools": [
+    "tools/legacy_research_archive.py",
+    "tools/archive_untoned_2126_legacy.py",
+    "tools/verify_legacy_untoned_archive.js"
+  ],
+  "validationResults": {
+    "nodeTestsPassed": 31,
+    "nodeTestsFailed": 0,
+    "retainedLayoutAuditPassed": true,
+    "freshNativeReplays": 10
+  }
+}
