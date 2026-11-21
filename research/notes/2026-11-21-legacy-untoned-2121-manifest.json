@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "route": "untoned-21x21-v5.1-five-center-2k",
+  "archivedAt": "2026-11-21T11:56:01.681052+08:00",
+  "archiveParentCommit": "982219e9237732d72a31b72cd11e038e4c7461a1",
+  "archiveCommitResolution": "git log --diff-filter=A --format=%H -- <this manifest path>",
+  "gitHistoryRewritten": false,
+  "searchRestarted": false,
+  "relatedCommits": [
+    {
+      "commit": "387008a27fa89251e4148bb874035373deb3f115",
+      "authorTime": "2026-11-14T23:27:02+08:00",
+      "committerTime": "2026-11-14T23:27:02+08:00",
+      "subject": "research: certify 21x21 one-hop local optimum at CKT 9.527273",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "f745bd0d283faea4f6f024940bb1c1bf56f86407",
+      "authorTime": "2026-11-15T01:59:33+08:00",
+      "committerTime": "2026-11-15T01:59:33+08:00",
+      "subject": "research: verify bounded two-step coupling below 21x21 local optimum",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "95996193fb01449319ce1bd741bff0c242cf9bf7",
+      "authorTime": "2026-11-15T03:40:16+08:00",
+      "committerTime": "2026-11-15T03:40:16+08:00",
+      "subject": "research: verify three-hop tradeoffs and improve alternate 21x21 centers",
+      "ancestorOfArchiveParent": false
+    },
+    {
+      "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+      "authorTime": "2026-11-15T11:00:20+08:00",
+      "committerTime": "2026-11-15T11:00:20+08:00",
+      "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+      "ancestorOfArchiveParent": false
+    }
+  ],
+  "timeConvention": "ISO 8601; run times retain UTC Z; author/committer and archive times include offset. File mtime is not a run timestamp.",
+  "originalFiles": [
+    {
+      "path": "research/config/untoned-2121-anneal-2k-pilot-runner.js",
+      "bytes": 11459,
+      "sha256": "beb62854f0153cac0bf0854be16081d4da79317d659068b10e26dad956d6ae10",
+      "fileMtime": "2026-11-15T03:57:42.415855+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "beb62854f0153cac0bf0854be16081d4da79317d659068b10e26dad956d6ae10",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2121-anneal-2k.json",
+      "bytes": 1557233,
+      "sha256": "8d79bc803d46eda8d1a1d35c6d4daae862f4ffdfc1fc44693093db3682242122",
+      "fileMtime": "2026-11-15T04:26:29.218120+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "match": "no-matching-historical-blob"
+    },
+    {
+      "path": "tests/untoned-2121-anneal-2k.test.mjs",
+      "bytes": 1417,
+      "sha256": "e4b1fbb5ca32ee7ba2f7fcae298ac62fb90ac9adc2d2f9b60c05001e452fc477",
+      "fileMtime": "2026-11-15T03:57:42.416373+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "match": "no-matching-historical-blob"
+    },
+    {
+      "path": "tools/anneal_untoned_2121_multicenter_2k.js",
+      "bytes": 12638,
+      "sha256": "5f05188eb3b5de9e0462c71e1ba06f6adf7571733c101e917820327d17cf722b",
+      "fileMtime": "2026-11-15T08:18:46.775654+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "match": "no-matching-historical-blob"
+    },
+    {
+      "path": "tools/report_untoned_2121_anneal_2k.py",
+      "bytes": 4201,
+      "sha256": "b464db5c50dba909a00a0711579201624d31feebbf4e1c130123908f5fb5986c",
+      "fileMtime": "2026-11-15T03:59:14.791963+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "match": "no-matching-historical-blob"
+    }
+  ],
+  "pilotContinuationEvidence": {
+    "localSource": "research/notes/2026-11-15-untoned-2121-anneal-2k.json",
+    "localSourceSha256": "8d79bc803d46eda8d1a1d35c6d4daae862f4ffdfc1fc44693093db3682242122",
+    "localCompleted": false,
+    "localNewScores": 204,
+    "localStates": 210,
+    "localTrajectory": 210,
+    "trajectoryIsExactPrefix": true,
+    "pilotFingerprintMatchesHistoricalCalibration": true,
+    "calibration": {
+      "afterNewScores": 204,
+      "pilotRunner": "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark-2121-2k\\research\\config\\untoned-2121-anneal-2k-pilot-runner.js",
+      "pilotSha256": "beb62854f0153cac0bf0854be16081d4da79317d659068b10e26dad956d6ae10",
+      "pilotFingerprint": "cbc5500d2a9e40e413debcb8d516a93141d4c627d122f7b075395635273bac3c",
+      "pilotSourceHashes": {
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\a7_CKT_R11.html": "efa0b4006bd79a9d3fff06873d6b7fcc94e702620d81dc7ca6f7bb8c76860ce8",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\ckt-v4-ergonomics.json": "86380f69a0dff22df15af083e33acd0bda8f89cab64a59ac2ca896202c0be4aa",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\config\\untoned-2121-local-closure-seed.json": "41fabe10613de5911b94711df7703d282628d8a6af93b0f6f933f312d503e4a3",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\close_untoned_2121_local.js": "71b4a1d5cbb57dfe2a5ade27c4026da7548090997c574eb9611e84cb0aa77749",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\search_untoned_production_v51.js": "49b0e8dbc8d0a92ecaf7f10764dfb1b22b1d84b2d5de9149a17d7c77854f5124",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\ckt_v4_model.js": "dc6b252c946743087b53497cdfe36ba8a7249236d2aec07f68ee8727aee2081e",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\score_completion_ckt_v4.js": "8b9e9c7a574f9285f3819f880a95d23485e917f9158125410817df5df64427dd",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\ckt_v4_upstream_role_tables.json": "b9d85861addf4786bfcf2c8c7755e99130f073306282c224b3cda85202b1bf35",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\ckt_v4_scheme_fixture.js": "b6e6b068da159031fa32538b42b5fe0120e5d7eea233d62eb993984e4994150c",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\auxiliary_semantics.js": "06f4c8a269869b4e3f14cedf094a39190912fcf3a60d1b13a58bb1757fbc5899",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\R11_integrated_replay\\script1.js": "8fdf2e43e905ec98fe93b7244dc291d396ea278c137baba63b4e363eec36c470",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\R11_integrated_replay\\script2.js": "f2c1fc0ffc95393123b45095c75ce67df199ecf3fc39c1db0393f6b60045a002",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\R11_integrated_replay\\track_options.json": "0315132e54b495b42e66a56b52b49c9f9d54e30b9913b1a53ac8d141a058d9e3",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\R11_integrated_replay\\memory_r2.py": "ff87da967ae666c9368d7554407d9dffdc793d94dd57a737d183dee9aff2b25c",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\.cache\\R11_integrated_replay\\audit.py": "fa9bfe87218ea8d2013abd9b83aa936b15d1b7dc2f6c560a4e9e93dfd1838267",
+        "D:\\C2D\\Documents\\rime-snow-pinyin\\snow_pinyin.base.dict.yaml": "fbb591096db8521012220b80cf3730ed72e94c32dc9c92b4e01e0cf14298e4be",
+        "D:\\C2D\\Documents\\rime-snow-pinyin\\rime-stroke\\stroke.dict.yaml": "0fe1c1c0673f3564f16deb1f659a75f3ad6a43e5308165dccfb63fd94864f631",
+        "D:\\C2D\\Documents\\rime-snow-pinyin\\scripts\\research\\evaluate_ckt_v4_word_aux_order.js": "cab547926383ca1febdee874954a0947fc6af0b6eeddca280293738ecf23f26e",
+        "D:\\C2D\\Documents\\rime-snow-pinyin\\scripts\\research\\evaluate_ckt51_aux_order.js": "eb6005d9f09127003f43bd37be6f5dafdb408fc2785e3c7e5976c86f3aba0810",
+        "D:\\C2D\\Documents\\rime-snow-pinyin\\scripts\\research\\auxiliary_semantics.js": "e04c9f070d7d17a5d24d89265ba9353c74deaaf675b1523c69b67b08ac019298",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\anneal_untoned_2121_multicenter_2k.js": "beb62854f0153cac0bf0854be16081d4da79317d659068b10e26dad956d6ae10",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\tools\\probe_untoned_2121_two_step.js": "cdd1fcc906b0879d69580a30bca1213431b35a5d2119af049873ef18464c094d",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-14-untoned-2121-local-closure.json": "e7dcf099de1eb6f3f2199d39205892aaf051217e6a29e1a00914640fd1162ec7",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-15-untoned-2121-two-step.json": "2a5918fdbd4c72a438d34f965238b609403eb1071affc1bd0e1a5500cd8b110e",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-15-untoned-2121-three-step.json": "7fd7932e5d29d1fbbd9e5bc3419df6f0251217bc5cb648171cb4690b9625d228",
+        "D:\\C2D\\Desktop\\Code\\Lua\\inputMethod\\shuangpin-layout-benchmark\\research\\notes\\2026-11-15-untoned-2121-other-centers.json": "88052e15c34e09a5d0712bcc777958a23183e285f6160c88593e555c3702d9fc"
+      },
+      "positiveCoarseMedian": 0.134842881749492,
+      "acceptedPilot": 0,
+      "reason": "pilot had zero accepted moves; calibrate coarse temperature to observed deltas",
+      "newCoarse": [
+        0.1,
+        0.025
+      ],
+      "newFine": [
+        0.012,
+        0.00015
+      ]
+    },
+    "historicalCompleted": true,
+    "historicalNewScores": 2000,
+    "historicalStates": 2006,
+    "historicalTrajectory": 2016,
+    "sourceCommit": {
+      "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+      "authorTime": "2026-11-15T11:00:20+08:00",
+      "committerTime": "2026-11-15T11:00:20+08:00",
+      "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+      "ancestorOfArchiveParent": false
+    },
+    "historicalSourceSha256": "69d008106977e5d4bdfb1a250a51f39d12bd2697b3b5014935769a2eb9fe69d9",
+    "historicalSourceBytes": 14005533,
+    "runTimestamps": "No started/updated timestamp fields in this database; 2026-11-15 is the artifact date. Do not substitute mtime or commit time."
+  },
+  "restoredFiles": [
+    {
+      "path": "tools/close_untoned_2121_local.js",
+      "bytes": 13691,
+      "sha256": "16a1f3fa7191abd86b04fc6ada2758dbd1829edcf5df28cab76a00afde2f15b5",
+      "fileMtime": "2026-11-21T11:56:05.200915+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "16a1f3fa7191abd86b04fc6ada2758dbd1829edcf5df28cab76a00afde2f15b5",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/verify_untoned_2121_anneal_2k.js",
+      "bytes": 5596,
+      "sha256": "b43498b78f73996a4a7f959958d200dbef1877175c80003665099990c71d05ad",
+      "fileMtime": "2026-11-21T11:56:05.586555+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b43498b78f73996a4a7f959958d200dbef1877175c80003665099990c71d05ad",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/summarize_untoned_2121_anneal_2k.py",
+      "bytes": 9068,
+      "sha256": "043c5ecae4b314dce527548eec1c5e605526db3cebd6abaea22785597b16a1d8",
+      "fileMtime": "2026-11-21T11:56:06.322785+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "043c5ecae4b314dce527548eec1c5e605526db3cebd6abaea22785597b16a1d8",
+      "match": "bytes"
+    },
+    {
+      "path": "research/config/untoned-2121-local-closure-finalist.json",
+      "bytes": 1325,
+      "sha256": "43fed3900d0ea9bcd2e2ff01d26022b7faa55dec581023fd2c0b5fe0af8f6883",
+      "fileMtime": "2026-11-21T11:56:06.634569+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "43fed3900d0ea9bcd2e2ff01d26022b7faa55dec581023fd2c0b5fe0af8f6883",
+      "match": "bytes"
+    },
+    {
+      "path": "research/config/untoned-2121-local-closure-seed.json",
+      "bytes": 5493,
+      "sha256": "bfcf3424fcdb15ff84c4ff99e7bcfbf3fa28bd171ce115e3e23410f1b36515ea",
+      "fileMtime": "2026-11-21T11:56:07.367652+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "bfcf3424fcdb15ff84c4ff99e7bcfbf3fa28bd171ce115e3e23410f1b36515ea",
+      "match": "bytes"
+    },
+    {
+      "path": "research/config/untoned-2121-anneal-2k-finalists-20261115.json",
+      "bytes": 14213,
+      "sha256": "bca13e269e2af08b4c0650185ed5eac8db6c30fcd7500f326b07a51a231f9a8a",
+      "fileMtime": "2026-11-21T11:56:07.676481+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "bca13e269e2af08b4c0650185ed5eac8db6c30fcd7500f326b07a51a231f9a8a",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2121-anneal-2k-summary.json",
+      "bytes": 556,
+      "sha256": "d0fb7461108147d0ddbba9f0018e596634d44a99393128da68298b1808357483",
+      "fileMtime": "2026-11-21T11:56:08.315812+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "d0fb7461108147d0ddbba9f0018e596634d44a99393128da68298b1808357483",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2121-anneal-2k-finalists.json",
+      "bytes": 91103,
+      "sha256": "ab839fcbffeac968af818ae92825bad1fc771b71c0417856d328d7da308cd124",
+      "fileMtime": "2026-11-21T11:56:08.684469+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "ab839fcbffeac968af818ae92825bad1fc771b71c0417856d328d7da308cd124",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2121-anneal-2k-memory-audit.json",
+      "bytes": 196677,
+      "sha256": "d6fd2a37513e35ecd9838327ae1c43910dde9d350425df0d4c42aff809ba56f8",
+      "fileMtime": "2026-11-21T11:56:09.289468+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "d6fd2a37513e35ecd9838327ae1c43910dde9d350425df0d4c42aff809ba56f8",
+      "match": "bytes"
+    },
+    {
+      "path": "research/notes/2026-11-15-untoned-2121-anneal-2k-verification.json",
+      "bytes": 192395,
+      "sha256": "b118625f100973ad3b21e544ed7e1d015bee418b1e5fbda748a9b79a6c0092e0",
+      "fileMtime": "2026-11-21T11:56:09.622283+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "b118625f100973ad3b21e544ed7e1d015bee418b1e5fbda748a9b79a6c0092e0",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/anneal_untoned_2121_multicenter_2k.js",
+      "bytes": 12961,
+      "sha256": "0b445b6a908c6434e92cfd9980c7e96545e5b4861c40fe122f031ccb1cd20654",
+      "fileMtime": "2026-11-21T11:57:18.478713+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "0b445b6a908c6434e92cfd9980c7e96545e5b4861c40fe122f031ccb1cd20654",
+      "match": "bytes"
+    },
+    {
+      "path": "tools/report_untoned_2121_anneal_2k.py",
+      "bytes": 5255,
+      "sha256": "d49d1dc37a08f620bb9a90498a3ac536e1bb261f061b769c49d7b0cbd22f6310",
+      "fileMtime": "2026-11-21T11:57:19.022837+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "d49d1dc37a08f620bb9a90498a3ac536e1bb261f061b769c49d7b0cbd22f6310",
+      "match": "bytes"
+    },
+    {
+      "path": "tests/untoned-2121-anneal-2k.test.mjs",
+      "bytes": 1815,
+      "sha256": "0e173e04a78f6ba64ba4ffdfdcc83fbc5f67953f88a87aa3d86819cccb495e87",
+      "fileMtime": "2026-11-21T11:57:19.427829+08:00",
+      "fileMtimeIsExperimentTime": false,
+      "matchingCommit": {
+        "commit": "e133b51328bcbc29311eaf49f19f3536ed81f7dc",
+        "authorTime": "2026-11-15T11:00:20+08:00",
+        "committerTime": "2026-11-15T11:00:20+08:00",
+        "subject": "research: complete five-center 2000-state untoned 21x21 annealing",
+        "ancestorOfArchiveParent": false
+      },
+      "gitBlobSha256": "0e173e04a78f6ba64ba4ffdfdcc83fbc5f67953f88a87aa3d86819cccb495e87",
+      "match": "bytes"
+    }
+  ],
+  "scoreVersion": "v5.1, not v5.2",
+  "historicalNewScores": 2000,
+  "historicalTotalStates": 2006,
+  "historicalFinalParetoCount": 97,
+  "retainedRecords": 100,
+  "database": "research/notes/2026-11-21-legacy-untoned-2121-selected-results.json.gz",
+  "selection": "All 97 final five-axis Pareto points, all historical baselines/seeds, best novel score and the 16 historical verification representatives.",
+  "resumeOriginalTrajectoryAvailable": false,
+  "sourceRecovery": "git show e133b51:research/notes/2026-11-15-untoned-2121-anneal-2k.json",
+  "databaseCleanupScope": "The local 204-score pilot database is replaced by selected completed-run results. Predecessor closure caches and other worktrees are outside this 2k run and are untouched.",
+  "databaseSha256": "16e9c0c84ea8f18a4336a7165d04ae200cd6eac9359579cee6712b9559211843",
+  "databaseBytes": 65268,
+  "validationResults": {
+    "nodeTestsPassed": 4,
+    "nodeTestsFailed": 0,
+    "retainedLayoutAuditPassed": true,
+    "retainedLayoutCount": 100,
+    "scoreArithmeticRows": 95,
+    "freshNativeReplays": 0,
+    "historicalVerifiedRepresentatives": 16,
+    "fullHistoricalTranscriptRechecked": {
+      "newScores": 2000,
+      "states": 2006,
+      "archive": 97
+    }
+  },
+  "codeSnapshotResolution": "Local earlier code snapshots were recorded in originalFiles, then replaced with completed-run versions from e133b51: path relocation on resume, stronger memory/domain checks and independent proposal transcript test."
+}
